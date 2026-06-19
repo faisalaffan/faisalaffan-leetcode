@@ -1,0 +1,16 @@
+package main
+
+// LeetCode #1337: The K Weakest Rows in a Matrix
+// https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
+// Difficulty: Easy
+
+import "fmt"
+
+func main() {
+	fmt.Println(TheKWeakestRowsInAMatrix())
+}
+
+func TheKWeakestRowsInAMatrix() any {
+	// TODO: implement
+	return nil
+}

@@ -1,0 +1,16 @@
+package main
+
+// LeetCode #3587: Minimum Adjacent Swaps to Alternate Parity
+// https://leetcode.com/problems/minimum-adjacent-swaps-to-alternate-parity/
+// Difficulty: Medium
+
+import "fmt"
+
+func main() {
+	fmt.Println(MinimumAdjacentSwapsToAlternateParity())
+}
+
+func MinimumAdjacentSwapsToAlternateParity() any {
+	// TODO: implement
+	return nil
+}

@@ -1,0 +1,16 @@
+package main
+
+// LeetCode #1716: Calculate Money in Leetcode Bank
+// https://leetcode.com/problems/calculate-money-in-leetcode-bank/
+// Difficulty: Easy
+
+import "fmt"
+
+func main() {
+	fmt.Println(CalculateMoneyInLeetcodeBank())
+}
+
+func CalculateMoneyInLeetcodeBank() any {
+	// TODO: implement
+	return nil
+}

@@ -1,0 +1,16 @@
+package main
+
+// LeetCode #2806: Account Balance After Rounded Purchase
+// https://leetcode.com/problems/account-balance-after-rounded-purchase/
+// Difficulty: Easy
+
+import "fmt"
+
+func main() {
+	fmt.Println(AccountBalanceAfterRoundedPurchase())
+}
+
+func AccountBalanceAfterRoundedPurchase() any {
+	// TODO: implement
+	return nil
+}

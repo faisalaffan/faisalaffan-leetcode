@@ -1,0 +1,16 @@
+package main
+
+// LeetCode #1111: Maximum Nesting Depth of Two Valid Parentheses Strings
+// https://leetcode.com/problems/maximum-nesting-depth-of-two-valid-parentheses-strings/
+// Difficulty: Medium
+
+import "fmt"
+
+func main() {
+	fmt.Println(MaximumNestingDepthOfTwoValidParenthesesStrings())
+}
+
+func MaximumNestingDepthOfTwoValidParenthesesStrings() any {
+	// TODO: implement
+	return nil
+}
