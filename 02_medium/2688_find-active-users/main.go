@@ -2,32 +2,64 @@ package main
 
 // LeetCode #2688: Find Active Users
 // https://leetcode.com/problems/find-active-users/
-// Difficulty: Medium [Paid] (SQL problem)
-// Time: O(n log n) | Space: O(n)
+// Difficulty: Medium (SQL problem — simulated in Go)
+//
+// Simulates: Find users who made a second purchase within 7 days
+// (inclusive) of another purchase. The 7-day window is inclusive of
+// both start and end dates.
 
 import (
 	"fmt"
 	"sort"
+	"time"
 )
 
-func findActiveUsers(logins [][]int) []int {
-	// Group by user
-	userLogins := make(map[int][]int)
-	for _, log := range logins {
-		user, day := log[0], log[1]
-		userLogins[user] = append(userLogins[user], day)
+// UserPurchase represents the Users database table.
+type UserPurchase struct {
+	UserID    int
+	Item      string
+	CreatedAt string // format: "YYYY-MM-DD"
+	Amount    int
+}
+
+// findActiveUsers simulates the SQL query.
+// Time: O(n log n) | Space: O(n)
+// n = number of purchase records.
+func findActiveUsers(purchases []UserPurchase) []int {
+	// Group purchases by user_id.
+	userDates := make(map[int][]string)
+	for _, p := range purchases {
+		userDates[p.UserID] = append(userDates[p.UserID], p.CreatedAt)
 	}
 
-	active := []int{}
-	for user, days := range userLogins {
-		if len(days) < 5 {
-			continue
+	// Count distinct dates per user.
+	userUniqueDates := make(map[int][]string)
+	for uid, dates := range userDates {
+		seen := make(map[string]bool)
+		for _, d := range dates {
+			if !seen[d] {
+				seen[d] = true
+				userUniqueDates[uid] = append(userUniqueDates[uid], d)
+			}
 		}
-		sort.Ints(days)
-		// Check for 5 consecutive days (days are consecutive if each diff is 1)
-		for i := 0; i <= len(days)-5; i++ {
-			if days[i+4]-days[i] == 4 {
-				active = append(active, user)
+	}
+
+	var active []int
+
+	for uid, dates := range userUniqueDates {
+		// Sort dates ascending.
+		sort.Strings(dates)
+
+		// Check consecutive purchases for <= 7 day gap.
+		for i := 1; i < len(dates); i++ {
+			prev, err1 := time.Parse("2006-01-02", dates[i-1])
+			curr, err2 := time.Parse("2006-01-02", dates[i])
+			if err1 != nil || err2 != nil {
+				continue
+			}
+			diff := curr.Sub(prev).Hours() / 24
+			if diff >= 0 && diff <= 7 {
+				active = append(active, uid)
 				break
 			}
 		}
@@ -38,15 +70,28 @@ func findActiveUsers(logins [][]int) []int {
 }
 
 func main() {
-	// Test case 1
-	fmt.Println("Test 1:", findActiveUsers([][]int{{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {2, 1}, {2, 3}}))
-	// Expected: [1]
+	// Test data from the problem description.
+	purchases := []UserPurchase{
+		// User 6 has purchases on Sep 10 and Sep 14 (4 days apart) -> active.
+		{UserID: 6, Item: "item1", CreatedAt: "2023-09-10", Amount: 100},
+		{UserID: 6, Item: "item2", CreatedAt: "2023-09-14", Amount: 200},
+		// User 1 has purchases far apart (Sep 10 and Sep 20, 10 days) -> not active.
+		{UserID: 1, Item: "item3", CreatedAt: "2023-09-10", Amount: 50},
+		{UserID: 1, Item: "item4", CreatedAt: "2023-09-20", Amount: 75},
+		// User 2 has only 1 purchase -> not active.
+		{UserID: 2, Item: "item5", CreatedAt: "2023-09-10", Amount: 150},
+		// User 3 has purchases exactly 7 days apart -> active.
+		{UserID: 3, Item: "item6", CreatedAt: "2023-09-10", Amount: 60},
+		{UserID: 3, Item: "item7", CreatedAt: "2023-09-17", Amount: 80},
+	}
 
-	// Test case 2
-	fmt.Println("Test 2:", findActiveUsers([][]int{{1, 1}, {1, 3}, {1, 5}}))
-	// Expected: []
+	results := findActiveUsers(purchases)
 
-	// Test case 3
-	fmt.Println("Test 3:", findActiveUsers([][]int{{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {2, 7}, {2, 8}, {2, 9}, {2, 10}, {2, 11}}))
-	// Expected: [1 2]
+	fmt.Println("Active Users (user_id):")
+	for _, uid := range results {
+		fmt.Println(uid)
+	}
+	// Expected output:
+	// 3
+	// 6
 }
