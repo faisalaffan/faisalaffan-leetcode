@@ -1,0 +1,10 @@
+# Go build artifacts
+/[0-9][0-9][0-9][0-9]_*
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/settings.json
+
+# OS
+.DS_Store
