@@ -66,5 +66,5 @@ func main() {
 	fmt.Println(pathsWithMaxScore([]string{"E23", "2X2", "12S"})) // [7, 1]
 	fmt.Println(pathsWithMaxScore([]string{"E12", "1X1", "21S"})) // [4, 2]
 	fmt.Println(pathsWithMaxScore([]string{"E11", "XXX", "11S"})) // [0, 0]
-	fmt.Println(pathsWithMaxScore([]string{"E", "S"}))            // [0, 1]
+	fmt.Println(pathsWithMaxScore([]string{"E0", "0S"}))          // [0, 3]
 }
