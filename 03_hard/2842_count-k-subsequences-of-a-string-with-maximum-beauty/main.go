@@ -30,7 +30,7 @@ func powMod2842(a, e int64) int64 {
 }
 
 func countKSubsequencesWithMaxBeauty(s string, k int) int {
-	if k > 26 {
+	if k <= 0 || k > 26 {
 		return 0
 	}
 

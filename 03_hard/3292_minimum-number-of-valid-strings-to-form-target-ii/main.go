@@ -5,7 +5,7 @@ package main
 // Difficulty: Hard
 //
 // A "valid string" is any substring of any word in the words array.
-// We build a trie containing ALL suffixes of all words, so that every
+// Build a trie containing ALL suffixes of all words, so that every
 // possible valid substring is a prefix of some path in the trie.
 // Then DP: dp[i] = min number of valid strings to form target[i:].
 // For each position i, walk the trie to find all valid substrings
@@ -31,6 +31,8 @@ func main() {
 	fmt.Println(minValidStrings([]string{"a", "b", "c"}, "abc"))
 	// Example 5: target empty
 	fmt.Println(minValidStrings([]string{"a"}, ""))
+	// Example 6: repetition
+	fmt.Println(minValidStrings([]string{"aa", "a"}, "aaa"))
 }
 
 func minValidStrings(words []string, target string) int {
@@ -42,7 +44,7 @@ func minValidStrings(words []string, target string) int {
 	// This way every substring of any word is a prefix of some path.
 	root := &trieNode{}
 	for _, w := range words {
-		// Insert every suffix of w into the trie
+		// Insert every suffix of w into the trie.
 		for start := 0; start < len(w); start++ {
 			node := root
 			for i := start; i < len(w); i++ {
@@ -64,14 +66,14 @@ func minValidStrings(words []string, target string) int {
 
 	for i := n - 1; i >= 0; i-- {
 		node := root
-		// Walk the trie to find all valid substrings starting at i
+		// Walk the trie to find all valid substrings starting at i.
 		for j := i; j < n; j++ {
 			idx := target[j] - 'a'
 			if node.child[idx] == nil {
 				break
 			}
 			node = node.child[idx]
-			// Every node reached represents a valid substring target[i:j+1]
+			// Every node reached represents a valid substring target[i:j+1].
 			if dp[j+1] != math.MaxInt32 {
 				candidate := 1 + dp[j+1]
 				if candidate < dp[i] {

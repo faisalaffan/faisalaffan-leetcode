@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
 // 2354. Number of Excellent Pairs
 // ----------------------------------------------------------------

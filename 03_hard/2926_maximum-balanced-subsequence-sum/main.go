@@ -4,11 +4,13 @@ package main
 // https://leetcode.com/problems/maximum-balanced-subsequence-sum/
 // Difficulty: Hard
 //
-// Approach: BIT (Fenwick tree) with coordinate compression.
-// Transform: balanced condition nums[j] - nums[i] >= j - i
-// is equivalent to nums[j] - j >= nums[i] - i.
-// Define key[i] = nums[i] - i. We need a subsequence with non-decreasing keys.
-// DP + BIT: dp[i] = nums[i] + max(dp[j]) for j < i with key[j] <= key[i].
+// A subsequence nums[i1], nums[i2], ..., nums[ik] is balanced if
+// nums[i_{t+1}] - nums[i_t] >= i_{t+1} - i_t, which is equivalent to
+// nums[i] - i being non-decreasing. Transform each element to key = nums[i] - i,
+// then find the subsequence with non-decreasing keys maximizing sum of nums[i].
+// Use BIT (Fenwick tree) with coordinate compression for DP: For each element,
+// query max sum for keys <= current key, add nums[i], update BIT.
+// O(N log N) time, O(N) space.
 
 import (
 	"fmt"
@@ -78,12 +80,32 @@ func maxBalancedSubsequenceSum(nums []int) int64 {
 }
 
 func main() {
-	// Example: [3,3,5,6] -> 14 (subsequence [3,5,6])
+	// Example: [3,3,5,6] => 14 (subsequence [3,5,6])
+	// keys: [3,2,3,3]
+	// 3 (pos 3): query(<=3)=minInt => cur=3
+	// 3 (pos 2): query(<=2)=minInt => cur=3
+	// 5 (pos 3): query(<=3)=max(3,3)=3 => cur=3+5=8
+	// 6 (pos 3): query(<=3)=max(3,3,8)=8 => cur=8+6=14
 	fmt.Println(maxBalancedSubsequenceSum([]int{3, 3, 5, 6}))
 
-	// All negative: pick the max single element
-	fmt.Println(maxBalancedSubsequenceSum([]int{-5, -3, -1}))
+	// All equal: [5,5,5] => 15
+	fmt.Println(maxBalancedSubsequenceSum([]int{5, 5, 5}))
+
+	// All negative: [-1,-2,-3] => -1 (pick single max)
+	fmt.Println(maxBalancedSubsequenceSum([]int{-1, -2, -3}))
 
 	// Mixed
 	fmt.Println(maxBalancedSubsequenceSum([]int{5, -10, 3}))
+
+	// Increasing nums
+	fmt.Println(maxBalancedSubsequenceSum([]int{1, 2, 3, 4, 5}))
+
+	// Decreasing nums
+	fmt.Println(maxBalancedSubsequenceSum([]int{5, 4, 3, 2, 1}))
+
+	// Single element
+	fmt.Println(maxBalancedSubsequenceSum([]int{-5}))
+
+	// Complex case
+	fmt.Println(maxBalancedSubsequenceSum([]int{10, 1, 2, 3, 4, 5}))
 }

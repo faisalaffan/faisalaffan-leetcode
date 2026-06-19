@@ -102,7 +102,7 @@ func maxScore(grid [][]int) int {
 
 		// Try each cell of this value.
 		for _, cell := range cells {
-			r, c := cell[0], cell[1]
+			_, c := cell[0], cell[1]
 			bit := 1 << c
 			for mask := 0; mask < (1 << n); mask++ {
 				if prevDp[mask] < 0 {

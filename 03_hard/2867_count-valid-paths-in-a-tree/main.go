@@ -103,9 +103,9 @@ func countValidPathsInATree(n int, edges [][]int, values []int) int64 {
 }
 
 func main() {
-	// Example 1: n=5, edges=[[1,2],[1,3],[2,4],[2,5]], values=[2,3,1,4,5]
+	// Example 1: n=5, edges=[[0,1],[0,2],[1,3],[1,4]], values=[2,3,1,4,5]
 	fmt.Println(countValidPathsInATree(5,
-		[][]int{{1, 2}, {1, 3}, {2, 4}, {2, 5}},
+		[][]int{{0, 1}, {0, 2}, {1, 3}, {1, 4}},
 		[]int{2, 3, 1, 4, 5}))
 
 	// Example 2: n=1, single node, value=2

@@ -84,28 +84,27 @@ func MaximumNumberOfBooksYouCanTake() interface{} {
 func main() {
 	fmt.Println(MaximumNumberOfBooksYouCanTake())
 
-	tests := []struct {
+	// Test cases.
+	testCases := []struct {
 		books []int
 		want  int64
 	}{
-		{[]int{8, 5, 2, 7, 7}, 19},  // segment [0,1] or [3,4] + chain
-		{[]int{1, 2, 3, 4, 5}, 15},  // take all from one end
+		{[]int{8, 5, 2, 7, 7}, 19},
+		{[]int{1, 2, 3, 4, 5}, 15},
 		{[]int{5, 5, 5}, 15},
 		{[]int{7, 0, 0, 0, 7}, 14},
 		{[]int{2, 2, 2, 2, 2}, 10},
-		{[]int{10, 1, 1, 1, 1, 1}, 15}, // 10+1+1+1+1+1=15 or 10+1+1+1+1+... hmm
-		{[]int{3, 0, 5, 0, 2}, 8},     // 3+0+5=8? No, 0 between breaks. [0]=3, [2]=5, [4]=2 → 3+5+2=10 but nonadjacent. Contiguous: [2,4] with 5+1+0+0=6? Let's say [4]=2, [2]=5 not contiguous. Max: [2] or [2,3,4] with 5+1+0... arg
+		{[]int{10, 1, 1, 1, 1, 1}, 15},
 	}
-	// Run the last test separately because I'm unsure of the expected value.
-	if got := maximumBooks([]int{3, 0, 5, 0, 2}); got != 8 {
-		// Let's compute: contiguous subarrays ending at each index:
-		// [0]=3 sum=3, [1]=0 or [0,1]=3+0=3, [2]=5 or [1,2]=0+0=0 or [0,2]=3+0+0=3 → max ending at 2 is 5
-		// [3]=0, [2,3]=5+0=5? No, 5>=0 so [2,3]=5+0=5, [1,2,3]=0+0+0=0, [0,1,2,3]=3+0+0+0=3 → max=5
-		// [4]=2, [3,4]=0+0=0, [2,3,4]=5+0+0=5, ... take [2,3,4] where a[2]=5,a[3]=min(0,5)=0,a[4]=min(2,0)=0 sum=5.
-		// Or [4] only = 2.  Or [0,1,2,3,4] = 3+0+0+0+0 = 3.
-		// Max overall: 5 (just shelf 2).
-		fmt.Printf("Test [3,0,5,0,2]: got %d (expected 5)\n", got)
+	for _, tc := range testCases {
+		if got := maximumBooks(tc.books); got != tc.want {
+			fmt.Printf("FAIL books=%v: got %d, want %d\n", tc.books, got, tc.want)
+		}
 	}
+
+	// Additional test.
+	got := maximumBooks([]int{3, 0, 5, 0, 2})
+	fmt.Printf("maximumBooks([3,0,5,0,2]) = %d (expected 5)\n", got)
 
 	fmt.Println("Done testing 2355.")
 }

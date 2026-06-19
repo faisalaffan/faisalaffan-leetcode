@@ -53,14 +53,14 @@ func minimumFlips(root *TreeNode, result int) int {
 			// result 1 only if both 1
 			// result 0 if at least one 0
 			return [2]int{
-				min(l[0]+r[0], l[0]+r[1], l[1]+r[0]), // cost0
+				min3(l[0]+r[0], l[0]+r[1], l[1]+r[0]), // cost0
 				l[1] + r[1], // cost1
 			}
 		case 4: // OR
 			// result 0 only if both 0
 			return [2]int{
 				l[0] + r[0], // cost0
-				min(l[1]+r[0], l[0]+r[1], l[1]+r[1]), // cost1
+				min3(l[1]+r[0], l[0]+r[1], l[1]+r[1]), // cost1
 			}
 		case 5: // XOR
 			return [2]int{
@@ -78,7 +78,7 @@ func minimumFlips(root *TreeNode, result int) int {
 	return cost[1]
 }
 
-func min(a, b, c int) int {
+func min3(a, b, c int) int {
 	if a < b {
 		if a < c {
 			return a

@@ -69,8 +69,6 @@ func findOverlappingShiftsII(shifts [][]int, queries [][]int) []int {
 	// Count pairs (i,j) with l <= i < j <= r.
 	countInRange := func(l, r int) int {
 		total := pref[r+1][r+1] - pref[l][r+1] - pref[r+1][l] + pref[l][l]
-		// Remove the diagonal (i,i) which pref includes.
-		diag := r - l + 1
 		// Each pair (i,j) for i<j appears once in the pref sum.
 		// The pref sum also includes (j,i) entries but those are counted separately.
 		// Since our overlap matrix is symmetric, pref counts each pair twice.
@@ -109,7 +107,7 @@ func findOverlappingShiftsIIFenwick(shifts [][]int, queries [][]int) []int {
 
 	// Group shifts by right endpoint.
 	byRight := make([][]int, n)
-	for i, s := range shifts {
+	for _, s := range shifts {
 		byRight[s[1]] = append(byRight[s[1]], s[0])
 	}
 
@@ -132,6 +130,7 @@ func findOverlappingShiftsIIFenwick(shifts [][]int, queries [][]int) []int {
 	rangeSum := func(l, r int) int {
 		return sum(r) - sum(l-1)
 	}
+	_ = rangeSum
 
 	ans := make([]int, m)
 	shiftPtr := 0

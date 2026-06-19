@@ -4,11 +4,14 @@ package main
 // https://leetcode.com/problems/maximum-spending-after-buying-items/
 // Difficulty: Hard
 //
-// Approach: Sort all values ascending.
-// By the rearrangement inequality, to maximize sum(day * value),
-// the smallest values should be bought on the earliest days.
-// Since each row is sorted ascending, merging all values into one
-// sorted list and pairing with day number gives the optimal result.
+// m x n grid where each row is sorted ascending. On day d (1-indexed), buy one
+// item from the first remaining element of any row. The spending on day d is
+// d * (item value). Maximize total spending.
+//
+// By the rearrangement inequality, spending is maximized by buying items in
+// ascending order of value (smallest first, largest last). Since each row is
+// sorted ascending, we can simply flatten all values into one sorted list.
+// O(m*n log(m*n)) time, O(m*n) space.
 
 import (
 	"fmt"
@@ -37,7 +40,7 @@ func maxSpending(values [][]int) int64 {
 }
 
 func main() {
-	// Example: values=[[8,5,2],[6,4,1],[9,7,3]] -> 285
+	// Example: values=[[8,5,2],[6,4,1],[9,7,3]] => 285
 	// Sorted: [1,2,3,4,5,6,7,8,9]
 	// Spending: 1*1 + 2*2 + 3*3 + 4*4 + 5*5 + 6*6 + 7*7 + 8*8 + 9*9 = 285
 	fmt.Println(maxSpending([][]int{{8, 5, 2}, {6, 4, 1}, {9, 7, 3}}))
@@ -47,4 +50,16 @@ func main() {
 
 	// Simple case
 	fmt.Println(maxSpending([][]int{{10, 20}, {5, 15}}))
+
+	// All same values
+	fmt.Println(maxSpending([][]int{{5, 5}, {5, 5}}))
+
+	// Single cell
+	fmt.Println(maxSpending([][]int{{7}}))
+
+	// One row ascending
+	fmt.Println(maxSpending([][]int{{1, 2, 3, 4, 5}}))
+
+	// Empty grid
+	fmt.Println(maxSpending([][]int{}))
 }

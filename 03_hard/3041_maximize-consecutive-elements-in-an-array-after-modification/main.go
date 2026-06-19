@@ -19,8 +19,9 @@ func maxSelectedElements(nums []int) int {
 	f := make(map[int]int)
 	ans := 0
 	for _, x := range nums {
+		old := f[x]
 		f[x] = max(f[x], f[x-1]+1)
-		f[x+1] = max(f[x+1], f[x]+1)
+		f[x+1] = max(f[x+1], old+1)
 	}
 	for _, v := range f {
 		if v > ans {
