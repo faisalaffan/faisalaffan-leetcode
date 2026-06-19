@@ -12,24 +12,11 @@ import (
 	"fmt"
 )
 
-func main() {
-	// Example: [1,2,3] -> 1
-	nums := []int{1, 2, 3}
-	fmt.Println(medianOfUniquenessArray(nums))
-
-	// Additional test
-	nums2 := []int{3, 4, 3, 4, 5}
-	fmt.Println(medianOfUniquenessArray(nums2))
-}
-
 func medianOfUniquenessArray(nums []int) int {
 	n := len(nums)
 	total := n * (n + 1) / 2
-	// The median is the (total+1)/2-th element (1-indexed) in sorted order
 	medianPos := (total + 1) / 2
 
-	// Binary search for the smallest x such that
-	// count of subarrays with distinct count <= x >= medianPos
 	left, right := 1, n
 	for left < right {
 		mid := (left + right) / 2
@@ -42,7 +29,6 @@ func medianOfUniquenessArray(nums []int) int {
 	return left
 }
 
-// countLE returns the number of subarrays with distinct element count <= k
 func countLE(nums []int, k int) int64 {
 	n := len(nums)
 	freq := make(map[int]int)
@@ -62,8 +48,34 @@ func countLE(nums []int, k int) int64 {
 			}
 			left++
 		}
-		// All subarrays ending at 'right' with start in [left, right] have <= k distinct
 		count += int64(right - left + 1)
 	}
 	return count
+}
+
+func main() {
+	// Test case 1
+	nums := []int{1, 2, 3}
+	fmt.Println("Test 1:", medianOfUniquenessArray(nums))
+	// Expected: 1
+
+	// Test case 2
+	nums2 := []int{3, 4, 3, 4, 5}
+	fmt.Println("Test 2:", medianOfUniquenessArray(nums2))
+	// Expected: ?
+
+	// Test case 3: single element
+	nums3 := []int{1}
+	fmt.Println("Test 3:", medianOfUniquenessArray(nums3))
+	// Expected: 1
+
+	// Test case 4: all same
+	nums4 := []int{5, 5, 5, 5}
+	fmt.Println("Test 4:", medianOfUniquenessArray(nums4))
+	// Expected: 1
+
+	// Test case 5: all distinct
+	nums5 := []int{1, 2, 3, 4}
+	fmt.Println("Test 5:", medianOfUniquenessArray(nums5))
+	// Expected: 2 (subarrays: 10 total, median pos 5th/6th → min distinct count covering >=5 subarrays)
 }

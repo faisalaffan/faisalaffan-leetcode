@@ -4,27 +4,16 @@ package main
 // https://leetcode.com/problems/valid-arrangement-of-pairs/
 // Difficulty: Hard
 //
-// Approach: Eulerian Path (Hierholzer's Algorithm).
-// Build adjacency list, compute in-degree and out-degree.
-// Start node = node with out-degree > in-degree, or any node with outgoing edges.
+// Eulerian Path (Hierholzer's Algorithm). Build adjacency list, compute
+// in/out degrees. Start at node with out > in, or any node with edges.
 // Use iterative DFS to reconstruct the path, then reverse.
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	// Example from problem statement
-	pairs1 := [][]int{{5, 1}, {4, 5}, {11, 9}, {9, 4}}
-	fmt.Printf("validArrangement(%v) = %v (expected [[11 9] [9 4] [4 5] [5 1]])\n",
-		pairs1, validArrangement(pairs1))
-
-	// Additional tests
-	pairs2 := [][]int{{1, 2}, {2, 3}, {3, 4}}
-	fmt.Printf("validArrangement(%v) = %v\n", pairs2, validArrangement(pairs2))
-
-	pairs3 := [][]int{{1, 2}, {2, 1}}
-	fmt.Printf("validArrangement(%v) = %v\n", pairs3, validArrangement(pairs3))
+	fmt.Println(validArrangement([][]int{{5, 1}, {4, 5}, {11, 9}, {9, 4}}))
+	fmt.Println(validArrangement([][]int{{1, 2}, {2, 3}, {3, 4}}))
+	fmt.Println(validArrangement([][]int{{1, 2}, {2, 1}}))
 }
 
 func validArrangement(pairs [][]int) [][]int {

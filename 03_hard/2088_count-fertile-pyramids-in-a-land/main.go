@@ -4,34 +4,19 @@ package main
 // https://leetcode.com/problems/count-fertile-pyramids-in-a-land/
 // Difficulty: Hard
 //
-// Approach: DP. For each fertile cell, dp[i][j] = max pyramid height with (i,j) as top/inverted top.
-// Recurrence (regular pyramid): dp[i][j] = 1 + min(dp[i+1][j-1], dp[i+1][j], dp[i+1][j+1])
-// Recurrence (inverted pyramid): dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i-1][j+1])
-// Total pyramids = sum(dp[i][j] - 1) over all cells where dp[i][j] > 1.
+// DP approach: dp[i][j] = max pyramid height with (i,j) as the top.
+// Regular pyramid (top down): dp[i][j] = 1 + min(dp[i+1][j-1], dp[i+1][j], dp[i+1][j+1])
+// Inverted pyramid (top up):  dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i-1][j+1])
+// Sum (dp[i][j] - 1) over all cells where dp[i][j] > 1.
 
 import "fmt"
 
 func main() {
-	// Example from problem statement
-	grid1 := [][]int{{0, 1, 1, 0}, {1, 1, 1, 1}}
-	fmt.Printf("countPyramids(%v) = %d (expected 2)\n", grid1, countPyramids(grid1))
-
-	// Additional test cases
-	grid2 := [][]int{{1, 1, 1}, {1, 1, 1}}
-	fmt.Printf("countPyramids(%v) = %d\n", grid2, countPyramids(grid2))
-
-	grid3 := [][]int{{1}}
-	fmt.Printf("countPyramids(%v) = %d (expected 0)\n", grid3, countPyramids(grid3))
-
-	grid4 := [][]int{{1, 1}}
-	fmt.Printf("countPyramids(%v) = %d (expected 0)\n", grid4, countPyramids(grid4))
-
-	grid5 := [][]int{
-		{1, 1, 1},
-		{1, 1, 1},
-		{1, 1, 1},
-	}
-	fmt.Printf("countPyramids(%v) = %d\n", grid5, countPyramids(grid5))
+	fmt.Println(countPyramids([][]int{{0, 1, 1, 0}, {1, 1, 1, 1}}))
+	fmt.Println(countPyramids([][]int{{1, 1, 1}, {1, 1, 1}}))
+	fmt.Println(countPyramids([][]int{{1}}))
+	fmt.Println(countPyramids([][]int{{1, 1}}))
+	fmt.Println(countPyramids([][]int{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}))
 }
 
 func countPyramids(grid [][]int) int {
@@ -40,6 +25,8 @@ func countPyramids(grid [][]int) int {
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}
+
+	total := 0
 
 	// Regular pyramids (top pointing down): bottom-up DP
 	for i := m - 1; i >= 0; i-- {
@@ -53,12 +40,6 @@ func countPyramids(grid [][]int) int {
 			} else {
 				dp[i][j] = 1 + min(dp[i+1][j-1], min(dp[i+1][j], dp[i+1][j+1]))
 			}
-		}
-	}
-
-	total := 0
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
 			if dp[i][j] > 1 {
 				total += dp[i][j] - 1
 			}
@@ -77,11 +58,6 @@ func countPyramids(grid [][]int) int {
 			} else {
 				dp[i][j] = 1 + min(dp[i-1][j-1], min(dp[i-1][j], dp[i-1][j+1]))
 			}
-		}
-	}
-
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
 			if dp[i][j] > 1 {
 				total += dp[i][j] - 1
 			}

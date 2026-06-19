@@ -14,13 +14,6 @@ import (
 
 const ALL_ONES = (1 << 20) - 1
 
-func main() {
-	// Example: [1,4,3,3,2], [0,3,3,2] -> 12
-	nums := []int{1, 4, 3, 3, 2}
-	andValues := []int{0, 3, 3, 2}
-	fmt.Println(minimumSumOfValuesByDividingArray(nums, andValues))
-}
-
 func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int {
 	m := len(andValues)
 	dp := make([]map[int]int, m+1)
@@ -34,7 +27,6 @@ func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int {
 		for j := 0; j <= m; j++ {
 			ndp[j] = make(map[int]int)
 		}
-
 		for j := 0; j <= m; j++ {
 			for andVal, sum := range dp[j] {
 				if andVal == ALL_ONES {
@@ -42,20 +34,19 @@ func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int {
 					if val, ok := ndp[j][x]; !ok || sum < val {
 						ndp[j][x] = sum
 					}
-					// Start new segment at x and immediately close (single element segment)
+					// Start and immediately close (single element segment)
 					if j < m && x == andValues[j] {
 						if val, ok := ndp[j+1][ALL_ONES]; !ok || sum+x < val {
 							ndp[j+1][ALL_ONES] = sum + x
 						}
 					}
 				} else {
-					// Extend segment with x
 					newAnd := andVal & x
 					// Extend, don't close
 					if val, ok := ndp[j][newAnd]; !ok || sum < val {
 						ndp[j][newAnd] = sum
 					}
-					// Extend and close segment at x
+					// Extend and close
 					if j < m && newAnd == andValues[j] {
 						if val, ok := ndp[j+1][ALL_ONES]; !ok || sum+x < val {
 							ndp[j+1][ALL_ONES] = sum + x
@@ -64,7 +55,6 @@ func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int {
 				}
 			}
 		}
-
 		dp = ndp
 	}
 
@@ -72,4 +62,30 @@ func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int {
 		return ans
 	}
 	return -1
+}
+
+func main() {
+	// Test case 1
+	nums := []int{1, 4, 3, 3, 2}
+	andValues := []int{0, 3, 3, 2}
+	fmt.Println("Test 1:", minimumSumOfValuesByDividingArray(nums, andValues))
+	// Expected: 12
+
+	// Test case 2: single segment
+	nums2 := []int{1, 2, 3}
+	andValues2 := []int{0}
+	fmt.Println("Test 2:", minimumSumOfValuesByDividingArray(nums2, andValues2))
+	// Expected: 3
+
+	// Test case 3: impossible
+	nums3 := []int{1, 2}
+	andValues3 := []int{5}
+	fmt.Println("Test 3:", minimumSumOfValuesByDividingArray(nums3, andValues3))
+	// Expected: -1
+
+	// Test case 4: all same
+	nums4 := []int{7, 7, 7, 7}
+	andValues4 := []int{7, 7}
+	fmt.Println("Test 4:", minimumSumOfValuesByDividingArray(nums4, andValues4))
+	// Expected: 7+7=14
 }

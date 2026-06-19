@@ -3,11 +3,21 @@ package main
 // LeetCode #2959: Number of Possible Sets of Closing Branches
 // https://leetcode.com/problems/number-of-possible-sets-of-closing-branches/
 // Difficulty: Hard
+//
+// Given n nodes (0..n-1), some branches may be closed (removed).
+// For each subset of remaining branches, run Floyd-Warshall to compute
+// all-pairs shortest paths. A subset is valid if all pairwise distances
+// among remaining nodes are <= maxDistance.
+// Count valid subsets (including empty set? Typically yes, with n=0 it's trivially valid).
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func numberOfSets(n int, maxDistance int, roads [][]int) int {
 	const inf = 1 << 29
+
+	// Build adjacency matrix
 	g := make([][]int, n)
 	for i := range g {
 		g[i] = make([]int, n)
@@ -23,13 +33,19 @@ func numberOfSets(n int, maxDistance int, roads [][]int) int {
 			g[v][u] = w
 		}
 	}
+
 	ans := 0
+
+	// Try all subsets of open branches
 	for mask := 0; mask < (1 << n); mask++ {
+		// Copy distances for this subset
 		dist := make([][]int, n)
 		for i := range dist {
 			dist[i] = make([]int, n)
 			copy(dist[i], g[i])
 		}
+
+		// Floyd-Warshall only for open branches
 		for k := 0; k < n; k++ {
 			if mask>>k&1 == 0 {
 				continue
@@ -48,8 +64,10 @@ func numberOfSets(n int, maxDistance int, roads [][]int) int {
 				}
 			}
 		}
-		ok := 1
-		for i := 0; i < n && ok == 1; i++ {
+
+		// Validate all pairwise distances for open branches
+		ok := true
+		for i := 0; i < n && ok; i++ {
 			if mask>>i&1 == 0 {
 				continue
 			}
@@ -58,17 +76,24 @@ func numberOfSets(n int, maxDistance int, roads [][]int) int {
 					continue
 				}
 				if dist[i][j] > maxDistance {
-					ok = 0
+					ok = false
 					break
 				}
 			}
 		}
-		ans += ok
+		if ok {
+			ans++
+		}
 	}
 	return ans
 }
 
 func main() {
+	// Example
 	fmt.Println(numberOfSets(3, 5, [][]int{{0, 1, 2}, {1, 2, 10}, {0, 2, 10}}))
 	fmt.Println(numberOfSets(3, 5, [][]int{{0, 1, 20}, {0, 2, 5}, {1, 2, 2}}))
+
+	// Edge cases
+	fmt.Println(numberOfSets(1, 0, [][]int{}))
+	fmt.Println(numberOfSets(2, 1, [][]int{{0, 1, 2}}))
 }

@@ -5,6 +5,9 @@ package main
 // Difficulty: Hard
 // Time: O(2^m * log(k * min_coin)) where m = filtered coin count
 // Space: O(m)
+//
+// Find the k-th smallest amount that can be represented as a positive multiple of
+// at least one coin denomination. Use inclusion-exclusion with LCM and binary search.
 
 import (
 	"fmt"
@@ -18,18 +21,16 @@ func gcd(a, b int64) int64 {
 	return a
 }
 
-// Safe LCM that returns > limit if overflow would occur
 func lcmSafe(a, b, limit int64) int64 {
 	g := gcd(a, b)
 	aDivG := a / g
 	if aDivG > limit/b {
-		return limit + 1 // overflow sentinel
+		return limit + 1
 	}
 	return aDivG * b
 }
 
 func kthSmallestAmount(coins []int, k int) int64 {
-	// Sort and remove redundant coins (multiples of smaller coins)
 	sort.Ints(coins)
 	filtered := make([]int, 0)
 	for _, c := range coins {
@@ -51,9 +52,7 @@ func kthSmallestAmount(coins []int, k int) int64 {
 		coinI64[i] = int64(c)
 	}
 
-	// Count numbers <= X divisible by at least one coin
 	count := func(X int64) int64 {
-		// Inclusion-exclusion via DFS
 		var dfs func(idx int, curLCM int64, cnt int) int64
 		dfs = func(idx int, curLCM int64, cnt int) int64 {
 			if idx == m {
@@ -65,9 +64,7 @@ func kthSmallestAmount(coins []int, k int) int64 {
 				}
 				return -(X / curLCM)
 			}
-			// Skip this coin
 			total := dfs(idx+1, curLCM, cnt)
-			// Take this coin
 			newLCM := lcmSafe(curLCM, coinI64[idx], X)
 			if newLCM <= X {
 				total += dfs(idx+1, newLCM, cnt+1)
@@ -77,7 +74,6 @@ func kthSmallestAmount(coins []int, k int) int64 {
 		return dfs(0, 1, 0)
 	}
 
-	// Binary search for k-th amount
 	minCoin := int64(filtered[0])
 	low := int64(1)
 	high := minCoin * int64(k)
@@ -90,7 +86,6 @@ func kthSmallestAmount(coins []int, k int) int64 {
 			low = mid + 1
 		}
 	}
-
 	return low
 }
 
@@ -106,4 +101,8 @@ func main() {
 	// Test case 3
 	fmt.Println("Test 3:", kthSmallestAmount([]int{2, 3, 4}, 5))
 	// Expected: 8
+
+	// Test case 4: single coin
+	fmt.Println("Test 4:", kthSmallestAmount([]int{5}, 4))
+	// Expected: 20
 }

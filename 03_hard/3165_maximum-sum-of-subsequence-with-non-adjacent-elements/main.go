@@ -6,20 +6,14 @@ package main
 //
 // Given nums and queries [pos, val], update nums[pos]=val then compute the
 // maximum sum of a subsequence with no adjacent elements (House Robber style).
-// Each query returns the max sum after the update. Use a segment tree with
-// 4-state nodes (s00, s01, s10, s11) for O(log n) per query.
+// Each query returns the max sum after the update.
+//
+// Approach: segment tree with 4-state nodes (s00, s01, s10, s11) for O(log n)
+// per update/query.
 
-import (
-	"fmt"
-)
+import "fmt"
 
 const MOD = 1000000007
-
-func main() {
-	nums := []int{3, 5, 9}
-	queries := [][]int{{1, -2}, {0, -1}}
-	fmt.Println(maximumSumSubsequence(nums, queries))
-}
 
 type Node struct {
 	s00, s01, s10, s11 int
@@ -48,8 +42,7 @@ type SegTree struct {
 
 func NewSegTree(arr []int) *SegTree {
 	n := len(arr)
-	size := 4 * n
-	tree := make([]Node, size)
+	tree := make([]Node, 4*n)
 	st := &SegTree{tree: tree, n: n}
 	st.build(arr, 1, 0, n-1)
 	return st
@@ -81,10 +74,13 @@ func (st *SegTree) update(idx, l, r, pos, val int) {
 }
 
 func (st *SegTree) Query() int {
-	return st.tree[1].s11
+	return st.tree[1].s11 % MOD
 }
 
 func maximumSumSubsequence(nums []int, queries [][]int) []int {
+	if len(nums) == 0 {
+		return make([]int, len(queries))
+	}
 	st := NewSegTree(nums)
 	ans := make([]int, len(queries))
 	for i, q := range queries {
@@ -93,4 +89,11 @@ func maximumSumSubsequence(nums []int, queries [][]int) []int {
 		ans[i] = st.Query()
 	}
 	return ans
+}
+
+func main() {
+	nums := []int{3, 5, 9}
+	queries := [][]int{{1, -2}, {0, -1}}
+	fmt.Println(maximumSumSubsequence(nums, queries))
+	// Expect: [9, 5]  (after each update, the max non-adjacent sum)
 }

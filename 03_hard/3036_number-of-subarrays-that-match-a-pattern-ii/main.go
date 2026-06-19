@@ -3,6 +3,15 @@ package main
 // LeetCode #3036: Number of Subarrays That Match a Pattern II
 // https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-ii/
 // Difficulty: Hard
+//
+// Given an array nums and a pattern array where each element is -1, 0, or 1,
+// count the number of subarrays of nums of length len(pattern)+1 that match
+// the pattern. A subarray matches if for each adjacent pair in the subarray,
+// the comparison result (nums[i+1] - nums[i] sign) equals the pattern value.
+//
+// Approach: Z-algorithm (linear time)
+//   Build a combined array: pattern + [-2] + (nums[i+1] cmp nums[i] for i in range).
+//   Use Z-algorithm to find all positions where the pattern appears.
 
 import (
 	"cmp"
@@ -11,13 +20,18 @@ import (
 
 func countMatchingSubarrays(nums, pattern []int) int {
 	m := len(pattern)
+
+	// Build combined array: pattern | sentinel | diff array
 	arr := make([]int, 0, m+1+len(nums)-1)
 	arr = append(arr, pattern...)
-	arr = append(arr, 2)
+	arr = append(arr, 2) // sentinel (any value not in {-1,0,1})
 	for i := 1; i < len(nums); i++ {
 		arr = append(arr, cmp.Compare(nums[i], nums[i-1]))
 	}
+
 	n := len(arr)
+
+	// Z-algorithm
 	z := make([]int, n)
 	l, r := 0, 0
 	for i := 1; i < n; i++ {
@@ -31,6 +45,8 @@ func countMatchingSubarrays(nums, pattern []int) int {
 			l, r = i, i+z[i]-1
 		}
 	}
+
+	// Count matches
 	ans := 0
 	for i := m + 1; i < n; i++ {
 		if z[i] == m {
@@ -39,9 +55,33 @@ func countMatchingSubarrays(nums, pattern []int) int {
 	}
 	return ans
 }
-func min2(a, b int) int { if a < b { return a }; return b }
+
+func min2(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
 
 func main() {
-	fmt.Println(countMatchingSubarrays([]int{1, 2, 3, 4, 5, 6}, []int{1, 1}))
-	fmt.Println(countMatchingSubarrays([]int{1, 4, 4, 1, 3, 5, 5, 3}, []int{1, 0, -1}))
+	// Example: [1,2,3,4,5,6], pattern [1,1]
+	// Comparisons: 1,1,1,1,1 -> matches at [1,2,3], [2,3,4], [3,4,5], [4,5,6] -> 4
+	fmt.Println("Test 1:", countMatchingSubarrays([]int{1, 2, 3, 4, 5, 6}, []int{1, 1}))
+
+	// Example: [1,4,4,1,3,5,5,3], pattern [1,0,-1]
+	// comparisons: 1,0,-1,1,1,0,-1
+	// matches at [1,4,4,1] -> 1
+	fmt.Println("Test 2:", countMatchingSubarrays([]int{1, 4, 4, 1, 3, 5, 5, 3}, []int{1, 0, -1}))
+
+	// All equal
+	fmt.Println("Test 3:", countMatchingSubarrays([]int{5, 5, 5, 5}, []int{0, 0}))
+
+	// Decreasing
+	fmt.Println("Test 4:", countMatchingSubarrays([]int{5, 4, 3, 2, 1}, []int{-1, -1}))
+
+	// No match
+	fmt.Println("Test 5:", countMatchingSubarrays([]int{1, 2, 3}, []int{-1}))
+
+	// Single pattern element
+	fmt.Println("Test 6:", countMatchingSubarrays([]int{1, 2, 1, 2}, []int{1}))
 }

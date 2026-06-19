@@ -9,37 +9,27 @@ package main
 // Let arr[k] = nums1[k] - nums2[k]. Then for i < j: arr[i] <= arr[j] + diff.
 // Processing left to right, at position j count previous i where
 // arr[i] <= arr[j] + diff. Use BIT (Fenwick Tree) on compressed values.
-// Time O(N log N) | Space O(N)
 
 import (
 	"fmt"
 	"sort"
 )
 
-func main() {
-	// Example 1
-	fmt.Println(numberOfPairs([][]int{{3, 2, 5}, {2, 2, 1}}, 1))
-	// Example 2
-	fmt.Println(numberOfPairs([][]int{{3, -1}, {-2, 2}}, -1))
-	// Single element
-	fmt.Println(numberOfPairs([][]int{{1}, {1}}, 0))
-}
-
-type bit struct {
+type BIT struct {
 	tree []int
 }
 
-func newBIT(size int) *bit {
-	return &bit{tree: make([]int, size+1)}
+func newBIT(size int) *BIT {
+	return &BIT{tree: make([]int, size+2)}
 }
 
-func (b *bit) add(idx int) {
+func (b *BIT) add(idx int) {
 	for i := idx; i < len(b.tree); i += i & -i {
 		b.tree[i]++
 	}
 }
 
-func (b *bit) sum(idx int) int {
+func (b *BIT) sum(idx int) int {
 	s := 0
 	for i := idx; i > 0; i -= i & -i {
 		s += b.tree[i]
@@ -47,7 +37,7 @@ func (b *bit) sum(idx int) int {
 	return s
 }
 
-func numberOfPairs(input [][]int, diff int) int {
+func numberOfPairs(input [][]int, diff int) int64 {
 	nums1, nums2 := input[0], input[1]
 	n := len(nums1)
 
@@ -56,7 +46,7 @@ func numberOfPairs(input [][]int, diff int) int {
 		arr[i] = nums1[i] - nums2[i]
 	}
 
-	// Coordinate compression: we need to query arr[j] + diff
+	// Coordinate compression
 	allVals := make([]int, 0, n*2)
 	for _, v := range arr {
 		allVals = append(allVals, v, v+diff)
@@ -76,14 +66,28 @@ func numberOfPairs(input [][]int, diff int) int {
 	}
 
 	bt := newBIT(len(allVals) + 2)
-	ans := 0
+	var ans int64
+
 	for j := 0; j < n; j++ {
 		// Count previous arr[i] where arr[i] <= arr[j] + diff
 		target := arr[j] + diff
 		pos := compress(target)
-		ans += bt.sum(pos)
+		ans += int64(bt.sum(pos))
 		bt.add(compress(arr[j]))
 	}
 
 	return ans
+}
+
+func main() {
+	// Example 1
+	fmt.Println(numberOfPairs([][]int{{3, 2, 5}, {2, 2, 1}}, 1))
+	// Example 2
+	fmt.Println(numberOfPairs([][]int{{3, -1}, {-2, 2}}, -1))
+	// Single element
+	fmt.Println(numberOfPairs([][]int{{1}, {1}}, 0))
+	// All equal
+	fmt.Println(numberOfPairs([][]int{{1, 1, 1}, {1, 1, 1}}, 0))
+	// Larger range
+	fmt.Println(numberOfPairs([][]int{{1, 3, 5, 7}, {2, 4, 6, 8}}, 2))
 }

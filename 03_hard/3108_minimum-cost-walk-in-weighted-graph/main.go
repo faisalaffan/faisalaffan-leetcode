@@ -4,6 +4,10 @@ package main
 // https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/
 // Difficulty: Hard
 // Time: O(n + m + q * alpha(n)) | Space: O(n)
+//
+// For each query (u,v), answer the minimum possible bitwise AND of a walk from u to v.
+// Since AND only decreases with more edges, the minimum AND in a component is the AND
+// of ALL edges in that component.
 
 import (
 	"fmt"
@@ -11,15 +15,16 @@ import (
 
 type DSU struct {
 	parent []int
-	and    []int // bitwise AND of all edge weights in the component
+	and    []int
 }
 
 func NewDSU(n int) *DSU {
 	parent := make([]int, n)
 	and := make([]int, n)
+	mask := (1 << 30) - 1 // all 1s in lower 30 bits (max weight < 2^30)
 	for i := 0; i < n; i++ {
 		parent[i] = i
-		and[i] = (1 << 30) - 1 // all 1s in lower 30 bits (max weight < 2^30)
+		and[i] = mask
 	}
 	return &DSU{parent: parent, and: and}
 }
@@ -37,7 +42,6 @@ func (d *DSU) Union(x, y, w int) {
 		d.and[rx] &= w
 		return
 	}
-	// Merge ry into rx
 	d.and[rx] = d.and[rx] & d.and[ry] & w
 	d.parent[ry] = rx
 }
@@ -49,13 +53,11 @@ func (d *DSU) GetAnd(x int) int {
 func minimumCostWalk(n int, edges [][]int, query [][]int) []int {
 	dsu := NewDSU(n)
 
-	// Process all edges
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
 		dsu.Union(u, v, w)
 	}
 
-	// Answer queries
 	ans := make([]int, len(query))
 	for i, q := range query {
 		u, v := q[0], q[1]
@@ -91,4 +93,11 @@ func main() {
 	query = [][]int{{0, 2}}
 	fmt.Println("Test 3:", minimumCostWalk(n, edges, query))
 	// Expected: 7 & 3 = 3
+
+	// Test case 4: single node, self query
+	n = 1
+	edges = [][]int{}
+	query = [][]int{{0, 0}}
+	fmt.Println("Test 4:", minimumCostWalk(n, edges, query))
+	// Expected: [0]
 }

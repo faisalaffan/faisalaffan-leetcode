@@ -4,20 +4,19 @@ package main
 // https://leetcode.com/problems/find-maximum-non-decreasing-array-length/
 // Difficulty: Hard
 //
-// Approach: DP + monotonic deque optimization.
-// We partition the array into contiguous groups, replace each group
-// with its sum, and want the resulting array to be non-decreasing.
-// Goal: maximize the number of groups.
+// DP + monotonic deque optimization.
+// Partition array into contiguous groups, replace each group with its sum.
+// Goal: resulting array is non-decreasing, maximize number of groups.
 //
 // Define:
-//   f[i] = max groups for prefix ending at i-1 (i elements total)
+//   f[i] = max groups for prefix ending at i-1 (i elements)
 //   g[i] = minimum possible last group sum achieving f[i]
 //   pref[i] = prefix sum of first i elements
 //
 // Transition: for j < i where sum(j..i-1) = pref[i]-pref[j] >= g[j],
 //   f[i] = f[j] + 1, g[i] = pref[i]-pref[j]
 //
-// Optimization: maintain deque of candidates sorted by g[j] and pref[j]+g[j].
+// Optimization: deque maintains candidates sorted by g[j] and pref[j]+g[j].
 
 import (
 	"fmt"
@@ -31,24 +30,22 @@ func findMaximumLength(nums []int) int {
 	}
 
 	f := make([]int, n+1)
-	g := make([]int64, n+1) // g[j] = last group sum in optimal partition of first j elements
+	g := make([]int64, n+1)
 	deq := make([]int, 0, n+1)
-	deq = append(deq, 0) // start with index 0
+	deq = append(deq, 0)
 
 	head := 0
 	for i := 1; i <= n; i++ {
 		// Pop front: discard indices that are no longer optimal
-		// A candidate j is outdated if pref[i] >= pref[deq[head+1]] + g[deq[head+1]]
 		for head+1 < len(deq) && pref[i] >= pref[deq[head+1]]+g[deq[head+1]] {
 			head++
 		}
 
 		j := deq[head]
 		f[i] = f[j] + 1
-		last := pref[i] - pref[j]
-		g[i] = last
+		g[i] = pref[i] - pref[j]
 
-		// Pop back: maintain monotonicity of pref[i] + g[i] (strictly increasing)
+		// Pop back: maintain monotonicity of pref[i]+g[i]
 		for len(deq) > head && pref[i]+g[i] <= pref[deq[len(deq)-1]]+g[deq[len(deq)-1]] {
 			deq = deq[:len(deq)-1]
 		}
@@ -65,4 +62,6 @@ func main() {
 	// Simple cases
 	fmt.Println(findMaximumLength([]int{1, 2, 3}))
 	fmt.Println(findMaximumLength([]int{5, 4, 3, 2, 1}))
+	fmt.Println(findMaximumLength([]int{1, 1, 1}))
+	fmt.Println(findMaximumLength([]int{1, 2, 1, 2}))
 }

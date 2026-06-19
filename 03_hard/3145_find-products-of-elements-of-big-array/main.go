@@ -5,8 +5,8 @@ package main
 // Difficulty: Hard
 //
 // The "powerful array" of x is the shortest sorted array of powers of two that
-// sum to x (the binary representation). The "big array" is the concatenation of
-// powerful arrays for all positive integers. E.g., [1, 2, 1, 2, 4, 1, 4, ...].
+// sum to x (i.e., set bits of x). The "big array" is the concatenation of
+// powerful arrays for all positive integers: [1, 2, 1, 2, 4, 1, 4, ...].
 // Each query [from, to, mod] asks for the product of big array elements in that
 // range modulo mod. Since every element is a power of 2, product = 2^(exponent_sum).
 // Use binary search + bit counting to compute prefix exponent sums.
@@ -17,18 +17,7 @@ import (
 	"sort"
 )
 
-func main() {
-	// queries with mod: [[from,to,mod], ...]
-	queries := [][]int{
-		{1, 3, 1000000007},
-		{5, 7, 1000000007},
-	}
-	res := findProductsOfElementsOfBigArray(queries)
-	fmt.Println(res)
-}
-
-// cnt1 returns the total number of set bits in numbers 1..num.
-// This equals the total count of elements in the big array contributed by 1..num.
+// cnt1 returns total count of set bits in numbers 1..num (i.e., big array prefix length)
 func cnt1(num int) int {
 	if num <= 0 {
 		return 0
@@ -45,8 +34,7 @@ func cnt1(num int) int {
 	return res
 }
 
-// acc0 returns the total sum of bit-position exponents for set bits in 1..num.
-// This equals the prefix exponent sum of the big array contributed by 1..num.
+// acc0 returns total sum of bit-position exponents for set bits in 1..num
 func acc0(num int) int {
 	if num <= 0 {
 		return 0
@@ -63,24 +51,19 @@ func acc0(num int) int {
 	return res
 }
 
-// prefixExpSum returns the total exponent sum for big array elements [0..bound-1].
+// prefixExpSum returns total exponent sum for big array elements [0..bound-1]
 func prefixExpSum(bound int) int {
 	if bound <= 0 {
 		return 0
 	}
-	// Binary search for the smallest num where cnt1(num) >= bound
 	target := sort.Search(bound, func(n int) bool {
 		return cnt1(n) >= bound
 	})
 
-	// Number of elements before target's powerful array
 	prevCnt := cnt1(target - 1)
-	rest := bound - prevCnt // how many elements we need from target's array
-
-	// Start with exponent sum from numbers before target
+	rest := bound - prevCnt
 	expSum := acc0(target - 1)
 
-	// Add exponents from target's set bits
 	for i := 0; rest > 0; i++ {
 		if target&(1<<uint(i)) != 0 {
 			expSum += i
@@ -95,8 +78,25 @@ func findProductsOfElementsOfBigArray(queries [][]int) []int {
 	for idx, q := range queries {
 		from, to, mod := q[0], q[1], q[2]
 		exp := prefixExpSum(to+1) - prefixExpSum(from)
-		// Compute 2^exp % mod using big.Int for large exponents
 		ans[idx] = int(new(big.Int).Exp(big.NewInt(2), big.NewInt(int64(exp)), big.NewInt(int64(mod))).Int64())
 	}
 	return ans
+}
+
+func main() {
+	// Test case 1
+	queries := [][]int{
+		{1, 3, 1000000007},
+		{5, 7, 1000000007},
+	}
+	fmt.Println("Test 1:", findProductsOfElementsOfBigArray(queries))
+
+	// Test case 2: single element query
+	queries2 := [][]int{{0, 0, 1000000007}}
+	fmt.Println("Test 2:", findProductsOfElementsOfBigArray(queries2))
+	// Expected: 1 (2^0 = 1)
+
+	// Test case 3
+	queries3 := [][]int{{2, 5, 1000000007}}
+	fmt.Println("Test 3:", findProductsOfElementsOfBigArray(queries3))
 }

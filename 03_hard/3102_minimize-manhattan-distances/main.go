@@ -3,7 +3,10 @@ package main
 // LeetCode #3102: Minimize Manhattan Distances
 // https://leetcode.com/problems/minimize-manhattan-distances/
 // Difficulty: Hard
-// Time: O(n) | Space: O(1)
+//
+// Manhattan distance = |x1-x2| + |y1-y2| = max(u1-u2, v1-v2) where u=x+y, v=x-y.
+// Max Manhattan distance among points = max(max_u - min_u, max_v - min_v).
+// To minimize after removing one point, try removing each of the 4 extreme points.
 
 import (
 	"fmt"
@@ -17,7 +20,6 @@ func minimumDistance(points [][]int) int {
 	}
 
 	// Track top-2 max and min for u = x+y and v = x-y
-	// We need values AND indices
 	max1U, max2U := math.MinInt32, math.MinInt32
 	min1U, min2U := math.MaxInt32, math.MaxInt32
 	max1V, max2V := math.MinInt32, math.MinInt32
@@ -29,7 +31,6 @@ func minimumDistance(points [][]int) int {
 		u := p[0] + p[1]
 		v := p[0] - p[1]
 
-		// u max
 		if u > max1U {
 			max2U = max1U
 			max1U = u
@@ -37,8 +38,6 @@ func minimumDistance(points [][]int) int {
 		} else if u > max2U {
 			max2U = u
 		}
-
-		// u min
 		if u < min1U {
 			min2U = min1U
 			min1U = u
@@ -47,7 +46,6 @@ func minimumDistance(points [][]int) int {
 			min2U = u
 		}
 
-		// v max
 		if v > max1V {
 			max2V = max1V
 			max1V = v
@@ -55,8 +53,6 @@ func minimumDistance(points [][]int) int {
 		} else if v > max2V {
 			max2V = v
 		}
-
-		// v min
 		if v < min1V {
 			min2V = min1V
 			min1V = v
@@ -66,16 +62,16 @@ func minimumDistance(points [][]int) int {
 		}
 	}
 
-	// Try removing each of the 4 candidate points (extreme ones)
-	candidates := make(map[int]bool)
-	candidates[idxMax1U] = true
-	candidates[idxMin1U] = true
-	candidates[idxMax1V] = true
-	candidates[idxMin1V] = true
+	// Try removing each extreme point candidate
+	candidates := map[int]bool{
+		idxMax1U: true,
+		idxMin1U: true,
+		idxMax1V: true,
+		idxMin1V: true,
+	}
 
 	result := math.MaxInt32
 	for idx := range candidates {
-		// Compute max_u without idx
 		maxU := max1U
 		if idx == idxMax1U {
 			maxU = max2U
@@ -113,11 +109,19 @@ func main() {
 	fmt.Println("Test 1:", minimumDistance([][]int{{3, 10}, {5, 15}, {1, 5}, {2, 2}, {4, 4}}))
 	// Expected: 9
 
-	// Test case 2 - from LeetCode
+	// Test case 2
 	fmt.Println("Test 2:", minimumDistance([][]int{{3, 10}, {5, 15}, {10, 2}, {4, 4}}))
 	// Expected: 12
 
 	// Test case 3
 	fmt.Println("Test 3:", minimumDistance([][]int{{1, 1}, {1, 1}, {1, 1}}))
 	// Expected: 0
+
+	// Test case 4: two points
+	fmt.Println("Test 4:", minimumDistance([][]int{{0, 0}, {3, 4}}))
+	// Expected: 0 (n <= 2 → 0)
+
+	// Test case 5: LeetCode example
+	fmt.Println("Test 5:", minimumDistance([][]int{{1, 2}, {3, 4}, {5, 6}}))
+	// Expected: 4
 }

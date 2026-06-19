@@ -4,6 +4,13 @@ package main
 // https://leetcode.com/problems/distribute-elements-into-two-arrays-ii/
 // Difficulty: Hard
 // Time: O(n log n) | Space: O(n)
+//
+// Approach: Fenwick Tree (Binary Indexed Tree) for O(log n) counting
+// of elements greater than a given value in each array.
+// Start with arr1 = [nums[0]], arr2 = [nums[1]].
+// For each remaining element, count in each array how many elements are greater.
+// Place in the array with more greater elements. Break ties by smaller array size,
+// then arr1.
 
 import (
 	"fmt"
@@ -37,7 +44,6 @@ func (b *BIT) Query(idx int) int {
 	return sum
 }
 
-// QueryRange returns count of elements in [l, r].
 func (b *BIT) QueryRange(l, r int) int {
 	if l > r {
 		return 0
@@ -71,7 +77,6 @@ func ResultArray(nums []int) []int {
 		idx := coord[nums[i]]
 
 		// Count elements > nums[i] in each array
-		// greater = total - (elements <= nums[i])
 		greater1 := len(arr1) - bit1.Query(idx)
 		greater2 := len(arr2) - bit2.Query(idx)
 
@@ -82,7 +87,6 @@ func ResultArray(nums []int) []int {
 			arr2 = append(arr2, nums[i])
 			bit2.Update(idx, 1)
 		} else {
-			// equal greater count: put in smaller array, or arr1 if same size
 			if len(arr1) <= len(arr2) {
 				arr1 = append(arr1, nums[i])
 				bit1.Update(idx, 1)
@@ -97,15 +101,30 @@ func ResultArray(nums []int) []int {
 }
 
 func main() {
-	// Test case 1
+	// Example 1
 	fmt.Println("Test 1:", ResultArray([]int{2, 1, 3, 3}))
 	// Expected: [2, 3, 1, 3]
 
-	// Test case 2
+	// Example 2
 	fmt.Println("Test 2:", ResultArray([]int{5, 4, 3, 8}))
 	// Expected: [5, 3, 4, 8]
 
-	// Test case 3
+	// Example 3
 	fmt.Println("Test 3:", ResultArray([]int{1, 2, 3, 4, 5}))
 	// Expected: [1, 3, 2, 4, 5] or similar valid distribution
+
+	// Single element arrays -> no processing
+	fmt.Println("Test 4:", ResultArray([]int{10, 20}))
+	// Expected: [10, 20]
+
+	// Descending order
+	fmt.Println("Test 5:", ResultArray([]int{5, 4, 3, 2, 1}))
+	// Expected: some valid distribution
+
+	// All equal
+	fmt.Println("Test 6:", ResultArray([]int{7, 7, 7, 7}))
+	// Expected: some valid distribution
+
+	// Large test
+	fmt.Println("Test 7:", ResultArray([]int{100, 50, 25, 75, 10, 90}))
 }

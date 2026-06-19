@@ -4,26 +4,32 @@ package main
 // https://leetcode.com/problems/minimum-cost-to-convert-string-ii/
 // Difficulty: Hard
 //
-// Approach: Trie + DP + Floyd-Warshall
-// 1. Use a trie to assign integer IDs to all original/changed substrings.
-// 2. Build a graph of substring-to-substring costs and run Floyd-Warshall.
+// Given source, target strings, and a dictionary of substring conversions
+// (original[i] -> changed[i] at cost[i]), find minimum total cost to
+// convert source to target by converting substrings.
+//
+// Approach:
+// 1. Trie to assign integer IDs to all substrings in the dictionary.
+// 2. Floyd-Warshall to find shortest conversion path between any two substrings.
 // 3. DP[i] = min cost to convert source[i:] to target[i:].
-//    - If source[i]==target[i], DP[i] = DP[i+1] (skip matching char).
-//    - For every substring pair (source[i:j+1], target[i:j+1]) that exists
-//      in the dictionary, try converting that substring.
+//    Try matching substrings of all lengths, using dp[j+1] + conversion_cost.
 
 import (
 	"fmt"
 	"math"
 )
 
+const alphabetSize = 26
+
 type trieNode struct {
-	children [26]*trieNode
-	idx      int
+	children [alphabetSize]*trieNode
+	idx      int // -1 means no ID assigned
 }
 
 func minimumCost(source string, target string, original []string, changed []string, cost []int) int64 {
 	n := len(source)
+
+	// Step 1: Build trie and assign IDs to all dictionary substrings
 	root := &trieNode{}
 	id := 0
 	insert := func(s string) int {
@@ -41,14 +47,16 @@ func minimumCost(source string, target string, original []string, changed []stri
 		}
 		return cur.idx
 	}
-	origIDs := make([]int, len(original))
-	changedIDs := make([]int, len(changed))
-	for i, s := range original {
-		origIDs[i] = insert(s)
+
+	m := len(original)
+	origIDs := make([]int, m)
+	changedIDs := make([]int, m)
+	for i := 0; i < m; i++ {
+		origIDs[i] = insert(original[i])
+		changedIDs[i] = insert(changed[i])
 	}
-	for i, s := range changed {
-		changedIDs[i] = insert(s)
-	}
+
+	// Step 2: Floyd-Warshall for shortest conversion paths
 	const big = math.MaxInt64 / 2
 	dist := make([][]int64, id)
 	for i := range dist {
@@ -58,7 +66,7 @@ func minimumCost(source string, target string, original []string, changed []stri
 		}
 		dist[i][i] = 0
 	}
-	for i := 0; i < len(original); i++ {
+	for i := 0; i < m; i++ {
 		u, v := origIDs[i], changedIDs[i]
 		if int64(cost[i]) < dist[u][v] {
 			dist[u][v] = int64(cost[i])
@@ -76,15 +84,21 @@ func minimumCost(source string, target string, original []string, changed []stri
 			}
 		}
 	}
+
+	// Step 3: DP from right to left
 	dp := make([]int64, n+1)
 	for i := range dp {
 		dp[i] = big
 	}
 	dp[n] = 0
+
 	for i := n - 1; i >= 0; i-- {
+		// Option: skip matching characters
 		if source[i] == target[i] {
 			dp[i] = dp[i+1]
 		}
+
+		// Try all substring pairs starting at i
 		curS := root
 		curT := root
 		for j := i; j < n; j++ {
@@ -102,6 +116,7 @@ func minimumCost(source string, target string, original []string, changed []stri
 			}
 		}
 	}
+
 	if dp[0] >= big {
 		return -1
 	}
@@ -109,16 +124,18 @@ func minimumCost(source string, target string, original []string, changed []stri
 }
 
 func main() {
-	// Example: source="abcd" -> 2
-	// Convert "cd" to "ef" cost 2: "ab"+"ef" = "abef"
+	// Example
 	fmt.Println(minimumCost("abcd", "abef", []string{"cd"}, []string{"ef"}, []int{2}))
 
 	// LeetCode example
 	fmt.Println(minimumCost("abcdef", "abcefg", []string{"abc", "def"}, []string{"abc", "efg"}, []int{1, 2}))
 
-	// Same string, cost 0
+	// Same string
 	fmt.Println(minimumCost("abcd", "abcd", []string{"a"}, []string{"b"}, []int{5}))
 
-	// Single char conversion
+	// Single char
 	fmt.Println(minimumCost("a", "b", []string{"a"}, []string{"b"}, []int{10}))
+
+	// Impossible
+	fmt.Println(minimumCost("a", "b", []string{"c"}, []string{"d"}, []int{5}))
 }

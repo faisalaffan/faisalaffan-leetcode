@@ -3,6 +3,10 @@ package main
 // LeetCode #2991: Top Three Wineries (SQL simulation)
 // https://leetcode.com/problems/top-three-wineries/
 // Difficulty: Hard [Paid]
+//
+// For each country, find the top 3 wineries based on total points.
+// Sort wineries by total points descending, then name ascending.
+// If fewer than 3 wineries, fill with "No <rank> winery".
 
 import (
 	"fmt"
@@ -22,21 +26,22 @@ func topThreeWineries(data []Winery) []string {
 		k := key{w.Country, w.Winery}
 		totals[k] += w.Points
 	}
-	byCountry := make(map[string][]struct {
+
+	type wineryScore struct {
 		name   string
 		points int
-	})
-	for k, pts := range totals {
-		byCountry[k.country] = append(byCountry[k.country], struct {
-			name   string
-			points int
-		}{k.winery, pts})
 	}
+	byCountry := make(map[string][]wineryScore)
+	for k, pts := range totals {
+		byCountry[k.country] = append(byCountry[k.country], wineryScore{k.winery, pts})
+	}
+
 	countries := make([]string, 0, len(byCountry))
 	for c := range byCountry {
 		countries = append(countries, c)
 	}
 	sort.Strings(countries)
+
 	var result []string
 	for _, c := range countries {
 		list := byCountry[c]
@@ -46,8 +51,7 @@ func topThreeWineries(data []Winery) []string {
 			}
 			return list[i].name < list[j].name
 		})
-		top := list[0]
-		row := fmt.Sprintf("%s|%s (%d)", c, top.name, top.points)
+		row := fmt.Sprintf("%s|%s (%d)", c, list[0].name, list[0].points)
 		if len(list) >= 2 {
 			row += fmt.Sprintf("|%s (%d)", list[1].name, list[1].points)
 		} else {
@@ -64,6 +68,7 @@ func topThreeWineries(data []Winery) []string {
 }
 
 func main() {
+	// Example from problem description
 	data := []Winery{
 		{"USA", "RoyalVines", 47},
 		{"USA", "RoyalVines", 39},
@@ -73,7 +78,31 @@ func main() {
 		{"France", "Bordeaux", 3},
 		{"France", "Loire", 88},
 	}
+	fmt.Println("Test 1:")
 	for _, r := range topThreeWineries(data) {
+		fmt.Println(r)
+	}
+
+	// Single winery per country
+	fmt.Println("\nTest 2 (single winery per country):")
+	data2 := []Winery{
+		{"Italy", "Chianti", 90},
+		{"Italy", "Chianti", 80},
+		{"Spain", "Rioja", 85},
+	}
+	for _, r := range topThreeWineries(data2) {
+		fmt.Println(r)
+	}
+
+	// Multiple countries with ties
+	fmt.Println("\nTest 3 (ties):")
+	data3 := []Winery{
+		{"A", "X", 100},
+		{"A", "Y", 100},
+		{"A", "Z", 50},
+		{"B", "P", 200},
+	}
+	for _, r := range topThreeWineries(data3) {
 		fmt.Println(r)
 	}
 }

@@ -4,6 +4,11 @@ package main
 // https://leetcode.com/problems/maximum-strength-of-k-disjoint-subarrays/
 // Difficulty: Hard
 // Time: O(n*k) | Space: O(k)
+//
+// Approach: DP with two states
+// dp0[j] = max strength with j subarrays, NOT using current element
+// dp1[j] = max strength with j subarrays, ENDING at current element
+// Weight for j-th subarray (1-indexed): (-1)^(j+1) * (k-j+1)
 
 import (
 	"fmt"
@@ -13,12 +18,9 @@ import (
 func MaximumStrength(nums []int, k int) int64 {
 	n := len(nums)
 
-	// dp0[j] = max strength with j subarrays, NOT using current element
-	// dp1[j] = max strength with j subarrays, ENDING at current element
 	dp0 := make([]int64, k+1)
 	dp1 := make([]int64, k+1)
 
-	// Weight for the j-th subarray (1-indexed): (-1)^(j+1) * (k-j+1)
 	weight := func(j int) int64 {
 		w := int64(k - j + 1)
 		if j%2 == 0 {
@@ -27,7 +29,6 @@ func MaximumStrength(nums []int, k int) int64 {
 		return w
 	}
 
-	// Initialize with -inf
 	negInf := int64(math.MinInt64 / 2)
 	for j := 0; j <= k; j++ {
 		dp0[j] = negInf
@@ -73,15 +74,35 @@ func max(a, b int64) int64 {
 }
 
 func main() {
-	// Test case 1
+	// Example 1
 	fmt.Println("Test 1:", MaximumStrength([]int{1, 2, 3, -1, 2}, 3))
 	// Expected: 22
 
-	// Test case 2
+	// Example 2
 	fmt.Println("Test 2:", MaximumStrength([]int{12, -2, -2, -2, -2}, 5))
 	// Expected: 64
 
-	// Test case 3
+	// Example 3
 	fmt.Println("Test 3:", MaximumStrength([]int{-1, -2, -3}, 1))
 	// Expected: -1
+
+	// Single element, k=1
+	fmt.Println("Test 4:", MaximumStrength([]int{5}, 1))
+	// Expected: 5
+
+	// All negative, k=1
+	fmt.Println("Test 5:", MaximumStrength([]int{-5, -3, -1}, 1))
+	// Expected: -1 (best single element)
+
+	// Two subarrays from 4 elements
+	fmt.Println("Test 6:", MaximumStrength([]int{1, 2, 3, 4}, 2))
+	// weight(1)=2, weight(2)=-1
+	// Possible: [1,2] with w=2, [3,4] with w=-1: 2*(1+2) + (-1)*(3+4) = 6-7 = -1
+	// Or: [1] w=2, [4] w=-1: 2*1 + (-1)*4 = 2-4 = -2
+	// [1,2,3] w=2, [4] w=-1: 2*6 + (-1)*4 = 12-4 = 8
+	// Hmm, expected depends on optimal selection
+
+	// Large range
+	fmt.Println("Test 7:", MaximumStrength([]int{1000000, 1000000, 1000000}, 2))
+	// Expected: 2000000
 }

@@ -88,8 +88,23 @@ func earliestSecondToMarkIndices(nums []int, changeIndices []int) int {
 }
 
 func main() {
-	// Example: nums=[2,2,3], changeIndices=[1,2,3,1,2,3,1,2,3] -> 6
-	fmt.Println(earliestSecondToMarkIndices([]int{2, 2, 3}, []int{1, 2, 3, 1, 2, 3, 1, 2, 3}))
-	// Another test
-	fmt.Println(earliestSecondToMarkIndices([]int{2, 2, 0}, []int{2, 2, 2, 2, 3, 2, 2, 1}))
+	// Example 1
+	fmt.Println("Example 1:", earliestSecondToMarkIndices([]int{2, 2, 3}, []int{1, 2, 3, 1, 2, 3, 1, 2, 3}))
+	// Expected: 6
+
+	// Example 2
+	fmt.Println("Example 2:", earliestSecondToMarkIndices([]int{2, 2, 0}, []int{2, 2, 2, 2, 3, 2, 2, 1}))
+	// Expected: -1 or some value
+
+	// Single element
+	fmt.Println("Single:", earliestSecondToMarkIndices([]int{1}, []int{1, 1, 1, 1}))
+	// Expected: some value >= 1
+
+	// All zeros
+	fmt.Println("All zeros:", earliestSecondToMarkIndices([]int{0, 0, 0}, []int{1, 2, 3, 1, 2, 3}))
+	// Expected: some value (zeros are already marked)
+
+	// Simple case
+	fmt.Println("Simple:", earliestSecondToMarkIndices([]int{1, 1}, []int{1, 2, 2, 1}))
+	// Expected: some value
 }

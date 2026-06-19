@@ -4,24 +4,25 @@ package main
 // https://leetcode.com/problems/count-the-number-of-good-partitions/
 // Difficulty: Hard
 //
-// Approach: Greedy merging of intervals + fast exponentiation.
 // For each value, find its first and last occurrence (forming an interval).
-// Merge overlapping intervals. Each merged segment is a "good" partition
-// because no value appears across segments.
-// Number of ways to partition k segments: 2^(k-1) mod (10^9+7).
+// Merge overlapping intervals. Each merged segment can be an independent
+// partition boundary. Number of ways to partition k independent segments
+// into contiguous groups = 2^(k-1) mod (10^9+7).
+//
+// A partition is "good" if no value appears in more than one part.
 
 import "fmt"
 
 func numberOfGoodPartitions(nums []int) int {
 	const mod = 1_000_000_007
 
-	// Find last occurrence of each value
+	// Last occurrence of each value
 	last := make(map[int]int)
 	for i, x := range nums {
 		last[x] = i
 	}
 
-	// Merge overlapping intervals
+	// Scan and merge overlapping intervals
 	maxEnd := -1
 	parts := 0
 	for i, x := range nums {
@@ -33,7 +34,7 @@ func numberOfGoodPartitions(nums []int) int {
 		}
 	}
 
-	// Compute 2^(parts-1) mod mod
+	// 2^(parts-1) mod MOD
 	ans := 1
 	for i := 1; i < parts; i++ {
 		ans = (ans * 2) % mod
@@ -42,12 +43,15 @@ func numberOfGoodPartitions(nums []int) int {
 }
 
 func main() {
-	// Example: [1,2,3,4] -> 8 (4 segments, 2^3 = 8 ways)
+	// Example: [1,2,3,4] -> 8 (4 segments, 2^3)
 	fmt.Println(numberOfGoodPartitions([]int{1, 2, 3, 4}))
 
 	// All same value
 	fmt.Println(numberOfGoodPartitions([]int{1, 1, 1, 1}))
 
-	// Overlapping
+	// Overlapping intervals
 	fmt.Println(numberOfGoodPartitions([]int{1, 2, 1, 3}))
+
+	// Two distinct values interleaved
+	fmt.Println(numberOfGoodPartitions([]int{1, 2, 1, 2}))
 }

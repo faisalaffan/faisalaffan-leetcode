@@ -2,14 +2,11 @@ package main
 
 // LeetCode #2940: Find Building Where Alice and Bob Can Meet
 // https://leetcode.com/problems/find-building-where-alice-and-bob-can-meet/
-// Difficulty: Hard
 //
-// Approach: Segment tree for range maximum + binary search.
 // Alice at a can reach building m (m > a) iff heights[m] > heights[a].
 // Bob at b can reach m (m > b) iff heights[m] > heights[b].
-// We need the smallest m >= max(a,b) with height > max(heights[a], heights[b]).
-// Use a segment tree storing max heights for range queries and binary search
-// for the leftmost valid index.
+// Need smallest m >= max(a,b) with height > max(heights[a], heights[b]).
+// Use segment tree for range maximum + binary search.
 
 import (
 	"fmt"
@@ -83,16 +80,16 @@ func leftmostBuilding(heights []int, queries [][]int) []int {
 			a, b = b, a // ensure a <= b
 		}
 
-		// If Alice can jump directly to Bob's building
+		// Alice can jump to Bob's building if heights[a] < heights[b]
 		if heights[a] < heights[b] {
 			ans[qi] = b
 			continue
 		}
 
-		// Need a building to the right of b with height > max(heights[a], heights[b])
-		target := heights[a] // heights[a] >= heights[b] since we checked heights[a] < heights[b] case
+		// Need building to the right of b with height > heights[a] (>= heights[b])
+		target := heights[a]
 
-		// Binary search for the leftmost index m in [b+1, n-1] with height > target
+		// Binary search leftmost index m in [b+1, n-1] with height > target
 		lo, hi := b+1, n-1
 		res := -1
 		for lo <= hi {
@@ -116,6 +113,7 @@ func main() {
 	queries := [][]int{{0, 1}, {0, 3}, {2, 4}, {3, 4}, {2, 2}}
 	fmt.Println(leftmostBuilding(heights, queries))
 
-	// Simple case
+	// Additional test cases
 	fmt.Println(leftmostBuilding([]int{1, 2, 3, 4}, [][]int{{0, 3}}))
+	fmt.Println(leftmostBuilding([]int{5, 3, 8, 2, 6, 1, 4, 6}, [][]int{{0, 7}, {3, 5}, {4, 2}}))
 }

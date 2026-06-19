@@ -3,6 +3,9 @@ package main
 // LeetCode #3060: User Activities Within Time Bounds (SQL simulation)
 // https://leetcode.com/problems/user-activities-within-time-bounds/
 // Difficulty: Hard [Paid]
+//
+// Approach: Find users who have two consecutive sessions of the same type
+// within 12 hours of each other (end of first to start of second).
 
 import (
 	"fmt"
@@ -41,7 +44,9 @@ func userActivitiesWithinTimeBounds(sessions []UserSession) []int {
 					break
 				}
 			}
-			if found { break }
+			if found {
+				break
+			}
 		}
 		if found {
 			result = append(result, uid)
@@ -53,11 +58,50 @@ func userActivitiesWithinTimeBounds(sessions []UserSession) []int {
 
 func main() {
 	layout := "2006-01-02 15:04:05"
-	parse := func(s string) time.Time { t, _ := time.Parse(layout, s); return t }
-	sessions := []UserSession{
+	parse := func(s string) time.Time {
+		t, _ := time.Parse(layout, s)
+		return t
+	}
+
+	// Example 1: User 102 has two Viewer sessions 2h apart (10:00 to 13:00)
+	sessions1 := []UserSession{
 		{101, parse("2023-01-01 08:00:00"), parse("2023-01-01 10:00:00"), 1, "Viewer"},
 		{102, parse("2023-01-01 09:00:00"), parse("2023-01-01 11:00:00"), 3, "Viewer"},
 		{102, parse("2023-01-01 13:00:00"), parse("2023-01-01 14:00:00"), 4, "Viewer"},
 	}
-	fmt.Println(userActivitiesWithinTimeBounds(sessions))
+	fmt.Println("Example 1:", userActivitiesWithinTimeBounds(sessions1))
+	// Expected: [102] (gap from 11:00 to 13:00 = 2h <= 12h)
+
+	// Example 2: gap exactly 12 hours
+	sessions2 := []UserSession{
+		{201, parse("2023-01-01 08:00:00"), parse("2023-01-01 09:00:00"), 1, "TypeA"},
+		{201, parse("2023-01-01 21:00:00"), parse("2023-01-01 22:00:00"), 2, "TypeA"},
+	}
+	fmt.Println("Example 2 (exactly 12h):", userActivitiesWithinTimeBounds(sessions2))
+	// Expected: [201] (gap = 12h exactly)
+
+	// Example 3: gap > 12 hours
+	sessions3 := []UserSession{
+		{301, parse("2023-01-01 08:00:00"), parse("2023-01-01 09:00:00"), 1, "TypeA"},
+		{301, parse("2023-01-01 22:00:00"), parse("2023-01-01 23:00:00"), 2, "TypeA"},
+	}
+	fmt.Println("Example 3 (gap > 12h):", userActivitiesWithinTimeBounds(sessions3))
+	// Expected: [] (gap = 13h > 12h)
+
+	// Example 4: different type sessions, gap within bound
+	sessions4 := []UserSession{
+		{401, parse("2023-01-01 08:00:00"), parse("2023-01-01 09:00:00"), 1, "TypeA"},
+		{401, parse("2023-01-01 10:00:00"), parse("2023-01-01 11:00:00"), 2, "TypeB"},
+	}
+	fmt.Println("Example 4 (diff types):", userActivitiesWithinTimeBounds(sessions4))
+	// Expected: [] (different types, so grouped separately, each group has only 1 session)
+
+	// Example 5: multiple users
+	sessions5 := []UserSession{
+		{1, parse("2023-01-01 08:00:00"), parse("2023-01-01 09:00:00"), 1, "A"},
+		{2, parse("2023-01-01 10:00:00"), parse("2023-01-01 11:00:00"), 2, "A"},
+		{1, parse("2023-01-01 12:00:00"), parse("2023-01-01 13:00:00"), 3, "A"},
+		{2, parse("2023-01-01 14:00:00"), parse("2023-01-01 15:00:00"), 4, "B"},
+	}
+	fmt.Println("Example 5 (multiple):", userActivitiesWithinTimeBounds(sessions5))
 }

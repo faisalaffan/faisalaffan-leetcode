@@ -4,25 +4,20 @@ package main
 // https://leetcode.com/problems/find-minimum-diameter-after-merging-two-trees/
 // Difficulty: Hard
 //
-// Given two trees (undirected acyclic graphs), we connect one node from each
-// tree with an edge, forming a new tree. Find the minimum possible diameter
-// of the resulting tree. The answer is max(d1, d2, ceil(d1/2)+ceil(d2/2)+1).
+// Given two trees (undirected acyclic graphs), connect one node from each with
+// an edge. Find the minimum possible diameter of the resulting tree.
+//
+// Answer = max(d1, d2, ceil(d1/2)+ceil(d2/2)+1).
+//
+// Approach: compute diameter via double-BFS (or DFS) for each tree.
 
-import (
-	"fmt"
-)
-
-func main() {
-	edges1 := [][]int{{0, 1}, {0, 2}, {0, 3}}
-	edges2 := [][]int{{0, 1}}
-	fmt.Println(minimumDiameterAfterMergingTwoTrees(edges1, edges2))
-}
+import "fmt"
 
 func minimumDiameterAfterMergingTwoTrees(edges1, edges2 [][]int) int {
 	d1 := treeDiameter(edges1)
 	d2 := treeDiameter(edges2)
-	// Minimum diameter after merging
 	merge := (d1+1)/2 + (d2+1)/2 + 1
+
 	ans := d1
 	if d2 > ans {
 		ans = d2
@@ -45,36 +40,43 @@ func treeDiameter(edges [][]int) int {
 		adj[v] = append(adj[v], u)
 	}
 
-	// BFS from 0 to find farthest node
+	// BFS from 0 to find farthest node.
 	far1, _ := bfs(adj, 0)
-	// BFS from farthest node to get diameter
+	// BFS from farthest node to get diameter.
 	_, dist := bfs(adj, far1)
 	return dist
 }
 
-func bfs(adj [][]int, start int) (farthest, dist int) {
+func bfs(adj [][]int, start int) (farthest, maxDist int) {
 	n := len(adj)
-	visited := make([]bool, n)
-	queue := []int{start}
-	visited[start] = true
-	distArr := make([]int, n)
-
+	dist := make([]int, n)
+	for i := range dist {
+		dist[i] = -1
+	}
+	q := []int{start}
+	dist[start] = 0
 	farthest = start
-	maxDist := 0
-	for len(queue) > 0 {
-		u := queue[0]
-		queue = queue[1:]
+	maxDist = 0
+
+	for len(q) > 0 {
+		u := q[0]
+		q = q[1:]
 		for _, v := range adj[u] {
-			if !visited[v] {
-				visited[v] = true
-				distArr[v] = distArr[u] + 1
-				queue = append(queue, v)
-				if distArr[v] > maxDist {
-					maxDist = distArr[v]
+			if dist[v] == -1 {
+				dist[v] = dist[u] + 1
+				q = append(q, v)
+				if dist[v] > maxDist {
+					maxDist = dist[v]
 					farthest = v
 				}
 			}
 		}
 	}
 	return farthest, maxDist
+}
+
+func main() {
+	edges1 := [][]int{{0, 1}, {0, 2}, {0, 3}}
+	edges2 := [][]int{{0, 1}}
+	fmt.Println(minimumDiameterAfterMergingTwoTrees(edges1, edges2))
 }

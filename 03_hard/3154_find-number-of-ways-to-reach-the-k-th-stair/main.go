@@ -4,24 +4,19 @@ package main
 // https://leetcode.com/problems/find-number-of-ways-to-reach-the-k-th-stair/
 // Difficulty: Hard
 //
-// You start at stair 1 with jump = 0. Operations:
-//   1. Go down to i-1 (cannot be used consecutively or on stair 0).
-//   2. Go up to i + 2^jump, then jump++.
-// Count total ways to reach stair k. You may pass through k and come back.
+// Start at stair 1 with jump = 0.
+// Operations:
+//   - Go down to i-1 (cannot be used consecutively or below stair 0)
+//   - Go up to i + 2^jump, then jump++
 //
-// Mathematical approach: after `up` up-jumps, position = 2^up.
-// Need `down = 2^up - k` down moves (cannot be consecutive).
-// Down moves must be <= up+1 (inserted into up+1 gaps).
+// Count total ways to reach stair k. May pass through k and come back.
+// After `up` up-jumps, position = 2^up. Need down = 2^up - k down moves.
+// Down moves must be <= up+1 (inserted into up+1 gaps, no two consecutive).
 // Ways = C(up+1, down). Sum over all valid (up, down) pairs.
 
 import (
 	"fmt"
 )
-
-func main() {
-	fmt.Println(waysToReachStair(0)) // expected: 2
-	fmt.Println(waysToReachStair(1)) // expected: 4
-}
 
 func comb(n, k int) int {
 	if k < 0 || k > n {
@@ -42,12 +37,29 @@ func comb(n, k int) int {
 
 func waysToReachStair(k int) int {
 	ans := 0
-	// up-jumps can be from 0 to 30 (2^30 > 10^9, k <= 10^9)
 	for up := 0; up <= 31; up++ {
-		down := (1 << uint(up)) - k
+		power := 1 << uint(up)
+		down := power - k
 		if down >= 0 && down <= up+1 {
 			ans += comb(up+1, down)
 		}
 	}
 	return ans
+}
+
+func main() {
+	// Test case 1
+	fmt.Println("Test 1:", waysToReachStair(0))
+	// Expected: 2
+
+	// Test case 2
+	fmt.Println("Test 2:", waysToReachStair(1))
+	// Expected: 4
+
+	// Test case 3
+	fmt.Println("Test 3:", waysToReachStair(2))
+	// Expected: ?
+
+	// Test case 4: larger
+	fmt.Println("Test 4:", waysToReachStair(10))
 }

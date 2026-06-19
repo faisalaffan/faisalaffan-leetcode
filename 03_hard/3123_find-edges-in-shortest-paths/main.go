@@ -13,16 +13,6 @@ import (
 	"fmt"
 )
 
-func main() {
-	n := 6
-	edges := [][]int{
-		{0, 1, 4}, {0, 2, 1}, {1, 3, 2}, {1, 4, 3},
-		{1, 5, 1}, {2, 3, 1}, {3, 5, 3}, {4, 5, 2},
-	}
-	// Expected: [true,false,true,false,true,false,true,false]
-	fmt.Println(findEdgesInShortestPaths(n, edges))
-}
-
 type Item struct {
 	node, dist int
 	idx        int
@@ -78,11 +68,33 @@ func findEdgesInShortestPaths(n int, edges [][]int) []bool {
 	ans := make([]bool, len(edges))
 	for i, e := range edges {
 		u, v, w := e[0], e[1], e[2]
-		// Edge (u,v) is on a shortest path if either direction gives the shortest distance
 		if distFromStart[u]+w+distFromEnd[v] == shortest ||
 			distFromStart[v]+w+distFromEnd[u] == shortest {
 			ans[i] = true
 		}
 	}
 	return ans
+}
+
+func main() {
+	// Test case 1
+	n := 6
+	edges := [][]int{
+		{0, 1, 4}, {0, 2, 1}, {1, 3, 2}, {1, 4, 3},
+		{1, 5, 1}, {2, 3, 1}, {3, 5, 3}, {4, 5, 2},
+	}
+	fmt.Println("Test 1:", findEdgesInShortestPaths(n, edges))
+	// Expected: [true, false, true, false, true, false, true, false]
+
+	// Test case 2: simple 2-node
+	n2 := 2
+	edges2 := [][]int{{0, 1, 5}}
+	fmt.Println("Test 2:", findEdgesInShortestPaths(n2, edges2))
+	// Expected: [true]
+
+	// Test case 3: no path
+	n3 := 3
+	edges3 := [][]int{{0, 1, 1}}
+	fmt.Println("Test 3:", findEdgesInShortestPaths(n3, edges3))
+	// Expected: [false] (node 2 unreachable from 0)
 }

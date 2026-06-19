@@ -2,15 +2,12 @@ package main
 
 // LeetCode #2935: Maximum Strong Pair XOR II
 // https://leetcode.com/problems/maximum-strong-pair-xor-ii/
-// Difficulty: Hard
 //
-// Approach: Binary Trie + Sliding Window.
 // A strong pair satisfies |x-y| <= min(x,y).
-// For sorted array, if x <= y, then condition is y <= 2x.
-// Sort the array. Use a sliding window where all elements satisfy
-// the strong pair condition with the current right element.
-// Maintain a binary trie with counts for insertion/deletion and
-// query max XOR.
+// For sorted array with x <= y, condition simplifies to y <= 2*x.
+// Sort array, use sliding window with a binary trie to maintain candidates.
+// For each right element, remove elements from left that violate y > 2*x,
+// then query trie for max XOR with current element.
 
 import (
 	"fmt"
@@ -79,12 +76,11 @@ func maximumStrongPairXor(nums []int) int {
 	ans := 0
 
 	for _, val := range nums {
-		// Maintain window: for all x in window, val <= 2*x (since x <= val in sorted order)
-		for left < len(nums) && nums[left] < (val+1)/2 {
+		// Maintain window where for all x, val <= 2*x (since x <= val in sorted order)
+		for left < len(nums) && (val+1)/2 > nums[left] {
 			trie.remove(nums[left])
 			left++
 		}
-		// Query max XOR with current value
 		if trie.sz > 0 {
 			if xr := trie.maxXor(val); xr > ans {
 				ans = xr
@@ -96,10 +92,12 @@ func maximumStrongPairXor(nums []int) int {
 }
 
 func main() {
-	// Example: [1,2,3,4,5] -> 7 (strong pair 3 XOR 4 = 7)
+	// Example: [1,2,3,4,5] -> 7 (strong pair 3 XOR 4)
 	fmt.Println(maximumStrongPairXor([]int{1, 2, 3, 4, 5}))
 
-	// Simple cases
+	// Edge cases
 	fmt.Println(maximumStrongPairXor([]int{10, 100}))
 	fmt.Println(maximumStrongPairXor([]int{5, 6}))
+	fmt.Println(maximumStrongPairXor([]int{1, 1, 1}))
+	fmt.Println(maximumStrongPairXor([]int{1, 2, 4, 8, 16}))
 }

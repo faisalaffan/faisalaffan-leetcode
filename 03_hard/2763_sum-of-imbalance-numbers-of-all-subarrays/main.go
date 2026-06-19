@@ -33,7 +33,6 @@ func sumImbalanceNumbers(nums []int) int {
 			v := nums[j]
 			if seen[v] {
 				// Duplicate value doesn't change imbalance
-				// (sorted consecutive values have diff 0 <= 1)
 				ans += imbalance
 				continue
 			}
