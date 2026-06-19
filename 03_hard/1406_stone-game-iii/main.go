@@ -6,11 +6,31 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(StoneGameIii())
+func stoneGameIII(stoneValue []int) string {
+	n := len(stoneValue)
+	dp := make([]int, n+1)
+	for i := n - 1; i >= 0; i-- {
+		dp[i] = stoneValue[i] - dp[i+1]
+		if i+2 <= n {
+			if sum := stoneValue[i] + stoneValue[i+1] - dp[i+2]; sum > dp[i] {
+				dp[i] = sum
+			}
+		}
+		if i+3 <= n {
+			if sum := stoneValue[i] + stoneValue[i+1] + stoneValue[i+2] - dp[i+3]; sum > dp[i] {
+				dp[i] = sum
+			}
+		}
+	}
+	if dp[0] > 0 {
+		return "Alice"
+	} else if dp[0] < 0 {
+		return "Bob"
+	}
+	return "Tie"
 }
 
-func StoneGameIii() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Example: [1,2,3,7] -> "Bob"
+	fmt.Println(stoneGameIII([]int{1, 2, 3, 7}))
 }

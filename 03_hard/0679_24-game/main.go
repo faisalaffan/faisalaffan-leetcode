@@ -1,16 +1,73 @@
 package main
 
+import (
+	"fmt"
+	"math"
+)
+
 // LeetCode #679: 24 Game
 // https://leetcode.com/problems/24-game/
 // Difficulty: Hard
-
-import "fmt"
+//
+// Backtracking: pick two numbers, apply + - * /, reduce array, recurse.
+// Check if result within epsilon of 24.
 
 func main() {
-	fmt.Println(TwoFourGame())
+	// Example: [4,1,8,7] => true ((8-4)*(7-1)=24)
+	fmt.Println(judgePoint24([]int{4, 1, 8, 7}))
+	// Example: [1,2,1,2] => false
+	fmt.Println(judgePoint24([]int{1, 2, 1, 2}))
+	// [3,3,8,8] => true (8/(3-8/3)=24)
+	fmt.Println(judgePoint24([]int{3, 3, 8, 8}))
+	// [1,5,5,5] => true (5*(5-1/5)=24)
+	fmt.Println(judgePoint24([]int{1, 5, 5, 5}))
+	// [1,9,1,2] => true ((9-1)*(2+1)=24)
+	fmt.Println(judgePoint24([]int{1, 9, 1, 2}))
 }
 
-func TwoFourGame() any {
-	// TODO: implement
-	return nil
+const eps = 1e-6
+
+func judgePoint24(cards []int) bool {
+	nums := make([]float64, len(cards))
+	for i, v := range cards {
+		nums[i] = float64(v)
+	}
+	return backtrack(nums)
+}
+
+func backtrack(nums []float64) bool {
+	if len(nums) == 1 {
+		return math.Abs(nums[0]-24.0) < eps
+	}
+	for i := 0; i < len(nums); i++ {
+		for j := 0; j < len(nums); j++ {
+			if i == j {
+				continue
+			}
+			var rest []float64
+			for k := 0; k < len(nums); k++ {
+				if k != i && k != j {
+					rest = append(rest, nums[k])
+				}
+			}
+			candidates := ops(nums[i], nums[j])
+			for _, r := range candidates {
+				if backtrack(append(rest, r)) {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+func ops(a, b float64) []float64 {
+	res := []float64{a + b, a - b, b - a, a * b}
+	if math.Abs(b) > eps {
+		res = append(res, a/b)
+	}
+	if math.Abs(a) > eps {
+		res = append(res, b/a)
+	}
+	return res
 }

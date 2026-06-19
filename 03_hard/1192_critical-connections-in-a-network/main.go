@@ -6,11 +6,72 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CriticalConnectionsInANetwork())
+func criticalConnections(n int, connections [][]int) [][]int {
+	// Build adjacency list
+	graph := make([][]int, n)
+	for _, e := range connections {
+		u, v := e[0], e[1]
+		graph[u] = append(graph[u], v)
+		graph[v] = append(graph[v], u)
+	}
+
+	disc := make([]int, n) // discovery time
+	low := make([]int, n)  // low-link value
+	for i := range disc {
+		disc[i] = -1
+	}
+	time := 0
+	result := [][]int{}
+
+	var dfs func(u, parent int)
+	dfs = func(u, parent int) {
+		disc[u] = time
+		low[u] = time
+		time++
+
+		for _, v := range graph[u] {
+			if v == parent {
+				continue
+			}
+			if disc[v] == -1 {
+				dfs(v, u)
+				low[u] = min(low[u], low[v])
+				// If low[v] > disc[u], edge (u,v) is a bridge
+				if low[v] > disc[u] {
+					result = append(result, []int{u, v})
+				}
+			} else {
+				// Back edge
+				low[u] = min(low[u], disc[v])
+			}
+		}
+	}
+
+	for i := 0; i < n; i++ {
+		if disc[i] == -1 {
+			dfs(i, -1)
+		}
+	}
+	return result
 }
 
-func CriticalConnectionsInANetwork() any {
-	// TODO: implement
-	return nil
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func main() {
+	// Test case 1
+	fmt.Println(criticalConnections(4, [][]int{{0, 1}, {1, 2}, {2, 0}, {1, 3}}))
+	// Expected: [[1,3]]
+
+	// Test case 2: star graph
+	fmt.Println(criticalConnections(3, [][]int{{0, 1}, {0, 2}}))
+	// Expected: [[0,1],[0,2]]
+
+	// Test case 3: cycle
+	fmt.Println(criticalConnections(3, [][]int{{0, 1}, {1, 2}, {2, 0}}))
+	// Expected: []
 }

@@ -3,14 +3,52 @@ package main
 // LeetCode #2167: Minimum Time to Remove All Cars Containing Illegal Goods
 // https://leetcode.com/problems/minimum-time-to-remove-all-cars-containing-illegal-goods/
 // Difficulty: Hard
+//
+// 3-state DP: processing left to right:
+//   0 = removing from left end (cost 1 per car)
+//   1 = middle section (cost 2 per '1', 0 per '0')
+//   2 = removing from right end (cost 1 per car)
+// Transitions: 0 -> 1 -> 2 (or 0 -> 2 directly).
 
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumTimeToRemoveAllCarsContainingIllegalGoods())
+	fmt.Println(minimumTime("1100101")) // 5
+	fmt.Println(minimumTime("0010"))    // 2
+	fmt.Println(minimumTime("010"))     // 2
+	fmt.Println(minimumTime("111"))     // 3
+	fmt.Println(minimumTime("0"))       // 0
+}
+
+func minimumTime(s string) int {
+	const inf = 1 << 60
+	l, m, r := 0, inf, inf
+	for _, ch := range s {
+		c := int(ch - '0')
+		nl := l + 1
+		nm := m + 2*c
+		if l+2*c < nm {
+			nm = l + 2*c
+		}
+		nr := r + 1
+		if m+1 < nr {
+			nr = m + 1
+		}
+		if l+1 < nr {
+			nr = l + 1
+		}
+		l, m, r = nl, nm, nr
+	}
+	ans := l
+	if m < ans {
+		ans = m
+	}
+	if r < ans {
+		ans = r
+	}
+	return ans
 }
 
 func MinimumTimeToRemoveAllCarsContainingIllegalGoods() any {
-	// TODO: implement
-	return nil
+	return minimumTime("1100101")
 }

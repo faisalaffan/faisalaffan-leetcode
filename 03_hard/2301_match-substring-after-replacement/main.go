@@ -3,14 +3,64 @@ package main
 // LeetCode #2301: Match Substring After Replacement
 // https://leetcode.com/problems/match-substring-after-replacement/
 // Difficulty: Hard
+//
+// Approach: Build a directed graph from mappings, compute transitive closure
+// (a->b and b->c implies a->c). Then check if each character in s can be
+// transformed to the corresponding character in sub, character by character.
 
 import "fmt"
 
 func main() {
-	fmt.Println(MatchSubstringAfterReplacement())
+	// Example 1: "fool3e7bar","leet",[["e","3"],["t","7"],["t","8"]] => true
+	fmt.Println(matchReplacement("fool3e7bar", "leet", [][]byte{{'e', '3'}, {'t', '7'}, {'t', '8'}}))
+	// Example 2: "fooleetbar","f00l",[["o","0"]] => false
+	fmt.Println(matchReplacement("fooleetbar", "f00l", [][]byte{{'o', '0'}}))
+	// Example 3: "Fool33tbaR","leet",[["e","3"],["t","7"],["t","8"],["e","E"],["e","e"]] => true
+	fmt.Println(matchReplacement("Fool33tbaR", "leet", [][]byte{{'e', '3'}, {'t', '7'}, {'t', '8'}, {'e', 'E'}, {'e', 'e'}}))
+	// Edge: sub == s
+	fmt.Println(matchReplacement("abc", "abc", [][]byte{}))
+	// Edge: single char
+	fmt.Println(matchReplacement("a", "b", [][]byte{{'a', 'b'}}))
+	fmt.Println(matchReplacement("a", "b", [][]byte{}))
 }
 
-func MatchSubstringAfterReplacement() any {
-	// TODO: implement
-	return nil
+func matchReplacement(s string, sub string, mappings [][]byte) bool {
+	// Build transitive closure: can[a][b] means a can be replaced by b
+	can := make([][]bool, 256)
+	for i := range can {
+		can[i] = make([]bool, 256)
+		can[i][i] = true
+	}
+	for _, m := range mappings {
+		can[m[0]][m[1]] = true
+	}
+
+	// Floyd-Warshall for transitive closure
+	for k := 0; k < 256; k++ {
+		for i := 0; i < 256; i++ {
+			if !can[i][k] {
+				continue
+			}
+			for j := 0; j < 256; j++ {
+				if can[k][j] {
+					can[i][j] = true
+				}
+			}
+		}
+	}
+
+	// Slide sub through s
+	for start := 0; start <= len(s)-len(sub); start++ {
+		match := true
+		for i := 0; i < len(sub); i++ {
+			if !can[sub[i]][s[start+i]] {
+				match = false
+				break
+			}
+		}
+		if match {
+			return true
+		}
+	}
+	return false
 }

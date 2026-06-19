@@ -6,11 +6,38 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PatchingArray())
+func minPatches(nums []int, n int) int {
+	patches := 0
+	miss := int64(1) // smallest sum we cannot form
+	i := 0
+
+	for miss <= int64(n) {
+		if i < len(nums) && int64(nums[i]) <= miss {
+			miss += int64(nums[i])
+			i++
+		} else {
+			// Patch with miss itself
+			miss += miss
+			patches++
+		}
+	}
+	return patches
 }
 
-func PatchingArray() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Example 1
+	fmt.Println(minPatches([]int{1, 3}, 6))
+	// 1
+
+	// Example 2
+	fmt.Println(minPatches([]int{1, 5, 10}, 20))
+	// 2
+
+	// Example 3
+	fmt.Println(minPatches([]int{1, 2, 2}, 5))
+	// 0
+
+	// Example 4
+	fmt.Println(minPatches([]int{1, 2, 31, 33}, 2147483647))
+	// 28
 }

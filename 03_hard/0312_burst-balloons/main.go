@@ -3,14 +3,88 @@ package main
 // LeetCode #312: Burst Balloons
 // https://leetcode.com/problems/burst-balloons/
 // Difficulty: Hard
+//
+// Approach: DP Interval (Divide and Conquer).
+//   - Add sentinel balloons with value 1 at both ends (index 0 and n+1).
+//   - Define dp[i][j] = max coins from bursting all balloons in (i, j) exclusively.
+//   - For each k in (i, j), consider k as the LAST balloon to burst in this interval.
+//     When k bursts, its neighbors are i and j (since all balloons in between
+//     have already been burst).
+//   - dp[i][j] = max over k: dp[i][k] + nums[i] * nums[k] * nums[j] + dp[k][j]
+//   - Answer: dp[0][n+1] where n is the original length.
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Println(BurstBalloons())
+	// Example 1: [3,1,5,8] -> 167
+	// Explanation: nums = [3,1,5,8] -> [3,5,8] -> [3,8] -> [8] -> []
+	// coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167
+	nums := []int{3, 1, 5, 8}
+	fmt.Println("Burst Balloons:", maxCoins(nums)) // 167
+
+	// Example 2: [1,5] -> 10
+	fmt.Println("[1,5]:", maxCoins([]int{1, 5})) // 1*0*5? Wait let me recalc.
+	// Actually with sentinel: [1,1,5,1]
+	// Burst 1: 1*1*5 + burst 5: 1*5*1 = 5 + 5 = 10. Yes, 10.
+
+	// Example 3: single balloon [5] -> 5
+	fmt.Println("[5]:", maxCoins([]int{5})) // 5
+
+	// Example 4: empty
+	fmt.Println("[]:", maxCoins([]int{})) // 0
 }
 
+// maxCoins returns the maximum coins obtainable by bursting all balloons.
+func maxCoins(nums []int) int {
+	n := len(nums)
+	if n == 0 {
+		return 0
+	}
+
+	// Add sentinel balloons with value 1.
+	arr := make([]int, n+2)
+	arr[0] = 1
+	arr[n+1] = 1
+	for i := 0; i < n; i++ {
+		arr[i+1] = nums[i]
+	}
+
+	// dp[i][j] = max coins from bursting all balloons strictly between i and j.
+	dp := make([][]int, n+2)
+	for i := range dp {
+		dp[i] = make([]int, n+2)
+	}
+
+	// Fill dp by interval length.
+	for length := 2; length <= n+1; length++ {
+		for i := 0; i+length <= n+1; i++ {
+			j := i + length
+			// Try each k as the LAST balloon to burst in (i, j).
+			for k := i + 1; k < j; k++ {
+				// arr[k] is the last to burst, so its neighbors are arr[i] and arr[j].
+				coins := dp[i][k] + arr[i]*arr[k]*arr[j] + dp[k][j]
+				if coins > dp[i][j] {
+					dp[i][j] = coins
+				}
+			}
+		}
+	}
+
+	return dp[0][n+1]
+}
+
+// max returns the larger of two ints.
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+// Stub compatibility.
 func BurstBalloons() any {
-	// TODO: implement
-	return nil
+	nums := []int{3, 1, 5, 8}
+	return maxCoins(nums)
 }

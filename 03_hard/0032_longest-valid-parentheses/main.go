@@ -6,11 +6,41 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(LongestValidParentheses())
+// longestValidParentheses finds the length of the longest valid parentheses substring.
+// Uses a stack-based approach.
+//
+// Complexity: O(n) time, O(n) space
+func longestValidParentheses(s string) int {
+	stack := []int{-1} // base index for valid substring calculation
+	maxLen := 0
+
+	for i, ch := range s {
+		if ch == '(' {
+			stack = append(stack, i)
+		} else {
+			// Pop the matching '('
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				// No matching '('; set new base index
+				stack = append(stack, i)
+			} else {
+				// Calculate length of current valid substring
+				length := i - stack[len(stack)-1]
+				if length > maxLen {
+					maxLen = length
+				}
+			}
+		}
+	}
+
+	return maxLen
 }
 
-func LongestValidParentheses() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test cases from LeetCode
+	fmt.Println("Test 1: (() ->", longestValidParentheses("(()"))       // 2
+	fmt.Println("Test 2: )()()) ->", longestValidParentheses(")()())"))  // 4
+	fmt.Println("Test 3: '' ->", longestValidParentheses(""))           // 0
+	fmt.Println("Test 4: ()() ->", longestValidParentheses("()()"))     // 4
+	fmt.Println("Test 5: (()()) ->", longestValidParentheses("(()())")) // 6
 }

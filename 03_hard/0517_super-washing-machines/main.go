@@ -7,10 +7,34 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SuperWashingMachines())
+	fmt.Println(findMinMoves([]int{1, 0, 5})) // Expected: 3
 }
 
-func SuperWashingMachines() any {
-	// TODO: implement
-	return nil
+func findMinMoves(machines []int) int {
+	n := len(machines)
+	sum := 0
+	for _, v := range machines {
+		sum += v
+	}
+	if sum%n != 0 {
+		return -1
+	}
+	target := sum / n
+
+	ans := 0
+	balance := 0
+	for _, v := range machines {
+		balance += v - target
+		if balance > ans {
+			ans = balance
+		}
+		if balance < -ans {
+			ans = -balance
+		}
+		// A machine may need to receive from both sides simultaneously
+		if v-target > ans {
+			ans = v - target
+		}
+	}
+	return ans
 }

@@ -6,11 +6,40 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaxDotProductOfTwoSubsequences())
+func maxDotProduct(nums1 []int, nums2 []int) int {
+	n1, n2 := len(nums1), len(nums2)
+	dp := make([][]int, n1)
+	for i := range dp {
+		dp[i] = make([]int, n2)
+	}
+
+	for i := 0; i < n1; i++ {
+		for j := 0; j < n2; j++ {
+			product := nums1[i] * nums2[j]
+			dp[i][j] = product
+			if i > 0 && dp[i-1][j] > dp[i][j] {
+				dp[i][j] = dp[i-1][j]
+			}
+			if j > 0 && dp[i][j-1] > dp[i][j] {
+				dp[i][j] = dp[i][j-1]
+			}
+			if i > 0 && j > 0 {
+				candidate := dp[i-1][j-1]
+				if candidate > 0 {
+					candidate += product
+				} else {
+					candidate = product
+				}
+				if candidate > dp[i][j] {
+					dp[i][j] = candidate
+				}
+			}
+		}
+	}
+	return dp[n1-1][n2-1]
 }
 
-func MaxDotProductOfTwoSubsequences() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Example: [2,1,-2,5], [3,0,-6] -> 18
+	fmt.Println(maxDotProduct([]int{2, 1, -2, 5}, []int{3, 0, -6}))
 }

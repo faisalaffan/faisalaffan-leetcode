@@ -6,11 +6,41 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ConstrainedSubsequenceSum())
+func constrainedSubsetSum(nums []int, k int) int {
+	n := len(nums)
+	dp := make([]int, n)
+	// Monotonic deque storing indices, decreasing dp values
+	deque := make([]int, 0, n)
+	ans := nums[0]
+
+	for i := 0; i < n; i++ {
+		// Remove indices out of window
+		for len(deque) > 0 && deque[0] < i-k {
+			deque = deque[1:]
+		}
+
+		dp[i] = nums[i]
+		if len(deque) > 0 {
+			// max dp in window
+			if dp[deque[0]] > 0 {
+				dp[i] += dp[deque[0]]
+			}
+		}
+
+		if dp[i] > ans {
+			ans = dp[i]
+		}
+
+		// Maintain decreasing deque
+		for len(deque) > 0 && dp[deque[len(deque)-1]] <= dp[i] {
+			deque = deque[:len(deque)-1]
+		}
+		deque = append(deque, i)
+	}
+	return ans
 }
 
-func ConstrainedSubsequenceSum() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Example: [10,2,-10,5,20], 2 -> 37
+	fmt.Println(constrainedSubsetSum([]int{10, 2, -10, 5, 20}, 2))
 }

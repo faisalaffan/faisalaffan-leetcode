@@ -6,11 +6,41 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(NumberOfWaysToWearDifferentHatsToEachOther())
+const mod1434 = 1_000_000_007
+
+func numberWays(hats [][]int) int {
+	n := len(hats)
+	// Map each hat (1..40) to people who like it
+	hatToPeople := make([][]int, 41)
+	for person, list := range hats {
+		for _, hat := range list {
+			hatToPeople[hat] = append(hatToPeople[hat], person)
+		}
+	}
+
+	totalMasks := 1 << n
+	dp := make([]int, totalMasks)
+	dp[0] = 1
+
+	for hat := 1; hat <= 40; hat++ {
+		if len(hatToPeople[hat]) == 0 {
+			continue
+		}
+		// Iterate masks in reverse to avoid reusing the same hat
+		for mask := totalMasks - 1; mask >= 0; mask-- {
+			for _, person := range hatToPeople[hat] {
+				if mask&(1<<person) != 0 {
+					continue
+				}
+				nextMask := mask | (1 << person)
+				dp[nextMask] = (dp[nextMask] + dp[mask]) % mod1434
+			}
+		}
+	}
+	return dp[totalMasks-1]
 }
 
-func NumberOfWaysToWearDifferentHatsToEachOther() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Example: hats = [[3,4],[4,5],[5]] -> 1
+	fmt.Println(numberWays([][]int{{3, 4}, {4, 5}, {5}}))
 }

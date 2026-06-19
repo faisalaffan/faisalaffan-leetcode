@@ -4,13 +4,55 @@ package main
 // https://leetcode.com/problems/find-number-of-coins-to-place-in-tree-nodes/
 // Difficulty: Hard
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func main() {
-	fmt.Println(FindNumberOfCoinsToPlaceInTreeNodes())
+func placedCoins(edges [][]int, cost []int) []int64 {
+	n := len(cost)
+	g := make([][]int, n)
+	for _, e := range edges {
+		a, b := e[0], e[1]
+		g[a] = append(g[a], b)
+		g[b] = append(g[b], a)
+	}
+	ans := make([]int64, n)
+	for i := range ans {
+		ans[i] = 1
+	}
+	var dfs func(a, fa int) []int
+	dfs = func(a, fa int) []int {
+		res := []int{cost[a]}
+		for _, b := range g[a] {
+			if b != fa {
+				res = append(res, dfs(b, a)...)
+			}
+		}
+		sort.Ints(res)
+		m := len(res)
+		if m >= 3 {
+			x := res[m-1] * res[m-2] * res[m-3]
+			y := res[0] * res[1] * res[m-1]
+			if x > y {
+				y = x
+			}
+			if y > 0 {
+				ans[a] = int64(y)
+			} else {
+				ans[a] = 0
+			}
+		}
+		if m >= 5 {
+			res = append(res[:2], res[m-3:]...)
+		}
+		return res
+	}
+	dfs(0, -1)
+	return ans
 }
 
-func FindNumberOfCoinsToPlaceInTreeNodes() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(placedCoins([][]int{{0, 1}, {1, 2}, {1, 3}, {3, 4}}, []int{1, 10, 1, 1, 1}))
+	fmt.Println(placedCoins([][]int{{0, 1}, {1, 2}}, []int{1, 2, 3}))
 }

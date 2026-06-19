@@ -6,11 +6,60 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(DeleteColumnsToMakeSortedIii())
+func minDeletionSize(A []string) int {
+	if len(A) == 0 {
+		return 0
+	}
+	m, n := len(A), len(A[0])
+
+	// dp[j] = longest increasing subsequence ending at column j
+	dp := make([]int, n)
+	for j := range dp {
+		dp[j] = 1
+	}
+
+	for j := 0; j < n; j++ {
+		for k := 0; k < j; k++ {
+			// Check if we can place column j after column k
+			ok := true
+			for i := 0; i < m; i++ {
+				if A[i][k] > A[i][j] {
+					ok = false
+					break
+				}
+			}
+			if ok {
+				dp[j] = max(dp[j], dp[k]+1)
+			}
+		}
+	}
+
+	// max columns we can keep
+	maxKeep := 0
+	for _, v := range dp {
+		maxKeep = max(maxKeep, v)
+	}
+	// min columns to delete = total - maxKeep
+	return n - maxKeep
 }
 
-func DeleteColumnsToMakeSortedIii() any {
-	// TODO: implement
-	return nil
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func main() {
+	fmt.Println("Example 1:")
+	fmt.Println(minDeletionSize([]string{"babca", "bbazb"}))
+	// Expected: 3
+
+	fmt.Println("Example 2:")
+	fmt.Println(minDeletionSize([]string{"edcba"}))
+	// Expected: 4
+
+	fmt.Println("Example 3:")
+	fmt.Println(minDeletionSize([]string{"ghi", "def", "abc"}))
+	// Expected: 0
 }

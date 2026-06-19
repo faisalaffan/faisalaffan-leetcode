@@ -3,14 +3,38 @@ package main
 // LeetCode #1147: Longest Chunked Palindrome Decomposition
 // https://leetcode.com/problems/longest-chunked-palindrome-decomposition/
 // Difficulty: Hard
+//
+// Greedy two-pointer: try the shortest matching prefix/suffix pair. When a
+// match is found, increment count by 2 and advance both pointers. Any
+// unmatched remnant in the middle adds 1.
 
 import "fmt"
 
 func main() {
-	fmt.Println(LongestChunkedPalindromeDecomposition())
+	fmt.Println(longestDecomposition("ghiabcdefhelloadamhelloabcdefghi"))
 }
 
-func LongestChunkedPalindromeDecomposition() any {
-	// TODO: implement
-	return nil
+func longestDecomposition(text string) int {
+	n := len(text)
+	ans := 0
+	l, r := 0, n-1
+
+	for l <= r {
+		found := false
+		for length := 1; l+length-1 < r-length+1; length++ {
+			if text[l:l+length] == text[r-length+1:r+1] {
+				ans += 2
+				l += length
+				r -= length
+				found = true
+				break
+			}
+		}
+		if !found {
+			ans++
+			break
+		}
+	}
+
+	return ans
 }
