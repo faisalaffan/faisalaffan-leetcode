@@ -6,11 +6,26 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(DetermineIfStringHalvesAreAlike())
+// Time: O(n), Space: O(1)
+func HalvesAreAlike(s string) bool {
+	vowels := map[byte]bool{
+		'a': true, 'e': true, 'i': true, 'o': true, 'u': true,
+		'A': true, 'E': true, 'I': true, 'O': true, 'U': true,
+	}
+	mid := len(s) / 2
+	count := 0
+	for i := 0; i < mid; i++ {
+		if vowels[s[i]] {
+			count++
+		}
+		if vowels[s[i+mid]] {
+			count--
+		}
+	}
+	return count == 0
 }
 
-func DetermineIfStringHalvesAreAlike() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(HalvesAreAlike("book"))
+	fmt.Println(HalvesAreAlike("textbook"))
 }

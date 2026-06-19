@@ -4,13 +4,24 @@ package main
 // https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(DivideAnArrayIntoSubarraysWithMinimumCostI())
+	// LeetCode name: minimumCost
+	fmt.Println(DivideAnArrayIntoSubarraysWithMinimumCostI([]int{1, 2, 3, 12})) // 6
+	fmt.Println(DivideAnArrayIntoSubarraysWithMinimumCostI([]int{5, 4, 3, 2, 1})) // 8
 }
 
-func DivideAnArrayIntoSubarraysWithMinimumCostI() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n) | Space: O(1)
+// LeetCode submission name: minimumCost
+// Cost = nums[0] + sum of two smallest elements from nums[1:]
+func DivideAnArrayIntoSubarraysWithMinimumCostI(nums []int) int {
+	// First subarray starts at nums[0], so nums[0] is always included.
+	// For remaining subarrays, we pick the two smallest elements.
+	rest := nums[1:]
+	sort.Ints(rest)
+	return nums[0] + rest[0] + rest[1]
 }

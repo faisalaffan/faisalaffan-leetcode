@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(EmployeeBonus())
+func EmployeeBonus() string {
+	return "SELECT e.name, b.bonus FROM Employee e LEFT JOIN Bonus b ON e.empId = b.empId WHERE b.bonus < 1000 OR b.bonus IS NULL"
 }
 
-func EmployeeBonus() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(EmployeeBonus())
 }

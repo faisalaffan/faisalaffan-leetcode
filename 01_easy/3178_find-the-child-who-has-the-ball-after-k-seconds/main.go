@@ -7,10 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheChildWhoHasTheBallAfterKSeconds())
+	fmt.Println(FindTheChildWhoHasTheBallAfterKSeconds(3, 5))
+	fmt.Println(FindTheChildWhoHasTheBallAfterKSeconds(5, 6))
+	fmt.Println(FindTheChildWhoHasTheBallAfterKSeconds(4, 2))
 }
 
-func FindTheChildWhoHasTheBallAfterKSeconds() any {
-	// TODO: implement
-	return nil
+// FindTheChildWhoHasTheBallAfterKSeconds returns the child who has the ball after k seconds.
+// Children pass the ball left-to-right, then right-to-left, repeatedly.
+// Time: O(1). Space: O(1).
+func FindTheChildWhoHasTheBallAfterKSeconds(n int, k int) int {
+	cycleLen := 2 * (n - 1)
+	k %= cycleLen
+	if k < n {
+		return k
+	}
+	return cycleLen - k
 }

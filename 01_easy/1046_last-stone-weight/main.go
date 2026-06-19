@@ -3,14 +3,33 @@ package main
 // LeetCode #1046: Last Stone Weight
 // https://leetcode.com/problems/last-stone-weight/
 // Difficulty: Easy
+// Time: O(n log n) | Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(LastStoneWeight())
+	fmt.Println(lastStoneWeight([]int{2, 7, 4, 1, 8, 1})) // 1
+	fmt.Println(lastStoneWeight([]int{1}))                 // 1
+	fmt.Println(lastStoneWeight([]int{2, 2}))              // 0
 }
 
-func LastStoneWeight() any {
-	// TODO: implement
-	return nil
+// LeetCode submission: lastStoneWeight
+func lastStoneWeight(stones []int) int {
+	for len(stones) > 1 {
+		sort.Ints(stones)
+		n := len(stones)
+		if stones[n-1] == stones[n-2] {
+			stones = stones[:n-2]
+		} else {
+			stones[n-2] = stones[n-1] - stones[n-2]
+			stones = stones[:n-1]
+		}
+	}
+	if len(stones) == 1 {
+		return stones[0]
+	}
+	return 0
 }

@@ -6,11 +6,24 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(LargestSubstringBetweenTwoEqualCharacters())
+// Time: O(n), Space: O(1) (since only 26 letters)
+func MaxLengthBetweenEqualCharacters(s string) int {
+	firstIndex := make(map[rune]int)
+	maxLen := -1
+	for i, ch := range s {
+		if idx, exists := firstIndex[ch]; exists {
+			if i-idx-1 > maxLen {
+				maxLen = i - idx - 1
+			}
+		} else {
+			firstIndex[ch] = i
+		}
+	}
+	return maxLen
 }
 
-func LargestSubstringBetweenTwoEqualCharacters() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(MaxLengthBetweenEqualCharacters("aa"))
+	fmt.Println(MaxLengthBetweenEqualCharacters("abca"))
+	fmt.Println(MaxLengthBetweenEqualCharacters("cbzxy"))
 }

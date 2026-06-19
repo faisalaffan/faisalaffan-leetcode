@@ -4,13 +4,45 @@ package main
 // https://leetcode.com/problems/minimum-deletions-for-at-most-k-distinct-characters/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(MinimumDeletionsForAtMostKDistinctCharacters())
+	fmt.Println(MinimumDeletionsForAtMostKDistinctCharacters("aabbbcc", 2))
+	fmt.Println(MinimumDeletionsForAtMostKDistinctCharacters("abcde", 2))
 }
 
-func MinimumDeletionsForAtMostKDistinctCharacters() any {
-	// TODO: implement
-	return nil
+// MinimumDeletionsForAtMostKDistinctCharacters returns min deletions so the string has at most k distinct characters.
+// Time: O(n log n). Space: O(1).
+func MinimumDeletionsForAtMostKDistinctCharacters(s string, k int) int {
+	freq := make([]int, 26)
+	for i := 0; i < len(s); i++ {
+		freq[s[i]-'a']++
+	}
+	sort.Slice(freq, func(i, j int) bool {
+		return freq[i] > freq[j]
+	})
+
+	// Count distinct characters
+	distinct := 0
+	for _, f := range freq {
+		if f > 0 {
+			distinct++
+		}
+	}
+	if distinct <= k {
+		return 0
+	}
+
+	// Delete the least frequent characters (from the end of sorted freq)
+	deletions := 0
+	for i := len(freq) - 1; i >= 0 && distinct > k; i-- {
+		if freq[i] > 0 {
+			deletions += freq[i]
+			distinct--
+		}
+	}
+	return deletions
 }

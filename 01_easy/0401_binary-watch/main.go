@@ -4,13 +4,33 @@ package main
 // https://leetcode.com/problems/binary-watch/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func main() {
-	fmt.Println(BinaryWatch())
+func countBits(n int) int {
+	count := 0
+	for n > 0 {
+		n &= n - 1
+		count++
+	}
+	return count
 }
 
-func BinaryWatch() any {
-	// TODO: implement
-	return nil
+// Time: O(1), Space: O(1)
+func BinaryWatch(turnedOn int) []string {
+	var result []string
+	for h := 0; h < 12; h++ {
+		for m := 0; m < 60; m++ {
+			if countBits(h)+countBits(m) == turnedOn {
+				result = append(result, fmt.Sprintf("%d:%02d", h, m))
+			}
+		}
+	}
+	return result
+}
+
+func main() {
+	fmt.Println(BinaryWatch(1))
+	fmt.Println(BinaryWatch(9))
 }

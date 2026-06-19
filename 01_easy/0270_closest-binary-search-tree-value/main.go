@@ -4,13 +4,35 @@ package main
 // https://leetcode.com/problems/closest-binary-search-tree-value/
 // Difficulty: Easy [Paid]
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-func main() {
-	fmt.Println(ClosestBinarySearchTreeValue())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func ClosestBinarySearchTreeValue() any {
-	// TODO: implement
-	return nil
+// Time: O(h) | Space: O(1)
+func ClosestValue(root *TreeNode, target float64) int {
+	closest := root.Val
+	for root != nil {
+		if math.Abs(float64(root.Val)-target) < math.Abs(float64(closest)-target) {
+			closest = root.Val
+		}
+		if target < float64(root.Val) {
+			root = root.Left
+		} else {
+			root = root.Right
+		}
+	}
+	return closest
+}
+
+func main() {
+	root := &TreeNode{4, &TreeNode{2, &TreeNode{1, nil, nil}, &TreeNode{3, nil, nil}}, &TreeNode{5, nil, nil}}
+	fmt.Println(ClosestValue(root, 3.714286))
+	fmt.Println(ClosestValue(&TreeNode{1, nil, nil}, 4.428571))
 }

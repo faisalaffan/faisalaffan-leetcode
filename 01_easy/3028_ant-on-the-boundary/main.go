@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(AntOnTheBoundary())
+	// LeetCode name: returnToBoundaryCount
+	fmt.Println(AntOnTheBoundary([]int{2, 3, -5})) // 1
+	fmt.Println(AntOnTheBoundary([]int{3, 2, -3, -2})) // 1
 }
 
-func AntOnTheBoundary() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: returnToBoundaryCount
+func AntOnTheBoundary(nums []int) int {
+	pos := 0
+	count := 0
+	for _, v := range nums {
+		pos += v
+		if pos == 0 {
+			count++
+		}
+	}
+	return count
 }

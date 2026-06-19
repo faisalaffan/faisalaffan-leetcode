@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(BigCountries())
+func BigCountries() string {
+	return "SELECT name, population, area FROM World WHERE area >= 3000000 OR population >= 25000000"
 }
 
-func BigCountries() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(BigCountries())
 }

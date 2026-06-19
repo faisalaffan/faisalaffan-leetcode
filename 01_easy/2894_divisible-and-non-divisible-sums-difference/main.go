@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(DivisibleAndNonDivisibleSumsDifference())
+	// LeetCode name: differenceOfSums
+	fmt.Println(DivisibleAndNonDivisibleSumsDifference(10, 3)) // 19
+	fmt.Println(DivisibleAndNonDivisibleSumsDifference(5, 6))  // 15
+	fmt.Println(DivisibleAndNonDivisibleSumsDifference(5, 1))  // -15
 }
 
-func DivisibleAndNonDivisibleSumsDifference() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: differenceOfSums
+func DivisibleAndNonDivisibleSumsDifference(n int, m int) int {
+	num1 := 0 // sum of numbers not divisible by m
+	num2 := 0 // sum of numbers divisible by m
+	for i := 1; i <= n; i++ {
+		if i%m == 0 {
+			num2 += i
+		} else {
+			num1 += i
+		}
+	}
+	return num1 - num2
 }

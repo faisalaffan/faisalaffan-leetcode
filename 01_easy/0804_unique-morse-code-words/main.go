@@ -6,11 +6,23 @@ package main
 
 import "fmt"
 
+var morse = []string{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."}
+
 func main() {
-	fmt.Println(UniqueMorseCodeWords())
+	fmt.Println(uniqueMorseRepresentations([]string{"gin", "zen", "gig", "msg"})) // 2
+	fmt.Println(uniqueMorseRepresentations([]string{"a"}))                        // 1
 }
 
-func UniqueMorseCodeWords() any {
-	// TODO: implement
-	return nil
+// uniqueMorseRepresentations counts unique Morse code transformations of words.
+// Time: O(n * m) where n = len(words), m = avg len. Space: O(n).
+func uniqueMorseRepresentations(words []string) int {
+	set := make(map[string]bool)
+	for _, word := range words {
+		var code string
+		for _, c := range word {
+			code += morse[c-'a']
+		}
+		set[code] = true
+	}
+	return len(set)
 }

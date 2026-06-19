@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumOperationsToEqualizeArray())
+	fmt.Println(MinimumOperationsToEqualizeArray([]int{1, 2, 3}))
+	fmt.Println(MinimumOperationsToEqualizeArray([]int{5, 5, 5}))
 }
 
-func MinimumOperationsToEqualizeArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n)
+// Space: O(1)
+func MinimumOperationsToEqualizeArray(nums []int) int {
+	for i := 1; i < len(nums); i++ {
+		if nums[i] != nums[0] {
+			return 1
+		}
+	}
+	return 0
 }

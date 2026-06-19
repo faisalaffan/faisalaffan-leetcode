@@ -6,11 +6,24 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaximumNestingDepthOfTheParentheses())
+// Time: O(n), Space: O(1)
+func MaximumNestingDepthOfTheParentheses(s string) int {
+	maxDepth, currentDepth := 0, 0
+	for _, ch := range s {
+		if ch == '(' {
+			currentDepth++
+			if currentDepth > maxDepth {
+				maxDepth = currentDepth
+			}
+		} else if ch == ')' {
+			currentDepth--
+		}
+	}
+	return maxDepth
 }
 
-func MaximumNestingDepthOfTheParentheses() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(MaximumNestingDepthOfTheParentheses("(1+(2*3)+((8)/4))+1"))
+	fmt.Println(MaximumNestingDepthOfTheParentheses("(1)+((2))+(((3)))"))
+	fmt.Println(MaximumNestingDepthOfTheParentheses(""))
 }

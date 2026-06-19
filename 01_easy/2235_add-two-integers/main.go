@@ -7,10 +7,11 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(AddTwoIntegers())
+	fmt.Println(AddTwoIntegers(12, 5))   // 17
+	fmt.Println(AddTwoIntegers(-10, 4))  // -6
 }
 
-func AddTwoIntegers() any {
-	// TODO: implement
-	return nil
+// Time: O(1), Space: O(1)
+func AddTwoIntegers(num1 int, num2 int) int {
+	return num1 + num2
 }

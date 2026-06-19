@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheKOrOfAnArray())
+	// LeetCode name: findKOr
+	fmt.Println(FindTheKOrOfAnArray([]int{7, 12, 9, 8, 9, 15}, 4)) // 9
+	fmt.Println(FindTheKOrOfAnArray([]int{2, 12, 1, 11, 4, 5}, 6)) // 0
+	fmt.Println(FindTheKOrOfAnArray([]int{10, 8, 5, 9, 11, 6, 8}, 1)) // 15
 }
 
-func FindTheKOrOfAnArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n * 32) | Space: O(1)
+// LeetCode submission name: findKOr
+func FindTheKOrOfAnArray(nums []int, k int) int {
+	result := 0
+	for bit := 0; bit < 32; bit++ {
+		count := 0
+		for _, num := range nums {
+			if num&(1<<bit) != 0 {
+				count++
+			}
+		}
+		if count >= k {
+			result |= (1 << bit)
+		}
+	}
+	return result
 }

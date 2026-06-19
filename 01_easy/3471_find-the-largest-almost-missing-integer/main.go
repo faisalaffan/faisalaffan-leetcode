@@ -7,10 +7,22 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheLargestAlmostMissingInteger())
+	fmt.Println(FindTheLargestAlmostMissingInteger([]int{3, 9, 2, 3, 1, 6, 7, 8, 9}, 2))
+	fmt.Println(FindTheLargestAlmostMissingInteger([]int{0, 0}, 1))
 }
 
-func FindTheLargestAlmostMissingInteger() any {
-	// TODO: implement
-	return nil
+// FindTheLargestAlmostMissingInteger returns the largest integer that appears fewer than k times in nums.
+// Time: O(n). Space: O(n).
+func FindTheLargestAlmostMissingInteger(nums []int, k int) int {
+	freq := make(map[int]int)
+	for _, v := range nums {
+		freq[v]++
+	}
+	largest := -1
+	for val, count := range freq {
+		if count < k && val > largest {
+			largest = val
+		}
+	}
+	return largest
 }

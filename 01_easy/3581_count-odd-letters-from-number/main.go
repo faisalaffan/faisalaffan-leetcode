@@ -7,10 +7,30 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountOddLettersFromNumber())
+	fmt.Println(CountOddLettersFromNumber(41))
+	fmt.Println(CountOddLettersFromNumber(20))
+	fmt.Println(CountOddLettersFromNumber(7))
 }
 
-func CountOddLettersFromNumber() any {
-	// TODO: implement
-	return nil
+// Time: O(log n) - number of digits of n
+// Space: O(1)
+func CountOddLettersFromNumber(n int) int {
+	digitWords := [10]string{"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}
+
+	mask := 0
+	for n > 0 {
+		d := n % 10
+		word := digitWords[d]
+		for _, ch := range word {
+			mask ^= 1 << (ch - 'a')
+		}
+		n /= 10
+	}
+
+	ans := 0
+	for mask > 0 {
+		ans += mask & 1
+		mask >>= 1
+	}
+	return ans
 }

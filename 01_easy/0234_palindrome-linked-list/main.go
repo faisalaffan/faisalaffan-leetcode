@@ -6,11 +6,45 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PalindromeLinkedList())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func PalindromeLinkedList() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+func IsPalindrome(head *ListNode) bool {
+	reverse := func(head *ListNode) *ListNode {
+		var prev *ListNode
+		for head != nil {
+			next := head.Next
+			head.Next = prev
+			prev = head
+			head = next
+		}
+		return prev
+	}
+
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+
+	second := reverse(slow)
+	first := head
+	for second != nil {
+		if first.Val != second.Val {
+			return false
+		}
+		first = first.Next
+		second = second.Next
+	}
+	return true
+}
+
+func main() {
+	l1 := &ListNode{1, &ListNode{2, &ListNode{2, &ListNode{1, nil}}}}
+	fmt.Println(IsPalindrome(l1))
+	l2 := &ListNode{1, &ListNode{2, nil}}
+	fmt.Println(IsPalindrome(l2))
 }

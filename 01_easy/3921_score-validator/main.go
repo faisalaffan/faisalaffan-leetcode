@@ -4,13 +4,33 @@ package main
 // https://leetcode.com/problems/score-validator/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-	fmt.Println(ScoreValidator())
+	fmt.Println(ScoreValidator([]string{"1", "4", "W", "6", "WD"}))
+	fmt.Println(ScoreValidator([]string{"WD", "NB", "0", "4", "4"}))
+	fmt.Println(ScoreValidator([]string{"W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"}))
 }
 
-func ScoreValidator() any {
-	// TODO: implement
-	return nil
+// Time: O(n)
+// Space: O(1)
+func ScoreValidator(events []string) []int {
+	score, counter := 0, 0
+	for _, e := range events {
+		if counter == 10 {
+			break
+		}
+		if e == "W" {
+			counter++
+		} else if e == "WD" || e == "NB" {
+			score++
+		} else {
+			v, _ := strconv.Atoi(e)
+			score += v
+		}
+	}
+	return []int{score, counter}
 }

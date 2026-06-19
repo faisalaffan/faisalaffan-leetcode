@@ -6,11 +6,25 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MinimumDistanceToTheTargetElement())
+// Time: O(n), Space: O(1)
+func GetMinDistance(nums []int, target int, start int) int {
+	minDist := len(nums)
+	for i, num := range nums {
+		if num == target {
+			dist := start - i
+			if dist < 0 {
+				dist = -dist
+			}
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+	}
+	return minDist
 }
 
-func MinimumDistanceToTheTargetElement() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(GetMinDistance([]int{1, 2, 3, 4, 5}, 5, 3))
+	fmt.Println(GetMinDistance([]int{1}, 1, 0))
+	fmt.Println(GetMinDistance([]int{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 1, 0))
 }

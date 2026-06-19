@@ -4,13 +4,25 @@ package main
 // https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(MinimumCostOfBuyingCandiesWithDiscount())
+	fmt.Println(MinimumCostOfBuyingCandiesWithDiscount([]int{1, 2, 3}))    // 5
+	fmt.Println(MinimumCostOfBuyingCandiesWithDiscount([]int{6, 5, 7, 9, 2, 2})) // 23
+	fmt.Println(MinimumCostOfBuyingCandiesWithDiscount([]int{5, 5}))        // 10
 }
 
-func MinimumCostOfBuyingCandiesWithDiscount() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n), Space: O(1) ignoring sort
+func MinimumCostOfBuyingCandiesWithDiscount(cost []int) int {
+	sort.Sort(sort.Reverse(sort.IntSlice(cost)))
+	total := 0
+	for i, c := range cost {
+		if i%3 != 2 { // buy 2, get 1 free (the cheapest = every 3rd item)
+			total += c
+		}
+	}
+	return total
 }

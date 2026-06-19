@@ -4,13 +4,23 @@ package main
 // https://leetcode.com/problems/counting-words-with-a-given-prefix/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	fmt.Println(CountingWordsWithAGivenPrefix())
+	fmt.Println(CountingWordsWithAGivenPrefix([]string{"pay", "attention", "practice", "attend"}, "at")) // 2
+	fmt.Println(CountingWordsWithAGivenPrefix([]string{"leetcode", "win", "loops", "success"}, "code"))   // 0
 }
 
-func CountingWordsWithAGivenPrefix() any {
-	// TODO: implement
-	return nil
+// Time: O(n * m), Space: O(1)
+func CountingWordsWithAGivenPrefix(words []string, pref string) int {
+	count := 0
+	for _, w := range words {
+		if strings.HasPrefix(w, pref) {
+			count++
+		}
+	}
+	return count
 }

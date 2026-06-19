@@ -4,13 +4,27 @@ package main
 // https://leetcode.com/problems/sort-array-by-absolute-value/
 // Difficulty: Easy [Paid]
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(SortArrayByAbsoluteValue())
+	fmt.Println(SortArrayByAbsoluteValue([]int{3, -1, -4, 1, 5}))
 }
 
-func SortArrayByAbsoluteValue() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n)
+// Space: O(n)
+func SortArrayByAbsoluteValue(nums []int) []int {
+	sort.Slice(nums, func(i, j int) bool {
+		return abs(nums[i]) < abs(nums[j])
+	})
+	return nums
+}
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }

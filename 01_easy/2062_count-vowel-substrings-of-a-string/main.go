@@ -7,10 +7,29 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountVowelSubstringsOfAString())
+	fmt.Println(CountVowelSubstringsOfAString("aeiouu"))    // 2
+	fmt.Println(CountVowelSubstringsOfAString("unicornarihan")) // 0
+	fmt.Println(CountVowelSubstringsOfAString("cuaieuouac"))    // 7
 }
 
-func CountVowelSubstringsOfAString() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2), Space: O(1)
+func CountVowelSubstringsOfAString(word string) int {
+	isVowel := func(ch byte) bool {
+		return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'
+	}
+
+	count := 0
+	for i := 0; i < len(word); i++ {
+		vowelSet := make(map[byte]bool)
+		for j := i; j < len(word); j++ {
+			if !isVowel(word[j]) {
+				break
+			}
+			vowelSet[word[j]] = true
+			if len(vowelSet) == 5 {
+				count++
+			}
+		}
+	}
+	return count
 }

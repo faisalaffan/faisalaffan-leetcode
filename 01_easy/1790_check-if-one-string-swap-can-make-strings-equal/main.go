@@ -6,11 +6,28 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CheckIfOneStringSwapCanMakeStringsEqual())
+// Time: O(n), Space: O(1)
+func AreAlmostEqual(s1 string, s2 string) bool {
+	var diff []int
+	for i := 0; i < len(s1); i++ {
+		if s1[i] != s2[i] {
+			diff = append(diff, i)
+			if len(diff) > 2 {
+				return false
+			}
+		}
+	}
+	if len(diff) == 0 {
+		return true
+	}
+	if len(diff) != 2 {
+		return false
+	}
+	return s1[diff[0]] == s2[diff[1]] && s1[diff[1]] == s2[diff[0]]
 }
 
-func CheckIfOneStringSwapCanMakeStringsEqual() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(AreAlmostEqual("bank", "kanb"))
+	fmt.Println(AreAlmostEqual("attack", "defend"))
+	fmt.Println(AreAlmostEqual("kelb", "kelb"))
 }

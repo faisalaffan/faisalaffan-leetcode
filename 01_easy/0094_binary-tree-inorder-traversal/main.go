@@ -6,11 +6,30 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(BinaryTreeInorderTraversal())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func BinaryTreeInorderTraversal() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+func InorderTraversal(root *TreeNode) []int {
+	var res []int
+	var dfs func(*TreeNode)
+	dfs = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		dfs(node.Left)
+		res = append(res, node.Val)
+		dfs(node.Right)
+	}
+	dfs(root)
+	return res
+}
+
+func main() {
+	root := &TreeNode{1, nil, &TreeNode{2, &TreeNode{3, nil, nil}, nil}}
+	fmt.Println(InorderTraversal(root))
+	fmt.Println(InorderTraversal(nil))
 }

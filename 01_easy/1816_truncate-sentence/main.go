@@ -4,13 +4,19 @@ package main
 // https://leetcode.com/problems/truncate-sentence/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func main() {
-	fmt.Println(TruncateSentence())
+// Time: O(n), Space: O(n)
+func TruncateSentence(s string, k int) string {
+	words := strings.Split(s, " ")
+	return strings.Join(words[:k], " ")
 }
 
-func TruncateSentence() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(TruncateSentence("Hello how are you Contestant", 4))
+	fmt.Println(TruncateSentence("What is the solution to this problem", 4))
+	fmt.Println(TruncateSentence("chopper is not a tanuki", 5))
 }

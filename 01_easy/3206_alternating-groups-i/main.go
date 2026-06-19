@@ -7,10 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(AlternatingGroupsI())
+	fmt.Println(AlternatingGroupsI([]int{1, 1, 1}))
+	fmt.Println(AlternatingGroupsI([]int{0, 1, 0, 0, 1}))
 }
 
-func AlternatingGroupsI() any {
-	// TODO: implement
-	return nil
+// AlternatingGroupsI counts the number of groups of 3 adjacent elements where all three are alternating.
+// Time: O(n). Space: O(1).
+func AlternatingGroupsI(colors []int) int {
+	n := len(colors)
+	count := 0
+	for i := 0; i < n; i++ {
+		if colors[i] == colors[(i+2)%n] && colors[i] != colors[(i+1)%n] {
+			count++
+		}
+	}
+	return count
 }

@@ -3,14 +3,18 @@ package main
 // LeetCode #1523: Count Odd Numbers in an Interval Range
 // https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/
 // Difficulty: Easy
+//
+// LeetCode submission: func countOdds(low int, high int) int
 
 import "fmt"
 
 func main() {
-	fmt.Println(CountOddNumbersInAnIntervalRange())
+	fmt.Println(CountOddNumbersInAnIntervalRange(3, 7)) // 3
+	fmt.Println(CountOddNumbersInAnIntervalRange(8, 10)) // 1
+	fmt.Println(CountOddNumbersInAnIntervalRange(0, 0)) // 0
 }
 
-func CountOddNumbersInAnIntervalRange() any {
-	// TODO: implement
-	return nil
+// Time: O(1), Space: O(1)
+func CountOddNumbersInAnIntervalRange(low int, high int) int {
+	return (high + 1) / 2 - low / 2
 }

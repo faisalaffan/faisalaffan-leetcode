@@ -7,10 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumOperationsToExceedThresholdValueI())
+	// LeetCode name: minOperations
+	fmt.Println(MinimumOperationsToExceedThresholdValueI([]int{2, 11, 10, 1, 3}, 10)) // 3
+	fmt.Println(MinimumOperationsToExceedThresholdValueI([]int{1, 1, 2, 4, 9}, 9))    // 4
 }
 
-func MinimumOperationsToExceedThresholdValueI() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: minOperations
+func MinimumOperationsToExceedThresholdValueI(nums []int, k int) int {
+	count := 0
+	for _, v := range nums {
+		if v < k {
+			count++
+		}
+	}
+	return count
 }

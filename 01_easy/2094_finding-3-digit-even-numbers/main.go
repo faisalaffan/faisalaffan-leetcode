@@ -4,13 +4,46 @@ package main
 // https://leetcode.com/problems/finding-3-digit-even-numbers/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(FindingThreeDigitEvenNumbers())
+	fmt.Println(FindingThreeDigitEvenNumbers([]int{2, 1, 3, 0}))       // [102 120 130 132 210 230 302 310 312 320]
+	fmt.Println(FindingThreeDigitEvenNumbers([]int{2, 2, 8, 8, 2}))    // [222 228 282 288 822 828 882]
+	fmt.Println(FindingThreeDigitEvenNumbers([]int{0, 0, 0}))          // []
 }
 
-func FindingThreeDigitEvenNumbers() any {
-	// TODO: implement
-	return nil
+// Time: O(n^3), Space: O(1)
+func FindingThreeDigitEvenNumbers(digits []int) []int {
+	set := make(map[int]bool)
+	n := len(digits)
+
+	for i := 0; i < n; i++ {
+		if digits[i] == 0 {
+			continue
+		}
+		for j := 0; j < n; j++ {
+			if j == i {
+				continue
+			}
+			for k := 0; k < n; k++ {
+				if k == i || k == j {
+					continue
+				}
+				num := digits[i]*100 + digits[j]*10 + digits[k]
+				if num%2 == 0 {
+					set[num] = true
+				}
+			}
+		}
+	}
+
+	result := make([]int, 0, len(set))
+	for v := range set {
+		result = append(result, v)
+	}
+	sort.Ints(result)
+	return result
 }

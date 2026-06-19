@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SnakeInMatrix())
+	fmt.Println(SnakeInMatrix(3, []string{"RIGHT", "DOWN"}))
+	fmt.Println(SnakeInMatrix(2, []string{"DOWN", "RIGHT", "UP"}))
 }
 
-func SnakeInMatrix() any {
-	// TODO: implement
-	return nil
+// SnakeInMatrix returns the final position of the snake in an n x n matrix after following commands.
+// Time: O(m). Space: O(1).
+func SnakeInMatrix(n int, commands []string) int {
+	r, c := 0, 0
+	for _, cmd := range commands {
+		switch cmd {
+		case "UP":
+			r--
+		case "DOWN":
+			r++
+		case "LEFT":
+			c--
+		case "RIGHT":
+			c++
+		}
+	}
+	return r*n + c
 }

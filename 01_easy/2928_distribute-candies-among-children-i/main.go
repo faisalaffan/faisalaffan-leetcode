@@ -7,10 +7,22 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(DistributeCandiesAmongChildrenI())
+	// LeetCode name: distributeCandies
+	fmt.Println(DistributeCandiesAmongChildrenI(5, 2)) // 3
+	fmt.Println(DistributeCandiesAmongChildrenI(3, 3)) // 10
 }
 
-func DistributeCandiesAmongChildrenI() any {
-	// TODO: implement
-	return nil
+// Time: O(limit^2) | Space: O(1)
+// LeetCode submission name: distributeCandies
+func DistributeCandiesAmongChildrenI(n int, limit int) int {
+	ways := 0
+	for a := 0; a <= limit && a <= n; a++ {
+		for b := 0; b <= limit && a+b <= n; b++ {
+			c := n - a - b
+			if c <= limit {
+				ways++
+			}
+		}
+	}
+	return ways
 }

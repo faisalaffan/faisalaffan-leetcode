@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CustomersWhoNeverOrder())
+func CustomersWhoNeverOrder() string {
+	return "SELECT c.name AS Customers FROM Customers c LEFT JOIN Orders o ON c.id = o.customerId WHERE o.customerId IS NULL"
 }
 
-func CustomersWhoNeverOrder() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CustomersWhoNeverOrder())
 }

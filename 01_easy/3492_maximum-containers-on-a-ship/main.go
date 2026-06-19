@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumContainersOnAShip())
+	fmt.Println(MaximumContainersOnAShip(3, 2, 10))
+	fmt.Println(MaximumContainersOnAShip(5, 3, 50))
 }
 
-func MaximumContainersOnAShip() any {
-	// TODO: implement
-	return nil
+// MaximumContainersOnAShip returns the maximum number of containers that can be loaded on an n x n ship, each weighing w, within maxWeight.
+// Time: O(1). Space: O(1).
+func MaximumContainersOnAShip(n int, w int, maxWeight int) int {
+	maxBySpace := n * n
+	maxByWeight := maxWeight / w
+	if maxBySpace < maxByWeight {
+		return maxBySpace
+	}
+	return maxByWeight
 }

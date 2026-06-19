@@ -7,10 +7,14 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ExactlyOneConsecutiveSetBitsPair())
+	fmt.Println(ExactlyOneConsecutiveSetBitsPair(6))
+	fmt.Println(ExactlyOneConsecutiveSetBitsPair(5))
+	fmt.Println(ExactlyOneConsecutiveSetBitsPair(3))
 }
 
-func ExactlyOneConsecutiveSetBitsPair() any {
-	// TODO: implement
-	return nil
+// Time: O(1)
+// Space: O(1)
+func ExactlyOneConsecutiveSetBitsPair(n int) bool {
+	m := n & (n >> 1)
+	return m > 0 && m&(m-1) == 0
 }

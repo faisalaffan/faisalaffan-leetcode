@@ -4,13 +4,19 @@ package main
 // https://leetcode.com/problems/repeated-substring-pattern/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func main() {
-	fmt.Println(RepeatedSubstringPattern())
+// Time: O(n), Space: O(n)
+func RepeatedSubstringPattern(s string) bool {
+	t := s + s
+	return strings.Contains(t[1:len(t)-1], s)
 }
 
-func RepeatedSubstringPattern() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(RepeatedSubstringPattern("abab"))
+	fmt.Println(RepeatedSubstringPattern("aba"))
+	fmt.Println(RepeatedSubstringPattern("abcabcabcabc"))
 }

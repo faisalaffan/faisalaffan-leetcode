@@ -7,10 +7,33 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountCommonWordsWithOneOccurrence())
+	fmt.Println(CountCommonWordsWithOneOccurrence(
+		[]string{"leetcode", "is", "amazing", "as", "is"},
+		[]string{"amazing", "leetcode", "is"},
+	)) // 2
+	fmt.Println(CountCommonWordsWithOneOccurrence(
+		[]string{"a", "ab"},
+		[]string{"a", "a", "a", "ab"},
+	)) // 1
 }
 
-func CountCommonWordsWithOneOccurrence() any {
-	// TODO: implement
-	return nil
+// Time: O(n + m), Space: O(n + m)
+func CountCommonWordsWithOneOccurrence(words1 []string, words2 []string) int {
+	freq1 := make(map[string]int)
+	freq2 := make(map[string]int)
+
+	for _, w := range words1 {
+		freq1[w]++
+	}
+	for _, w := range words2 {
+		freq2[w]++
+	}
+
+	count := 0
+	for w, c := range freq1 {
+		if c == 1 && freq2[w] == 1 {
+			count++
+		}
+	}
+	return count
 }

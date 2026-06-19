@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountSpecialQuadruplets())
+	fmt.Println(CountSpecialQuadruplets([]int{1, 2, 3, 6}))   // 1
+	fmt.Println(CountSpecialQuadruplets([]int{3, 3, 6, 4, 5})) // 0
+	fmt.Println(CountSpecialQuadruplets([]int{1, 1, 1, 3, 5})) // 4
 }
 
-func CountSpecialQuadruplets() any {
-	// TODO: implement
-	return nil
+// Time: O(n^3), Space: O(1)
+func CountSpecialQuadruplets(nums []int) int {
+	n := len(nums)
+	count := 0
+	for a := 0; a < n; a++ {
+		for b := a + 1; b < n; b++ {
+			for c := b + 1; c < n; c++ {
+				for d := c + 1; d < n; d++ {
+					if nums[a]+nums[b]+nums[c] == nums[d] {
+						count++
+					}
+				}
+			}
+		}
+	}
+	return count
 }

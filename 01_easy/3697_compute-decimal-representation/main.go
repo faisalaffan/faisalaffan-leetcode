@@ -7,10 +7,28 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ComputeDecimalRepresentation())
+	fmt.Println(ComputeDecimalRepresentation(537))
+	fmt.Println(ComputeDecimalRepresentation(102))
+	fmt.Println(ComputeDecimalRepresentation(6))
 }
 
-func ComputeDecimalRepresentation() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(log n)
+func ComputeDecimalRepresentation(n int) []int {
+	res := make([]int, 0)
+	place := 1
+	for n > 0 {
+		d := n % 10
+		if d != 0 {
+			res = append(res, d*place)
+		}
+		place *= 10
+		n /= 10
+	}
+
+	// Reverse to descending order
+	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
+		res[i], res[j] = res[j], res[i]
+	}
+	return res
 }

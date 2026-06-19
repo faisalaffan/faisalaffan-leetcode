@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountPartitionsWithEvenSumDifference())
+	fmt.Println(CountPartitionsWithEvenSumDifference([]int{1, 2, 3, 4, 5, 6}))
+	fmt.Println(CountPartitionsWithEvenSumDifference([]int{10, 10, 10, 10, 10}))
 }
 
-func CountPartitionsWithEvenSumDifference() any {
-	// TODO: implement
-	return nil
+// CountPartitionsWithEvenSumDifference counts partitions where the difference between left and right sums is even.
+// Time: O(n). Space: O(1).
+func CountPartitionsWithEvenSumDifference(nums []int) int {
+	totalSum := 0
+	for _, v := range nums {
+		totalSum += v
+	}
+	leftSum := 0
+	count := 0
+	for i := 0; i < len(nums)-1; i++ {
+		leftSum += nums[i]
+		rightSum := totalSum - leftSum
+		if (leftSum-rightSum)%2 == 0 {
+			count++
+		}
+	}
+	return count
 }

@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CustomerPlacingTheLargestNumberOfOrders())
+func CustomerPlacingTheLargestNumberOfOrders() string {
+	return "SELECT customer_number FROM Orders GROUP BY customer_number ORDER BY COUNT(*) DESC LIMIT 1"
 }
 
-func CustomerPlacingTheLargestNumberOfOrders() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CustomerPlacingTheLargestNumberOfOrders())
 }

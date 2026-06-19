@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfLinesToWriteString())
+	widths := []int{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
+	fmt.Println(numberOfLines(widths, "abcdefghijklmnopqrstuvwxyz")) // [3, 60]
+
+	widths2 := []int{4, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}
+	fmt.Println(numberOfLines(widths2, "bbbcccdddaaa")) // [2, 4]
 }
 
-func NumberOfLinesToWriteString() any {
-	// TODO: implement
-	return nil
+// numberOfLines returns the lines and last line width needed to write the string.
+// Time: O(n). Space: O(1).
+func numberOfLines(widths []int, s string) []int {
+	lines, currentWidth := 1, 0
+	for _, c := range s {
+		w := widths[c-'a']
+		if currentWidth+w > 100 {
+			lines++
+			currentWidth = w
+		} else {
+			currentWidth += w
+		}
+	}
+	return []int{lines, currentWidth}
 }

@@ -7,10 +7,18 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CheckGoodInteger())
+	fmt.Println(CheckGoodInteger(1000))
+	fmt.Println(CheckGoodInteger(19))
 }
 
-func CheckGoodInteger() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(1)
+func CheckGoodInteger(n int) bool {
+	total := 0
+	for n > 0 {
+		d := n % 10
+		total += d * (d - 1)
+		n /= 10
+	}
+	return total >= 50
 }

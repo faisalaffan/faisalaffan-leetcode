@@ -2,15 +2,13 @@ package main
 
 // LeetCode #1113: Reported Posts
 // https://leetcode.com/problems/reported-posts/
-// Difficulty: Easy [Paid]
+// Difficulty: Easy [Paid] (SQL)
+// Time: O(n) | Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(ReportedPosts())
+	fmt.Println("SQL: SELECT extra AS report_reason, COUNT(DISTINCT post_id) AS report_count FROM Actions WHERE action = 'report' AND action_date = '2019-07-04' GROUP BY extra")
 }
 
-func ReportedPosts() any {
-	// TODO: implement
-	return nil
-}
+// This is a SQL problem. The answer is the SQL query above.

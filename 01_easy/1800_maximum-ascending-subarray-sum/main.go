@@ -6,11 +6,24 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaximumAscendingSubarraySum())
+// Time: O(n), Space: O(1)
+func MaxAscendingSum(nums []int) int {
+	maxSum, currentSum := nums[0], nums[0]
+	for i := 1; i < len(nums); i++ {
+		if nums[i] > nums[i-1] {
+			currentSum += nums[i]
+		} else {
+			currentSum = nums[i]
+		}
+		if currentSum > maxSum {
+			maxSum = currentSum
+		}
+	}
+	return maxSum
 }
 
-func MaximumAscendingSubarraySum() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(MaxAscendingSum([]int{10, 20, 30, 5, 10, 50}))
+	fmt.Println(MaxAscendingSum([]int{10, 20, 30, 40, 50}))
+	fmt.Println(MaxAscendingSum([]int{12, 17, 15, 13, 10, 11, 12}))
 }

@@ -6,11 +6,24 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(LongestPalindrome())
+// Time: O(n), Space: O(1)
+func LongestPalindrome(s string) int {
+	count := [128]int{}
+	for _, c := range s {
+		count[c]++
+	}
+	length, odd := 0, 0
+	for _, c := range count {
+		length += (c / 2) * 2
+		if c%2 == 1 {
+			odd = 1
+		}
+	}
+	return length + odd
 }
 
-func LongestPalindrome() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(LongestPalindrome("abccccdd"))
+	fmt.Println(LongestPalindrome("a"))
+	fmt.Println(LongestPalindrome("bb"))
 }

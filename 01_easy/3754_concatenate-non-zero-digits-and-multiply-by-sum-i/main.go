@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ConcatenateNonZeroDigitsAndMultiplyBySumI())
+	fmt.Println(ConcatenateNonZeroDigitsAndMultiplyBySumI(10203004))
+	fmt.Println(ConcatenateNonZeroDigitsAndMultiplyBySumI(1000))
 }
 
-func ConcatenateNonZeroDigitsAndMultiplyBySumI() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(1)
+func ConcatenateNonZeroDigitsAndMultiplyBySumI(n int) int {
+	concat := 0
+	digitSum := 0
+	multiplier := 1
+
+	for n > 0 {
+		d := n % 10
+		if d != 0 {
+			concat = d*multiplier + concat
+			multiplier *= 10
+			digitSum += d
+		}
+		n /= 10
+	}
+
+	return concat * digitSum
 }

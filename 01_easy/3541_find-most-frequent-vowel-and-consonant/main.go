@@ -7,10 +7,41 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindMostFrequentVowelAndConsonant())
+	fmt.Println(FindMostFrequentVowelAndConsonant("hello world"))
+	fmt.Println(FindMostFrequentVowelAndConsonant("aabbccddee"))
 }
 
-func FindMostFrequentVowelAndConsonant() any {
-	// TODO: implement
-	return nil
+// isVowel returns true if the byte is a lowercase vowel.
+func isVowel(b byte) bool {
+	return b == 'a' || b == 'e' || b == 'i' || b == 'o' || b == 'u'
+}
+
+// FindMostFrequentVowelAndConsonant returns the sum of max vowel frequency and max consonant frequency.
+// Time: O(n). Space: O(1).
+func FindMostFrequentVowelAndConsonant(s string) int {
+	vowelFreq := make([]int, 26)
+	consonantFreq := make([]int, 26)
+	for i := 0; i < len(s); i++ {
+		ch := s[i]
+		if ch >= 'a' && ch <= 'z' {
+			if isVowel(ch) {
+				vowelFreq[ch-'a']++
+			} else {
+				consonantFreq[ch-'a']++
+			}
+		}
+	}
+	maxVowel := 0
+	for _, v := range vowelFreq {
+		if v > maxVowel {
+			maxVowel = v
+		}
+	}
+	maxConsonant := 0
+	for _, v := range consonantFreq {
+		if v > maxConsonant {
+			maxConsonant = v
+		}
+	}
+	return maxVowel + maxConsonant
 }

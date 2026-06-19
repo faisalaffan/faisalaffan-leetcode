@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SplitTheArray())
+	// LeetCode name: isPossibleToSplit
+	fmt.Println(SplitTheArray([]int{1, 1, 2, 2, 3, 4})) // true
+	fmt.Println(SplitTheArray([]int{1, 1, 1, 1}))       // false
 }
 
-func SplitTheArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+// LeetCode submission name: isPossibleToSplit
+// Each number can appear at most twice (once in each half of the split)
+func SplitTheArray(nums []int) bool {
+	freq := make(map[int]int)
+	for _, v := range nums {
+		freq[v]++
+		if freq[v] > 2 {
+			return false
+		}
+	}
+	return true
 }

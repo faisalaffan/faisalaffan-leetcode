@@ -6,11 +6,19 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ReverseString())
+// Time: O(n), Space: O(1)
+func ReverseString(s []byte) {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
 }
 
-func ReverseString() any {
-	// TODO: implement
-	return nil
+func main() {
+	s1 := []byte("hello")
+	ReverseString(s1)
+	fmt.Println(string(s1))
+
+	s2 := []byte("Hannah")
+	ReverseString(s2)
+	fmt.Println(string(s2))
 }

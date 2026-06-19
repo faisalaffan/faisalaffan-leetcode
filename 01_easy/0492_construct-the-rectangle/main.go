@@ -6,11 +6,19 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ConstructTheRectangle())
+// Time: O(sqrt(n)), Space: O(1)
+func ConstructTheRectangle(area int) []int {
+	w := 1
+	for i := 1; i*i <= area; i++ {
+		if area%i == 0 {
+			w = i
+		}
+	}
+	return []int{area / w, w}
 }
 
-func ConstructTheRectangle() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(ConstructTheRectangle(4))
+	fmt.Println(ConstructTheRectangle(37))
+	fmt.Println(ConstructTheRectangle(122122))
 }

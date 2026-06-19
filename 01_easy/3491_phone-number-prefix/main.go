@@ -4,13 +4,33 @@ package main
 // https://leetcode.com/problems/phone-number-prefix/
 // Difficulty: Easy [Paid]
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(PhoneNumberPrefix())
+	fmt.Println(PhoneNumberPrefix([]string{"123", "1234", "567", "7890"}))
+	fmt.Println(PhoneNumberPrefix([]string{"111", "222", "333"}))
 }
 
-func PhoneNumberPrefix() any {
-	// TODO: implement
-	return nil
+// PhoneNumberPrefix returns true if no number is a prefix of another number.
+// Time: O(n log n * m). Space: O(1).
+func PhoneNumberPrefix(numbers []string) bool {
+	sort.Strings(numbers)
+	for i := 0; i < len(numbers)-1; i++ {
+		if len(numbers[i]) <= len(numbers[i+1]) {
+			isPrefix := true
+			for j := 0; j < len(numbers[i]); j++ {
+				if numbers[i][j] != numbers[i+1][j] {
+					isPrefix = false
+					break
+				}
+			}
+			if isPrefix {
+				return false
+			}
+		}
+	}
+	return true
 }

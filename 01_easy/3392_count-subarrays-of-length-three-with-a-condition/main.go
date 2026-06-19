@@ -7,10 +7,18 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountSubarraysOfLengthThreeWithACondition())
+	fmt.Println(CountSubarraysOfLengthThreeWithACondition([]int{1, 2, 1, 2, 1}))
+	fmt.Println(CountSubarraysOfLengthThreeWithACondition([]int{1, 3, 5, 7, 9}))
 }
 
-func CountSubarraysOfLengthThreeWithACondition() any {
-	// TODO: implement
-	return nil
+// CountSubarraysOfLengthThreeWithACondition counts subarrays of length 3 where the sum of first and last equals the middle.
+// Time: O(n). Space: O(1).
+func CountSubarraysOfLengthThreeWithACondition(nums []int) int {
+	count := 0
+	for i := 0; i <= len(nums)-3; i++ {
+		if nums[i]+nums[i+2] == nums[i+1] {
+			count++
+		}
+	}
+	return count
 }

@@ -4,13 +4,40 @@ package main
 // https://leetcode.com/problems/check-if-numbers-are-ascending-in-a-sentence/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+)
 
 func main() {
-	fmt.Println(CheckIfNumbersAreAscendingInASentence())
+	fmt.Println(CheckIfNumbersAreAscendingInASentence("1 box has 3 blue 4 red 6 green and 12 yellow marbles")) // true
+	fmt.Println(CheckIfNumbersAreAscendingInASentence("hello world 5 x 5"))                                     // false
+	fmt.Println(CheckIfNumbersAreAscendingInASentence("sunset is at 7 11 pm overnight"))                        // false
 }
 
-func CheckIfNumbersAreAscendingInASentence() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func CheckIfNumbersAreAscendingInASentence(s string) bool {
+	prev := 0
+	num := 0
+	hasNum := false
+
+	for i := 0; i < len(s); i++ {
+		if unicode.IsDigit(rune(s[i])) {
+			num = num*10 + int(s[i]-'0')
+			hasNum = true
+		} else {
+			if hasNum {
+				if num <= prev {
+					return false
+				}
+				prev = num
+				num = 0
+				hasNum = false
+			}
+		}
+	}
+	if hasNum && num <= prev {
+		return false
+	}
+	return true
 }

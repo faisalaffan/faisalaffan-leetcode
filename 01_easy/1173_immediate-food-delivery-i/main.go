@@ -2,15 +2,13 @@ package main
 
 // LeetCode #1173: Immediate Food Delivery I
 // https://leetcode.com/problems/immediate-food-delivery-i/
-// Difficulty: Easy [Paid]
+// Difficulty: Easy [Paid] (SQL)
+// Time: O(n) | Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(ImmediateFoodDeliveryI())
+	fmt.Println("SQL: SELECT ROUND(100.0 * SUM(CASE WHEN order_date = customer_pref_delivery_date THEN 1 ELSE 0 END) / COUNT(*), 2) AS immediate_percentage FROM Delivery")
 }
 
-func ImmediateFoodDeliveryI() any {
-	// TODO: implement
-	return nil
-}
+// This is a SQL problem. The answer is the SQL query above.

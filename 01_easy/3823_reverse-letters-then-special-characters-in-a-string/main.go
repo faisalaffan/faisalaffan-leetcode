@@ -7,10 +7,41 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ReverseLettersThenSpecialCharactersInAString())
+	fmt.Println(ReverseLettersThenSpecialCharactersInAString(")ebc#da@f("))
+	fmt.Println(ReverseLettersThenSpecialCharactersInAString("z"))
+	fmt.Println(ReverseLettersThenSpecialCharactersInAString("!@#$%^&*()"))
 }
 
-func ReverseLettersThenSpecialCharactersInAString() any {
-	// TODO: implement
-	return nil
+func isLetter(ch byte) bool {
+	return ch >= 'a' && ch <= 'z'
+}
+
+func isSpecial(ch byte) bool {
+	return !isLetter(ch)
+}
+
+func reverseRange(s []byte, cond func(byte) bool) {
+	i, j := 0, len(s)-1
+	for i < j {
+		for i < j && !cond(s[i]) {
+			i++
+		}
+		for i < j && !cond(s[j]) {
+			j--
+		}
+		if i < j {
+			s[i], s[j] = s[j], s[i]
+			i++
+			j--
+		}
+	}
+}
+
+// Time: O(n)
+// Space: O(n)
+func ReverseLettersThenSpecialCharactersInAString(s string) string {
+	b := []byte(s)
+	reverseRange(b, isLetter)
+	reverseRange(b, isSpecial)
+	return string(b)
 }

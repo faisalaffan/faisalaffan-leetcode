@@ -6,11 +6,27 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(SameTree())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func SameTree() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(h) where h is tree height
+func IsSameTree(p *TreeNode, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil || p.Val != q.Val {
+		return false
+	}
+	return IsSameTree(p.Left, q.Left) && IsSameTree(p.Right, q.Right)
+}
+
+func main() {
+	t1 := &TreeNode{1, &TreeNode{2, nil, nil}, &TreeNode{3, nil, nil}}
+	t2 := &TreeNode{1, &TreeNode{2, nil, nil}, &TreeNode{3, nil, nil}}
+	fmt.Println(IsSameTree(t1, t2))
+	t3 := &TreeNode{1, &TreeNode{2, nil, nil}, nil}
+	fmt.Println(IsSameTree(t1, t3))
 }

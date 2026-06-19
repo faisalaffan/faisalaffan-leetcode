@@ -7,10 +7,22 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumMovesToConvertString())
+	fmt.Println(MinimumMovesToConvertString("XXX"))       // 1
+	fmt.Println(MinimumMovesToConvertString("XXOX"))      // 2
+	fmt.Println(MinimumMovesToConvertString("OOOO"))      // 0
 }
 
-func MinimumMovesToConvertString() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func MinimumMovesToConvertString(s string) int {
+	moves := 0
+	i := 0
+	for i < len(s) {
+		if s[i] == 'X' {
+			moves++
+			i += 3
+		} else {
+			i++
+		}
+	}
+	return moves
 }

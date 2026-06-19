@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(DuplicateEmails())
+func DuplicateEmails() string {
+	return "SELECT email FROM Person GROUP BY email HAVING COUNT(email) > 1"
 }
 
-func DuplicateEmails() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(DuplicateEmails())
 }

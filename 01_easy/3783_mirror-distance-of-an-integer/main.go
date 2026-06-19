@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MirrorDistanceOfAnInteger())
+	fmt.Println(MirrorDistanceOfAnInteger(25))
+	fmt.Println(MirrorDistanceOfAnInteger(10))
+	fmt.Println(MirrorDistanceOfAnInteger(7))
 }
 
-func MirrorDistanceOfAnInteger() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(1)
+func MirrorDistanceOfAnInteger(n int) int {
+	rev := 0
+	for x := n; x > 0; x /= 10 {
+		rev = rev*10 + x%10
+	}
+	if n > rev {
+		return n - rev
+	}
+	return rev - n
 }

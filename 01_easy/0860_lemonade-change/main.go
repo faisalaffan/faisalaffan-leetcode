@@ -7,10 +7,35 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LemonadeChange())
+	fmt.Println(lemonadeChange([]int{5, 5, 5, 10, 20})) // true
+	fmt.Println(lemonadeChange([]int{5, 5, 10, 10, 20})) // false
+	fmt.Println(lemonadeChange([]int{5, 5, 5, 10, 5, 20, 5, 10, 5, 20})) // true
 }
 
-func LemonadeChange() any {
-	// TODO: implement
-	return nil
+// lemonadeChange checks if we can provide correct change for each customer.
+// Time: O(n). Space: O(1).
+func lemonadeChange(bills []int) bool {
+	fives, tens := 0, 0
+	for _, bill := range bills {
+		switch bill {
+		case 5:
+			fives++
+		case 10:
+			if fives == 0 {
+				return false
+			}
+			fives--
+			tens++
+		case 20:
+			if tens > 0 && fives > 0 {
+				tens--
+				fives--
+			} else if fives >= 3 {
+				fives -= 3
+			} else {
+				return false
+			}
+		}
+	}
+	return true
 }

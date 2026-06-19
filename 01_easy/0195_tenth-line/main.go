@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(TenthLine())
+func TenthLine() string {
+	return "sed -n '10p' file.txt"
 }
 
-func TenthLine() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(TenthLine())
 }

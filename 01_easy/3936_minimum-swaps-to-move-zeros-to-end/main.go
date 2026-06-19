@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumSwapsToMoveZerosToEnd())
+	fmt.Println(MinimumSwapsToMoveZerosToEnd([]int{0, 1, 0, 3, 12}))
+	fmt.Println(MinimumSwapsToMoveZerosToEnd([]int{0, 1, 0, 2}))
+	fmt.Println(MinimumSwapsToMoveZerosToEnd([]int{1, 2, 0}))
 }
 
-func MinimumSwapsToMoveZerosToEnd() any {
-	// TODO: implement
-	return nil
+// Time: O(n)
+// Space: O(1)
+func MinimumSwapsToMoveZerosToEnd(nums []int) int {
+	zeroCount := 0
+	for _, v := range nums {
+		if v == 0 {
+			zeroCount++
+		}
+	}
+	boundary := len(nums) - zeroCount
+	swaps := 0
+	for i := 0; i < boundary; i++ {
+		if nums[i] == 0 {
+			swaps++
+		}
+	}
+	return swaps
 }

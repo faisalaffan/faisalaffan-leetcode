@@ -7,10 +7,18 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindIndicesOfStableMountains())
+	fmt.Println(FindIndicesOfStableMountains([]int{1, 2, 3, 4, 5}, 2))
+	fmt.Println(FindIndicesOfStableMountains([]int{10, 1, 10, 1, 10}, 3))
 }
 
-func FindIndicesOfStableMountains() any {
-	// TODO: implement
-	return nil
+// FindIndicesOfStableMountains returns indices of stable mountains (where the previous mountain's height > threshold).
+// Time: O(n). Space: O(n).
+func FindIndicesOfStableMountains(height []int, threshold int) []int {
+	result := []int{}
+	for i := 1; i < len(height); i++ {
+		if height[i-1] > threshold {
+			result = append(result, i)
+		}
+	}
+	return result
 }

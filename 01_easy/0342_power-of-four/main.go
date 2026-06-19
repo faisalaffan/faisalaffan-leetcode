@@ -6,11 +6,13 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PowerOfFour())
+// Time: O(1), Space: O(1)
+func PowerOfFour(n int) bool {
+	return n > 0 && n&(n-1) == 0 && (n-1)%3 == 0
 }
 
-func PowerOfFour() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(PowerOfFour(16))
+	fmt.Println(PowerOfFour(5))
+	fmt.Println(PowerOfFour(1))
 }

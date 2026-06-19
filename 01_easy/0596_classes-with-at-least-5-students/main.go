@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ClassesWithAtLeastFiveStudents())
+func ClassesWithAtLeastFiveStudents() string {
+	return "SELECT class FROM Courses GROUP BY class HAVING COUNT(student) >= 5"
 }
 
-func ClassesWithAtLeastFiveStudents() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(ClassesWithAtLeastFiveStudents())
 }

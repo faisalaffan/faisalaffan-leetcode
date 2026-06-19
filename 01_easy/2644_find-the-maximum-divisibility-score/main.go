@@ -3,14 +3,29 @@ package main
 // LeetCode #2644: Find the Maximum Divisibility Score
 // https://leetcode.com/problems/find-the-maximum-divisibility-score/
 // Difficulty: Easy
+// Time: O(|nums| * |divisors|) | Space: O(1)
 
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheMaximumDivisibilityScore())
+	fmt.Println(FindTheMaximumDivisibilityScore([]int{2, 3, 4, 5, 6}, []int{2, 3, 4}))
+	fmt.Println(FindTheMaximumDivisibilityScore([]int{4, 7, 9, 3, 9}, []int{5, 2, 3}))
 }
 
-func FindTheMaximumDivisibilityScore() any {
-	// TODO: implement
-	return nil
+func FindTheMaximumDivisibilityScore(nums []int, divisors []int) int {
+	ans := divisors[0]
+	maxScore := 0
+	for _, d := range divisors {
+		score := 0
+		for _, n := range nums {
+			if n%d == 0 {
+				score++
+			}
+		}
+		if score > maxScore || (score == maxScore && d < ans) {
+			maxScore = score
+			ans = d
+		}
+	}
+	return ans
 }

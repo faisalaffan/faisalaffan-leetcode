@@ -6,11 +6,41 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(GuessNumberHigherOrLower())
+var pick int
+
+func guess(num int) int {
+	if num == pick {
+		return 0
+	} else if num < pick {
+		return 1
+	}
+	return -1
 }
 
-func GuessNumberHigherOrLower() any {
-	// TODO: implement
-	return nil
+// Time: O(log n), Space: O(1)
+func GuessNumberHigherOrLower(n int) int {
+	lo, hi := 1, n
+	for lo <= hi {
+		mid := lo + (hi-lo)/2
+		switch guess(mid) {
+		case 0:
+			return mid
+		case 1:
+			lo = mid + 1
+		case -1:
+			hi = mid - 1
+		}
+	}
+	return -1
+}
+
+func main() {
+	pick = 6
+	fmt.Println(GuessNumberHigherOrLower(10))
+
+	pick = 1
+	fmt.Println(GuessNumberHigherOrLower(1))
+
+	pick = 1
+	fmt.Println(GuessNumberHigherOrLower(2))
 }

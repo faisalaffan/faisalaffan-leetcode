@@ -4,13 +4,20 @@ package main
 // https://leetcode.com/problems/goal-parser-interpretation/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func main() {
-	fmt.Println(GoalParserInterpretation())
+// Time: O(n), Space: O(n)
+func Interpret(command string) string {
+	command = strings.ReplaceAll(command, "()", "o")
+	command = strings.ReplaceAll(command, "(al)", "al")
+	return command
 }
 
-func GoalParserInterpretation() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(Interpret("G()(al)"))
+	fmt.Println(Interpret("G()()()()(al)"))
+	fmt.Println(Interpret("(al)G(al)()()G"))
 }

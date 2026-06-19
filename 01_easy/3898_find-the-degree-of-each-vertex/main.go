@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheDegreeOfEachVertex())
+	fmt.Println(FindTheDegreeOfEachVertex([][]int{{0, 1, 1}, {1, 0, 1}, {1, 1, 0}}))
+	fmt.Println(FindTheDegreeOfEachVertex([][]int{{0, 1, 0}, {1, 0, 0}, {0, 0, 0}}))
+	fmt.Println(FindTheDegreeOfEachVertex([][]int{{0}}))
 }
 
-func FindTheDegreeOfEachVertex() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2)
+// Space: O(n)
+func FindTheDegreeOfEachVertex(matrix [][]int) []int {
+	ans := make([]int, len(matrix))
+	for i, row := range matrix {
+		sum := 0
+		for _, v := range row {
+			sum += v
+		}
+		ans[i] = sum
+	}
+	return ans
 }

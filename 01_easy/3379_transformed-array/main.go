@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(TransformedArray())
+	fmt.Println(TransformedArray([]int{3, -2, 1, 1}))
+	fmt.Println(TransformedArray([]int{-1, 4, -1}))
 }
 
-func TransformedArray() any {
-	// TODO: implement
-	return nil
+// TransformedArray constructs a new array where result[i] = nums[(i + nums[i]) mod n], handling negative wrap-around.
+// Time: O(n). Space: O(n).
+func TransformedArray(nums []int) []int {
+	n := len(nums)
+	result := make([]int, n)
+	for i, val := range nums {
+		idx := (i + val) % n
+		if idx < 0 {
+			idx += n
+		}
+		result[i] = nums[idx]
+	}
+	return result
 }

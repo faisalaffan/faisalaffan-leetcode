@@ -6,11 +6,42 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaximumDepthOfNAryTree())
+// Node represents an N-ary tree node.
+type Node struct {
+	Val      int
+	Children []*Node
 }
 
-func MaximumDepthOfNAryTree() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(h)
+func MaximumDepthOfNAryTree(root *Node) int {
+	if root == nil {
+		return 0
+	}
+	maxDepth := 0
+	for _, child := range root.Children {
+		if depth := MaximumDepthOfNAryTree(child); depth > maxDepth {
+			maxDepth = depth
+		}
+	}
+	return maxDepth + 1
+}
+
+func main() {
+	// Test: [1,null,3,2,4,null,5,6]
+	root1 := &Node{
+		Val: 1,
+		Children: []*Node{
+			{Val: 3, Children: []*Node{
+				{Val: 5},
+				{Val: 6},
+			}},
+			{Val: 2},
+			{Val: 4},
+		},
+	}
+	fmt.Println(MaximumDepthOfNAryTree(root1))
+
+	// Test: single node
+	root2 := &Node{Val: 1}
+	fmt.Println(MaximumDepthOfNAryTree(root2))
 }

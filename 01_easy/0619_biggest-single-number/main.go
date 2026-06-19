@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(BiggestSingleNumber())
+func BiggestSingleNumber() string {
+	return "SELECT MAX(num) AS num FROM (SELECT num FROM MyNumbers GROUP BY num HAVING COUNT(num) = 1) AS single_numbers"
 }
 
-func BiggestSingleNumber() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(BiggestSingleNumber())
 }

@@ -6,11 +6,13 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(NimGame())
+// Time: O(1) | Space: O(1)
+func CanWinNim(n int) bool {
+	return n%4 != 0
 }
 
-func NimGame() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CanWinNim(4))
+	fmt.Println(CanWinNim(1))
+	fmt.Println(CanWinNim(2))
 }

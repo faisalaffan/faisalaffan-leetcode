@@ -6,11 +6,20 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ClimbingStairs())
+// Time: O(n) | Space: O(1)
+func ClimbStairs(n int) int {
+	if n <= 2 {
+		return n
+	}
+	a, b := 1, 2
+	for i := 3; i <= n; i++ {
+		a, b = b, a+b
+	}
+	return b
 }
 
-func ClimbingStairs() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(ClimbStairs(2))
+	fmt.Println(ClimbStairs(3))
+	fmt.Println(ClimbStairs(4))
 }

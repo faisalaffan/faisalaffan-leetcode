@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FindCustomerReferee())
+func FindCustomerReferee() string {
+	return "SELECT name FROM Customer WHERE referee_id != 2 OR referee_id IS NULL"
 }
 
-func FindCustomerReferee() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(FindCustomerReferee())
 }

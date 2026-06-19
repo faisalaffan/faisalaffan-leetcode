@@ -6,11 +6,27 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaximumDepthOfBinaryTree())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func MaximumDepthOfBinaryTree() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(h)
+func MaxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	left := MaxDepth(root.Left)
+	right := MaxDepth(root.Right)
+	if left > right {
+		return left + 1
+	}
+	return right + 1
+}
+
+func main() {
+	root := &TreeNode{3, &TreeNode{9, nil, nil}, &TreeNode{20, &TreeNode{15, nil, nil}, &TreeNode{7, nil, nil}}}
+	fmt.Println(MaxDepth(root))
+	fmt.Println(MaxDepth(nil))
 }

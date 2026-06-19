@@ -6,11 +6,25 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ValidPerfectSquare())
+// Time: O(log n), Space: O(1)
+func ValidPerfectSquare(num int) bool {
+	lo, hi := 1, num
+	for lo <= hi {
+		mid := lo + (hi-lo)/2
+		sq := mid * mid
+		if sq == num {
+			return true
+		} else if sq < num {
+			lo = mid + 1
+		} else {
+			hi = mid - 1
+		}
+	}
+	return false
 }
 
-func ValidPerfectSquare() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(ValidPerfectSquare(16))
+	fmt.Println(ValidPerfectSquare(14))
+	fmt.Println(ValidPerfectSquare(1))
 }

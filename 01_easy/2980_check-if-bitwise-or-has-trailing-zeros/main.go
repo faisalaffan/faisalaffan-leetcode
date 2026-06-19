@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CheckIfBitwiseOrHasTrailingZeros())
+	// LeetCode name: hasTrailingZeros
+	fmt.Println(CheckIfBitwiseOrHasTrailingZeros([]int{1, 2, 3, 4, 5})) // true
+	fmt.Println(CheckIfBitwiseOrHasTrailingZeros([]int{2, 4, 8, 16}))   // true
+	fmt.Println(CheckIfBitwiseOrHasTrailingZeros([]int{1, 3, 5, 7, 9})) // false
 }
 
-func CheckIfBitwiseOrHasTrailingZeros() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: hasTrailingZeros
+func CheckIfBitwiseOrHasTrailingZeros(nums []int) bool {
+	evenCount := 0
+	for _, num := range nums {
+		if num%2 == 0 {
+			evenCount++
+			if evenCount >= 2 {
+				return true
+			}
+		}
+	}
+	return false
 }

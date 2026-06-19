@@ -3,14 +3,26 @@ package main
 // LeetCode #2729: Check if The Number is Fascinating
 // https://leetcode.com/problems/check-if-the-number-is-fascinating/
 // Difficulty: Easy
+// Time: O(n) | Space: O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strconv"
+)
 
 func main() {
-	fmt.Println(CheckIfTheNumberIsFascinating())
+	fmt.Println(CheckIfTheNumberIsFascinating(192))
+	fmt.Println(CheckIfTheNumberIsFascinating(100))
 }
 
-func CheckIfTheNumberIsFascinating() any {
-	// TODO: implement
-	return nil
+func CheckIfTheNumberIsFascinating(n int) bool {
+	concat := strconv.Itoa(n) + strconv.Itoa(n*2) + strconv.Itoa(n*3)
+	if len(concat) != 9 {
+		return false
+	}
+
+	digits := []byte(concat)
+	sort.Slice(digits, func(i, j int) bool { return digits[i] < digits[j] })
+	return string(digits) == "123456789"
 }

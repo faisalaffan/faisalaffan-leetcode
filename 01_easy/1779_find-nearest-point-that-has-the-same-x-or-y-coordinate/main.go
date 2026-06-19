@@ -6,11 +6,31 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FindNearestPointThatHasTheSameXOrYCoordinate())
+// Time: O(n), Space: O(1)
+func NearestValidPoint(x int, y int, points [][]int) int {
+	minDist := -1
+	bestIdx := -1
+	for i, p := range points {
+		if p[0] == x || p[1] == y {
+			dist := abs(p[0]-x) + abs(p[1]-y)
+			if minDist == -1 || dist < minDist {
+				minDist = dist
+				bestIdx = i
+			}
+		}
+	}
+	return bestIdx
 }
 
-func FindNearestPointThatHasTheSameXOrYCoordinate() any {
-	// TODO: implement
-	return nil
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
+}
+
+func main() {
+	fmt.Println(NearestValidPoint(3, 4, [][]int{{1, 2}, {3, 1}, {2, 4}, {2, 3}, {4, 4}}))
+	fmt.Println(NearestValidPoint(3, 4, [][]int{{3, 4}}))
+	fmt.Println(NearestValidPoint(3, 4, [][]int{{2, 3}}))
 }

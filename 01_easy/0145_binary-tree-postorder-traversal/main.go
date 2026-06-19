@@ -6,11 +6,30 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(BinaryTreePostorderTraversal())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func BinaryTreePostorderTraversal() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+func PostorderTraversal(root *TreeNode) []int {
+	var res []int
+	var dfs func(*TreeNode)
+	dfs = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		dfs(node.Left)
+		dfs(node.Right)
+		res = append(res, node.Val)
+	}
+	dfs(root)
+	return res
+}
+
+func main() {
+	root := &TreeNode{1, nil, &TreeNode{2, &TreeNode{3, nil, nil}, nil}}
+	fmt.Println(PostorderTraversal(root))
+	fmt.Println(PostorderTraversal(nil))
 }

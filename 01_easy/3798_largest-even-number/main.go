@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LargestEvenNumber())
+	fmt.Println(LargestEvenNumber("1112"))
+	fmt.Println(LargestEvenNumber("221"))
+	fmt.Println(LargestEvenNumber("1"))
 }
 
-func LargestEvenNumber() any {
-	// TODO: implement
-	return nil
+// Time: O(n)
+// Space: O(n)
+func LargestEvenNumber(s string) string {
+	i := len(s)
+	for i > 0 && s[i-1] == '1' {
+		i--
+	}
+	return s[:i]
 }

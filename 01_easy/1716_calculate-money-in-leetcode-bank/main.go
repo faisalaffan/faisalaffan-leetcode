@@ -6,11 +6,19 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CalculateMoneyInLeetcodeBank())
+// Time: O(1), Space: O(1)
+func TotalMoney(n int) int {
+	weeks := n / 7
+	days := n % 7
+	// Sum of arithmetic progression: first week = 28, each week adds 7
+	total := weeks*28 + 7*weeks*(weeks-1)/2
+	// Remaining days
+	total += days*(weeks+1) + days*(days-1)/2
+	return total
 }
 
-func CalculateMoneyInLeetcodeBank() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(TotalMoney(4))
+	fmt.Println(TotalMoney(10))
+	fmt.Println(TotalMoney(20))
 }

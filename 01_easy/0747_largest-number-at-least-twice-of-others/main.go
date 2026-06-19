@@ -7,10 +7,24 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LargestNumberAtLeastTwiceOfOthers())
+	fmt.Println(dominantIndex([]int{3, 6, 1, 0}))   // 1
+	fmt.Println(dominantIndex([]int{1, 2, 3, 4}))    // -1
+	fmt.Println(dominantIndex([]int{1}))              // 0
 }
 
-func LargestNumberAtLeastTwiceOfOthers() any {
-	// TODO: implement
-	return nil
+// dominantIndex returns the index of the largest element if it is at least twice as large as all others.
+// Time: O(n). Space: O(1).
+func dominantIndex(nums []int) int {
+	maxIdx := 0
+	for i, v := range nums {
+		if v > nums[maxIdx] {
+			maxIdx = i
+		}
+	}
+	for i, v := range nums {
+		if i != maxIdx && v*2 > nums[maxIdx] {
+			return -1
+		}
+	}
+	return maxIdx
 }

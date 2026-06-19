@@ -6,11 +6,19 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(LongestUncommonSubsequenceI())
+// Time: O(1), Space: O(1)
+func LongestUncommonSubsequenceI(a, b string) int {
+	if a == b {
+		return -1
+	}
+	if len(a) > len(b) {
+		return len(a)
+	}
+	return len(b)
 }
 
-func LongestUncommonSubsequenceI() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(LongestUncommonSubsequenceI("aba", "cdc"))
+	fmt.Println(LongestUncommonSubsequenceI("aaa", "bbb"))
+	fmt.Println(LongestUncommonSubsequenceI("aaa", "aaa"))
 }

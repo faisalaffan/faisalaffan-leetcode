@@ -4,13 +4,30 @@ package main
 // https://leetcode.com/problems/capitalize-the-title/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
 
 func main() {
-	fmt.Println(CapitalizeTheTitle())
+	fmt.Println(CapitalizeTheTitle("capiTalIze tHe titLe")) // "Capitalize The Title"
+	fmt.Println(CapitalizeTheTitle("First leTTER of EACH Word")) // "First Letter of Each Word"
+	fmt.Println(CapitalizeTheTitle("i lOve leetcode"))           // "i Love Leetcode"
 }
 
-func CapitalizeTheTitle() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func CapitalizeTheTitle(title string) string {
+	words := strings.Fields(title)
+	for i, w := range words {
+		lower := strings.ToLower(w)
+		if len(lower) > 2 {
+			runes := []rune(lower)
+			runes[0] = unicode.ToUpper(runes[0])
+			words[i] = string(runes)
+		} else {
+			words[i] = lower
+		}
+	}
+	return strings.Join(words, " ")
 }

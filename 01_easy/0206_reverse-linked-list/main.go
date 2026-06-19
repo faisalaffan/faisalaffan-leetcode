@@ -6,11 +6,35 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ReverseLinkedList())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func ReverseLinkedList() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+func ReverseList(head *ListNode) *ListNode {
+	var prev *ListNode
+	curr := head
+	for curr != nil {
+		next := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = next
+	}
+	return prev
+}
+
+func printList(head *ListNode) {
+	for head != nil {
+		fmt.Print(head.Val, " ")
+		head = head.Next
+	}
+	fmt.Println()
+}
+
+func main() {
+	l1 := &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{5, nil}}}}}
+	printList(ReverseList(l1))
+	l2 := &ListNode{1, &ListNode{2, nil}}
+	printList(ReverseList(l2))
 }

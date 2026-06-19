@@ -7,10 +7,33 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SetMismatch())
+	fmt.Println(findErrorNums([]int{1, 2, 2, 4})) // [2, 3]
+	fmt.Println(findErrorNums([]int{1, 1}))        // [1, 2]
+	fmt.Println(findErrorNums([]int{2, 2}))        // [2, 1]
 }
 
-func SetMismatch() any {
-	// TODO: implement
-	return nil
+// findErrorNums finds the duplicated and missing number in the set.
+// Time: O(n). Space: O(1).
+func findErrorNums(nums []int) []int {
+	n := len(nums)
+	sum := 0
+	sumSq := 0
+	expectedSum := n * (n + 1) / 2
+	expectedSumSq := n * (n + 1) * (2*n + 1) / 6
+
+	for _, v := range nums {
+		sum += v
+		sumSq += v * v
+	}
+
+	// diff = duplicate - missing
+	diff := sum - expectedSum
+	// sqDiff = duplicate^2 - missing^2
+	sqDiff := sumSq - expectedSumSq
+	// duplicate + missing = sqDiff / diff
+	plus := sqDiff / diff
+
+	dup := (diff + plus) / 2
+	miss := (plus - diff) / 2
+	return []int{dup, miss}
 }

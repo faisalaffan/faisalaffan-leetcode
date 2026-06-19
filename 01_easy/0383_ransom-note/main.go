@@ -6,11 +6,23 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(RansomNote())
+// Time: O(n+m), Space: O(1)
+func RansomNote(ransomNote, magazine string) bool {
+	count := [26]int{}
+	for _, c := range magazine {
+		count[c-'a']++
+	}
+	for _, c := range ransomNote {
+		count[c-'a']--
+		if count[c-'a'] < 0 {
+			return false
+		}
+	}
+	return true
 }
 
-func RansomNote() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(RansomNote("a", "b"))
+	fmt.Println(RansomNote("aa", "ab"))
+	fmt.Println(RansomNote("aa", "aab"))
 }

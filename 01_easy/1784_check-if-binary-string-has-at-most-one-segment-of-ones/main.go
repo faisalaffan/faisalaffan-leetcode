@@ -4,13 +4,18 @@ package main
 // https://leetcode.com/problems/check-if-binary-string-has-at-most-one-segment-of-ones/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func main() {
-	fmt.Println(CheckIfBinaryStringHasAtMostOneSegmentOfOnes())
+// Time: O(n), Space: O(1)
+func CheckOnesSegment(s string) bool {
+	return !strings.Contains(s, "01")
 }
 
-func CheckIfBinaryStringHasAtMostOneSegmentOfOnes() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CheckOnesSegment("1001"))
+	fmt.Println(CheckOnesSegment("110"))
+	fmt.Println(CheckOnesSegment("1"))
 }

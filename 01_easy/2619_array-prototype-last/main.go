@@ -3,14 +3,19 @@ package main
 // LeetCode #2619: Array Prototype Last
 // https://leetcode.com/problems/array-prototype-last/
 // Difficulty: Easy
+// Time: O(1) | Space: O(1)
+// Note: JavaScript problem, adapted to Go. Returns last element of a slice.
 
 import "fmt"
 
 func main() {
-	fmt.Println(ArrayPrototypeLast())
+	fmt.Println(arrayPrototypeLast([]int{1, 2, 3}))
+	fmt.Println(arrayPrototypeLast([]int{}))
 }
 
-func ArrayPrototypeLast() any {
-	// TODO: implement
-	return nil
+func arrayPrototypeLast(arr []int) int {
+	if len(arr) == 0 {
+		return -1
+	}
+	return arr[len(arr)-1]
 }

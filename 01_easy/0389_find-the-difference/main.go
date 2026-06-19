@@ -6,11 +6,20 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FindTheDifference())
+// Time: O(n), Space: O(1)
+func FindTheDifference(s, t string) byte {
+	var diff byte
+	for i := 0; i < len(s); i++ {
+		diff ^= s[i]
+	}
+	for i := 0; i < len(t); i++ {
+		diff ^= t[i]
+	}
+	return diff
 }
 
-func FindTheDifference() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Printf("%c\n", FindTheDifference("abcd", "abcde"))
+	fmt.Printf("%c\n", FindTheDifference("", "y"))
+	fmt.Printf("%c\n", FindTheDifference("a", "aa"))
 }

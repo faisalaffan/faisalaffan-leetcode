@@ -4,13 +4,32 @@ package main
 // https://leetcode.com/problems/summary-ranges/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func main() {
-	fmt.Println(SummaryRanges())
+// Time: O(n) | Space: O(1) excluding output
+func SummaryRanges(nums []int) []string {
+	var res []string
+	i := 0
+	for i < len(nums) {
+		start := nums[i]
+		for i+1 < len(nums) && nums[i+1] == nums[i]+1 {
+			i++
+		}
+		if start == nums[i] {
+			res = append(res, strconv.Itoa(start))
+		} else {
+			res = append(res, strconv.Itoa(start)+"->"+strconv.Itoa(nums[i]))
+		}
+		i++
+	}
+	return res
 }
 
-func SummaryRanges() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(SummaryRanges([]int{0, 1, 2, 4, 5, 7}))
+	fmt.Println(SummaryRanges([]int{0, 2, 3, 4, 6, 8, 9}))
+	fmt.Println(SummaryRanges([]int{}))
 }

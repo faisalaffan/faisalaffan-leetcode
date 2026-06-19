@@ -6,11 +6,12 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CombineTwoTables())
+// Time: O(n) | Space: O(1)
+// Write your MySQL query statement below
+func CombineTwoTables() string {
+	return "SELECT Person.firstName, Person.lastName, Address.city, Address.state FROM Person LEFT JOIN Address ON Person.personId = Address.personId"
 }
 
-func CombineTwoTables() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CombineTwoTables())
 }

@@ -7,10 +7,24 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindPivotIndex())
+	fmt.Println(pivotIndex([]int{1, 7, 3, 6, 5, 6}))   // 3
+	fmt.Println(pivotIndex([]int{1, 2, 3}))             // -1
+	fmt.Println(pivotIndex([]int{2, 1, -1}))            // 0
 }
 
-func FindPivotIndex() any {
-	// TODO: implement
-	return nil
+// pivotIndex finds the index where sum of left elements equals sum of right elements.
+// Time: O(n). Space: O(1).
+func pivotIndex(nums []int) int {
+	total := 0
+	for _, v := range nums {
+		total += v
+	}
+	leftSum := 0
+	for i, v := range nums {
+		if leftSum == total-leftSum-v {
+			return i
+		}
+		leftSum += v
+	}
+	return -1
 }

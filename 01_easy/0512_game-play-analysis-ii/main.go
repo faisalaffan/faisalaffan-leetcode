@@ -6,11 +6,11 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(GamePlayAnalysisIi())
+// Time: O(n), Space: O(n)
+func GamePlayAnalysisIi() string {
+	return "SELECT player_id, device_id FROM Activity WHERE (player_id, event_date) IN (SELECT player_id, MIN(event_date) FROM Activity GROUP BY player_id)"
 }
 
-func GamePlayAnalysisIi() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(GamePlayAnalysisIi())
 }

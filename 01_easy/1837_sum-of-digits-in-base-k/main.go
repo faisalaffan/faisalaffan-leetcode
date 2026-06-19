@@ -6,11 +6,18 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(SumOfDigitsInBaseK())
+// Time: O(log_k(n)), Space: O(1)
+func SumBase(n int, k int) int {
+	sum := 0
+	for n > 0 {
+		sum += n % k
+		n /= k
+	}
+	return sum
 }
 
-func SumOfDigitsInBaseK() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(SumBase(34, 6))
+	fmt.Println(SumBase(10, 10))
+	fmt.Println(SumBase(42, 2))
 }

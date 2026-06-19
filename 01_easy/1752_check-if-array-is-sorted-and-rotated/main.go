@@ -6,11 +6,19 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CheckIfArrayIsSortedAndRotated())
+// Time: O(n), Space: O(1)
+func Check(nums []int) bool {
+	drops := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] > nums[(i+1)%len(nums)] {
+			drops++
+		}
+	}
+	return drops <= 1
 }
 
-func CheckIfArrayIsSortedAndRotated() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(Check([]int{3, 4, 5, 1, 2}))
+	fmt.Println(Check([]int{2, 1, 3, 4}))
+	fmt.Println(Check([]int{1, 2, 3}))
 }

@@ -6,11 +6,22 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FirstUniqueCharacterInAString())
+// Time: O(n), Space: O(1)
+func FirstUniqueCharacterInAString(s string) int {
+	count := [26]int{}
+	for _, c := range s {
+		count[c-'a']++
+	}
+	for i, c := range s {
+		if count[c-'a'] == 1 {
+			return i
+		}
+	}
+	return -1
 }
 
-func FirstUniqueCharacterInAString() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(FirstUniqueCharacterInAString("leetcode"))
+	fmt.Println(FirstUniqueCharacterInAString("loveleetcode"))
+	fmt.Println(FirstUniqueCharacterInAString("aabb"))
 }

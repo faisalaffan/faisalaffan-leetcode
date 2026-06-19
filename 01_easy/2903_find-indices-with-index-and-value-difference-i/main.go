@@ -7,10 +7,29 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindIndicesWithIndexAndValueDifferenceI())
+	// LeetCode name: findIndices
+	fmt.Println(FindIndicesWithIndexAndValueDifferenceI([]int{5, 1, 4, 1}, 2, 4)) // [0,3]
+	fmt.Println(FindIndicesWithIndexAndValueDifferenceI([]int{2, 1}, 0, 0))       // [0,0]
+	fmt.Println(FindIndicesWithIndexAndValueDifferenceI([]int{1, 2, 3}, 2, 4))    // [-1,-1]
 }
 
-func FindIndicesWithIndexAndValueDifferenceI() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2) | Space: O(1)
+// LeetCode submission name: findIndices
+func FindIndicesWithIndexAndValueDifferenceI(nums []int, indexDifference int, valueDifference int) []int {
+	n := len(nums)
+	for i := 0; i < n; i++ {
+		for j := i; j < n; j++ {
+			if abs(i-j) >= indexDifference && abs(nums[i]-nums[j]) >= valueDifference {
+				return []int{i, j}
+			}
+		}
+	}
+	return []int{-1, -1}
+}
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }

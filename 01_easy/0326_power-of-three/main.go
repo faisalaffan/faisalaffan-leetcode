@@ -6,11 +6,19 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PowerOfThree())
+// Time: O(log n) | Space: O(1)
+func IsPowerOfThree(n int) bool {
+	if n < 1 {
+		return false
+	}
+	for n%3 == 0 {
+		n /= 3
+	}
+	return n == 1
 }
 
-func PowerOfThree() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(IsPowerOfThree(27))
+	fmt.Println(IsPowerOfThree(0))
+	fmt.Println(IsPowerOfThree(-1))
 }

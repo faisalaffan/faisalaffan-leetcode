@@ -2,15 +2,13 @@ package main
 
 // LeetCode #1303: Find the Team Size
 // https://leetcode.com/problems/find-the-team-size/
-// Difficulty: Easy [Paid]
+// Difficulty: Easy [Paid] (SQL)
+// Time: O(n) | Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheTeamSize())
+	fmt.Println("SQL: SELECT employee_id, COUNT(team_id) OVER (PARTITION BY team_id) AS team_size FROM Employee")
 }
 
-func FindTheTeamSize() any {
-	// TODO: implement
-	return nil
-}
+// This is a SQL problem. The answer is the SQL query above.

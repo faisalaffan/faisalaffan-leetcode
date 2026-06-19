@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindChampionI())
+	// LeetCode name: findChampion
+	fmt.Println(FindChampionI([][]int{{0, 1}, {0, 0}}))          // 0
+	fmt.Println(FindChampionI([][]int{{0, 0, 1}, {1, 0, 1}, {0, 0, 0}})) // 1
 }
 
-func FindChampionI() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2) | Space: O(1)
+// LeetCode submission name: findChampion
+func FindChampionI(grid [][]int) int {
+	n := len(grid)
+	for i := 0; i < n; i++ {
+		isChampion := true
+		for j := 0; j < n; j++ {
+			if i != j && grid[i][j] != 1 {
+				isChampion = false
+				break
+			}
+		}
+		if isChampion {
+			return i
+		}
+	}
+	return -1
 }

@@ -6,11 +6,26 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(RangeSumQueryImmutable())
+type NumArray struct {
+	prefix []int
 }
 
-func RangeSumQueryImmutable() any {
-	// TODO: implement
-	return nil
+// Time: O(n) for init, O(1) per query | Space: O(n)
+func Constructor(nums []int) NumArray {
+	prefix := make([]int, len(nums)+1)
+	for i, v := range nums {
+		prefix[i+1] = prefix[i] + v
+	}
+	return NumArray{prefix: prefix}
+}
+
+func (na *NumArray) SumRange(left int, right int) int {
+	return na.prefix[right+1] - na.prefix[left]
+}
+
+func main() {
+	na := Constructor([]int{-2, 0, 3, -5, 2, -1})
+	fmt.Println(na.SumRange(0, 2))
+	fmt.Println(na.SumRange(2, 5))
+	fmt.Println(na.SumRange(0, 5))
 }

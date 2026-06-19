@@ -6,11 +6,26 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(HappyNumber())
+// Time: O(log n) | Space: O(1)
+func IsHappy(n int) bool {
+	next := func(x int) int {
+		sum := 0
+		for x > 0 {
+			d := x % 10
+			sum += d * d
+			x /= 10
+		}
+		return sum
+	}
+	slow, fast := n, next(n)
+	for fast != 1 && slow != fast {
+		slow = next(slow)
+		fast = next(next(fast))
+	}
+	return fast == 1
 }
 
-func HappyNumber() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(IsHappy(19))
+	fmt.Println(IsHappy(2))
 }

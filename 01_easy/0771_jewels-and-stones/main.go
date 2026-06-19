@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(JewelsAndStones())
+	fmt.Println(numJewelsInStones("aA", "aAAbbbb")) // 3
+	fmt.Println(numJewelsInStones("z", "ZZ"))       // 0
+	fmt.Println(numJewelsInStones("", "abc"))       // 0
 }
 
-func JewelsAndStones() any {
-	// TODO: implement
-	return nil
+// numJewelsInStones counts how many stones are also jewels.
+// Time: O(j + s). Space: O(j).
+func numJewelsInStones(jewels string, stones string) int {
+	jSet := make(map[rune]bool)
+	for _, c := range jewels {
+		jSet[c] = true
+	}
+	count := 0
+	for _, c := range stones {
+		if jSet[c] {
+			count++
+		}
+	}
+	return count
 }

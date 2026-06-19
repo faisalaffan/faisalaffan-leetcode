@@ -7,10 +7,15 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(BuildArrayFromPermutation())
+	fmt.Println(BuildArrayFromPermutation([]int{0, 2, 1, 5, 3, 4}))    // [0,1,2,4,5,3]
+	fmt.Println(BuildArrayFromPermutation([]int{5, 0, 1, 2, 3, 4}))    // [4,5,0,1,2,3]
 }
 
-func BuildArrayFromPermutation() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func BuildArrayFromPermutation(nums []int) []int {
+	ans := make([]int, len(nums))
+	for i, v := range nums {
+		ans[i] = nums[v]
+	}
+	return ans
 }

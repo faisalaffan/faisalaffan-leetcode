@@ -7,10 +7,31 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CheckIfStringIsDecomposableIntoValueEqualSubstrings())
+	fmt.Println(CheckIfStringIsDecomposableIntoValueEqualSubstrings("000111000"))   // false
+	fmt.Println(CheckIfStringIsDecomposableIntoValueEqualSubstrings("00011111222"))  // true
+	fmt.Println(CheckIfStringIsDecomposableIntoValueEqualSubstrings("011100022233")) // false
 }
 
-func CheckIfStringIsDecomposableIntoValueEqualSubstrings() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func CheckIfStringIsDecomposableIntoValueEqualSubstrings(s string) bool {
+	hasGroupOfTwo := false
+	i := 0
+	for i < len(s) {
+		j := i
+		for j < len(s) && s[j] == s[i] {
+			j++
+		}
+		count := j - i
+		if count%3 == 1 {
+			return false
+		}
+		if count%3 == 2 {
+			if hasGroupOfTwo {
+				return false
+			}
+			hasGroupOfTwo = true
+		}
+		i = j
+	}
+	return hasGroupOfTwo
 }

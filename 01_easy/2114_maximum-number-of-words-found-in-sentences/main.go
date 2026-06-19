@@ -4,13 +4,24 @@ package main
 // https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	fmt.Println(MaximumNumberOfWordsFoundInSentences())
+	fmt.Println(MaximumNumberOfWordsFoundInSentences([]string{"alice and bob love leetcode", "i think so too", "this is great thanks very much"})) // 6
+	fmt.Println(MaximumNumberOfWordsFoundInSentences([]string{"please wait", "continue to fight", "continue to win"}))                              // 3
 }
 
-func MaximumNumberOfWordsFoundInSentences() any {
-	// TODO: implement
-	return nil
+// Time: O(n * m), Space: O(1)
+func MaximumNumberOfWordsFoundInSentences(sentences []string) int {
+	maxWords := 0
+	for _, s := range sentences {
+		count := strings.Count(s, " ") + 1
+		if count > maxWords {
+			maxWords = count
+		}
+	}
+	return maxWords
 }

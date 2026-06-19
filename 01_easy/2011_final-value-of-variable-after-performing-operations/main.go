@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FinalValueOfVariableAfterPerformingOperations())
+	fmt.Println(FinalValueOfVariableAfterPerformingOperations([]string{"--X", "X++", "X++"}))     // 1
+	fmt.Println(FinalValueOfVariableAfterPerformingOperations([]string{"++X", "++X", "X++"}))     // 3
+	fmt.Println(FinalValueOfVariableAfterPerformingOperations([]string{"X++", "++X", "--X", "X--"})) // 0
 }
 
-func FinalValueOfVariableAfterPerformingOperations() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func FinalValueOfVariableAfterPerformingOperations(operations []string) int {
+	x := 0
+	for _, op := range operations {
+		if op[1] == '+' {
+			x++
+		} else {
+			x--
+		}
+	}
+	return x
 }

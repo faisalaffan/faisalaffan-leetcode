@@ -6,11 +6,26 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PathSum())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func PathSum() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(h)
+func HasPathSum(root *TreeNode, targetSum int) bool {
+	if root == nil {
+		return false
+	}
+	targetSum -= root.Val
+	if root.Left == nil && root.Right == nil {
+		return targetSum == 0
+	}
+	return HasPathSum(root.Left, targetSum) || HasPathSum(root.Right, targetSum)
+}
+
+func main() {
+	root := &TreeNode{5, &TreeNode{4, &TreeNode{11, &TreeNode{7, nil, nil}, &TreeNode{2, nil, nil}}, nil}, &TreeNode{8, &TreeNode{13, nil, nil}, &TreeNode{4, nil, &TreeNode{1, nil, nil}}}}
+	fmt.Println(HasPathSum(root, 22))
+	fmt.Println(HasPathSum(nil, 0))
 }

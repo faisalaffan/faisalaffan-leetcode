@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FlippingAnImage())
+	fmt.Println(flipAndInvertImage([][]int{{1, 1, 0}, {1, 0, 1}, {0, 0, 0}})) // [[1,0,0],[0,1,0],[1,1,1]]
+	fmt.Println(flipAndInvertImage([][]int{{1, 1, 0, 0}, {1, 0, 0, 1}, {0, 1, 1, 1}, {1, 0, 1, 0}}))
 }
 
-func FlippingAnImage() any {
-	// TODO: implement
-	return nil
+// flipAndInvertImage flips the image horizontally then inverts it.
+// Time: O(m*n). Space: O(1) in-place.
+func flipAndInvertImage(image [][]int) [][]int {
+	for _, row := range image {
+		l, r := 0, len(row)-1
+		for l <= r {
+			row[l], row[r] = 1-row[r], 1-row[l]
+			l++
+			r--
+		}
+	}
+	return image
 }

@@ -7,10 +7,22 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CheckDivisibilityByDigitSumAndProduct())
+	fmt.Println(CheckDivisibilityByDigitSumAndProduct(99))
+	fmt.Println(CheckDivisibilityByDigitSumAndProduct(23))
+	fmt.Println(CheckDivisibilityByDigitSumAndProduct(10))
 }
 
-func CheckDivisibilityByDigitSumAndProduct() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(1)
+func CheckDivisibilityByDigitSumAndProduct(n int) bool {
+	x := n
+	sum := 0
+	prod := 1
+	for x > 0 {
+		d := x % 10
+		sum += d
+		prod *= d
+		x /= 10
+	}
+	return n%(sum+prod) == 0
 }

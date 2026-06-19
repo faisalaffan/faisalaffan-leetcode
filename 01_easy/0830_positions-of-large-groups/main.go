@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(PositionsOfLargeGroups())
+	fmt.Println(largeGroupPositions("abbxxxxzzy"))    // [[3,6]]
+	fmt.Println(largeGroupPositions("abc"))           // []
+	fmt.Println(largeGroupPositions("abcdddeeeeaabbbcd")) // [[3,5],[6,9],[12,14]]
 }
 
-func PositionsOfLargeGroups() any {
-	// TODO: implement
-	return nil
+// largeGroupPositions finds all large groups (consecutive identical characters of length >= 3).
+// Time: O(n). Space: O(1) excluding output.
+func largeGroupPositions(s string) [][]int {
+	result := make([][]int, 0)
+	start := 0
+	for i := 1; i <= len(s); i++ {
+		if i == len(s) || s[i] != s[start] {
+			if i-start >= 3 {
+				result = append(result, []int{start, i - 1})
+			}
+			start = i
+		}
+	}
+	return result
 }

@@ -7,10 +7,39 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountTheNumberOfIncremovableSubarraysI())
+	// LeetCode name: incremovableSubarrayCount
+	fmt.Println(CountTheNumberOfIncremovableSubarraysI([]int{1, 2, 3, 4})) // 10
+	fmt.Println(CountTheNumberOfIncremovableSubarraysI([]int{6, 5, 7, 8})) // 7
+	fmt.Println(CountTheNumberOfIncremovableSubarraysI([]int{8, 7, 6, 6})) // 3
 }
 
-func CountTheNumberOfIncremovableSubarraysI() any {
-	// TODO: implement
-	return nil
+// Time: O(n^3) | Space: O(n)
+// LeetCode submission name: incremovableSubarrayCount
+func CountTheNumberOfIncremovableSubarraysI(nums []int) int {
+	n := len(nums)
+	count := 0
+
+	for l := 0; l < n; l++ {
+		for r := l; r < n; r++ {
+			// Check if array without nums[l..r] is strictly increasing
+			if isStrictlyIncreasing(nums, l, r) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func isStrictlyIncreasing(nums []int, l, r int) bool {
+	prev := -1
+	for i := 0; i < len(nums); i++ {
+		if i >= l && i <= r {
+			continue
+		}
+		if nums[i] <= prev {
+			return false
+		}
+		prev = nums[i]
+	}
+	return true
 }

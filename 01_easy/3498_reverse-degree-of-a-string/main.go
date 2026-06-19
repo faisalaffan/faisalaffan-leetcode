@@ -7,10 +7,18 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ReverseDegreeOfAString())
+	fmt.Println(ReverseDegreeOfAString("abc"))
+	fmt.Println(ReverseDegreeOfAString("zaba"))
 }
 
-func ReverseDegreeOfAString() any {
-	// TODO: implement
-	return nil
+// ReverseDegreeOfAString computes the sum of (position_in_reversed_alphabet * (i+1)) for each character.
+// Reverse: a=26, b=25, ..., z=1.
+// Time: O(n). Space: O(1).
+func ReverseDegreeOfAString(s string) int {
+	sum := 0
+	for i, ch := range s {
+		revPos := 26 - int(ch-'a')
+		sum += revPos * (i + 1)
+	}
+	return sum
 }

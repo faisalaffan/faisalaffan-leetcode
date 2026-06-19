@@ -6,11 +6,35 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(RemoveDuplicatesFromSortedList())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func RemoveDuplicatesFromSortedList() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+func DeleteDuplicates(head *ListNode) *ListNode {
+	curr := head
+	for curr != nil && curr.Next != nil {
+		if curr.Val == curr.Next.Val {
+			curr.Next = curr.Next.Next
+		} else {
+			curr = curr.Next
+		}
+	}
+	return head
+}
+
+func printList(head *ListNode) {
+	for head != nil {
+		fmt.Print(head.Val, " ")
+		head = head.Next
+	}
+	fmt.Println()
+}
+
+func main() {
+	l1 := &ListNode{1, &ListNode{1, &ListNode{2, nil}}}
+	printList(DeleteDuplicates(l1))
+	l2 := &ListNode{1, &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{3, nil}}}}}
+	printList(DeleteDuplicates(l2))
 }

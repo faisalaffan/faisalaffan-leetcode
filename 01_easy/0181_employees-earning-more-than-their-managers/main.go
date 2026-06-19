@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(EmployeesEarningMoreThanTheirManagers())
+func EmployeesEarningMoreThanTheirManagers() string {
+	return "SELECT e.name AS Employee FROM Employee e JOIN Employee m ON e.managerId = m.id WHERE e.salary > m.salary"
 }
 
-func EmployeesEarningMoreThanTheirManagers() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(EmployeesEarningMoreThanTheirManagers())
 }

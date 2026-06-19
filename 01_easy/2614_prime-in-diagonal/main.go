@@ -3,14 +3,43 @@ package main
 // LeetCode #2614: Prime In Diagonal
 // https://leetcode.com/problems/prime-in-diagonal/
 // Difficulty: Easy
+// Time: O(n * sqrt(max(nums))) | Space: O(1)
 
 import "fmt"
 
 func main() {
-	fmt.Println(PrimeInDiagonal())
+	fmt.Println(diagonalPrime([][]int{{1, 2, 3}, {5, 6, 7}, {9, 10, 11}}))
+	fmt.Println(diagonalPrime([][]int{{1, 2, 3}, {5, 17, 7}, {9, 11, 10}}))
 }
 
-func PrimeInDiagonal() any {
-	// TODO: implement
-	return nil
+func isPrime(n int) bool {
+	if n <= 1 {
+		return false
+	}
+	if n <= 3 {
+		return true
+	}
+	if n%2 == 0 || n%3 == 0 {
+		return false
+	}
+	for i := 5; i*i <= n; i += 6 {
+		if n%i == 0 || n%(i+2) == 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func diagonalPrime(nums [][]int) int {
+	n := len(nums)
+	ans := 0
+	for i := 0; i < n; i++ {
+		if isPrime(nums[i][i]) && nums[i][i] > ans {
+			ans = nums[i][i]
+		}
+		if isPrime(nums[i][n-i-1]) && nums[i][n-i-1] > ans {
+			ans = nums[i][n-i-1]
+		}
+	}
+	return ans
 }

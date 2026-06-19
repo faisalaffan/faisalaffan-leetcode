@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ConstructTheMinimumBitwiseArrayI())
+	fmt.Println(ConstructTheMinimumBitwiseArrayI([]int{2, 3, 5, 7}))
+	fmt.Println(ConstructTheMinimumBitwiseArrayI([]int{11, 13, 31}))
 }
 
-func ConstructTheMinimumBitwiseArrayI() any {
-	// TODO: implement
-	return nil
+// ConstructTheMinimumBitwiseArrayI returns an array where ans[i] is the smallest number such that ans[i] | (ans[i]+1) == nums[i].
+// Time: O(n * min_val). Space: O(n).
+func ConstructTheMinimumBitwiseArrayI(nums []int) []int {
+	result := make([]int, len(nums))
+	for i, num := range nums {
+		found := false
+		for candidate := 0; candidate < num; candidate++ {
+			if candidate|(candidate+1) == num {
+				result[i] = candidate
+				found = true
+				break
+			}
+		}
+		if !found {
+			result[i] = -1
+		}
+	}
+	return result
 }

@@ -7,10 +7,31 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ShortestSubarrayWithOrAtLeastKI())
+	// LeetCode name: minimumSubarrayLength
+	fmt.Println(ShortestSubarrayWithOrAtLeastKI([]int{1, 2, 3}, 2)) // 1
+	fmt.Println(ShortestSubarrayWithOrAtLeastKI([]int{2, 1, 8}, 10)) // 3
+	fmt.Println(ShortestSubarrayWithOrAtLeastKI([]int{1, 2}, 10))    // -1
 }
 
-func ShortestSubarrayWithOrAtLeastKI() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2) | Space: O(1)
+// LeetCode submission name: minimumSubarrayLength
+func ShortestSubarrayWithOrAtLeastKI(nums []int, k int) int {
+	n := len(nums)
+	minLen := n + 1
+	for i := 0; i < n; i++ {
+		orVal := 0
+		for j := i; j < n; j++ {
+			orVal |= nums[j]
+			if orVal >= k {
+				if j-i+1 < minLen {
+					minLen = j - i + 1
+				}
+				break
+			}
+		}
+	}
+	if minLen > n {
+		return -1
+	}
+	return minLen
 }

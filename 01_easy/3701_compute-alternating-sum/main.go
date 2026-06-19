@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ComputeAlternatingSum())
+	fmt.Println(ComputeAlternatingSum([]int{1, 2, 3, 4, 5}))
+	fmt.Println(ComputeAlternatingSum([]int{10, 5, 3}))
 }
 
-func ComputeAlternatingSum() any {
-	// TODO: implement
-	return nil
+// Time: O(n)
+// Space: O(1)
+func ComputeAlternatingSum(nums []int) int {
+	ans := 0
+	for i, x := range nums {
+		if i%2 == 0 {
+			ans += x
+		} else {
+			ans -= x
+		}
+	}
+	return ans
 }

@@ -2,15 +2,31 @@ package main
 
 // LeetCode #2082: The Number of Rich Customers
 // https://leetcode.com/problems/the-number-of-rich-customers/
-// Difficulty: Easy [Paid]
+// Difficulty: Easy [Paid] (SQL)
 
 import "fmt"
 
 func main() {
-	fmt.Println(TheNumberOfRichCustomers())
+	// (customer_id, amount)
+	transactions := [][2]string{{"1", "500"}, {"2", "300"}, {"1", "600"}, {"3", "200"}}
+	fmt.Println(TheNumberOfRichCustomers(transactions)) // 1 (only customer 1 has amount > 500)
 }
 
-func TheNumberOfRichCustomers() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func TheNumberOfRichCustomers(transactions [][2]string) int {
+	customers := make(map[int]bool)
+	for _, t := range transactions {
+		amount := 0
+		for _, c := range t[1] {
+			amount = amount*10 + int(c-'0')
+		}
+		if amount > 500 {
+			id := 0
+			for _, c := range t[0] {
+				id = id*10 + int(c-'0')
+			}
+			customers[id] = true
+		}
+	}
+	return len(customers)
 }

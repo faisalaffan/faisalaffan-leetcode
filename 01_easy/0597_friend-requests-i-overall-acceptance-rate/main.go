@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FriendRequestsIOverallAcceptanceRate())
+func FriendRequestsIOverallAcceptanceRate() string {
+	return "SELECT ROUND(IFNULL((SELECT COUNT(DISTINCT requester_id, accepter_id) FROM RequestAccepted) / (SELECT COUNT(DISTINCT sender_id, send_to_id) FROM FriendRequest), 0), 2) AS accept_rate"
 }
 
-func FriendRequestsIOverallAcceptanceRate() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(FriendRequestsIOverallAcceptanceRate())
 }

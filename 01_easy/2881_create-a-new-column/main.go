@@ -3,14 +3,25 @@ package main
 // LeetCode #2881: Create a New Column
 // https://leetcode.com/problems/create-a-new-column/
 // Difficulty: Easy
+//
+// Note: This is a Pandas-only problem on LeetCode (Python).
+// In Go, we add a "grade" column computed from existing data.
 
 import "fmt"
 
 func main() {
-	fmt.Println(CreateANewColumn())
+	// LeetCode name: createBonusColumn
+	fmt.Println(CreateANewColumn([][]int{{101, 15}, {102, 11}, {103, 20}}))
+	// [[101 15 30] [102 11 22] [103 20 40]]
 }
 
-func CreateANewColumn() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+// LeetCode submission name: createBonusColumn
+func CreateANewColumn(df [][]int) [][]int {
+	result := make([][]int, len(df))
+	for i, row := range df {
+		// bonus = salary * 2
+		result[i] = []int{row[0], row[1], row[1] * 2}
+	}
+	return result
 }

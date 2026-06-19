@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MonotonicArray())
+	fmt.Println(isMonotonic([]int{1, 2, 2, 3}))   // true
+	fmt.Println(isMonotonic([]int{6, 5, 4, 4}))   // true
+	fmt.Println(isMonotonic([]int{1, 3, 2}))      // false
+	fmt.Println(isMonotonic([]int{1, 1, 1}))      // true
 }
 
-func MonotonicArray() any {
-	// TODO: implement
-	return nil
+// isMonotonic checks if the array is monotonic (either non-decreasing or non-increasing).
+// Time: O(n). Space: O(1).
+func isMonotonic(nums []int) bool {
+	inc, dec := true, true
+	for i := 1; i < len(nums); i++ {
+		if nums[i] > nums[i-1] {
+			dec = false
+		}
+		if nums[i] < nums[i-1] {
+			inc = false
+		}
+	}
+	return inc || dec
 }

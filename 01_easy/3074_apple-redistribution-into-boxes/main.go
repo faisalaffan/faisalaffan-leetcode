@@ -4,13 +4,32 @@ package main
 // https://leetcode.com/problems/apple-redistribution-into-boxes/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(AppleRedistributionIntoBoxes())
+	// LeetCode name: minimumBoxes
+	fmt.Println(AppleRedistributionIntoBoxes([]int{1, 3, 2}, []int{4, 3, 1, 5, 2})) // 2
+	fmt.Println(AppleRedistributionIntoBoxes([]int{5, 5, 5}, []int{2, 4, 2, 7}))    // 4
 }
 
-func AppleRedistributionIntoBoxes() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n) | Space: O(1)
+// LeetCode submission name: minimumBoxes
+func AppleRedistributionIntoBoxes(apples []int, capacity []int) int {
+	totalApples := 0
+	for _, a := range apples {
+		totalApples += a
+	}
+	sort.Sort(sort.Reverse(sort.IntSlice(capacity)))
+	boxes := 0
+	for _, c := range capacity {
+		boxes++
+		totalApples -= c
+		if totalApples <= 0 {
+			return boxes
+		}
+	}
+	return boxes
 }

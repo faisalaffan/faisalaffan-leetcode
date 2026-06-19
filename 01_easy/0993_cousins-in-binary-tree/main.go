@@ -6,11 +6,58 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CousinsInBinaryTree())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func CousinsInBinaryTree() any {
-	// TODO: implement
-	return nil
+func main() {
+	root := &TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val:   2,
+			Left:  &TreeNode{Val: 4},
+		},
+		Right: &TreeNode{Val: 3},
+	}
+	fmt.Println(isCousins(root, 4, 3)) // false
+
+	root2 := &TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val:   2,
+			Right: &TreeNode{Val: 4},
+		},
+		Right: &TreeNode{
+			Val:   3,
+			Right: &TreeNode{Val: 5},
+		},
+	}
+	fmt.Println(isCousins(root2, 5, 4)) // true
+}
+
+// isCousins checks if two nodes are cousins (same depth, different parent).
+// Time: O(n). Space: O(n).
+func isCousins(root *TreeNode, x int, y int) bool {
+	var xDepth, yDepth int
+	var xParent, yParent *TreeNode
+	dfsCousins(root, nil, 0, x, y, &xDepth, &yDepth, &xParent, &yParent)
+	return xDepth == yDepth && xParent != nil && yParent != nil && xParent != yParent
+}
+
+func dfsCousins(node, parent *TreeNode, depth int, x, y int, xDepth, yDepth *int, xParent, yParent **TreeNode) {
+	if node == nil {
+		return
+	}
+	if node.Val == x {
+		*xDepth = depth
+		*xParent = parent
+	}
+	if node.Val == y {
+		*yDepth = depth
+		*yParent = parent
+	}
+	dfsCousins(node.Left, node, depth+1, x, y, xDepth, yDepth, xParent, yParent)
+	dfsCousins(node.Right, node, depth+1, x, y, xDepth, yDepth, xParent, yParent)
 }

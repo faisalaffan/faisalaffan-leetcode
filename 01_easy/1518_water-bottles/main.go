@@ -3,14 +3,25 @@ package main
 // LeetCode #1518: Water Bottles
 // https://leetcode.com/problems/water-bottles/
 // Difficulty: Easy
+//
+// LeetCode submission: func numWaterBottles(numBottles int, numExchange int) int
 
 import "fmt"
 
 func main() {
-	fmt.Println(WaterBottles())
+	fmt.Println(WaterBottles(9, 3))  // 13
+	fmt.Println(WaterBottles(15, 4)) // 19
+	fmt.Println(WaterBottles(5, 5))  // 6
 }
 
-func WaterBottles() any {
-	// TODO: implement
-	return nil
+// Time: O(log n), Space: O(1)
+func WaterBottles(numBottles int, numExchange int) int {
+	total := numBottles
+	empty := numBottles
+	for empty >= numExchange {
+		newBottles := empty / numExchange
+		total += newBottles
+		empty = newBottles + empty%numExchange
+	}
+	return total
 }

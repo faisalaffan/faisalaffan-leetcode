@@ -7,10 +7,24 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheMiddleIndexInArray())
+	fmt.Println(FindTheMiddleIndexInArray([]int{2, 3, -1, 8, 4}))   // 3
+	fmt.Println(FindTheMiddleIndexInArray([]int{1, -1, 4}))          // 2
+	fmt.Println(FindTheMiddleIndexInArray([]int{2, 5}))              // -1
 }
 
-func FindTheMiddleIndexInArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func FindTheMiddleIndexInArray(nums []int) int {
+	total := 0
+	for _, v := range nums {
+		total += v
+	}
+
+	leftSum := 0
+	for i, v := range nums {
+		if leftSum == total-leftSum-v {
+			return i
+		}
+		leftSum += v
+	}
+	return -1
 }

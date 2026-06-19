@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumDifferenceBetweenIncreasingElements())
+	fmt.Println(MaximumDifferenceBetweenIncreasingElements([]int{7, 1, 5, 4}))   // 4
+	fmt.Println(MaximumDifferenceBetweenIncreasingElements([]int{9, 4, 3, 2}))   // -1
+	fmt.Println(MaximumDifferenceBetweenIncreasingElements([]int{1, 5, 2, 10}))  // 9
 }
 
-func MaximumDifferenceBetweenIncreasingElements() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func MaximumDifferenceBetweenIncreasingElements(nums []int) int {
+	minSoFar := nums[0]
+	maxDiff := -1
+	for i := 1; i < len(nums); i++ {
+		if nums[i] > minSoFar {
+			diff := nums[i] - minSoFar
+			if diff > maxDiff {
+				maxDiff = diff
+			}
+		}
+		if nums[i] < minSoFar {
+			minSoFar = nums[i]
+		}
+	}
+	return maxDiff
 }

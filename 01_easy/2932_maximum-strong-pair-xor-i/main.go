@@ -7,10 +7,40 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumStrongPairXorI())
+	// LeetCode name: maximumStrongPairXor
+	fmt.Println(MaximumStrongPairXorI([]int{1, 2, 3, 4, 5})) // 7
+	fmt.Println(MaximumStrongPairXorI([]int{10, 100}))        // 0
+	fmt.Println(MaximumStrongPairXorI([]int{5, 6, 25, 30}))   // 7
 }
 
-func MaximumStrongPairXorI() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2) | Space: O(1)
+// LeetCode submission name: maximumStrongPairXor
+func MaximumStrongPairXorI(nums []int) int {
+	n := len(nums)
+	maxXor := 0
+	for i := 0; i < n; i++ {
+		for j := i; j < n; j++ {
+			x, y := nums[i], nums[j]
+			if abs(x-y) <= min(x, y) {
+				if x^y > maxXor {
+					maxXor = x ^ y
+				}
+			}
+		}
+	}
+	return maxXor
+}
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }

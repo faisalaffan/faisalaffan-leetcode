@@ -6,11 +6,18 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MissingNumber())
+// Time: O(n) | Space: O(1)
+func MissingNumber(nums []int) int {
+	n := len(nums)
+	result := n
+	for i, v := range nums {
+		result ^= i ^ v
+	}
+	return result
 }
 
-func MissingNumber() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(MissingNumber([]int{3, 0, 1}))
+	fmt.Println(MissingNumber([]int{0, 1}))
+	fmt.Println(MissingNumber([]int{9, 6, 4, 2, 3, 5, 7, 0, 1}))
 }

@@ -7,10 +7,33 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumDifferenceBetweenEvenAndOddFrequencyI())
+	fmt.Println(MaximumDifferenceBetweenEvenAndOddFrequencyI("aaaaabbc"))
+	fmt.Println(MaximumDifferenceBetweenEvenAndOddFrequencyI("abcabcab"))
 }
 
-func MaximumDifferenceBetweenEvenAndOddFrequencyI() any {
-	// TODO: implement
-	return nil
+// MaximumDifferenceBetweenEvenAndOddFrequencyI returns the max difference between max even-frequency and min odd-frequency in s.
+// Time: O(n). Space: O(1).
+func MaximumDifferenceBetweenEvenAndOddFrequencyI(s string) int {
+	freq := make([]int, 26)
+	for i := 0; i < len(s); i++ {
+		freq[s[i]-'a']++
+	}
+
+	maxEven := 0
+	minOdd := -1
+	for _, f := range freq {
+		if f == 0 {
+			continue
+		}
+		if f%2 == 0 && f > maxEven {
+			maxEven = f
+		} else if f%2 == 1 && (minOdd == -1 || f < minOdd) {
+			minOdd = f
+		}
+	}
+
+	if maxEven == 0 || minOdd == -1 {
+		return 0
+	}
+	return maxEven - minOdd
 }

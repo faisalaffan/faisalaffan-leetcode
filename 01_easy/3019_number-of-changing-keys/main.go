@@ -5,12 +5,22 @@ package main
 // Difficulty: Easy
 
 import "fmt"
+import "unicode"
 
 func main() {
-	fmt.Println(NumberOfChangingKeys())
+	// LeetCode name: countKeyChanges
+	fmt.Println(NumberOfChangingKeys("aAbBcC")) // 2
+	fmt.Println(NumberOfChangingKeys("AaAaAaaA")) // 0
 }
 
-func NumberOfChangingKeys() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: countKeyChanges
+func NumberOfChangingKeys(s string) int {
+	count := 0
+	for i := 1; i < len(s); i++ {
+		if unicode.ToLower(rune(s[i])) != unicode.ToLower(rune(s[i-1])) {
+			count++
+		}
+	}
+	return count
 }

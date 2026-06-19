@@ -7,10 +7,39 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindIfPathExistsInGraph())
+	fmt.Println(FindIfPathExistsInGraph(3, [][]int{{0, 1}, {1, 2}, {2, 0}}, 0, 2)) // true
+	fmt.Println(FindIfPathExistsInGraph(6, [][]int{{0, 1}, {0, 2}, {3, 5}, {5, 4}, {4, 3}}, 0, 5)) // false
 }
 
-func FindIfPathExistsInGraph() any {
-	// TODO: implement
-	return nil
+// Time: O(V + E), Space: O(V + E)
+func FindIfPathExistsInGraph(n int, edges [][]int, source int, destination int) bool {
+	if source == destination {
+		return true
+	}
+
+	adj := make([][]int, n)
+	for _, e := range edges {
+		u, v := e[0], e[1]
+		adj[u] = append(adj[u], v)
+		adj[v] = append(adj[v], u)
+	}
+
+	visited := make([]bool, n)
+	queue := []int{source}
+	visited[source] = true
+
+	for len(queue) > 0 {
+		u := queue[0]
+		queue = queue[1:]
+		for _, v := range adj[u] {
+			if v == destination {
+				return true
+			}
+			if !visited[v] {
+				visited[v] = true
+				queue = append(queue, v)
+			}
+		}
+	}
+	return false
 }

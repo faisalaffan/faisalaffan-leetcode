@@ -3,14 +3,28 @@ package main
 // LeetCode #2643: Row With Maximum Ones
 // https://leetcode.com/problems/row-with-maximum-ones/
 // Difficulty: Easy
+// Time: O(m * n) | Space: O(1)
 
 import "fmt"
 
 func main() {
-	fmt.Println(RowWithMaximumOnes())
+	fmt.Println(RowWithMaximumOnes([][]int{{0, 1}, {1, 0}}))
+	fmt.Println(RowWithMaximumOnes([][]int{{0, 0, 0}, {0, 1, 1}}))
 }
 
-func RowWithMaximumOnes() any {
-	// TODO: implement
-	return nil
+func RowWithMaximumOnes(mat [][]int) []int {
+	maxRow, maxCount := 0, 0
+	for i := 0; i < len(mat); i++ {
+		count := 0
+		for _, val := range mat[i] {
+			if val == 1 {
+				count++
+			}
+		}
+		if count > maxCount {
+			maxCount = count
+			maxRow = i
+		}
+	}
+	return []int{maxRow, maxCount}
 }

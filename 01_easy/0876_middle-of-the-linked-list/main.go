@@ -6,11 +6,28 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(MiddleOfTheLinkedList())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func MiddleOfTheLinkedList() any {
-	// TODO: implement
-	return nil
+func main() {
+	// [1,2,3,4,5] => 3
+	head := &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{5, nil}}}}}
+	fmt.Println(middleNode(head).Val) // 3
+
+	// [1,2,3,4,5,6] => 4
+	head2 := &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{5, &ListNode{6, nil}}}}}}
+	fmt.Println(middleNode(head2).Val) // 4
+}
+
+// middleNode returns the middle node of a linked list.
+// Time: O(n). Space: O(1).
+func middleNode(head *ListNode) *ListNode {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	return slow
 }

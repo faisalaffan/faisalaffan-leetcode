@@ -6,11 +6,22 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(LengthOfLastWord())
+// Time: O(n) | Space: O(1)
+func LengthOfLastWord(s string) int {
+	length := 0
+	i := len(s) - 1
+	for i >= 0 && s[i] == ' ' {
+		i--
+	}
+	for i >= 0 && s[i] != ' ' {
+		length++
+		i--
+	}
+	return length
 }
 
-func LengthOfLastWord() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(LengthOfLastWord("Hello World"))
+	fmt.Println(LengthOfLastWord("   fly me   to   the moon  "))
+	fmt.Println(LengthOfLastWord("luffy is still joyboy"))
 }

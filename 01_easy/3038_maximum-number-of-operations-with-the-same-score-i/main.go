@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumNumberOfOperationsWithTheSameScoreI())
+	// LeetCode name: maxOperations
+	fmt.Println(MaximumNumberOfOperationsWithTheSameScoreI([]int{3, 2, 1, 4, 5})) // 2
+	fmt.Println(MaximumNumberOfOperationsWithTheSameScoreI([]int{3, 2, 6, 1, 4})) // 1
 }
 
-func MaximumNumberOfOperationsWithTheSameScoreI() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: maxOperations
+func MaximumNumberOfOperationsWithTheSameScoreI(nums []int) int {
+	if len(nums) < 2 {
+		return 0
+	}
+	score := nums[0] + nums[1]
+	count := 1
+	for i := 2; i+1 < len(nums); i += 2 {
+		if nums[i]+nums[i+1] == score {
+			count++
+		} else {
+			break
+		}
+	}
+	return count
 }

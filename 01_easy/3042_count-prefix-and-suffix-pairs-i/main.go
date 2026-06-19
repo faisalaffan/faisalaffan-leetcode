@@ -7,10 +7,41 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountPrefixAndSuffixPairsI())
+	// LeetCode name: countPrefixSuffixPairs
+	fmt.Println(CountPrefixAndSuffixPairsI([]string{"a", "aba", "ababa", "aa"})) // 4
+	fmt.Println(CountPrefixAndSuffixPairsI([]string{"pa", "papa", "ma", "mama"})) // 2
 }
 
-func CountPrefixAndSuffixPairsI() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2 * m) where m is max word length | Space: O(1)
+// LeetCode submission name: countPrefixSuffixPairs
+func CountPrefixAndSuffixPairsI(words []string) int {
+	n := len(words)
+	count := 0
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			if isPrefixAndSuffix(words[i], words[j]) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func isPrefixAndSuffix(a, b string) bool {
+	if len(a) > len(b) {
+		return false
+	}
+	// Check prefix
+	for i := 0; i < len(a); i++ {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	// Check suffix
+	for i := 0; i < len(a); i++ {
+		if a[i] != b[len(b)-len(a)+i] {
+			return false
+		}
+	}
+	return true
 }

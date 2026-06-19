@@ -7,10 +7,38 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CheckIfAnArrayIsConsecutive())
+	fmt.Println(CheckIfAnArrayIsConsecutive([]int{1, 3, 4, 2})) // true
+	fmt.Println(CheckIfAnArrayIsConsecutive([]int{1, 3, 5}))    // false
+	fmt.Println(CheckIfAnArrayIsConsecutive([]int{1, 4}))       // false
 }
 
-func CheckIfAnArrayIsConsecutive() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func CheckIfAnArrayIsConsecutive(nums []int) bool {
+	if len(nums) == 0 {
+		return false
+	}
+
+	set := make(map[int]bool)
+	min, max := nums[0], nums[0]
+
+	for _, v := range nums {
+		set[v] = true
+		if v < min {
+			min = v
+		}
+		if v > max {
+			max = v
+		}
+	}
+
+	if max-min+1 != len(nums) {
+		return false
+	}
+
+	for i := min; i <= max; i++ {
+		if !set[i] {
+			return false
+		}
+	}
+	return true
 }

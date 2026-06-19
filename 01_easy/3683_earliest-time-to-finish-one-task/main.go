@@ -4,13 +4,25 @@ package main
 // https://leetcode.com/problems/earliest-time-to-finish-one-task/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-	fmt.Println(EarliestTimeToFinishOneTask())
+	fmt.Println(EarliestTimeToFinishOneTask([][]int{{1, 6}, {2, 3}}))
+	fmt.Println(EarliestTimeToFinishOneTask([][]int{{100, 100}, {100, 100}, {100, 100}}))
 }
 
-func EarliestTimeToFinishOneTask() any {
-	// TODO: implement
-	return nil
+// Time: O(n)
+// Space: O(1)
+func EarliestTimeToFinishOneTask(tasks [][]int) int {
+	ans := math.MaxInt
+	for _, t := range tasks {
+		finish := t[0] + t[1]
+		if finish < ans {
+			ans = finish
+		}
+	}
+	return ans
 }

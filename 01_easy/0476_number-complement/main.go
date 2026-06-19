@@ -6,11 +6,17 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(NumberComplement())
+// Time: O(1), Space: O(1)
+func NumberComplement(num int) int {
+	mask := ^0
+	for num&mask != 0 {
+		mask <<= 1
+	}
+	return ^num & ^mask
 }
 
-func NumberComplement() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(NumberComplement(5))
+	fmt.Println(NumberComplement(1))
+	fmt.Println(NumberComplement(2))
 }

@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountEqualAndDivisiblePairsInAnArray())
+	fmt.Println(CountEqualAndDivisiblePairsInAnArray([]int{3, 1, 2, 2, 2, 1, 3}, 2)) // 4
+	fmt.Println(CountEqualAndDivisiblePairsInAnArray([]int{1, 2, 3, 4}, 1))           // 0
 }
 
-func CountEqualAndDivisiblePairsInAnArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2), Space: O(1)
+func CountEqualAndDivisiblePairsInAnArray(nums []int, k int) int {
+	n := len(nums)
+	count := 0
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			if nums[i] == nums[j] && (i*j)%k == 0 {
+				count++
+			}
+		}
+	}
+	return count
 }

@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(PermutationDifferenceBetweenTwoStrings())
+	// LeetCode name: findPermutationDifference
+	fmt.Println(PermutationDifferenceBetweenTwoStrings("abc", "bac")) // 2
+	fmt.Println(PermutationDifferenceBetweenTwoStrings("abcde", "edcba")) // 12
 }
 
-func PermutationDifferenceBetweenTwoStrings() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: findPermutationDifference
+func PermutationDifferenceBetweenTwoStrings(s string, t string) int {
+	pos := make(map[byte]int)
+	for i := 0; i < len(t); i++ {
+		pos[t[i]] = i
+	}
+	diff := 0
+	for i := 0; i < len(s); i++ {
+		d := i - pos[s[i]]
+		if d < 0 {
+			d = -d
+		}
+		diff += d
+	}
+	return diff
 }

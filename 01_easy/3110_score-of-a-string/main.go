@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ScoreOfAString())
+	// LeetCode name: scoreOfString
+	fmt.Println(ScoreOfAString("hello")) // 13
+	fmt.Println(ScoreOfAString("zaz"))   // 50
 }
 
-func ScoreOfAString() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: scoreOfString
+func ScoreOfAString(s string) int {
+	score := 0
+	for i := 1; i < len(s); i++ {
+		diff := int(s[i]) - int(s[i-1])
+		if diff < 0 {
+			diff = -diff
+		}
+		score += diff
+	}
+	return score
 }

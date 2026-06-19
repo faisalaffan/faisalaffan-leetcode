@@ -6,11 +6,30 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(GetMaximumInGeneratedArray())
+// Time: O(n), Space: O(n)
+func GetMaximumGenerated(n int) int {
+	if n == 0 {
+		return 0
+	}
+	nums := make([]int, n+1)
+	nums[0] = 0
+	nums[1] = 1
+	maxVal := 1
+	for i := 2; i <= n; i++ {
+		if i%2 == 0 {
+			nums[i] = nums[i/2]
+		} else {
+			nums[i] = nums[i/2] + nums[i/2+1]
+		}
+		if nums[i] > maxVal {
+			maxVal = nums[i]
+		}
+	}
+	return maxVal
 }
 
-func GetMaximumInGeneratedArray() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(GetMaximumGenerated(7))
+	fmt.Println(GetMaximumGenerated(2))
+	fmt.Println(GetMaximumGenerated(3))
 }

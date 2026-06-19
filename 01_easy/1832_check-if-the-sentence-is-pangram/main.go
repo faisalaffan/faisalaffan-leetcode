@@ -6,11 +6,16 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CheckIfTheSentenceIsPangram())
+// Time: O(n), Space: O(1)
+func CheckIfPangram(sentence string) bool {
+	seen := 0
+	for i := 0; i < len(sentence); i++ {
+		seen |= 1 << (sentence[i] - 'a')
+	}
+	return seen == (1<<26)-1
 }
 
-func CheckIfTheSentenceIsPangram() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CheckIfPangram("thequickbrownfoxjumpsoverthelazydog"))
+	fmt.Println(CheckIfPangram("leetcode"))
 }

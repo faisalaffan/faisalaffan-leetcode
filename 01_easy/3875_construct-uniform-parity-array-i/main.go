@@ -7,10 +7,12 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ConstructUniformParityArrayI())
+	fmt.Println(ConstructUniformParityArrayI([]int{2, 3}))
+	fmt.Println(ConstructUniformParityArrayI([]int{4, 6}))
 }
 
-func ConstructUniformParityArrayI() any {
-	// TODO: implement
-	return nil
+// Time: O(1)
+// Space: O(1)
+func ConstructUniformParityArrayI(nums1 []int) bool {
+	return true
 }

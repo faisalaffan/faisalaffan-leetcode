@@ -7,10 +7,22 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LibraryLateFeeCalculator())
+	fmt.Println(LibraryLateFeeCalculator([]int{5, 1, 7}))
+	fmt.Println(LibraryLateFeeCalculator([]int{1, 1}))
 }
 
-func LibraryLateFeeCalculator() any {
-	// TODO: implement
-	return nil
+// Time: O(n)
+// Space: O(1)
+func LibraryLateFeeCalculator(daysLate []int) int {
+	ans := 0
+	for _, x := range daysLate {
+		if x == 1 {
+			ans += 1
+		} else if x > 5 {
+			ans += 3 * x
+		} else {
+			ans += 2 * x
+		}
+	}
+	return ans
 }

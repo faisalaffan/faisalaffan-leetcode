@@ -7,10 +7,22 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SortArrayByParity())
+	fmt.Println(sortArrayByParity([]int{3, 1, 2, 4})) // [2,4,3,1] or [4,2,1,3] etc.
+	fmt.Println(sortArrayByParity([]int{0}))           // [0]
+	fmt.Println(sortArrayByParity([]int{1, 3, 5}))     // [1,3,5]
 }
 
-func SortArrayByParity() any {
-	// TODO: implement
-	return nil
+// sortArrayByParity moves all even numbers to the front, odd to the back.
+// Time: O(n). Space: O(1).
+func sortArrayByParity(nums []int) []int {
+	l, r := 0, len(nums)-1
+	for l < r {
+		if nums[l]%2 == 0 {
+			l++
+		} else {
+			nums[l], nums[r] = nums[r], nums[l]
+			r--
+		}
+	}
+	return nums
 }

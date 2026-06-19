@@ -6,11 +6,31 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(IslandPerimeter())
+// Time: O(m*n), Space: O(1)
+func IslandPerimeter(grid [][]int) int {
+	perimeter := 0
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			if grid[i][j] == 1 {
+				perimeter += 4
+				if i > 0 && grid[i-1][j] == 1 {
+					perimeter -= 2
+				}
+				if j > 0 && grid[i][j-1] == 1 {
+					perimeter -= 2
+				}
+			}
+		}
+	}
+	return perimeter
 }
 
-func IslandPerimeter() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(IslandPerimeter([][]int{
+		{0, 1, 0, 0},
+		{1, 1, 1, 0},
+		{0, 1, 0, 0},
+		{1, 1, 0, 0},
+	}))
+	fmt.Println(IslandPerimeter([][]int{{1}}))
 }

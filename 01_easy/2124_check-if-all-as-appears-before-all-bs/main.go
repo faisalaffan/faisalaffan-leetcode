@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CheckIfAllAsAppearsBeforeAllBs())
+	fmt.Println(CheckIfAllAsAppearsBeforeAllBs("aaabbb")) // true
+	fmt.Println(CheckIfAllAsAppearsBeforeAllBs("abab"))   // false
+	fmt.Println(CheckIfAllAsAppearsBeforeAllBs("bbb"))    // true
 }
 
-func CheckIfAllAsAppearsBeforeAllBs() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func CheckIfAllAsAppearsBeforeAllBs(s string) bool {
+	foundB := false
+	for i := 0; i < len(s); i++ {
+		if s[i] == 'b' {
+			foundB = true
+		} else if s[i] == 'a' && foundB {
+			return false
+		}
+	}
+	return true
 }

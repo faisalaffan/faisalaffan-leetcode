@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(BinaryNumberWithAlternatingBits())
+	fmt.Println(hasAlternatingBits(5))  // true (101)
+	fmt.Println(hasAlternatingBits(7))  // false (111)
+	fmt.Println(hasAlternatingBits(11)) // false (1011)
+	fmt.Println(hasAlternatingBits(10)) // true (1010)
 }
 
-func BinaryNumberWithAlternatingBits() any {
-	// TODO: implement
-	return nil
+// hasAlternatingBits checks if the binary representation of n has alternating bits.
+// Time: O(log n). Space: O(1).
+func hasAlternatingBits(n int) bool {
+	// XOR with n>>1 gives all 1s if alternating
+	x := n ^ (n >> 1)
+	// Check if x is all 1s (i.e., x & (x+1) == 0)
+	return x&(x+1) == 0
 }

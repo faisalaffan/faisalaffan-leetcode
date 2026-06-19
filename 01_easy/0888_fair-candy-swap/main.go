@@ -7,10 +7,28 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FairCandySwap())
+	fmt.Println(fairCandySwap([]int{1, 1}, []int{2, 2}))       // [1,2]
+	fmt.Println(fairCandySwap([]int{1, 2}, []int{2, 3}))       // [1,2]
+	fmt.Println(fairCandySwap([]int{2}, []int{1, 3}))          // [2,3]
 }
 
-func FairCandySwap() any {
-	// TODO: implement
+// fairCandySwap finds a candy swap that makes both Alice and Bob have equal candy.
+// Time: O(n + m). Space: O(m).
+func fairCandySwap(aliceSizes []int, bobSizes []int) []int {
+	sumA, sumB := 0, 0
+	bSet := make(map[int]bool)
+	for _, v := range aliceSizes {
+		sumA += v
+	}
+	for _, v := range bobSizes {
+		sumB += v
+		bSet[v] = true
+	}
+	diff := (sumB - sumA) / 2
+	for _, a := range aliceSizes {
+		if bSet[a+diff] {
+			return []int{a, a + diff}
+		}
+	}
 	return nil
 }

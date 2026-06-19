@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NRepeatedElementInSizeTwoNArray())
+	fmt.Println(repeatedNTimes([]int{1, 2, 3, 3})) // 3
+	fmt.Println(repeatedNTimes([]int{2, 1, 2, 5, 3, 2})) // 2
+	fmt.Println(repeatedNTimes([]int{5, 1, 5, 2, 5, 3, 5, 4})) // 5
 }
 
-func NRepeatedElementInSizeTwoNArray() any {
-	// TODO: implement
-	return nil
+// repeatedNTimes finds the element repeated n times in a 2n size array.
+// Time: O(n). Space: O(1).
+func repeatedNTimes(nums []int) int {
+	// Since the element appears n times in 2n, any two consecutive elements
+	// must contain the repeated element (in most cases).
+	for i := 0; i < len(nums)-2; i++ {
+		if nums[i] == nums[i+1] || nums[i] == nums[i+2] {
+			return nums[i]
+		}
+	}
+	// If not found yet, the repeated element is in the last 3 positions
+	return nums[len(nums)-1]
 }

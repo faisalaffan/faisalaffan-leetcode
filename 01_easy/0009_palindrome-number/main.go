@@ -6,11 +6,22 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PalindromeNumber())
+// Time: O(log n) | Space: O(1)
+func IsPalindrome(x int) bool {
+	if x < 0 || (x%10 == 0 && x != 0) {
+		return false
+	}
+
+	reverted := 0
+	for x > reverted {
+		reverted = reverted*10 + x%10
+		x /= 10
+	}
+	return x == reverted || x == reverted/10
 }
 
-func PalindromeNumber() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(IsPalindrome(121))  // true
+	fmt.Println(IsPalindrome(-121)) // false
+	fmt.Println(IsPalindrome(10))   // false
 }

@@ -3,14 +3,31 @@ package main
 // LeetCode #2837: Total Traveled Distance
 // https://leetcode.com/problems/total-traveled-distance/
 // Difficulty: Easy [Paid]
+// Time: O(n) | Space: O(n)
+// Note: SQL problem, adapted to Go. Computes total travel distance per user.
 
 import "fmt"
 
 func main() {
-	fmt.Println(TotalTraveledDistance())
+	rides := []struct {
+		UserID   int
+		Distance int
+	}{
+		{1, 10},
+		{1, 15},
+		{2, 20},
+		{3, 0},
+	}
+	fmt.Println(TotalTraveledDistance(rides))
 }
 
-func TotalTraveledDistance() any {
-	// TODO: implement
-	return nil
+func TotalTraveledDistance(rides []struct {
+	UserID   int
+	Distance int
+}) map[int]int {
+	total := map[int]int{}
+	for _, r := range rides {
+		total[r.UserID] += r.Distance
+	}
+	return total
 }

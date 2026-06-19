@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LargestOddNumberInString())
+	fmt.Println(LargestOddNumberInString("52"))      // "5"
+	fmt.Println(LargestOddNumberInString("4206"))     // ""
+	fmt.Println(LargestOddNumberInString("35427"))    // "35427"
 }
 
-func LargestOddNumberInString() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func LargestOddNumberInString(num string) string {
+	for i := len(num) - 1; i >= 0; i-- {
+		if (num[i]-'0')%2 == 1 {
+			return num[:i+1]
+		}
+	}
+	return ""
 }

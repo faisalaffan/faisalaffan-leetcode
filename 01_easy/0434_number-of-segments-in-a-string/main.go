@@ -6,11 +6,23 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(NumberOfSegmentsInAString())
+// Time: O(n), Space: O(1)
+func NumberOfSegmentsInAString(s string) int {
+	count := 0
+	inSegment := false
+	for _, c := range s {
+		if c != ' ' && !inSegment {
+			count++
+			inSegment = true
+		} else if c == ' ' {
+			inSegment = false
+		}
+	}
+	return count
 }
 
-func NumberOfSegmentsInAString() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(NumberOfSegmentsInAString("Hello, my name is John"))
+	fmt.Println(NumberOfSegmentsInAString("Hello"))
+	fmt.Println(NumberOfSegmentsInAString(""))
 }

@@ -6,11 +6,23 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PalindromePermutation())
+// Time: O(n) | Space: O(1) (fixed 256 chars)
+func CanPermutePalindrome(s string) bool {
+	count := make(map[rune]int)
+	for _, c := range s {
+		count[c]++
+	}
+	oddCount := 0
+	for _, v := range count {
+		if v%2 == 1 {
+			oddCount++
+		}
+	}
+	return oddCount <= 1
 }
 
-func PalindromePermutation() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CanPermutePalindrome("code"))
+	fmt.Println(CanPermutePalindrome("aab"))
+	fmt.Println(CanPermutePalindrome("carerac"))
 }

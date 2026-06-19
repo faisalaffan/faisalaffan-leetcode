@@ -7,10 +7,24 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(TrafficSignalColor())
+	fmt.Println(TrafficSignalColor(60))
+	fmt.Println(TrafficSignalColor(5))
+	fmt.Println(TrafficSignalColor(0))
+	fmt.Println(TrafficSignalColor(30))
+	fmt.Println(TrafficSignalColor(90))
 }
 
-func TrafficSignalColor() any {
-	// TODO: implement
-	return nil
+// Time: O(1)
+// Space: O(1)
+func TrafficSignalColor(timer int) string {
+	if timer == 0 {
+		return "Green"
+	}
+	if timer == 30 {
+		return "Orange"
+	}
+	if timer > 30 && timer <= 90 {
+		return "Red"
+	}
+	return "Invalid"
 }

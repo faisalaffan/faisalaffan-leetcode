@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(TransformArrayByParity())
+	fmt.Println(TransformArrayByParity([]int{4, 3, 2, 1}))
+	fmt.Println(TransformArrayByParity([]int{1, 5, 2, 8, 3}))
 }
 
-func TransformArrayByParity() any {
-	// TODO: implement
-	return nil
+// TransformArrayByParity transforms array: even numbers -> 0 (sorted first), odd numbers -> 1.
+// Time: O(n log n). Space: O(1).
+func TransformArrayByParity(nums []int) []int {
+	// Count evens
+	evenCount := 0
+	for _, v := range nums {
+		if v%2 == 0 {
+			evenCount++
+		}
+	}
+	result := make([]int, len(nums))
+	for i := 0; i < evenCount; i++ {
+		result[i] = 0
+	}
+	for i := evenCount; i < len(nums); i++ {
+		result[i] = 1
+	}
+	return result
 }

@@ -3,14 +3,31 @@ package main
 // LeetCode #2389: Longest Subsequence With Limited Sum
 // https://leetcode.com/problems/longest-subsequence-with-limited-sum/
 // Difficulty: Easy
+// Time O((n+m) log n) | Space O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(LongestSubsequenceWithLimitedSum())
+	fmt.Println(LongestSubsequenceWithLimitedSum([]int{4, 5, 2, 1}, []int{3, 10, 21})) // [2,3,4]
+	fmt.Println(LongestSubsequenceWithLimitedSum([]int{2, 3, 4, 5}, []int{1}))          // [0]
 }
 
-func LongestSubsequenceWithLimitedSum() any {
-	// TODO: implement
-	return nil
+func LongestSubsequenceWithLimitedSum(nums []int, queries []int) []int {
+	sort.Ints(nums)
+	prefix := make([]int, len(nums))
+	sum := 0
+	for i, n := range nums {
+		sum += n
+		prefix[i] = sum
+	}
+
+	res := make([]int, len(queries))
+	for i, q := range queries {
+		// Binary search for rightmost index where prefix <= q
+		res[i] = sort.SearchInts(prefix, q+1)
+	}
+	return res
 }

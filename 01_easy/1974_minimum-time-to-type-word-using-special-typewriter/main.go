@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumTimeToTypeWordUsingSpecialTypewriter())
+	fmt.Println(MinimumTimeToTypeWordUsingSpecialTypewriter("abc"))  // 5
+	fmt.Println(MinimumTimeToTypeWordUsingSpecialTypewriter("bza"))  // 7
+	fmt.Println(MinimumTimeToTypeWordUsingSpecialTypewriter("zjpc")) // 34
 }
 
-func MinimumTimeToTypeWordUsingSpecialTypewriter() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func MinimumTimeToTypeWordUsingSpecialTypewriter(word string) int {
+	seconds := 0
+	pos := 0 // 'a'
+	for i := 0; i < len(word); i++ {
+		target := int(word[i] - 'a')
+		diff := target - pos
+		if diff < 0 {
+			diff = -diff
+		}
+		if diff > 13 {
+			diff = 26 - diff
+		}
+		seconds += diff + 1 // move + type
+		pos = target
+	}
+	return seconds
 }

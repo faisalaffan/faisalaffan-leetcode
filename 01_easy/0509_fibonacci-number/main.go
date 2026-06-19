@@ -6,11 +6,20 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FibonacciNumber())
+// Time: O(n), Space: O(1)
+func FibonacciNumber(n int) int {
+	if n <= 1 {
+		return n
+	}
+	a, b := 0, 1
+	for i := 2; i <= n; i++ {
+		a, b = b, a+b
+	}
+	return b
 }
 
-func FibonacciNumber() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(FibonacciNumber(2))
+	fmt.Println(FibonacciNumber(3))
+	fmt.Println(FibonacciNumber(4))
 }

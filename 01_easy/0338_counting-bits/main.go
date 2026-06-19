@@ -6,11 +6,17 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CountingBits())
+// Time: O(n), Space: O(n)
+func CountingBits(n int) []int {
+	ans := make([]int, n+1)
+	for i := 1; i <= n; i++ {
+		ans[i] = ans[i>>1] + (i & 1)
+	}
+	return ans
 }
 
-func CountingBits() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CountingBits(2))
+	fmt.Println(CountingBits(5))
+	fmt.Println(CountingBits(0))
 }

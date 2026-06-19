@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ExistenceOfASubstringInAStringAndItsReverse())
+	// LeetCode name: isSubstringPresent
+	fmt.Println(ExistenceOfASubstringInAStringAndItsReverse("leetcode")) // true
+	fmt.Println(ExistenceOfASubstringInAStringAndItsReverse("abcba"))   // true
+	fmt.Println(ExistenceOfASubstringInAStringAndItsReverse("abcd"))    // false
 }
 
-func ExistenceOfASubstringInAStringAndItsReverse() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+// LeetCode submission name: isSubstringPresent
+func ExistenceOfASubstringInAStringAndItsReverse(s string) bool {
+	// Build set of all substrings of length 2
+	substrings := make(map[string]bool)
+	for i := 0; i < len(s)-1; i++ {
+		substrings[s[i:i+2]] = true
+	}
+
+	// Check reverse for any of those substrings
+	for i := len(s) - 1; i > 0; i-- {
+		if substrings[string(s[i])+string(s[i-1])] {
+			return true
+		}
+	}
+	return false
 }

@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(DeleteColumnsToMakeSorted())
+	fmt.Println(minDeletionSize([]string{"cba", "daf", "ghi"})) // 1
+	fmt.Println(minDeletionSize([]string{"a", "b"}))             // 0
+	fmt.Println(minDeletionSize([]string{"zyx", "wvu", "tsr"}))  // 3
 }
 
-func DeleteColumnsToMakeSorted() any {
-	// TODO: implement
-	return nil
+// minDeletionSize counts columns to delete so the remaining columns are sorted.
+// Time: O(n * m). Space: O(1).
+func minDeletionSize(strs []string) int {
+	if len(strs) == 0 {
+		return 0
+	}
+	n, m := len(strs), len(strs[0])
+	count := 0
+	for col := 0; col < m; col++ {
+		for row := 1; row < n; row++ {
+			if strs[row][col] < strs[row-1][col] {
+				count++
+				break
+			}
+		}
+	}
+	return count
 }

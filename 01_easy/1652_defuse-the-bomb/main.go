@@ -6,11 +6,31 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(DefuseTheBomb())
+// Time: O(n*|k|), Space: O(n) (or O(1) excluding output)
+func Decrypt(code []int, k int) []int {
+	n := len(code)
+	result := make([]int, n)
+	if k == 0 {
+		return result
+	}
+	for i := 0; i < n; i++ {
+		sum := 0
+		if k > 0 {
+			for j := 1; j <= k; j++ {
+				sum += code[(i+j)%n]
+			}
+		} else {
+			for j := 1; j <= -k; j++ {
+				sum += code[(i-j+n)%n]
+			}
+		}
+		result[i] = sum
+	}
+	return result
 }
 
-func DefuseTheBomb() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(Decrypt([]int{5, 7, 1, 4}, 3))
+	fmt.Println(Decrypt([]int{1, 2, 3, 4}, 0))
+	fmt.Println(Decrypt([]int{2, 4, 9, 3}, -2))
 }

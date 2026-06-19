@@ -6,11 +6,22 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(NumberOfStudentsUnableToEatLunch())
+// Time: O(n), Space: O(1)
+func CountStudents(students []int, sandwiches []int) int {
+	count := [2]int{0, 0}
+	for _, s := range students {
+		count[s]++
+	}
+	for _, sandwich := range sandwiches {
+		if count[sandwich] == 0 {
+			break
+		}
+		count[sandwich]--
+	}
+	return count[0] + count[1]
 }
 
-func NumberOfStudentsUnableToEatLunch() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CountStudents([]int{1, 1, 0, 0}, []int{0, 1, 0, 1}))
+	fmt.Println(CountStudents([]int{1, 1, 1, 0, 0, 1}, []int{1, 0, 0, 0, 1, 1}))
 }

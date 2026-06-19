@@ -3,14 +3,28 @@ package main
 // LeetCode #1078: Occurrences After Bigram
 // https://leetcode.com/problems/occurrences-after-bigram/
 // Difficulty: Easy
+// Time: O(n) | Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	fmt.Println(OccurrencesAfterBigram())
+	fmt.Println(findOcurrences("alice is a good girl she is a good student", "a", "good"))
+	// ["girl","student"]
+	fmt.Println(findOcurrences("we will we will rock you", "we", "will"))
+	// ["we","rock"]
 }
 
-func OccurrencesAfterBigram() any {
-	// TODO: implement
-	return nil
+// LeetCode submission: findOcurrences
+func findOcurrences(text, first, second string) []string {
+	words := strings.Fields(text)
+	var ans []string
+	for i := 2; i < len(words); i++ {
+		if words[i-2] == first && words[i-1] == second {
+			ans = append(ans, words[i])
+		}
+	}
+	return ans
 }

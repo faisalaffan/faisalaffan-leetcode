@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(DivideArrayIntoEqualPairs())
+	fmt.Println(DivideArrayIntoEqualPairs([]int{3, 2, 3, 2, 2, 2})) // true
+	fmt.Println(DivideArrayIntoEqualPairs([]int{1, 2, 3, 4}))       // false
 }
 
-func DivideArrayIntoEqualPairs() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func DivideArrayIntoEqualPairs(nums []int) bool {
+	freq := make(map[int]int)
+	for _, v := range nums {
+		freq[v]++
+	}
+	for _, c := range freq {
+		if c%2 != 0 {
+			return false
+		}
+	}
+	return true
 }

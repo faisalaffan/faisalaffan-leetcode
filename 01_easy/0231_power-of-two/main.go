@@ -6,11 +6,13 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PowerOfTwo())
+// Time: O(1) | Space: O(1)
+func IsPowerOfTwo(n int) bool {
+	return n > 0 && n&(n-1) == 0
 }
 
-func PowerOfTwo() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(IsPowerOfTwo(1))
+	fmt.Println(IsPowerOfTwo(16))
+	fmt.Println(IsPowerOfTwo(3))
 }

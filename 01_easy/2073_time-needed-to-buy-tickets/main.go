@@ -7,10 +7,27 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(TimeNeededToBuyTickets())
+	fmt.Println(TimeNeededToBuyTickets([]int{2, 3, 2}, 2)) // 6
+	fmt.Println(TimeNeededToBuyTickets([]int{5, 1, 1, 1}, 0)) // 8
 }
 
-func TimeNeededToBuyTickets() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func TimeNeededToBuyTickets(tickets []int, k int) int {
+	time := 0
+	for i, t := range tickets {
+		if i <= k {
+			if t <= tickets[k] {
+				time += t
+			} else {
+				time += tickets[k]
+			}
+		} else {
+			if t < tickets[k] {
+				time += t
+			} else {
+				time += tickets[k] - 1
+			}
+		}
+	}
+	return time
 }

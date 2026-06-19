@@ -1,16 +1,19 @@
 package main
 
-// LeetCode #1662: Check If Two String Arrays are Equivalent
+// LeetCode #1662: Check If Two String Arrays Are Equivalent
 // https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/
 // Difficulty: Easy
 
 import "fmt"
+import "strings"
 
-func main() {
-	fmt.Println(CheckIfTwoStringArraysAreEquivalent())
+// Time: O(n), Space: O(n) where n is total characters
+func ArrayStringsAreEqual(word1 []string, word2 []string) bool {
+	return strings.Join(word1, "") == strings.Join(word2, "")
 }
 
-func CheckIfTwoStringArraysAreEquivalent() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(ArrayStringsAreEqual([]string{"ab", "c"}, []string{"a", "bc"}))
+	fmt.Println(ArrayStringsAreEqual([]string{"a", "cb"}, []string{"ab", "c"}))
+	fmt.Println(ArrayStringsAreEqual([]string{"abc", "d", "defg"}, []string{"abcddefg"}))
 }

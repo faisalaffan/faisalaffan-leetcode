@@ -7,10 +7,13 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ANumberAfterADoubleReversal())
+	fmt.Println(ANumberAfterADoubleReversal(526))  // true
+	fmt.Println(ANumberAfterADoubleReversal(1800)) // false
+	fmt.Println(ANumberAfterADoubleReversal(0))    // true
 }
 
-func ANumberAfterADoubleReversal() any {
-	// TODO: implement
-	return nil
+// Time: O(1), Space: O(1)
+func ANumberAfterADoubleReversal(num int) bool {
+	// Reversing twice yields the same iff num has no trailing zeros
+	return num == 0 || num%10 != 0
 }

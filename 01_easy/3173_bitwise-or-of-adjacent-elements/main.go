@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(BitwiseOrOfAdjacentElements())
+	// LeetCode name: orArray
+	fmt.Println(BitwiseOrOfAdjacentElements([]int{1, 2, 3, 4})) // [3, 3, 7]
+	fmt.Println(BitwiseOrOfAdjacentElements([]int{5, 1, 6}))     // [5, 7]
 }
 
-func BitwiseOrOfAdjacentElements() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+// LeetCode submission name: orArray
+func BitwiseOrOfAdjacentElements(nums []int) []int {
+	result := make([]int, len(nums)-1)
+	for i := 0; i < len(nums)-1; i++ {
+		result[i] = nums[i] | nums[i+1]
+	}
+	return result
 }

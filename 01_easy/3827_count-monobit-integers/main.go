@@ -7,10 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountMonobitIntegers())
+	fmt.Println(CountMonobitIntegers(1))
+	fmt.Println(CountMonobitIntegers(4))
+	fmt.Println(CountMonobitIntegers(0))
 }
 
-func CountMonobitIntegers() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(1)
+func CountMonobitIntegers(n int) int {
+	ans := 1 // 0 is monobit (all zeros)
+	x := 1   // 2^1 - 1 = 1 (all ones)
+	for x <= n {
+		ans++
+		x = x*2 + 1
+	}
+	return ans
 }

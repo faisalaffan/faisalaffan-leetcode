@@ -6,11 +6,25 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CountItemsMatchingARule())
+// Time: O(n), Space: O(1)
+func CountMatches(items [][]string, ruleKey string, ruleValue string) int {
+	idx := 0
+	switch ruleKey {
+	case "color":
+		idx = 1
+	case "name":
+		idx = 2
+	}
+	count := 0
+	for _, item := range items {
+		if item[idx] == ruleValue {
+			count++
+		}
+	}
+	return count
 }
 
-func CountItemsMatchingARule() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(CountMatches([][]string{{"phone", "blue", "pixel"}, {"computer", "silver", "lenovo"}, {"phone", "gold", "iphone"}}, "color", "silver"))
+	fmt.Println(CountMatches([][]string{{"phone", "blue", "pixel"}, {"computer", "silver", "phone"}, {"phone", "gold", "iphone"}}, "type", "phone"))
 }

@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(TriangleJudgement())
+func TriangleJudgement() string {
+	return "SELECT x, y, z, CASE WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes' ELSE 'No' END AS triangle FROM Triangle"
 }
 
-func TriangleJudgement() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(TriangleJudgement())
 }

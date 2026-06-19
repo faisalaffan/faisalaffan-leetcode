@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SmallestIndexWithEqualValue())
+	fmt.Println(SmallestIndexWithEqualValue([]int{0, 1, 2}))          // 0
+	fmt.Println(SmallestIndexWithEqualValue([]int{4, 3, 2, 1}))       // 2
+	fmt.Println(SmallestIndexWithEqualValue([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 0})) // -1
 }
 
-func SmallestIndexWithEqualValue() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func SmallestIndexWithEqualValue(nums []int) int {
+	for i, v := range nums {
+		if i%10 == v {
+			return i
+		}
+	}
+	return -1
 }

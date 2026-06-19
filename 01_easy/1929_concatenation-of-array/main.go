@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ConcatenationOfArray())
+	fmt.Println(ConcatenationOfArray([]int{1, 2, 1}))       // [1,2,1,1,2,1]
+	fmt.Println(ConcatenationOfArray([]int{1, 3, 2, 1}))    // [1,3,2,1,1,3,2,1]
 }
 
-func ConcatenationOfArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func ConcatenationOfArray(nums []int) []int {
+	n := len(nums)
+	ans := make([]int, 2*n)
+	for i, v := range nums {
+		ans[i] = v
+		ans[i+n] = v
+	}
+	return ans
 }

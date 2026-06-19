@@ -4,13 +4,19 @@ package main
 // https://leetcode.com/problems/maximum-product-difference-between-two-pairs/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(MaximumProductDifferenceBetweenTwoPairs())
+	fmt.Println(MaximumProductDifferenceBetweenTwoPairs([]int{5, 6, 2, 7, 4}))      // 34
+	fmt.Println(MaximumProductDifferenceBetweenTwoPairs([]int{4, 2, 5, 9, 7, 4, 8})) // 64
 }
 
-func MaximumProductDifferenceBetweenTwoPairs() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n), Space: O(1) ignoring sort
+func MaximumProductDifferenceBetweenTwoPairs(nums []int) int {
+	sort.Ints(nums)
+	n := len(nums)
+	return nums[n-1]*nums[n-2] - nums[0]*nums[1]
 }

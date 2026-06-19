@@ -6,11 +6,25 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(LinkedListFrequency())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func LinkedListFrequency() any {
-	// TODO: implement
-	return nil
+func main() {
+	// LeetCode name: frequencies
+	head := &ListNode{1, &ListNode{2, &ListNode{2, &ListNode{3, &ListNode{3, &ListNode{3, nil}}}}}}
+	fmt.Println(LinkedListFrequency(head)) // map[1:1 2:2 3:3]
+}
+
+// Time: O(n) | Space: O(n)
+// LeetCode submission name: frequencies
+func LinkedListFrequency(head *ListNode) map[int]int {
+	freq := make(map[int]int)
+	curr := head
+	for curr != nil {
+		freq[curr.Val]++
+		curr = curr.Next
+	}
+	return freq
 }

@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CheckIfStringIsAPrefixOfArray())
+	fmt.Println(CheckIfStringIsAPrefixOfArray("iloveleetcode", []string{"i", "love", "leetcode", "apples"})) // true
+	fmt.Println(CheckIfStringIsAPrefixOfArray("iloveleetcode", []string{"apples", "i", "love", "leetcode"})) // false
 }
 
-func CheckIfStringIsAPrefixOfArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func CheckIfStringIsAPrefixOfArray(s string, words []string) bool {
+	i := 0
+	for _, w := range words {
+		if i >= len(s) {
+			break
+		}
+		for j := 0; j < len(w); j++ {
+			if i >= len(s) || s[i] != w[j] {
+				return false
+			}
+			i++
+		}
+	}
+	return i == len(s)
 }

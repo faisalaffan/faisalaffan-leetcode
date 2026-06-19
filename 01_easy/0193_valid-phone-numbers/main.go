@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ValidPhoneNumbers())
+func ValidPhoneNumbers() string {
+	return `grep -E '^(\([0-9]{3}\) [0-9]{3}-[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4})$' file.txt`
 }
 
-func ValidPhoneNumbers() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(ValidPhoneNumbers())
 }

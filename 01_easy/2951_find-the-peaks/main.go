@@ -7,10 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindThePeaks())
+	// LeetCode name: findPeaks
+	fmt.Println(FindThePeaks([]int{2, 4, 4}))    // []
+	fmt.Println(FindThePeaks([]int{1, 4, 3, 8, 5})) // [1, 3]
 }
 
-func FindThePeaks() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1) excluding output
+// LeetCode submission name: findPeaks
+func FindThePeaks(mountain []int) []int {
+	result := []int{}
+	for i := 1; i < len(mountain)-1; i++ {
+		if mountain[i] > mountain[i-1] && mountain[i] > mountain[i+1] {
+			result = append(result, i)
+		}
+	}
+	return result
 }

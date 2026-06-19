@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(NotBoringMovies())
+func NotBoringMovies() string {
+	return "SELECT * FROM Cinema WHERE id % 2 = 1 AND description != 'boring' ORDER BY rating DESC"
 }
 
-func NotBoringMovies() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(NotBoringMovies())
 }

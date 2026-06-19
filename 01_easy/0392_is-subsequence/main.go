@@ -6,11 +6,19 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(IsSubsequence())
+// Time: O(n+m), Space: O(1)
+func IsSubsequence(s, t string) bool {
+	i := 0
+	for j := 0; i < len(s) && j < len(t); j++ {
+		if s[i] == t[j] {
+			i++
+		}
+	}
+	return i == len(s)
 }
 
-func IsSubsequence() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(IsSubsequence("abc", "ahbgdc"))
+	fmt.Println(IsSubsequence("axc", "ahbgdc"))
+	fmt.Println(IsSubsequence("", "ahbgdc"))
 }

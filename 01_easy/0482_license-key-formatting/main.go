@@ -6,11 +6,29 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(LicenseKeyFormatting())
+// Time: O(n), Space: O(n)
+func LicenseKeyFormatting(s string, k int) string {
+	var result []byte
+	count := 0
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == '-' {
+			continue
+		}
+		if count == k {
+			result = append([]byte{'-'}, result...)
+			count = 0
+		}
+		c := s[i]
+		if c >= 'a' && c <= 'z' {
+			c -= 32
+		}
+		result = append([]byte{c}, result...)
+		count++
+	}
+	return string(result)
 }
 
-func LicenseKeyFormatting() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(LicenseKeyFormatting("5F3Z-2e-9-w", 4))
+	fmt.Println(LicenseKeyFormatting("2-5g-3-J", 2))
 }

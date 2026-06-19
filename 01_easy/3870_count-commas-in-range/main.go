@@ -7,10 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountCommasInRange())
+	fmt.Println(CountCommasInRange(1002))
+	fmt.Println(CountCommasInRange(998))
+	fmt.Println(CountCommasInRange(1500000))
 }
 
-func CountCommasInRange() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(1)
+func CountCommasInRange(n int) int {
+	total := 0
+	threshold := 1000
+	for n >= threshold {
+		total += n - threshold + 1
+		threshold *= 1000
+	}
+	return total
 }

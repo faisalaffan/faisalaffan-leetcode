@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountOperationsToObtainZero())
+	fmt.Println(CountOperationsToObtainZero(2, 3))  // 3
+	fmt.Println(CountOperationsToObtainZero(10, 10)) // 1
 }
 
-func CountOperationsToObtainZero() any {
-	// TODO: implement
-	return nil
+// Time: O(log max(num1, num2)), Space: O(1)
+func CountOperationsToObtainZero(num1 int, num2 int) int {
+	ops := 0
+	for num1 > 0 && num2 > 0 {
+		if num1 >= num2 {
+			num1 -= num2
+		} else {
+			num2 -= num1
+		}
+		ops++
+	}
+	return ops
 }

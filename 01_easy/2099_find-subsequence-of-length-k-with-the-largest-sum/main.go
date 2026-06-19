@@ -4,13 +4,45 @@ package main
 // https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(FindSubsequenceOfLengthKWithTheLargestSum())
+	fmt.Println(FindSubsequenceOfLengthKWithTheLargestSum([]int{2, 1, 3, 3}, 2))       // [3 3]
+	fmt.Println(FindSubsequenceOfLengthKWithTheLargestSum([]int{-1, -2, 3, 4}, 3))    // [-1 3 4]
+	fmt.Println(FindSubsequenceOfLengthKWithTheLargestSum([]int{3, 4, 3, 3}, 2))      // [3 4]
 }
 
-func FindSubsequenceOfLengthKWithTheLargestSum() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n), Space: O(n)
+func FindSubsequenceOfLengthKWithTheLargestSum(nums []int, k int) []int {
+	type pair struct {
+		val int
+		idx int
+	}
+
+	pairs := make([]pair, len(nums))
+	for i, v := range nums {
+		pairs[i] = pair{v, i}
+	}
+
+	// Sort by value descending
+	sort.Slice(pairs, func(i, j int) bool {
+		return pairs[i].val > pairs[j].val
+	})
+
+	// Take top k
+	selected := pairs[:k]
+
+	// Sort by original index to preserve order
+	sort.Slice(selected, func(i, j int) bool {
+		return selected[i].idx < selected[j].idx
+	})
+
+	result := make([]int, k)
+	for i, p := range selected {
+		result[i] = p.val
+	}
+	return result
 }

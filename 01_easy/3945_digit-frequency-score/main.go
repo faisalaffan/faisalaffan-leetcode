@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(DigitFrequencyScore())
+	fmt.Println(DigitFrequencyScore(122))
+	fmt.Println(DigitFrequencyScore(101))
 }
 
-func DigitFrequencyScore() any {
-	// TODO: implement
-	return nil
+// Time: O(log n)
+// Space: O(1)
+func DigitFrequencyScore(n int) int {
+	sum := 0
+	for n > 0 {
+		sum += n % 10
+		n /= 10
+	}
+	return sum
 }

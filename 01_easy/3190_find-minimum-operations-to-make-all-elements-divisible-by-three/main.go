@@ -7,10 +7,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindMinimumOperationsToMakeAllElementsDivisibleByThree())
+	fmt.Println(FindMinimumOperationsToMakeAllElementsDivisibleByThree([]int{1, 2, 3, 4}))
+	fmt.Println(FindMinimumOperationsToMakeAllElementsDivisibleByThree([]int{3, 6, 9}))
 }
 
-func FindMinimumOperationsToMakeAllElementsDivisibleByThree() any {
-	// TODO: implement
-	return nil
+// FindMinimumOperationsToMakeAllElementsDivisibleByThree returns the minimum operations to make all elements divisible by 3.
+// Each operation adds or subtracts 1 from an element.
+// Time: O(n). Space: O(1).
+func FindMinimumOperationsToMakeAllElementsDivisibleByThree(nums []int) int {
+	ops := 0
+	for _, num := range nums {
+		r := num % 3
+		if r == 1 || r == 2 {
+			ops++
+		}
+	}
+	return ops
 }

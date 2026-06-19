@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindWordsContainingCharacter())
+	// LeetCode name: findWordsContaining
+	fmt.Println(FindWordsContainingCharacter([]string{"leet", "code"}, 'e')) // [0, 1]
+	fmt.Println(FindWordsContainingCharacter([]string{"abc", "bcd", "aaaa", "cbc"}, 'a')) // [0, 2]
+	fmt.Println(FindWordsContainingCharacter([]string{"abc", "bcd", "aaaa", "cbc"}, 'z')) // []
 }
 
-func FindWordsContainingCharacter() any {
-	// TODO: implement
-	return nil
+// Time: O(n * m) where m is max word length | Space: O(1) excluding output
+// LeetCode submission name: findWordsContaining
+func FindWordsContainingCharacter(words []string, x byte) []int {
+	result := []int{}
+	for i, word := range words {
+		for j := 0; j < len(word); j++ {
+			if word[j] == x {
+				result = append(result, i)
+				break
+			}
+		}
+	}
+	return result
 }

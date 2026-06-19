@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumNumberOfChairsInAWaitingRoom())
+	// LeetCode name: minimumChairs
+	fmt.Println(MinimumNumberOfChairsInAWaitingRoom("EEEE"))   // 4
+	fmt.Println(MinimumNumberOfChairsInAWaitingRoom("ELELEL")) // 1
 }
 
-func MinimumNumberOfChairsInAWaitingRoom() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: minimumChairs
+func MinimumNumberOfChairsInAWaitingRoom(s string) int {
+	current := 0
+	maxChairs := 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == 'E' {
+			current++
+			if current > maxChairs {
+				maxChairs = current
+			}
+		} else {
+			current--
+		}
+	}
+	return maxChairs
 }

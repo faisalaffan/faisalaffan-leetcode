@@ -4,13 +4,23 @@ package main
 // https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/
 // Difficulty: Easy
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	fmt.Println(NumberOfStringsThatAppearAsSubstringsInWord())
+	fmt.Println(NumberOfStringsThatAppearAsSubstringsInWord([]string{"a", "abc", "bc", "d"}, "abc")) // 3
+	fmt.Println(NumberOfStringsThatAppearAsSubstringsInWord([]string{"a", "b", "c"}, "aaaaabbbbb"))  // 2
 }
 
-func NumberOfStringsThatAppearAsSubstringsInWord() any {
-	// TODO: implement
-	return nil
+// Time: O(n * m), Space: O(1)
+func NumberOfStringsThatAppearAsSubstringsInWord(patterns []string, word string) int {
+	count := 0
+	for _, p := range patterns {
+		if strings.Contains(word, p) {
+			count++
+		}
+	}
+	return count
 }

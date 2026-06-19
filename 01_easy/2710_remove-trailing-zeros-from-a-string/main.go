@@ -3,14 +3,18 @@ package main
 // LeetCode #2710: Remove Trailing Zeros From a String
 // https://leetcode.com/problems/remove-trailing-zeros-from-a-string/
 // Difficulty: Easy
+// Time: O(n) | Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	fmt.Println(RemoveTrailingZerosFromAString())
+	fmt.Println(RemoveTrailingZerosFromAString("51230100"))
+	fmt.Println(RemoveTrailingZerosFromAString("123"))
 }
 
-func RemoveTrailingZerosFromAString() any {
-	// TODO: implement
-	return nil
+func RemoveTrailingZerosFromAString(num string) string {
+	return strings.TrimRight(num, "0")
 }

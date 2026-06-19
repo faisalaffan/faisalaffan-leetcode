@@ -7,10 +7,27 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumLengthSubstringWithTwoOccurrences())
+	// LeetCode name: maximumLengthSubstring
+	fmt.Println(MaximumLengthSubstringWithTwoOccurrences("bcbbbcba")) // 4
+	fmt.Println(MaximumLengthSubstringWithTwoOccurrences("aaaa"))      // 2
 }
 
-func MaximumLengthSubstringWithTwoOccurrences() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+// LeetCode submission name: maximumLengthSubstring
+func MaximumLengthSubstringWithTwoOccurrences(s string) int {
+	left := 0
+	freq := make(map[byte]int)
+	maxLen := 0
+
+	for right := 0; right < len(s); right++ {
+		freq[s[right]]++
+		for freq[s[right]] > 2 {
+			freq[s[left]]--
+			left++
+		}
+		if right-left+1 > maxLen {
+			maxLen = right - left + 1
+		}
+	}
+	return maxLen
 }

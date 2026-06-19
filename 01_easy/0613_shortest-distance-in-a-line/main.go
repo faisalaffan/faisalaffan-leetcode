@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ShortestDistanceInALine())
+func ShortestDistanceInALine() string {
+	return "SELECT MIN(ABS(p1.x - p2.x)) AS shortest FROM Point p1 JOIN Point p2 ON p1.x != p2.x"
 }
 
-func ShortestDistanceInALine() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(ShortestDistanceInALine())
 }

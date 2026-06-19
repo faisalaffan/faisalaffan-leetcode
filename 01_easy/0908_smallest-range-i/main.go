@@ -7,10 +7,26 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SmallestRangeI())
+	fmt.Println(smallestRangeI([]int{1}, 0))          // 0
+	fmt.Println(smallestRangeI([]int{0, 10}, 2))      // 6
+	fmt.Println(smallestRangeI([]int{1, 3, 6}, 3))    // 0
 }
 
-func SmallestRangeI() any {
-	// TODO: implement
-	return nil
+// smallestRangeI returns the smallest possible range after modifying each element by at most k.
+// Time: O(n). Space: O(1).
+func smallestRangeI(nums []int, k int) int {
+	minVal, maxVal := nums[0], nums[0]
+	for _, v := range nums[1:] {
+		if v < minVal {
+			minVal = v
+		}
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+	diff := (maxVal - k) - (minVal + k)
+	if diff < 0 {
+		return 0
+	}
+	return diff
 }

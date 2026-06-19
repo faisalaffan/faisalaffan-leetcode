@@ -7,10 +7,17 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SmallestNumberWithAllSetBits())
+	fmt.Println(SmallestNumberWithAllSetBits(5))
+	fmt.Println(SmallestNumberWithAllSetBits(10))
+	fmt.Println(SmallestNumberWithAllSetBits(3))
 }
 
-func SmallestNumberWithAllSetBits() any {
-	// TODO: implement
-	return nil
+// SmallestNumberWithAllSetBits returns the smallest number >= n whose binary representation consists of all 1s.
+// Time: O(log n). Space: O(1).
+func SmallestNumberWithAllSetBits(n int) int {
+	result := 1
+	for result < n {
+		result = (result << 1) | 1
+	}
+	return result
 }

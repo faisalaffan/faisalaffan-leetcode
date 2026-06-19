@@ -7,10 +7,27 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LongestContinuousIncreasingSubsequence())
+	fmt.Println(findLengthOfLCIS([]int{1, 3, 5, 4, 7}))    // 3
+	fmt.Println(findLengthOfLCIS([]int{2, 2, 2, 2, 2}))    // 1
+	fmt.Println(findLengthOfLCIS([]int{1, 3, 5, 7}))       // 4
 }
 
-func LongestContinuousIncreasingSubsequence() any {
-	// TODO: implement
-	return nil
+// findLengthOfLCIS finds the length of the longest continuous increasing subsequence.
+// Time: O(n). Space: O(1).
+func findLengthOfLCIS(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	maxLen, curr := 1, 1
+	for i := 1; i < len(nums); i++ {
+		if nums[i] > nums[i-1] {
+			curr++
+			if curr > maxLen {
+				maxLen = curr
+			}
+		} else {
+			curr = 1
+		}
+	}
+	return maxLen
 }

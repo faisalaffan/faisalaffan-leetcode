@@ -6,11 +6,10 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(SwapSexOfEmployees())
+func SwapSexOfEmployees() string {
+	return "UPDATE Salary SET sex = CASE WHEN sex = 'm' THEN 'f' ELSE 'm' END"
 }
 
-func SwapSexOfEmployees() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(SwapSexOfEmployees())
 }

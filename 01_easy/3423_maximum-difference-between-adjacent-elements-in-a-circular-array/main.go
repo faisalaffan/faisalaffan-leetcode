@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumDifferenceBetweenAdjacentElementsInACircularArray())
+	fmt.Println(MaximumDifferenceBetweenAdjacentElementsInACircularArray([]int{1, 2, 4}))
+	fmt.Println(MaximumDifferenceBetweenAdjacentElementsInACircularArray([]int{-5, -1, -3}))
 }
 
-func MaximumDifferenceBetweenAdjacentElementsInACircularArray() any {
-	// TODO: implement
-	return nil
+// MaximumDifferenceBetweenAdjacentElementsInACircularArray returns the max absolute diff between adjacent elements (circular).
+// Time: O(n). Space: O(1).
+func MaximumDifferenceBetweenAdjacentElementsInACircularArray(nums []int) int {
+	n := len(nums)
+	maxDiff := 0
+	for i := 0; i < n; i++ {
+		diff := nums[i] - nums[(i+1)%n]
+		if diff < 0 {
+			diff = -diff
+		}
+		if diff > maxDiff {
+			maxDiff = diff
+		}
+	}
+	return maxDiff
 }

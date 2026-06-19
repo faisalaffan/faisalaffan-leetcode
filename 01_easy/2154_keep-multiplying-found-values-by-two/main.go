@@ -7,10 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(KeepMultiplyingFoundValuesByTwo())
+	fmt.Println(KeepMultiplyingFoundValuesByTwo([]int{5, 3, 6, 1, 12}, 3))  // 24
+	fmt.Println(KeepMultiplyingFoundValuesByTwo([]int{2, 7, 9}, 4))          // 4
 }
 
-func KeepMultiplyingFoundValuesByTwo() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func KeepMultiplyingFoundValuesByTwo(nums []int, original int) int {
+	set := make(map[int]bool)
+	for _, v := range nums {
+		set[v] = true
+	}
+
+	for set[original] {
+		original *= 2
+	}
+	return original
 }

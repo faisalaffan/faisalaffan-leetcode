@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheXorOfNumbersWhichAppearTwice())
+	// LeetCode name: duplicateNumbersXOR
+	fmt.Println(FindTheXorOfNumbersWhichAppearTwice([]int{1, 2, 2, 1})) // 3
+	fmt.Println(FindTheXorOfNumbersWhichAppearTwice([]int{1, 2, 3}))    // 0
 }
 
-func FindTheXorOfNumbersWhichAppearTwice() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+// LeetCode submission name: duplicateNumbersXOR
+func FindTheXorOfNumbersWhichAppearTwice(nums []int) int {
+	freq := make(map[int]int)
+	for _, v := range nums {
+		freq[v]++
+	}
+	xor := 0
+	for v, f := range freq {
+		if f == 2 {
+			xor ^= v
+		}
+	}
+	return xor
 }

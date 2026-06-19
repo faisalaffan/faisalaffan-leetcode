@@ -5,12 +5,31 @@ package main
 // Difficulty: Easy
 
 import "fmt"
+import "unicode"
 
-func main() {
-	fmt.Println(LongestNiceSubstring())
+// Time: O(n^2), Space: O(n)
+func LongestNiceSubstring(s string) string {
+	result := ""
+	for i := 0; i < len(s); i++ {
+		lower := 0
+		upper := 0
+		for j := i; j < len(s); j++ {
+			ch := rune(s[j])
+			if unicode.IsUpper(ch) {
+				upper |= 1 << (unicode.ToLower(ch) - 'a')
+			} else {
+				lower |= 1 << (ch - 'a')
+			}
+			if lower == upper && j-i+1 > len(result) {
+				result = s[i : j+1]
+			}
+		}
+	}
+	return result
 }
 
-func LongestNiceSubstring() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(LongestNiceSubstring("YazaAay"))
+	fmt.Println(LongestNiceSubstring("Bb"))
+	fmt.Println(LongestNiceSubstring("c"))
 }

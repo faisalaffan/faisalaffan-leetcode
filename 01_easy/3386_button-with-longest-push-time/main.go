@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ButtonWithLongestPushTime())
+	fmt.Println(ButtonWithLongestPushTime([][]int{{1, 2}, {2, 5}, {3, 9}, {1, 15}}))
+	fmt.Println(ButtonWithLongestPushTime([][]int{{10, 5}, {1, 7}}))
 }
 
-func ButtonWithLongestPushTime() any {
-	// TODO: implement
-	return nil
+// ButtonWithLongestPushTime returns the button index with the longest duration between consecutive events.
+// Each event is [button_index, timestamp].
+// Time: O(n). Space: O(1).
+func ButtonWithLongestPushTime(events [][]int) int {
+	maxDuration := 0
+	buttonIndex := events[0][0]
+	prevTime := events[0][1]
+
+	for i := 1; i < len(events); i++ {
+		duration := events[i][1] - prevTime
+		if duration > maxDuration || (duration == maxDuration && events[i][0] < buttonIndex) {
+			maxDuration = duration
+			buttonIndex = events[i][0]
+		}
+		prevTime = events[i][1]
+	}
+	return buttonIndex
 }
