@@ -7,36 +7,28 @@ package main
 import "fmt"
 
 func main() {
-	// This is a SQL problem - simulating in Go
-	// Find the user who rated the most movies
-	// Find the movie with the highest average rating in Feb 2020
-
-	type rating struct {
-		userID    int
-		movieID   int
-		rating    int
-		createdAt string
-	}
-	type movie struct {
-		id       int
-		title    string
-	}
-	type user struct {
-		id   int
-		name string
-	}
-
-	movies := []movie{
+	movies := []struct {
+		id    int
+		title string
+	}{
 		{1, "Avengers"},
 		{2, "Frozen 2"},
 		{3, "Joker"},
 	}
-	users := []user{
+	users := []struct {
+		id   int
+		name string
+	}{
 		{1, "Daniel"},
 		{2, "Monica"},
 		{3, "Maria"},
 	}
-	ratings := []rating{
+	ratings := []struct {
+		userID    int
+		movieID   int
+		rating    int
+		createdAt string
+	}{
 		{1, 1, 3, "2020-01-12"},
 		{1, 2, 4, "2020-02-11"},
 		{1, 3, 2, "2020-02-12"},

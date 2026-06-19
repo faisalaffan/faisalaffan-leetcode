@@ -8,35 +8,30 @@ import "fmt"
 import "sort"
 
 func main() {
-	// SQL problem - simulating in Go
-	type invoice struct {
-		invoiceID    int
-		customerID   int
-		price        int
-	}
-	type contact struct {
-		userID        int
-		contactEmail  string
-		trusted       bool
-	}
-	type customer struct {
+	invoices := []struct {
+		invoiceID  int
 		customerID int
-		customerName string
-		email       string
-	}
-
-	invoices := []invoice{
+		price      int
+	}{
 		{44, 2, 100},
 		{55, 8, 120},
 		{66, 9, 150},
 	}
-	customers := []customer{
+	customers := []struct {
+		customerID   int
+		customerName string
+		email        string
+	}{
 		{1, "Alice", "alice@leetcode.com"},
 		{2, "Bob", "bob@leetcode.com"},
 		{13, "John", "john@leetcode.com"},
 		{6, "Alex", "alex@leetcode.com"},
 	}
-	contacts := []contact{
+	contacts := []struct {
+		userID       int
+		contactEmail string
+		trusted      bool
+	}{
 		{1, "bob@leetcode.com", true},
 		{1, "john@leetcode.com", true},
 		{1, "jane@leetcode.com", false},

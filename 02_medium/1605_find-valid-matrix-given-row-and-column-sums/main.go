@@ -12,6 +12,13 @@ func main() {
 	fmt.Println(RestoreMatrix([]int{14, 9}, []int{6, 9, 8}))
 }
 
+func minInt(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
 func RestoreMatrix(rowSum []int, colSum []int) [][]int {
 	// Time: O(R*C), Space: O(R*C)
 	rows, cols := len(rowSum), len(colSum)

@@ -8,23 +8,19 @@ import "fmt"
 import "sort"
 
 func main() {
-	// SQL problem - simulating in Go
-	type login struct {
-		userID int
-		loginDate string
-	}
-	type account struct {
+	accounts := []struct {
 		id   int
 		name string
-	}
-
-	accounts := []account{
+	}{
 		{1, "Daniel"},
 		{2, "Bob"},
 		{3, "John"},
 		{4, "Alice"},
 	}
-	logins := []login{
+	logins := []struct {
+		userID    int
+		loginDate string
+	}{
 		{1, "2020-01-01"}, {1, "2020-01-02"}, {1, "2020-01-03"},
 		{1, "2020-01-06"}, {1, "2020-01-07"},
 		{2, "2020-01-01"}, {2, "2020-01-02"}, {2, "2020-01-03"},

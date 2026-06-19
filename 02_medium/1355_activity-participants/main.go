@@ -7,23 +7,19 @@ package main
 import "fmt"
 
 func main() {
-	// SQL problem - simulating in Go
-	type activity struct {
+	activities := []struct {
 		id   int
 		name string
-	}
-	type friend struct {
-		id         int
-		name       string
-		activityID int
-	}
-
-	activities := []activity{
+	}{
 		{1, "Eating"},
 		{2, "Singing"},
 		{3, "Horse Riding"},
 	}
-	friends := []friend{
+	friends := []struct {
+		id         int
+		name       string
+		activityID int
+	}{
 		{1, "Jonathan D.", 1},
 		{2, "Jade W.", 1},
 		{3, "Victor J.", 1},

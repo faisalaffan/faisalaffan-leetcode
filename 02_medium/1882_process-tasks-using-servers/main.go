@@ -62,7 +62,6 @@ func main() {
 // Time: O((m + n) log n) where m = len(tasks), n = len(servers)
 // Space: O(n)
 func AssignTasks(servers []int, tasks []int) []int {
-	n := len(servers)
 	m := len(tasks)
 
 	available := &MinHeapAvailable{}

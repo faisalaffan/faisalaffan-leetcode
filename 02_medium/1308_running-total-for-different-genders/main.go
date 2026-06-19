@@ -7,16 +7,12 @@ package main
 import "fmt"
 
 func main() {
-	// This is a SQL problem but we implement the logic in Go
-	// Simulate the Scores table
-	type score struct {
-		playerName string
-		gender     string
-		day        string
+	scores := []struct {
+		playerName  string
+		gender      string
+		day         string
 		scorePoints int
-	}
-
-	scores := []score{
+	}{
 		{"Aron", "F", "2020-01-01", 17},
 		{"Alice", "F", "2020-01-07", 23},
 		{"Bajrang", "M", "2020-01-07", 7},

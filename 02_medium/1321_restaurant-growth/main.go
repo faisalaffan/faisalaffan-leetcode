@@ -8,13 +8,10 @@ import "fmt"
 import "sort"
 
 func main() {
-	type daily struct {
+	customers := []struct {
 		visitedOn string
 		amount    int
-	}
-
-	// Test case
-	customers := []daily{
+	}{
 		{"2020-01-01", 10},
 		{"2020-01-02", 10},
 		{"2020-01-03", 10},
