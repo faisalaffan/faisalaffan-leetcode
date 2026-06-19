@@ -13,6 +13,11 @@ import "fmt"
 const mod = 1000000007
 
 func steppingNumbers(low, high string) int {
+	// We want countLE(high) - countLT(low). Use countLE(decrement(low)) for countLT.
+	// Edge case: low="0" has no predecessor, handle separately.
+	if low == "0" {
+		return countLE(high)
+	}
 	cHigh := countLE(high)
 	cLow := countLE(decrement(low))
 	return (cHigh - cLow + mod) % mod
@@ -61,10 +66,9 @@ func countLE(s string) int {
 	var dfs func(pos int, last int, tight int, started int) int
 	dfs = func(pos int, last int, tight int, started int) int {
 		if pos == n {
-			if started == 1 {
-				return 1
-			}
-			return 0
+			// Count 0 as a valid stepping number (single digit 0).
+			// If started==0, we've processed all leading zeros which represents the number 0.
+			return 1
 		}
 		if dp[pos][last][tight][started] != -1 {
 			return dp[pos][last][tight][started]

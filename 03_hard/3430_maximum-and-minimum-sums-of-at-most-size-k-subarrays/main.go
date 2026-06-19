@@ -4,19 +4,49 @@ package main
 // https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subarrays/
 // Difficulty: Hard
 //
-// Monotonic stack for previous/next smaller/greater.
-// Contribution counting with k constraint.
+// Monotonic stack for previous/next smaller/greater element.
+// Contribution counting with subarray length constraint ≤ k.
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaximumAndMinimumSumsOfAtMostSizeKSubarrays([]int{1, 3, 2}, 2))
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 
-func MaximumAndMinimumSumsOfAtMostSizeKSubarrays(nums []int, k int) int64 {
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+// For each element, compute how many subarrays of length ≤ k it is min/max of.
+func countContributions(leftDist, rightDist, k int) int64 {
+	// leftDist: distance to previous smaller/greater element
+	// rightDist: distance to next smaller/greater element
+	// Number of subarrays of length ≤ k where this element is min (or max):
+	// choose left extension a in [1, leftDist], right extension b in [1, rightDist]
+	// subarray length = a + b - 1 ≤ k  =>  a + b ≤ k + 1
+	var total int64
+	maxA := min(leftDist, k)
+	for a := 1; a <= maxA; a++ {
+		bLimit := min(rightDist, k+1-a)
+		if bLimit > 0 {
+			total += int64(bLimit)
+		}
+	}
+	return total
+}
+
+func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	n := len(nums)
 
-	// Previous smaller element (strict)
+	// --- Monotonic stacks ---
+
+	// Previous smaller (strict)
 	ps := make([]int, n)
 	stack := make([]int, 0, n)
 	for i := 0; i < n; i++ {
@@ -31,7 +61,7 @@ func MaximumAndMinimumSumsOfAtMostSizeKSubarrays(nums []int, k int) int64 {
 		stack = append(stack, i)
 	}
 
-	// Next smaller element (strict)
+	// Next smaller (strict: nums[ns[i]] < nums[i])
 	ns := make([]int, n)
 	stack = stack[:0]
 	for i := n - 1; i >= 0; i-- {
@@ -46,7 +76,7 @@ func MaximumAndMinimumSumsOfAtMostSizeKSubarrays(nums []int, k int) int64 {
 		stack = append(stack, i)
 	}
 
-	// Previous greater element (strict)
+	// Previous greater (strict)
 	pg := make([]int, n)
 	stack = stack[:0]
 	for i := 0; i < n; i++ {
@@ -61,7 +91,7 @@ func MaximumAndMinimumSumsOfAtMostSizeKSubarrays(nums []int, k int) int64 {
 		stack = append(stack, i)
 	}
 
-	// Next greater element (strict)
+	// Next greater (strict: nums[ng[i]] > nums[i])
 	ng := make([]int, n)
 	stack = stack[:0]
 	for i := n - 1; i >= 0; i-- {
@@ -76,42 +106,44 @@ func MaximumAndMinimumSumsOfAtMostSizeKSubarrays(nums []int, k int) int64 {
 		stack = append(stack, i)
 	}
 
-	contrib := func(left, right, idx int) int64 {
-		l := int64(idx - left)
-		r := int64(right - idx)
-		total := int64(0)
-		// Sum of subarray counts with length <= k that include idx
-		// For each possible subarray length L: min(L, k) counts of being in a length-L subarray
-		// Actually count # subarrays where idx is min/max and subarray length <= k
-		// Left choices: 1..l, right choices: 1..r
-		// For each leftLen a and rightLen b, subarray length = a+b-1
-		// Count where a+b-1 <= k, i.e., a+b <= k+1
-
-		// For each a in [1, l], b in [1, r], where a+b <= k+1
-		// cnt = sum_{a=1}^{l} min(r, k+1-a)
-		// Clamp a such that k+1-a >= 1 => a <= k
-		maxA := l
-		if maxA > int64(k) {
-			maxA = int64(k)
-		}
-		for a := int64(1); a <= maxA; a++ {
-			rem := int64(k+1) - a
-			bLimit := r
-			if rem < bLimit {
-				bLimit = rem
-			}
-			if bLimit >= 1 {
-				total += bLimit
-			}
-		}
-		return total
-	}
-
-	ans := int64(0)
+	var sumMin, sumMax int64
 	for i := 0; i < n; i++ {
-		minContrib := contrib(ps[i], ns[i], i)
-		maxContrib := contrib(pg[i], ng[i], i)
-		ans += int64(nums[i]) * (maxContrib - minContrib)
+		lMin := i - ps[i]    // left extension limit for min contribution
+		rMin := ns[i] - i    // right extension limit for min contribution
+		lMax := i - pg[i]    // left extension limit for max contribution
+		rMax := ng[i] - i    // right extension limit for max contribution
+
+		cntMin := countContributions(lMin, rMin, k)
+		cntMax := countContributions(lMax, rMax, k)
+
+		sumMin += int64(nums[i]) * cntMin
+		sumMax += int64(nums[i]) * cntMax
 	}
-	return ans
+	return sumMin, sumMax
+}
+
+func main() {
+	// Example test: [1,2,3,4,5], k=3
+	nums := []int{1, 2, 3, 4, 5}
+	k := 3
+	minS, maxS := minMaxSumOfSubarraysAtMostK(nums, k)
+	fmt.Printf("nums=%v, k=%d -> minSum=%d, maxSum=%d\n", nums, k, minS, maxS)
+
+	// Test: [1,3,2], k=2
+	nums2 := []int{1, 3, 2}
+	k2 := 2
+	minS2, maxS2 := minMaxSumOfSubarraysAtMostK(nums2, k2)
+	fmt.Printf("nums=%v, k=%d -> minSum=%d, maxSum=%d\n", nums2, k2, minS2, maxS2)
+
+	// Test: single element
+	nums3 := []int{5}
+	k3 := 1
+	minS3, maxS3 := minMaxSumOfSubarraysAtMostK(nums3, k3)
+	fmt.Printf("nums=%v, k=%d -> minSum=%d, maxSum=%d\n", nums3, k3, minS3, maxS3)
+
+	// Test: all equal
+	nums4 := []int{2, 2, 2, 2}
+	k4 := 2
+	minS4, maxS4 := minMaxSumOfSubarraysAtMostK(nums4, k4)
+	fmt.Printf("nums=%v, k=%d -> minSum=%d, maxSum=%d\n", nums4, k4, minS4, maxS4)
 }

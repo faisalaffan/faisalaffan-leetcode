@@ -13,9 +13,9 @@ import (
 )
 
 func main() {
-	fmt.Println(minimumDifference([]int{3, 1, 2}))                    // -1
-	fmt.Println(minimumDifference([]int{7, 9, 5, 8, 1, 3}))          // 1
-	fmt.Println(minimumDifference([]int{1, 2, 3, 4, 5, 6, 7, 8, 9})) // 0
+	fmt.Println(minimumDifference([]int{3, 1, 2}))                       // -1
+	fmt.Println(minimumDifference([]int{7, 9, 5, 8, 1, 3}))             // 1
+	fmt.Println(minimumDifference([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}))    // -18
 }
 
 type MinHeap []int

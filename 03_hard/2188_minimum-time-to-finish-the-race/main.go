@@ -10,9 +10,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(minimumFinishTime([][]int{{2, 3}, {3, 4}}, 5, 4))          // 21
-	fmt.Println(minimumFinishTime([][]int{{1, 10}, {2, 2}, {3, 4}}, 2, 5)) // 14
-	fmt.Println(minimumFinishTime([][]int{{3, 4}}, 2, 3))                  // 9
+	fmt.Println(minimumFinishTime([][]int{{2, 3}, {3, 4}}, 5, 4))            // 21
+	fmt.Println(minimumFinishTime([][]int{{1, 10}, {2, 2}, {3, 4}}, 2, 5))   // 13
+	fmt.Println(minimumFinishTime([][]int{{3, 4}}, 2, 3))                    // 13
 }
 
 func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {

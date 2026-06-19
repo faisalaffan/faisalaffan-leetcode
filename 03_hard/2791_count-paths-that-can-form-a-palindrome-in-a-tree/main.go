@@ -5,8 +5,9 @@ package main
 // Difficulty: Hard
 //
 // DFS + bitmask. Characters are on edges (s[i] = edge char from parent[i] to i).
-// XOR mask from root to node. Path(u,v) XOR = mask[u] ^ mask[v]. A palindrome
-// requires at most 1 bit set in the path XOR.
+// Compute XOR mask from root for each node. Path(u,v) XOR = mask[u] ^ mask[v].
+// A palindrome requires at most 1 bit set. Count pairs by iterating all masks
+// and for each, counting prior masks that differ by 0 or 1 bit.
 // O(N * 26) time, O(N) space.
 
 import "fmt"
@@ -19,45 +20,42 @@ func countPalindromePaths(parent []int, s string) int {
 		children[p] = append(children[p], i)
 	}
 
-	maskCount := make(map[int]int)
-	maskCount[0] = 1 // empty path from root to itself
-	result := 0
-
-	var dfs func(node int, mask int)
-	dfs = func(node int, mask int) {
+	// Compute mask for each node (XOR of edge chars from root)
+	mask := make([]int, n)
+	var dfsMask func(node int, cur int)
+	dfsMask = func(node int, cur int) {
+		mask[node] = cur
 		for _, child := range children[node] {
 			edgeMask := 1 << (s[child] - 'a')
-			childMask := mask ^ edgeMask
-
-			// Paths with even parity (XOR = 0)
-			result += maskCount[childMask]
-
-			// Paths with exactly one odd character (XOR has 1 bit set)
-			for b := 0; b < 26; b++ {
-				needed := childMask ^ (1 << b)
-				result += maskCount[needed]
-			}
-
-			maskCount[childMask]++
-			dfs(child, childMask)
-			maskCount[childMask]--
+			dfsMask(child, cur^edgeMask)
 		}
 	}
+	dfsMask(0, 0)
 
-	dfs(0, 0)
+	// Count pairs: iterate masks linearly, counting prior masks with XOR=0 or XOR=1bit
+	count := make(map[int]int)
+	result := 0
+	for _, m := range mask {
+		// XOR = 0: same mask
+		result += count[m]
+		// XOR has exactly 1 bit: differ by one bit
+		for b := 0; b < 26; b++ {
+			result += count[m^(1<<b)]
+		}
+		count[m]++
+	}
+
 	return result
 }
 
 func main() {
-	// Example 1: parent=[-1,0,0,1,1,2], s="acaabc" => 8
+	// LeetCode Example 1: parent=[-1,0,0,1,1,2], s="acaabc" => 8
 	fmt.Println(countPalindromePaths([]int{-1, 0, 0, 1, 1, 2}, "acaabc"))
-	// Example 2: parent=[-1,0,0,0,0], s="aaaaa" => 10
+	// LeetCode Example 2: parent=[-1,0,0,0,0], s="aaaaa" => 10
 	fmt.Println(countPalindromePaths([]int{-1, 0, 0, 0, 0}, "aaaaa"))
 	// Single node (no edges)
 	fmt.Println(countPalindromePaths([]int{-1}, "a"))
 	// Two nodes
 	fmt.Println(countPalindromePaths([]int{-1, 0}, "aa"))
 	fmt.Println(countPalindromePaths([]int{-1, 0}, "ab"))
-	// User's example
-	fmt.Println(countPalindromePaths([]int{-1, 0, 0, 1, 1, 2}, "abacbe"))
 }

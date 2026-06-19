@@ -24,6 +24,7 @@ type trieNode struct {
 
 type binaryTrie struct {
 	root *trieNode
+	sz   int
 }
 
 func newBinaryTrie() *binaryTrie {
@@ -40,6 +41,7 @@ func (t *binaryTrie) insert(x int) {
 		node = node.children[bit]
 		node.cnt++
 	}
+	t.sz++
 }
 
 func (t *binaryTrie) remove(x int) {
@@ -49,6 +51,7 @@ func (t *binaryTrie) remove(x int) {
 		node = node.children[bit]
 		node.cnt--
 	}
+	t.sz--
 }
 
 func (t *binaryTrie) maxXor(x int) int {
@@ -82,7 +85,7 @@ func maximumStrongPairXor(nums []int) int {
 			left++
 		}
 		// Query max XOR with current value
-		if trie.root.cnt > 0 {
+		if trie.sz > 0 {
 			if xr := trie.maxXor(val); xr > ans {
 				ans = xr
 			}

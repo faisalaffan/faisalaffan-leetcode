@@ -14,25 +14,26 @@ func stoneGameViii(stones []int) int {
 		prefix[i] = prefix[i-1] + stones[i]
 	}
 
-	// dp[i] = maximum score difference (current player - other) when
-	// considering stones from index i onward (i is the first stone).
-	// The player picks some index j >= i, takes prefix[j], then the rest
-	// becomes a game for the other player.
-	// dp[i] = max(prefix[j] - dp[j+1]) for j in [i, n-2]
-	// dp[n-1] = 0 (only one stone, can't make a move with i < n-1 requirement)
+	// dp[i] = max score difference (current player - opponent) starting from
+	// position i. The player may choose any j >= i, j < n-1, take the prefix
+	// from position i to j (scoring prefix[j] - base), and leave position j+1
+	// for the opponent.
+	//
+	// Recurrence: dp[i] = max over j >= i of (prefix[j] - base - dp[j+1])
+	// where base = 0 (when i=0) or prefix[i-1].
+	// This simplifies to: dp[i] = max(prefix[i] - dp[i+1], dp[i+1]).
+	//
+	// dp[n-1] = 0 (cannot take when only 1 stone remains).
 
-	// dp[i] = max(prefix[i] - dp[i+1], dp[i+1])
-	dpI := 0
+	dp := 0
 	for i := n - 2; i >= 0; i-- {
-		dpI = max(prefix[i]-dpI, dpI)
+		dp = max(prefix[i]-dp, dp)
 	}
-	return dpI
+	return dp
 }
 
 func main() {
-	// Example: [-1,2,-3,4,-5] -> 5
+	// Test cases
 	fmt.Println(stoneGameViii([]int{-1, 2, -3, 4, -5}))
-
-	// Additional test
 	fmt.Println(stoneGameViii([]int{1, 2, 3, 4, 5}))
 }

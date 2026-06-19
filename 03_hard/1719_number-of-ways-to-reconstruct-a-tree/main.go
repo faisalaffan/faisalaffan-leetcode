@@ -3,9 +3,8 @@ package main
 // LeetCode #1719: Number Of Ways To Reconstruct A Tree
 // https://leetcode.com/problems/number-of-ways-to-reconstruct-a-tree/
 // Difficulty: Hard
-// Strategy: Sort nodes by degree. Root has deg=n-1.
-// For each node, its parent is the neighbor with smallest degree >= its own.
-// Check validity. If any node has same degree as parent -> 2 ways.
+// Strategy: Sort nodes by degree descending, assign parents from processed neighbors.
+// Validate ancestor relationships. Check multiplicity when deg equals parent deg.
 
 import (
 	"fmt"
@@ -13,15 +12,15 @@ import (
 )
 
 func checkWays(pairs [][]int) int {
-	// Build adjacency sets and degree counts
+	// Build adjacency and degrees
 	adj := make(map[int]map[int]bool)
 	deg := make(map[int]int)
-	nodes := make(map[int]bool)
+	nodeSet := make(map[int]bool)
 
 	for _, p := range pairs {
 		u, v := p[0], p[1]
-		nodes[u] = true
-		nodes[v] = true
+		nodeSet[u] = true
+		nodeSet[v] = true
 		if adj[u] == nil {
 			adj[u] = make(map[int]bool)
 		}
@@ -34,50 +33,74 @@ func checkWays(pairs [][]int) int {
 		deg[v]++
 	}
 
-	n := len(nodes)
+	n := len(nodeSet)
 
-	// Build node list and sort by degree descending
-	nodeList := make([]int, 0, n)
-	for node := range nodes {
-		nodeList = append(nodeList, node)
+	// Build sorted node list
+	nodes := make([]int, 0, n)
+	for node := range nodeSet {
+		nodes = append(nodes, node)
 	}
-	sort.Slice(nodeList, func(i, j int) bool {
-		return deg[nodeList[i]] > deg[nodeList[j]]
+	sort.Slice(nodes, func(i, j int) bool {
+		if deg[nodes[i]] != deg[nodes[j]] {
+			return deg[nodes[i]] > deg[nodes[j]]
+		}
+		return nodes[i] < nodes[j]
 	})
 
-	// Root must have degree n-1
-	if deg[nodeList[0]] != n-1 {
-		return 0
+	maxDeg := deg[nodes[0]]
+
+	// If max degree < n-1: only simple paths are valid (deg <= 2 for all nodes)
+	if maxDeg < n-1 {
+		if maxDeg > 2 {
+			return 0
+		}
+		leafCount := 0
+		for _, v := range nodes {
+			if deg[v] > 2 {
+				return 0
+			}
+			if deg[v] == 1 {
+				leafCount++
+			}
+		}
+		if leafCount != 2 {
+			return 0
+		}
+		// Path graph: there is exactly 1 way
+		return 1
 	}
 
-	// Map node -> parent
+	// Root = first node (highest degree). No deg=n-1 requirement.
 	parent := make(map[int]int)
+	parent[nodes[0]] = -1
 
-	// For each node (except root), find its parent:
-	// the neighbor with smallest degree >= its own degree
-	for _, v := range nodeList {
-		if deg[v] == n-1 {
-			parent[v] = -1
-			continue
-		}
-		// Find candidate parent
-		bestParent := -1
+	// Processing order for tiebreaking
+	order := make(map[int]int)
+	for i, v := range nodes {
+		order[v] = i
+	}
+
+	// Assign parents
+	for _, v := range nodes[1:] {
+		bestP := -1
+		bestDeg := -1
 		for u := range adj[v] {
-			if deg[u] >= deg[v] {
-				if bestParent == -1 || deg[u] < deg[bestParent] || (deg[u] == deg[bestParent] && u < bestParent) {
-					bestParent = u
+			if _, ok := parent[u]; ok { // u is processed
+				if deg[u] >= deg[v] {
+					if bestP == -1 || deg[u] < bestDeg || (deg[u] == bestDeg && order[u] > order[bestP]) {
+						bestP = u
+						bestDeg = deg[u]
+					}
 				}
 			}
 		}
-		if bestParent == -1 {
+		if bestP == -1 {
 			return 0
 		}
-		parent[v] = bestParent
+		parent[v] = bestP
 	}
 
-	// Verify: for every pair (u,v), the parent-child relationships are consistent
-	// In the tree, for every edge in pairs, one must be ancestor of the other
-	// Check parent chains
+	// Validate ancestor relationships for all pairs
 	isAncestor := func(anc, desc int) bool {
 		for desc != -1 {
 			if desc == anc {
@@ -95,40 +118,37 @@ func checkWays(pairs [][]int) int {
 		}
 	}
 
-	// Check for multiple ways: if any node has the same degree as its parent
-	// (and parent is not root), there are 2 ways
-	ways := 1
+	// Check multiplicity: if any node has same degree as parent
+	// AND has another same-degree neighbor != parent
 	for v, p := range parent {
 		if p == -1 {
 			continue
 		}
 		if deg[v] == deg[p] {
-			ways = 2
-			break
+			for u := range adj[v] {
+				if u != p && deg[u] == deg[v] {
+					return 2
+				}
+			}
 		}
 	}
 
-	return ways
+	return 1
 }
 
 func main() {
 	// Example 1: [[1,2],[2,3]] -> 1
-	pairs1 := [][]int{{1, 2}, {2, 3}}
-	fmt.Printf("checkWays(%v) = %d (expected 1)\n", pairs1, checkWays(pairs1))
+	fmt.Printf("checkWays(%v) = %d (expected 1)\n", [][]int{{1, 2}, {2, 3}}, checkWays([][]int{{1, 2}, {2, 3}}))
 
 	// Example 2: [[1,2],[2,3],[1,3]] -> 2
-	pairs2 := [][]int{{1, 2}, {2, 3}, {1, 3}}
-	fmt.Printf("checkWays(%v) = %d (expected 2)\n", pairs2, checkWays(pairs2))
+	fmt.Printf("checkWays(%v) = %d (expected 2)\n", [][]int{{1, 2}, {2, 3}, {1, 3}}, checkWays([][]int{{1, 2}, {2, 3}, {1, 3}}))
 
 	// Example 3: [[1,2],[2,3],[2,4],[1,5]] -> 0
-	pairs3 := [][]int{{1, 2}, {2, 3}, {2, 4}, {1, 5}}
-	fmt.Printf("checkWays(%v) = %d (expected 0)\n", pairs3, checkWays(pairs3))
+	fmt.Printf("checkWays(%v) = %d (expected 0)\n", [][]int{{1, 2}, {2, 3}, {2, 4}, {1, 5}}, checkWays([][]int{{1, 2}, {2, 3}, {2, 4}, {1, 5}}))
 
 	// Linear chain [[1,2],[2,3],[3,4]] -> 1
-	pairs4 := [][]int{{1, 2}, {2, 3}, {3, 4}}
-	fmt.Printf("checkWays(%v) = %d (expected 1)\n", pairs4, checkWays(pairs4))
+	fmt.Printf("checkWays(%v) = %d (expected 1)\n", [][]int{{1, 2}, {2, 3}, {3, 4}}, checkWays([][]int{{1, 2}, {2, 3}, {3, 4}}))
 
-	// Star: [[1,2],[1,3],[1,4]] -> 1
-	pairs5 := [][]int{{1, 2}, {1, 3}, {1, 4}}
-	fmt.Printf("checkWays(%v) = %d (expected 1)\n", pairs5, checkWays(pairs5))
+	// Star [[1,2],[1,3],[1,4]] -> 1
+	fmt.Printf("checkWays(%v) = %d (expected 1)\n", [][]int{{1, 2}, {1, 3}, {1, 4}}, checkWays([][]int{{1, 2}, {1, 3}, {1, 4}}))
 }

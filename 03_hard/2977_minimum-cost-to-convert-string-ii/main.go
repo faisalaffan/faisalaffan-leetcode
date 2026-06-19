@@ -110,8 +110,8 @@ func minimumCost(source string, target string, original []string, changed []stri
 
 func main() {
 	// Example: source="abcd" -> 2
-	// Convert "ab" to "cd" cost 2
-	fmt.Println(minimumCost("abcd", "abce", []string{"a", "cd"}, []string{"e", "ef"}, []int{1, 2}))
+	// Convert "cd" to "ef" cost 2: "ab"+"ef" = "abef"
+	fmt.Println(minimumCost("abcd", "abef", []string{"cd"}, []string{"ef"}, []int{2}))
 
 	// LeetCode example
 	fmt.Println(minimumCost("abcdef", "abcefg", []string{"abc", "def"}, []string{"abc", "efg"}, []int{1, 2}))

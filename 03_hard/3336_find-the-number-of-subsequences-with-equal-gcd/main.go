@@ -62,13 +62,6 @@ func subsequencePairCount(nums []int) int {
 		}
 	}
 
-	comb := func(a, b int) int {
-		if a < b || b < 0 {
-			return 0
-		}
-		return C[a][b]
-	}
-
 	// cntMult[g] = number of elements divisible by g
 	cntMult := make([]int, maxVal+1)
 	for g := 1; g <= maxVal; g++ {

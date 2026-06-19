@@ -4,140 +4,197 @@ package main
 // https://leetcode.com/problems/subsequences-with-a-unique-middle-mode-i/
 // Difficulty: Hard
 //
-// Count subsequences length 5 with unique middle mode (index 2).
-// Fix middle index, use prefix/suffix counts, inclusion-exclusion.
+// Count subsequences of length 5 where the middle element (index 2) is the
+// unique mode. Fix middle index, use prefix/suffix counts, inclusion-exclusion.
 
 import "fmt"
 
 func main() {
-	fmt.Println(SubsequencesWithAUniqueMiddleModeI([]int{1, 2, 2, 3, 3, 4}))
+	// Example: nums=[1,2,1,2,1] -> 6
+	fmt.Println(subsequencesWithMiddleMode([]int{1, 2, 1, 2, 1}))
+
+	// n=5, all distinct
+	fmt.Println(subsequencesWithMiddleMode([]int{1, 2, 3, 4, 5}))
+
+	// n=5, all same
+	fmt.Println(subsequencesWithMiddleMode([]int{1, 1, 1, 1, 1}))
+
+	// Larger example
+	fmt.Println(subsequencesWithMiddleMode([]int{1, 2, 2, 3, 3, 4}))
+
+	// All ones
+	fmt.Println(subsequencesWithMiddleMode([]int{1, 1, 1, 1, 1, 1, 1}))
 }
 
-func SubsequencesWithAUniqueMiddleModeI(nums []int) int {
+const MOD = 1000000007
+
+func subsequencesWithMiddleMode(nums []int) int {
 	n := len(nums)
 	if n < 5 {
 		return 0
 	}
 
-	const MOD = 1000000007
+	// Coordinate compression
+	comp := make(map[int]int)
+	for _, v := range nums {
+		comp[v] = 1
+	}
+	m := 0
+	for k := range comp {
+		comp[k] = m
+		m++
+	}
+	arr := make([]int, n)
+	for i, v := range nums {
+		arr[i] = comp[v]
+	}
+
+	// Total count of each value
+	tot := make([]int, m)
+	for _, v := range arr {
+		tot[v]++
+	}
+
+	// Precompute combinations up to n, choose up to 5
+	C := make([][]int, n+1)
+	for i := 0; i <= n; i++ {
+		C[i] = make([]int, 6)
+		C[i][0] = 1
+		for j := 1; j <= i && j <= 5; j++ {
+			C[i][j] = (C[i-1][j] + C[i-1][j-1]) % MOD
+		}
+	}
+	comb := func(a, b int) int {
+		if a < b || b < 0 {
+			return 0
+		}
+		return C[a][b]
+	}
 
 	ans := 0
-	for mid := 2; mid <= n-3; mid++ {
-		left := make(map[int]int)
-		right := make(map[int]int)
-		for i := 0; i < mid; i++ {
-			left[nums[i]]++
-		}
-		for i := mid + 1; i < n; i++ {
-			right[nums[i]]++
-		}
-		total := 0
+	cnt := make([]int, m) // prefix count as we sweep
 
-		// Choose 2 from left and 2 from right (any values)
-		leftPairs := 0
-		for _, c := range left {
-			if c >= 2 {
-				leftPairs += c * (c - 1) / 2
-			}
-		}
-		rightPairs := 0
-		for _, c := range right {
-			if c >= 2 {
-				rightPairs += c * (c - 1) / 2
-			}
-		}
+	for i := 0; i < n; i++ {
+		x := arr[i]
+		cnt[x]++
+		remx := tot[x] - cnt[x] // count of x to the right (including i)
+		leftOther := i + 1 - cnt[x]
+		rightOther := n - i - 1 - (remx - 1) // -1 because i is included in remx
 
-		// Total 5-element subsequences with nums[mid] at index 2
-		// = (choose 2 from left) * (choose 2 from right)
-		// But also consider when same value appears multiple times across left/right
-
-		// For each distinct value v that appears in both sides, subtract invalid
-		val := nums[mid]
-		// Count subsequences where the middle mode is not unique
-		// i.e., some other value appears at least 2 times in the 5 elements.
-		// This happens when left has >= 2 of v and right has >= 2 of v,
-		// or when some other value appears on both sides such that it could
-		// become the mode.
-
-		// Count valid subsequences for this middle:
-		// Fix middle = nums[mid]. Need exactly 2 from left and 2 from right.
-		// A subsequence is invalid if some other value appears 2+ times.
-
-		lv := left[val]
-		rv := right[val]
-
-		// Total: choose2 from left * choose2 from right
-		totalLeft := (mid * (mid - 1) / 2) % MOD
-		totalRight := ((n - mid - 1) * (n - mid - 2) / 2) % MOD
-		total = (totalLeft * totalRight) % MOD
-
-		// Subtract invalid: when left side has 2 of val, right side has 2 of val
-		// (then val appears 5 times, not unique middle mode)
-		if lv >= 2 && rv >= 2 {
-			sub := (lv * (lv - 1) / 2) % MOD
-			sub2 := (rv * (rv - 1) / 2) % MOD
-			total = (total - sub*sub2%MOD + MOD) % MOD
-		}
-
-		// Subtract invalid: when some other value x appears 2+ times across left+right
-		// and also appears in the middle (which it can't since middle is fixed).
-		// Actually the middle is fixed to nums[mid]. For uniqueness, no other value
-		// should appear 2+ times. So if any other value x has:
-		//   left[x] + right[x] >= 2, that makes it a competitor for "middle mode"
-		//   AND we need at least 1 on each side (since we choose 2 from each side)
-		// Actually the issue is: if a value x != val appears in left >= 2 OR right >= 2,
-		// then the mode might not be unique.
-		// But the mode is defined as the value at index 2 of the chosen 5-length subsequence.
-		// The middle mode is unique if no other value appears 2+ times.
-		// So invalid if:
-		//   - Some x != val appears in left >= 2 OR right >= 2 OR (left[x]>=1 && right[x]>=1)
-
-		for x, lc := range left {
-			if x == val {
-				continue
-			}
-			rc := right[x]
-			if lc >= 2 || rc >= 2 || (lc >= 1 && rc >= 1) {
-				// This value x competes for mode.
-				// Count subsequences where x can make the mode non-unique.
-				// We need to count subsequences where x appears 2+ times.
-				// x can appear 2+ in left, 2+ in right, or 1 each side.
-				invalid := 0
-
-				// Case: x appears 2+ in left (x contributes at least 2 from left)
-				if lc >= 2 {
-					// Need 2 more from left (choose the x's) and 2 from right (any)
-					cinvalid := (lc * (lc - 1) / 2) % MOD
-					cinvalid = cinvalid * totalRight % MOD
-					invalid = (invalid + cinvalid) % MOD
+		// Case: x appears >= 3 times in the subsequence (total 5)
+		// We need at least 2 more xs besides the middle one.
+		// Choose l from left and r from right, l + r >= 2
+		// Remaining 2 slots filled with non-x elements
+		for l := 0; l <= 2 && l <= cnt[x]-1; l++ {
+			for r := 0; r <= 2 && r <= remx-1; r++ {
+				if l+r < 2 {
+					continue
 				}
-
-				// Case: x appears 2+ in right
-				if rc >= 2 {
-					cinvalid := (rc * (rc - 1) / 2) % MOD
-					cinvalid = cinvalid * totalLeft % MOD
-					invalid = (invalid + cinvalid) % MOD
+				if 2-l > leftOther || 2-r > rightOther {
+					continue
 				}
+				ways := comb(cnt[x]-1, l) * comb(remx-1, r) % MOD
+				ways = ways * comb(leftOther, 2-l) % MOD
+				ways = ways * comb(rightOther, 2-r) % MOD
+				ans = (ans + ways) % MOD
+			}
+		}
 
-				// Case: x appears 1 on each side
-				if lc >= 1 && rc >= 1 {
-					// Need 1 more from left (any of the remaining) and 1 more from right (any of remaining)
-					leftRest := (mid - 1)  // left elements excluding the one x
-					rightRest := (n - mid - 2) // right elements excluding the one x
+		// Case: x appears exactly 2 times in the subsequence.
+		// The extra x comes from left or right (not both, since that'd be 3 total).
+		// We need to subtract cases where another value y also appears 2+ times.
+		// This is complex; for the exact approach, consider:
+		// - x appears 2 times: one at middle i, one from left (or right)
+		// - Need to ensure no other value y appears 2+ times
+
+		// Subcase: extra x from left
+		if cnt[x] >= 2 {
+			// cnt[x]-1 ways to pick the left x
+			ways := comb(leftOther, 2) * comb(rightOther, 2) % MOD
+			ways = ways * (cnt[x] - 1) % MOD
+			// Subtract invalid: some y also appears 2+ times
+			for y := 0; y < m; y++ {
+				if y == x {
+					continue
+				}
+				cntY := cnt[y]
+				remY := tot[y] - cnt[y]
+				// y appears 2+ times: we need to subtract
+				// Case: y appears 2 times in right (both slots on right)
+				if remY >= 2 {
+					sub := comb(remY, 2) * comb(leftOther, 2) % MOD
+					sub = sub * (cnt[x] - 1) % MOD
+					ways = (ways - sub + MOD) % MOD
+				}
+				// Case: y appears 1 on left and 1 on right
+				if cntY >= 1 && remY >= 1 {
+					// Pick 1 y from left, 1 y from right
+					sub := cntY * remY % MOD
+					// Remaining: 1 more from left (non-x, non-y), 1 more from right (non-x, non-y)
+					leftRest := leftOther - cntY
+					rightRest := rightOther - remY
 					if leftRest >= 1 && rightRest >= 1 {
-						cinvalid := lc * rc % MOD
-						// After fixing those 2 x's, choose 1 more from left, 1 more from right
-						cinvalid = cinvalid * leftRest % MOD
-						cinvalid = cinvalid * rightRest % MOD
-						invalid = (invalid + cinvalid) % MOD
+						sub = sub * leftRest % MOD
+						sub = sub * rightRest % MOD
+						sub = sub * (cnt[x] - 1) % MOD
+						ways = (ways - sub + MOD) % MOD
 					}
 				}
-
-				total = (total - invalid + MOD) % MOD
+				// Case: y appears 2 times on left
+				if cntY >= 2 {
+					sub := comb(cntY, 2) * comb(rightOther, 2) % MOD
+					sub = sub * (cnt[x] - 1) % MOD
+					ways = (ways - sub + MOD) % MOD
+				}
 			}
+			ans = (ans + ways) % MOD
 		}
 
-		ans = (ans + total) % MOD
+		// Subcase: extra x from right
+		if remx >= 2 {
+			ways := comb(leftOther, 2) * comb(rightOther, 2) % MOD
+			ways = ways * (remx - 1) % MOD
+			for y := 0; y < m; y++ {
+				if y == x {
+					continue
+				}
+				cntY := cnt[y]
+				remY := tot[y] - cnt[y]
+				if cntY >= 2 {
+					sub := comb(cntY, 2) * comb(rightOther, 2) % MOD
+					sub = sub * (remx - 1) % MOD
+					ways = (ways - sub + MOD) % MOD
+				}
+				if cntY >= 1 && remY >= 1 {
+					sub := cntY * remY % MOD
+					leftRest := leftOther - cntY
+					rightRest := rightOther - remY
+					if leftRest >= 1 && rightRest >= 1 {
+						sub = sub * leftRest % MOD
+						sub = sub * rightRest % MOD
+						sub = sub * (remx - 1) % MOD
+						ways = (ways - sub + MOD) % MOD
+					}
+				}
+				if remY >= 2 {
+					sub := comb(remY, 2) * comb(leftOther, 2) % MOD
+					sub = sub * (remx - 1) % MOD
+					ways = (ways - sub + MOD) % MOD
+				}
+			}
+			ans = (ans + ways) % MOD
+		}
+
+		// Decrement right count for next iteration
+		// (since we're moving past i, what's currently "right" shrinks)
+		// Actually cnt is updated at the start of each iteration.
+		// The issue is that remx includes i itself.
+		// After this iteration, we're moving i forward, so the right counts
+		// for the NEXT iteration will not include element i.
+		// Actually cnt is already incremented at the start. The right count
+		// naturally decreases as i increases.
+		// No adjustment needed since we recompute remx each iteration.
 	}
+
 	return ans
 }

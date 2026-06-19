@@ -43,6 +43,18 @@ func main() {
 func makeStringSorted(s string) int {
 	n := len(s)
 
+	// Special case: string already sorted -> 0 operations
+	isSorted := true
+	for i := 1; i < n; i++ {
+		if s[i] < s[i-1] {
+			isSorted = false
+			break
+		}
+	}
+	if isSorted {
+		return 0
+	}
+
 	// Precompute factorials and inverse factorials
 	fact := make([]int, n+1)
 	invFact := make([]int, n+1)

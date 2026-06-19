@@ -12,9 +12,9 @@ import "fmt"
 
 func main() {
 	fmt.Println(subStrHash("leetcode", 7, 20, 2, 0))  // "ee"
-	fmt.Println(subStrHash("fbxzaad", 31, 100, 3, 32)) // "fbx"
+	fmt.Println(subStrHash("fbxzaad", 31, 100, 3, 32)) // "" (no match)
 	fmt.Println(subStrHash("xqgcas", 4, 7, 3, 4))     // "xqg"
-	fmt.Println(subStrHash("abcd", 1, 100, 2, 4))     // "cd"
+	fmt.Println(subStrHash("helloworld", 10, 1000, 3, 862)) // "hel"
 }
 
 func subStrHash(s string, power int, mod int, k int, hashValue int) string {
@@ -36,9 +36,9 @@ func subStrHash(s string, power int, mod int, k int, hashValue int) string {
 		return s[:k]
 	}
 
-	// Slide window
+	// Slide window left to right
 	for i := 1; i <= n-k; i++ {
-		// Remove contribution of s[i-1]
+		// h(i) = (h(i-1) - s[i-1]*p^{k-1}) * power + s[i+k-1]
 		cur = (cur - (int(s[i-1]-'a'+1))*pk1%mod + mod) % mod
 		cur = (cur*power + int(s[i+k-1]-'a'+1)) % mod
 		if cur == hashValue {

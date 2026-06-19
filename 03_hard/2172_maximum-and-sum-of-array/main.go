@@ -11,8 +11,8 @@ import "fmt"
 
 func main() {
 	fmt.Println(maximumANDSum([]int{1, 2, 3, 4, 5, 6}, 3)) // 9
-	fmt.Println(maximumANDSum([]int{1, 3, 10, 4, 7, 1}, 3)) // 16
-	fmt.Println(maximumANDSum([]int{1, 2, 3}, 2))            // 4
+	fmt.Println(maximumANDSum([]int{1, 3, 10, 4, 7, 1}, 3)) // 10
+	fmt.Println(maximumANDSum([]int{1, 2, 3}, 2))            // 5
 	fmt.Println(maximumANDSum([]int{1, 2}, 1))               // 1
 }
 
@@ -26,12 +26,16 @@ func maximumANDSum(nums []int, numSlots int) int {
 		dp[i] = -1
 	}
 
+	ans := 0
 	for mask := 0; mask < total; mask++ {
 		if dp[mask] < 0 {
 			continue
 		}
 		idx := popcount(mask)
 		if idx >= n {
+			if dp[mask] > ans {
+				ans = dp[mask]
+			}
 			continue
 		}
 		for slot := 0; slot < m; slot++ {
@@ -44,7 +48,7 @@ func maximumANDSum(nums []int, numSlots int) int {
 			}
 		}
 	}
-	return dp[total-1]
+	return ans
 }
 
 func popcount(x int) int {
