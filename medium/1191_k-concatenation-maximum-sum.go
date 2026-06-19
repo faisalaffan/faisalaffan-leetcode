@@ -1,0 +1,11 @@
+package medium
+
+// LeetCode #1191: K-Concatenation Maximum Sum
+// https://leetcode.com/problems/k-concatenation-maximum-sum/
+// Difficulty: Medium
+
+// Solve is the solution for K-Concatenation Maximum Sum.
+func KConcatenationMaximumSum() any {
+	// TODO: implement
+	return nil
+}

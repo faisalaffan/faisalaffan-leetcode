@@ -1,0 +1,11 @@
+package medium
+
+// LeetCode #2510: Check if There is a Path With Equal Number of 0's And 1's
+// https://leetcode.com/problems/check-if-there-is-a-path-with-equal-number-of-0s-and-1s/
+// Difficulty: Medium [Paid]
+
+// Solve is the solution for Check if There is a Path With Equal Number of 0's And 1's.
+func CheckIfThereIsAPathWithEqualNumberOfZeroSAndOneS() any {
+	// TODO: implement
+	return nil
+}

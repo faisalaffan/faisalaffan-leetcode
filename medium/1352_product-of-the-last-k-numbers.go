@@ -1,0 +1,11 @@
+package medium
+
+// LeetCode #1352: Product of the Last K Numbers
+// https://leetcode.com/problems/product-of-the-last-k-numbers/
+// Difficulty: Medium
+
+// Solve is the solution for Product of the Last K Numbers.
+func ProductOfTheLastKNumbers() any {
+	// TODO: implement
+	return nil
+}

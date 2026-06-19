@@ -1,0 +1,11 @@
+package medium
+
+// LeetCode #2471: Minimum Number of Operations to Sort a Binary Tree by Level
+// https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/
+// Difficulty: Medium
+
+// Solve is the solution for Minimum Number of Operations to Sort a Binary Tree by Level.
+func MinimumNumberOfOperationsToSortABinaryTreeByLevel() any {
+	// TODO: implement
+	return nil
+}
