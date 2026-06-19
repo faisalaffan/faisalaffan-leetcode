@@ -55,7 +55,6 @@ func FrequenciesOfShortestSupersequences(words []string) [][]int {
 		// For letters that appear once, self-loops (u→u) must be removed because
 		// if a letter appears only once, it cannot serve as both source and target
 		// of the same pair.
-		valid := true
 		for _, u := range letters {
 			if mask>>pos[u]&1 == 1 {
 				// Letter appears once: remove all outgoing edges to itself

@@ -99,7 +99,7 @@ func ResultArray(nums []int) []int {
 func main() {
 	// Test case 1
 	fmt.Println("Test 1:", ResultArray([]int{2, 1, 3, 3}))
-	// Expected: [2, 1, 3, 3]
+	// Expected: [2, 3, 1, 3]
 
 	// Test case 2
 	fmt.Println("Test 2:", ResultArray([]int{5, 4, 3, 8}))

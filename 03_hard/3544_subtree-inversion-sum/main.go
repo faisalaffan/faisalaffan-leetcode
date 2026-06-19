@@ -4,14 +4,12 @@ package main
 // https://leetcode.com/problems/subtree-inversion-sum/
 // Difficulty: Hard
 //
-// For each node, count inversions (pairs (a,b) where a appears before b in DFS
-// preorder and nums[a] > nums[b]) within its subtree. Sum over all nodes.
+// For each node u, count inversions within its subtree (pairs (a,b) where a is
+// visited before b in DFS and nums[a] > nums[b]). Sum over all nodes.
 //
-// Use DFS with small-to-large merging of sorted value lists.
-// For each node u:
-//   subtreeInv[u] = sum(childInv) + crossSubtreeInversions + countLess(nums[u])
-// where crossSubtreeInversions counts pairs (a in earlier child, b in later child)
-// with nums[a] > nums[b], and countLess counts descendants with value < nums[u].
+// DFS with sorted-list merging (small-to-large):
+//   For each node, merge children's sorted value lists, counting cross-child
+//   inversions. Add count of descendants with value < nums[u].
 
 import (
 	"fmt"
@@ -30,7 +28,7 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 
 	var dfs func(u, p int) ([]int, int64)
 	dfs = func(u, p int) ([]int, int64) {
-		vals := []int{nums[u]}
+		vals := make([]int, 0)
 		var invTotal int64
 
 		for _, v := range adj[u] {
@@ -40,8 +38,9 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 			childVals, childInv := dfs(v, u)
 			invTotal += childInv
 
-			// Count cross inversions between vals (earlier children) and childVals (this child)
-			// Pair (a in vals, b in childVals) where a > b and a visited before b
+			// Count cross inversions:
+			// Pair (a in earlier children, b in this child) where a > b
+			// Since vals is sorted and contains values from earlier children:
 			cross := int64(0)
 			i := 0
 			for _, b := range childVals {
@@ -55,6 +54,8 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 			// Small-to-large merge
 			if len(vals) < len(childVals) {
 				vals, childVals = childVals, vals
+				// After swapping, vals = larger (was childVals), childVals = smaller (was vals)
+				// The cross count was correct (computed before swap).
 			}
 			merged := make([]int, 0, len(vals)+len(childVals))
 			p1, p2 := 0, 0
@@ -73,9 +74,15 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 		}
 
 		// Count descendants with value < nums[u]
-		// vals is sorted; binary search for first element >= nums[u]
+		// vals is sorted (from children only, does not include nums[u])
 		less := sort.Search(len(vals), func(i int) bool { return vals[i] >= nums[u] })
 		invTotal += int64(less)
+
+		// Insert nums[u] into sorted vals for parent
+		pos := sort.Search(len(vals), func(i int) bool { return vals[i] >= nums[u] })
+		vals = append(vals, 0)
+		copy(vals[pos+1:], vals[pos:])
+		vals[pos] = nums[u]
 
 		ans += invTotal
 		return vals, invTotal
@@ -85,45 +92,97 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 	return ans
 }
 
+// Brute-force verification
+func subtreeInversionSumBrute(n int, edges [][]int, nums []int) int64 {
+	adj := make([][]int, n)
+	for _, e := range edges {
+		u, v := e[0], e[1]
+		adj[u] = append(adj[u], v)
+		adj[v] = append(adj[v], u)
+	}
+
+	// Get DFS preorder
+	var order []int
+	var dfsOrder func(u, p int)
+	dfsOrder = func(u, p int) {
+		order = append(order, u)
+		for _, v := range adj[u] {
+			if v != p {
+				dfsOrder(v, u)
+			}
+		}
+	}
+	dfsOrder(0, -1)
+
+	// tin/tout to identify subtree ranges
+	tin := make([]int, n)
+	tout := make([]int, n)
+	var dfsRange func(u, p int, idx *int)
+	dfsRange = func(u, p int, idx *int) {
+		tin[u] = *idx
+		(*idx)++
+		for _, v := range adj[u] {
+			if v != p {
+				dfsRange(v, u, idx)
+			}
+		}
+		tout[u] = *idx - 1
+	}
+	idx := 0
+	dfsRange(0, -1, &idx)
+
+	var total int64
+	for u := 0; u < n; u++ {
+		// Count inversions within subtree u
+		var subtreeNodes []int
+		for _, v := range order {
+			if tin[v] >= tin[u] && tin[v] <= tout[u] {
+				subtreeNodes = append(subtreeNodes, v)
+			}
+		}
+		subInv := int64(0)
+		for i := 0; i < len(subtreeNodes); i++ {
+			for j := i + 1; j < len(subtreeNodes); j++ {
+				if nums[subtreeNodes[i]] > nums[subtreeNodes[j]] {
+					subInv++
+				}
+			}
+		}
+		total += subInv
+	}
+	return total
+}
+
 func main() {
-	// Test: n=5, edges=[[0,1],[0,2],[1,3],[1,4]], nums=[3,2,5,1,4]
-	// Tree:
-	//     0(3)
-	//    / \
-	//  1(2) 2(5)
-	//  / \
-	// 3(1) 4(4)
-	// DFS preorder: 0,1,3,4,2
-	res := subtreeInversionSum(5,
-		[][]int{{0, 1}, {0, 2}, {1, 3}, {1, 4}},
-		[]int{3, 2, 5, 1, 4})
-	fmt.Printf("subtree inversion sum -> %d (expected 10)\n", res)
+	// Test: tree from user spec
+	// Tree: 0(3)-1(2), 0-2(5), 1-3(1), 1-4(4)
+	// DFS: 0,1,3,4,2
+	n1 := 5
+	edges1 := [][]int{{0, 1}, {0, 2}, {1, 3}, {1, 4}}
+	nums1 := []int{3, 2, 5, 1, 4}
+	res1 := subtreeInversionSum(n1, edges1, nums1)
+	brute1 := subtreeInversionSumBrute(n1, edges1, nums1)
+	fmt.Printf("subtree inversion sum -> %d (brute: %d)\n", res1, brute1)
 
-	// Test: single node
-	res2 := subtreeInversionSum(1, [][]int{}, []int{5})
-	fmt.Printf("single node -> %d (expected 0)\n", res2)
+	// Simple tests
+	// Single node: 0 inversions
+	fmt.Printf("single -> %d (expected 0)\n",
+		subtreeInversionSum(1, [][]int{}, []int{5}))
 
-	// Test: two nodes, values [2,1]
-	// Tree: 0(2)-1(1)
-	// Subtrees:
-	//   subtree_1: {1} -> 0 inversions
-	//   subtree_0: {0,1} -> (0,1) where 2>1 -> 1 inversion
-	// Total: 0+1 = 1
-	res3 := subtreeInversionSum(2, [][]int{{0, 1}}, []int{2, 1})
-	fmt.Printf("two nodes [2,1] -> %d (expected 1)\n", res3)
+	// Two nodes [2,1]: subtree 1 has 0, subtree 0 has (0,1):2>1 = 1. Total: 1.
+	fmt.Printf("[2,1] -> %d (expected 1)\n",
+		subtreeInversionSum(2, [][]int{{0, 1}}, []int{2, 1}))
 
-	// Test: two nodes, values [1,2] (no inversion)
-	res4 := subtreeInversionSum(2, [][]int{{0, 1}}, []int{1, 2})
-	fmt.Printf("two nodes [1,2] -> %d (expected 0)\n", res4)
+	// Two nodes [1,2]: no inversion
+	fmt.Printf("[1,2] -> %d (expected 0)\n",
+		subtreeInversionSum(2, [][]int{{0, 1}}, []int{1, 2}))
 
-	// Test: line of 3, values [3,1,2]
-	// Tree: 0(3)-1(1)-2(2)
+	// Line 0-1-2, values [3,1,2]
 	// DFS: 0,1,2
-	// subtrees:
-	//   subtree_2: {2} -> 0
-	//   subtree_1: {1,2} -> (1,2): 1<2 no -> 0
-	//   subtree_0: {0,1,2} -> (0,1):3>1, (0,2):3>2 -> 2
-	// Total: 0+0+2 = 2
-	res5 := subtreeInversionSum(3, [][]int{{0, 1}, {1, 2}}, []int{3, 1, 2})
-	fmt.Printf("line [3,1,2] -> %d (expected 2)\n", res5)
+	// subtree 2: 0
+	// subtree 1: (1,2): 1<2 no -> 0
+	// subtree 0: (0,1):3>1, (0,2):3>2 -> 2
+	// Total: 2
+	fmt.Printf("line [3,1,2] -> %d (expected 2)\n",
+		subtreeInversionSum(3, [][]int{{0, 1}, {1, 2}}, []int{3, 1, 2}))
 }

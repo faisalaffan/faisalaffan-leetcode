@@ -6,7 +6,7 @@ package main
 //
 // DP over bitmask of targets. For each array element, compute cost to make it
 // divisible by each subset S of targets (cost = nearest multiple of lcm(S)).
-// Then dp[mask] = min cost to cover mask using processed elements.
+// Then dp[mask] = min cost to cover mask using processed elements (0/1 knapSack).
 
 import "fmt"
 
@@ -35,11 +35,10 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 	m := len(target)
 	M := 1 << m
 
-	// precomputeLCM[mask] = lcm of targets in mask
+	// Precompute LCM for each subset mask
 	lcmMask := make([]int, M)
 	lcmMask[0] = 1
 	for mask := 1; mask < M; mask++ {
-		// find lowest set bit
 		lsb := mask & -mask
 		bit := 0
 		for lsb>>bit != 1 {
@@ -50,7 +49,6 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 			lcmMask[mask] = target[bit]
 		} else {
 			l := lcm(lcmMask[prev], target[bit])
-			// Clamp to avoid overflow (targets ≤ 50, nums ≤ 1e9)
 			if l > 1_000_000_000 {
 				l = 1_000_000_001
 			}
@@ -58,8 +56,8 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 		}
 	}
 
-	// For each element, compute cost to cover each mask
-	// cost[i][mask] = min increments to make nums[i] divisible by lcmMask[mask]
+	// For each element, min increment to cover each mask
+	// cost[i][mask] = min increment to make nums[i] divisible by lcmMask[mask]
 	elemCost := make([][]int, n)
 	for i, x := range nums {
 		elemCost[i] = make([]int, M)
@@ -70,7 +68,6 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 				elemCost[i][mask] = INF
 				continue
 			}
-			// Nearest multiple of l ≥ x
 			rem := x % l
 			if rem == 0 {
 				elemCost[i][mask] = 0
@@ -80,9 +77,10 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 		}
 	}
 
+	// 0/1 knapSack DP over elements
 	dp := make([]int, M)
-	for i := 1; i < M; i++ {
-		dp[i] = INF
+	for mask := 1; mask < M; mask++ {
+		dp[mask] = INF
 	}
 
 	for _, cost := range elemCost {
@@ -97,9 +95,9 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 					continue
 				}
 				newMask := oldMask | s
-				candidate := dp[oldMask] + cost[s]
-				if candidate < ndp[newMask] {
-					ndp[newMask] = candidate
+				cand := dp[oldMask] + cost[s]
+				if cand < ndp[newMask] {
+					ndp[newMask] = cand
 				}
 			}
 		}
@@ -110,20 +108,18 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 }
 
 func main() {
-	// Test: nums=[1,2,3], target=[4,2,6] -> expected 4
-	fmt.Printf("[1,2,3] target=[4,2,6] -> %d (expected 4)\n",
+	fmt.Printf("[1,2,3] target=[4,2,6] -> %d\n",
 		minIncrementsForTargetMultiples([]int{1, 2, 3}, []int{4, 2, 6}))
 
-	// Test: nums=[2,3,5], target=[3,5] -> expected ?
-	// target 3: 2→3 cost 1; target 5: already 5 cost 0 => total 1
 	fmt.Printf("[2,3,5] target=[3,5] -> %d\n",
 		minIncrementsForTargetMultiples([]int{2, 3, 5}, []int{3, 5}))
 
-	// Test: nums=[1], target=[2] -> 1→2 cost 1
-	fmt.Printf("[1] target=[2] -> %d (expected 1)\n",
+	fmt.Printf("[1] target=[2] -> %d\n",
 		minIncrementsForTargetMultiples([]int{1}, []int{2}))
 
-	// Test: nums=[4,8,12], target=[3] -> need multiple of 3: 4→6 cost 2, 8→9 cost 1, 12→12 cost 0. Min 0.
-	fmt.Printf("[4,8,12] target=[3] -> %d (expected 0)\n",
+	fmt.Printf("[4,8,12] target=[3] -> %d\n",
 		minIncrementsForTargetMultiples([]int{4, 8, 12}, []int{3}))
+
+	fmt.Printf("[2,5] target=[4,6,8] -> %d\n",
+		minIncrementsForTargetMultiples([]int{2, 5}, []int{4, 6, 8}))
 }

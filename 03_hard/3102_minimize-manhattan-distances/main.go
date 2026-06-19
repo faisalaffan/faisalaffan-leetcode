@@ -111,7 +111,7 @@ func max(a, b int) int {
 func main() {
 	// Test case 1
 	fmt.Println("Test 1:", minimumDistance([][]int{{3, 10}, {5, 15}, {1, 5}, {2, 2}, {4, 4}}))
-	// Expected: 9 (remove point [5,15], remaining max distance = 9)
+	// Expected: 9
 
 	// Test case 2 - from LeetCode
 	fmt.Println("Test 2:", minimumDistance([][]int{{3, 10}, {5, 15}, {10, 2}, {4, 4}}))

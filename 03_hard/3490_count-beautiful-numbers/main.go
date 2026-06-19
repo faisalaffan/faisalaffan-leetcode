@@ -4,14 +4,59 @@ package main
 // https://leetcode.com/problems/count-beautiful-numbers/
 // Difficulty: Hard
 //
-// A number is "beautiful" if its digit product is non-zero and divides the number.
-// Digit DP over the range [low, high]. Track product of digits (non-zero) and
-// remainder modulo product. Use memoization on (pos, tight, started, prod, rem).
+// A number is "beautiful" if all digits are non-zero and the product of
+// its digits divides the number.
+//
+// Digit DP tracking remainders modulo prime powers (2^a, 3^b, 5^c, 7^d).
+// At the leaf, check num % (2^a * 3^b * 5^c * 7^d) == 0 by checking
+// each prime power condition independently: rem % 2^a == 0 etc.
 
-import (
-	"fmt"
-	"strconv"
+import "fmt"
+
+const (
+	MAX2 = 30
+	MAX3 = 18
+	MAX5 = 9
+	MAX7 = 9
 )
+
+var (
+	pow2 [MAX2 + 1]int
+	pow3 [MAX3 + 1]int
+	pow5 [MAX5 + 1]int
+	pow7 [MAX7 + 1]int
+)
+
+func init() {
+	pow2[0], pow3[0], pow5[0], pow7[0] = 1, 1, 1, 1
+	for i := 1; i <= MAX2; i++ {
+		pow2[i] = pow2[i-1] * 2
+	}
+	for i := 1; i <= MAX3; i++ {
+		pow3[i] = pow3[i-1] * 3
+	}
+	for i := 1; i <= MAX5; i++ {
+		pow5[i] = pow5[i-1] * 5
+	}
+	for i := 1; i <= MAX7; i++ {
+		pow7[i] = pow7[i-1] * 7
+	}
+}
+
+// Prime factor exponent contributions for digits 0-9
+// digit -> (e2, e3, e5, e7)
+var expTable = [10][4]int{
+	{0, 0, 0, 0}, // 0
+	{0, 0, 0, 0}, // 1
+	{1, 0, 0, 0}, // 2
+	{0, 1, 0, 0}, // 3
+	{2, 0, 0, 0}, // 4
+	{0, 0, 1, 0}, // 5
+	{1, 1, 0, 0}, // 6
+	{0, 0, 0, 1}, // 7
+	{3, 0, 0, 0}, // 8
+	{0, 2, 0, 0}, // 9
+}
 
 func countBeautifulNumbers(low, high int) int {
 	if low < 1 {
@@ -24,85 +69,81 @@ func countUpTo(limit int) int {
 	if limit <= 0 {
 		return 0
 	}
-	s := strconv.Itoa(limit)
-	n := len(s)
-	digits := make([]int, n)
-	for i, ch := range s {
-		digits[i] = int(ch - '0')
+	// Extract digits
+	var digs [20]int
+	n := 0
+	for tmp := limit; tmp > 0; tmp /= 10 {
+		digs[n] = tmp % 10
+		n++
+	}
+	// Reverse
+	for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
+		digs[i], digs[j] = digs[j], digs[i]
 	}
 
-	// memo[pos][tight][started] = map from (prod, rem) to count
-	// Use a struct key for the map
 	type stateKey struct {
-		prod int
-		rem  int
+		a, b, c, d byte
+		r2, r3     int
+		r5, r7     int
 	}
 	memo := make([][][]map[stateKey]int, n)
 	for i := range memo {
 		memo[i] = make([][]map[stateKey]int, 2)
-		for t := 0; t < 2; t++ {
-			memo[i][t] = make([]map[stateKey]int, 2)
-		}
+		memo[i][0] = make([]map[stateKey]int, 2)
+		memo[i][1] = make([]map[stateKey]int, 2)
 	}
 
-	var dfs func(pos int, tight int, started int, prod int, rem int) int
-	dfs = func(pos int, tight int, started int, prod int, rem int) int {
+	var dfs func(pos, tight, started int, a, b, c, d int, r2, r3, r5, r7 int) int
+	dfs = func(pos, tight, started int, a, b, c, d int, r2, r3, r5, r7 int) int {
 		if pos == n {
 			if started == 0 {
 				return 0
 			}
-			if prod > 0 && rem%prod == 0 {
+			if r2%pow2[a] == 0 && r3%pow3[b] == 0 && r5%pow5[c] == 0 && r7%pow7[d] == 0 {
 				return 1
 			}
 			return 0
 		}
 
-		if memo[pos][tight][started] != nil {
-			key := stateKey{prod, rem}
-			if val, ok := memo[pos][tight][started][key]; ok && tight == 0 {
+		sk := stateKey{byte(a), byte(b), byte(c), byte(d), r2, r3, r5, r7}
+		if tight == 0 {
+			if memo[pos][tight][started] == nil {
+				memo[pos][tight][started] = make(map[stateKey]int)
+			} else if val, ok := memo[pos][tight][started][sk]; ok {
 				return val
 			}
 		}
 
-		limitDigit := 9
+		maxD := 9
 		if tight == 1 {
-			limitDigit = digits[pos]
+			maxD = digs[pos]
 		}
 
 		total := 0
-		for d := 0; d <= limitDigit; d++ {
-			nextTight := 0
-			if tight == 1 && d == limitDigit {
-				nextTight = 1
+		for dg := 0; dg <= maxD; dg++ {
+			nt := 0
+			if tight == 1 && dg == maxD {
+				nt = 1
 			}
-
-			if started == 0 && d == 0 {
-				// Still not started
-				total += dfs(pos+1, nextTight, 0, prod, rem)
-			} else if d == 0 {
-				// Digit 0 means product becomes 0, which can never divide the number
-				// Skip further processing, product=0 case is handled at leaf
-				total += dfs(pos+1, nextTight, 1, 0, 0)
+			if started == 0 && dg == 0 {
+				total += dfs(pos+1, nt, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+			} else if dg == 0 {
+				// Digit 0 → product 0, cannot divide
+				continue
 			} else {
-				newProd := prod
-				newRem := rem
-				if started == 1 {
-					newProd = prod * d
-					newRem = (rem*10 + d) % newProd
-					// Actually we need rem % newProd, not rem
-					// rem = number_so_far % prod
-					// new_number = number_so_far*10 + d
-					// new_prod = prod*d
-					// new_rem = (number_so_far*10 + d) % (prod*d)
-					// = ((prod*q + rem)*10 + d) % (prod*d)
-					// = (rem*10 + d) % (prod*d) since prod*10*q % (prod*d) = 0
-					// ... no wait, (prod*q*10) % (prod*d) = prod*(10*q) % (prod*d)
-					// = prod * ((10*q) % d) ... this doesn't simplify nicely
-				} else {
-					newProd = d
-					newRem = 0 // number = d, product = d, d % d = 0
+				e := expTable[dg]
+				na := a + e[0]
+				nb := b + e[1]
+				nc := c + e[2]
+				nd := d + e[3]
+				if na > MAX2 || nb > MAX3 || nc > MAX5 || nd > MAX7 {
+					continue
 				}
-				total += dfs(pos+1, nextTight, 1, newProd, newRem)
+				nr2 := (r2*10 + dg) % pow2[MAX2]
+				nr3 := (r3*10 + dg) % pow3[MAX3]
+				nr5 := (r5*10 + dg) % pow5[MAX5]
+				nr7 := (r7*10 + dg) % pow7[MAX7]
+				total += dfs(pos+1, nt, 1, na, nb, nc, nd, nr2, nr3, nr5, nr7)
 			}
 		}
 
@@ -110,44 +151,17 @@ func countUpTo(limit int) int {
 			if memo[pos][tight][started] == nil {
 				memo[pos][tight][started] = make(map[stateKey]int)
 			}
-			key := stateKey{prod, rem}
-			memo[pos][tight][started][key] = total
+			memo[pos][tight][started][sk] = total
 		}
-
 		return total
 	}
 
-	return dfs(0, 1, 0, 1, 0)
+	return dfs(0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 
 func main() {
-	// Test: low=1, high=20 -> expected 19 (all except ... let's count)
-	// Beautiful numbers up to 20: 1..9 all beautiful (prod=number, number%prod=0)
-	// 10: product=0 not beautiful
-	// 11: product=1, 11%1=0 beautiful
-	// 12: product=2, 12%2=0 beautiful
-	// 13: product=3, 13%3=1 not beautiful? Wait 13%3=1, so no.
-	// Actually 13%3=1≠0, so not beautiful.
-	// 14: product=4, 14%4=2 not beautiful
-	// 15: product=5, 15%5=0 beautiful
-	// 16: product=6, 16%6=4 not beautiful
-	// 17: product=7, 17%7=3 not beautiful
-	// 18: product=8, 18%8=2 not beautiful
-	// 19: product=9, 19%9=1 not beautiful
-	// 20: product=0 not beautiful
-	// So up to 20: 1-9(9), 11(1), 15(1) = 11, not 19.
-	// The user said 1,20→19 which might be wrong or for a different problem definition.
-	// Let me just run it and see.
 	fmt.Printf("count(1,20) -> %d\n", countBeautifulNumbers(1, 20))
-
-	// Test: 1,100
 	fmt.Printf("count(1,100) -> %d\n", countBeautifulNumbers(1, 100))
-
-	// Test: individual numbers
-	for i := 1; i <= 20; i++ {
-		c := countBeautifulNumbers(i, i)
-		if c > 0 {
-			fmt.Printf("%d is beautiful\n", i)
-		}
-	}
+	fmt.Printf("count(1,1000) -> %d\n", countBeautifulNumbers(1, 1000))
+	fmt.Printf("count(1,10000) -> %d\n", countBeautifulNumbers(1, 10000))
 }

@@ -60,7 +60,7 @@ func main() {
 		[]string{"abcd", "bcd", "xbcd"},
 		[]string{"bcd", "ab", "cd"},
 	))
-	// Expected: [1, 0, 1]  (Note: "ab" matches root, shortest word = "bcd" idx 1)
+	// Expected: [1, 1, 1]
 
 	// Test case 2
 	fmt.Println("Test 2:", stringIndices(
