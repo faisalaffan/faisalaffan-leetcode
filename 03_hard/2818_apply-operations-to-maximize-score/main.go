@@ -119,12 +119,34 @@ func maximumScore(nums []int, k int) int {
 func main() {
 	// Example: nums=[8,3,9,3,8], k=2 => 81
 	fmt.Println(maximumScore([]int{8, 3, 9, 3, 8}, 2))
+
 	// Single element
 	fmt.Println(maximumScore([]int{5}, 1))
-	// K larger than total subarrays
+
+	// k larger than total subarrays
 	fmt.Println(maximumScore([]int{2, 3}, 3))
+
 	// All same values
 	fmt.Println(maximumScore([]int{4, 4, 4}, 2))
-	// Prime-heavy
+
+	// Prime-heavy inputs
 	fmt.Println(maximumScore([]int{19, 12, 14, 6, 10}, 3))
+
+	// Two elements
+	fmt.Println(maximumScore([]int{2, 3}, 1))
+
+	// k=1 with different values
+	fmt.Println(maximumScore([]int{10, 20}, 1))
+
+	// All prime numbers (score = 1)
+	fmt.Println(maximumScore([]int{2, 3, 5, 7, 11, 13}, 4))
+
+	// Large k
+	fmt.Println(maximumScore([]int{100, 200, 300}, 10))
+
+	// Values with many prime factors
+	fmt.Println(maximumScore([]int{30, 42, 70, 105}, 5)) // 30=2*3*5, 42=2*3*7, 70=2*5*7, 105=3*5*7
+
+	// Minimal case
+	fmt.Println(maximumScore([]int{1}, 1)) // 1 has 0 prime factors
 }

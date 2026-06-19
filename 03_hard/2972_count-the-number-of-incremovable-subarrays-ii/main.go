@@ -39,7 +39,7 @@ func incremovableSubarrayCount(nums []int) int64 {
 
 	// Try all possible left boundaries
 	prev := math.MinInt
-	for i, x := range nums {
+	for _, x := range nums {
 		if x <= prev {
 			break
 		}

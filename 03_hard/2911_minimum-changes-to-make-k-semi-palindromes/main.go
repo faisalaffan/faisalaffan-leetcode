@@ -4,10 +4,10 @@ package main
 // https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/
 // Difficulty: Hard
 //
-// DP + precompute. A semi-palindrome of length L: there exists divisor d of L
-// (1 <= d < L) such that grouping characters by residue class modulo d and
-// each group forms a palindrome. Precompute cost[i][j] = min changes to make
-// s[i:j] a semi-palindrome, then DP[k][n] = min changes to partition into k.
+// A semi-palindrome of length L has a divisor d|L (d<L) such that grouping
+// characters by residue class modulo d and each group forms a palindrome.
+// Precompute cost[i][j] = min changes to make s[i:j] a semi-palindrome,
+// then DP[k][n] = min changes to partition string into k semi-palindromes.
 // O(N^3 * sqrt(N)) time, O(N^2) space.
 
 import (
@@ -44,8 +44,7 @@ func minimumChanges(s string, k int) int {
 				// For each residue class (group)
 				for r := 0; r < groups; r++ {
 					// Characters in this group: s[i+r], s[i+r+d], s[i+r+2d], ...
-					// Need to form a palindrome
-					// Pair positions p and groupSize-1-p within group
+					// Need each group to form a palindrome
 					for p := 0; p < groupSize/2; p++ {
 						leftIdx := i + r + p*d
 						rightIdx := i + r + (groupSize-1-p)*d
@@ -98,9 +97,13 @@ func main() {
 	fmt.Println(minimumChanges("abcdef", 2))
 	// Example: s="aabbaa", k=3 => 0
 	fmt.Println(minimumChanges("aabbaa", 3))
-	// Single partition
+	// Single partition (but semi-palindrome needs at least 2 chars)
 	fmt.Println(minimumChanges("aba", 1))
 	// k = n/2
 	fmt.Println(minimumChanges("ab", 1))
 	fmt.Println(minimumChanges("aabb", 2))
+	// All same characters
+	fmt.Println(minimumChanges("aaaa", 2))
+	// Longer string
+	fmt.Println(minimumChanges("abcdeabcde", 2))
 }

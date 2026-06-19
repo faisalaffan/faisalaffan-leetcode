@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // rootCount uses rerooting DP. Build tree, count correct guesses with root=0,
-// then reroot: moving from u to v, lose (u,v) guess, gain (v,u) guess.
+// then reroot: moving from u to v, subtract (u,v) if guessed, add (v,u) if guessed.
 // Count roots where correct >= k.
 //
 // Complexity: O(n) time, O(n) space
@@ -89,4 +89,13 @@ func main() {
 	edges3 := [][]int{{0, 1}, {0, 2}}
 	guesses3 := [][]int{{0, 1}, {0, 2}}
 	fmt.Println("Test 3: ->", rootCount(edges3, guesses3, 2)) // 1
+
+	// Edge cases
+	edges4 := [][]int{{0, 1}}
+	guesses4 := [][]int{{0, 1}}
+	fmt.Println("Test 4: k=0 ->", rootCount(edges4, guesses4, 0)) // 2
+
+	edges5 := [][]int{{0, 1}, {1, 2}}
+	guesses5 := [][]int{{0, 1}}
+	fmt.Println("Test 5: k=1 ->", rootCount(edges5, guesses5, 1)) // 2
 }

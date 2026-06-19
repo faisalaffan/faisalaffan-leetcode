@@ -18,18 +18,15 @@ func getMaxFunctionValue(receiver []int, k int64) int64 {
 		logK++
 	}
 
-	// dp[i][j] = node after 2^j steps from i
 	dp := make([][]int, n)
-	// sum[i][j] = sum of node ids along path of length 2^j from i (INCLUSIVE of i)
 	sum := make([][]int64, n)
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, logK)
 		sum[i] = make([]int64, logK)
 		dp[i][0] = receiver[i]
-		sum[i][0] = int64(i) // base: 2^0 = 1 step, sum of start node only (exclude end)
+		sum[i][0] = int64(i)
 	}
 
-	// Build binary lifting tables
 	for j := 1; j < logK; j++ {
 		for i := 0; i < n; i++ {
 			mid := dp[i][j-1]
@@ -52,7 +49,7 @@ func getMaxFunctionValue(receiver []int, k int64) int64 {
 			remaining >>= 1
 			bit++
 		}
-		total += int64(cur) // add the final node reached after k steps
+		total += int64(cur)
 		if total > maxVal {
 			maxVal = total
 		}
@@ -64,12 +61,38 @@ func getMaxFunctionValue(receiver []int, k int64) int64 {
 func main() {
 	// Example: receiver=[2,0,1], k=4 => 6
 	fmt.Println(getMaxFunctionValue([]int{2, 0, 1}, 4))
+
 	// k=1
 	fmt.Println(getMaxFunctionValue([]int{1, 0}, 1))
+
 	// Larger k
 	fmt.Println(getMaxFunctionValue([]int{2, 0, 1}, 10))
-	// Self-loop
+
+	// Self-loop (each node passes to itself)
 	fmt.Println(getMaxFunctionValue([]int{0, 1}, 3))
-	// Chain
+
+	// Chain pattern
 	fmt.Println(getMaxFunctionValue([]int{1, 2, 0}, 2))
+
+	// All nodes point to themselves
+	fmt.Println(getMaxFunctionValue([]int{0, 1, 2, 3}, 5))
+
+	// Cycle of length 3
+	fmt.Println(getMaxFunctionValue([]int{1, 2, 0}, 7))
+
+	// Single node pointing to itself
+	fmt.Println(getMaxFunctionValue([]int{0}, 10))
+
+	// Two-node cycle
+	fmt.Println(getMaxFunctionValue([]int{1, 0}, 6))
+
+	// k=0 (just the starting node, k >= 1 per constraints but testing)
+	// Note: k=0 isn't in constraints (1 <= k <= 1e10), but let's test
+	// fmt.Println(getMaxFunctionValue([]int{0, 1, 2}, 0))
+
+	// Large k with small cycle
+	fmt.Println(getMaxFunctionValue([]int{1, 2, 0}, 100))
+
+	// Linear chain (no cycle, all point to next, last self-loop)
+	fmt.Println(getMaxFunctionValue([]int{1, 2, 3, 3}, 4))
 }

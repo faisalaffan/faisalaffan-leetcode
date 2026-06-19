@@ -69,4 +69,12 @@ func main() {
 	fmt.Println(maxKDivisibleComponents(3,
 		[][]int{{0, 1}, {1, 2}},
 		[]int{3, 6, 9}, 3))
+	// All values divisible by k
+	fmt.Println(maxKDivisibleComponents(4,
+		[][]int{{0, 1}, {1, 2}, {2, 3}},
+		[]int{6, 6, 6, 6}, 6))
+	// Star: center value not divisible by k, leaves are
+	fmt.Println(maxKDivisibleComponents(4,
+		[][]int{{0, 1}, {0, 2}, {0, 3}},
+		[]int{1, 6, 6, 6}, 6))
 }

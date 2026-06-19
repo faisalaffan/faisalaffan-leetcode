@@ -20,7 +20,7 @@ func findValidSplit(nums []int) int {
 		return -1
 	}
 
-	// Track last occurrence of each prime
+	// Track last occurrence of each prime factor
 	last := make(map[int]int)
 
 	// Factorize a number into its distinct prime factors
@@ -78,4 +78,5 @@ func main() {
 	fmt.Println("Test 3: [1,1,1] ->", findValidSplit([]int{1, 1, 1})) // 0
 	fmt.Println("Test 4: [6,10,15] ->", findValidSplit([]int{6, 10, 15}))
 	fmt.Println("Test 5: [2,4,8] ->", findValidSplit([]int{2, 4, 8})) // -1
+	fmt.Println("Test 6: [1] ->", findValidSplit([]int{1}))           // -1
 }

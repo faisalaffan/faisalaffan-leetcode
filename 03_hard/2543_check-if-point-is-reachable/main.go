@@ -35,8 +35,8 @@ func main() {
 	fmt.Println("Test 2: targetX=4, targetY=7 ->", isReachable(4, 7))   // false
 	fmt.Println("Test 3: targetX=1, targetY=1 ->", isReachable(1, 1))   // true
 	fmt.Println("Test 4: targetX=2, targetY=4 ->", isReachable(2, 4))   // true (gcd=2)
-	fmt.Println("Test 5: targetX=3, targetY=5 ->", isReachable(3, 5))   // false (gcd=1, wait gcd=1 is power of 2!)
+	fmt.Println("Test 5: targetX=3, targetY=5 ->", isReachable(3, 5))   // true (gcd=1=2^0)
 	fmt.Println("Test 6: targetX=8, targetY=12 ->", isReachable(8, 12)) // true (gcd=4=2^2)
 	fmt.Println("Test 7: targetX=4, targetY=8 ->", isReachable(4, 8))   // true (gcd=4=2^2)
-	fmt.Println("Test 8: targetX=2, targetY=3 ->", isReachable(2, 3))   // false (gcd=1)
+	fmt.Println("Test 8: targetX=2, targetY=3 ->", isReachable(2, 3))   // true (gcd=1=2^0)
 }

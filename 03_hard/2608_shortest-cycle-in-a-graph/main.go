@@ -3,26 +3,17 @@ package main
 // LeetCode #2608: Shortest Cycle in a Graph
 // https://leetcode.com/problems/shortest-cycle-in-a-graph/
 // Difficulty: Hard
-//
-// Approach: BFS from each unvisited node.
-// For each node, BFS tracks parent to avoid going back.
-// When we encounter a visited neighbor that is not parent,
-// we found a cycle of length = dist[u] + dist[v] + 1.
 
 import (
 	"fmt"
 	"math"
 )
 
-func main() {
-	// Example 1: n=7, edges=[[0,1],[1,2],[2,0],[3,4],[4,5],[5,6],[6,3]] -> 3
-	fmt.Println(findShortestCycle(7, [][]int{{0, 1}, {1, 2}, {2, 0}, {3, 4}, {4, 5}, {5, 6}, {6, 3}}))
-	// Example 2: n=4, edges=[[0,1],[0,2]] -> -1
-	fmt.Println(findShortestCycle(4, [][]int{{0, 1}, {0, 2}}))
-	// Example 3: n=5, edges=[[0,1],[1,2],[2,3],[3,1]] -> 3
-	fmt.Println(findShortestCycle(5, [][]int{{0, 1}, {1, 2}, {2, 3}, {3, 1}}))
-}
-
+// findShortestCycle returns the length of the shortest cycle in an undirected graph.
+// BFS from each unvisited node. For each node, BFS tracks parent to avoid going back.
+// When we encounter a visited neighbor that is not parent, we found a cycle.
+//
+// Complexity: O(n * (n+m)) time, O(n+m) space
 func findShortestCycle(n int, edges [][]int) int {
 	adj := make([][]int, n)
 	for _, e := range edges {
@@ -73,4 +64,19 @@ func findShortestCycle(n int, edges [][]int) int {
 		return -1
 	}
 	return ans
+}
+
+func main() {
+	// Example 1: n=7, edges=[[0,1],[1,2],[2,0],[3,4],[4,5],[5,6],[6,3]] -> 3
+	fmt.Println("Test 1: ->", findShortestCycle(7, [][]int{{0, 1}, {1, 2}, {2, 0}, {3, 4}, {4, 5}, {5, 6}, {6, 3}}))
+	// Example 2: n=4, edges=[[0,1],[0,2]] -> -1
+	fmt.Println("Test 2: ->", findShortestCycle(4, [][]int{{0, 1}, {0, 2}}))
+	// Example 3: n=5, edges=[[0,1],[1,2],[2,3],[3,1]] -> 3
+	fmt.Println("Test 3: ->", findShortestCycle(5, [][]int{{0, 1}, {1, 2}, {2, 3}, {3, 1}}))
+	// Simple triangle
+	fmt.Println("Test 4: triangle ->", findShortestCycle(3, [][]int{{0, 1}, {1, 2}, {2, 0}}))
+	// No edges
+	fmt.Println("Test 5: no edges ->", findShortestCycle(3, [][]int{}))
+	// 4-cycle
+	fmt.Println("Test 6: square ->", findShortestCycle(4, [][]int{{0, 1}, {1, 2}, {2, 3}, {3, 0}}))
 }

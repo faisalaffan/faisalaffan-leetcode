@@ -4,12 +4,14 @@ package main
 // https://leetcode.com/problems/maximum-points-after-collecting-coins-from-all-nodes/
 // Difficulty: Hard
 //
-// Approach: Tree DP with memoization.
-// At each node, we can either:
-//   1. Collect coins[i] - k points (penalty), children unaffected.
-//   2. Collect floor(coins[i]/2) points, and all descendants' coins are halved.
-// Since coins[i] <= 10^4, at most 14 halvings reduce everything to 0.
-// DP[node][shifts] = max points from the subtree when coins have been halved `shifts` times.
+// Tree DP with memoization. At each node, we can either:
+//   1. Collect coins[i] - k points (pay penalty)
+//   2. Halve coins[i] (floor division by 2) and collect the reduced value
+// Halving at a node also halves coins in the entire subtree because the
+// "shifts" count propagates downward. Since coins[i] <= 10^4, at most 14
+// halvings reduce everything to 0.
+// DP[node][shifts] = max points from subtree when coins have been halved
+// `shifts` times before reaching this node.
 
 import "fmt"
 
@@ -22,8 +24,7 @@ func maximumPoints(edges [][]int, coins []int, k int) int {
 		g[v] = append(g[v], u)
 	}
 
-	// dp[node][shifts] = max points from subtree at node with `shifts` halvings applied
-	const maxShifts = 14
+	const maxShifts = 16 // enough for coins up to 10^4 (log2(10000) ≈ 14)
 	dp := make([][]int, n)
 	for i := range dp {
 		dp[i] = make([]int, maxShifts)
@@ -41,23 +42,23 @@ func maximumPoints(edges [][]int, coins []int, k int) int {
 			return dp[node][shifts]
 		}
 
-		// Option 1: collect with penalty k
-		way1 := (coins[node] >> shifts) - k
-		// Option 2: halve this node and the entire subtree
-		way2 := coins[node] >> (shifts + 1)
+		// Option 1: collect coins with penalty k at this node
+		collect := (coins[node] >> shifts) - k
+		// Option 2: halve coins at this node (collect halved value)
+		halve := coins[node] >> (shifts + 1)
 
 		for _, child := range g[node] {
 			if child == parent {
 				continue
 			}
-			way1 += dfs(child, node, shifts)
-			way2 += dfs(child, node, shifts+1)
+			collect += dfs(child, node, shifts)     // children not halved
+			halve += dfs(child, node, shifts+1)       // children also halved
 		}
 
-		if way1 > way2 {
-			dp[node][shifts] = way1
+		if collect > halve {
+			dp[node][shifts] = collect
 		} else {
-			dp[node][shifts] = way2
+			dp[node][shifts] = halve
 		}
 		return dp[node][shifts]
 	}
@@ -66,13 +67,24 @@ func maximumPoints(edges [][]int, coins []int, k int) int {
 }
 
 func main() {
-	// Example 1: edges=[[0,1],[1,2],[2,3]], coins=[10,10,3,3], k=2
-	// Optimal: collect penalty at 0,1 and halve at 2,3 (or all penalty)
+	// Example: edges=[[0,1],[1,2],[2,3]], coins=[10,10,3,3], k=2
 	fmt.Println(maximumPoints([][]int{{0, 1}, {1, 2}, {2, 3}}, []int{10, 10, 3, 3}, 2))
 
-	// Example from LeetCode: k=5 -> 11
+	// Same tree, k=5
 	fmt.Println(maximumPoints([][]int{{0, 1}, {1, 2}, {2, 3}}, []int{10, 10, 3, 3}, 5))
 
-	// Example 2: star tree, k=0 -> 16
+	// Star tree, k=0
 	fmt.Println(maximumPoints([][]int{{0, 1}, {0, 2}}, []int{8, 4, 4}, 0))
+
+	// Single node
+	fmt.Println(maximumPoints([][]int{}, []int{5}, 2))
+
+	// All coins small
+	fmt.Println(maximumPoints([][]int{{0, 1}}, []int{0, 0}, 1))
+
+	// Larger k (penalty large, always better to halve)
+	fmt.Println(maximumPoints([][]int{{0, 1}, {1, 2}}, []int{10, 10, 10}, 20))
+
+	// k=0, always collect
+	fmt.Println(maximumPoints([][]int{{0, 1}, {0, 2}}, []int{5, 3, 7}, 0))
 }

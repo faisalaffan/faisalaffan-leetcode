@@ -80,8 +80,9 @@ func main() {
 	fmt.Println("Test 1: s=\"abacaba\", t=\"bzaa\" ->", minimumScore("abacaba", "bzaa")) // 1
 
 	// Additional test cases
-	fmt.Println("Test 2: s=\"abc\", t=\"abc\" ->", minimumScore("abc", "abc"))    // 0
-	fmt.Println("Test 3: s=\"abcde\", t=\"ace\" ->", minimumScore("abcde", "ace")) // 0
-	fmt.Println("Test 4: s=\"abcde\", t=\"xyz\" ->", minimumScore("abcde", "xyz")) // 3
-	fmt.Println("Test 5: s=\"a\", t=\"b\" ->", minimumScore("a", "b"))           // 1
+	fmt.Println("Test 2: s=\"abc\", t=\"abc\" ->", minimumScore("abc", "abc"))      // 0
+	fmt.Println("Test 3: s=\"abcde\", t=\"ace\" ->", minimumScore("abcde", "ace"))  // 0
+	fmt.Println("Test 4: s=\"abcde\", t=\"xyz\" ->", minimumScore("abcde", "xyz"))  // 3
+	fmt.Println("Test 5: s=\"a\", t=\"b\" ->", minimumScore("a", "b"))              // 1
+	fmt.Println("Test 6: s=\"\", t=\"a\" ->", minimumScore("", "a"))                // 1
 }

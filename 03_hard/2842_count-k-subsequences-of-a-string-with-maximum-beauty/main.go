@@ -39,7 +39,6 @@ func countKSubsequencesWithMaxBeauty(s string, k int) int {
 		freq[c-'a']++
 	}
 
-	// Filter non-zero frequencies
 	freqs := make([]int, 0, 26)
 	for _, f := range freq {
 		if f > 0 {
@@ -51,15 +50,12 @@ func countKSubsequencesWithMaxBeauty(s string, k int) int {
 		return 0
 	}
 
-	// Sort descending
 	sort.Slice(freqs, func(i, j int) bool {
 		return freqs[i] > freqs[j]
 	})
 
-	// The k-th frequency value defines the cutoff
 	kthFreq := freqs[k-1]
 
-	// Count how many frequencies equal kthFreq
 	totalAtCutoff := 0
 	for _, f := range freqs {
 		if f == kthFreq {
@@ -67,8 +63,6 @@ func countKSubsequencesWithMaxBeauty(s string, k int) int {
 		}
 	}
 
-	// How many of the totalAtCutoff are in the top k
-	// (some with freq > kthFreq are definitely included)
 	greater := 0
 	for _, f := range freqs {
 		if f > kthFreq {
@@ -77,13 +71,10 @@ func countKSubsequencesWithMaxBeauty(s string, k int) int {
 	}
 	needFromCutoff := k - greater
 
-	// Ways to choose which needFromCutoff of totalAtCutoff characters to include
-	// C(totalAtCutoff, needFromCutoff)
 	if needFromCutoff > totalAtCutoff {
 		return 0
 	}
 
-	// Compute nCk using precomputed factorials
 	n := totalAtCutoff
 	r := needFromCutoff
 	if r > n-r {
@@ -95,8 +86,6 @@ func countKSubsequencesWithMaxBeauty(s string, k int) int {
 		comb = comb * powMod2842(int64(i+1), mod2842-2) % mod2842
 	}
 
-	// Multiply by product of frequencies of characters we must include
-	// (those with freq > kthFreq) and kthFreq^needFromCutoff
 	result := comb
 	for _, f := range freqs {
 		if f > kthFreq {
@@ -113,15 +102,41 @@ func countKSubsequencesWithMaxBeauty(s string, k int) int {
 func main() {
 	// Example: s="bcca", k=2 => 4
 	fmt.Println(countKSubsequencesWithMaxBeauty("bcca", 2))
+
 	// k=1
 	fmt.Println(countKSubsequencesWithMaxBeauty("aabc", 1))
+
 	// k > distinct chars
 	fmt.Println(countKSubsequencesWithMaxBeauty("ab", 3))
+
 	// k = distinct chars
 	fmt.Println(countKSubsequencesWithMaxBeauty("abcd", 4))
+
 	// All same char
 	fmt.Println(countKSubsequencesWithMaxBeauty("aaaa", 1))
 	fmt.Println(countKSubsequencesWithMaxBeauty("aaaa", 2))
-	// Larger example
+
+	// Larger example with varying frequencies
 	fmt.Println(countKSubsequencesWithMaxBeauty("abbcccddddeeeee", 3))
+
+	// k=26 with many chars
+	fmt.Println(countKSubsequencesWithMaxBeauty("abcdefghijklmnopqrstuvwxyz", 26))
+
+	// k=0 (not valid per constraints but test edge)
+	fmt.Println(countKSubsequencesWithMaxBeauty("abc", 0))
+
+	// All same frequency, k equals number of chars
+	fmt.Println(countKSubsequencesWithMaxBeauty("abc", 3))
+
+	// Ties at cutoff
+	fmt.Println(countKSubsequencesWithMaxBeauty("aabbccddee", 3))
+
+	// Single character repeated many times
+	fmt.Println(countKSubsequencesWithMaxBeauty("zzzzzzzzzz", 1))
+
+	// k=2 with multiple chars at same frequency
+	fmt.Println(countKSubsequencesWithMaxBeauty("aaabbbccc", 2))
+
+	// Long string with uneven frequencies
+	fmt.Println(countKSubsequencesWithMaxBeauty("thequickbrownfoxjumpsoverthelazydog", 5))
 }

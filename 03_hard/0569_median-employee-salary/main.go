@@ -20,23 +20,22 @@ type Employee struct {
 	Salary  int
 }
 
-// medianEmployeeSalary returns median salary(s) per company.
-// Time: O(E log E) for sorting, Space: O(E)
-func medianEmployeeSalary(employees []Employee) []struct {
+// MedianResult holds one output row.
+type MedianResult struct {
 	Company string
 	Salary  int
-} {
+}
+
+// medianEmployeeSalary returns median salary(s) per company.
+// Time: O(E log E) for sorting, Space: O(E)
+func medianEmployeeSalary(employees []Employee) []MedianResult {
 	// Group by company.
 	byCompany := make(map[string][]int)
 	for _, e := range employees {
 		byCompany[e.Company] = append(byCompany[e.Company], e.Salary)
 	}
 
-	type result struct {
-		Company string
-		Salary  int
-	}
-	var results []result
+	var results []MedianResult
 
 	// Process each company.
 	for company, salaries := range byCompany {
@@ -49,11 +48,11 @@ func medianEmployeeSalary(employees []Employee) []struct {
 
 		if n%2 == 1 {
 			// Odd count: one median.
-			results = append(results, result{company, salaries[n/2]})
+			results = append(results, MedianResult{company, salaries[n/2]})
 		} else {
 			// Even count: two medians (the two middle values).
-			results = append(results, result{company, salaries[n/2-1]})
-			results = append(results, result{company, salaries[n/2]})
+			results = append(results, MedianResult{company, salaries[n/2-1]})
+			results = append(results, MedianResult{company, salaries[n/2]})
 		}
 	}
 

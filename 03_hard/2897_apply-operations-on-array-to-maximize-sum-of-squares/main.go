@@ -4,10 +4,11 @@ package main
 // https://leetcode.com/problems/apply-operations-to-maximize-sum-of-squares/
 // Difficulty: Hard
 //
-// Bit counting + greedy. The AND/OR operation preserves total bit count per
-// position. After any number of operations, we select k elements and maximize
-// sum of squares. Greedy: for each of the k selections, take one available bit
-// from each position (highest first) to build the largest possible numbers.
+// The operation (a,b) -> (a&b, a|b) preserves total bit count per position but
+// concentrates bits. Sum of squares is convex: we maximize by concentrating bits
+// into as few numbers as possible. For each bit position, count available bits,
+// then greedily build k largest possible numbers by taking one available bit from
+// each position (highest first) for each of the k selections.
 // O((N + k) * 32) time, O(32) space.
 
 import "fmt"
@@ -46,7 +47,7 @@ func main() {
 	fmt.Println(maxSum2897([]int{2, 6, 5, 8}, 2))
 	// Example 2: nums=[4,5,4,7], k=3 => 90
 	fmt.Println(maxSum2897([]int{4, 5, 4, 7}, 3))
-	// User example: nums=[2,3,4,5], k=1
+	// k=1 (just take largest possible number)
 	fmt.Println(maxSum2897([]int{2, 3, 4, 5}, 1))
 	// All zeros
 	fmt.Println(maxSum2897([]int{0, 0, 0}, 2))
@@ -54,4 +55,8 @@ func main() {
 	fmt.Println(maxSum2897([]int{7}, 1))
 	// Simple
 	fmt.Println(maxSum2897([]int{5, 6, 3}, 2))
+	// All same values
+	fmt.Println(maxSum2897([]int{3, 3, 3}, 2))
+	// k larger than count of bits
+	fmt.Println(maxSum2897([]int{8, 4, 2}, 5))
 }
