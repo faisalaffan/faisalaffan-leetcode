@@ -7,22 +7,22 @@ package main
 import "fmt"
 
 func tallestBillboard(rods []int) int {
-	// dp[diff] = max total sum of both sides with this diff (left - right)
+	// dp[diff] = max total sum of both sides with this abs difference
 	dp := map[int]int{0: 0}
 
 	for _, r := range rods {
 		cur := make(map[int]int)
 		for diff, total := range dp {
-			// 1. skip this rod
-			if total > cur[diff] {
+			// 1. skip this rod — use >= to propagate diff=0/total=0 (map zero-value)
+			if total >= cur[diff] {
 				cur[diff] = total
 			}
-			// 2. add to left side (diff increases)
+			// 2. add to taller side: diff increases by r, total increases by r
 			left := total + r
 			if left > cur[diff+r] {
 				cur[diff+r] = left
 			}
-			// 3. add to right side (diff decreases)
+			// 3. add to shorter side: abs diff changes
 			right := total + r
 			newDiff := diff - r
 			if newDiff < 0 {
@@ -35,15 +35,9 @@ func tallestBillboard(rods []int) int {
 		dp = cur
 	}
 
-	// dp[0] is the max total sum with equal sides; each side is half
+	// dp[0] = max total sum when diff=0 (equal sides)
+	// Each side height = dp[0] / 2
 	return dp[0] / 2
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
 
 func main() {

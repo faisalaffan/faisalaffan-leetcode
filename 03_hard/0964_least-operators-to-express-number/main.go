@@ -59,7 +59,7 @@ func leastOpsExpressTarget(x int, target int) int {
 		if digit > 0 {
 			// Add (x-digit) copies of x^pos and subtract x^(pos+1)
 			// cost: (x-digit)*cost[pos] + '-' operator + cost[pos+1]
-			borrowCost := (x-digit)*cost[pos] + 1 + cost[pos+1] + dfs(pos+1, newCarry+1)
+			borrowCost := (x-digit)*cost[pos] + cost[pos+1] + dfs(pos+1, newCarry)
 			if borrowCost < best {
 				best = borrowCost
 			}

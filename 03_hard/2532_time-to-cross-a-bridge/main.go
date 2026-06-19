@@ -126,8 +126,8 @@ func findCrossingTime(n int, k int, time [][]int) int {
 				readyTime: currentTime + time[w.idx][1], // + pickLeft
 				idx:       w.idx,
 			})
-		} else if leftWait.Len() > 0 {
-			// Worker on left crosses to right (with a box)
+		} else if leftWait.Len() > 0 && remainingBoxes > 0 {
+			// Worker on left crosses to right (with a box, only if boxes remain)
 			w := heap.Pop(leftWait).(Worker)
 			currentTime += time[w.idx][0] // leftToRight
 			remainingBoxes--

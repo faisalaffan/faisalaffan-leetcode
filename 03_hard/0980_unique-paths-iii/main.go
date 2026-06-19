@@ -13,15 +13,15 @@ func uniquePathsIII(grid [][]int) int {
 	}
 
 	startX, startY := 0, 0
-	emptyCount := 0
+	nonObstacleCount := 0
 
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
 			if grid[i][j] == 1 {
 				startX, startY = i, j
 			}
-			if grid[i][j] == 0 || grid[i][j] == 1 {
-				emptyCount++
+			if grid[i][j] != -1 {
+				nonObstacleCount++
 			}
 		}
 	}
@@ -38,7 +38,7 @@ func uniquePathsIII(grid [][]int) int {
 			return
 		}
 		if grid[x][y] == 2 {
-			if walked == emptyCount {
+			if walked == nonObstacleCount {
 				ans++
 			}
 			return
@@ -52,7 +52,7 @@ func uniquePathsIII(grid [][]int) int {
 		visited[x][y] = false
 	}
 
-	dfs(startX, startY, 1) // start counts as 1 walked cell
+	dfs(startX, startY, 1)
 	return ans
 }
 

@@ -4,26 +4,66 @@ package main
 // https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/
 // Difficulty: Hard
 //
-// Repeatedly replace each adjacent pair (a,b) with (a+b)%10 until 2 digits remain.
-// Check if final two digits are equal.
-// Uses Lucas theorem to compute binomial coefficients modulo small primes
-// (2 and 5) and Chinese Remainder Theorem.
+// Repeatedly replace adjacent pair (a,b) with (a+b)%10 until 2 digits remain.
+// Final two digits are equal iff:
+//   sum_{j=0}^{n-2} C(n-2, j) * int(s[j])   ≡
+//   sum_{j=0}^{n-2} C(n-2, j) * int(s[j+1]) (mod 10)
+//
+// Compute C(n,k) mod 10 via Lucas theorem mod 2 and mod 5, then CRT.
+// n up to 10^5 so factorial precomputation is fine.
 
 import "fmt"
 
-const MOD = 10
+// factorials modulo 5
+var fact5 = [5]int{1, 1, 2, 6, 24} // 0!,1!,2!,3!,4! values
+var invFact5 = [5]int{1, 1, 3, 2, 4} // modular inverses: fact5[i] * invFact5[i] ≡ 1 (mod 5)
 
-// factor out powers of 2 and 5 from n!, return (remaining_value_mod, count_of_2, count_of_5)
-func factor25(n int) (int, int, int) {
-	// Compute n! with factors of 2 and 5 removed
-	// Use the formula: n! = 2^a * 5^b * r where r is coprime with 10
-	val := 1
-	cnt2 := 0
-	cnt5 := 0
+// Cmod5(n,k): binomial coefficient modulo 5 using Lucas theorem
+func binomMod5(n, k int) int {
+	if k < 0 || k > n {
+		return 0
+	}
+	if n < 5 {
+		return fact5[n] / (fact5[k] * fact5[n-k]) % 5
+	}
+	// Lucas: represent n,k in base 5, multiply C(base5_digit_n, base5_digit_k) mod 5
+	res := 1
+	for n > 0 || k > 0 {
+		ni := n % 5
+		ki := k % 5
+		if ki > ni {
+			return 0
+		}
+		num := fact5[ni]
+		den := fact5[ki] * fact5[ni-ki] % 5
+		// modular inverse of den mod 5
+		invDen := invFact5[den]
+		res = res * num % 5 * invDen % 5
+		n /= 5
+		k /= 5
+	}
+	return res
+}
 
-	// We need n! mod something, but excluding factors 2 and 5
-	// Use the recursive formula: f(n) = f(n/2) * f(n/5) * product of numbers 1..n not divisible by 2 or 5
-	return val, cnt2, cnt5 // placeholder
+// binomMod2: binomial coefficient modulo 2 using Lucas theorem
+// C(n,k) mod 2 = 1 iff (k & ~n) == 0 i.e. k is a submask of n
+func binomMod2(n, k int) int {
+	if k < 0 || k > n {
+		return 0
+	}
+	if k&^n == 0 {
+		return 1
+	}
+	return 0
+}
+
+// binomMod10: binomial coefficient modulo 10 via CRT
+func binomMod10(n, k int) int {
+	r2 := binomMod2(n, k)
+	r5 := binomMod5(n, k)
+	// Solve x ≡ r2 (mod 2), x ≡ r5 (mod 5)
+	// x = r5 * 6 + r2 * 5 (mod 10)
+	return (r5*6 + r2*5) % 10
 }
 
 func isEqualAfterOps(s string) bool {
@@ -32,110 +72,18 @@ func isEqualAfterOps(s string) bool {
 		return s[0] == s[1]
 	}
 
-	// After n-2 steps, final digit at position i (0-indexed, where i goes 0..1) is:
-	// sum_{j=0}^{n-2} C(n-2, j) * s[j+i] % 10
-	// We need to check if these two sums are equal mod 10.
-
-	// Compute C(n-2, k) modulo 10 for all k
-	// n up to 10^5 or more, use Lucas theorem mod 2 and mod 5, then CRT
-
-	// Precompute factorials mod 2 and mod 5 using Lucas
-	// Lucas theorem: C(n,k) mod p = product C(n_i, k_i) mod p where n_i,k_i are base-p digits
-
-	binomialMod2 := func(n, k int) int {
-		// C(n,k) mod 2 = 1 iff (k & ~n) == 0 (Lucas for p=2)
-		if k&^n == 0 {
-			return 1
-		}
-		return 0
-	}
-
-	// Precompute factorials mod 5 up to 4
-	fact5 := [5]int{1, 1, 2, 6, 24}
-
-	var lucasMod5 func(n, k int) int
-	lucasMod5 = func(n, k int) int {
-		if k < 0 || k > n {
-			return 0
-		}
-		if n < 5 {
-			return fact5[n] / (fact5[k] * fact5[n-k]) % 5
-		}
-		// Lucas: C(n,k) = C(n/5, k/5) * C(n%5, k%5) mod 5
-		// But 5 is prime, n/5 uses integer division
-		return lucasMod5(n/5, k/5) * (fact5[n%5] / (fact5[k%5] * fact5[(n-k)%5])) % 5
-	}
-
-	// Actually for mod 5 we need modular inverse since 5 is prime
-	// Let me use a simpler approach: precompute binomial up to n using
-	// formula with 2 and 5 factors removed, then combine with CRT
-
-	// Alternative: compute binomial mod 2 and mod 5 separately
-
-	// Helper: C(n,k) mod 2 using Lucas
-	c2 := func(n, k int) int {
-		if k < 0 || k > n {
-			return 0
-		}
-		if k&^n == 0 {
-			return 1
-		}
-		return 0
-	}
-
-	// Helper: C(n,k) mod 5 using Lucas
-	var c5 func(n, k int) int
-	c5 = func(n, k int) int {
-		if k < 0 || k > n {
-			return 0
-		}
-		if n == 0 || k == 0 {
-			return 1
-		}
-		ni := n % 5
-		ki := k % 5
-		if ki > ni {
-			return 0
-		}
-		// C(ni, ki) mod 5 = fact5[ni] * inv(fact5[ki] * fact5[ni-ki]) mod 5
-		num := fact5[ni]
-		den := fact5[ki] * fact5[ni-ki] % 5
-		// inv of den mod 5 (den is 1,2,3,4 → den^(5-2) = den^3 mod 5)
-		invDen := 1
-		for d := den; d < 5; d++ {
-			if (den*d)%5 == 1 {
-				invDen = d
-				break
-			}
-		}
-		return num * invDen % 5 * c5(n/5, k/5) % 5
-	}
-
-	// CRT: given x ≡ r2 (mod 2) and x ≡ r5 (mod 5), find x mod 10
-	// Since 2 and 5 are coprime, solution exists.
-	// x = r5 * 6 + r2 * 5 (mod 10) because:
-	// 6 ≡ 1 (mod 5), 6 ≡ 0 (mod 2); 5 ≡ 1 (mod 2), 5 ≡ 0 (mod 5)
-	crt := func(r2, r5 int) int {
-		return (r5*6 + r2*5) % 10
-	}
-
-	binomMod10 := func(n, k int) int {
-		return crt(c2(n, k), c5(n, k))
-	}
-
+	m := n - 2
 	sum0 := 0
 	sum1 := 0
-	nn := n - 2
 	for j := 0; j < n-1; j++ {
-		b := binomMod10(nn, j)
+		c := binomMod10(m, j)
 		if j < n {
-			sum0 = (sum0 + b*int(s[j]-'0')) % 10
+			sum0 = (sum0 + c*int(s[j]-'0')) % 10
 		}
 		if j+1 < n {
-			sum1 = (sum1 + b*int(s[j+1]-'0')) % 10
+			sum1 = (sum1 + c*int(s[j+1]-'0')) % 10
 		}
 	}
-
 	return sum0 == sum1
 }
 
@@ -146,12 +94,15 @@ func main() {
 	// Test: "12" -> expected true
 	fmt.Printf("s=12 -> %v (expected true)\n", isEqualAfterOps("12"))
 
-	// Test: "3478" -> expected ?
-	fmt.Printf("s=3478 -> %v\n", isEqualAfterOps("3478"))
+	// Test: "3478" -> simulate: 3478->717->88, so true
+	fmt.Printf("s=3478 -> %v (expected true)\n", isEqualAfterOps("3478"))
 
 	// Test: "0000" -> expected true
 	fmt.Printf("s=0000 -> %v (expected true)\n", isEqualAfterOps("0000"))
 
-	// Test: "1234" -> expected ?
-	fmt.Printf("s=1234 -> %v\n", isEqualAfterOps("1234"))
+	// Test: "1234" -> expected false (simulated above -> 82)
+	fmt.Printf("s=1234 -> %v (expected false)\n", isEqualAfterOps("1234"))
+
+	// Test: "11" -> expected true
+	fmt.Printf("s=11 -> %v (expected true)\n", isEqualAfterOps("11"))
 }

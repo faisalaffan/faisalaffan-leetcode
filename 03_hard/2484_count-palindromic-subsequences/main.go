@@ -6,8 +6,8 @@ package main
 //
 // Count distinct palindromic subsequences of length 5 (a b c b a).
 // For each middle position j and each pair (a,b):
-//   leftCount[a][b] = number of (a,b) ordered pairs in s[0:j]
-//   rightCount[a][b] = number of (a,b) ordered pairs in s[j+1:n]
+//   leftCount[a][b] = number of (a,b) ordered pairs in s[0:j] (exclusive)
+//   rightCount[a][b] = number of (a,b) ordered pairs in s[j+1:n] (exclusive)
 //   result += leftCount[a][b] * rightCount[b][a]
 
 import "fmt"
@@ -38,7 +38,7 @@ func countPalindromicSubsequences(s string) int {
 		nums[i] = int(s[i] - '0')
 	}
 
-	// prefix counts
+	// prefix counts: prefixCnt[i][d] = count of digit d in s[0:i]
 	prefixCnt := make([][10]int, n+1)
 	for i := 0; i < n; i++ {
 		for d := 0; d < 10; d++ {
@@ -47,7 +47,7 @@ func countPalindromicSubsequences(s string) int {
 		prefixCnt[i+1][nums[i]]++
 	}
 
-	// suffix counts
+	// suffix counts: suffixCnt[i][d] = count of digit d in s[i:n]
 	suffixCnt := make([][10]int, n+1)
 	for i := n - 1; i >= 0; i-- {
 		for d := 0; d < 10; d++ {
@@ -72,12 +72,8 @@ func countPalindromicSubsequences(s string) int {
 	for j := 0; j < n; j++ {
 		d := nums[j]
 
-		// Remove pairs involving position j from rightPairs
-		// Pairs (a, d) where a is before j: these are no longer "after j"
-		for a := 0; a < 10; a++ {
-			rightPairs[a][d] -= int64(prefixCnt[j][a])
-		}
-		// Pairs (d, b) where b is after j: remove them too
+		// Remove pairs where position j is the FIRST element (d at j, any after j)
+		// These are no longer after position j.
 		for b := 0; b < 10; b++ {
 			rightPairs[d][b] -= int64(suffixCnt[j+1][b])
 		}
@@ -89,7 +85,8 @@ func countPalindromicSubsequences(s string) int {
 			}
 		}
 
-		// Add pairs (a, d) where d is the second element, now part of left for next iterations
+		// Add position j's contribution to leftPairs for NEXT iteration.
+		// Pairs (a at p < j, d at j) now become part of the left prefix.
 		for a := 0; a < 10; a++ {
 			leftPairs[a][d] += int64(prefixCnt[j][a])
 		}

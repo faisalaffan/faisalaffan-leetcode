@@ -24,12 +24,15 @@ func main() {
 
 func minCostToEqualizeArray(nums []int, cost1, cost2 int) int {
 	n := len(nums)
-	maxVal := 0
+	minVal, maxVal := nums[0], nums[0]
 	var sum int64 = 0
 	for _, v := range nums {
 		sum += int64(v)
 		if v > maxVal {
 			maxVal = v
+		}
+		if v < minVal {
+			minVal = v
 		}
 	}
 
@@ -47,12 +50,12 @@ func minCostToEqualizeArray(nums []int, cost1, cost2 int) int {
 	}
 
 	ans := int64(math.MaxInt64)
-	// Try target values from maxVal to maxVal + n + 10 (optimal T is bounded)
-	limit := maxVal + n + 10
+	// Check targets from maxVal upward. The optimal T is bounded.
+	limit := maxVal + n*2 + 5
 
 	for target := maxVal; target <= limit; target++ {
 		totalIncs := int64(target)*int64(n) - sum
-		maxDeficit := int64(target - maxVal) // the maxSingle element needs this many increments
+		maxDeficit := int64(target - minVal)
 
 		// Max pairs = min(totalIncs/2, totalIncs - maxDeficit)
 		pairs := totalIncs / 2
@@ -63,9 +66,6 @@ func minCostToEqualizeArray(nums []int, cost1, cost2 int) int {
 		if cost < ans {
 			ans = cost
 		}
-
-		// If totalIncs is very large and cost starts increasing, we can stop early
-		// but since limit is small, this is fine.
 	}
 
 	return int(ans % MOD)
