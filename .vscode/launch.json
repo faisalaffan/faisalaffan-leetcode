@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "LeetCode: Debug (ketik path)",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/${input:problemPath}",
+            "showLog": true
+        },
+        {
+            "name": "LeetCode: Debug (file aktif)",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${fileDirname}",
+            "showLog": false
+        }
+    ],
+    "inputs": [
+        {
+            "id": "problemPath",
+            "type": "promptString",
+            "description": "Ketik path soal. Contoh: 01_easy/0001_two-sum",
+            "default": "01_easy/0001_two-sum"
+        }
+    ]
+}
