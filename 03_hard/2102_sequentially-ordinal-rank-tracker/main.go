@@ -20,7 +20,7 @@ type Location struct {
 }
 
 // LowHeap is a min-heap: root is the "worst" among the top-k items.
-// Comparison: score ascending, then name ASC (earlier alphabetically = worse).
+// Sort by score ASC, then name DESC (lower score = worse; same score, larger name = worse).
 type LowHeap []Location
 
 func (h LowHeap) Len() int      { return len(h) }
@@ -29,7 +29,7 @@ func (h LowHeap) Less(i, j int) bool {
 	if h[i].score != h[j].score {
 		return h[i].score < h[j].score // lower score = worse = root
 	}
-	return h[i].name < h[j].name // earlier name = worse = root
+	return h[i].name > h[j].name // larger name (name DESC) = worse = root
 }
 func (h *LowHeap) Push(x any)   { *h = append(*h, x.(Location)) }
 func (h *LowHeap) Pop() any {
@@ -40,8 +40,8 @@ func (h *LowHeap) Pop() any {
 	return x
 }
 
-// HighHeap is a max-heap: root is the "best" among the leftovers.
-// Comparison: score descending, then name DESC (later alphabetically = better).
+// HighHeap is a min-heap: root is the "best" among the leftovers.
+// Sort by score DESC, then name ASC (higher score = better; same score, smaller name = better).
 type HighHeap []Location
 
 func (h HighHeap) Len() int      { return len(h) }
@@ -50,7 +50,7 @@ func (h HighHeap) Less(i, j int) bool {
 	if h[i].score != h[j].score {
 		return h[i].score > h[j].score // higher score = better = root
 	}
-	return h[i].name > h[j].name // later name = better = root
+	return h[i].name < h[j].name // smaller name (name ASC) = better = root
 }
 func (h *HighHeap) Push(x any)   { *h = append(*h, x.(Location)) }
 func (h *HighHeap) Pop() any {
@@ -100,8 +100,8 @@ func main() {
 	tracker.Add("orland", 2)
 	fmt.Printf("Get() = %s (expected bradford)\n", tracker.Get())
 	tracker.Add("orlando", 3)
-	fmt.Printf("Get() = %s (expected orlando)\n", tracker.Get())
+	fmt.Printf("Get() = %s (expected bradford)\n", tracker.Get())
 	tracker.Add("alpine", 2)
+	fmt.Printf("Get() = %s (expected bradford)\n", tracker.Get())
 	fmt.Printf("Get() = %s (expected orland)\n", tracker.Get())
-	fmt.Printf("Get() = %s (expected alpine)\n", tracker.Get())
 }

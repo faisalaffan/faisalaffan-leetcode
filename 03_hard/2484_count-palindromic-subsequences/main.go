@@ -5,10 +5,10 @@ package main
 // Difficulty: Hard
 //
 // Count distinct palindromic subsequences of length 5 (a b c b a).
-// For each middle position j and each digit pair (a,b):
-//   leftPairs[a][b] = number of (a,b) ordered pairs before j
-//   rightPairs[b][a] = number of (b,a) ordered pairs after j
-//   result += leftPairs[a][b] * rightPairs[b][a]
+// For each middle position j and each pair (a,b):
+//   leftCount[a][b] = number of (a,b) ordered pairs in s[0:j]
+//   rightCount[a][b] = number of (a,b) ordered pairs in s[j+1:n]
+//   result += leftCount[a][b] * rightCount[b][a]
 
 import "fmt"
 
@@ -47,45 +47,49 @@ func countPalindromicSubsequences(s string) int {
 		prefixCnt[i+1][nums[i]]++
 	}
 
-	// Compute all pairs in the entire string
-	totalPairs := [10][10]int64{}
+	// suffix counts
+	suffixCnt := make([][10]int, n+1)
+	for i := n - 1; i >= 0; i-- {
+		for d := 0; d < 10; d++ {
+			suffixCnt[i][d] = suffixCnt[i+1][d]
+		}
+		suffixCnt[i][nums[i]]++
+	}
+
+	// Compute total ordered pairs in the full string
+	// rightPairs[a][b] = number of (a,b) pairs where a appears before b
+	rightPairs := [10][10]int64{}
 	for i := 0; i < n; i++ {
 		d := nums[i]
 		for a := 0; a < 10; a++ {
-			totalPairs[a][d] += int64(prefixCnt[i][a])
+			rightPairs[a][d] += int64(prefixCnt[i][a])
 		}
 	}
 
-	// rightPairs starts as totalPairs, leftPairs starts as zeros
-	rightPairs := [10][10]int64{}
-	for a := 0; a < 10; a++ {
-		for b := 0; b < 10; b++ {
-			rightPairs[a][b] = totalPairs[a][b]
-		}
-	}
 	leftPairs := [10][10]int64{}
-
 	var result int64 = 0
 
 	for j := 0; j < n; j++ {
 		d := nums[j]
 
-		// Remove pairs involving position j
+		// Remove pairs involving position j from rightPairs
+		// Pairs (a, d) where a is before j: these are no longer "after j"
 		for a := 0; a < 10; a++ {
-			// pairs (a, d) where a is before j and d is at j — remove from right
 			rightPairs[a][d] -= int64(prefixCnt[j][a])
 		}
+		// Pairs (d, b) where b is after j: remove them too
+		for b := 0; b < 10; b++ {
+			rightPairs[d][b] -= int64(suffixCnt[j+1][b])
+		}
 
-		// Now compute contributions with j as middle
+		// For each (a,b), count palindromes with j as middle
 		for a := 0; a < 10; a++ {
 			for b := 0; b < 10; b++ {
-				// leftPairs[a][b] = (a, b) pairs in prefix (before j)
-				// rightPairs[b][a] = (b, a) pairs in suffix (after j)
 				result = (result + leftPairs[a][b]*rightPairs[b][a]) % MOD
 			}
 		}
 
-		// Add pairs where d is the second element (d is now in the prefix for next iterations)
+		// Add pairs (a, d) where d is the second element, now part of left for next iterations
 		for a := 0; a < 10; a++ {
 			leftPairs[a][d] += int64(prefixCnt[j][a])
 		}
