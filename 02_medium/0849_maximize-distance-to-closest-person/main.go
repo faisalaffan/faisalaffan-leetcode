@@ -7,10 +7,38 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximizeDistanceToClosestPerson())
+	fmt.Println(MaximizeDistanceToClosestPerson([]int{1, 0, 0, 0, 1, 0, 1}))
+	fmt.Println(MaximizeDistanceToClosestPerson([]int{1, 0, 0, 0}))
+	fmt.Println(MaximizeDistanceToClosestPerson([]int{0, 1}))
 }
 
-func MaximizeDistanceToClosestPerson() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+func MaximizeDistanceToClosestPerson(seats []int) int {
+	n := len(seats)
+	ans := 0
+	lastPerson := -1
+
+	for i := 0; i < n; i++ {
+		if seats[i] == 1 {
+			if lastPerson == -1 {
+				ans = i
+			} else {
+				dist := (i - lastPerson) / 2
+				if dist > ans {
+					ans = dist
+				}
+			}
+			lastPerson = i
+		}
+	}
+
+	// Check distance from last person to the end
+	if seats[n-1] == 0 {
+		dist := n - 1 - lastPerson
+		if dist > ans {
+			ans = dist
+		}
+	}
+
+	return ans
 }

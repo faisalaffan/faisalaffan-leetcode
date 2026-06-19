@@ -2,15 +2,62 @@ package main
 
 // LeetCode #1126: Active Businesses
 // https://leetcode.com/problems/active-businesses/
-// Difficulty: Medium [Paid]
+// Difficulty: Medium
+//
+// Approach: Count occurrences per (event_type, occurences), find avg per event_type.
+//           Filter businesses where > 1 event type has > avg occurences.
+// Time: O(n)
+// Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(ActiveBusinesses())
+	// (business_id, event_type, occurences)
+	// Biz 1: reviews=10, ads=7 -> reviews(10 > avg 6.67) ✓, ads(7 > avg 5) ✓ -> 2 above, active
+	// Biz 2: reviews=3, ads=2  -> reviews(3 < 6.67) ✗, ads(2 < 5) ✗
+	// Biz 3: reviews=7, ads=6  -> reviews(7 > 6.67) ✓, ads(6 > 5) ✓ -> 2 above, active
+	events := [][]int{
+		{1, 1, 10}, {1, 2, 7},
+		{2, 1, 3}, {2, 2, 2},
+		{3, 1, 7}, {3, 2, 6},
+	}
+	fmt.Println(activeBusinesses(events)) // [1,3]
 }
 
-func ActiveBusinesses() any {
-	// TODO: implement
-	return nil
+func activeBusinesses(events [][]int) []int {
+	// events[i] = [business_id, event_type, occurences]
+	typeTotals := make(map[int]int)
+	typeCount := make(map[int]int)
+	bizEvents := make(map[int]map[int]int)
+
+	for _, e := range events {
+		bizID, eventType, occ := e[0], e[1], e[2]
+		typeTotals[eventType] += occ
+		typeCount[eventType]++
+		if bizEvents[bizID] == nil {
+			bizEvents[bizID] = make(map[int]int)
+		}
+		bizEvents[bizID][eventType] = occ
+	}
+
+	// Compute average per event type
+	typeAvg := make(map[int]float64)
+	for t := range typeTotals {
+		typeAvg[t] = float64(typeTotals[t]) / float64(typeCount[t])
+	}
+
+	result := make([]int, 0)
+	for bizID, events := range bizEvents {
+		aboveAvgCount := 0
+		for eventType, occ := range events {
+			if float64(occ) > typeAvg[eventType] {
+				aboveAvgCount++
+			}
+		}
+		if aboveAvgCount > 1 {
+			result = append(result, bizID)
+		}
+	}
+
+	return result
 }

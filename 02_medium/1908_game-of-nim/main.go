@@ -7,10 +7,16 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(GameOfNim())
+	fmt.Println(NimGame([]int{1, 2, 3}))
+	fmt.Println(NimGame([]int{1, 1, 1}))
+	fmt.Println(NimGame([]int{1, 2}))
 }
 
-func GameOfNim() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func NimGame(piles []int) bool {
+	xor := 0
+	for _, p := range piles {
+		xor ^= p
+	}
+	return xor != 0
 }

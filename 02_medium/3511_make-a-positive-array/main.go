@@ -3,14 +3,27 @@ package main
 // LeetCode #3511: Make a Positive Array
 // https://leetcode.com/problems/make-a-positive-array/
 // Difficulty: Medium [Paid]
+// Complexity: O(n) time, O(1) space
 
 import "fmt"
 
 func main() {
-	fmt.Println(MakeAPositiveArray())
+	// Test case 1
+	fmt.Println("Test 1:", MakeAPositiveArray([]int{-1, 2, -3, 4}))
+	// Test case 2
+	fmt.Println("Test 2:", MakeAPositiveArray([]int{1, 2, 3}))
+	// Test case 3
+	fmt.Println("Test 3:", MakeAPositiveArray([]int{-5, -10}))
 }
 
-func MakeAPositiveArray() any {
-	// TODO: implement
-	return nil
+func MakeAPositiveArray(nums []int) int {
+	// Minimum operations to make all elements positive
+	// Each operation can increment an element by 1
+	ops := 0
+	for _, v := range nums {
+		if v <= 0 {
+			ops += -v + 1
+		}
+	}
+	return ops
 }

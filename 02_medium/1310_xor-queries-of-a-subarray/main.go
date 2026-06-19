@@ -7,10 +7,31 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(XorQueriesOfASubarray())
+	// Test case 1
+	fmt.Println(xorQueries([]int{1, 3, 4, 8}, [][]int{{0, 1}, {1, 2}, {0, 3}, {3, 3}}))
+	// [2,7,14,8]
+
+	// Test case 2
+	fmt.Println(xorQueries([]int{4, 8, 2, 10}, [][]int{{2, 3}, {1, 3}, {0, 0}, {0, 3}}))
+	// [8,0,4,4]
+
+	// Test case 3
+	fmt.Println(xorQueries([]int{2}, [][]int{{0, 0}}))
+	// [2]
 }
 
-func XorQueriesOfASubarray() any {
-	// TODO: implement
-	return nil
+// Time: O(n + m) where n = len(arr), m = len(queries)
+// Space: O(n) for prefix XOR array
+func xorQueries(arr []int, queries [][]int) []int {
+	n := len(arr)
+	prefix := make([]int, n+1)
+	for i := 0; i < n; i++ {
+		prefix[i+1] = prefix[i] ^ arr[i]
+	}
+
+	result := make([]int, len(queries))
+	for i, q := range queries {
+		result[i] = prefix[q[1]+1] ^ prefix[q[0]]
+	}
+	return result
 }

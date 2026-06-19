@@ -3,14 +3,52 @@ package main
 // LeetCode #251: Flatten 2D Vector
 // https://leetcode.com/problems/flatten-2d-vector/
 // Difficulty: Medium [Paid]
+// Time: O(1) amortized per next/hasNext, Space: O(1) excluding input
 
 import "fmt"
 
-func main() {
-	fmt.Println(FlattenTwoDVector())
+type Vector2D struct {
+	vec    [][]int
+	row    int
+	col    int
 }
 
-func FlattenTwoDVector() any {
-	// TODO: implement
-	return nil
+func Constructor(vec [][]int) Vector2D {
+	return Vector2D{vec, 0, 0}
+}
+
+func (this *Vector2D) advance() {
+	for this.row < len(this.vec) && this.col >= len(this.vec[this.row]) {
+		this.row++
+		this.col = 0
+	}
+}
+
+func (this *Vector2D) Next() int {
+	this.advance()
+	val := this.vec[this.row][this.col]
+	this.col++
+	return val
+}
+
+func (this *Vector2D) HasNext() bool {
+	this.advance()
+	return this.row < len(this.vec)
+}
+
+func main() {
+	iter := Constructor([][]int{{1, 2}, {3}, {4, 5, 6}})
+	for iter.HasNext() {
+		fmt.Print(iter.Next(), " ")
+	}
+	fmt.Println()
+
+	iter2 := Constructor([][]int{{}, {1}, {}})
+	for iter2.HasNext() {
+		fmt.Print(iter2.Next(), " ")
+	}
+	fmt.Println()
+
+	iter3 := Constructor([][]int{{}})
+	fmt.Println(iter3.HasNext())
 }

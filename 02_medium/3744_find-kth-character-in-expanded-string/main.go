@@ -3,14 +3,41 @@ package main
 // LeetCode #3744: Find Kth Character in Expanded String
 // https://leetcode.com/problems/find-kth-character-in-expanded-string/
 // Difficulty: Medium [Paid]
+// Time: O(n) | Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func main() {
-	fmt.Println(FindKthCharacterInExpandedString())
+func findKthCharacterInExpandedString(s string, k int) byte {
+	words := strings.Fields(s)
+
+	for _, word := range words {
+		l := len(word)
+		m := l * (l + 1) / 2
+
+		if k == m {
+			return ' '
+		} else if k > m {
+			k -= (m + 1)
+			continue
+		} else {
+			cur := 0
+			for i, ch := range word {
+				cur += (i + 1)
+				if k < cur {
+					return byte(ch)
+				}
+			}
+			return ' '
+		}
+	}
+	return ' '
 }
 
-func FindKthCharacterInExpandedString() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Printf("%c\n", findKthCharacterInExpandedString("hello world", 0))
+	fmt.Printf("%c\n", findKthCharacterInExpandedString("hello world", 15))
+	fmt.Printf("%c\n", findKthCharacterInExpandedString("hello world", 20))
 }

@@ -7,10 +7,37 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfStepsToReduceANumberInBinaryRepresentationToOne())
+	// Test case 1
+	fmt.Println(numSteps("1101")) // 6
+
+	// Test case 2
+	fmt.Println(numSteps("10")) // 1
+
+	// Test case 3
+	fmt.Println(numSteps("1")) // 0
+
+	// Test case 4
+	fmt.Println(numSteps("1111011110000011100000110001011011110010111001010111110001"))
 }
 
-func NumberOfStepsToReduceANumberInBinaryRepresentationToOne() any {
-	// TODO: implement
-	return nil
+// Time: O(n) where n = length of binary string
+// Space: O(1)
+func numSteps(s string) int {
+	steps := 0
+	carry := 0
+
+	for i := len(s) - 1; i > 0; i-- {
+		digit := int(s[i]-'0') + carry
+		if digit%2 == 1 {
+			// Odd: add 1 (which makes it even, two operations: +1 and /2)
+			steps += 2
+			carry = 1
+		} else {
+			// Even: divide by 2 (one operation)
+			steps++
+			// carry stays (if we had carry, 1+0=1, but we divide by 2)
+		}
+	}
+
+	return steps + carry
 }

@@ -3,14 +3,24 @@ package main
 // LeetCode #2938: Separate Black and White Balls
 // https://leetcode.com/problems/separate-black-and-white-balls/
 // Difficulty: Medium
+// Time: O(n) | Space: O(1)
 
 import "fmt"
 
 func main() {
-	fmt.Println(SeparateBlackAndWhiteBalls())
+	fmt.Println(minimumSteps("101"))
+	fmt.Println(minimumSteps("100"))
+	fmt.Println(minimumSteps("0111"))
 }
 
-func SeparateBlackAndWhiteBalls() any {
-	// TODO: implement
-	return nil
+func minimumSteps(s string) (ans int64) {
+	n := len(s)
+	cnt := 0
+	for i := n - 1; i >= 0; i-- {
+		if s[i] == '1' {
+			cnt++
+			ans += int64(n - i - cnt)
+		}
+	}
+	return
 }

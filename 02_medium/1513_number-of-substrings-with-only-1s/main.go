@@ -7,10 +7,27 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfSubstringsWithOnlyOneS())
+	fmt.Println(NumSub("0110111"))
+	fmt.Println(NumSub("101"))
+	fmt.Println(NumSub("111111"))
 }
 
-func NumberOfSubstringsWithOnlyOneS() any {
-	// TODO: implement
-	return nil
+func NumSub(s string) int {
+	// Time: O(N), Space: O(1)
+	const mod = 1_000_000_007
+
+	count := 0
+	consecutive := 0
+
+	for _, ch := range s {
+		if ch == '1' {
+			consecutive++
+			// Each new 1 adds 'consecutive' new substrings ending at this position
+			count = (count + consecutive) % mod
+		} else {
+			consecutive = 0
+		}
+	}
+
+	return count
 }

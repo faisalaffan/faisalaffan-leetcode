@@ -3,14 +3,32 @@ package main
 // LeetCode #260: Single Number III
 // https://leetcode.com/problems/single-number-iii/
 // Difficulty: Medium
+// Time: O(n), Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(SingleNumberIii())
+func singleNumber(nums []int) []int {
+	xor := 0
+	for _, num := range nums {
+		xor ^= num
+	}
+
+	diff := xor & -xor
+
+	num1, num2 := 0, 0
+	for _, num := range nums {
+		if num&diff == 0 {
+			num1 ^= num
+		} else {
+			num2 ^= num
+		}
+	}
+
+	return []int{num1, num2}
 }
 
-func SingleNumberIii() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(singleNumber([]int{1, 2, 1, 3, 2, 5}))
+	fmt.Println(singleNumber([]int{-1, 0}))
+	fmt.Println(singleNumber([]int{0, 1}))
 }

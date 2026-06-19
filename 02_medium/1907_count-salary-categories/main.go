@@ -2,15 +2,31 @@ package main
 
 // LeetCode #1907: Count Salary Categories
 // https://leetcode.com/problems/count-salary-categories/
-// Difficulty: Medium
+// Difficulty: Medium [Paid]
 
 import "fmt"
 
 func main() {
-	fmt.Println(CountSalaryCategories())
+	// accounts: [account_id, income]
+	accounts := [][]int{{1, 20000}, {2, 50000}, {3, 100000}, {4, 80000}, {5, 30000}}
+	fmt.Println(CountSalaryCategories(accounts))
 }
 
-func CountSalaryCategories() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func CountSalaryCategories(accounts [][]int) []int {
+	low := 0
+	mid := 0
+	high := 0
+
+	for _, a := range accounts {
+		income := a[1]
+		if income < 20000 {
+			low++
+		} else if income <= 50000 {
+			mid++
+		} else {
+			high++
+		}
+	}
+	return []int{low, mid, high}
 }

@@ -3,14 +3,53 @@ package main
 // LeetCode #1011: Capacity To Ship Packages Within D Days
 // https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
 // Difficulty: Medium
+//
+// Approach: Binary search on capacity
+// Time: O(n * log(sum(weights)))
+// Space: O(1)
 
 import "fmt"
 
 func main() {
-	fmt.Println(CapacityToShipPackagesWithinDDays())
+	fmt.Println(shipWithinDays([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5)) // 15
+	fmt.Println(shipWithinDays([]int{3, 2, 2, 4, 1, 4}, 3))             // 6
+	fmt.Println(shipWithinDays([]int{1, 2, 3, 1, 1}, 4))                // 3
 }
 
-func CapacityToShipPackagesWithinDDays() any {
-	// TODO: implement
-	return nil
+func shipWithinDays(weights []int, days int) int {
+	left, right := 0, 0
+	for _, w := range weights {
+		if w > left {
+			left = w
+		}
+		right += w
+	}
+
+	for left < right {
+		mid := left + (right-left)/2
+		if canShip(weights, days, mid) {
+			right = mid
+		} else {
+			left = mid + 1
+		}
+	}
+
+	return left
+}
+
+func canShip(weights []int, days int, capacity int) bool {
+	dayCount := 1
+	current := 0
+	for _, w := range weights {
+		if current+w > capacity {
+			dayCount++
+			current = w
+			if dayCount > days {
+				return false
+			}
+		} else {
+			current += w
+		}
+	}
+	return true
 }

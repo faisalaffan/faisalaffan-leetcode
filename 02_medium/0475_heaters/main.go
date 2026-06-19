@@ -3,14 +3,52 @@ package main
 // LeetCode #475: Heaters
 // https://leetcode.com/problems/heaters/
 // Difficulty: Medium
+// Time: O(n log n + m log n) where n = len(heaters), m = len(houses)
+// Space: O(log n) for sorting
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(Heaters())
+	fmt.Println(Heaters([]int{1, 2, 3}, []int{2}))
+	fmt.Println(Heaters([]int{1, 2, 3, 4}, []int{1, 4}))
+	fmt.Println(Heaters([]int{1, 5}, []int{2}))
 }
 
-func Heaters() any {
-	// TODO: implement
-	return nil
+func Heaters(houses []int, heaters []int) int {
+	sort.Ints(heaters)
+	maxRadius := 0
+
+	for _, house := range houses {
+		// Binary search to find nearest heater
+		idx := sort.SearchInts(heaters, house)
+		minDist := int(^uint(0) >> 1) // MaxInt
+
+		if idx < len(heaters) {
+			dist := heaters[idx] - house
+			if dist < 0 {
+				dist = -dist
+			}
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+		if idx > 0 {
+			dist := house - heaters[idx-1]
+			if dist < 0 {
+				dist = -dist
+			}
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+
+		if minDist > maxRadius {
+			maxRadius = minDist
+		}
+	}
+
+	return maxRadius
 }

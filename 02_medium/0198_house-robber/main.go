@@ -3,14 +3,29 @@ package main
 // LeetCode #198: House Robber
 // https://leetcode.com/problems/house-robber/
 // Difficulty: Medium
+// Time: O(n), Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(HouseRobber())
+func rob(nums []int) int {
+	prev, curr := 0, 0
+
+	for _, num := range nums {
+		prev, curr = curr, max(curr, prev+num)
+	}
+
+	return curr
 }
 
-func HouseRobber() any {
-	// TODO: implement
-	return nil
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func main() {
+	fmt.Println(rob([]int{1, 2, 3, 1}))
+	fmt.Println(rob([]int{2, 7, 9, 3, 1}))
+	fmt.Println(rob([]int{0}))
 }

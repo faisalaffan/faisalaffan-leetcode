@@ -7,10 +7,24 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindTheStudentThatWillReplaceTheChalk())
+	fmt.Println(ChalkReplacer([]int{5, 1, 5}, 22))
+	fmt.Println(ChalkReplacer([]int{3, 4, 1, 2}, 25))
+	fmt.Println(ChalkReplacer([]int{5, 2, 3}, 9))
 }
 
-func FindTheStudentThatWillReplaceTheChalk() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func ChalkReplacer(chalk []int, k int) int {
+	sum := 0
+	for _, c := range chalk {
+		sum += c
+	}
+	k %= sum
+
+	for i, c := range chalk {
+		if k < c {
+			return i
+		}
+		k -= c
+	}
+	return 0
 }

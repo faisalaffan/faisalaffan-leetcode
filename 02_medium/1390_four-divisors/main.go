@@ -7,10 +7,44 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FourDivisors())
+	// Test case 1
+	fmt.Println(sumFourDivisors([]int{21, 4, 7})) // 32
+
+	// Test case 2
+	fmt.Println(sumFourDivisors([]int{21, 21})) // 64
+
+	// Test case 3
+	fmt.Println(sumFourDivisors([]int{1, 2, 3, 4, 5})) // 0
 }
 
-func FourDivisors() any {
-	// TODO: implement
-	return nil
+// Time: O(n * sqrt(m)) where n = len(nums), m = max value in nums
+// Space: O(1)
+func sumFourDivisors(nums []int) int {
+	total := 0
+
+	for _, num := range nums {
+		divCount := 0
+		divSum := 0
+
+		for i := 1; i*i <= num; i++ {
+			if num%i == 0 {
+				divCount++
+				divSum += i
+
+				if i*i != num {
+					divCount++
+					divSum += num / i
+				}
+			}
+			if divCount > 4 {
+				break
+			}
+		}
+
+		if divCount == 4 {
+			total += divSum
+		}
+	}
+
+	return total
 }

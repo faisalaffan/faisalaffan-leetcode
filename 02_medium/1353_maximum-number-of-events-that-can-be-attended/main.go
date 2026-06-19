@@ -5,12 +5,78 @@ package main
 // Difficulty: Medium
 
 import "fmt"
+import "sort"
+import "container/heap"
 
-func main() {
-	fmt.Println(MaximumNumberOfEventsThatCanBeAttended())
+type minHeap []int
+
+func (h minHeap) Len() int           { return len(h) }
+func (h minHeap) Less(i, j int) bool { return h[i] < h[j] }
+func (h minHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *minHeap) Push(x interface{}) { *h = append(*h, x.(int)) }
+func (h *minHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[:n-1]
+	return x
 }
 
-func MaximumNumberOfEventsThatCanBeAttended() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println(maxEvents([][]int{{1, 2}, {2, 3}, {3, 4}})) // 3
+
+	// Test case 2
+	fmt.Println(maxEvents([][]int{{1, 2}, {2, 3}, {3, 4}, {1, 2}})) // 4
+
+	// Test case 3
+	fmt.Println(maxEvents([][]int{{1, 1}, {1, 2}, {1, 3}, {1, 4}, {2, 2}})) // 4
+
+	// Test case 4 - single day
+	fmt.Println(maxEvents([][]int{{1, 5}, {1, 5}, {1, 5}, {2, 3}, {2, 3}})) // 5
+}
+
+// Time: O(n log n) for sorting and heap operations
+// Space: O(n) for heap
+func maxEvents(events [][]int) int {
+	if len(events) == 0 {
+		return 0
+	}
+
+	// Sort by start day
+	sort.Slice(events, func(i, j int) bool {
+		return events[i][0] < events[j][0]
+	})
+
+	h := &minHeap{}
+	heap.Init(h)
+
+	i := 0
+	day := events[0][0]
+	count := 0
+	n := len(events)
+
+	for i < n || h.Len() > 0 {
+		// Add all events starting today
+		for i < n && events[i][0] == day {
+			heap.Push(h, events[i][1])
+			i++
+		}
+
+		// Remove expired events (end day < today)
+		for h.Len() > 0 && (*h)[0] < day {
+			heap.Pop(h)
+		}
+
+		// Attend one event today (earliest ending)
+		if h.Len() > 0 {
+			heap.Pop(h)
+			count++
+			day++
+		} else if i < n {
+			day = events[i][0]
+		}
+	}
+
+	return count
 }

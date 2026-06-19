@@ -3,14 +3,47 @@ package main
 // LeetCode #3795: Minimum Subarray Length With Distinct Sum At Least K
 // https://leetcode.com/problems/minimum-subarray-length-with-distinct-sum-at-least-k/
 // Difficulty: Medium
+// Time: O(n) | Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-func main() {
-	fmt.Println(MinimumSubarrayLengthWithDistinctSumAtLeastK())
+func minimumSubarrayLengthWithDistinctSumAtLeastK(nums []int, k int) int {
+	n := len(nums)
+	freq := make(map[int]int)
+	left := 0
+	distinctSum := 0
+	ans := math.MaxInt32
+
+	for right := 0; right < n; right++ {
+		freq[nums[right]]++
+		if freq[nums[right]] == 1 {
+			distinctSum += nums[right]
+		}
+
+		for distinctSum >= k {
+			length := right - left + 1
+			if length < ans {
+				ans = length
+			}
+			freq[nums[left]]--
+			if freq[nums[left]] == 0 {
+				distinctSum -= nums[left]
+			}
+			left++
+		}
+	}
+
+	if ans == math.MaxInt32 {
+		return -1
+	}
+	return ans
 }
 
-func MinimumSubarrayLengthWithDistinctSumAtLeastK() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(minimumSubarrayLengthWithDistinctSumAtLeastK([]int{2, 2, 3, 1}, 4))
+	fmt.Println(minimumSubarrayLengthWithDistinctSumAtLeastK([]int{3, 2, 3, 4}, 5))
+	fmt.Println(minimumSubarrayLengthWithDistinctSumAtLeastK([]int{5, 5, 4}, 5))
 }

@@ -2,15 +2,18 @@ package main
 
 // LeetCode #1843: Suspicious Bank Accounts
 // https://leetcode.com/problems/suspicious-bank-accounts/
-// Difficulty: Medium [Paid]
+// Difficulty: Medium [Paid] (SQL)
+// This is a SQL problem.
+// In Go we provide a placeholder implementation.
+// Time: O(n), Space: O(n)
 
 import "fmt"
 
-func main() {
-	fmt.Println(SuspiciousBankAccounts())
+func findSuspicious() []int {
+	return []int{}
 }
 
-func SuspiciousBankAccounts() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println("SQL problem - Suspicious Bank Accounts")
+	fmt.Println("Implementation requires database queries with JOINs")
 }

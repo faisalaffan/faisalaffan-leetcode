@@ -3,14 +3,41 @@ package main
 // LeetCode #3656: Determine if a Simple Graph Exists
 // https://leetcode.com/problems/determine-if-a-simple-graph-exists/
 // Difficulty: Medium [Paid]
+// Time: O(n log n) | Space: O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func main() {
-	fmt.Println(DetermineIfASimpleGraphExists())
+func determineIfASimpleGraphExists(degrees []int) bool {
+	n := len(degrees)
+	arr := make([]int, n)
+	copy(arr, degrees)
+	sort.Sort(sort.Reverse(sort.IntSlice(arr)))
+
+	for i := 0; i < n; i++ {
+		if arr[i] == 0 {
+			break
+		}
+		if arr[i] > n-i-1 {
+			return false
+		}
+		for j := i + 1; j <= i+arr[i]; j++ {
+			arr[j]--
+			if arr[j] < 0 {
+				return false
+			}
+		}
+		arr[i] = 0
+		sort.Sort(sort.Reverse(sort.IntSlice(arr)))
+	}
+
+	return true
 }
 
-func DetermineIfASimpleGraphExists() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(determineIfASimpleGraphExists([]int{3, 3, 3, 3}))
+	fmt.Println(determineIfASimpleGraphExists([]int{1, 1, 0}))
+	fmt.Println(determineIfASimpleGraphExists([]int{1, 1, 1}))
 }

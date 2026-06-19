@@ -3,14 +3,42 @@ package main
 // LeetCode #1105: Filling Bookcase Shelves
 // https://leetcode.com/problems/filling-bookcase-shelves/
 // Difficulty: Medium
+//
+// Approach: DP. dp[i] = min height to place first i books.
+//           Try placing books i-1..j on the same shelf.
+// Time: O(n^2)
+// Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(FillingBookcaseShelves())
+	fmt.Println(minHeightShelves([][]int{{1, 1}, {2, 3}, {2, 3}, {1, 1}, {1, 1}, {1, 1}, {1, 2}}, 4)) // 6
+	fmt.Println(minHeightShelves([][]int{{1, 3}, {2, 4}, {3, 2}}, 6))                               // 4
 }
 
-func FillingBookcaseShelves() any {
-	// TODO: implement
-	return nil
+func minHeightShelves(books [][]int, shelfWidth int) int {
+	n := len(books)
+	dp := make([]int, n+1)
+	for i := 1; i <= n; i++ {
+		dp[i] = 1<<31 - 1
+	}
+
+	for i := 1; i <= n; i++ {
+		width := 0
+		height := 0
+		for j := i; j > 0; j-- {
+			width += books[j-1][0]
+			if width > shelfWidth {
+				break
+			}
+			if books[j-1][1] > height {
+				height = books[j-1][1]
+			}
+			if dp[j-1]+height < dp[i] {
+				dp[i] = dp[j-1] + height
+			}
+		}
+	}
+
+	return dp[n]
 }

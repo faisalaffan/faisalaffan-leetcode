@@ -3,14 +3,32 @@ package main
 // LeetCode #729: My Calendar I
 // https://leetcode.com/problems/my-calendar-i/
 // Difficulty: Medium
+// Time: O(log n) per booking
+// Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(MyCalendarI())
+	cal := ConstructorCalendar()
+	fmt.Println(cal.Book(10, 20))
+	fmt.Println(cal.Book(15, 25))
+	fmt.Println(cal.Book(20, 30))
 }
 
-func MyCalendarI() any {
-	// TODO: implement
-	return nil
+type MyCalendar struct {
+	books [][2]int
+}
+
+func ConstructorCalendar() MyCalendar {
+	return MyCalendar{}
+}
+
+func (c *MyCalendar) Book(start int, end int) bool {
+	for _, b := range c.books {
+		if max(b[0], start) < min(b[1], end) {
+			return false
+		}
+	}
+	c.books = append(c.books, [2]int{start, end})
+	return true
 }

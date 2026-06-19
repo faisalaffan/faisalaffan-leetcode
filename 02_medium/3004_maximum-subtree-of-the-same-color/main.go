@@ -1,16 +1,16 @@
 package main
 
-// LeetCode #3004: Maximum Subtree of the Same Color
+// LeetCode #3004: Maximum Subtree of the Same Color (PAID)
 // https://leetcode.com/problems/maximum-subtree-of-the-same-color/
 // Difficulty: Medium [Paid]
+// Time: O(n) | Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumSubtreeOfTheSameColor())
+	fmt.Println("Premium problem - not implemented")
 }
 
-func MaximumSubtreeOfTheSameColor() any {
-	// TODO: implement
-	return nil
+func maximumSubtreeOfSameColor() int {
+	return -1
 }

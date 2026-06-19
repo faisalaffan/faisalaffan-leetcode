@@ -3,14 +3,93 @@ package main
 // LeetCode #2471: Minimum Number of Operations to Sort a Binary Tree by Level
 // https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/
 // Difficulty: Medium
+// Time: O(n log n) | Space: O(n)
+// BFS level-order. For each level, count min swaps to sort (cycle decomposition).
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func main() {
-	fmt.Println(MinimumNumberOfOperationsToSortABinaryTreeByLevel())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func MinimumNumberOfOperationsToSortABinaryTreeByLevel() any {
-	// TODO: implement
-	return nil
+func main() {
+	root := &TreeNode{1,
+		&TreeNode{4,
+			&TreeNode{7, nil, nil},
+			&TreeNode{6, nil, nil},
+		},
+		&TreeNode{3,
+			&TreeNode{8, nil, nil},
+			&TreeNode{5, nil, nil},
+		},
+	}
+	// Level 1: [1] sorted. Level 2: [4,3] -> swap, 1 op. Level 3: [7,6,8,5] -> 2 ops
+	fmt.Println(minimumOperations(root)) // 3
+
+	root2 := &TreeNode{1,
+		&TreeNode{2, nil, nil},
+		&TreeNode{3, nil, nil},
+	}
+	fmt.Println(minimumOperations(root2)) // 0
+}
+
+func minimumOperations(root *TreeNode) int {
+	q := []*TreeNode{root}
+	ans := 0
+	for len(q) > 0 {
+		n := len(q)
+		vals := make([]int, n)
+		for i := 0; i < n; i++ {
+			vals[i] = q[i].Val
+		}
+
+		// Count min swaps to sort vals
+		ans += minSwaps(vals)
+
+		next := make([]*TreeNode, 0)
+		for _, node := range q {
+			if node.Left != nil {
+				next = append(next, node.Left)
+			}
+			if node.Right != nil {
+				next = append(next, node.Right)
+			}
+		}
+		q = next
+	}
+	return ans
+}
+
+func minSwaps(arr []int) int {
+	n := len(arr)
+	sorted := make([]int, n)
+	copy(sorted, arr)
+	sort.Ints(sorted)
+
+	pos := make(map[int]int)
+	for i, v := range arr {
+		pos[v] = i
+	}
+
+	visited := make([]bool, n)
+	swaps := 0
+	for i := 0; i < n; i++ {
+		if visited[i] || arr[i] == sorted[i] {
+			continue
+		}
+		cycle := 0
+		j := i
+		for !visited[j] {
+			visited[j] = true
+			j = pos[sorted[j]]
+			cycle++
+		}
+		swaps += cycle - 1
+	}
+	return swaps
 }

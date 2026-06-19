@@ -1,16 +1,41 @@
 package main
 
+import (
+	"fmt"
+	"sort"
+)
+
 // LeetCode #1291: Sequential Digits
 // https://leetcode.com/problems/sequential-digits/
 // Difficulty: Medium
 
-import "fmt"
+// Generate all sequential digits numbers in range [low, high].
+// Sequential = each digit is 1 more than previous.
 
-func main() {
-	fmt.Println(SequentialDigits())
+// Time: O(1) — bounded by number of possible sequential digits
+// Space: O(1)
+
+func sequentialDigits(low int, high int) []int {
+	result := make([]int, 0)
+	digits := "123456789"
+
+	for length := len(fmt.Sprintf("%d", low)); length <= len(fmt.Sprintf("%d", high)); length++ {
+		for start := 0; start+length <= 9; start++ {
+			num := 0
+			for i := 0; i < length; i++ {
+				num = num*10 + int(digits[start+i]-'0')
+			}
+			if num >= low && num <= high {
+				result = append(result, num)
+			}
+		}
+	}
+
+	sort.Ints(result)
+	return result
 }
 
-func SequentialDigits() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Printf("%v (expected: [123 234])\n", sequentialDigits(100, 300))
+	fmt.Printf("%v (expected: [1234 2345 3456 4567 5678 6789 12345])\n", sequentialDigits(1000, 13000))
 }

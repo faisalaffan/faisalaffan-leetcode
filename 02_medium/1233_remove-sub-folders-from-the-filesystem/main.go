@@ -1,16 +1,43 @@
 package main
 
+import (
+	"fmt"
+	"sort"
+	"strings"
+)
+
 // LeetCode #1233: Remove Sub-Folders from the Filesystem
 // https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/
 // Difficulty: Medium
 
-import "fmt"
+// Sort folders lexicographically. If a folder is a prefix of next,
+// the next is a sub-folder. Add "/" to check exact prefix match.
 
-func main() {
-	fmt.Println(RemoveSubFoldersFromTheFilesystem())
+// Time: O(n log n * L) where L = average path length
+// Space: O(n)
+
+func removeSubfolders(folder []string) []string {
+	sort.Strings(folder)
+	result := make([]string, 0)
+	result = append(result, folder[0])
+
+	for i := 1; i < len(folder); i++ {
+		last := result[len(result)-1]
+		if !strings.HasPrefix(folder[i], last+"/") {
+			result = append(result, folder[i])
+		}
+	}
+
+	return result
 }
 
-func RemoveSubFoldersFromTheFilesystem() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Printf("%v (expected: [/a /c/d])\n",
+		removeSubfolders([]string{"/a", "/a/b", "/c/d", "/c/d/e", "/c/f"}))
+
+	fmt.Printf("%v (expected: [/a])\n",
+		removeSubfolders([]string{"/a", "/a/b/c", "/a/b"}))
+
+	fmt.Printf("%v (expected: [/a/b /c /d])\n",
+		removeSubfolders([]string{"/a/b", "/c", "/d"}))
 }

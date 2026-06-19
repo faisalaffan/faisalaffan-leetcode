@@ -3,14 +3,51 @@ package main
 // LeetCode #3720: Lexicographically Smallest Permutation Greater Than Target
 // https://leetcode.com/problems/lexicographically-smallest-permutation-greater-than-target/
 // Difficulty: Medium
+// Time: O(n*26) | Space: O(26)
 
 import "fmt"
 
-func main() {
-	fmt.Println(LexicographicallySmallestPermutationGreaterThanTarget())
+func lexicographicallySmallestPermutationGreaterThanTarget(s string, target string) string {
+	n := len(s)
+	var freq [26]int
+	for i := 0; i < n; i++ {
+		freq[s[i]-'a']++
+	}
+
+	var ans []byte
+
+	var dfs func(idx int, check bool) bool
+	dfs = func(idx int, check bool) bool {
+		if idx == n {
+			return check
+		}
+		for ch := 0; ch < 26; ch++ {
+			if freq[ch] == 0 {
+				continue
+			}
+			if !check && byte(ch)+'a' < target[idx] {
+				continue
+			}
+			freq[ch]--
+			ans = append(ans, byte(ch)+'a')
+			nextCheck := check || byte(ch)+'a' > target[idx]
+			if dfs(idx+1, nextCheck) {
+				return true
+			}
+			ans = ans[:len(ans)-1]
+			freq[ch]++
+		}
+		return false
+	}
+
+	if dfs(0, false) {
+		return string(ans)
+	}
+	return ""
 }
 
-func LexicographicallySmallestPermutationGreaterThanTarget() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(lexicographicallySmallestPermutationGreaterThanTarget("abc", "bba"))
+	fmt.Println(lexicographicallySmallestPermutationGreaterThanTarget("leet", "code"))
+	fmt.Println(lexicographicallySmallestPermutationGreaterThanTarget("baba", "bbaa"))
 }

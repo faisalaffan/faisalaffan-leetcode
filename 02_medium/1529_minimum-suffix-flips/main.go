@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumSuffixFlips())
+	fmt.Println(MinFlips("10111"))
+	fmt.Println(MinFlips("101"))
+	fmt.Println(MinFlips("00000"))
 }
 
-func MinimumSuffixFlips() any {
-	// TODO: implement
-	return nil
+func MinFlips(target string) int {
+	// Time: O(N), Space: O(1)
+	// Count transitions from 0 to 1 or 1 to 0
+	flips := 0
+	curr := byte('0') // current state of flipped prefix
+
+	for i := 0; i < len(target); i++ {
+		if target[i] != curr {
+			flips++
+			curr = target[i]
+		}
+	}
+
+	return flips
 }

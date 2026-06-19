@@ -6,11 +6,71 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FindNearestRightNodeInBinaryTree())
+// TreeNode is a binary tree node.
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func FindNearestRightNodeInBinaryTree() any {
-	// TODO: implement
+func main() {
+	// Tree: [1, 2, 3, null, 4, 5, 6]
+	root := &TreeNode{Val: 1}
+	root.Left = &TreeNode{Val: 2, Right: &TreeNode{Val: 4}}
+	root.Right = &TreeNode{Val: 3, Left: &TreeNode{Val: 5}, Right: &TreeNode{Val: 6}}
+
+	// Find nearest right node of node with value 4
+	u := root.Left.Right // node 4
+	result := FindNearestRightNode(root, u)
+	if result != nil {
+		fmt.Println("Nearest right of 4:", result.Val) // should be 5
+	} else {
+		fmt.Println("Nearest right of 4: nil")
+	}
+
+	// Tree: [3, 4, 2, null, null, null, 1]
+	root2 := &TreeNode{Val: 3}
+	root2.Left = &TreeNode{Val: 4}
+	root2.Right = &TreeNode{Val: 2, Right: &TreeNode{Val: 1}}
+
+	result2 := FindNearestRightNode(root2, root2.Left)
+	if result2 != nil {
+		fmt.Println("Nearest right of 4:", result2.Val)
+	} else {
+		fmt.Println("Nearest right of 4: nil")
+	}
+}
+
+func FindNearestRightNode(root *TreeNode, u *TreeNode) *TreeNode {
+	// Time: O(N), Space: O(N)
+	if root == nil {
+		return nil
+	}
+
+	queue := []*TreeNode{root}
+
+	for len(queue) > 0 {
+		levelSize := len(queue)
+		for i := 0; i < levelSize; i++ {
+			node := queue[0]
+			queue = queue[1:]
+
+			if node == u {
+				// Return the next node in the queue (right sibling)
+				if i+1 < levelSize {
+					return queue[0]
+				}
+				return nil
+			}
+
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+		}
+	}
+
 	return nil
 }

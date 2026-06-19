@@ -3,14 +3,35 @@ package main
 // LeetCode #397: Integer Replacement
 // https://leetcode.com/problems/integer-replacement/
 // Difficulty: Medium
+// Time: O(log n) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(IntegerReplacement())
+func integerReplacement(n int) int {
+	count := 0
+	for n > 1 {
+		if n&1 == 0 {
+			n >>= 1
+		} else if n == 3 || n&3 == 1 {
+			n--
+		} else {
+			n++
+		}
+		count++
+	}
+	return count
 }
 
-func IntegerReplacement() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println("Test 1:", integerReplacement(8))
+	// Expected: 3
+
+	// Test case 2
+	fmt.Println("Test 2:", integerReplacement(7))
+	// Expected: 4
+
+	// Test case 3
+	fmt.Println("Test 3:", integerReplacement(4))
+	// Expected: 2
 }

@@ -2,15 +2,55 @@ package main
 
 // LeetCode #1087: Brace Expansion
 // https://leetcode.com/problems/brace-expansion/
-// Difficulty: Medium [Paid]
+// Difficulty: Medium
+//
+// Approach: Backtracking - parse braces and generate all expansions
+// Time: O(n * k) where k is number of expansions
+// Space: O(n * k)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(BraceExpansion())
+	fmt.Println(expand("{a,b}c{d,e}f")) // ["acdf","acef","bcdf","bcef"]
+	fmt.Println(expand("abcd"))          // ["abcd"]
 }
 
-func BraceExpansion() any {
-	// TODO: implement
-	return nil
+func expand(s string) []string {
+	result := make([]string, 0)
+	backtrack(s, 0, "", &result)
+	sort.Strings(result)
+	return result
+}
+
+func backtrack(s string, idx int, cur string, result *[]string) {
+	if idx == len(s) {
+		*result = append(*result, cur)
+		return
+	}
+
+	if s[idx] == '{' {
+		// Find the closing brace
+		end := idx + 1
+		for s[end] != '}' {
+			end++
+		}
+		// Parse options
+		options := make([]byte, 0)
+		for k := idx + 1; k < end; k++ {
+			if s[k] != ',' {
+				options = append(options, s[k])
+			}
+		}
+		sort.Slice(options, func(i, j int) bool {
+			return options[i] < options[j]
+		})
+		for _, opt := range options {
+			backtrack(s, end+1, cur+string(opt), result)
+		}
+	} else {
+		backtrack(s, idx+1, cur+string(s[idx]), result)
+	}
 }

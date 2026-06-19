@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfDivisibleTripletSums())
+	fmt.Println("paid problem - placeholder")
 }
 
-func NumberOfDivisibleTripletSums() any {
-	// TODO: implement
-	return nil
+func numberOfDivisibleTripletSums(nums []int, d int) int {
+	return 0
 }

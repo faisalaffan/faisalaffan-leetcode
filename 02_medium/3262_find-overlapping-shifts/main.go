@@ -2,15 +2,83 @@ package main
 
 // LeetCode #3262: Find Overlapping Shifts
 // https://leetcode.com/problems/find-overlapping-shifts/
-// Difficulty: Medium [Paid]
+// Difficulty: Medium
+// Time: O(n log n) Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(FindOverlappingShifts())
+	// Test case 1
+	shifts1 := []Shift{
+		{1, 8, 12}, {1, 11, 15}, {1, 14, 18},
+		{2, 9, 17}, {2, 16, 20},
+		{3, 10, 12}, {3, 13, 15}, {3, 16, 18},
+		{4, 8, 10}, {4, 9, 11},
+	}
+	fmt.Println(countOverlappingShifts(shifts1)) // [[1 2] [2 1] [4 1]]
+
+	// Test case 2
+	shifts2 := []Shift{{1, 1, 3}, {1, 2, 4}}
+	fmt.Println(countOverlappingShifts(shifts2)) // [[1 1]]
+
+	// Test case 3
+	shifts3 := []Shift{{1, 1, 2}, {1, 3, 4}}
+	fmt.Println(countOverlappingShifts(shifts3)) // []
 }
 
-func FindOverlappingShifts() any {
-	// TODO: implement
-	return nil
+type Shift struct {
+	EmployeeID int
+	StartTime  int
+	EndTime    int
+}
+
+func countOverlappingShifts(shifts []Shift) [][2]int {
+	// Group shifts by employee
+	empShifts := make(map[int][]Shift)
+	for _, s := range shifts {
+		empShifts[s.EmployeeID] = append(empShifts[s.EmployeeID], s)
+	}
+
+	type result struct {
+		employeeID int
+		count      int
+	}
+	var results []result
+
+	for empID, s := range empShifts {
+		// Sort shifts by start time
+		sort.Slice(s, func(i, j int) bool {
+			return s[i].StartTime < s[j].StartTime
+		})
+
+		count := 0
+		// Sweep line: track maximum end time seen so far
+		maxEnd := s[0].EndTime
+		for i := 1; i < len(s); i++ {
+			if s[i].StartTime < maxEnd {
+				count++
+			}
+			if s[i].EndTime > maxEnd {
+				maxEnd = s[i].EndTime
+			}
+		}
+
+		if count > 0 {
+			results = append(results, result{empID, count})
+		}
+	}
+
+	// Sort by employee ID
+	sort.Slice(results, func(i, j int) bool {
+		return results[i].employeeID < results[j].employeeID
+	})
+
+	out := make([][2]int, len(results))
+	for i, r := range results {
+		out[i] = [2]int{r.employeeID, r.count}
+	}
+	return out
 }

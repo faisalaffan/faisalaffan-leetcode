@@ -2,15 +2,33 @@ package main
 
 // LeetCode #2489: Number of Substrings With Fixed Ratio
 // https://leetcode.com/problems/number-of-substrings-with-fixed-ratio/
-// Difficulty: Medium [Paid]
+// Difficulty: Medium
+// Time: O(n) | Space: O(n)
+// Count substrings where count('0') : count('1') = num1 : num2.
+// Transform: track (num2 * cnt0 - num1 * cnt1), count equal values.
 
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfSubstringsWithFixedRatio())
+	fmt.Println(fixedRatio("01001", 2, 3)) // 2
+	fmt.Println(fixedRatio("0000", 1, 1))  // 0
 }
 
-func NumberOfSubstringsWithFixedRatio() any {
-	// TODO: implement
-	return nil
+func fixedRatio(s string, num1 int, num2 int) int64 {
+	prefix := make(map[int]int64)
+	prefix[0] = 1
+	var cnt0, cnt1 int64
+	var ans int64
+
+	for _, ch := range s {
+		if ch == '0' {
+			cnt0++
+		} else {
+			cnt1++
+		}
+		key := num2*int(cnt0) - num1*int(cnt1)
+		ans += prefix[key]
+		prefix[key]++
+	}
+	return ans
 }

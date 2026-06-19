@@ -3,14 +3,28 @@ package main
 // LeetCode #2683: Neighboring Bitwise XOR
 // https://leetcode.com/problems/neighboring-bitwise-xor/
 // Difficulty: Medium
+// Time: O(n) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(NeighboringBitwiseXor())
+func doesValidArrayExist(derived []int) bool {
+	xor := 0
+	for _, v := range derived {
+		xor ^= v
+	}
+	return xor == 0
 }
 
-func NeighboringBitwiseXor() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println("Test 1:", doesValidArrayExist([]int{1, 1, 0}))
+	// Expected: true
+
+	// Test case 2
+	fmt.Println("Test 2:", doesValidArrayExist([]int{1, 1}))
+	// Expected: true
+
+	// Test case 3
+	fmt.Println("Test 3:", doesValidArrayExist([]int{1, 0}))
+	// Expected: false
 }

@@ -7,10 +7,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindThirdTransaction())
-}
-
-func FindThirdTransaction() any {
-	// TODO: implement
-	return nil
+	fmt.Println("paid problem - placeholder")
 }

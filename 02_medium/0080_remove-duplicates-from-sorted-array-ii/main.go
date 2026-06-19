@@ -6,11 +6,32 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(RemoveDuplicatesFromSortedArrayIi())
+func removeDuplicates(nums []int) int {
+	if len(nums) <= 2 {
+		return len(nums)
+	}
+
+	write := 2
+	for i := 2; i < len(nums); i++ {
+		if nums[i] != nums[write-2] {
+			nums[write] = nums[i]
+			write++
+		}
+	}
+
+	return write
 }
 
-func RemoveDuplicatesFromSortedArrayIi() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	nums1 := []int{1, 1, 1, 2, 2, 3}
+	k1 := removeDuplicates(nums1)
+	fmt.Println(nums1[:k1]) // [1 1 2 2 3]
+
+	// Test case 2
+	nums2 := []int{0, 0, 1, 1, 1, 1, 2, 3, 3}
+	k2 := removeDuplicates(nums2)
+	fmt.Println(nums2[:k2]) // [0 0 1 1 2 3 3]
 }
+
+// Time: O(n) | Space: O(1)

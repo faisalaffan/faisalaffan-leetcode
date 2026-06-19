@@ -6,11 +6,48 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(CountGoodNodesInBinaryTree())
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func CountGoodNodesInBinaryTree() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	root := &TreeNode{
+		Val: 3,
+		Left: &TreeNode{Val: 1, Left: &TreeNode{Val: 3}},
+		Right: &TreeNode{Val: 4, Left: &TreeNode{Val: 1}, Right: &TreeNode{Val: 5}},
+	}
+	fmt.Println(goodNodes(root)) // 4
+
+	// Test case 2
+	root2 := &TreeNode{Val: 3, Left: &TreeNode{Val: 3, Left: &TreeNode{Val: 4}, Right: &TreeNode{Val: 2}}}
+	fmt.Println(goodNodes(root2)) // 3
+
+	// Test case 3
+	fmt.Println(goodNodes(&TreeNode{Val: 1})) // 1
+}
+
+// Time: O(n) where n = number of nodes
+// Space: O(h) where h = tree height (recursion stack)
+func goodNodes(root *TreeNode) int {
+	return countGood(root, root.Val)
+}
+
+func countGood(node *TreeNode, maxSoFar int) int {
+	if node == nil {
+		return 0
+	}
+
+	count := 0
+	if node.Val >= maxSoFar {
+		count = 1
+		maxSoFar = node.Val
+	}
+
+	count += countGood(node.Left, maxSoFar)
+	count += countGood(node.Right, maxSoFar)
+
+	return count
 }

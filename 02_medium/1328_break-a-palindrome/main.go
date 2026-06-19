@@ -7,10 +7,37 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(BreakAPalindrome())
+	// Test case 1
+	fmt.Println(breakPalindrome("abccba")) // "aaccba"
+
+	// Test case 2
+	fmt.Println(breakPalindrome("a")) // ""
+
+	// Test case 3
+	fmt.Println(breakPalindrome("aa")) // "ab"
+
+	// Test case 4 - all 'a's
+	fmt.Println(breakPalindrome("aaa")) // "aab"
 }
 
-func BreakAPalindrome() any {
-	// TODO: implement
-	return nil
+// Time: O(n) where n = length of palindrome string
+// Space: O(n) for the byte array
+func breakPalindrome(palindrome string) string {
+	n := len(palindrome)
+	if n <= 1 {
+		return ""
+	}
+
+	bytes := []byte(palindrome)
+	// Try to change first non-'a' to 'a' (only in first half to maintain smallest lexicographically)
+	for i := 0; i < n/2; i++ {
+		if bytes[i] != 'a' {
+			bytes[i] = 'a'
+			return string(bytes)
+		}
+	}
+
+	// All characters in first half are 'a', change last character to 'b'
+	bytes[n-1] = 'b'
+	return string(bytes)
 }

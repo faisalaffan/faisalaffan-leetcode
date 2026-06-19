@@ -3,14 +3,34 @@ package main
 // LeetCode #3404: Count Special Subsequences
 // https://leetcode.com/problems/count-special-subsequences/
 // Difficulty: Medium
+// Time: O(n^2) Space: O(n)
 
 import "fmt"
 
-func main() {
-	fmt.Println(CountSpecialSubsequences())
+func numberOfSubsequences(nums []int) int64 {
+	n := len(nums)
+	var ans int64
+	cnt := make(map[float64]int)
+
+	// For each r, q = r-2. Accumulate (p,q) pairs as r increases.
+	for r := 4; r < n-2; r++ {
+		q := r - 2
+		b := float64(nums[q])
+		for _, aVal := range nums[:q-1] {
+			ratio := float64(aVal) / b
+			cnt[ratio]++
+		}
+
+		c := float64(nums[r])
+		for _, dVal := range nums[r+2:] {
+			ratio := float64(dVal) / c
+			ans += int64(cnt[ratio])
+		}
+	}
+	return ans
 }
 
-func CountSpecialSubsequences() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(numberOfSubsequences([]int{1, 2, 3, 4, 3, 6, 1})) // 1
+	fmt.Println(numberOfSubsequences([]int{3, 4, 3, 4, 3, 4, 3, 4})) // 3
 }

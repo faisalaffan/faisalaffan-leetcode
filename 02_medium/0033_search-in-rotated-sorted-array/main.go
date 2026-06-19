@@ -6,11 +6,44 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(SearchInRotatedSortedArray())
+func search(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+
+	for left <= right {
+		mid := left + (right-left)/2
+		if nums[mid] == target {
+			return mid
+		}
+
+		if nums[left] <= nums[mid] {
+			// Left half is sorted
+			if target >= nums[left] && target < nums[mid] {
+				right = mid - 1
+			} else {
+				left = mid + 1
+			}
+		} else {
+			// Right half is sorted
+			if target > nums[mid] && target <= nums[right] {
+				left = mid + 1
+			} else {
+				right = mid - 1
+			}
+		}
+	}
+
+	return -1
 }
 
-func SearchInRotatedSortedArray() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println(search([]int{4, 5, 6, 7, 0, 1, 2}, 0)) // 4
+
+	// Test case 2
+	fmt.Println(search([]int{4, 5, 6, 7, 0, 1, 2}, 3)) // -1
+
+	// Test case 3
+	fmt.Println(search([]int{1}, 0)) // -1
 }
+
+// Time: O(log n) | Space: O(1)

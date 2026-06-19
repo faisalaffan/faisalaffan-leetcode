@@ -3,14 +3,51 @@ package main
 // LeetCode #983: Minimum Cost For Tickets
 // https://leetcode.com/problems/minimum-cost-for-tickets/
 // Difficulty: Medium
+//
+// Approach: DP (bottom-up) over travel days
+// Time: O(n) where n is the range of days (last travel day)
+// Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumCostForTickets())
+	fmt.Println(mincostTickets([]int{1, 4, 6, 7, 8, 20}, []int{2, 7, 15})) // 11
+	fmt.Println(mincostTickets([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31}, []int{2, 7, 15})) // 17
+	fmt.Println(mincostTickets([]int{1, 2, 3}, []int{2, 7, 15})) // 6
 }
 
-func MinimumCostForTickets() any {
-	// TODO: implement
-	return nil
+func mincostTickets(days []int, costs []int) int {
+	lastDay := days[len(days)-1]
+	dp := make([]int, lastDay+1)
+	travelSet := make(map[int]bool)
+	for _, d := range days {
+		travelSet[d] = true
+	}
+
+	for i := 1; i <= lastDay; i++ {
+		if !travelSet[i] {
+			dp[i] = dp[i-1]
+			continue
+		}
+		one := dp[i-1] + costs[0]
+		seven := dp[max(0, i-7)] + costs[1]
+		thirty := dp[max(0, i-30)] + costs[2]
+		dp[i] = min(one, min(seven, thirty))
+	}
+
+	return dp[lastDay]
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }

@@ -7,10 +7,25 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumNumberOfVerticesToReachAllNodes())
+	fmt.Println(FindSmallestSetOfVertices(6, [][]int{{0, 1}, {0, 2}, {2, 5}, {3, 4}, {4, 2}}))
+	fmt.Println(FindSmallestSetOfVertices(3, [][]int{{0, 1}, {2, 1}}))
+	fmt.Println(FindSmallestSetOfVertices(5, [][]int{{0, 1}, {2, 1}, {3, 1}, {4, 0}}))
 }
 
-func MinimumNumberOfVerticesToReachAllNodes() any {
-	// TODO: implement
-	return nil
+func FindSmallestSetOfVertices(n int, edges [][]int) []int {
+	// Time: O(N + E), Space: O(N)
+	// Nodes with indegree 0 must be in the result since they can't be reached
+	indegree := make([]int, n)
+	for _, e := range edges {
+		indegree[e[1]]++
+	}
+
+	result := make([]int, 0)
+	for i := 0; i < n; i++ {
+		if indegree[i] == 0 {
+			result = append(result, i)
+		}
+	}
+
+	return result
 }

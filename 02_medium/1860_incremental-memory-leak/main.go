@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(IncrementalMemoryLeak())
+	fmt.Println(MemLeak(2, 2))
+	fmt.Println(MemLeak(8, 11))
+	fmt.Println(MemLeak(1, 1))
 }
 
-func IncrementalMemoryLeak() any {
-	// TODO: implement
-	return nil
+// Time: O(sqrt(memory1+memory2)), Space: O(1)
+func MemLeak(memory1 int, memory2 int) []int {
+	t := 1
+	for memory1 >= t || memory2 >= t {
+		if memory1 >= memory2 {
+			memory1 -= t
+		} else {
+			memory2 -= t
+		}
+		t++
+	}
+	return []int{t, memory1, memory2}
 }

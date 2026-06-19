@@ -3,14 +3,51 @@ package main
 // LeetCode #382: Linked List Random Node
 // https://leetcode.com/problems/linked-list-random-node/
 // Difficulty: Medium
+// Time: O(1) for init, O(n) for getRandom | Space: O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
-func main() {
-	fmt.Println(LinkedListRandomNode())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func LinkedListRandomNode() any {
-	// TODO: implement
-	return nil
+type Solution struct {
+	head *ListNode
+}
+
+func Constructor(head *ListNode) Solution {
+	return Solution{head: head}
+}
+
+// Reservoir sampling: O(n), uniform probability
+func (s *Solution) GetRandom() int {
+	result := s.head.Val
+	node := s.head.Next
+	i := 1
+	for node != nil {
+		i++
+		if rand.Intn(i) == 0 {
+			result = node.Val
+		}
+		node = node.Next
+	}
+	return result
+}
+
+func main() {
+	// Test case: 1->2->3
+	head := &ListNode{1, &ListNode{2, &ListNode{3, nil}}}
+	sol := Constructor(head)
+
+	// Run multiple times to show randomness
+	counts := map[int]int{}
+	for i := 0; i < 30000; i++ {
+		counts[sol.GetRandom()]++
+	}
+	fmt.Println("Counts:", counts)
+	// Expected: roughly 10000 each
 }

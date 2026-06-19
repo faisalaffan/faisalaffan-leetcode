@@ -3,14 +3,50 @@ package main
 // LeetCode #2202: Maximize the Topmost Element After K Moves
 // https://leetcode.com/problems/maximize-the-topmost-element-after-k-moves/
 // Difficulty: Medium
+// Time: O(n) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaximizeTheTopmostElementAfterKMoves())
+func maximumTop(nums []int, k int) int {
+	n := len(nums)
+	if n == 1 {
+		if k%2 == 1 {
+			return -1
+		}
+		return nums[0]
+	}
+
+	if k == 0 {
+		return nums[0]
+	}
+	if k == 1 {
+		return nums[1]
+	}
+
+	maxVal := -1
+	for i := 0; i < n && i < k-1; i++ {
+		if nums[i] > maxVal {
+			maxVal = nums[i]
+		}
+	}
+	if k < n {
+		if nums[k] > maxVal {
+			maxVal = nums[k]
+		}
+	}
+	return maxVal
 }
 
-func MaximizeTheTopmostElementAfterKMoves() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println(maximumTop([]int{5, 2, 4, 3, 1}, 3))
+	// Expected: 5
+
+	// Test case 2
+	fmt.Println(maximumTop([]int{2}, 1))
+	// Expected: -1
+
+	// Test case 3
+	fmt.Println(maximumTop([]int{99, 95, 68, 24, 18}, 69))
+	// Expected: 99
 }

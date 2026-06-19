@@ -7,10 +7,65 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(DetectCyclesInTwoDGrid())
+	grid1 := [][]byte{{'a', 'a', 'a', 'a'}, {'a', 'b', 'b', 'a'}, {'a', 'b', 'b', 'a'}, {'a', 'a', 'a', 'a'}}
+	fmt.Println(ContainsCycle(grid1))
+
+	grid2 := [][]byte{{'c', 'c', 'c', 'a'}, {'c', 'd', 'c', 'c'}, {'c', 'c', 'e', 'c'}, {'f', 'c', 'c', 'c'}}
+	fmt.Println(ContainsCycle(grid2))
+
+	grid3 := [][]byte{{'a', 'b'}, {'b', 'a'}}
+	fmt.Println(ContainsCycle(grid3))
 }
 
-func DetectCyclesInTwoDGrid() any {
-	// TODO: implement
-	return nil
+func ContainsCycle(grid [][]byte) bool {
+	// Time: O(R*C), Space: O(R*C)
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return false
+	}
+
+	rows, cols := len(grid), len(grid[0])
+	visited := make([][]bool, rows)
+	for i := 0; i < rows; i++ {
+		visited[i] = make([]bool, cols)
+	}
+
+	dirs := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
+
+	var dfs func(r, c, pr, pc int) bool
+	dfs = func(r, c, pr, pc int) bool {
+		visited[r][c] = true
+
+		for _, d := range dirs {
+			nr, nc := r+d[0], c+d[1]
+			if nr < 0 || nr >= rows || nc < 0 || nc >= cols {
+				continue
+			}
+			if nr == pr && nc == pc {
+				continue
+			}
+			if grid[nr][nc] != grid[r][c] {
+				continue
+			}
+			if visited[nr][nc] {
+				return true // cycle found
+			}
+			if dfs(nr, nc, r, c) {
+				return true
+			}
+		}
+
+		return false
+	}
+
+	for r := 0; r < rows; r++ {
+		for c := 0; c < cols; c++ {
+			if !visited[r][c] {
+				if dfs(r, c, -1, -1) {
+					return true
+				}
+			}
+		}
+	}
+
+	return false
 }

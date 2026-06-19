@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfSelfDivisiblePermutations())
+	fmt.Println("paid problem - placeholder")
 }
 
-func NumberOfSelfDivisiblePermutations() any {
-	// TODO: implement
-	return nil
+func numberOfSelfDivisiblePermutations(n int) int {
+	return 0
 }

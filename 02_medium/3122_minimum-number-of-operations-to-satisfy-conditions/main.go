@@ -3,14 +3,62 @@ package main
 // LeetCode #3122: Minimum Number of Operations to Satisfy Conditions
 // https://leetcode.com/problems/minimum-number-of-operations-to-satisfy-conditions/
 // Difficulty: Medium
+// Time: O(n * m * 10) | Space: O(m * 10)
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-func main() {
-	fmt.Println(MinimumNumberOfOperationsToSatisfyConditions())
+func minimumOperations(grid [][]int) int {
+	m := len(grid)
+	if m == 0 {
+		return 0
+	}
+	n := len(grid[0])
+
+	cost := make([][10]int, n)
+	for j := 0; j < n; j++ {
+		for d := 0; d < 10; d++ {
+			cnt := 0
+			for i := 0; i < m; i++ {
+				if grid[i][j] != d {
+					cnt++
+				}
+			}
+			cost[j][d] = cnt
+		}
+	}
+
+	dp := make([][10]int, n)
+	for j := 0; j < n; j++ {
+		for d := 0; d < 10; d++ {
+			dp[j][d] = math.MaxInt32
+		}
+	}
+
+	for d := 0; d < 10; d++ {
+		dp[0][d] = cost[0][d]
+	}
+
+	for j := 1; j < n; j++ {
+		for d := 0; d < 10; d++ {
+			for pd := 0; pd < 10; pd++ {
+				if pd != d {
+					dp[j][d] = min(dp[j][d], dp[j-1][pd]+cost[j][d])
+				}
+			}
+		}
+	}
+
+	ans := math.MaxInt32
+	for d := 0; d < 10; d++ {
+		ans = min(ans, dp[n-1][d])
+	}
+	return ans
 }
 
-func MinimumNumberOfOperationsToSatisfyConditions() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(minimumOperations([][]int{{1, 0, 2}, {1, 0, 2}})) // Expected: 0
+	fmt.Println(minimumOperations([][]int{{1, 1, 1}, {0, 0, 0}})) // Expected: 3
 }

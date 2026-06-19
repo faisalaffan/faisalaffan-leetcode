@@ -3,14 +3,41 @@ package main
 // LeetCode #3641: Longest Semi-Repeating Subarray
 // https://leetcode.com/problems/longest-semi-repeating-subarray/
 // Difficulty: Medium [Paid]
+// Time: O(n) | Space: O(n)
 
 import "fmt"
 
-func main() {
-	fmt.Println(LongestSemiRepeatingSubarray())
+func longestSemiRepeatingSubarray(nums []int, k int) int {
+	freq := make(map[int]int)
+	dupCount := 0
+	maxLen := 0
+	l := 0
+
+	for r, x := range nums {
+		freq[x]++
+		if freq[x] == 2 {
+			dupCount++
+		}
+
+		for dupCount > k {
+			left := nums[l]
+			freq[left]--
+			if freq[left] == 1 {
+				dupCount--
+			}
+			l++
+		}
+
+		if r-l+1 > maxLen {
+			maxLen = r - l + 1
+		}
+	}
+
+	return maxLen
 }
 
-func LongestSemiRepeatingSubarray() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(longestSemiRepeatingSubarray([]int{1, 2, 3, 1, 2, 3, 4}, 2))
+	fmt.Println(longestSemiRepeatingSubarray([]int{1, 1, 1, 1, 1}, 4))
+	fmt.Println(longestSemiRepeatingSubarray([]int{1, 1, 1, 1, 1}, 0))
 }

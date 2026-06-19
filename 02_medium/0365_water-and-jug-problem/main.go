@@ -3,14 +3,34 @@ package main
 // LeetCode #365: Water and Jug Problem
 // https://leetcode.com/problems/water-and-jug-problem/
 // Difficulty: Medium
+// Time: O(log min(x,y)) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(WaterAndJugProblem())
+func canMeasureWater(x int, y int, target int) bool {
+	if target > x+y {
+		return false
+	}
+	return target%gcd(x, y) == 0
 }
 
-func WaterAndJugProblem() any {
-	// TODO: implement
-	return nil
+func gcd(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+func main() {
+	// Test case 1
+	fmt.Println("Test 1:", canMeasureWater(3, 5, 4))
+	// Expected: true
+
+	// Test case 2
+	fmt.Println("Test 2:", canMeasureWater(2, 6, 5))
+	// Expected: false
+
+	// Test case 3
+	fmt.Println("Test 3:", canMeasureWater(1, 2, 3))
+	// Expected: true
 }

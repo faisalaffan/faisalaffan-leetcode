@@ -7,10 +7,50 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(WaysToMakeAFairArray())
+	fmt.Println(WaysToMakeFair([]int{2, 1, 6, 4}))
+	fmt.Println(WaysToMakeFair([]int{1, 1, 1}))
+	fmt.Println(WaysToMakeFair([]int{1, 2, 3, 4, 5}))
 }
 
-func WaysToMakeAFairArray() any {
-	// TODO: implement
-	return nil
+func WaysToMakeFair(nums []int) int {
+	// Time: O(N), Space: O(1)
+
+	// Calculate total sum at even and odd indices
+	totalEven := 0
+	totalOdd := 0
+	for i, num := range nums {
+		if i%2 == 0 {
+			totalEven += num
+		} else {
+			totalOdd += num
+		}
+	}
+
+	result := 0
+	prefixEven := 0
+	prefixOdd := 0
+
+	for i, num := range nums {
+		if i%2 == 0 {
+			totalEven -= num
+		} else {
+			totalOdd -= num
+		}
+
+		// After removing nums[i], all indices shift:
+		// Elements to the right of i swap parity
+		// Even sum = prefixEven + totalOdd
+		// Odd sum = prefixOdd + totalEven
+		if prefixEven+totalOdd == prefixOdd+totalEven {
+			result++
+		}
+
+		if i%2 == 0 {
+			prefixEven += num
+		} else {
+			prefixOdd += num
+		}
+	}
+
+	return result
 }

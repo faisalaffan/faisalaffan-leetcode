@@ -7,10 +7,39 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindUniqueBinaryString())
+	fmt.Println(FindDifferentBinaryString([]string{"01", "10"}))
+	fmt.Println(FindDifferentBinaryString([]string{"00", "01"}))
+	fmt.Println(FindDifferentBinaryString([]string{"111", "011", "001"}))
 }
 
-func FindUniqueBinaryString() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2), Space: O(n)
+func FindDifferentBinaryString(nums []string) string {
+	n := len(nums)
+	set := make(map[string]bool)
+	for _, s := range nums {
+		set[s] = true
+	}
+
+	// Generate candidates using Cantor diagonal argument
+	result := make([]byte, n)
+	for i := 0; i < n; i++ {
+		result[i] = '0'
+	}
+	for {
+		s := string(result)
+		if !set[s] {
+			return s
+		}
+		// Increment binary string
+		j := n - 1
+		for j >= 0 && result[j] == '1' {
+			result[j] = '0'
+			j--
+		}
+		if j < 0 {
+			break
+		}
+		result[j] = '1'
+	}
+	return ""
 }

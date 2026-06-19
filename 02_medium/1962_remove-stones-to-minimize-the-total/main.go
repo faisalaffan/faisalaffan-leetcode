@@ -4,13 +4,45 @@ package main
 // https://leetcode.com/problems/remove-stones-to-minimize-the-total/
 // Difficulty: Medium
 
-import "fmt"
+import (
+	"container/heap"
+	"fmt"
+)
 
-func main() {
-	fmt.Println(RemoveStonesToMinimizeTheTotal())
+type MaxHeap []int
+
+func (h MaxHeap) Len() int           { return len(h) }
+func (h MaxHeap) Less(i, j int) bool { return h[i] > h[j] }
+func (h MaxHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *MaxHeap) Push(x interface{}) { *h = append(*h, x.(int)) }
+func (h *MaxHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[:n-1]
+	return x
 }
 
-func RemoveStonesToMinimizeTheTotal() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(MinStoneSum([]int{5, 4, 9}, 2))
+	fmt.Println(MinStoneSum([]int{4, 3, 6, 7}, 3))
+}
+
+// Time: O(n + k log n), Space: O(n)
+func MinStoneSum(piles []int, k int) int {
+	h := &MaxHeap{}
+	heap.Init(h)
+	sum := 0
+	for _, p := range piles {
+		sum += p
+		heap.Push(h, p)
+	}
+
+	for i := 0; i < k; i++ {
+		cur := heap.Pop(h).(int)
+		removed := cur / 2
+		sum -= removed
+		heap.Push(h, cur-removed)
+	}
+	return sum
 }

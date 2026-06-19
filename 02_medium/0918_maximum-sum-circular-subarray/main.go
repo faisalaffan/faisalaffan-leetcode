@@ -7,10 +7,43 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumSumCircularSubarray())
+	fmt.Println(MaximumSumCircularSubarray([]int{1, -2, 3, -2}))
+	fmt.Println(MaximumSumCircularSubarray([]int{5, -3, 5}))
+	fmt.Println(MaximumSumCircularSubarray([]int{-3, -2, -3}))
 }
 
-func MaximumSumCircularSubarray() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(1)
+func MaximumSumCircularSubarray(nums []int) int {
+	total := 0
+	maxSum, curMax := nums[0], 0
+	minSum, curMin := nums[0], 0
+
+	for _, v := range nums {
+		total += v
+		curMax = max(curMax+v, v)
+		maxSum = max(maxSum, curMax)
+		curMin = min(curMin+v, v)
+		minSum = min(minSum, curMin)
+	}
+
+	// If all numbers are negative, return the max (non-circular)
+	if maxSum < 0 {
+		return maxSum
+	}
+
+	return max(maxSum, total-minSum)
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }

@@ -3,14 +3,45 @@ package main
 // LeetCode #581: Shortest Unsorted Continuous Subarray
 // https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
 // Difficulty: Medium
+// Time: O(n)
+// Space: O(1)
 
 import "fmt"
 
 func main() {
-	fmt.Println(ShortestUnsortedContinuousSubarray())
+	fmt.Println(FindUnsortedSubarray([]int{2, 6, 4, 8, 10, 9, 15}))
+	fmt.Println(FindUnsortedSubarray([]int{1, 2, 3, 4}))
+	fmt.Println(FindUnsortedSubarray([]int{1}))
 }
 
-func ShortestUnsortedContinuousSubarray() any {
-	// TODO: implement
-	return nil
+func FindUnsortedSubarray(nums []int) int {
+	n := len(nums)
+	if n <= 1 {
+		return 0
+	}
+
+	left := -1
+	minRight := nums[n-1]
+	for i := n - 2; i >= 0; i-- {
+		if nums[i] > minRight {
+			left = i
+		} else {
+			minRight = nums[i]
+		}
+	}
+
+	right := -1
+	maxLeft := nums[0]
+	for i := 1; i < n; i++ {
+		if nums[i] < maxLeft {
+			right = i
+		} else {
+			maxLeft = nums[i]
+		}
+	}
+
+	if right == -1 {
+		return 0
+	}
+	return right - left + 1
 }

@@ -3,14 +3,31 @@ package main
 // LeetCode #1111: Maximum Nesting Depth of Two Valid Parentheses Strings
 // https://leetcode.com/problems/maximum-nesting-depth-of-two-valid-parentheses-strings/
 // Difficulty: Medium
+//
+// Approach: Assign '(' to group A or B based on even/odd depth.
+// Time: O(n)
+// Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(MaximumNestingDepthOfTwoValidParenthesesStrings())
+	fmt.Println(maxDepthAfterSplit("(()())")) // [0,1,1,1,1,0] or similar
+	fmt.Println(maxDepthAfterSplit("()(())()")) // [0,0,0,1,1,0,0,0]
 }
 
-func MaximumNestingDepthOfTwoValidParenthesesStrings() any {
-	// TODO: implement
-	return nil
+func maxDepthAfterSplit(seq string) []int {
+	result := make([]int, len(seq))
+	depth := 0
+
+	for i, c := range seq {
+		if c == '(' {
+			depth++
+			result[i] = depth % 2
+		} else {
+			result[i] = depth % 2
+			depth--
+		}
+	}
+
+	return result
 }

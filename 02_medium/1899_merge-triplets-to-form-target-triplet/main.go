@@ -7,10 +7,28 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MergeTripletsToFormTargetTriplet())
+	fmt.Println(MergeTriplets([][]int{{2, 5, 3}, {1, 8, 4}, {1, 7, 5}}, []int{2, 7, 5}))
+	fmt.Println(MergeTriplets([][]int{{3, 4, 5}, {4, 5, 6}}, []int{3, 2, 5}))
+	fmt.Println(MergeTriplets([][]int{{2, 5, 3}, {2, 3, 4}, {1, 2, 5}, {5, 2, 3}}, []int{5, 5, 5}))
 }
 
-func MergeTripletsToFormTargetTriplet() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func MergeTriplets(triplets [][]int, target []int) bool {
+	found := [3]bool{}
+	for _, t := range triplets {
+		// Skip any triplet that exceeds target
+		if t[0] > target[0] || t[1] > target[1] || t[2] > target[2] {
+			continue
+		}
+		if t[0] == target[0] {
+			found[0] = true
+		}
+		if t[1] == target[1] {
+			found[1] = true
+		}
+		if t[2] == target[2] {
+			found[2] = true
+		}
+	}
+	return found[0] && found[1] && found[2]
 }

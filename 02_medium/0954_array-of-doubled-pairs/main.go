@@ -4,13 +4,45 @@ package main
 // https://leetcode.com/problems/array-of-doubled-pairs/
 // Difficulty: Medium
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func main() {
-	fmt.Println(ArrayOfDoubledPairs())
+// Time: O(n log n) | Space: O(n)
+func canReorderDoubled(arr []int) bool {
+	freq := make(map[int]int)
+	for _, v := range arr {
+		freq[v]++
+	}
+
+	keys := make([]int, 0, len(freq))
+	for k := range freq {
+		keys = append(keys, k)
+	}
+	sort.Slice(keys, func(i, j int) bool {
+		return abs(keys[i]) < abs(keys[j])
+	})
+
+	for _, v := range keys {
+		if freq[v] > freq[2*v] {
+			return false
+		}
+		freq[2*v] -= freq[v]
+	}
+	return true
 }
 
-func ArrayOfDoubledPairs() any {
-	// TODO: implement
-	return nil
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func main() {
+	fmt.Println(canReorderDoubled([]int{3, 1, 3, 6}))
+	fmt.Println(canReorderDoubled([]int{2, 1, 2, 6}))
+	fmt.Println(canReorderDoubled([]int{4, -2, 2, -4}))
+	fmt.Println(canReorderDoubled([]int{1, 2, 4, 16, 8, 4}))
 }

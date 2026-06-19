@@ -6,11 +6,42 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PancakeSorting())
+// Time: O(n^2) | Space: O(n)
+func pancakeSort(arr []int) []int {
+	ans := make([]int, 0)
+	n := len(arr)
+
+	for i := n; i > 1; i-- {
+		// Find index of max in arr[:i]
+		maxIdx := 0
+		for j := 1; j < i; j++ {
+			if arr[j] > arr[maxIdx] {
+				maxIdx = j
+			}
+		}
+		if maxIdx == i-1 {
+			continue
+		}
+		// Flip to bring max to front
+		if maxIdx > 0 {
+			reverse(arr, maxIdx)
+			ans = append(ans, maxIdx+1)
+		}
+		// Flip to put max at correct position
+		reverse(arr, i-1)
+		ans = append(ans, i)
+	}
+
+	return ans
 }
 
-func PancakeSorting() any {
-	// TODO: implement
-	return nil
+func reverse(arr []int, end int) {
+	for i, j := 0, end; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+}
+
+func main() {
+	fmt.Println(pancakeSort([]int{3, 2, 4, 1}))
+	fmt.Println(pancakeSort([]int{1, 2, 3}))
 }

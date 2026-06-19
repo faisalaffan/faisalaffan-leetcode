@@ -2,15 +2,49 @@ package main
 
 // LeetCode #2692: Make Object Immutable
 // https://leetcode.com/problems/make-object-immutable/
-// Difficulty: Medium [Paid]
+// Difficulty: Medium [Paid] (JS problem)
+// Time: O(1) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(MakeObjectImmutable())
+type ImmutableMap struct {
+	data map[string]any
 }
 
-func MakeObjectImmutable() any {
-	// TODO: implement
-	return nil
+func NewImmutable(data map[string]any) *ImmutableMap {
+	copied := make(map[string]any)
+	for k, v := range data {
+		copied[k] = v
+	}
+	return &ImmutableMap{data: copied}
+}
+
+func (im *ImmutableMap) Get(key string) (any, bool) {
+	val, ok := im.data[key]
+	return val, ok
+}
+
+func (im *ImmutableMap) Set(key string, val any) {
+	// Immutable: do nothing (or panic in JS-like implementation)
+	// In Go, we just don't modify
+}
+
+func main() {
+	im := NewImmutable(map[string]any{"a": 1, "b": 2})
+
+	// Test case 1
+	val, ok := im.Get("a")
+	fmt.Println("Test 1:", val, ok)
+	// Expected: 1 true
+
+	// Test case 2
+	im.Set("c", 3)
+	_, ok2 := im.Get("c")
+	fmt.Println("Test 2:", ok2)
+	// Expected: false (immutable)
+
+	// Test case 3
+	_, ok3 := im.Get("z")
+	fmt.Println("Test 3:", ok3)
+	// Expected: false
 }

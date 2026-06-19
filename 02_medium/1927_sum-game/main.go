@@ -7,10 +7,46 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SumGame())
+	fmt.Println(SumGame("5023"))
+	fmt.Println(SumGame("25??"))
+	fmt.Println(SumGame("?3295???"))
 }
 
-func SumGame() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func SumGame(num string) bool {
+	n := len(num)
+	leftSum, rightSum := 0, 0
+	leftQ, rightQ := 0, 0
+
+	for i := 0; i < n/2; i++ {
+		if num[i] == '?' {
+			leftQ++
+		} else {
+			leftSum += int(num[i] - '0')
+		}
+	}
+	for i := n / 2; i < n; i++ {
+		if num[i] == '?' {
+			rightQ++
+		} else {
+			rightSum += int(num[i] - '0')
+		}
+	}
+
+	// Alice wants to avoid tie, Bob wants tie
+	// "?" on left side favors Alice when she puts 9, etc.
+	// The optimal strategy:
+	// Bob will try to minimize the difference,
+	// Alice will try to maximize it.
+
+	// If total number of ? is odd, Alice can always win
+	if (leftQ+rightQ)%2 == 1 {
+		return true
+	}
+
+	// Each pair of '?' on opposite sides can cancel out (one puts 9, other puts 0)
+	diff := leftSum - rightSum
+	diff += (leftQ - rightQ) * 9 / 2
+
+	return diff != 0
 }

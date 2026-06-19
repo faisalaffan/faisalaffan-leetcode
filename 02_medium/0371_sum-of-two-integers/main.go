@@ -3,14 +3,29 @@ package main
 // LeetCode #371: Sum of Two Integers
 // https://leetcode.com/problems/sum-of-two-integers/
 // Difficulty: Medium
+// Time: O(1) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(SumOfTwoIntegers())
+func getSum(a int, b int) int {
+	for b != 0 {
+		carry := a & b
+		a = a ^ b
+		b = carry << 1
+	}
+	return a
 }
 
-func SumOfTwoIntegers() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println("Test 1:", getSum(1, 2))
+	// Expected: 3
+
+	// Test case 2
+	fmt.Println("Test 2:", getSum(2, 3))
+	// Expected: 5
+
+	// Test case 3: Negative numbers
+	fmt.Println("Test 3:", getSum(-1, 1))
+	// Expected: 0
 }

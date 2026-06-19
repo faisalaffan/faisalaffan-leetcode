@@ -1,16 +1,61 @@
 package main
 
+import (
+	"fmt"
+)
+
 // LeetCode #1136: Parallel Courses
 // https://leetcode.com/problems/parallel-courses/
 // Difficulty: Medium [Paid]
 
-import "fmt"
+// topological sort (Kahn's algorithm) to find minimum semesters.
 
-func main() {
-	fmt.Println(ParallelCourses())
+// Time: O(n + len(relations))
+// Space: O(n + len(relations))
+
+func minimumSemesters(n int, relations [][]int) int {
+	adj := make([][]int, n+1)
+	indeg := make([]int, n+1)
+
+	for _, r := range relations {
+		adj[r[0]] = append(adj[r[0]], r[1])
+		indeg[r[1]]++
+	}
+
+	queue := make([]int, 0)
+	for i := 1; i <= n; i++ {
+		if indeg[i] == 0 {
+			queue = append(queue, i)
+		}
+	}
+
+	semesters := 0
+	taken := 0
+
+	for len(queue) > 0 {
+		semesters++
+		size := len(queue)
+		for i := 0; i < size; i++ {
+			cur := queue[0]
+			queue = queue[1:]
+			taken++
+			for _, next := range adj[cur] {
+				indeg[next]--
+				if indeg[next] == 0 {
+					queue = append(queue, next)
+				}
+			}
+		}
+	}
+
+	if taken != n {
+		return -1
+	}
+	return semesters
 }
 
-func ParallelCourses() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Printf("%d (expected: 2)\n", minimumSemesters(3, [][]int{{1, 3}, {2, 3}}))
+	fmt.Printf("%d (expected: -1)\n", minimumSemesters(3, [][]int{{1, 2}, {2, 3}, {3, 1}}))
+	fmt.Printf("%d (expected: 1)\n", minimumSemesters(3, [][]int{}))
 }

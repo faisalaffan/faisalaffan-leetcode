@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfEqualNumbersBlocks())
+	fmt.Println("paid problem - placeholder")
 }
 
-func NumberOfEqualNumbersBlocks() any {
-	// TODO: implement
-	return nil
+func numberOfEqualNumbersBlocks(nums []int) int {
+	return 0
 }

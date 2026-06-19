@@ -3,14 +3,21 @@ package main
 // LeetCode #2914: Minimum Number of Changes to Make Binary String Beautiful
 // https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/
 // Difficulty: Medium
+// Time: O(n) | Space: O(1)
 
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumNumberOfChangesToMakeBinaryStringBeautiful())
+	fmt.Println(minChanges("1001"))
+	fmt.Println(minChanges("10"))
+	fmt.Println(minChanges("0000"))
 }
 
-func MinimumNumberOfChangesToMakeBinaryStringBeautiful() any {
-	// TODO: implement
-	return nil
+func minChanges(s string) (ans int) {
+	for i := 1; i < len(s); i += 2 {
+		if s[i] != s[i-1] {
+			ans++
+		}
+	}
+	return
 }

@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfDivisibleSubstrings())
+	fmt.Println("paid problem - placeholder")
 }
 
-func NumberOfDivisibleSubstrings() any {
-	// TODO: implement
-	return nil
+func numberOfDivisibleSubstrings(s string) int {
+	return 0
 }

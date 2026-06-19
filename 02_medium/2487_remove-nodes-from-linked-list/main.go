@@ -3,14 +3,59 @@ package main
 // LeetCode #2487: Remove Nodes From Linked List
 // https://leetcode.com/problems/remove-nodes-from-linked-list/
 // Difficulty: Medium
+// Time: O(n) | Space: O(n)
+// Reverse list, track max so far, keep nodes >= max.
 
 import "fmt"
 
-func main() {
-	fmt.Println(RemoveNodesFromLinkedList())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func RemoveNodesFromLinkedList() any {
-	// TODO: implement
-	return nil
+func main() {
+	// 5 -> 2 -> 13 -> 3 -> 8
+	head := &ListNode{5, &ListNode{2, &ListNode{13, &ListNode{3, &ListNode{8, nil}}}}}
+	res := removeNodes(head)
+	for res != nil {
+		fmt.Print(res.Val, " ") // 13 8
+		res = res.Next
+	}
+	fmt.Println()
+}
+
+func removeNodes(head *ListNode) *ListNode {
+	// Reverse
+	var prev *ListNode
+	cur := head
+	for cur != nil {
+		next := cur.Next
+		cur.Next = prev
+		prev = cur
+		cur = next
+	}
+
+	// Keep nodes >= max so far
+	dummy := &ListNode{Next: prev}
+	cur = dummy.Next
+	maxSoFar := cur.Val
+	for cur != nil && cur.Next != nil {
+		if cur.Next.Val < maxSoFar {
+			cur.Next = cur.Next.Next
+		} else {
+			cur = cur.Next
+			maxSoFar = cur.Val
+		}
+	}
+
+	// Reverse back
+	var prev2 *ListNode
+	cur = dummy.Next
+	for cur != nil {
+		next := cur.Next
+		cur.Next = prev2
+		prev2 = cur
+		cur = next
+	}
+	return prev2
 }

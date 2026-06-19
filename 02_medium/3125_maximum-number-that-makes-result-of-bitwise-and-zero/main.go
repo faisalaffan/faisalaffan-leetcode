@@ -3,14 +3,21 @@ package main
 // LeetCode #3125: Maximum Number That Makes Result of Bitwise AND Zero
 // https://leetcode.com/problems/maximum-number-that-makes-result-of-bitwise-and-zero/
 // Difficulty: Medium [Paid]
+// Time: O(1) | Space: O(1)
 
 import "fmt"
+import "math/bits"
 
-func main() {
-	fmt.Println(MaximumNumberThatMakesResultOfBitwiseAndZero())
+func maxNumber(n int64) int64 {
+	if n <= 0 {
+		return 0
+	}
+	bits := bits.Len64(uint64(n))
+	return int64((uint64(1) << (bits - 1)) - 1)
 }
 
-func MaximumNumberThatMakesResultOfBitwiseAndZero() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(maxNumber(5))  // Expected: 3
+	fmt.Println(maxNumber(10)) // Expected: 7
+	fmt.Println(maxNumber(1))  // Expected: 0
 }

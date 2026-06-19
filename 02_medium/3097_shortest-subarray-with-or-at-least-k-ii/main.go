@@ -3,14 +3,54 @@ package main
 // LeetCode #3097: Shortest Subarray With OR at Least K II
 // https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/
 // Difficulty: Medium
+// Time: O(n * 32) = O(n) | Space: O(32) = O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(ShortestSubarrayWithOrAtLeastKIi())
+func minimumSubarrayLength(nums []int, k int) int {
+	if k == 0 {
+		return 1
+	}
+
+	n := len(nums)
+	ans := n + 1
+	bits := make([]int, 32)
+	left := 0
+	cur := 0
+
+	for right := 0; right < n; right++ {
+		cur |= nums[right]
+		for b := 0; b < 32; b++ {
+			if nums[right]&(1<<b) != 0 {
+				bits[b]++
+			}
+		}
+
+		for left <= right && cur >= k {
+			if right-left+1 < ans {
+				ans = right - left + 1
+			}
+
+			for b := 0; b < 32; b++ {
+				if nums[left]&(1<<b) != 0 {
+					bits[b]--
+					if bits[b] == 0 {
+						cur &^= (1 << b)
+					}
+				}
+			}
+			left++
+		}
+	}
+
+	if ans > n {
+		return -1
+	}
+	return ans
 }
 
-func ShortestSubarrayWithOrAtLeastKIi() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(minimumSubarrayLength([]int{1, 2, 3}, 3))       // Expected: 1
+	fmt.Println(minimumSubarrayLength([]int{1, 2, 3}, 5))       // Expected: 2
+	fmt.Println(minimumSubarrayLength([]int{2, 1, 8}, 10))      // Expected: 3
 }

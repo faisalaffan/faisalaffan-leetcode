@@ -3,14 +3,38 @@ package main
 // LeetCode #790: Domino and Tromino Tiling
 // https://leetcode.com/problems/domino-and-tromino-tiling/
 // Difficulty: Medium
+// Time: O(n)
+// Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(DominoAndTrominoTiling())
+	fmt.Println(numTilings(3))
+	fmt.Println(numTilings(1))
+	fmt.Println(numTilings(5))
 }
 
-func DominoAndTrominoTiling() any {
-	// TODO: implement
-	return nil
+func numTilings(n int) int {
+	if n == 1 {
+		return 1
+	}
+	if n == 2 {
+		return 2
+	}
+
+	mod := 1000000007
+	dp := make([]int, n+1)
+	dp2 := make([]int, n+1)
+
+	dp[0] = 1
+	dp[1] = 1
+	dp[2] = 2
+	dp2[2] = 1
+
+	for i := 3; i <= n; i++ {
+		dp[i] = (dp[i-1] + dp[i-2] + 2*dp2[i-1]) % mod
+		dp2[i] = (dp[i-2] + dp2[i-1]) % mod
+	}
+
+	return dp[n]
 }

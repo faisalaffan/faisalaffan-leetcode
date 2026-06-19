@@ -3,14 +3,33 @@ package main
 // LeetCode #646: Maximum Length of Pair Chain
 // https://leetcode.com/problems/maximum-length-of-pair-chain/
 // Difficulty: Medium
+// Time: O(n log n) for sorting
+// Space: O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(MaximumLengthOfPairChain())
+	fmt.Println(findLongestChain([][]int{{1, 2}, {2, 3}, {3, 4}}))
+	fmt.Println(findLongestChain([][]int{{1, 2}, {7, 8}, {4, 5}}))
 }
 
-func MaximumLengthOfPairChain() any {
-	// TODO: implement
-	return nil
+func findLongestChain(pairs [][]int) int {
+	sort.Slice(pairs, func(i, j int) bool {
+		return pairs[i][1] < pairs[j][1]
+	})
+
+	count := 0
+	curEnd := -1 << 31
+
+	for _, pair := range pairs {
+		if pair[0] > curEnd {
+			curEnd = pair[1]
+			count++
+		}
+	}
+
+	return count
 }

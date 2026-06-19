@@ -5,12 +5,52 @@ package main
 // Difficulty: Medium
 
 import "fmt"
+import "sort"
 
 func main() {
-	fmt.Println(MaximumAreaOfAPieceOfCakeAfterHorizontalAndVerticalCuts())
+	// Test case 1
+	fmt.Println(maxArea(5, 4, []int{1, 2, 4}, []int{1, 3})) // 4
+
+	// Test case 2
+	fmt.Println(maxArea(5, 4, []int{3, 1}, []int{1})) // 6
+
+	// Test case 3
+	fmt.Println(maxArea(5, 4, []int{3}, []int{3})) // 9
 }
 
-func MaximumAreaOfAPieceOfCakeAfterHorizontalAndVerticalCuts() any {
-	// TODO: implement
-	return nil
+const mod = 1_000_000_007
+
+// Time: O(n log n + m log m) for sorting
+// Space: O(1)
+func maxArea(h int, w int, horizontalCuts []int, verticalCuts []int) int {
+	sort.Ints(horizontalCuts)
+	sort.Ints(verticalCuts)
+
+	// Find max gap in horizontal cuts (including edges)
+	maxHDiff := max(horizontalCuts[0], h-horizontalCuts[len(horizontalCuts)-1])
+	for i := 1; i < len(horizontalCuts); i++ {
+		diff := horizontalCuts[i] - horizontalCuts[i-1]
+		if diff > maxHDiff {
+			maxHDiff = diff
+		}
+	}
+
+	// Find max gap in vertical cuts (including edges)
+	maxVDiff := max(verticalCuts[0], w-verticalCuts[len(verticalCuts)-1])
+	for i := 1; i < len(verticalCuts); i++ {
+		diff := verticalCuts[i] - verticalCuts[i-1]
+		if diff > maxVDiff {
+			maxVDiff = diff
+		}
+	}
+
+	area := (maxHDiff % mod) * (maxVDiff % mod) % mod
+	return area
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }

@@ -6,11 +6,68 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(BinarySearchTreeIteratorIi())
+// TreeNode is a binary tree node.
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func BinarySearchTreeIteratorIi() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Tree: [7, 3, 15, null, null, 9, 20]
+	root := &TreeNode{Val: 7}
+	root.Left = &TreeNode{Val: 3}
+	root.Right = &TreeNode{Val: 15, Left: &TreeNode{Val: 9}, Right: &TreeNode{Val: 20}}
+
+	it := ConstructorBST(root)
+	fmt.Println("Next:", it.Next())      // 3
+	fmt.Println("Next:", it.Next())      // 7
+	fmt.Println("HasPrev:", it.HasPrev()) // true
+	fmt.Println("Prev:", it.Prev())      // 3
+	fmt.Println("Next:", it.Next())      // 7
+	fmt.Println("Next:", it.Next())      // 9
+	fmt.Println("Next:", it.Next())      // 15
+	fmt.Println("HasNext:", it.HasNext()) // true
+	fmt.Println("Next:", it.Next())      // 20
+	fmt.Println("HasNext:", it.HasNext()) // false
+}
+
+type BSTIterator struct {
+	stack []*TreeNode
+	pos   int
+	order []int
+}
+
+func ConstructorBST(root *TreeNode) BSTIterator {
+	return BSTIterator{order: inorder(root)}
+}
+
+func inorder(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	result := make([]int, 0)
+	result = append(result, inorder(root.Left)...)
+	result = append(result, root.Val)
+	result = append(result, inorder(root.Right)...)
+	return result
+}
+
+func (it *BSTIterator) HasNext() bool {
+	return it.pos < len(it.order)
+}
+
+func (it *BSTIterator) Next() int {
+	val := it.order[it.pos]
+	it.pos++
+	return val
+}
+
+func (it *BSTIterator) HasPrev() bool {
+	return it.pos > 1
+}
+
+func (it *BSTIterator) Prev() int {
+	it.pos--
+	return it.order[it.pos-1]
 }

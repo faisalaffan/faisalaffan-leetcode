@@ -7,10 +7,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(ManagerOfTheLargestDepartment())
-}
-
-func ManagerOfTheLargestDepartment() any {
-	// TODO: implement
-	return nil
+	fmt.Println("paid problem - placeholder")
 }

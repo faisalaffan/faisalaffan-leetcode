@@ -7,10 +7,43 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SumOfBeautyInTheArray())
+	fmt.Println(SumOfBeautyInTheArray([]int{1, 2, 3}))
+	fmt.Println(SumOfBeautyInTheArray([]int{2, 4, 6, 4}))
+	fmt.Println(SumOfBeautyInTheArray([]int{3, 2, 1}))
 }
 
-func SumOfBeautyInTheArray() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(n)
+func SumOfBeautyInTheArray(nums []int) int {
+	n := len(nums)
+	prefixMax := make([]int, n)
+	suffixMin := make([]int, n)
+
+	prefixMax[0] = nums[0]
+	for i := 1; i < n; i++ {
+		if nums[i] > prefixMax[i-1] {
+			prefixMax[i] = nums[i]
+		} else {
+			prefixMax[i] = prefixMax[i-1]
+		}
+	}
+
+	suffixMin[n-1] = nums[n-1]
+	for i := n - 2; i >= 0; i-- {
+		if nums[i] < suffixMin[i+1] {
+			suffixMin[i] = nums[i]
+		} else {
+			suffixMin[i] = suffixMin[i+1]
+		}
+	}
+
+	ans := 0
+	for i := 1; i < n-1; i++ {
+		if nums[i] > prefixMax[i-1] && nums[i] < suffixMin[i+1] {
+			ans += 2
+		} else if nums[i] > nums[i-1] && nums[i] < nums[i+1] {
+			ans++
+		}
+	}
+
+	return ans
 }

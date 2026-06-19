@@ -3,14 +3,66 @@ package main
 // LeetCode #2623: Memoize
 // https://leetcode.com/problems/memoize/
 // Difficulty: Medium
+// Time: O(1) amortized per call | Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
-func main() {
-	fmt.Println(Memoize())
+type MemoizedFn func(args ...int) int
+
+func memoize(fn func(...int) int) MemoizedFn {
+	var mu sync.Mutex
+	cache := make(map[string]int)
+
+	return func(args ...int) int {
+		// Create a key from args
+		key := ""
+		for i, arg := range args {
+			if i > 0 {
+				key += ","
+			}
+			key += fmt.Sprintf("%d", arg)
+		}
+
+		mu.Lock()
+		defer mu.Unlock()
+
+		if val, ok := cache[key]; ok {
+			return val
+		}
+		result := fn(args...)
+		cache[key] = result
+		return result
+	}
 }
 
-func Memoize() any {
-	// TODO: implement
-	return nil
+var callCount int
+
+func add(a, b int) int {
+	callCount++
+	return a + b
+}
+
+func main() {
+	callCount = 0
+	memoizedAdd := memoize(func(args ...int) int {
+		return add(args[0], args[1])
+	})
+
+	// Test case 1
+	fmt.Println("Test 1:", memoizedAdd(1, 2))
+	// Expected: 3
+
+	// Test case 2: same args, should use cache
+	fmt.Println("Test 2:", memoizedAdd(1, 2))
+	// Expected: 3
+
+	// Test case 3: different args
+	fmt.Println("Test 3:", memoizedAdd(2, 3))
+	// Expected: 5
+
+	fmt.Println("Calls:", callCount)
+	// Expected: 2 (not 3)
 }

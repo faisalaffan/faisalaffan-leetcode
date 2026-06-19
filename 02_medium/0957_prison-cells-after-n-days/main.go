@@ -6,11 +6,43 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PrisonCellsAfterNDays())
+// Time: O(1) | Space: O(1)
+func prisonAfterNDays(cells []int, n int) []int {
+	seen := make(map[[8]int]int)
+	cycle := false
+
+	for n > 0 {
+		key := toArray(cells)
+		if day, ok := seen[key]; ok && !cycle {
+			n %= day - n
+			cycle = true
+		}
+		seen[key] = n
+
+		if n > 0 {
+			n--
+			cells = nextDay(cells)
+		}
+	}
+
+	return cells
 }
 
-func PrisonCellsAfterNDays() any {
-	// TODO: implement
-	return nil
+func toArray(cells []int) [8]int {
+	return [8]int{cells[0], cells[1], cells[2], cells[3], cells[4], cells[5], cells[6], cells[7]}
+}
+
+func nextDay(cells []int) []int {
+	next := make([]int, 8)
+	for i := 1; i < 7; i++ {
+		if cells[i-1] == cells[i+1] {
+			next[i] = 1
+		}
+	}
+	return next
+}
+
+func main() {
+	fmt.Println(prisonAfterNDays([]int{0, 1, 0, 1, 1, 0, 0, 1}, 7))
+	fmt.Println(prisonAfterNDays([]int{1, 0, 0, 1, 0, 0, 1, 0}, 1000000000))
 }

@@ -3,14 +3,25 @@ package main
 // LeetCode #1762: Buildings With an Ocean View
 // https://leetcode.com/problems/buildings-with-an-ocean-view/
 // Difficulty: Medium [Paid]
+// Time: O(n), Space: O(1) excluding output
 
 import "fmt"
 
-func main() {
-	fmt.Println(BuildingsWithAnOceanView())
+func findBuildings(heights []int) []int {
+	result := make([]int, 0)
+	maxHeight := -1
+
+	for i := len(heights) - 1; i >= 0; i-- {
+		if heights[i] > maxHeight {
+			result = append([]int{i}, result...)
+			maxHeight = heights[i]
+		}
+	}
+	return result
 }
 
-func BuildingsWithAnOceanView() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(findBuildings([]int{4, 2, 3, 1}))    // Expected: [0, 2, 3]
+	fmt.Println(findBuildings([]int{4, 3, 2, 1}))    // Expected: [0, 1, 2, 3]
+	fmt.Println(findBuildings([]int{1, 3, 2, 4}))    // Expected: [3]
 }

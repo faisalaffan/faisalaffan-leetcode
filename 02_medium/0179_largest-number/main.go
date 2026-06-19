@@ -3,14 +3,34 @@ package main
 // LeetCode #179: Largest Number
 // https://leetcode.com/problems/largest-number/
 // Difficulty: Medium
+// Time: O(n log n), Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strconv"
+	"strings"
+)
 
-func main() {
-	fmt.Println(LargestNumber())
+func largestNumber(nums []int) string {
+	strs := make([]string, len(nums))
+	for i, num := range nums {
+		strs[i] = strconv.Itoa(num)
+	}
+
+	sort.Slice(strs, func(i, j int) bool {
+		return strs[i]+strs[j] > strs[j]+strs[i]
+	})
+
+	if strs[0] == "0" {
+		return "0"
+	}
+
+	return strings.Join(strs, "")
 }
 
-func LargestNumber() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(largestNumber([]int{10, 2}))
+	fmt.Println(largestNumber([]int{3, 30, 34, 5, 9}))
+	fmt.Println(largestNumber([]int{0, 0}))
 }

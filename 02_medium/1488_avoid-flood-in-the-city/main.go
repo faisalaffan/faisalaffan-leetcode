@@ -4,13 +4,56 @@ package main
 // https://leetcode.com/problems/avoid-flood-in-the-city/
 // Difficulty: Medium
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(AvoidFloodInTheCity())
+	fmt.Println(AvoidFlood([]int{1, 2, 3, 4}))
+	fmt.Println(AvoidFlood([]int{1, 2, 0, 0, 2, 1}))
+	fmt.Println(AvoidFlood([]int{1, 2, 0, 1, 2}))
 }
 
-func AvoidFloodInTheCity() any {
-	// TODO: implement
-	return nil
+func AvoidFlood(rains []int) []int {
+	// Time: O(N log N), Space: O(N)
+	n := len(rains)
+	ans := make([]int, n)
+	for i := range ans {
+		ans[i] = -1 // default for rain days
+	}
+
+	lastRain := make(map[int]int) // lake -> last rain day
+	dryDays := make([]int, 0)     // indices of dry days (0s)
+
+	for i, lake := range rains {
+		if lake == 0 {
+			dryDays = append(dryDays, i)
+			ans[i] = 1 // placeholder
+			continue
+		}
+
+		ans[i] = -1 // rain day, no action
+
+		if prev, exists := lastRain[lake]; exists {
+			// Find a dry day after prev to dry this lake
+			idx := sort.Search(len(dryDays), func(j int) bool {
+				return dryDays[j] > prev
+			})
+			if idx == len(dryDays) {
+				return nil // impossible to prevent flood
+			}
+			ans[dryDays[idx]] = lake
+			// Remove used dry day
+			dryDays = append(dryDays[:idx], dryDays[idx+1:]...)
+		}
+		lastRain[lake] = i
+	}
+
+	// Remaining dry days can be any positive number
+	for _, idx := range dryDays {
+		ans[idx] = 1
+	}
+
+	return ans
 }

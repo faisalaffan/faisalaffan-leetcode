@@ -7,10 +7,32 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfWaysWhereSquareOfNumberIsEqualToProductOfTwoNumbers())
+	fmt.Println(NumTriplets([]int{7, 4}, []int{5, 2, 8, 9}))
+	fmt.Println(NumTriplets([]int{1, 1}, []int{1, 1, 1}))
+	fmt.Println(NumTriplets([]int{7, 7, 8, 3}, []int{1, 2, 9, 7}))
 }
 
-func NumberOfWaysWhereSquareOfNumberIsEqualToProductOfTwoNumbers() any {
-	// TODO: implement
-	return nil
+func NumTriplets(nums1 []int, nums2 []int) int {
+	// Time: O(N^2 + M^2), Space: O(N^2)
+	// Count pairs in each array that multiply to a specific product
+	return countSquareProducts(nums1, nums2) + countSquareProducts(nums2, nums1)
+}
+
+func countSquareProducts(nums1 []int, nums2 []int) int {
+	// Count nums1[i]^2 == nums2[j] * nums2[k] for j < k
+	productCount := make(map[int]int)
+	for j := 0; j < len(nums2); j++ {
+		for k := j + 1; k < len(nums2); k++ {
+			product := nums2[j] * nums2[k]
+			productCount[product]++
+		}
+	}
+
+	count := 0
+	for _, v := range nums1 {
+		square := v * v
+		count += productCount[square]
+	}
+
+	return count
 }

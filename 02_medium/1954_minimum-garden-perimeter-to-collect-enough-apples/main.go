@@ -7,10 +7,23 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumGardenPerimeterToCollectEnoughApples())
+	fmt.Println(MinimumPerimeter(1))
+	fmt.Println(MinimumPerimeter(13))
+	fmt.Println(MinimumPerimeter(1000000000))
 }
 
-func MinimumGardenPerimeterToCollectEnoughApples() any {
-	// TODO: implement
-	return nil
+// Time: O(cuberoot(n)), Space: O(1)
+func MinimumPerimeter(neededApples int64) int64 {
+	// For a garden with side length 2n (total apples = 2n(n+1)(2n+1))
+	// Apples = 2 * n * (n+1) * (2n+1)
+	// Perimeter = 8 * n
+
+	n := int64(1)
+	for {
+		apples := 2 * n * (n + 1) * (2*n + 1)
+		if apples >= neededApples {
+			return 8 * n
+		}
+		n++
+	}
 }

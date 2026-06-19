@@ -7,10 +7,44 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfNodesInTheSubTreeWithTheSameLabel())
+	fmt.Println(CountSubTrees(7, [][]int{{0, 1}, {0, 2}, {1, 4}, {1, 5}, {2, 3}, {2, 6}}, "abaedcd"))
+	fmt.Println(CountSubTrees(4, [][]int{{0, 1}, {1, 2}, {0, 3}}, "bbbb"))
+	fmt.Println(CountSubTrees(5, [][]int{{0, 1}, {0, 2}, {1, 3}, {0, 4}}, "aabab"))
 }
 
-func NumberOfNodesInTheSubTreeWithTheSameLabel() any {
-	// TODO: implement
-	return nil
+func CountSubTrees(n int, edges [][]int, labels string) []int {
+	// Time: O(N), Space: O(N)
+	graph := make([][]int, n)
+	for _, e := range edges {
+		u, v := e[0], e[1]
+		graph[u] = append(graph[u], v)
+		graph[v] = append(graph[v], u)
+	}
+
+	result := make([]int, n)
+	visited := make([]bool, n)
+
+	var dfs func(node int) []int
+	dfs = func(node int) []int {
+		visited[node] = true
+		// Count array for 26 lowercase letters
+		count := make([]int, 26)
+		count[labels[node]-'a'] = 1
+
+		for _, nei := range graph[node] {
+			if visited[nei] {
+				continue
+			}
+			childCount := dfs(nei)
+			for i := 0; i < 26; i++ {
+				count[i] += childCount[i]
+			}
+		}
+
+		result[node] = count[labels[node]-'a']
+		return count
+	}
+
+	dfs(0)
+	return result
 }

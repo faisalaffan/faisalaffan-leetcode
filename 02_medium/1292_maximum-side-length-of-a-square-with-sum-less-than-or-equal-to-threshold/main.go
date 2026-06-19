@@ -1,16 +1,54 @@
 package main
 
+import (
+	"fmt"
+)
+
 // LeetCode #1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold
 // https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/
 // Difficulty: Medium
 
-import "fmt"
+// Prefix sum matrix + binary search on side length.
+// For each square, sum = prefix[r+s][c+s] - prefix[r][c+s] - prefix[r+s][c] + prefix[r][c].
 
-func main() {
-	fmt.Println(MaximumSideLengthOfASquareWithSumLessThanOrEqualToThreshold())
+// Time: O(m * n * log(min(m,n)))
+// Space: O(m*n)
+
+func maxSideLength(mat [][]int, threshold int) int {
+	m, n := len(mat), len(mat[0])
+	prefix := make([][]int, m+1)
+	for i := range prefix {
+		prefix[i] = make([]int, n+1)
+	}
+	for i := 1; i <= m; i++ {
+		for j := 1; j <= n; j++ {
+			prefix[i][j] = mat[i-1][j-1] + prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1]
+		}
+	}
+
+	maxSide := 0
+	for i := 1; i <= m; i++ {
+		for j := 1; j <= n; j++ {
+			for s := maxSide + 1; s <= m-i+1 && s <= n-j+1; s++ {
+				sum := prefix[i+s-1][j+s-1] - prefix[i-1][j+s-1] - prefix[i+s-1][j-1] + prefix[i-1][j-1]
+				if sum <= threshold {
+					if s > maxSide {
+						maxSide = s
+					}
+				} else {
+					break
+				}
+			}
+		}
+	}
+
+	return maxSide
 }
 
-func MaximumSideLengthOfASquareWithSumLessThanOrEqualToThreshold() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Printf("%d (expected: 2)\n",
+		maxSideLength([][]int{{1, 1, 3, 2, 4, 3, 2}, {1, 1, 3, 2, 4, 3, 2}, {1, 1, 3, 2, 4, 3, 2}}, 4))
+
+	fmt.Printf("%d (expected: 3)\n",
+		maxSideLength([][]int{{2, 2, 2, 2, 2}, {2, 2, 2, 2, 2}, {2, 2, 2, 2, 2}}, 12))
 }

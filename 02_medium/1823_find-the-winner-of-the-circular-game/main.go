@@ -3,14 +3,20 @@ package main
 // LeetCode #1823: Find the Winner of the Circular Game
 // https://leetcode.com/problems/find-the-winner-of-the-circular-game/
 // Difficulty: Medium
+// Time: O(n), Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(FindTheWinnerOfTheCircularGame())
+func findTheWinner(n int, k int) int {
+	winner := 0 // 0-indexed position for 1 person
+	for i := 2; i <= n; i++ {
+		winner = (winner + k) % i
+	}
+	return winner + 1 // convert to 1-indexed
 }
 
-func FindTheWinnerOfTheCircularGame() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(findTheWinner(5, 2)) // Expected: 3
+	fmt.Println(findTheWinner(6, 5)) // Expected: 1
+	fmt.Println(findTheWinner(1, 1)) // Expected: 1
 }

@@ -7,10 +7,36 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(CountTripletsThatCanFormTwoArraysOfEqualXor())
+	// Test case 1
+	fmt.Println(countTriplets([]int{2, 3, 1, 6, 7})) // 4
+
+	// Test case 2
+	fmt.Println(countTriplets([]int{1, 1, 1, 1, 1})) // 10
+
+	// Test case 3
+	fmt.Println(countTriplets([]int{1, 2, 3})) // 2
+
+	// Test case 4
+	fmt.Println(countTriplets([]int{1})) // 0
 }
 
-func CountTripletsThatCanFormTwoArraysOfEqualXor() any {
-	// TODO: implement
-	return nil
+// Time: O(n^2) where n = len(arr)
+// Space: O(1)
+func countTriplets(arr []int) int {
+	n := len(arr)
+	count := 0
+
+	// For pairs (i, k) where arr[i]^...^arr[k] == 0,
+	// any j between i+1 and k works, giving (k-i) triplets
+	for i := 0; i < n; i++ {
+		xor := arr[i]
+		for k := i + 1; k < n; k++ {
+			xor ^= arr[k]
+			if xor == 0 {
+				count += k - i
+			}
+		}
+	}
+
+	return count
 }

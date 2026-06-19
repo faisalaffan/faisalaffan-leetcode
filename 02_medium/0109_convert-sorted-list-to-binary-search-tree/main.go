@@ -6,11 +6,59 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(ConvertSortedListToBinarySearchTree())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func ConvertSortedListToBinarySearchTree() any {
-	// TODO: implement
-	return nil
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
+
+func sortedListToBST(head *ListNode) *TreeNode {
+	nums := []int{}
+	for head != nil {
+		nums = append(nums, head.Val)
+		head = head.Next
+	}
+
+	var build func(left, right int) *TreeNode
+	build = func(left, right int) *TreeNode {
+		if left > right {
+			return nil
+		}
+		mid := left + (right-left)/2
+		node := &TreeNode{Val: nums[mid]}
+		node.Left = build(left, mid-1)
+		node.Right = build(mid+1, right)
+		return node
+	}
+
+	return build(0, len(nums)-1)
+}
+
+func printInorder(root *TreeNode) {
+	if root == nil {
+		return
+	}
+	printInorder(root.Left)
+	fmt.Printf("%d ", root.Val)
+	printInorder(root.Right)
+}
+
+func main() {
+	// Test case 1: [-10,-3,0,5,9]
+	head := &ListNode{-10, &ListNode{-3, &ListNode{0, &ListNode{5, &ListNode{9, nil}}}}}
+	root := sortedListToBST(head)
+	printInorder(root) // -10 -3 0 5 9
+	fmt.Println()
+
+	// Test case 2: [] -> nil
+	root = sortedListToBST(nil)
+	printInorder(root)
+	fmt.Println()
+}
+
+// Time: O(n) | Space: O(n)

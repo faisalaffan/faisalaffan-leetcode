@@ -3,14 +3,29 @@ package main
 // LeetCode #3513: Number of Unique XOR Triplets I
 // https://leetcode.com/problems/number-of-unique-xor-triplets-i/
 // Difficulty: Medium
+// Complexity: O(n^3) time, O(n) space
 
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfUniqueXorTripletsI())
+	// Test case 1
+	fmt.Println("Test 1:", NumberOfUniqueXorTripletsI([]int{1, 2, 3}))
+	// Test case 2
+	fmt.Println("Test 2:", NumberOfUniqueXorTripletsI([]int{1, 1, 1}))
+	// Test case 3
+	fmt.Println("Test 3:", NumberOfUniqueXorTripletsI([]int{5, 6, 7, 8}))
 }
 
-func NumberOfUniqueXorTripletsI() any {
-	// TODO: implement
-	return nil
+func NumberOfUniqueXorTripletsI(nums []int) int {
+	seen := make(map[int]bool)
+	n := len(nums)
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			for k := j + 1; k < n; k++ {
+				xor := nums[i] ^ nums[j] ^ nums[k]
+				seen[xor] = true
+			}
+		}
+	}
+	return len(seen)
 }

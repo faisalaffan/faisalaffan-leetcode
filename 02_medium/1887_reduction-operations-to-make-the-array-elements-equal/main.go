@@ -4,13 +4,26 @@ package main
 // https://leetcode.com/problems/reduction-operations-to-make-the-array-elements-equal/
 // Difficulty: Medium
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(ReductionOperationsToMakeTheArrayElementsEqual())
+	fmt.Println(ReductionOperations([]int{5, 1, 3}))
+	fmt.Println(ReductionOperations([]int{1, 1, 1}))
+	fmt.Println(ReductionOperations([]int{1, 1, 2, 2, 3}))
 }
 
-func ReductionOperationsToMakeTheArrayElementsEqual() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n), Space: O(1)
+func ReductionOperations(nums []int) int {
+	sort.Ints(nums)
+	n := len(nums)
+	ops := 0
+	for i := 1; i < n; i++ {
+		if nums[i] != nums[i-1] {
+			ops += n - i
+		}
+	}
+	return ops
 }

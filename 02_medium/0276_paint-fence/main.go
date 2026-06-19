@@ -3,14 +3,30 @@ package main
 // LeetCode #276: Paint Fence
 // https://leetcode.com/problems/paint-fence/
 // Difficulty: Medium [Paid]
+// Time: O(n), Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(PaintFence())
+func numWays(n int, k int) int {
+	if n == 0 || k == 0 {
+		return 0
+	}
+	if n == 1 {
+		return k
+	}
+
+	same := k
+	diff := k * (k - 1)
+
+	for i := 3; i <= n; i++ {
+		same, diff = diff, (same+diff)*(k-1)
+	}
+
+	return same + diff
 }
 
-func PaintFence() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(numWays(3, 2))
+	fmt.Println(numWays(1, 1))
+	fmt.Println(numWays(7, 2))
 }

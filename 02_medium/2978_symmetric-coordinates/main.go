@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SymmetricCoordinates())
+	fmt.Println("paid problem - placeholder")
 }
 
-func SymmetricCoordinates() any {
-	// TODO: implement
-	return nil
+func symmetricCoordinates(coordinates [][]int) [][]int {
+	return [][]int{}
 }

@@ -7,10 +7,30 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfTimesBinaryStringIsPrefixAligned())
+	// Test case 1
+	fmt.Println(numTimesAllBlue([]int{3, 2, 4, 1, 5})) // 2
+
+	// Test case 2
+	fmt.Println(numTimesAllBlue([]int{4, 1, 2, 3})) // 1
+
+	// Test case 3
+	fmt.Println(numTimesAllBlue([]int{2, 1, 3})) // 1
 }
 
-func NumberOfTimesBinaryStringIsPrefixAligned() any {
-	// TODO: implement
-	return nil
+// Time: O(n) where n = length of flips
+// Space: O(1)
+func numTimesAllBlue(flips []int) int {
+	count := 0
+	maxFlip := 0
+
+	for i, f := range flips {
+		if f > maxFlip {
+			maxFlip = f
+		}
+		if maxFlip == i+1 {
+			count++
+		}
+	}
+
+	return count
 }

@@ -3,14 +3,37 @@ package main
 // LeetCode #3043: Find the Length of the Longest Common Prefix
 // https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/
 // Difficulty: Medium
+// Time: O(n*logM + m*logM) | Space: O(n*logM)
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-	fmt.Println(FindTheLengthOfTheLongestCommonPrefix())
+	fmt.Println(longestCommonPrefix([]int{1, 10, 100}, []int{1000}))
+	fmt.Println(longestCommonPrefix([]int{1, 2, 3}, []int{4, 4, 4}))
 }
 
-func FindTheLengthOfTheLongestCommonPrefix() any {
-	// TODO: implement
-	return nil
+func longestCommonPrefix(arr1 []int, arr2 []int) int {
+	prefixes := map[int]bool{}
+	for _, x := range arr1 {
+		for x > 0 {
+			prefixes[x] = true
+			x /= 10
+		}
+	}
+	ans := 0
+	for _, x := range arr2 {
+		for x > 0 {
+			if prefixes[x] {
+				if len(strconv.Itoa(x)) > ans {
+					ans = len(strconv.Itoa(x))
+				}
+				break
+			}
+			x /= 10
+		}
+	}
+	return ans
 }

@@ -3,14 +3,39 @@ package main
 // LeetCode #3727: Maximum Alternating Sum of Squares
 // https://leetcode.com/problems/maximum-alternating-sum-of-squares/
 // Difficulty: Medium
+// Time: O(n log n) | Space: O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func main() {
-	fmt.Println(MaximumAlternatingSumOfSquares())
+func maximumAlternatingSumOfSquares(nums []int) int64 {
+	sort.Slice(nums, func(i, j int) bool {
+		return abs(nums[i]) > abs(nums[j])
+	})
+
+	var ans int64
+	for i, v := range nums {
+		sq := int64(v) * int64(v)
+		if i%2 == 0 {
+			ans += sq
+		} else {
+			ans -= sq
+		}
+	}
+	return ans
 }
 
-func MaximumAlternatingSumOfSquares() any {
-	// TODO: implement
-	return nil
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func main() {
+	fmt.Println(maximumAlternatingSumOfSquares([]int{1, 2, 3}))
+	fmt.Println(maximumAlternatingSumOfSquares([]int{1, -1, 2, -2, 3, -3}))
+	fmt.Println(maximumAlternatingSumOfSquares([]int{0, 0, 0}))
 }

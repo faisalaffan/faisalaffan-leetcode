@@ -7,10 +7,48 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(SumOfSubarrayMinimums())
+	fmt.Println(SumOfSubarrayMinimums([]int{3, 1, 2, 4}))
+	fmt.Println(SumOfSubarrayMinimums([]int{11, 81, 94, 43, 3}))
+	fmt.Println(SumOfSubarrayMinimums([]int{71, 55, 82, 55}))
 }
 
-func SumOfSubarrayMinimums() any {
-	// TODO: implement
-	return nil
+// Time: O(n) | Space: O(n)
+func SumOfSubarrayMinimums(arr []int) int {
+	const mod = 1_000_000_007
+	n := len(arr)
+
+	prevSmaller := make([]int, n)
+	nextSmaller := make([]int, n)
+
+	for i := 0; i < n; i++ {
+		prevSmaller[i] = -1
+		nextSmaller[i] = n
+	}
+
+	var stack []int
+	for i := 0; i < n; i++ {
+		for len(stack) > 0 && arr[stack[len(stack)-1]] > arr[i] {
+			nextSmaller[stack[len(stack)-1]] = i
+			stack = stack[:len(stack)-1]
+		}
+		stack = append(stack, i)
+	}
+
+	stack = nil
+	for i := n - 1; i >= 0; i-- {
+		for len(stack) > 0 && arr[stack[len(stack)-1]] >= arr[i] {
+			prevSmaller[stack[len(stack)-1]] = i
+			stack = stack[:len(stack)-1]
+		}
+		stack = append(stack, i)
+	}
+
+	ans := 0
+	for i := 0; i < n; i++ {
+		left := i - prevSmaller[i]
+		right := nextSmaller[i] - i
+		ans = (ans + arr[i]*left*right) % mod
+	}
+
+	return ans
 }

@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfSameEndSubstrings())
+	fmt.Println("paid problem - placeholder")
 }
 
-func NumberOfSameEndSubstrings() any {
-	// TODO: implement
-	return nil
+func numberOfSameEndSubstrings(s string, queries [][]int) []int {
+	return []int{}
 }

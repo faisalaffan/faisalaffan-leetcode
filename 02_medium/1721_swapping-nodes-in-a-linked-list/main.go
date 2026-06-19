@@ -3,14 +3,63 @@ package main
 // LeetCode #1721: Swapping Nodes in a Linked List
 // https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
 // Difficulty: Medium
+// Time: O(n), Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(SwappingNodesInALinkedList())
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
 
-func SwappingNodesInALinkedList() any {
-	// TODO: implement
-	return nil
+func swapNodes(head *ListNode, k int) *ListNode {
+	// First pass: find kth from beginning
+	first := head
+	for i := 1; i < k; i++ {
+		first = first.Next
+	}
+
+	// Two pointer approach for kth from end
+	slow := head
+	fast := first
+	for fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next
+	}
+
+	// Swap values
+	first.Val, slow.Val = slow.Val, first.Val
+	return head
+}
+
+func makeList(vals []int) *ListNode {
+	if len(vals) == 0 {
+		return nil
+	}
+	head := &ListNode{Val: vals[0]}
+	curr := head
+	for i := 1; i < len(vals); i++ {
+		curr.Next = &ListNode{Val: vals[i]}
+		curr = curr.Next
+	}
+	return head
+}
+
+func printList(head *ListNode) {
+	for head != nil {
+		fmt.Printf("%d ", head.Val)
+		head = head.Next
+	}
+	fmt.Println()
+}
+
+func main() {
+	l1 := makeList([]int{1, 2, 3, 4, 5})
+	printList(swapNodes(l1, 2)) // Expected: 1 4 3 2 5
+
+	l2 := makeList([]int{7, 9, 6, 6, 7, 8, 3, 0, 9, 5})
+	printList(swapNodes(l2, 5)) // Expected: 7 9 6 6 8 7 3 0 9 5
+
+	l3 := makeList([]int{1, 2})
+	printList(swapNodes(l3, 1)) // Expected: 2 1
 }

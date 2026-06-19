@@ -3,14 +3,45 @@ package main
 // LeetCode #616: Add Bold Tag in String
 // https://leetcode.com/problems/add-bold-tag-in-string/
 // Difficulty: Medium [Paid]
+// Time: O(n * L) where n = len(s), L = total length of all words
+// Space: O(n)
 
 import "fmt"
 
 func main() {
-	fmt.Println(AddBoldTagInString())
+	fmt.Println(AddBoldTag("abcxyz123", []string{"abc", "123"}))
+	fmt.Println(AddBoldTag("aaabbcc", []string{"aaa", "aab", "bc"}))
 }
 
-func AddBoldTagInString() any {
-	// TODO: implement
-	return nil
+func AddBoldTag(s string, words []string) string {
+	n := len(s)
+	bold := make([]bool, n)
+
+	for _, word := range words {
+		for i := 0; i <= n-len(word); i++ {
+			if s[i:i+len(word)] == word {
+				for j := i; j < i+len(word); j++ {
+					bold[j] = true
+				}
+			}
+		}
+	}
+
+	result := ""
+	i := 0
+	for i < n {
+		if bold[i] {
+			result += "<b>"
+			for i < n && bold[i] {
+				result += string(s[i])
+				i++
+			}
+			result += "</b>"
+		} else {
+			result += string(s[i])
+			i++
+		}
+	}
+
+	return result
 }

@@ -3,14 +3,34 @@ package main
 // LeetCode #280: Wiggle Sort
 // https://leetcode.com/problems/wiggle-sort/
 // Difficulty: Medium [Paid]
+// Time: O(n), Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(WiggleSort())
+func wiggleSort(nums []int) {
+	for i := 1; i < len(nums); i++ {
+		if i%2 == 1 {
+			if nums[i] < nums[i-1] {
+				nums[i], nums[i-1] = nums[i-1], nums[i]
+			}
+		} else {
+			if nums[i] > nums[i-1] {
+				nums[i], nums[i-1] = nums[i-1], nums[i]
+			}
+		}
+	}
 }
 
-func WiggleSort() any {
-	// TODO: implement
-	return nil
+func main() {
+	nums1 := []int{3, 5, 2, 1, 6, 4}
+	wiggleSort(nums1)
+	fmt.Println(nums1)
+
+	nums2 := []int{1, 2, 3, 4}
+	wiggleSort(nums2)
+	fmt.Println(nums2)
+
+	nums3 := []int{1}
+	wiggleSort(nums3)
+	fmt.Println(nums3)
 }

@@ -7,10 +7,48 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LoudAndRich())
+	fmt.Println(LoudAndRich([][]int{{1, 0}, {2, 1}, {3, 1}, {3, 7}, {4, 3}, {5, 3}, {6, 3}}, []int{3, 2, 5, 4, 6, 1, 7, 0}))
+	fmt.Println(LoudAndRich([][]int{{0, 1}, {1, 2}}, []int{0, 1, 2}))
+	fmt.Println(LoudAndRich([][]int{}, []int{0}))
 }
 
-func LoudAndRich() any {
-	// TODO: implement
-	return nil
+// Time: O(n + m) | Space: O(n + m) where m = len(richer)
+func LoudAndRich(richer [][]int, quiet []int) []int {
+	n := len(quiet)
+	graph := make([][]int, n)
+	indeg := make([]int, n)
+
+	for _, r := range richer {
+		a, b := r[0], r[1]
+		graph[a] = append(graph[a], b)
+		indeg[b]++
+	}
+
+	ans := make([]int, n)
+	for i := range ans {
+		ans[i] = i
+	}
+
+	var queue []int
+	for i := 0; i < n; i++ {
+		if indeg[i] == 0 {
+			queue = append(queue, i)
+		}
+	}
+
+	for len(queue) > 0 {
+		u := queue[0]
+		queue = queue[1:]
+		for _, v := range graph[u] {
+			if quiet[ans[v]] > quiet[ans[u]] {
+				ans[v] = ans[u]
+			}
+			indeg[v]--
+			if indeg[v] == 0 {
+				queue = append(queue, v)
+			}
+		}
+	}
+
+	return ans
 }

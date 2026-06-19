@@ -7,10 +7,49 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumSwapsToArrangeABinaryGrid())
+	fmt.Println(MinSwaps([][]int{{0, 0, 1}, {1, 1, 0}, {1, 0, 0}}))
+	fmt.Println(MinSwaps([][]int{{0, 1, 1, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}}))
+	fmt.Println(MinSwaps([][]int{{1, 0, 0}, {1, 1, 0}, {1, 1, 1}}))
 }
 
-func MinimumSwapsToArrangeABinaryGrid() any {
-	// TODO: implement
-	return nil
+func MinSwaps(grid [][]int) int {
+	// Time: O(N^2), Space: O(N)
+	n := len(grid)
+
+	// trailingZeros[i] = number of trailing zeros in row i
+	trailingZeros := make([]int, n)
+	for i := 0; i < n; i++ {
+		count := 0
+		for j := n - 1; j >= 0 && grid[i][j] == 0; j-- {
+			count++
+		}
+		trailingZeros[i] = count
+	}
+
+	swaps := 0
+
+	for i := 0; i < n; i++ {
+		// Row i needs at least n-i-1 trailing zeros
+		needed := n - i - 1
+		found := -1
+
+		for j := i; j < n; j++ {
+			if trailingZeros[j] >= needed {
+				found = j
+				break
+			}
+		}
+
+		if found == -1 {
+			return -1
+		}
+
+		// Bubble the found row up to position i
+		for j := found; j > i; j-- {
+			trailingZeros[j], trailingZeros[j-1] = trailingZeros[j-1], trailingZeros[j]
+			swaps++
+		}
+	}
+
+	return swaps
 }

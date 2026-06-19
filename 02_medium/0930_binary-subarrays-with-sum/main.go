@@ -6,11 +6,28 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(BinarySubarraysWithSum())
+// Time: O(n) | Space: O(1)
+func numSubarraysWithSum(nums []int, goal int) int {
+	// sliding window for sum <= goal, then subtract sum < goal
+	atMost := func(g int) int {
+		if g < 0 {
+			return 0
+		}
+		sum, cnt, left := 0, 0, 0
+		for right, v := range nums {
+			sum += v
+			for sum > g {
+				sum -= nums[left]
+				left++
+			}
+			cnt += right - left + 1
+		}
+		return cnt
+	}
+	return atMost(goal) - atMost(goal-1)
 }
 
-func BinarySubarraysWithSum() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(numSubarraysWithSum([]int{1, 0, 1, 0, 1}, 2))
+	fmt.Println(numSubarraysWithSum([]int{0, 0, 0, 0, 0}, 0))
 }

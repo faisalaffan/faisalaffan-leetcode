@@ -3,14 +3,27 @@ package main
 // LeetCode #3638: Maximum Balanced Shipments
 // https://leetcode.com/problems/maximum-balanced-shipments/
 // Difficulty: Medium
+// Time: O(n) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(MaximumBalancedShipments())
+func maxBalancedShipments(weight []int) int {
+	ans := 0
+	mx := 0
+	for _, x := range weight {
+		if x > mx {
+			mx = x
+		}
+		if x < mx {
+			ans++
+			mx = 0
+		}
+	}
+	return ans
 }
 
-func MaximumBalancedShipments() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(maxBalancedShipments([]int{2, 5, 1, 4, 3}))
+	fmt.Println(maxBalancedShipments([]int{4, 4}))
+	fmt.Println(maxBalancedShipments([]int{1, 3, 2, 4, 5, 2}))
 }

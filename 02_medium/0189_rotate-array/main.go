@@ -3,14 +3,43 @@ package main
 // LeetCode #189: Rotate Array
 // https://leetcode.com/problems/rotate-array/
 // Difficulty: Medium
+// Time: O(n), Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(RotateArray())
+func rotate(nums []int, k int) {
+	n := len(nums)
+	if n == 0 {
+		return
+	}
+	k = k % n
+	if k == 0 {
+		return
+	}
+
+	reverse := func(arr []int, l, r int) {
+		for l < r {
+			arr[l], arr[r] = arr[r], arr[l]
+			l++
+			r--
+		}
+	}
+
+	reverse(nums, 0, n-1)
+	reverse(nums, 0, k-1)
+	reverse(nums, k, n-1)
 }
 
-func RotateArray() any {
-	// TODO: implement
-	return nil
+func main() {
+	nums1 := []int{1, 2, 3, 4, 5, 6, 7}
+	rotate(nums1, 3)
+	fmt.Println(nums1)
+
+	nums2 := []int{-1, -100, 3, 99}
+	rotate(nums2, 2)
+	fmt.Println(nums2)
+
+	nums3 := []int{1}
+	rotate(nums3, 0)
+	fmt.Println(nums3)
 }

@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(FindPeakCallingHoursForEachCity())
+	fmt.Println("paid problem - placeholder")
 }
 
-func FindPeakCallingHoursForEachCity() any {
-	// TODO: implement
-	return nil
+func findPeakCallingHoursForEachCity(calls [][]string) []string {
+	return []string{}
 }

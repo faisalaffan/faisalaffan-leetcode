@@ -6,11 +6,53 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(PalindromePartitioning())
+func partition(s string) [][]string {
+	result := [][]string{}
+	n := len(s)
+
+	// Precompute palindrome table
+	pal := make([][]bool, n)
+	for i := range pal {
+		pal[i] = make([]bool, n)
+	}
+	for i := n - 1; i >= 0; i-- {
+		for j := i; j < n; j++ {
+			if s[i] == s[j] && (j-i <= 2 || pal[i+1][j-1]) {
+				pal[i][j] = true
+			}
+		}
+	}
+
+	var backtrack func(start int, path []string)
+	backtrack = func(start int, path []string) {
+		if start == n {
+			part := make([]string, len(path))
+			copy(part, path)
+			result = append(result, part)
+			return
+		}
+		for end := start; end < n; end++ {
+			if pal[start][end] {
+				path = append(path, s[start:end+1])
+				backtrack(end+1, path)
+				path = path[:len(path)-1]
+			}
+		}
+	}
+
+	backtrack(0, []string{})
+	return result
 }
 
-func PalindromePartitioning() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println(partition("aab")) // [["a","a","b"],["aa","b"]]
+
+	// Test case 2
+	fmt.Println(partition("a")) // [["a"]]
+
+	// Test case 3
+	fmt.Println(partition("ab")) // [["a","b"]]
 }
+
+// Time: O(n * 2^n) | Space: O(n^2)

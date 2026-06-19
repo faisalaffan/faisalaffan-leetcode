@@ -4,13 +4,30 @@ package main
 // https://leetcode.com/problems/boats-to-save-people/
 // Difficulty: Medium
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(BoatsToSavePeople())
+	fmt.Println(BoatsToSavePeople([]int{1, 2}, 3))
+	fmt.Println(BoatsToSavePeople([]int{3, 2, 2, 1}, 3))
+	fmt.Println(BoatsToSavePeople([]int{3, 5, 3, 4}, 5))
 }
 
-func BoatsToSavePeople() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n) | Space: O(log n)
+func BoatsToSavePeople(people []int, limit int) int {
+	sort.Ints(people)
+	left, right := 0, len(people)-1
+	ans := 0
+
+	for left <= right {
+		if people[left]+people[right] <= limit {
+			left++
+		}
+		right--
+		ans++
+	}
+
+	return ans
 }

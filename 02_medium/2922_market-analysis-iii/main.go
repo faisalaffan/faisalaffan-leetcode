@@ -7,10 +7,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MarketAnalysisIii())
+	fmt.Println("paid problem - placeholder")
 }
 
-func MarketAnalysisIii() any {
-	// TODO: implement
-	return nil
+func marketAnalysisIII(orders [][]int, k int) []int64 {
+	return []int64{}
 }

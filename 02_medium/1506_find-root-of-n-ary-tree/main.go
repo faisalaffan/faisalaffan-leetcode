@@ -6,11 +6,45 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(FindRootOfNAryTree())
+// Node is an N-ary tree node.
+type Node struct {
+	Val      int
+	Children []*Node
 }
 
-func FindRootOfNAryTree() any {
-	// TODO: implement
+func main() {
+	// Build tree: root = 1 -> [2, 3, 4]; 3 -> [5, 6]
+	child5 := &Node{Val: 5}
+	child6 := &Node{Val: 6}
+	child2 := &Node{Val: 2}
+	child3 := &Node{Val: 3, Children: []*Node{child5, child6}}
+	child4 := &Node{Val: 4}
+	root := &Node{Val: 1, Children: []*Node{child2, child3, child4}}
+
+	// All nodes in random order (without knowing root)
+	allNodes := []*Node{child2, child5, child3, child4, root, child6}
+
+	found := FindRoot(allNodes)
+	fmt.Println("Found root val:", found.Val)
+}
+
+func FindRoot(tree []*Node) *Node {
+	// Time: O(N), Space: O(1)
+	// The root is the only node that is never a child.
+	// XOR all node values + all child values. Root value remains.
+	var xorSum int
+	for _, node := range tree {
+		xorSum ^= node.Val
+		for _, child := range node.Children {
+			xorSum ^= child.Val
+		}
+	}
+
+	// Find node with matching value
+	for _, node := range tree {
+		if node.Val == xorSum {
+			return node
+		}
+	}
 	return nil
 }

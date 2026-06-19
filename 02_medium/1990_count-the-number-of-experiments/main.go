@@ -2,15 +2,10 @@ package main
 
 // LeetCode #1990: Count the Number of Experiments
 // https://leetcode.com/problems/count-the-number-of-experiments/
-// Difficulty: Medium [Paid]
+// Difficulty: Medium [Paid - SQL]
 
 import "fmt"
 
 func main() {
-	fmt.Println(CountTheNumberOfExperiments())
-}
-
-func CountTheNumberOfExperiments() any {
-	// TODO: implement
-	return nil
+	fmt.Println("This is a SQL problem, not implemented in Go")
 }

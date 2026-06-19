@@ -4,13 +4,72 @@ package main
 // https://leetcode.com/problems/the-most-recent-orders-for-each-product/
 // Difficulty: Medium [Paid]
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(TheMostRecentOrdersForEachProduct())
+	// SQL problem: for each product, find the most recent order(s).
+	// Tables: Products(product_id, product_name), Orders(order_id, product_id, order_date)
+
+	products := map[int]string{
+		1: "Product A",
+		2: "Product B",
+		3: "Product C",
+	}
+
+	orders := []struct{ orderID, productID int; date string }{
+		{1, 1, "2020-07-31"},
+		{2, 1, "2020-07-30"},
+		{3, 1, "2020-07-29"},
+		{4, 2, "2020-07-31"},
+		{5, 2, "2020-07-30"},
+		{6, 3, "2020-07-31"},
+	}
+
+	result := MostRecentOrders(products, orders)
+	fmt.Println("Most recent orders per product:")
+	for _, r := range result {
+		fmt.Printf("  %s: Order %d on %s\n", r.productName, r.orderID, r.date)
+	}
 }
 
-func TheMostRecentOrdersForEachProduct() any {
-	// TODO: implement
-	return nil
+type recentOrderInfo struct {
+	productName string
+	orderID     int
+	date        string
+}
+
+func MostRecentOrders(products map[int]string, orders []struct{ orderID, productID int; date string }) []recentOrderInfo {
+	// Group orders by product
+	productOrders := make(map[int][]struct{ orderID int; date string })
+	for _, o := range orders {
+		productOrders[o.productID] = append(productOrders[o.productID], struct{ orderID int; date string }{o.orderID, o.date})
+	}
+
+	// Find most recent order date per product
+	productRecent := make(map[int]string)
+	for pid, ords := range productOrders {
+		sort.Slice(ords, func(i, j int) bool {
+			return ords[i].date > ords[j].date
+		})
+		productRecent[pid] = ords[0].date
+	}
+
+	// Collect orders that match the most recent date for their product
+	result := make([]recentOrderInfo, 0)
+	for pid, pname := range products {
+		recentDate, ok := productRecent[pid]
+		if !ok {
+			continue
+		}
+		for _, o := range orders {
+			if o.productID == pid && o.date == recentDate {
+				result = append(result, recentOrderInfo{pname, o.orderID, o.date})
+			}
+		}
+	}
+
+	return result
 }

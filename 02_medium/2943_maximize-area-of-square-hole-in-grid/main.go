@@ -3,14 +3,40 @@ package main
 // LeetCode #2943: Maximize Area of Square Hole in Grid
 // https://leetcode.com/problems/maximize-area-of-square-hole-in-grid/
 // Difficulty: Medium
+// Time: O(h log h + v log v) | Space: O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	fmt.Println(MaximizeAreaOfSquareHoleInGrid())
+	fmt.Println(maximizeSquareArea(3, 4, []int{2}, []int{2}))
+	fmt.Println(maximizeSquareArea(2, 2, []int{1}, []int{1}))
 }
 
-func MaximizeAreaOfSquareHoleInGrid() any {
-	// TODO: implement
-	return nil
+func maximizeSquareArea(m int, n int, hBars []int, vBars []int) int {
+	calc := func(nums []int, limit int) int {
+		nums = append(nums, 1)
+		nums = append(nums, limit)
+		sort.Ints(nums)
+		ans, cnt := 1, 1
+		for i := 1; i < len(nums); i++ {
+			if nums[i] == nums[i-1]+1 {
+				cnt++
+				if cnt > ans {
+					ans = cnt
+				}
+			} else {
+				cnt = 1
+			}
+		}
+		return ans
+	}
+	x := calc(hBars, m)
+	y := calc(vBars, n)
+	if x > y {
+		x = y
+	}
+	return x * x
 }

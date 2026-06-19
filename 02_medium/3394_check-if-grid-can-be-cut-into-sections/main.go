@@ -3,14 +3,42 @@ package main
 // LeetCode #3394: Check if Grid can be Cut into Sections
 // https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/
 // Difficulty: Medium
+// Time: O(n log n) Space: O(n)
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
-func main() {
-	fmt.Println(CheckIfGridCanBeCutIntoSections())
+type pair struct{ l, r int }
+
+func check(intervals []pair) bool {
+	slices.SortFunc(intervals, func(a, b pair) int { return a.l - b.l })
+	cnt, maxR := 0, 0
+	for _, p := range intervals {
+		if p.l >= maxR {
+			cnt++
+		}
+		if p.r > maxR {
+			maxR = p.r
+		}
+	}
+	return cnt >= 3
 }
 
-func CheckIfGridCanBeCutIntoSections() any {
-	// TODO: implement
-	return nil
+func checkValidCuts(_ int, rectangles [][]int) bool {
+	n := len(rectangles)
+	a := make([]pair, n)
+	b := make([]pair, n)
+	for i, rect := range rectangles {
+		a[i] = pair{rect[0], rect[2]}
+		b[i] = pair{rect[1], rect[3]}
+	}
+	return check(a) || check(b)
+}
+
+func main() {
+	fmt.Println(checkValidCuts(5, [][]int{{1, 0, 5, 2}, {0, 2, 2, 4}, {3, 2, 5, 3}, {0, 4, 4, 5}})) // true
+	fmt.Println(checkValidCuts(4, [][]int{{0, 0, 1, 1}, {2, 0, 3, 4}, {0, 2, 2, 3}, {3, 0, 4, 3}})) // true
+	fmt.Println(checkValidCuts(4, [][]int{{0, 2, 2, 4}, {1, 0, 3, 2}, {2, 2, 3, 4}, {3, 0, 4, 2}, {3, 2, 4, 4}})) // false
 }

@@ -5,12 +5,55 @@ package main
 // Difficulty: Medium
 
 import "fmt"
+import "sort"
 
 func main() {
-	fmt.Println(SortIntegersByThePowerValue())
+	// Test case 1
+	fmt.Println(getKth(12, 15, 2)) // 13
+
+	// Test case 2
+	fmt.Println(getKth(1, 1, 1)) // 1
+
+	// Test case 3
+	fmt.Println(getKth(7, 11, 4)) // 7
+
+	// Test case 4
+	fmt.Println(getKth(10, 20, 5)) // 13
 }
 
-func SortIntegersByThePowerValue() any {
-	// TODO: implement
-	return nil
+// Time: O(n log n) for sorting
+// Space: O(n) for memoization and sorted array
+func getKth(lo int, hi int, k int) int {
+	memo := make(map[int]int)
+	memo[1] = 0
+
+	var power func(int) int
+	power = func(x int) int {
+		if val, ok := memo[x]; ok {
+			return val
+		}
+		if x%2 == 0 {
+			memo[x] = 1 + power(x/2)
+		} else {
+			memo[x] = 1 + power(3*x+1)
+		}
+		return memo[x]
+	}
+
+	type pair struct {
+		val, power int
+	}
+	pairs := make([]pair, 0, hi-lo+1)
+	for i := lo; i <= hi; i++ {
+		pairs = append(pairs, pair{i, power(i)})
+	}
+
+	sort.Slice(pairs, func(i, j int) bool {
+		if pairs[i].power != pairs[j].power {
+			return pairs[i].power < pairs[j].power
+		}
+		return pairs[i].val < pairs[j].val
+	})
+
+	return pairs[k-1].val
 }

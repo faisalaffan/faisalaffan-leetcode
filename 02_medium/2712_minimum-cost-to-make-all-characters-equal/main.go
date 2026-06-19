@@ -3,14 +3,42 @@ package main
 // LeetCode #2712: Minimum Cost to Make All Characters Equal
 // https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/
 // Difficulty: Medium
+// Time: O(n) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(MinimumCostToMakeAllCharactersEqual())
+func MinimumCostToMakeAllCharactersEqual(s string) int64 {
+	n := len(s)
+
+	calc := func(target byte) int64 {
+		var cost int64
+		flip := 0
+		for i := 0; i < n; i++ {
+			cur := s[i]
+			if flip%2 == 1 {
+				if cur == '0' {
+					cur = '1'
+				} else {
+					cur = '0'
+				}
+			}
+			if cur != target {
+				flip++
+				cost += int64(i + 1)
+			}
+		}
+		return cost
+	}
+
+	cost0 := calc('0')
+	cost1 := calc('1')
+	if cost0 < cost1 {
+		return cost0
+	}
+	return cost1
 }
 
-func MinimumCostToMakeAllCharactersEqual() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(MinimumCostToMakeAllCharactersEqual("0011"))
+	fmt.Println(MinimumCostToMakeAllCharactersEqual("010101"))
 }

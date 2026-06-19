@@ -6,11 +6,36 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(DeleteColumnsToMakeSortedIi())
+// Time: O(n * m) | Space: O(n)
+func minDeletionSize(strs []string) int {
+	m := len(strs)
+	n := len(strs[0])
+	cut := make([]bool, m)
+	ans := 0
+
+	for col := 0; col < n; col++ {
+		ok := true
+		for row := 0; row+1 < m; row++ {
+			if !cut[row] && strs[row][col] > strs[row+1][col] {
+				ans++
+				ok = false
+				break
+			}
+		}
+		if ok {
+			for row := 0; row+1 < m; row++ {
+				if strs[row][col] < strs[row+1][col] {
+					cut[row] = true
+				}
+			}
+		}
+	}
+
+	return ans
 }
 
-func DeleteColumnsToMakeSortedIi() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(minDeletionSize([]string{"ca", "bb", "ac"}))
+	fmt.Println(minDeletionSize([]string{"xc", "yb", "za"}))
+	fmt.Println(minDeletionSize([]string{"zyx", "wvu", "tsr"}))
 }

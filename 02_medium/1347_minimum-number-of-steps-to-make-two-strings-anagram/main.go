@@ -7,10 +7,30 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MinimumNumberOfStepsToMakeTwoStringsAnagram())
+	// Test case 1
+	fmt.Println(minSteps("bab", "aba")) // 1
+
+	// Test case 2
+	fmt.Println(minSteps("leetcode", "practice")) // 5
+
+	// Test case 3
+	fmt.Println(minSteps("anagram", "mangaar")) // 0
 }
 
-func MinimumNumberOfStepsToMakeTwoStringsAnagram() any {
-	// TODO: implement
-	return nil
+// Time: O(n) where n = length of strings
+// Space: O(1) - fixed size array of 26
+func minSteps(s string, t string) int {
+	freq := make([]int, 26)
+	for i := 0; i < len(s); i++ {
+		freq[s[i]-'a']++
+		freq[t[i]-'a']--
+	}
+
+	steps := 0
+	for _, f := range freq {
+		if f > 0 {
+			steps += f
+		}
+	}
+	return steps
 }

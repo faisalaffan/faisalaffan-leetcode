@@ -3,14 +3,37 @@ package main
 // LeetCode #486: Predict the Winner
 // https://leetcode.com/problems/predict-the-winner/
 // Difficulty: Medium
+// Time: O(n^2)
+// Space: O(n^2)
 
 import "fmt"
 
 func main() {
-	fmt.Println(PredictTheWinner())
+	fmt.Println(PredictTheWinner([]int{1, 5, 2}))
+	fmt.Println(PredictTheWinner([]int{1, 5, 233, 7}))
 }
 
-func PredictTheWinner() any {
-	// TODO: implement
-	return nil
+func PredictTheWinner(nums []int) bool {
+	n := len(nums)
+	dp := make([][]int, n)
+	for i := range dp {
+		dp[i] = make([]int, n)
+		dp[i][i] = nums[i]
+	}
+
+	for length := 2; length <= n; length++ {
+		for i := 0; i <= n-length; i++ {
+			j := i + length - 1
+			// Max of (pick left) or (pick right), minus opponent's optimal play
+			left := nums[i] - dp[i+1][j]
+			right := nums[j] - dp[i][j-1]
+			if left > right {
+				dp[i][j] = left
+			} else {
+				dp[i][j] = right
+			}
+		}
+	}
+
+	return dp[0][n-1] >= 0
 }

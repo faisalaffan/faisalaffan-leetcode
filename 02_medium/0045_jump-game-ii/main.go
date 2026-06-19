@@ -6,11 +6,41 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println(JumpGameIi())
+func jump(nums []int) int {
+	n := len(nums)
+	if n < 2 {
+		return 0
+	}
+
+	jumps := 0
+	currentEnd := 0
+	farthest := 0
+
+	for i := 0; i < n-1; i++ {
+		if i+nums[i] > farthest {
+			farthest = i + nums[i]
+		}
+		if i == currentEnd {
+			jumps++
+			currentEnd = farthest
+			if currentEnd >= n-1 {
+				break
+			}
+		}
+	}
+
+	return jumps
 }
 
-func JumpGameIi() any {
-	// TODO: implement
-	return nil
+func main() {
+	// Test case 1
+	fmt.Println(jump([]int{2, 3, 1, 1, 4})) // 2
+
+	// Test case 2
+	fmt.Println(jump([]int{2, 3, 0, 1, 4})) // 2
+
+	// Test case 3
+	fmt.Println(jump([]int{0})) // 0
 }
+
+// Time: O(n) | Space: O(1)

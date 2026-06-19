@@ -7,10 +7,14 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(StoneGame())
+	fmt.Println(StoneGame([]int{5, 3, 4, 5}))
+	fmt.Println(StoneGame([]int{3, 7, 2, 5}))
+	fmt.Println(StoneGame([]int{1, 100, 3, 2}))
 }
 
-func StoneGame() any {
-	// TODO: implement
-	return nil
+// Time: O(1) | Space: O(1)
+// Alex always wins because there are an even number of piles
+// and total stones is odd (no ties), with Alex going first.
+func StoneGame(piles []int) bool {
+	return true
 }

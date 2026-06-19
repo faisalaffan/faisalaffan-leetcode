@@ -7,10 +7,41 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(LargestSumOfAverages())
+	fmt.Println(LargestSumOfAverages([]int{9, 1, 2, 3, 9}, 3))
+	fmt.Println(LargestSumOfAverages([]int{1, 2, 3, 4, 5, 6, 7}, 4))
+	fmt.Println(LargestSumOfAverages([]int{4, 1, 7, 5, 6, 2, 3}, 4))
 }
 
-func LargestSumOfAverages() any {
-	// TODO: implement
-	return nil
+// Time: O(k * n^2) | Space: O(k * n)
+func LargestSumOfAverages(nums []int, k int) float64 {
+	n := len(nums)
+	prefix := make([]float64, n+1)
+	for i := 0; i < n; i++ {
+		prefix[i+1] = prefix[i] + float64(nums[i])
+	}
+
+	dp := make([][]float64, n+1)
+	for i := range dp {
+		dp[i] = make([]float64, k+1)
+	}
+
+	for i := 1; i <= n; i++ {
+		dp[i][1] = prefix[i] / float64(i)
+	}
+
+	for j := 2; j <= k; j++ {
+		for i := j; i <= n; i++ {
+			var best float64
+			for x := j - 1; x < i; x++ {
+				avg := (prefix[i] - prefix[x]) / float64(i-x)
+				val := dp[x][j-1] + avg
+				if val > best {
+					best = val
+				}
+			}
+			dp[i][j] = best
+		}
+	}
+
+	return dp[n][k]
 }

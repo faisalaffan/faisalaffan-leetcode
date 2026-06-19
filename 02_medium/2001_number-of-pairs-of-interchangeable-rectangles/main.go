@@ -7,10 +7,30 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOfPairsOfInterchangeableRectangles())
+	fmt.Println(NumberOfPairsOfInterchangeableRectangles([][]int{{4, 8}, {3, 6}, {10, 20}, {15, 30}}))
+	fmt.Println(NumberOfPairsOfInterchangeableRectangles([][]int{{4, 5}, {7, 8}}))
 }
 
-func NumberOfPairsOfInterchangeableRectangles() any {
-	// TODO: implement
-	return nil
+// Time: O(n log max(w,h)), Space: O(n)
+func NumberOfPairsOfInterchangeableRectangles(rectangles [][]int) int64 {
+	cnt := make(map[[2]int]int64)
+	for _, r := range rectangles {
+		w, h := r[0], r[1]
+		g := gcd2001(w, h)
+		key := [2]int{w / g, h / g}
+		cnt[key]++
+	}
+
+	var ans int64
+	for _, m := range cnt {
+		ans += m * (m - 1) / 2
+	}
+	return ans
+}
+
+func gcd2001(a, b int) int {
+	for a != 0 {
+		a, b = b%a, a
+	}
+	return b
 }

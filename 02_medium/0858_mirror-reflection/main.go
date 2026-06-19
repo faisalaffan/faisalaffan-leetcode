@@ -7,10 +7,29 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(MirrorReflection())
+	fmt.Println(MirrorReflection(2, 1))
+	fmt.Println(MirrorReflection(3, 1))
+	fmt.Println(MirrorReflection(4, 3))
 }
 
-func MirrorReflection() any {
-	// TODO: implement
-	return nil
+// Time: O(log min(p,q)) | Space: O(1)
+func MirrorReflection(p int, q int) int {
+	g := gcd(p, q)
+	p /= g
+	q /= g
+
+	if p%2 == 0 {
+		return 2
+	}
+	if q%2 == 0 {
+		return 0
+	}
+	return 1
+}
+
+func gcd(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
 }

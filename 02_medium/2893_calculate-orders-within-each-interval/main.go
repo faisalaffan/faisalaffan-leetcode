@@ -3,14 +3,41 @@ package main
 // LeetCode #2893: Calculate Orders Within Each Interval
 // https://leetcode.com/problems/calculate-orders-within-each-interval/
 // Difficulty: Medium [Paid]
+// Time: O(n) | Space: O(1)
 
 import "fmt"
 
-func main() {
-	fmt.Println(CalculateOrdersWithinEachInterval())
+type Order struct {
+	Time   int
+	Amount int
 }
 
-func CalculateOrdersWithinEachInterval() any {
-	// TODO: implement
-	return nil
+func CalculateOrdersWithinEachInterval(orders []Order, interval int) []int {
+	if len(orders) == 0 {
+		return []int{}
+	}
+
+	// Group orders by interval
+	maxTime := orders[len(orders)-1].Time
+	bucketCount := maxTime/interval + 1
+	buckets := make([]int, bucketCount)
+
+	for _, o := range orders {
+		idx := o.Time / interval
+		buckets[idx] += o.Amount
+	}
+
+	return buckets
+}
+
+func main() {
+	orders := []Order{
+		{0, 10}, {1, 20}, {4, 30}, {6, 40},
+	}
+	fmt.Println(CalculateOrdersWithinEachInterval(orders, 3))
+
+	orders2 := []Order{
+		{0, 5}, {2, 10},
+	}
+	fmt.Println(CalculateOrdersWithinEachInterval(orders2, 5))
 }

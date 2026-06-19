@@ -1,16 +1,52 @@
 package main
 
+import (
+	"fmt"
+)
+
 // LeetCode #1267: Count Servers that Communicate
 // https://leetcode.com/problems/count-servers-that-communicate/
 // Difficulty: Medium
 
-import "fmt"
+// Count servers that can communicate with at least one other server
+// in the same row or column.
 
-func main() {
-	fmt.Println(CountServersThatCommunicate())
+// Time: O(m*n)
+// Space: O(m+n)
+
+func countServers(grid [][]int) int {
+	m, n := len(grid), len(grid[0])
+	rowCount := make([]int, m)
+	colCount := make([]int, n)
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 1 {
+				rowCount[i]++
+				colCount[j]++
+			}
+		}
+	}
+
+	count := 0
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 1 && (rowCount[i] > 1 || colCount[j] > 1) {
+				count++
+			}
+		}
+	}
+
+	return count
 }
 
-func CountServersThatCommunicate() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Printf("%d (expected: 3)\n",
+		countServers([][]int{{1, 0}, {0, 1}}))
+
+	fmt.Printf("%d (expected: 4)\n",
+		countServers([][]int{{1, 0}, {1, 1}}))
+
+	fmt.Printf("%d (expected: 0)\n",
+		countServers([][]int{{1, 0, 0}, {0, 0, 0}, {0, 0, 1}}))
 }

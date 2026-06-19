@@ -3,14 +3,67 @@ package main
 // LeetCode #3670: Maximum Product of Two Integers With No Common Bits
 // https://leetcode.com/problems/maximum-product-of-two-integers-with-no-common-bits/
 // Difficulty: Medium
+// Time: O(n + B*2^B) | Space: O(2^B)
 
-import "fmt"
+import (
+	"fmt"
+	"math/bits"
+)
 
-func main() {
-	fmt.Println(MaximumProductOfTwoIntegersWithNoCommonBits())
+func maximumProductOfTwoIntegersWithNoCommonBits(nums []int) int64 {
+	maxVal := 0
+	for _, v := range nums {
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+
+	maxBits := 32 - bits.LeadingZeros32(uint32(maxVal))
+	if maxBits == 0 {
+		maxBits = 1
+	}
+	size := 1 << maxBits
+
+	dp := make([]int, size)
+	for _, x := range nums {
+		if dp[x] < x {
+			dp[x] = x
+		}
+	}
+
+	// SOS DP
+	for b := 0; b < maxBits; b++ {
+		half := 1 << b
+		step := half << 1
+		for base := 0; base < size; base += step {
+			upper := base + half
+			for m := 0; m < half; m++ {
+				u := upper + m
+				l := base + m
+				if dp[u] < dp[l] {
+					dp[u] = dp[l]
+				}
+			}
+		}
+	}
+
+	var ans int64 = 0
+	full := size - 1
+	for _, x := range nums {
+		complement := (^x) & full
+		y := dp[complement]
+		if y > 0 {
+			prod := int64(x) * int64(y)
+			if prod > ans {
+				ans = prod
+			}
+		}
+	}
+	return ans
 }
 
-func MaximumProductOfTwoIntegersWithNoCommonBits() any {
-	// TODO: implement
-	return nil
+func main() {
+	fmt.Println(maximumProductOfTwoIntegersWithNoCommonBits([]int{3, 5, 2}))
+	fmt.Println(maximumProductOfTwoIntegersWithNoCommonBits([]int{1, 2, 4, 8}))
+	fmt.Println(maximumProductOfTwoIntegersWithNoCommonBits([]int{5, 10, 3, 6}))
 }

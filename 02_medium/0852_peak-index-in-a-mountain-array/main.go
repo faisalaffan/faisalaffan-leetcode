@@ -7,10 +7,21 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(PeakIndexInAMountainArray())
+	fmt.Println(PeakIndexInAMountainArray([]int{0, 1, 0}))
+	fmt.Println(PeakIndexInAMountainArray([]int{0, 2, 1, 0}))
+	fmt.Println(PeakIndexInAMountainArray([]int{0, 10, 5, 2}))
 }
 
-func PeakIndexInAMountainArray() any {
-	// TODO: implement
-	return nil
+// Time: O(log n) | Space: O(1)
+func PeakIndexInAMountainArray(arr []int) int {
+	left, right := 1, len(arr)-2
+	for left < right {
+		mid := (left + right) / 2
+		if arr[mid] > arr[mid+1] {
+			right = mid
+		} else {
+			left = mid + 1
+		}
+	}
+	return left
 }

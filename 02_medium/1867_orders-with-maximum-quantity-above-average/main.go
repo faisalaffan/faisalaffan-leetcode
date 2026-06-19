@@ -7,10 +7,33 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(OrdersWithMaximumQuantityAboveAverage())
+	// Sample: order_id, quantity
+	orders := [][]int{{1, 10}, {2, 5}, {3, 8}, {4, 3}, {5, 12}}
+	fmt.Println(OrdersAboveAverage(orders))
 }
 
-func OrdersWithMaximumQuantityAboveAverage() any {
-	// TODO: implement
-	return nil
+// Time: O(n), Space: O(1)
+func OrdersAboveAverage(orders [][]int) int {
+	if len(orders) == 0 {
+		return 0
+	}
+	sum := 0
+	for _, o := range orders {
+		sum += o[1]
+	}
+	avg := float64(sum) / float64(len(orders))
+	count := 0
+	for _, o := range orders {
+		if float64(o[1]) > avg {
+			count++
+		}
+	}
+	// Find max quantity among orders above average
+	maxQty := 0
+	for _, o := range orders {
+		if float64(o[1]) > avg && o[1] > maxQty {
+			maxQty = o[1]
+		}
+	}
+	return maxQty
 }

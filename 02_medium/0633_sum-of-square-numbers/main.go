@@ -3,14 +3,35 @@ package main
 // LeetCode #633: Sum of Square Numbers
 // https://leetcode.com/problems/sum-of-square-numbers/
 // Difficulty: Medium
+// Time: O(sqrt(c))
+// Space: O(1)
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-	fmt.Println(SumOfSquareNumbers())
+	fmt.Println(JudgeSquareSum(5))
+	fmt.Println(JudgeSquareSum(3))
+	fmt.Println(JudgeSquareSum(4))
+	fmt.Println(JudgeSquareSum(2))
 }
 
-func SumOfSquareNumbers() any {
-	// TODO: implement
-	return nil
+func JudgeSquareSum(c int) bool {
+	left := 0
+	right := int(math.Sqrt(float64(c)))
+
+	for left <= right {
+		sum := left*left + right*right
+		if sum == c {
+			return true
+		} else if sum < c {
+			left++
+		} else {
+			right--
+		}
+	}
+
+	return false
 }
