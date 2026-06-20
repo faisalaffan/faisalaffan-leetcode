@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfPaths(corridors [][]int, n int) int
-```
+**Fungsi Solusi:** `func numberOfPaths(corridors [][]int, n int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n * deg^2)  
-**Kompleksitas Ruang:** O(n + m)
+**Waktu:** O(n * deg^2)  |  **Ruang:** O(n + m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,7 +31,7 @@ package main
 import "fmt"
 
 func numberOfPaths(corridors [][]int, n int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n+1)
 	for _, c := range corridors {
 		u, v := c[0], c[1]
@@ -47,7 +41,7 @@ func numberOfPaths(corridors [][]int, n int) int {
 
 	// For each pair of neighbors of a node, check if they are also connected
 	// Use adjacency set for O(1) lookup
-  // Alokasi slice integer
+  // Alokasi slice
 	adjSet := make([]map[int]bool, n+1)
 	for i := 1; i <= n; i++ {
 		adjSet[i] = make(map[int]bool)

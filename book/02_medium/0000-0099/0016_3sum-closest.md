@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array integer dan sebuah target. Tugasmu adalah mencari **dua angka** yang jika dijumlahkan menghasilkan target. Kembalikan **indeks** (posisi) kedua angka.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+Contoh: `nums=[2,7,11,15], target=9` → `2+7=9` → `[0,1]`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+**Cara berpikir:** Gunakan HashMap. Untuk setiap angka, cek apakah `target-angka` sudah ada di map. Kalau sudah → ketemu pasangan. Kalau belum → simpan angka ke map.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func threeSumClosest(nums []int, target int) int
-```
+**Fungsi Solusi:** `func threeSumClosest(nums []int, target int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer, Sorting
 
-**Kompleksitas Waktu:** O(n^2)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n^2)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,14 +36,14 @@ import (
 )
 
 func threeSumClosest(nums []int, target int) int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(nums)
 	closest := nums[0] + nums[1] + nums[2]
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(nums)-2; i++ {
 		left, right := i+1, len(nums)-1
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 		for left < right {
 			sum := nums[i] + nums[left] + nums[right]
 			if math.Abs(float64(sum-target)) < math.Abs(float64(closest-target)) {

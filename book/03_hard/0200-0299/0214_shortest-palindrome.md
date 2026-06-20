@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu adalah memeriksa apakah string tersebut palindrome — dibaca sama dari depan dan belakang. Abaikan non-alfanumerik dan case.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** Two Pointer — kiri dan kanan. Skip non-alfanumerik. Bandingkan.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func shortestPalindrome(s string) string
-```
+**Fungsi Solusi:** `func shortestPalindrome(s string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -37,7 +28,7 @@ import "fmt"
 
 func shortestPalindrome(s string) string {
 	n := len(s)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return ""
 	}
@@ -48,7 +39,7 @@ func shortestPalindrome(s string) string {
 	}
 
 	combined := s + "#" + string(rev)
-  // Alokasi slice integer
+  // Alokasi slice
 	lps := make([]int, len(combined))
 
 	for i := 1; i < len(combined); i++ {

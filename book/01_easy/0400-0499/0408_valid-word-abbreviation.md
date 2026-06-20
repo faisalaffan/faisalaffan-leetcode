@@ -4,25 +4,18 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ValidWordAbbreviation(word, abbr string) bool
-```
+**Fungsi Solusi:** `func ValidWordAbbreviation(word, abbr string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n), Space: O(1)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(n), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 

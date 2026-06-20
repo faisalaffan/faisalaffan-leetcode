@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumScore(s string, t string) int
-```
+**Fungsi Solusi:** `func minimumScore(s string, t string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum
+**Teknik:** Two Pointer, Binary Search, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +41,9 @@ func minimumScore(s string, t string) int {
 	n, m := len(s), len(t)
 
 	// prefixPos[i] = position in s where first i chars of t are matched (0-indexed)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixPos := make([]int, m+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range prefixPos {
 		prefixPos[i] = n
 	}
@@ -63,9 +57,9 @@ func minimumScore(s string, t string) int {
 	}
 
 	// suffixPos[i] = position in s where last i chars of t are matched
-  // Alokasi slice integer
+  // Alokasi slice
 	suffixPos := make([]int, m+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range suffixPos {
 		suffixPos[i] = -1
 	}

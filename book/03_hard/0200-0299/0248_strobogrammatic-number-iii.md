@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func strobogrammaticInRange(low string, high string) int
-```
+**Fungsi Solusi:** `func strobogrammaticInRange(low string, high string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, DFS
+**Teknik:** Two Pointer, DFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -109,7 +103,7 @@ func generate(n int) []string {
 }
 
 func helper(n, m int) []string {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return []string{""}
 	}
@@ -132,7 +126,7 @@ func helper(n, m int) []string {
 }
 
 func countStrobogrammatic(n int) int {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxScore(nums1 []int, nums2 []int, k int) int64
-```
+**Fungsi Solusi:** `func maxScore(nums1 []int, nums2 []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,12 +50,12 @@ func (h *MinHeap) Pop() any {
 
 func maxScore(nums1 []int, nums2 []int, k int) int64 {
 	n := len(nums1)
-  // Alokasi slice integer
+  // Alokasi slice
 	pairs := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		pairs[i] = [2]int{nums2[i], nums1[i]}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(pairs, func(i, j int) bool {
 		return pairs[i][0] > pairs[j][0]
 	})
@@ -74,10 +68,10 @@ func maxScore(nums1 []int, nums2 []int, k int) int64 {
 	for _, p := range pairs {
 		val1, val2 := p[1], p[0]
 		sum += int64(val1)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, val1)
 		if h.Len() > k {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			sum -= int64(heap.Pop(h).(int))
 		}
 		if h.Len() == k {

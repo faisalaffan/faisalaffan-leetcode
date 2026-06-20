@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfWaysToReachDestinationInTheGrid(m, n int, blocked [][]int) int
-```
+**Fungsi Solusi:** `func numberOfWaysToReachDestinationInTheGrid(m, n int, blocked [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,9 +38,9 @@ const mod2912 = 1000000007
 
 func numberOfWaysToReachDestinationInTheGrid(m, n int, blocked [][]int) int {
 	// Mark blocked cells
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	grid := make([][]bool, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range grid {
 		grid[i] = make([]bool, n)
 	}
@@ -56,9 +50,9 @@ func numberOfWaysToReachDestinationInTheGrid(m, n int, blocked [][]int) int {
 		}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}

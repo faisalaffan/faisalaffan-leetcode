@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func powWithLimit(base int, k int, limit int) int
-```
-
-> **💡 Hint:** Find smallest x s.t. x^k >= l, largest x s.t. x^k <= r.
+**Fungsi Solusi:** `func powWithLimit(base int, k int, limit int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search
+**Teknik:** Two Pointer, Binary Search
 
-**Kompleksitas Waktu:** O(log r)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(log r)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,7 +55,7 @@ func CountKThRootsInARange(l int, r int, k int) int {
 
 	left := 1
 	right := hiX
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 	for left < right {
 		mid := left + (right-left)/2
 		if powWithLimit(mid, k, r) >= l {
@@ -80,7 +72,7 @@ func CountKThRootsInARange(l int, r int, k int) int {
 
 	// Find last x s.t. x^k <= r
 	left, right = first, hiX
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 	for left < right {
 		mid := (left + right + 1) / 2
 		if powWithLimit(mid, k, r) <= r {

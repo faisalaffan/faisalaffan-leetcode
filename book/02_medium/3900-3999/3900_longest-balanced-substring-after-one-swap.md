@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func LongestBalancedSubstringAfterOneSwap(s string) int
-```
-
-> **💡 Hint:** Prefix sum (0->-1, 1->+1). Track first occurrence of each prefix sum.
+**Fungsi Solusi:** `func LongestBalancedSubstringAfterOneSwap(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Prefix Sum
+**Teknik:** HashMap, Prefix Sum
 
-**Kompleksitas Waktu:** O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,9 +35,9 @@ import "fmt"
 func LongestBalancedSubstringAfterOneSwap(s string) int {
 	n := len(s)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	onesPref := make([]int, n+1) // prefix count of '1's
 	for i := 0; i < n; i++ {
 		onesPref[i+1] = onesPref[i]
@@ -60,7 +52,7 @@ func LongestBalancedSubstringAfterOneSwap(s string) int {
 	totalOnes := onesPref[n]
 	totalZeros := n - totalOnes
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	firstPos := make(map[int]int)
 	firstPos[0] = 0
 

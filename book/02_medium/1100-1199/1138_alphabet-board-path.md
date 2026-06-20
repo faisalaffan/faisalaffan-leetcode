@@ -2,27 +2,21 @@
 
 ## 📖 Deskripsi Soal
 
-**Tingkat Kesulitan:** Sulit
+**Tingkat Kesulitan:** —
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func alphabetBoardPath(target string) string
-```
+**Fungsi Solusi:** `func alphabetBoardPath(target string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 

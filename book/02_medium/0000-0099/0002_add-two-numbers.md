@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan linked list. Tugasmu traversing atau memanipulasi list.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Traverse dari head. Fast/slow pointer untuk deteksi siklus/cari tengah. Dummy node mempermudah operasi di head.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode
-```
+**Fungsi Solusi:** `func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(max(m,n))  |  **Ruang:** O(max(m,n))
 
-**Kompleksitas Waktu:** O(max(m,n))  
-**Kompleksitas Ruang:** O(max(m,n))
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 

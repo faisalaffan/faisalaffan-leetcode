@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func preorder(root *TreeNode) []int
-```
+**Fungsi Solusi:** `func preorder(root *TreeNode) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -79,7 +73,7 @@ func ConstructBinaryTreeFromPreorderAndPostorderTraversal(preorder []int, postor
 	// The second element in preorder is the root of the left subtree
 	// Find it in postorder to determine left subtree size
 	leftSize := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(postorder); i++ {
 		if postorder[i] == preorder[1] {
 			leftSize = i + 1

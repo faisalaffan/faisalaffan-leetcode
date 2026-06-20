@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountPairsThatFormACompleteDayI(hours []int) int
-```
+**Fungsi Solusi:** `func CountPairsThatFormACompleteDayI(hours []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n). Space: O(24).  |  **Ruang:** O(24).
 
-**Kompleksitas Waktu:** O(n). Space: O(24).  
-**Kompleksitas Ruang:** O(24).
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -44,7 +35,7 @@ func main() {
 // Time: O(n). Space: O(24).
 func CountPairsThatFormACompleteDayI(hours []int) int {
 	count := 0
-  // Alokasi slice integer
+  // Alokasi slice
 	rem := make([]int, 24)
 	for _, h := range hours {
 		r := h % 24

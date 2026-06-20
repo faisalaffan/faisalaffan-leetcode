@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findMinHeightTrees(n int, edges [][]int) []int
-```
+**Fungsi Solusi:** `func findMinHeightTrees(n int, edges [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(V), Space: O(V+E)  
-**Kompleksitas Ruang:** O(V+E)
+**Waktu:** O(V), Space: O(V+E)  |  **Ruang:** O(V+E)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ func findMinHeightTrees(n int, edges [][]int) []int {
 		return []int{0}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	adj := make([]map[int]bool, n)
 	for i := 0; i < n; i++ {
 		adj[i] = make(map[int]bool)

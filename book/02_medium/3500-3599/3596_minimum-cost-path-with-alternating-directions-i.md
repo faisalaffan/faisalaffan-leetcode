@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumCostPathWithAlternatingDirectionsI(grid [][]int) int
-```
+**Fungsi Solusi:** `func MinimumCostPathWithAlternatingDirectionsI(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Dijkstra
+**Teknik:** BFS, Dijkstra
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,9 +56,9 @@ func MinimumCostPathWithAlternatingDirectionsI(grid [][]int) int {
 	}
 
 	// Dijkstra-like with direction (0=horizontal, 1=vertical, 2=start)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][][3]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([][3]int, n)
 		for j := range dist[i] {

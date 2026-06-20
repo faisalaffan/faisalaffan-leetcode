@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countKReducibleNumbers(s string, k int) int
-```
+**Fungsi Solusi:** `func countKReducibleNumbers(s string, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -60,7 +51,7 @@ func countKReducibleNumbers(s string, k int) int {
 	n := len(s)
 
 	// stepsToReduceOne[v] = steps for VALUE v to reach 1 via x -> bitCount(x)
-  // Alokasi slice integer
+  // Alokasi slice
 	stepsToReduceOne := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		stepsToReduceOne[i] = 1 + stepsToReduceOne[bitCount(i)]
@@ -68,14 +59,14 @@ func countKReducibleNumbers(s string, k int) int {
 
 	// totalSteps[p] = total steps for a number with popcount p to reach 1
 	// = 1 (first step: N -> p) + stepsToReduceOne[p] (for p > 1), and 0 for p = 1
-  // Alokasi slice integer
+  // Alokasi slice
 	totalSteps := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		totalSteps[i] = 1 + stepsToReduceOne[i]
 	}
 
 	// Precompute combinations C[i][j]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	C := make([][]int, n+1)
 	for i := 0; i <= n; i++ {
 		C[i] = make([]int, i+1)
@@ -94,7 +85,7 @@ func countKReducibleNumbers(s string, k int) int {
 	}
 
 	// Count numbers with each popcount
-  // Alokasi slice integer
+  // Alokasi slice
 	cnt := make([]int, n+1)
 
 	// Part 1: Numbers with the same length as s but numerically smaller

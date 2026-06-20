@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countNumbers(l string, r string, b int) int
-```
-
-> **💡 Hint:** Digit DP. For each position, track the last digit used to ensure
+**Fungsi Solusi:** `func countNumbers(l string, r string, b int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -79,7 +71,7 @@ func countUpTo(s string, b int) int {
 
 	// DP[pos][tight][lastDigit][started]
 	var memo [101][2][17][2]int
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range memo {
 		for j := range memo[i] {
 			for k := range memo[i][j] {
@@ -166,7 +158,7 @@ func toDigits(s string, b int) []int {
 }
 
 func toDigitsDecimal(s string) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(s))
 	for i, ch := range s {
 		result[i] = int(ch - '0')

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func equalCountSubstrings(s string, count int) int
-```
+**Fungsi Solusi:** `func equalCountSubstrings(s string, count int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window
+**Waktu:** O(n * alphabet)  |  **Ruang:** O(alphabet)
 
-**Kompleksitas Waktu:** O(n * alphabet)  
-**Kompleksitas Ruang:** O(alphabet)
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,12 +31,12 @@ func equalCountSubstrings(s string, count int) int {
 	result := 0
 	// Try different numbers of distinct characters
 	for distinct := 1; distinct <= 26 && distinct*count <= len(s); distinct++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		freq := make([]int, 26)
 		unique := 0
 		exactCount := 0
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(s); i++ {
 			idx := int(s[i] - 'a')
 			if freq[idx] == 0 {

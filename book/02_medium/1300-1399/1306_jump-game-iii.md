@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func canReach(arr []int, start int) bool
-```
+**Fungsi Solusi:** `func canReach(arr []int, start int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** O(n) where n is length of arr  
-**Kompleksitas Ruang:** O(n) for visited array and queue
+**Waktu:** O(n) where n is length of arr  |  **Ruang:** O(n) for visited array and queue
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 

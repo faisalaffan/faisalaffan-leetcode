@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int
-```
+**Fungsi Solusi:** `func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +41,9 @@ func main() {
 func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {
 	const INF = 1 << 60
 
-  // Alokasi slice integer
+  // Alokasi slice
 	best := make([]int, numLaps+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range best {
 		best[i] = INF
 	}
@@ -73,9 +67,9 @@ func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, numLaps+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = INF
 	}

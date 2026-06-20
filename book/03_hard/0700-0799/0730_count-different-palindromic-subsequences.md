@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countPalindromicSubsequences(S string) int
-```
+**Fungsi Solusi:** `func countPalindromicSubsequences(S string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming
+**Teknik:** Two Pointer, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,15 +51,15 @@ const mod = 1000000007
 
 func countPalindromicSubsequences(S string) int {
 	n := len(S)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
 
 	// dp[i][j] = count of distinct palindromic subsequences in S[i:j+1]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}
@@ -74,9 +68,9 @@ func countPalindromicSubsequences(S string) int {
 	// nextPos[i][c] = next position >= i with char c (or -1)
 	// prevPos[i][c] = previous position <= i with char c (or -1)
 	const letters = 4
-  // Alokasi slice integer
+  // Alokasi slice
 	nextPos := make([][letters]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	prevPos := make([][letters]int, n)
 
 	// Initialize nextPos from right to left

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int
-```
+**Fungsi Solusi:** `func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -77,7 +71,7 @@ func main() {
 func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int {
 	// For each position (i, j) in a sideLength x sideLength block, compute how
 	// many times it is covered (i.e., appears in the full matrix).
-  // Alokasi slice integer
+  // Alokasi slice
 	counts := make([]int, 0, sideLength*sideLength)
 
 	for i := 0; i < sideLength; i++ {
@@ -93,7 +87,7 @@ func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int
 	}
 
 	// Sort descending so we pick the positions with highest coverage first
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(counts, func(i, j int) bool {
 		return counts[i] > counts[j]
 	})

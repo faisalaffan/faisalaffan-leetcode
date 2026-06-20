@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func productSalesAnalysis(sales [][]int) [][]int
-```
+**Fungsi Solusi:** `func productSalesAnalysis(sales [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ type Sale struct {
 
 func productSalesAnalysis(sales [][]int) [][]int {
 	// sales[i] = [sale_id, product_id, user_id, quantity]
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userProductQty := make(map[[2]int]int) // [user_id, product_id] -> total qty
 
 	for _, s := range sales {
@@ -54,7 +48,7 @@ func productSalesAnalysis(sales [][]int) [][]int {
 	}
 
 	// For each user, find product with max qty
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userMax := make(map[int]struct{ qty int; product int })
 	for key, qty := range userProductQty {
 		userID, productID := key[0], key[1]

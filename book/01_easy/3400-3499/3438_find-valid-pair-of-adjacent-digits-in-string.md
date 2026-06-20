@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindValidPairOfAdjacentDigitsInString(s string) string
-```
+**Fungsi Solusi:** `func FindValidPairOfAdjacentDigitsInString(s string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n). Space: O(n).  
-**Kompleksitas Ruang:** O(n).
+**Waktu:** O(n). Space: O(n).  |  **Ruang:** O(n).
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,13 +39,13 @@ func main() {
 // FindValidPairOfAdjacentDigitsInString finds the first pair of adjacent equal digits where the digit's frequency > the digit.
 // Time: O(n). Space: O(n).
 func FindValidPairOfAdjacentDigitsInString(s string) string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	freq := make(map[byte]int)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		freq[s[i]]++
 	}
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s)-1; i++ {
 		if s[i] == s[i+1] {
 			cnt := freq[s[i]]

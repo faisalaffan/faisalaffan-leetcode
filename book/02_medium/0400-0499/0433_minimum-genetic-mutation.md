@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minMutation(startGene string, endGene string, bank []string) int
-```
+**Fungsi Solusi:** `func minMutation(startGene string, endGene string, bank []string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** O(4^10) worst case (BFS)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(4^10) worst case (BFS)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,7 +31,7 @@ package main
 import "fmt"
 
 func minMutation(startGene string, endGene string, bank []string) int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	bankSet := make(map[string]bool)
 	for _, b := range bank {
 		bankSet[b] = true

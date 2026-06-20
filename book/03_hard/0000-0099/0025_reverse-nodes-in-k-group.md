@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan linked list. Tugasmu traversing atau memanipulasi list.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Traverse dari head. Fast/slow pointer untuk deteksi siklus/cari tengah. Dummy node mempermudah operasi di head.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func reverseKGroup(head *ListNode, k int) *ListNode
-```
+**Fungsi Solusi:** `func reverseKGroup(head *ListNode, k int) *ListNode`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 

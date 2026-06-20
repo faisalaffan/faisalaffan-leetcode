@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int) []bool
-```
+**Fungsi Solusi:** `func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int) []bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Floyd-Warshall
+**Waktu:** O(n^3) for Floyd-Warshall  |  **Ruang:** O(n^2) for reachability matrix
 
-**Kompleksitas Waktu:** O(n^3) for Floyd-Warshall  
-**Kompleksitas Ruang:** O(n^2) for reachability matrix
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Floyd-Warshall** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,16 +44,16 @@ func main() {
 // Space: O(n^2) for reachability matrix
 func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int) []bool {
 	// Build adjacency list
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, numCourses)
 	for _, p := range prerequisites {
 		adj[p[0]] = append(adj[p[0]], p[1])
 	}
 
 	// Floyd-Warshall for reachability
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	reachable := make([][]bool, numCourses)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range reachable {
 		reachable[i] = make([]bool, numCourses)
 	}

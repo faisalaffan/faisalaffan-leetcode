@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countPathsWithXorValue(grid [][]int, k int) int
-```
+**Fungsi Solusi:** `func countPathsWithXorValue(grid [][]int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m*n*U) Space: O(m*n*U) where U = maxXOR value  |  **Ruang:** O(m*n*U) where U = maxXOR value
 
-**Kompleksitas Waktu:** O(m*n*U) Space: O(m*n*U) where U = maxXOR value  
-**Kompleksitas Ruang:** O(m*n*U) where U = maxXOR value
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -51,9 +42,9 @@ func countPathsWithXorValue(grid [][]int, k int) int {
 	}
 
 	m, n := len(grid), len(grid[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	f := make([][][]int, m+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range f {
 		f[i] = make([][]int, n+1)
 		for j := range f[i] {

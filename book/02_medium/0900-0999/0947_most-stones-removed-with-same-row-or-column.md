@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func removeStones(stones [][]int) int
-```
+**Fungsi Solusi:** `func removeStones(stones [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Union-Find
 
-**Kompleksitas Waktu:** O(n * α(n))  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n * α(n))  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,9 +32,9 @@ import "fmt"
 // Time: O(n * α(n)) | Space: O(n)
 func removeStones(stones [][]int) int {
 	n := len(stones)
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range parent {
 		parent[i] = i
 	}
@@ -61,9 +55,9 @@ func removeStones(stones [][]int) int {
 	}
 
 	// Union stones sharing row or column
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	rowMap := make(map[int]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	colMap := make(map[int]int)
 	for i, s := range stones {
 		if v, ok := rowMap[s[0]]; ok {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findActiveUsers(logins []Login) []int
-```
+**Fungsi Solusi:** `func findActiveUsers(logins []Login) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,7 +43,7 @@ type Login struct {
 // findActiveUsers returns user IDs with 5+ consecutive login days.
 func findActiveUsers(logins []Login) []int {
 	// Group logins by user, deduplicate dates
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userDates := make(map[int]map[string]bool)
 	for _, l := range logins {
 		if userDates[l.UserID] == nil {
@@ -65,7 +59,7 @@ func findActiveUsers(logins []Login) []int {
 		for d := range dates {
 			dayNums = append(dayNums, dateToDays(d))
 		}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(dayNums)
 
 		// Check for 5 consecutive days
@@ -83,7 +77,7 @@ func findActiveUsers(logins []Login) []int {
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(activeUsers)
 	return activeUsers
 }

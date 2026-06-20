@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxSubarraySum(nums []int, k int) int64
-```
+**Fungsi Solusi:** `func maxSubarraySum(nums []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n) Space: O(k)  
-**Kompleksitas Ruang:** O(k)
+**Waktu:** O(n) Space: O(k)  |  **Ruang:** O(k)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,15 +40,15 @@ func main() {
 
 func maxSubarraySum(nums []int, k int) int64 {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int64, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + int64(nums[i])
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	minPref := make([]int64, k)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range minPref {
 		minPref[i] = math.MaxInt64
 	}

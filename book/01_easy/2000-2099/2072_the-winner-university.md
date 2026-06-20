@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func TheWinnerUniversity(newYork []int, california []int) string
-```
+**Fungsi Solusi:** `func TheWinnerUniversity(newYork []int, california []int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n), Space: O(1)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(n), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 

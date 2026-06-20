@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ValidSquare(p1 []int, p2 []int, p3 []int, p4 []int) bool
-```
+**Fungsi Solusi:** `func ValidSquare(p1 []int, p2 []int, p3 []int, p4 []int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,7 +52,7 @@ func ValidSquare(p1 []int, p2 []int, p3 []int, p4 []int) bool {
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(dists)
 
 	// All 4 sides equal and non-zero, and 2 diagonals equal

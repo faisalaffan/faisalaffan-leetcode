@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountSubstringsWithoutRepeatingCharacter(s string) int
-```
+**Fungsi Solusi:** `func CountSubstringsWithoutRepeatingCharacter(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** HashMap, Two Pointer
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,7 +31,7 @@ package main
 import "fmt"
 
 func CountSubstringsWithoutRepeatingCharacter(s string) int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	lastPos := make(map[byte]int)
 	left := 0
 	count := 0

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func IntersectionOfMultipleArrays(nums [][]int) []int
-```
+**Fungsi Solusi:** `func IntersectionOfMultipleArrays(nums [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n * m), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n * m), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,19 +39,19 @@ func main() {
 
 // Time: O(n * m), Space: O(n)
 func IntersectionOfMultipleArrays(nums [][]int) []int {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if len(nums) == 0 {
 		return []int{}
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	freq := make(map[int]int)
 	for _, v := range nums[0] {
 		freq[v] = 1
 	}
 
 	for i := 1; i < len(nums); i++ {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		seen := make(map[int]bool)
 		for _, v := range nums[i] {
 			if !seen[v] {
@@ -73,7 +67,7 @@ func IntersectionOfMultipleArrays(nums [][]int) []int {
 			result = append(result, v)
 		}
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

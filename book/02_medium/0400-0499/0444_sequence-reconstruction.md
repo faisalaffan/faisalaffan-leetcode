@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sequenceReconstruction(org []int, seqs [][]int) bool
-```
+**Fungsi Solusi:** `func sequenceReconstruction(org []int, seqs [][]int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** O(n + m)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + m)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -39,9 +33,9 @@ import "fmt"
 func sequenceReconstruction(org []int, seqs [][]int) bool {
 	n := len(org)
 	// Build indegree map and edges
-  // Alokasi slice integer
+  // Alokasi slice
 	indegree := make([]int, n+1)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n+1)
 	exists := make([]bool, n+1)
 
@@ -52,7 +46,7 @@ func sequenceReconstruction(org []int, seqs [][]int) bool {
 			}
 			exists[num] = true
 		}
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(seq)-1; i++ {
 			u, v := seq[i], seq[i+1]
 			graph[u] = append(graph[u], v)

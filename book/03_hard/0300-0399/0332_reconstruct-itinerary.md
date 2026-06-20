@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findItinerary(tickets [][]string) []string
-```
+**Fungsi Solusi:** `func findItinerary(tickets [][]string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** HashMap, DFS, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,7 +34,7 @@ import (
 
 func findItinerary(tickets [][]string) []string {
 	// Build adjacency list with sorting
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	graph := make(map[string][]string)
 	for _, t := range tickets {
 		from, to := t[0], t[1]

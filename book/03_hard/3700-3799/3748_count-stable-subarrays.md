@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countStableSubarrays(nums []int, queries [][]int) []int64
-```
-
-> **💡 Hint:** Precompute longest non-decreasing run ending at each position.
+**Fungsi Solusi:** `func countStableSubarrays(nums []int, queries [][]int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,7 +51,7 @@ func countStableSubarrays(nums []int, queries [][]int) []int64 {
 	n := len(nums)
 
 	// lenEnd[i] = length of longest non-decreasing subarray ending at i
-  // Alokasi slice integer
+  // Alokasi slice
 	lenEnd := make([]int, n)
 	for i := 0; i < n; i++ {
 		if i == 0 || nums[i] < nums[i-1] {
@@ -70,7 +62,7 @@ func countStableSubarrays(nums []int, queries [][]int) []int64 {
 	}
 
 	// pref[i] = total non-decreasing subarrays in nums[0..i] (inclusive)
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int64, n)
 	for i := 0; i < n; i++ {
 		pref[i] = int64(lenEnd[i])
@@ -79,7 +71,7 @@ func countStableSubarrays(nums []int, queries [][]int) []int64 {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]

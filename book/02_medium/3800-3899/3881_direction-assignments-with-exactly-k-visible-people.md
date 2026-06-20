@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func DirectionAssignmentsWithExactlyKVisiblePeople(n int, pos int, k int) int
-```
-
-> **💡 Hint:** Combinatorics. For each possible a (visible from left),
+**Fungsi Solusi:** `func DirectionAssignmentsWithExactlyKVisiblePeople(n int, pos int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,14 +50,14 @@ func DirectionAssignmentsWithExactlyKVisiblePeople(n int, pos int, k int) int {
 	left := pos
 	right := n - pos - 1
 
-  // Alokasi slice integer
+  // Alokasi slice
 	fact := make([]int64, n+1)
 	fact[0] = 1
 	for i := 1; i <= n; i++ {
 		fact[i] = fact[i-1] * int64(i) % MOD
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	invFact := make([]int64, n+1)
 	invFact[n] = modPow(fact[n], int(MOD-2), MOD)
 	for i := n - 1; i >= 0; i-- {

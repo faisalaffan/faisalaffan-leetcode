@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func SpecialArray(nums []int) int
-```
+**Fungsi Solusi:** `func SpecialArray(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(log n) (for sorting)  
-**Kompleksitas Ruang:** O(log n) (for sorting)
+**Waktu:** O(n log n), Space: O(log n) (for sorting)  |  **Ruang:** O(log n) (for sorting)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,12 +34,12 @@ import (
 
 // Time: O(n log n), Space: O(log n) (for sorting)
 func SpecialArray(nums []int) int {
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(nums, func(i, j int) bool {
 		return nums[i] > nums[j]
 	})
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(nums); i++ {
 		if nums[i] >= i+1 {
 			if i == len(nums)-1 || nums[i+1] < i+1 {

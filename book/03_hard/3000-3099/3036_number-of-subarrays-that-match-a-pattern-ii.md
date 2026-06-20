@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countMatchingSubarrays(nums, pattern []int) int
-```
-
-> **💡 Hint:** Z-algorithm (linear time)
+**Fungsi Solusi:** `func countMatchingSubarrays(nums, pattern []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -53,7 +42,7 @@ func countMatchingSubarrays(nums, pattern []int) int {
 	m := len(pattern)
 
 	// Build combined array: pattern | sentinel | diff array
-  // Alokasi slice integer
+  // Alokasi slice
 	arr := make([]int, 0, m+1+len(nums)-1)
 	arr = append(arr, pattern...)
 	arr = append(arr, 2) // sentinel (any value not in {-1,0,1})
@@ -64,7 +53,7 @@ func countMatchingSubarrays(nums, pattern []int) int {
 	n := len(arr)
 
 	// Z-algorithm
-  // Alokasi slice integer
+  // Alokasi slice
 	z := make([]int, n)
 	l, r := 0, 0
 	for i := 1; i < n; i++ {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minCost(maxTime int, edges [][]int, passingFees []int) int
-```
+**Fungsi Solusi:** `func minCost(maxTime int, edges [][]int, passingFees []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Dijkstra
+**Teknik:** DP, Dijkstra
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +37,7 @@ import (
 func minCost(maxTime int, edges [][]int, passingFees []int) int {
 	n := len(passingFees)
 	// dp[t][v] = min cost to reach node v at time t
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, maxTime+1)
 	for t := range dp {
 		dp[t] = make([]int, n)
@@ -54,7 +48,7 @@ func minCost(maxTime int, edges [][]int, passingFees []int) int {
 	dp[0][0] = passingFees[0]
 
 	// Build adjacency list
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, t := e[0], e[1], e[2]

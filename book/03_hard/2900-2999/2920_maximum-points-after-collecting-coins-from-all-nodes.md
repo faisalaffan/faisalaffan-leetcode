@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumPoints(edges [][]int, coins []int, k int) int
-```
+**Fungsi Solusi:** `func maximumPoints(edges [][]int, coins []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,7 +40,7 @@ import "fmt"
 
 func maximumPoints(edges [][]int, coins []int, k int) int {
 	n := len(coins)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -55,9 +49,9 @@ func maximumPoints(edges [][]int, coins []int, k int) int {
 	}
 
 	const maxShifts = 16 // enough for coins up to 10^4 (log2(10000) ≈ 14)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, maxShifts)
 		for j := range dp[i] {

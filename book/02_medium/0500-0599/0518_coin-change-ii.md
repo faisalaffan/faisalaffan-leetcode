@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CoinChangeIi(amount int, coins []int) int
-```
+**Fungsi Solusi:** `func CoinChangeIi(amount int, coins []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(amount * n) where n = len(coins)  
-**Kompleksitas Ruang:** O(amount)
+**Waktu:** O(amount * n) where n = len(coins)  |  **Ruang:** O(amount)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ func main() {
 }
 
 func CoinChangeIi(amount int, coins []int) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, amount+1)
 	dp[0] = 1
 

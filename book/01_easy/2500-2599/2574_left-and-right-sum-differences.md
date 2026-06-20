@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func LeftAndRightSumDifferences(nums []int) []int
-```
+**Fungsi Solusi:** `func LeftAndRightSumDifferences(nums []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -47,7 +38,7 @@ func LeftAndRightSumDifferences(nums []int) []int {
 	for _, v := range nums {
 		total += v
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	res := make([]int, n)
 	leftSum := 0
 	for i, v := range nums {

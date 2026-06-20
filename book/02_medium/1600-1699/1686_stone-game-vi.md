@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func stoneGameVI(aliceValues []int, bobValues []int) int
-```
+**Fungsi Solusi:** `func stoneGameVI(aliceValues []int, bobValues []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,14 +35,14 @@ import (
 
 func stoneGameVI(aliceValues []int, bobValues []int) int {
 	n := len(aliceValues)
-  // Alokasi slice integer
+  // Alokasi slice
 	pairs := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		pairs[i] = [2]int{aliceValues[i] + bobValues[i], i}
 	}
 
 	// Sort by sum descending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(pairs, func(i, j int) bool {
 		return pairs[i][0] > pairs[j][0]
 	})

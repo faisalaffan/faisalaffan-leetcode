@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findCandidates(contests []ContestScore, submissions []UserContest) []int
-```
+**Fungsi Solusi:** `func findCandidates(contests []ContestScore, submissions []UserContest) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ type UserContest struct {
 }
 
 func findCandidates(contests []ContestScore, submissions []UserContest) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	medalCount := make(map[int]int)
 	for _, c := range contests {
 		medalCount[c.GoldID]++
@@ -59,7 +53,7 @@ func findCandidates(contests []ContestScore, submissions []UserContest) []int {
 		medalCount[c.BronzeID]++
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	candidateSet := make(map[int]bool)
 
 	// Any user with 3+ medals
@@ -70,7 +64,7 @@ func findCandidates(contests []ContestScore, submissions []UserContest) []int {
 	}
 
 	// Users who won gold in consecutive contests (contests can be consecutive by contest_id)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userContests := make(map[int][]int)
 	for _, c := range contests {
 		userContests[c.GoldID] = append(userContests[c.GoldID], c.ContestID)
@@ -86,7 +80,7 @@ func findCandidates(contests []ContestScore, submissions []UserContest) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0, len(candidateSet))
 	for u := range candidateSet {
 		result = append(result, u)

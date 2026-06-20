@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func smallestFromLeaf(root *TreeNode) string
-```
-
-> **💡 Hint:** DFS backtracking from root to leaf, compare strings lexicographically
+**Fungsi Solusi:** `func smallestFromLeaf(root *TreeNode) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Backtracking
+**Teknik:** DFS, Backtracking
 
-**Kompleksitas Waktu:** O(n * h) worst-case where h is tree height  
-**Kompleksitas Ruang:** O(h)
+**Waktu:** O(n * h) worst-case where h is tree height  |  **Ruang:** O(h)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 

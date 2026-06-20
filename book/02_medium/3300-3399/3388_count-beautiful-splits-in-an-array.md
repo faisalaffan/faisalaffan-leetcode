@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func beautifulSplits(nums []int) int
-```
+**Fungsi Solusi:** `func beautifulSplits(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n^2) Space: O(n^2)  
-**Kompleksitas Ruang:** O(n^2)
+**Waktu:** O(n^2) Space: O(n^2)  |  **Ruang:** O(n^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,9 +39,9 @@ func beautifulSplits(nums []int) int {
 	n := len(nums)
 
 	// lcp[i][j] = longest common prefix of nums[i:] and nums[j:]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	lcp := make([][]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range lcp {
 		lcp[i] = make([]int, n+1)
 	}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int
-```
+**Fungsi Solusi:** `func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,7 +48,7 @@ func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int {
 		best  int // best score for this course
 		valid bool
 	}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	studentCourses := make(map[int]map[int]*courseScore)
 
 	for _, e := range enrollments {
@@ -74,7 +68,7 @@ func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, 0)
 	for sid, courses := range studentCourses {
 		allValid := true
@@ -88,7 +82,7 @@ func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int {
 			ans = append(ans, sid)
 		}
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(ans)
 	return ans
 }

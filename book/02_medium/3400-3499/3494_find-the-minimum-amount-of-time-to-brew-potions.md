@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindTheMinimumAmountOfTimeToBrewPotions(machines []int, potionTimes []int, potions int) int
-```
+**Fungsi Solusi:** `func FindTheMinimumAmountOfTimeToBrewPotions(machines []int, potionTimes []int, potions int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -62,7 +53,7 @@ func FindTheMinimumAmountOfTimeToBrewPotions(machines []int, potionTimes []int, 
 
 	// Simple greedy: sort both and pair fastest machine with fastest potion
 	time := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(potionTimes) && i < len(machines); i++ {
 		batchTime := potionTimes[i] / machines[i]
 		if potionTimes[i]%machines[i] != 0 {

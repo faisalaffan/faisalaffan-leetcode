@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(rects [][]int) Solution
-```
+**Fungsi Solusi:** `func Constructor(rects [][]int) Solution`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Prefix Sum
+**Teknik:** Binary Search, Prefix Sum
 
-**Kompleksitas Waktu:** O(n) for init, O(log n) per pick  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n) for init, O(log n) per pick  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,7 +49,7 @@ type Solution struct {
 }
 
 func Constructor(rects [][]int) Solution {
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixSum := make([]int, len(rects))
 	total := 0
 	for i, r := range rects {

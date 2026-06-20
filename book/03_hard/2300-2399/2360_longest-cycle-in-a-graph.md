@@ -2,27 +2,18 @@
 
 ## 📖 Deskripsi Soal
 
-**Tingkat Kesulitan:** Sulit
+**Tingkat Kesulitan:** —
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func longestCycle(edges []int) int
-```
+**Fungsi Solusi:** `func longestCycle(edges []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -46,9 +37,9 @@ import (
 
 func longestCycle(edges []int) int {
 	n := len(edges)
-  // Alokasi slice integer
+  // Alokasi slice
 	state := make([]int, n) // 0=unvisited, 1=visiting, 2=done
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([]int, n)
 	ans := -1
 

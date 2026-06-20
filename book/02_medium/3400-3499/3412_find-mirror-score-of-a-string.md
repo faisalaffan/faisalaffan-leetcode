@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func calculateScore(s string) int64
-```
+**Fungsi Solusi:** `func calculateScore(s string) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Stack
+**Teknik:** Stack
 
-**Kompleksitas Waktu:** O(n) Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n) Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,10 +31,10 @@ package main
 import "fmt"
 
 func calculateScore(s string) int64 {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	stacks := make([][]int, 26)
 	var ans int64
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		ch := int(s[i] - 'a')
 		mirror := 25 - ch

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool
-```
+**Fungsi Solusi:** `func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + m). Space: O(n + m).  |  **Ruang:** O(n + m).
 
-**Kompleksitas Waktu:** O(n + m). Space: O(n + m).  
-**Kompleksitas Ruang:** O(n + m).
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -79,10 +70,10 @@ func main() {
 // leafSimilar checks if two trees have the same leaf value sequence.
 // Time: O(n + m). Space: O(n + m).
 func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
-  // Alokasi slice integer
+  // Alokasi slice
 	leaves1 := make([]int, 0)
 	collectLeaves(root1, &leaves1)
-  // Alokasi slice integer
+  // Alokasi slice
 	leaves2 := make([]int, 0)
 	collectLeaves(root2, &leaves2)
 	if len(leaves1) != len(leaves2) {

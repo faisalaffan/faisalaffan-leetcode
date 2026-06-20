@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minChanges(nums []int, k int) int
-```
-
-> **💡 Hint:** DP with grouping by index mod k.
+**Fungsi Solusi:** `func minChanges(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Sliding Window, Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,7 +54,7 @@ func minChanges(nums []int, k int) int {
 	n := len(nums)
 
 	// Group values by index mod k
-  // Alokasi slice integer
+  // Alokasi slice
 	groups := make([]map[int]int, k)
 	for i := 0; i < k; i++ {
 		groups[i] = make(map[int]int)
@@ -71,7 +63,7 @@ func minChanges(nums []int, k int) int {
 		groups[i%k][v]++
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	groupSizes := make([]int, k)
 	for g := 0; g < k; g++ {
 		groupSizes[g] = len(groups[g]) // actually number of unique values is not the size; size = n/k rounded properly
@@ -82,7 +74,7 @@ func minChanges(nums []int, k int) int {
 	}
 
 	// Size of each group (number of positions)
-  // Alokasi slice integer
+  // Alokasi slice
 	size := make([]int, k)
 	for i := 0; i < n; i++ {
 		size[i%k]++
@@ -91,9 +83,9 @@ func minChanges(nums []int, k int) int {
 	const maxXor = 1024 // nums[i] < 1024 based on constraints (2^10)
 	INF := math.MaxInt32
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, k+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, maxXor)
 		for j := range dp[i] {

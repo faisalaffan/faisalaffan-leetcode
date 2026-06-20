@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(nums []int) NumArray
-```
+**Fungsi Solusi:** `func Constructor(nums []int) NumArray`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n) for init, O(1) per query  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n) for init, O(1) per query  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ type NumArray struct {
 
 // Time: O(n) for init, O(1) per query | Space: O(n)
 func Constructor(nums []int) NumArray {
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, len(nums)+1)
 	for i, v := range nums {
 		prefix[i+1] = prefix[i] + v

@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minValidStrings(words []string, target string) int
-```
+**Fungsi Solusi:** `func minValidStrings(words []string, target string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Trie, Prefix Sum
+**Teknik:** DP, Trie, Prefix Sum
 
-**Kompleksitas Waktu:** O(n * L) Space: O(total_chars + n) where L = average prefix length  
-**Kompleksitas Ruang:** O(total_chars + n) where L = average prefix length
+**Waktu:** O(n * L) Space: O(total_chars + n) where L = average prefix length  |  **Ruang:** O(total_chars + n) where L = average prefix length
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,9 +59,9 @@ func minValidStrings(words []string, target string) int {
 
 	n := len(target)
 	inf := int(1e9)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = inf
 	}

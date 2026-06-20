@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func xorAfterRangeMultiplicationQueriesI(arr []int, queries [][]int) []int
-```
+**Fungsi Solusi:** `func xorAfterRangeMultiplicationQueriesI(arr []int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n + q)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n + q)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,13 +32,13 @@ import "fmt"
 
 func xorAfterRangeMultiplicationQueriesI(arr []int, queries [][]int) []int {
 	n := len(arr)
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, n+1)
 	for i, v := range arr {
 		pref[i+1] = pref[i] ^ v
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r, mul := q[0], q[1], q[2]

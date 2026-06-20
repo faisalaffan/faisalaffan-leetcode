@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxValue(nums1 []int, nums0 []int) int
-```
-
-> **💡 Hint:** Sort both arrays descending. Greedily pick the largest
+**Fungsi Solusi:** `func maxValue(nums1 []int, nums0 []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,9 +53,9 @@ func main() {
 }
 
 func maxValue(nums1 []int, nums0 []int) int {
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(nums1, func(i, j int) bool { return nums1[i] > nums1[j] })
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(nums0, func(i, j int) bool { return nums0[i] > nums0[j] })
 
 	// Try all possible split points: take first i from nums1, rest from nums0

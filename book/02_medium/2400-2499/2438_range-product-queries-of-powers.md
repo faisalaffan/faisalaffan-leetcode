@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func productQueries(n int, queries [][]int) []int
-```
+**Fungsi Solusi:** `func productQueries(n int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + q * n)  |  **Ruang:** O(log n)
 
-**Kompleksitas Waktu:** O(n + q * n)  
-**Kompleksitas Ruang:** O(log n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -45,7 +36,7 @@ func main() {
 const MOD = 1000000007
 
 func productQueries(n int, queries [][]int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	powers := make([]int, 0)
 	pow := 1
 	for n > 0 {
@@ -56,7 +47,7 @@ func productQueries(n int, queries [][]int) []int {
 		pow <<= 1
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for i, q := range queries {
 		prod := 1

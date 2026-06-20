@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findWinners(matches [][]int) [][]int
-```
+**Fungsi Solusi:** `func findWinners(matches [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,9 +34,9 @@ import (
 )
 
 func findWinners(matches [][]int) [][]int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	losses := make(map[int]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	players := make(map[int]bool)
 
 	for _, m := range matches {
@@ -63,9 +57,9 @@ func findWinners(matches [][]int) [][]int {
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(winners)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(oneLoss)
 
 	return [][]int{winners, oneLoss}

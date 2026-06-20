@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumDifference(nums []int) int64
-```
+**Fungsi Solusi:** `func minimumDifference(nums []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack, Prefix Sum
+**Teknik:** Heap, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -79,17 +73,17 @@ func minimumDifference(nums []int) int64 {
 	m := len(nums)
 	n := m / 3
 
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, m)
 	h := &MaxHeap{}
 	heap.Init(h)
 	sum := 0
 	for i := 0; i < m; i++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, nums[i])
 		sum += nums[i]
 		if h.Len() > n {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			sum -= heap.Pop(h).(int)
 		}
 		if i >= n-1 {
@@ -97,17 +91,17 @@ func minimumDifference(nums []int) int64 {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	suf := make([]int, m)
 	h2 := &MinHeap{}
 	heap.Init(h2)
 	sum = 0
 	for i := m - 1; i >= 0; i-- {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h2, nums[i])
 		sum += nums[i]
 		if h2.Len() > n {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			sum -= heap.Pop(h2).(int)
 		}
 		if i <= 2*n {

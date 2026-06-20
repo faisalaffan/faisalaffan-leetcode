@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func beautifulIndices(s, a, b string, k int) []int
-```
-
-> **💡 Hint:** KMP + binary search
+**Fungsi Solusi:** `func beautifulIndices(s, a, b string, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Prefix Sum
+**Teknik:** Binary Search, Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -52,7 +44,7 @@ func beautifulIndices(s, a, b string, k int) []int {
 	posA := kmpSearch(s, a)
 	posB := kmpSearch(s, b)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, 0)
 	for _, i := range posA {
 		// Binary search for the first b-position >= i-k
@@ -72,7 +64,7 @@ func kmpSearch(text, pattern string) []int {
 	m := len(pattern)
 
 	// Build prefix function (LPS array)
-  // Alokasi slice integer
+  // Alokasi slice
 	pi := make([]int, m)
 	j := 0
 	for i := 1; i < m; i++ {
@@ -86,10 +78,10 @@ func kmpSearch(text, pattern string) []int {
 	}
 
 	// Search
-  // Alokasi slice integer
+  // Alokasi slice
 	pos := make([]int, 0)
 	j = 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(text); i++ {
 		for j > 0 && text[i] != pattern[j] {
 			j = pi[j-1]

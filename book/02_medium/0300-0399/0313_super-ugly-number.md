@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func nthSuperUglyNumber(n int, primes []int) int
-```
+**Fungsi Solusi:** `func nthSuperUglyNumber(n int, primes []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n * len(primes)), Space: O(n + len(primes))  |  **Ruang:** O(n + len(primes))
 
-**Kompleksitas Waktu:** O(n * len(primes)), Space: O(n + len(primes))  
-**Kompleksitas Ruang:** O(n + len(primes))
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -37,13 +28,13 @@ package main
 import "fmt"
 
 func nthSuperUglyNumber(n int, primes []int) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	ugly := make([]int, n)
 	ugly[0] = 1
 
-  // Alokasi slice integer
+  // Alokasi slice
 	pointers := make([]int, len(primes))
-  // Alokasi slice integer
+  // Alokasi slice
 	values := make([]int, len(primes))
 	for i, p := range primes {
 		values[i] = p

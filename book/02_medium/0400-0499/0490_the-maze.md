@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func TheMaze(maze [][]int, start []int, destination []int) bool
-```
+**Fungsi Solusi:** `func TheMaze(maze [][]int, start []int, destination []int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** O(m * n)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,9 +45,9 @@ func main() {
 
 func TheMaze(maze [][]int, start []int, destination []int) bool {
 	m, n := len(maze), len(maze[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][]bool, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range visited {
 		visited[i] = make([]bool, n)
 	}

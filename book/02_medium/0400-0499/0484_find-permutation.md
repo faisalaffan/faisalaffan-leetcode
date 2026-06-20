@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindPermutation(s string) []int
-```
+**Fungsi Solusi:** `func FindPermutation(s string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,14 +38,14 @@ func main() {
 
 func FindPermutation(s string) []int {
 	n := len(s) + 1
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n)
 	for i := 0; i < n; i++ {
 		result[i] = i + 1
 	}
 
 	// Reverse contiguous segments for each 'D'
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		if s[i] == 'D' {
 			j := i
@@ -60,7 +54,7 @@ func FindPermutation(s string) []int {
 			}
 			// Reverse segment from i to j
 			left, right := i, j
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 			for left < right {
 				result[left], result[right] = result[right], result[left]
 				left++

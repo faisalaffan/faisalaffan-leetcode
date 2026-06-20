@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindTheDistinctDifferenceArray(nums []int) []int
-```
+**Fungsi Solusi:** `func FindTheDistinctDifferenceArray(nums []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Prefix Sum
+**Teknik:** HashMap, Prefix Sum
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +37,7 @@ func main() {
 
 func FindTheDistinctDifferenceArray(nums []int) []int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	suffixDistinct := make([]int, n+1)
 	seen := map[int]bool{}
 
@@ -57,7 +51,7 @@ func FindTheDistinctDifferenceArray(nums []int) []int {
 
 	seen = map[int]bool{}
 	prefixDistinct := 0
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 
 	for i := 0; i < n; i++ {

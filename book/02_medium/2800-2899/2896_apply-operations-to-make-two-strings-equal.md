@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ApplyOperationsToMakeTwoStringsEqual(s1 string, s2 string, x int) int
-```
+**Fungsi Solusi:** `func ApplyOperationsToMakeTwoStringsEqual(s1 string, s2 string, x int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,9 +32,9 @@ import "fmt"
 
 func ApplyOperationsToMakeTwoStringsEqual(s1 string, s2 string, x int) int {
 	// Find positions where characters differ
-  // Alokasi slice integer
+  // Alokasi slice
 	diff := make([]int, 0)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s1); i++ {
 		if s1[i] != s2[i] {
 			diff = append(diff, i)
@@ -55,9 +49,9 @@ func ApplyOperationsToMakeTwoStringsEqual(s1 string, s2 string, x int) int {
 	}
 
 	m := len(diff)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, m)
 		for j := range dp[i] {

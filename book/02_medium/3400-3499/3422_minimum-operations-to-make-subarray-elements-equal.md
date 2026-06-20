@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minOperations(nums []int, k int) int64
-```
+**Fungsi Solusi:** `func minOperations(nums []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log k) Space: O(k)  
-**Kompleksitas Ruang:** O(k)
+**Waktu:** O(n log k) Space: O(k)  |  **Ruang:** O(k)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,12 +41,12 @@ func minOperations(nums []int, k int) int64 {
 	}
 
 	var ans int64 = math.MaxInt64
-  // Alokasi slice integer
+  // Alokasi slice
 	window := make([]int, k)
 
 	for i := 0; i <= n-k; i++ {
 		copy(window, nums[i:i+k])
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(window)
 		median := window[k/2]
 

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func SortEvenAndOddIndicesIndependently(nums []int) []int
-```
+**Fungsi Solusi:** `func SortEvenAndOddIndicesIndependently(nums []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,9 +40,9 @@ func main() {
 // Time: O(n log n), Space: O(n)
 func SortEvenAndOddIndicesIndependently(nums []int) []int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	even := make([]int, 0, (n+1)/2)
-  // Alokasi slice integer
+  // Alokasi slice
 	odd := make([]int, 0, n/2)
 
 	for i, v := range nums {
@@ -59,11 +53,11 @@ func SortEvenAndOddIndicesIndependently(nums []int) []int {
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(even)
 	sort.Sort(sort.Reverse(sort.IntSlice(odd)))
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n)
 	ei, oi := 0, 0
 	for i := 0; i < n; i++ {

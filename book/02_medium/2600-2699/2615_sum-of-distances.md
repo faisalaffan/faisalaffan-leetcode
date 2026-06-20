@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func distance(nums []int) []int64
-```
+**Fungsi Solusi:** `func distance(nums []int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Prefix Sum
+**Teknik:** HashMap, Prefix Sum
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -39,17 +33,17 @@ import "fmt"
 func distance(nums []int) []int64 {
 	n := len(nums)
 	// Group indices by value
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[int][]int)
 	for i, v := range nums {
 		groups[v] = append(groups[v], i)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, n)
 	for _, indices := range groups {
 		m := len(indices)
-  // Alokasi slice integer
+  // Alokasi slice
 		prefix := make([]int64, m+1)
 		for i, idx := range indices {
 			prefix[i+1] = prefix[i] + int64(idx)

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func goodIndices(nums []int, k int) []int
-```
+**Fungsi Solusi:** `func goodIndices(nums []int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,9 +38,9 @@ func main() {
 
 func goodIndices(nums []int, k int) []int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, n) // longest non-increasing ending at i
-  // Alokasi slice integer
+  // Alokasi slice
 	suf := make([]int, n)  // longest non-decreasing starting at i
 
 	pref[0] = 1
@@ -67,7 +61,7 @@ func goodIndices(nums []int, k int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, 0)
 	for i := k; i < n-k; i++ {
 		if pref[i-1] >= k && suf[i+1] >= k {

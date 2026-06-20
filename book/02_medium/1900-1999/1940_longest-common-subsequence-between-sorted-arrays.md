@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func LongestCommonSubsequenceBetweenSortedArrays(arrs [][]int) []int
-```
+**Fungsi Solusi:** `func LongestCommonSubsequenceBetweenSortedArrays(arrs [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(total elements), Space: O(unique elements)  
-**Kompleksitas Ruang:** O(unique elements)
+**Waktu:** O(total elements), Space: O(unique elements)  |  **Ruang:** O(unique elements)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ func main() {
 func LongestCommonSubsequenceBetweenSortedArrays(arrs [][]int) []int {
 	// Since arrays are sorted, use frequency counting
 	// Numbers appearing in ALL arrays are the answer
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	freq := make(map[int]int)
 	for _, arr := range arrs {
 		for _, v := range arr {
@@ -53,7 +47,7 @@ func LongestCommonSubsequenceBetweenSortedArrays(arrs [][]int) []int {
 	}
 
 	n := len(arrs)
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 	for _, v := range arrs[0] {
 		if freq[v] == n {

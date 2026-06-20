@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sumPrefixScores(words []string) []int
-```
+**Fungsi Solusi:** `func sumPrefixScores(words []string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Trie, Prefix Sum
+**Teknik:** Trie, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Trie** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,7 +53,7 @@ func sumPrefixScores(words []string) []int {
 	// Insert all words into trie, incrementing count at each node
 	for _, w := range words {
 		cur := root
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(w); i++ {
 			idx := w[i] - 'a'
 			if cur.children[idx] == nil {
@@ -70,12 +64,12 @@ func sumPrefixScores(words []string) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(words))
 	for wi, w := range words {
 		cur := root
 		total := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(w); i++ {
 			idx := w[i] - 'a'
 			cur = cur.children[idx]

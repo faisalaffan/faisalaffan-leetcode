@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func pseudoPalindromicPaths(root *TreeNode) int
-```
+**Fungsi Solusi:** `func pseudoPalindromicPaths(root *TreeNode) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, DFS, Stack
+**Teknik:** Two Pointer, DFS
 
-**Kompleksitas Waktu:** O(n) where n = number of nodes  
-**Kompleksitas Ruang:** O(h) for recursion stack
+**Waktu:** O(n) where n = number of nodes  |  **Ruang:** O(h) for recursion stack
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -73,7 +67,7 @@ func main() {
 // Space: O(h) for recursion stack
 func pseudoPalindromicPaths(root *TreeNode) int {
 	count := 0
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 10) // node values are 1-9
 
 	var dfs func(*TreeNode)

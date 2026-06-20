@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(nums1 []int, nums2 []int) FindSumPairs
-```
+**Fungsi Solusi:** `func Constructor(nums1 []int, nums2 []int) FindSumPairs`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ type FindSumPairs struct {
 }
 
 func Constructor(nums1 []int, nums2 []int) FindSumPairs {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	freq := make(map[int]int)
 	for _, v := range nums2 {
 		freq[v]++

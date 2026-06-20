@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func smallestEquivalentString(s1 string, s2 string, baseStr string) string
-```
-
-> **💡 Hint:** DSU (Union-Find) to group equivalent characters,
+**Fungsi Solusi:** `func smallestEquivalentString(s1 string, s2 string, baseStr string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Union-Find
 
-**Kompleksitas Waktu:** O((m + n) * alpha(26)) where m = len(s1), n = len(baseStr)  
-**Kompleksitas Ruang:** O(26) = O(1)
+**Waktu:** O((m + n) * alpha(26)) where m = len(s1), n = len(baseStr)  |  **Ruang:** O(26) = O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Union-Find** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +40,7 @@ func main() {
 }
 
 func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, 26)
 	for i := 0; i < 26; i++ {
 		parent[i] = i
@@ -71,13 +63,13 @@ func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
 		}
 	}
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s1); i++ {
 		union(int(s1[i]-'a'), int(s2[i]-'a'))
 	}
 
 	result := make([]byte, len(baseStr))
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(baseStr); i++ {
 		result[i] = byte('a' + find(int(baseStr[i]-'a')))
 	}

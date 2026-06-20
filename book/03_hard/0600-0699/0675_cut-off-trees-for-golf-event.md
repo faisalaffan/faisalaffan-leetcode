@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func cutOffTree(forest [][]int) int
-```
+**Fungsi Solusi:** `func cutOffTree(forest [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -88,7 +82,7 @@ func cutOffTree(forest [][]int) int {
 			}
 		}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(trees, func(i, j int) bool { return trees[i].h < trees[j].h })
 
 	dirs := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
@@ -110,7 +104,7 @@ func bfsShortest(forest [][]int, sr, sc, tr, tc, m, n int, dirs [][2]int) int {
 	if sr == tr && sc == tc {
 		return 0
 	}
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, m)
 	for i := 0; i < m; i++ {
 		dist[i] = make([]int, n)
@@ -123,7 +117,7 @@ func bfsShortest(forest [][]int, sr, sc, tr, tc, m, n int, dirs [][2]int) int {
 	heap.Init(h)
 
 	for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(h).(pqItem)
 		if cur.r == tr && cur.c == tc {
 			return cur.dist
@@ -139,7 +133,7 @@ func bfsShortest(forest [][]int, sr, sc, tr, tc, m, n int, dirs [][2]int) int {
 			nd := cur.dist + 1
 			if nd < dist[nr][nc] {
 				dist[nr][nc] = nd
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(h, pqItem{nr, nc, nd})
 			}
 		}

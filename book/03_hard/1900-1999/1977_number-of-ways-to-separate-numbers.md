@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfWaysToSeparateNumbers(s string) int
-```
-
-> **💡 Hint:** DP + LCP (Longest Common Prefix)
+**Fungsi Solusi:** `func numberOfWaysToSeparateNumbers(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
+**Teknik:** DP, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,9 +41,9 @@ func numberOfWaysToSeparateNumbers(s string) int {
 	n := len(s)
 
 	// LCP[i][j] = longest common prefix of s[i:] and s[j:]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	lcp := make([][]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range lcp {
 		lcp[i] = make([]int, n+1)
 	}
@@ -63,9 +55,9 @@ func numberOfWaysToSeparateNumbers(s string) int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n+2)  // dp[n] = 1 (empty suffix)
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, n+2) // pref[i] = sum_{k >= i} dp[k]
 	dp[n] = 1
 	pref[n] = 1

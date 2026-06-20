@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumTravelTime(n int, edges [][]int) int64
-```
-
-> **💡 Hint:** DP on intervals or use Dijkstra with state compression.
+**Fungsi Solusi:** `func minimumTravelTime(n int, edges [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Dynamic Programming, Heap / Priority Queue, Stack, Dijkstra
+**Teknik:** BFS, DP, Heap, Dijkstra
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -70,7 +62,7 @@ func (pq *PriorityQueue) Push(x interface{}) { n := len(*pq); item := x.(*Item);
 func (pq *PriorityQueue) Pop() interface{} { old := *pq; n := len(old); item := old[n-1]; item.idx = -1; *pq = old[:n-1]; return item }
 
 func minimumTravelTime(n int, edges [][]int) int64 {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -79,20 +71,20 @@ func minimumTravelTime(n int, edges [][]int) int64 {
 	}
 
 	// Dijkstra from 0 to n-1
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([]int64, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = math.MaxInt64
 	}
 	dist[0] = 0
 	pq := &PriorityQueue{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &Item{node: 0, dist: 0})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		item := heap.Pop(pq).(*Item)
 		u := item.node
 		if item.dist > dist[u] {
@@ -105,7 +97,7 @@ func minimumTravelTime(n int, edges [][]int) int64 {
 			v, w := edge[0], int64(edge[1])
 			if nd := item.dist + w; nd < dist[v] {
 				dist[v] = nd
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &Item{node: v, dist: nd})
 			}
 		}

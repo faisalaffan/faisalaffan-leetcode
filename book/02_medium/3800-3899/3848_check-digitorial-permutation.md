@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CheckDigitorialPermutation(n int) bool
-```
-
-> **💡 Hint:** Compute sum of factorials of digits, check if any permutation
+**Fungsi Solusi:** `func CheckDigitorialPermutation(n int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(log N)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(log N)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -54,9 +43,9 @@ func CheckDigitorialPermutation(n int) bool {
 
 	// Check if sum has same digits as n
 	// If they have the same digits, one is a permutation of the other
-  // Alokasi slice integer
+  // Alokasi slice
 	digitsN := make([]int, 10)
-  // Alokasi slice integer
+  // Alokasi slice
 	digitsSum := make([]int, 10)
 
 	temp = n

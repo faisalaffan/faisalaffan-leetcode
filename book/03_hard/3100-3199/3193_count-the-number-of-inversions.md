@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfPermutations(n int, requirements [][]int) int
-```
-
-> **💡 Hint:** DP with prefix sums.
+**Fungsi Solusi:** `func numberOfPermutations(n int, requirements [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window, Dynamic Programming, Prefix Sum
+**Teknik:** Sliding Window, DP, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sliding Window** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,9 +45,9 @@ const MOD = 1000000007
 func numberOfPermutations(n int, requirements [][]int) int {
 	// required[i] = required inversion count for prefix ending at i, or -1 if
 	// unspecified.
-  // Alokasi slice integer
+  // Alokasi slice
 	required := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range required {
 		required[i] = -1
 	}
@@ -69,20 +61,20 @@ func numberOfPermutations(n int, requirements [][]int) int {
 	}
 
 	// dp[j] = number of ways to have exactly j inversions for current prefix.
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, maxInv+1)
 	dp[0] = 1
 
 	for i := 1; i < n; i++ {
 		// prefix sums of dp for sliding window of size i+1 (0 to i).
-  // Alokasi slice integer
+  // Alokasi slice
 		pref := make([]int, maxInv+2)
 		pref[0] = dp[0]
 		for j := 1; j <= maxInv; j++ {
 			pref[j] = (pref[j-1] + dp[j]) % MOD
 		}
 
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, maxInv+1)
 		maxJ := maxInv
 		if required[i] != -1 {

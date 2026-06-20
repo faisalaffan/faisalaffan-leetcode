@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func wordMask(s string) int
-```
+**Fungsi Solusi:** `func wordMask(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Bitmask, Fenwick Tree (BIT)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,7 +34,7 @@ import "fmt"
 // wordMask converts a word to a bitmask of its letters (26 bits).
 func wordMask(s string) int {
 	mask := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		mask |= 1 << (s[i] - 'a')
 	}
@@ -47,7 +43,7 @@ func wordMask(s string) int {
 
 func findNumOfValidWords(words []string, puzzles []string) []int {
 	// Count words by mask
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	freq := make(map[int]int)
 	for _, w := range words {
 		m := wordMask(w)
@@ -56,7 +52,7 @@ func findNumOfValidWords(words []string, puzzles []string) []int {
 		freq[m]++
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(puzzles))
 	for i, p := range puzzles {
 		pmask := wordMask(p)

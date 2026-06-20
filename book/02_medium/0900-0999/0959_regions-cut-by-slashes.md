@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func regionsBySlashes(grid []string) int
-```
+**Fungsi Solusi:** `func regionsBySlashes(grid []string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Union-Find
 
-**Kompleksitas Waktu:** O(n^2 * α(n^2))  
-**Kompleksitas Ruang:** O(n^2)
+**Waktu:** O(n^2 * α(n^2))  |  **Ruang:** O(n^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Union-Find** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -39,9 +33,9 @@ import "fmt"
 func regionsBySlashes(grid []string) int {
 	n := len(grid)
 	size := n * n * 4
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, size)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range parent {
 		parent[i] = i
 	}

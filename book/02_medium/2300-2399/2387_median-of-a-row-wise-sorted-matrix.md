@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func matrixMedian(grid [][]int) int
-```
+**Fungsi Solusi:** `func matrixMedian(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search
+**Teknik:** Two Pointer, Binary Search
 
-**Kompleksitas Waktu:** O(rows * log(cols) * log(max-min))  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(rows * log(cols) * log(max-min))  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,7 +48,7 @@ func matrixMedian(grid [][]int) int {
 			// binary search in each row for count of elements <= mid
 			row := grid[i]
 			left, right := 0, c
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 			for left < right {
 				m := (left + right) / 2
 				if row[m] <= mid {

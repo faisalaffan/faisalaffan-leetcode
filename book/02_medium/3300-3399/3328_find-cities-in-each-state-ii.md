@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findCityRanking(cities []CityInfo) []CityRank
-```
+**Fungsi Solusi:** `func findCityRanking(cities []CityInfo) []CityRank`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(c log c) Space: O(c)  
-**Kompleksitas Ruang:** O(c)
+**Waktu:** O(c log c) Space: O(c)  |  **Ruang:** O(c)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,7 +56,7 @@ type CityRank struct {
 }
 
 func findCityRanking(cities []CityInfo) []CityRank {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	stateCities := make(map[int][]CityInfo)
 	for _, c := range cities {
 		stateCities[c.StateID] = append(stateCities[c.StateID], c)
@@ -70,7 +64,7 @@ func findCityRanking(cities []CityInfo) []CityRank {
 
 	var result []CityRank
 	for sid, cs := range stateCities {
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(cs, func(i, j int) bool {
 			return cs[i].Population > cs[j].Population
 		})
@@ -79,7 +73,7 @@ func findCityRanking(cities []CityInfo) []CityRank {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].StateID != result[j].StateID {
 			return result[i].StateID < result[j].StateID

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func yearOnYearGrowthRate(records []Record) []GrowthResult
-```
+**Fungsi Solusi:** `func yearOnYearGrowthRate(records []Record) []GrowthResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,9 +56,9 @@ type GrowthResult struct {
 
 func yearOnYearGrowthRate(records []Record) []GrowthResult {
 	// Build lookup: (year, month) -> value
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	lookup := make(map[[2]int]float64)
-  // Alokasi slice integer
+  // Alokasi slice
 	yearMonthSet := make([][2]int, 0)
 	for _, r := range records {
 		key := [2]int{r.Year, r.Month}
@@ -74,7 +68,7 @@ func yearOnYearGrowthRate(records []Record) []GrowthResult {
 		lookup[key] = r.Value
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(yearMonthSet, func(i, j int) bool {
 		if yearMonthSet[i][0] != yearMonthSet[j][0] {
 			return yearMonthSet[i][0] < yearMonthSet[j][0]

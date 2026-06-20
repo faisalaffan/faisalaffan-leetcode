@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumOperations(nums []int, k int, queries [][]int) []int64
-```
-
-> **💡 Hint:** Merge sort tree for kth order statistic (median).
+**Fungsi Solusi:** `func minimumOperations(nums []int, k int, queries [][]int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum, Merge Sort
+**Teknik:** Two Pointer, Binary Search, Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +52,7 @@ func minimumOperations(nums []int, k int, queries [][]int) []int64 {
 	n := len(nums)
 
 	// Build merge sort tree
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	tree := make([][]int, 4*n)
 	var build func(node, l, r int)
 	build = func(node, l, r int) {
@@ -114,13 +106,13 @@ func minimumOperations(nums []int, k int, queries [][]int) []int64 {
 	}
 
 	// Prefix sums for fast range sum
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int64, n+1)
 	for i, v := range nums {
 		pref[i+1] = pref[i] + int64(v)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]
@@ -177,7 +169,7 @@ func minimumOperations(nums []int, k int, queries [][]int) []int64 {
 }
 
 func merge(a, b []int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	res := make([]int, len(a)+len(b))
 	i, j, k := 0, 0, 0
 	for i < len(a) && j < len(b) {

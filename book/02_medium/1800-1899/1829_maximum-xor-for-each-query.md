@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getMaximumXor(nums []int, maximumBit int) []int
-```
+**Fungsi Solusi:** `func getMaximumXor(nums []int, maximumBit int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n), Space: O(1) excluding output  |  **Ruang:** O(1) excluding output
 
-**Kompleksitas Waktu:** O(n), Space: O(1) excluding output  
-**Kompleksitas Ruang:** O(1) excluding output
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -44,7 +35,7 @@ func getMaximumXor(nums []int, maximumBit int) []int {
 	}
 
 	maxVal := (1 << maximumBit) - 1
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n)
 
 	for i := n - 1; i >= 0; i-- {

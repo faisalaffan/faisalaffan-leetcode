@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func singleDivisorTriplet(nums []int) int64
-```
+**Fungsi Solusi:** `func singleDivisorTriplet(nums []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + m^3)  |  **Ruang:** O(m) where m = max value
 
-**Kompleksitas Waktu:** O(n + m^3)  
-**Kompleksitas Ruang:** O(m) where m = max value
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -37,7 +28,7 @@ package main
 import "fmt"
 
 func singleDivisorTriplet(nums []int) int64 {
-  // Alokasi slice integer
+  // Alokasi slice
 	count := make([]int, 101)
 	for _, v := range nums {
 		count[v]++

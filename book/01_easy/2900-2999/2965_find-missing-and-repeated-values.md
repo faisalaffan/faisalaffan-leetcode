@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindMissingAndRepeatedValues(grid [][]int) []int
-```
+**Fungsi Solusi:** `func FindMissingAndRepeatedValues(grid [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n^2)  
-**Kompleksitas Ruang:** O(n^2)
+**Waktu:** O(n^2)  |  **Ruang:** O(n^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,7 +40,7 @@ func main() {
 func FindMissingAndRepeatedValues(grid [][]int) []int {
 	n := len(grid)
 	total := n * n
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[int]int)
 	repeated := 0
 	for i := 0; i < n; i++ {

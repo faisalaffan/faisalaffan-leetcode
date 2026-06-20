@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func LongestLine(mat [][]int) int
-```
+**Fungsi Solusi:** `func LongestLine(mat [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(m * n)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,9 +49,9 @@ func LongestLine(mat [][]int) int {
 
 	// dp[i][j][0] = horizontal, dp[i][j][1] = vertical
 	// dp[i][j][2] = diagonal, dp[i][j][3] = anti-diagonal
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([][]int, n)
 		for j := range dp[i] {

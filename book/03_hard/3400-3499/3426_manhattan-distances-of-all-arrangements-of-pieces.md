@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func powMod3426(a int64, b int64) int64
-```
+**Fungsi Solusi:** `func powMod3426(a int64, b int64) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -60,13 +51,13 @@ func ManhattanDistancesOfAllArrangementsOfPieces(m, n, k int) int {
 	total := int64(m) * int64(n)
 
 	// Precompute factorials up to total
-  // Alokasi slice integer
+  // Alokasi slice
 	fact := make([]int64, total+1)
 	fact[0] = 1
 	for i := int64(1); i <= total; i++ {
 		fact[i] = fact[i-1] * i % MOD3426
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	invFact := make([]int64, total+1)
 	invFact[total] = powMod3426(fact[total], MOD3426-2)
 	for i := total - 1; i >= 0; i-- {

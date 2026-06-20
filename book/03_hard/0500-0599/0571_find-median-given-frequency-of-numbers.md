@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findMedianGivenFrequencyOfNumbers(numbers []NumberFreq) float64
-```
+**Fungsi Solusi:** `func findMedianGivenFrequencyOfNumbers(numbers []NumberFreq) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(N log N) where N = number of distinct num values (sorting)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N) where N = number of distinct num values (sorting)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +51,7 @@ func findMedianGivenFrequencyOfNumbers(numbers []NumberFreq) float64 {
 	}
 
 	// Sort by Num.
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(numbers, func(i, j int) bool {
 		return numbers[i].Num < numbers[j].Num
 	})

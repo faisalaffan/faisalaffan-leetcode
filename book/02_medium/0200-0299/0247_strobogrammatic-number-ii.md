@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findStrobogrammatic(n int) []string
-```
+**Fungsi Solusi:** `func findStrobogrammatic(n int) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(5^(n/2)), Space: O(n)  |  **Ruang:** O(n)
 
-**Kompleksitas Waktu:** O(5^(n/2)), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -41,7 +32,7 @@ func findStrobogrammatic(n int) []string {
 }
 
 func build(n, final int) []string {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return []string{""}
 	}

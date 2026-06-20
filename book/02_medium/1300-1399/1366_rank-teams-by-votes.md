@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func rankTeams(votes []string) string
-```
+**Fungsi Solusi:** `func rankTeams(votes []string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n*m + t^2*log(t)) where n = votes, m = teams per vote, t = unique teams  
-**Kompleksitas Ruang:** O(t^2) for storing vote positions
+**Waktu:** O(n*m + t^2*log(t)) where n = votes, m = teams per vote, t = unique teams  |  **Ruang:** O(t^2) for storing vote positions
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,7 +56,7 @@ func rankTeams(votes []string) string {
 
 	// Count votes for each position for each team
 	// score[team][position] = count
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	score := make(map[byte][]int)
 	for _, t := range []byte(teams) {
 		score[t] = make([]int, n)
@@ -76,7 +70,7 @@ func rankTeams(votes []string) string {
 
 	// Sort teams
 	teamList := []byte(teams)
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(teamList, func(i, j int) bool {
 		a, b := teamList[i], teamList[j]
 		for pos := 0; pos < n; pos++ {

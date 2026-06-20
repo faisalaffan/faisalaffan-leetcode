@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func biggestWindow(visits []int) int
-```
+**Fungsi Solusi:** `func biggestWindow(visits []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ func biggestWindow(visits []int) int {
 	if len(visits) == 0 {
 		return 0
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(visits)
 	maxGap := 0
 	for i := 1; i < len(visits); i++ {

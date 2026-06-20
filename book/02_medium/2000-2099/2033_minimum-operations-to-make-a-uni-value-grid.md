@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minOperations(grid [][]int, x int) int
-```
+**Fungsi Solusi:** `func minOperations(grid [][]int, x int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(m*n log(m*n))  
-**Kompleksitas Ruang:** O(m*n)
+**Waktu:** O(m*n log(m*n))  |  **Ruang:** O(m*n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ import (
 
 func minOperations(grid [][]int, x int) int {
 	m, n := len(grid), len(grid[0])
-  // Alokasi slice integer
+  // Alokasi slice
 	vals := make([]int, 0, m*n)
 
 	for i := 0; i < m; i++ {
@@ -58,7 +52,7 @@ func minOperations(grid [][]int, x int) int {
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(vals)
 	median := vals[len(vals)/2]
 

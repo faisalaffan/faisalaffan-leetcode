@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumRobots(chargeTimes []int, runningCosts []int, budget int64) int
-```
-
-> **💡 Hint:** Sliding window with monotonic deque. The budget constraint for
+**Fungsi Solusi:** `func maximumRobots(chargeTimes []int, runningCosts []int, budget int64) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window, Monotonic Stack/Queue
+**Teknik:** Two Pointer, Sliding Window, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +49,7 @@ func main() {
 
 func maximumRobots(chargeTimes []int, runningCosts []int, budget int64) int {
 	n := len(chargeTimes)
-  // Alokasi slice integer
+  // Alokasi slice
 	deque := make([]int, 0) // stores indices, front = max chargeTime
 	left := 0
 	var sum int64
@@ -73,6 +65,7 @@ func maximumRobots(chargeTimes []int, runningCosts []int, budget int64) int {
 		deque = append(deque, right)
 
 		// Check budget constraint
+  // Binary search loop
 		for left <= right {
 			maxCharge := chargeTimes[deque[0]]
 			cost := int64(maxCharge) + int64(right-left+1)*sum

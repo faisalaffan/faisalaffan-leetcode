@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countMentions(numberOfUsers int, events [][]string) []int
-```
+**Fungsi Solusi:** `func countMentions(numberOfUsers int, events [][]string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n + n*u) Space: O(n + u)  
-**Kompleksitas Ruang:** O(n + u)
+**Waktu:** O(n log n + n*u) Space: O(n + u)  |  **Ruang:** O(n + u)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ import (
 )
 
 func countMentions(numberOfUsers int, events [][]string) []int {
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(events, func(i, j int) bool {
 		x, _ := strconv.Atoi(events[i][1])
 		y, _ := strconv.Atoi(events[j][1])
@@ -52,9 +46,9 @@ func countMentions(numberOfUsers int, events [][]string) []int {
 		return x < y
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, numberOfUsers)
-  // Alokasi slice integer
+  // Alokasi slice
 	onlineT := make([]int, numberOfUsers)
 	lazy := 0
 

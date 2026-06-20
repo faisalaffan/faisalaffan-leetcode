@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func medianEmployeeSalary(employees []Employee) []MedianResult
-```
+**Fungsi Solusi:** `func medianEmployeeSalary(employees []Employee) []MedianResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(E log E) for sorting, Space: O(E)  
-**Kompleksitas Ruang:** O(E)
+**Waktu:** O(E log E) for sorting, Space: O(E)  |  **Ruang:** O(E)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,7 +53,7 @@ type MedianResult struct {
 // Time: O(E log E) for sorting, Space: O(E)
 func medianEmployeeSalary(employees []Employee) []MedianResult {
 	// Group by company.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	byCompany := make(map[string][]int)
 	for _, e := range employees {
 		byCompany[e.Company] = append(byCompany[e.Company], e.Salary)
@@ -69,11 +63,11 @@ func medianEmployeeSalary(employees []Employee) []MedianResult {
 
 	// Process each company.
 	for company, salaries := range byCompany {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(salaries)
 		n := len(salaries)
 
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 		if n == 0 {
 			continue
 		}
@@ -89,7 +83,7 @@ func medianEmployeeSalary(employees []Employee) []MedianResult {
 	}
 
 	// Sort by company name, then salary for deterministic output.
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].Company != results[j].Company {
 			return results[i].Company < results[j].Company

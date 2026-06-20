@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func GamePlayAnalysisIv(activities [][]int) float64
-```
+**Fungsi Solusi:** `func GamePlayAnalysisIv(activities [][]int) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +51,7 @@ func GamePlayAnalysisIv(activities [][]int) float64 {
 	if len(activities) == 0 {
 		return 0.0
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(activities, func(i, j int) bool {
 		if activities[i][0] != activities[j][0] {
 			return activities[i][0] < activities[j][0]
@@ -66,7 +60,7 @@ func GamePlayAnalysisIv(activities [][]int) float64 {
 	})
 
 	// Find first login for each player
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	firstLogin := make(map[int]int)
 	for _, act := range activities {
 		pid, date := act[0], act[1]
@@ -77,7 +71,7 @@ func GamePlayAnalysisIv(activities [][]int) float64 {
 
 	// Count players who logged in the day after their first login
 	nextDayPlayers := 0
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	playerSet := make(map[int]bool)
 	for _, act := range activities {
 		pid, date := act[0], act[1]

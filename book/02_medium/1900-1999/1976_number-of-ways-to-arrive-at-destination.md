@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountPaths(n int, roads [][]int) int
-```
+**Fungsi Solusi:** `func CountPaths(n int, roads [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
+**Teknik:** BFS, Heap
 
-**Kompleksitas Waktu:** O(E log V), Space: O(V + E)  
-**Kompleksitas Ruang:** O(V + E)
+**Waktu:** O(E log V), Space: O(V + E)  |  **Ruang:** O(V + E)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,7 +63,7 @@ func main() {
 
 // Time: O(E log V), Space: O(V + E)
 func CountPaths(n int, roads [][]int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]Edge, n)
 	for _, r := range roads {
 		u, v, t := r[0], r[1], r[2]
@@ -77,11 +71,11 @@ func CountPaths(n int, roads [][]int) int {
 		graph[v] = append(graph[v], Edge{u, t})
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([]int64, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	ways := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = 1 << 62
 	}
@@ -90,11 +84,11 @@ func CountPaths(n int, roads [][]int) int {
 
 	pq := &PriorityQueue{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, Item{0, 0})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(pq).(Item)
 		if cur.dist > dist[cur.node] {
 			continue
@@ -104,7 +98,7 @@ func CountPaths(n int, roads [][]int) int {
 			if newDist < dist[e.node] {
 				dist[e.node] = newDist
 				ways[e.node] = ways[cur.node]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, Item{e.node, newDist})
 			} else if newDist == dist[e.node] {
 				ways[e.node] = (ways[e.node] + ways[cur.node]) % mod1976

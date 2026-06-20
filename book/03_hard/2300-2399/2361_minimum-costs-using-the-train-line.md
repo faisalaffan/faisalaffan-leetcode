@@ -2,27 +2,18 @@
 
 ## 📖 Deskripsi Soal
 
-**Tingkat Kesulitan:** Sulit
+**Tingkat Kesulitan:** —
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumCosts(regular, express []int, expressCost int) []int64
-```
+**Fungsi Solusi:** `func minimumCosts(regular, express []int, expressCost int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -59,7 +50,7 @@ func minimumCosts(regular, express []int, expressCost int) []int64 {
 	dpReg := int64(0)
 	dpExp := int64(math.MaxInt64)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, n)
 	for i := 0; i < n; i++ {
 		newReg := int64(math.MaxInt64)
@@ -110,7 +101,7 @@ func main() {
 
 	got := minimumCosts([]int{1, 6, 9, 5}, []int{5, 2, 3, 10}, 8)
 	want := []int64{1, 7, 14, 19}
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range got {
 		if got[i] != want[i] {
 			fmt.Printf("FAIL [%d]: got %d, want %d\n", i, got[i], want[i])
@@ -119,7 +110,7 @@ func main() {
 
 	got2 := minimumCosts([]int{11, 5, 13}, []int{7, 10, 6}, 3)
 	want2 := []int64{10, 15, 24}
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range got2 {
 		if got2[i] != want2[i] {
 			fmt.Printf("FAIL2 [%d]: got %d, want %d\n", i, got2[i], want2[i])

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewUnionFind(n int) *UnionFind
-```
+**Fungsi Solusi:** `func NewUnionFind(n int) *UnionFind`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Union-Find
 
-**Kompleksitas Waktu:** O(n + swaps), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + swaps), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ type UnionFind struct {
 }
 
 func NewUnionFind(n int) *UnionFind {
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -72,7 +66,7 @@ func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) in
 	}
 
 	// Group indices by component
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[int][]int)
 	for i := 0; i < n; i++ {
 		root := uf.Find(i)
@@ -81,7 +75,7 @@ func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) in
 
 	hamming := 0
 	for _, indices := range groups {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		counts := make(map[int]int)
 		for _, idx := range indices {
 			counts[source[idx]]++

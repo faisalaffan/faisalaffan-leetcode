@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(capacity int) DinnerPlates
-```
+**Fungsi Solusi:** `func Constructor(capacity int) DinnerPlates`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Heap / Priority Queue, Stack
+**Teknik:** DP, Heap, Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -76,7 +70,7 @@ func Constructor(capacity int) DinnerPlates {
 func (dp *DinnerPlates) Push(val int) {
 	// Clean up stale available indices
 	for dp.avail.Len() > 0 && dp.avail[0] < len(dp.stacks) && len(dp.stacks[dp.avail[0]]) == dp.cap {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		heap.Pop(&dp.avail)
 	}
 
@@ -84,7 +78,7 @@ func (dp *DinnerPlates) Push(val int) {
 		idx := dp.avail[0]
 		dp.stacks[idx] = append(dp.stacks[idx], val)
 		if len(dp.stacks[idx]) == dp.cap {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			heap.Pop(&dp.avail)
 		}
 		if idx > dp.nonEmpty {
@@ -97,7 +91,7 @@ func (dp *DinnerPlates) Push(val int) {
 	dp.stacks = append(dp.stacks, []int{val})
 	dp.nonEmpty = len(dp.stacks) - 1
 	if dp.cap > 1 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(&dp.avail, len(dp.stacks)-1)
 	}
 }
@@ -112,7 +106,7 @@ func (dp *DinnerPlates) Pop() int {
 
 	// If stack becomes non-full, add to avail
 	if len(dp.stacks[idx]) == dp.cap-1 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(&dp.avail, idx)
 	}
 
@@ -132,7 +126,7 @@ func (dp *DinnerPlates) PopAtStack(index int) int {
 
 	// If it became non-full and index < nonEmpty, add to avail
 	if index < dp.nonEmpty && len(dp.stacks[index]) == dp.cap-1 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(&dp.avail, index)
 	}
 

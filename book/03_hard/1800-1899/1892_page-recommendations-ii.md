@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func pageRecommendationsIi(friendships [][]int, likes [][]int, users []int) [][]int
-```
+**Fungsi Solusi:** `func pageRecommendationsIi(friendships [][]int, likes [][]int, users []int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -93,7 +87,7 @@ func main() {
 // pageRecommendationsIi returns [][]int{{user_id, page_id}, ...}
 func pageRecommendationsIi(friendships [][]int, likes [][]int, users []int) [][]int {
 	// Build friendship graph
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	friends := make(map[int]map[int]bool) // user -> set of friends
 	for _, f := range friendships {
 		u1, u2 := f[0], f[1]
@@ -108,7 +102,7 @@ func pageRecommendationsIi(friendships [][]int, likes [][]int, users []int) [][]
 	}
 
 	// Build likes mapping
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userLikes := make(map[int]map[int]bool) // user -> set of liked pages
 	for _, l := range likes {
 		uid, pid := l[0], l[1]
@@ -128,7 +122,7 @@ func pageRecommendationsIi(friendships [][]int, likes [][]int, users []int) [][]
 		}
 
 		// Find friend-of-friend pages to recommend
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		recommended := make(map[int]bool)
 
 		// For each friend of the user
@@ -162,7 +156,7 @@ func pageRecommendationsIi(friendships [][]int, likes [][]int, users []int) [][]
 		for p := range recommended {
 			pages = append(pages, p)
 		}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(pages)
 		for _, p := range pages {
 			result = append(result, []int{user, p})

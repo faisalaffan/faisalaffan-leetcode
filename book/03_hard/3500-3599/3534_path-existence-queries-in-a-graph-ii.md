@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int
-```
-
-> **💡 Hint:** Process queries offline. Sort edges by weight, sort queries by
+**Fungsi Solusi:** `func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -70,7 +62,7 @@ func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int
 	}
 
 	// Sort edges by weight
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(edges, func(i, j int) bool {
 		return edges[i].w < edges[j].w
 	})
@@ -85,13 +77,13 @@ func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int
 		qList[i] = query{i, q[0], q[1]}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 
 	// Union-Find
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range parent {
 		parent[i] = i
 	}

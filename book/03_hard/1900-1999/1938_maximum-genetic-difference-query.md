@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newTrie() *Trie
-```
+**Fungsi Solusi:** `func newTrie() *Trie`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Trie
+**Teknik:** DFS, Trie
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -99,7 +93,7 @@ func (t *Trie) maxXor(x int) int {
 func maxGeneticDifference(parents []int, queries [][]int) []int {
 	n := len(parents)
 	// Build adjacency and find root
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	children := make([][]int, n)
 	var root int
 	for i, p := range parents {
@@ -111,14 +105,14 @@ func maxGeneticDifference(parents []int, queries [][]int) []int {
 	}
 
 	// Group queries by node
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	qByNode := make([][][2]int, n)
 	for i, q := range queries {
 		node, val := q[0], q[1]
 		qByNode[node] = append(qByNode[node], [2]int{val, i})
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	trie := newTrie()
 

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getKth(lo int, hi int, k int) int
-```
+**Fungsi Solusi:** `func getKth(lo int, hi int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming
+**Teknik:** HashMap, DP, Sorting
 
-**Kompleksitas Waktu:** O(n log n) for sorting  
-**Kompleksitas Ruang:** O(n) for memoization and sorted array
+**Waktu:** O(n log n) for sorting  |  **Ruang:** O(n) for memoization and sorted array
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +47,7 @@ func main() {
 // Time: O(n log n) for sorting
 // Space: O(n) for memoization and sorted array
 func getKth(lo int, hi int, k int) int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	memo := make(map[int]int)
 	memo[1] = 0
 
@@ -78,7 +72,7 @@ func getKth(lo int, hi int, k int) int {
 		pairs = append(pairs, pair{i, power(i)})
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(pairs, func(i, j int) bool {
 		if pairs[i].power != pairs[j].power {
 			return pairs[i].power < pairs[j].power

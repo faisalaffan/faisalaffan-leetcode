@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountPairs(nums1 []int, nums2 []int) int
-```
+**Fungsi Solusi:** `func CountPairs(nums1 []int, nums2 []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer, Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,17 +41,17 @@ func main() {
 // Time: O(n log n), Space: O(n)
 func CountPairs(nums1 []int, nums2 []int) int {
 	n := len(nums1)
-  // Alokasi slice integer
+  // Alokasi slice
 	diff := make([]int, n)
 	for i := 0; i < n; i++ {
 		diff[i] = nums1[i] - nums2[i]
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(diff)
 
 	left, right := 0, n-1
 	count := 0
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 	for left < right {
 		if diff[left]+diff[right] > 0 {
 			count += right - left

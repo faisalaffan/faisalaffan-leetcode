@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array integer dan sebuah target. Tugasmu adalah mencari **dua angka** yang jika dijumlahkan menghasilkan target. Kembalikan **indeks** (posisi) kedua angka.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+Contoh: `nums=[2,7,11,15], target=9` → `2+7=9` → `[0,1]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+**Cara berpikir:** Gunakan HashMap. Untuk setiap angka, cek apakah `target-angka` sudah ada di map. Kalau sudah → ketemu pasangan. Kalau belum → simpan angka ke map.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxSumOfThreeSubarrays(nums []int, k int) []int
-```
+**Fungsi Solusi:** `func maxSumOfThreeSubarrays(nums []int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window, Dynamic Programming
+**Teknik:** Two Pointer, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,7 +51,7 @@ func main() {
 
 func maxSumOfThreeSubarrays(nums []int, k int) []int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	w := make([]int, n-k+1)
 	sum := 0
 	for i := 0; i < n; i++ {
@@ -68,10 +64,10 @@ func maxSumOfThreeSubarrays(nums []int, k int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	left := make([]int, len(w))
 	best := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(w); i++ {
 		if w[i] > w[best] {
 			best = i
@@ -79,7 +75,7 @@ func maxSumOfThreeSubarrays(nums []int, k int) []int {
 		left[i] = best
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	right := make([]int, len(w))
 	best = len(w) - 1
 	for i := len(w) - 1; i >= 0; i-- {

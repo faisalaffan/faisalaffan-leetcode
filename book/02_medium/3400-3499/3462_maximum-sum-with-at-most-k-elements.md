@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxSum(grid [][]int, limits []int, k int) int64
-```
+**Fungsi Solusi:** `func maxSum(grid [][]int, limits []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n*m*log(m) + total*log(k)) Space: O(total)  
-**Kompleksitas Ruang:** O(total)
+**Waktu:** O(n*m*log(m) + total*log(k)) Space: O(total)  |  **Ruang:** O(total)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ import (
 func maxSum(grid [][]int, limits []int, k int) int64 {
 	var candidates []int
 	for i, row := range grid {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(row)
 		lim := limits[i]
 		m := len(row)
@@ -50,7 +44,7 @@ func maxSum(grid [][]int, limits []int, k int) int64 {
 			candidates = append(candidates, row[j])
 		}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(candidates, func(i, j int) bool {
 		return candidates[i] > candidates[j]
 	})

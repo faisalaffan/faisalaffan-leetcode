@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func combinationSum2(candidates []int, target int) [][]int
-```
+**Fungsi Solusi:** `func combinationSum2(candidates []int, target int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking, Sorting
 
-**Kompleksitas Waktu:** O(2^n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(2^n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -39,13 +33,13 @@ import (
 )
 
 func combinationSum2(candidates []int, target int) [][]int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(candidates)
 	result := [][]int{}
 	var backtrack func(start int, target int, path []int)
 	backtrack = func(start int, target int, path []int) {
 		if target == 0 {
-  // Alokasi slice integer
+  // Alokasi slice
 			comb := make([]int, len(path))
 			copy(comb, path)
 			result = append(result, comb)

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxScore(points []int, m int) int64
-```
-
-> **💡 Hint:** Binary search on the minimum score. For a candidate
+**Fungsi Solusi:** `func maxScore(points []int, m int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,7 +55,7 @@ func maxScore(points []int, m int) int64 {
 
 	// Check if we can achieve at least target score at each position
 	can := func(target int64) bool {
-  // Alokasi slice integer
+  // Alokasi slice
 		needed := make([]int64, n)
 		for i, p := range points {
 			// Moves needed at position i to reach target

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumTotalOperations(nums []int) int
-```
+**Fungsi Solusi:** `func MinimumTotalOperations(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n). Space: O(1).  |  **Ruang:** O(1).
 
-**Kompleksitas Waktu:** O(n). Space: O(1).  
-**Kompleksitas Ruang:** O(1).
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -44,7 +35,7 @@ func main() {
 // Each operation picks a subarray and subtracts the minimum value in it from all its elements.
 // Time: O(n). Space: O(1).
 func MinimumTotalOperations(nums []int) int {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if len(nums) == 0 {
 		return 0
 	}

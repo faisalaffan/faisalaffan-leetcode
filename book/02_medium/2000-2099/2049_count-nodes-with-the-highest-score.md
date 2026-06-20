@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countHighestScoreNodes(parents []int) int
-```
+**Fungsi Solusi:** `func countHighestScoreNodes(parents []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,14 +32,14 @@ import "fmt"
 
 func countHighestScoreNodes(parents []int) int {
 	n := len(parents)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	children := make([][]int, n)
 	for i := 1; i < n; i++ {
 		p := parents[i]
 		children[p] = append(children[p], i)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	subtreeSize := make([]int, n)
 	var dfs func(u int) int
 	dfs = func(u int) int {

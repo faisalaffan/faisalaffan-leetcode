@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func rectangleArea(rectangles [][]int) int
-```
-
-> **💡 Hint:** Sweep line + coordinate compression. Process vertical events (x, y1, y2, type),
+**Fungsi Solusi:** `func rectangleArea(rectangles [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,26 +50,26 @@ func rectangleArea(rectangles [][]int) int {
 		events = append(events, event{r[0], r[1], r[2], 1})
 		events = append(events, event{r[3], r[1], r[2], -1})
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(events, func(i, j int) bool {
 		return events[i].x < events[j].x
 	})
 
 	// Coordinate compress y values
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	ys := make(map[int]bool)
 	for _, r := range rectangles {
 		ys[r[1]] = true
 		ys[r[2]] = true
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	ySorted := make([]int, 0, len(ys))
 	for y := range ys {
 		ySorted = append(ySorted, y)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(ySorted)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	yIndex := make(map[int]int)
 	for i, y := range ySorted {
 		yIndex[y] = i
@@ -85,7 +77,7 @@ func rectangleArea(rectangles [][]int) int {
 
 	// Segment for y intervals
 	m := len(ySorted)
-  // Alokasi slice integer
+  // Alokasi slice
 	count := make([]int, m-1) // count[i] = active rectangles covering interval [ySorted[i], ySorted[i+1])
 
 	area := 0

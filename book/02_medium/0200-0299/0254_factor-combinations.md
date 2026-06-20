@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getFactors(n int) [][]int
-```
+**Fungsi Solusi:** `func getFactors(n int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking
 
-**Kompleksitas Waktu:** O(n log n), Space: O(log n)  
-**Kompleksitas Ruang:** O(log n)
+**Waktu:** O(n log n), Space: O(log n)  |  **Ruang:** O(log n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ func getFactors(n int) [][]int {
 	var backtrack func(start, remaining int, path []int)
 	backtrack = func(start, remaining int, path []int) {
 		if len(path) > 0 {
-  // Alokasi slice integer
+  // Alokasi slice
 			combo := make([]int, len(path)+1)
 			copy(combo, path)
 			combo[len(combo)-1] = remaining

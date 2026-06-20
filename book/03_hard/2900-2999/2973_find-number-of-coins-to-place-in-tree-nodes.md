@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func placedCoins(edges [][]int, cost []int) []int64
-```
+**Fungsi Solusi:** `func placedCoins(edges [][]int, cost []int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +42,7 @@ import (
 
 func placedCoins(edges [][]int, cost []int) []int64 {
 	n := len(cost)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][]int, n)
 	for _, e := range edges {
 		a, b := e[0], e[1]
@@ -56,9 +50,9 @@ func placedCoins(edges [][]int, cost []int) []int64 {
 		g[b] = append(g[b], a)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range ans {
 		ans[i] = 1
 	}
@@ -71,7 +65,7 @@ func placedCoins(edges [][]int, cost []int) []int64 {
 				res = append(res, dfs(b, a)...)
 			}
 		}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(res)
 		m := len(res)
 

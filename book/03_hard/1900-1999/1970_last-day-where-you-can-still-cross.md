@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewDSU(n int) *DSU
-```
-
-> **💡 Hint:** Binary search + Union-Find (DSU)
+**Fungsi Solusi:** `func NewDSU(n int) *DSU`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Union-Find (DSU)
+**Teknik:** Binary Search, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +39,9 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Alokasi slice integer
+  // Alokasi slice
 	p := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -85,7 +77,7 @@ func latestDayToCross(row, col int, cells [][]int) int {
 
 	canCross := func(day int) bool {
 		dsu := NewDSU(n + 2)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		land := make([][]bool, row)
 		for i := 0; i < row; i++ {
 			land[i] = make([]bool, col)

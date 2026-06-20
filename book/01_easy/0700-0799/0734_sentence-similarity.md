@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func areSentencesSimilar(sentence1 []string, sentence2 []string, similarPairs [][]string) bool
-```
+**Fungsi Solusi:** `func areSentencesSimilar(sentence1 []string, sentence2 []string, similarPairs [][]string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n + p) where n = len(sentence), p = len(pairs). Space: O(p).  
-**Kompleksitas Ruang:** O(p).
+**Waktu:** O(n + p) where n = len(sentence), p = len(pairs). Space: O(p).  |  **Ruang:** O(p).
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,7 +52,7 @@ func areSentencesSimilar(sentence1 []string, sentence2 []string, similarPairs []
 		return false
 	}
 	// Build bidirectional map
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pairMap := make(map[string]map[string]bool)
 	for _, p := range similarPairs {
 		a, b := p[0], p[1]
@@ -72,7 +66,7 @@ func areSentencesSimilar(sentence1 []string, sentence2 []string, similarPairs []
 		pairMap[b][a] = true
 	}
 
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range sentence1 {
 		w1, w2 := sentence1[i], sentence2[i]
 		if w1 == w2 {

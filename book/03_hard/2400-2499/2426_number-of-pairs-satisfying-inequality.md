@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newBIT(size int) *BIT
-```
+**Fungsi Solusi:** `func newBIT(size int) *BIT`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Fenwick Tree (BIT)
+**Teknik:** Two Pointer, Sorting, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -70,19 +64,19 @@ func numberOfPairs(input [][]int, diff int) int64 {
 	nums1, nums2 := input[0], input[1]
 	n := len(nums1)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	arr := make([]int, n)
 	for i := 0; i < n; i++ {
 		arr[i] = nums1[i] - nums2[i]
 	}
 
 	// Coordinate compression
-  // Alokasi slice integer
+  // Alokasi slice
 	allVals := make([]int, 0, n*2)
 	for _, v := range arr {
 		allVals = append(allVals, v, v+diff)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(allVals)
 	uniq := 1
 	for i := 1; i < len(allVals); i++ {

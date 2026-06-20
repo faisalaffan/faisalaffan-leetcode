@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func matchAlphanumericalPattern(board [][]int, pattern [][]byte) []int
-```
+**Fungsi Solusi:** `func matchAlphanumericalPattern(board [][]int, pattern [][]byte) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(R*C*P*Q)  
-**Kompleksitas Ruang:** O(min(26, 10))
+**Waktu:** O(R*C*P*Q)  |  **Ruang:** O(min(26, 10))
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -83,12 +77,12 @@ func matchAlphanumericalPattern(board [][]int, pattern [][]byte) []int {
 }
 
 func matches(board [][]int, pattern [][]byte, r, c int) bool {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	charToDigit := make(map[byte]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	digitToChar := make(map[int]byte)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(pattern); i++ {
 		for j := 0; j < len(pattern[0]); j++ {
 			ch := pattern[i][j]

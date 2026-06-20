@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findAllPeople(n int, meetings [][]int, firstPerson int) []int
-```
-
-> **💡 Hint:** Time-sorted Union-Find.
+**Fungsi Solusi:** `func findAllPeople(n int, meetings [][]int, firstPerson int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,15 +61,15 @@ func main() {
 
 func findAllPeople(n int, meetings [][]int, firstPerson int) []int {
 	// Sort meetings by time
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(meetings, func(i, j int) bool {
 		return meetings[i][2] < meetings[j][2]
 	})
 
 	// Union-Find structure
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range parent {
 		parent[i] = i
 	}
@@ -114,7 +106,7 @@ func findAllPeople(n int, meetings [][]int, firstPerson int) []int {
 		}
 
 		// Collect unique people in this time group
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		people := make(map[int]bool)
 		for k := i; k < j; k++ {
 			people[meetings[k][0]] = true

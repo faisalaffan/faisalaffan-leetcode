@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor() OrderManagementSystem
-```
+**Fungsi Solusi:** `func Constructor() OrderManagementSystem`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -108,12 +102,12 @@ func (o *OrderManagementSystem) GetOrdersAtPrice(orderType string, price int) []
 	if o.priceLookup[price] == nil || o.priceLookup[price][orderType] == nil {
 		return []int{}
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0, len(o.priceLookup[price][orderType]))
 	for id := range o.priceLookup[price][orderType] {
 		result = append(result, id)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

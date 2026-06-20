@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findSolution(customfunction customFunction, z int) [][]int
-```
+**Fungsi Solusi:** `func findSolution(customfunction customFunction, z int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Monotonic Stack/Queue
+**Teknik:** Monotonic Stack
 
-**Kompleksitas Waktu:** O(x + y) where x,y in [1, 1000]  
-**Kompleksitas Ruang:** O(n) for result
+**Waktu:** O(x + y) where x,y in [1, 1000]  |  **Ruang:** O(n) for result
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Monotonic Stack/Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Monotonic Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ import (
 type customFunction func(int, int) int
 
 func findSolution(customfunction customFunction, z int) [][]int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
 	x, y := 1, 1000
 

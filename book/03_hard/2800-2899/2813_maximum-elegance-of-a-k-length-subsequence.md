@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findMaximumElegance(items [][]int, k int) int64
-```
+**Fungsi Solusi:** `func findMaximumElegance(items [][]int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
+**Teknik:** HashMap, Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +54,7 @@ func (h *MinHeap) Pop() any {
 }
 
 func findMaximumElegance(items [][]int, k int) int64 {
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(items, func(i, j int) bool {
 		return items[i][0] > items[j][0]
 	})
@@ -70,7 +64,7 @@ func findMaximumElegance(items [][]int, k int) int64 {
 
 	totalProfit := int64(0)
 	distinct := 0
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seenCategory := make(map[int]bool)
 	best := int64(0)
 	n := len(items)
@@ -79,7 +73,7 @@ func findMaximumElegance(items [][]int, k int) int64 {
 		profit, cat := items[i][0], items[i][1]
 		totalProfit += int64(profit)
 		if seenCategory[cat] {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, profit)
 		} else {
 			seenCategory[cat] = true
@@ -98,7 +92,7 @@ func findMaximumElegance(items [][]int, k int) int64 {
 			continue
 		}
 
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		smallest := heap.Pop(h).(int)
 		totalProfit -= int64(smallest)
 		totalProfit += int64(profit)

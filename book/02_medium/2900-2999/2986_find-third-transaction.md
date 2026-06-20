@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findThirdTransaction(transactions []Transaction) []ThirdTransactionResult
-```
+**Fungsi Solusi:** `func findThirdTransaction(transactions []Transaction) []ThirdTransactionResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,7 +55,7 @@ type ThirdTransactionResult struct {
 // n = number of transactions per user, overall O(n log n) due to sorting.
 func findThirdTransaction(transactions []Transaction) []ThirdTransactionResult {
 	// Group transactions by user_id.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userTxns := make(map[int][]Transaction)
 	for _, t := range transactions {
 		userTxns[t.UserID] = append(userTxns[t.UserID], t)
@@ -74,7 +68,7 @@ func findThirdTransaction(transactions []Transaction) []ThirdTransactionResult {
 			continue
 		}
 		// Sort by transaction_date ASC.
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(txns, func(i, j int) bool {
 			return txns[i].TransactionDate < txns[j].TransactionDate
 		})
@@ -94,7 +88,7 @@ func findThirdTransaction(transactions []Transaction) []ThirdTransactionResult {
 	}
 
 	// Order by user_id ASC.
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].UserID < results[j].UserID
 	})

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxAverageRatio(classes [][]int, extraStudents int) float64
-```
+**Fungsi Solusi:** `func maxAverageRatio(classes [][]int, extraStudents int) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O((n+k) log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n+k) log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -66,23 +60,23 @@ func maxAverageRatio(classes [][]int, extraStudents int) float64 {
 	for _, c := range classes {
 		pass, total := c[0], c[1]
 		gain := float64(pass+1)/float64(total+1) - float64(pass)/float64(total)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, Class{pass, total, gain})
 	}
 
 	for i := 0; i < extraStudents; i++ {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		c := heap.Pop(h).(Class)
 		c.pass++
 		c.total++
 		c.gain = float64(c.pass+1)/float64(c.total+1) - float64(c.pass)/float64(c.total)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, c)
 	}
 
 	sum := 0.0
 	for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		c := heap.Pop(h).(Class)
 		sum += float64(c.pass) / float64(c.total)
 	}

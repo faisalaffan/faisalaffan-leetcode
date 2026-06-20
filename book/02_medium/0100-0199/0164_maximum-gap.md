@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumGap(nums []int) int
-```
+**Fungsi Solusi:** `func maximumGap(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Bitmask
+**Waktu:** O(n), Space: O(n) using bucket sort (Pigeonhole Principle)  |  **Ruang:** O(n) using bucket sort (Pigeonhole Principle)
 
-**Kompleksitas Waktu:** O(n), Space: O(n) using bucket sort (Pigeonhole Principle)  
-**Kompleksitas Ruang:** O(n) using bucket sort (Pigeonhole Principle)
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,11 +50,11 @@ func maximumGap(nums []int) int {
 	bucketSize := max(1, (maxVal-minVal)/(n-1))
 	bucketCount := (maxVal-minVal)/bucketSize + 1
 
-  // Alokasi slice integer
+  // Alokasi slice
 	bucketMin := make([]int, bucketCount)
-  // Alokasi slice integer
+  // Alokasi slice
 	bucketMax := make([]int, bucketCount)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range bucketMin {
 		bucketMin[i] = 1<<31 - 1
 		bucketMax[i] = -1 << 31

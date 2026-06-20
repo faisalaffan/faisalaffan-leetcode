@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func kSum(nums []int, k int) int64
-```
-
-> **💡 Hint:** // 1. Compute the maximum sum = sum of all positive numbers.
+**Fungsi Solusi:** `func kSum(nums []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -82,7 +74,7 @@ func kSum(nums []int, k int) int64 {
 
 	// Sum of all positive numbers
 	var maxSum int64
-  // Alokasi slice integer
+  // Alokasi slice
 	absVals := make([]int64, 0, n)
 	for _, v := range nums {
 		if v > 0 {
@@ -96,7 +88,7 @@ func kSum(nums []int, k int) int64 {
 	}
 
 	// Sort by absolute value
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(absVals, func(i, j int) bool {
 		return absVals[i] < absVals[j]
 	})
@@ -105,25 +97,25 @@ func kSum(nums []int, k int) int64 {
 	// ans[0] = maxSum (largest subsequence sum = sum of all positives)
 	// ans[1..k-1] generated from heap
 	h := &MinHeap{}
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(h, Item{sum: maxSum - absVals[0], idx: 0})
 
 	var ans int64 = maxSum
 
 	for i := 1; i < k; i++ {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		it := heap.Pop(h).(Item)
 		ans = it.sum
 
 		if it.idx+1 < n {
 			// Extend: subtract the next value
 			nextSum := it.sum - absVals[it.idx+1]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, Item{sum: nextSum, idx: it.idx + 1})
 
 			// Replace: undo current subtraction and subtract the next
 			replaceSum := it.sum + absVals[it.idx] - absVals[it.idx+1]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, Item{sum: replaceSum, idx: it.idx + 1})
 		}
 	}

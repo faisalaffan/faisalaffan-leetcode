@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func topThreeWineries(data []Winery) []string
-```
+**Fungsi Solusi:** `func topThreeWineries(data []Winery) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Trie
+**Teknik:** HashMap, Sorting, Trie
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,7 +44,7 @@ type Winery struct {
 
 func topThreeWineries(data []Winery) []string {
 	type key struct{ country, winery string }
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	totals := make(map[key]int)
 	for _, w := range data {
 		k := key{w.Country, w.Winery}
@@ -61,7 +55,7 @@ func topThreeWineries(data []Winery) []string {
 		name   string
 		points int
 	}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	byCountry := make(map[string][]wineryScore)
 	for k, pts := range totals {
 		byCountry[k.country] = append(byCountry[k.country], wineryScore{k.winery, pts})
@@ -76,7 +70,7 @@ func topThreeWineries(data []Winery) []string {
 	var result []string
 	for _, c := range countries {
 		list := byCountry[c]
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(list, func(i, j int) bool {
 			if list[i].points != list[j].points {
 				return list[i].points > list[j].points

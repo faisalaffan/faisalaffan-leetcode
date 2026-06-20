@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ZeroArrayTransformationIv(nums []int, queries [][]int) int
-```
+**Fungsi Solusi:** `func ZeroArrayTransformationIv(nums []int, queries [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,6 +52,7 @@ func ZeroArrayTransformationIv(nums []int, queries [][]int) int {
 	// queries[i] = [l, r, val] meaning we can subtract val in range [l, r]
 	minQueries := -1
 	left, right := 0, len(queries)
+  // Binary search loop
 	for left <= right {
 		mid := left + (right-left)/2
 		if canTransform(nums, queries, mid) {
@@ -73,7 +68,7 @@ func ZeroArrayTransformationIv(nums []int, queries [][]int) int {
 func canTransform(nums []int, queries [][]int, k int) bool {
 	n := len(nums)
 	// diff array to apply range updates
-  // Alokasi slice integer
+  // Alokasi slice
 	diff := make([]int, n+1)
 	for i := 0; i < k && i < len(queries); i++ {
 		l, r, val := queries[i][0], queries[i][1], queries[i][2]

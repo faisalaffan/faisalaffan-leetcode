@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan aturan permainan. Tugasmu menentukan pemenang atau skor optimal.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** DP dari end-state mundur ke awal. Atau analisis pola matematika.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CanReach(s string, minJump int, maxJump int) bool
-```
+**Fungsi Solusi:** `func CanReach(s string, minJump int, maxJump int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum
+**Teknik:** Two Pointer, DP, Prefix Sum
 
-**Kompleksitas Waktu:** O(n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,7 +43,7 @@ func CanReach(s string, minJump int, maxJump int) bool {
 	}
 
 	dp := make([]bool, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, n+1)
 	dp[0] = true
 	prefix[1] = 1

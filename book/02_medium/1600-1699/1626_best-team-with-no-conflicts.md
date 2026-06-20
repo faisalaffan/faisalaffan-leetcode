@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func BestTeamScore(scores []int, ages []int) int
-```
+**Fungsi Solusi:** `func BestTeamScore(scores []int, ages []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP, Sorting
 
-**Kompleksitas Waktu:** O(N^2), Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N^2), Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,14 +41,14 @@ func main() {
 func BestTeamScore(scores []int, ages []int) int {
 	// Time: O(N^2), Space: O(N)
 	n := len(scores)
-  // Alokasi slice integer
+  // Alokasi slice
 	players := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		players[i] = [2]int{ages[i], scores[i]}
 	}
 
 	// Sort by age, then by score
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(players, func(i, j int) bool {
 		if players[i][0] != players[j][0] {
 			return players[i][0] < players[j][0]
@@ -63,7 +57,7 @@ func BestTeamScore(scores []int, ages []int) int {
 	})
 
 	// LIS-like DP
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n)
 	maxScore := 0
 

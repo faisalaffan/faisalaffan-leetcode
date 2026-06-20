@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfZigzagArrays(n int, l int, r int) int
-```
-
-> **💡 Hint:** DP tracking last two values to enforce zigzag property.
+**Fungsi Solusi:** `func numberOfZigzagArrays(n int, l int, r int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Monotonic Stack/Queue
+**Teknik:** DP, Prefix Sum, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,19 +61,19 @@ func numberOfZigzagArrays(n int, l int, r int) int {
 	m := r - l + 1
 	// DP based on last value
 	// For position i, track dp[val] = count ending with val
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, m+2)
 	for v := 1; v <= m; v++ {
 		dp[v] = 1
 	}
 
 	for pos := 2; pos <= n; pos++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		prefix := make([]int, m+2)
 		for v := 1; v <= m; v++ {
 			prefix[v] = (prefix[v-1] + dp[v]) % ZMOD
 		}
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, m+2)
 
 		if pos == 2 {

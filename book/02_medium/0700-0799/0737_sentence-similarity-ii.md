@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func areSentencesSimilarTwo(words1 []string, words2 []string, pairs [][]string) bool
-```
+**Fungsi Solusi:** `func areSentencesSimilarTwo(words1 []string, words2 []string, pairs [][]string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** HashMap, Union-Find
 
-**Kompleksitas Waktu:** O(n * alpha(n))  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n * alpha(n))  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ func areSentencesSimilarTwo(words1 []string, words2 []string, pairs [][]string) 
 		return false
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	parent := make(map[string]string)
 
 	var find func(x string) string
@@ -76,7 +70,7 @@ func areSentencesSimilarTwo(words1 []string, words2 []string, pairs [][]string) 
 		union(p[0], p[1])
 	}
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(words1); i++ {
 		if words1[i] == words2[i] {
 			continue

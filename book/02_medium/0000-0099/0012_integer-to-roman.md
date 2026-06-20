@@ -4,25 +4,18 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string berisi angka Romawi. Tugasmu adalah mengkonversinya ke integer.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+Simbol: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Aturan: simbol kecil di DEPAN simbol besar → kurangi (IV=4). Simbol kecil di BELAKANG → tambah (VI=6).
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+**Cara berpikir:** Iterasi dari kiri ke kanan. Kalau nilai saat ini < nilai berikutnya → kurangi. Selain itu → tambahkan.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func intToRoman(num int) string
-```
+**Fungsi Solusi:** `func intToRoman(num int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(1)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(1)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -40,7 +33,7 @@ func intToRoman(num int) string {
 	symbols := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
 
 	result := ""
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(values); i++ {
 		for num >= values[i] {
 			result += symbols[i]

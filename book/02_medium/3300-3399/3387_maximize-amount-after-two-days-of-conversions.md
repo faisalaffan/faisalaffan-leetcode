@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxAmount(initialCurrency string, pairs1 [][]string, rates1 []float64, pairs2 [][]string, rates2 []float64) float64
-```
+**Fungsi Solusi:** `func maxAmount(initialCurrency string, pairs1 [][]string, rates1 []float64, pairs2 [][]string, rates2 []float64) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n1 + n2) Space: O(currencies)  
-**Kompleksitas Ruang:** O(currencies)
+**Waktu:** O(n1 + n2) Space: O(currencies)  |  **Ruang:** O(currencies)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,12 +37,12 @@ func main() {
 
 func maxAmount(initialCurrency string, pairs1 [][]string, rates1 []float64, pairs2 [][]string, rates2 []float64) float64 {
 	// Day 1: Bellman-Ford to find max amount of each currency
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	amounts1 := make(map[string]float64)
 	amounts1[initialCurrency] = 1.0
 
 	// Run Bellman-Ford (or just process all pairs repeatedly)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(pairs1); i++ {
 		updated := false
 		for j, p := range pairs1 {
@@ -73,13 +67,13 @@ func maxAmount(initialCurrency string, pairs1 [][]string, rates1 []float64, pair
 	}
 
 	// Day 2: start with day1 amounts, find max back to initial
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	amounts2 := make(map[string]float64)
 	for k, v := range amounts1 {
 		amounts2[k] = v
 	}
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(pairs2); i++ {
 		updated := false
 		for j, p := range pairs2 {

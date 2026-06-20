@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func isSolvable(words []string, result string) bool
-```
-
-> **💡 Hint:** Backtracking with digit assignment.
+**Fungsi Solusi:** `func isSolvable(words []string, result string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Backtracking
+**Teknik:** HashMap, Backtracking
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,10 +36,10 @@ package main
 import "fmt"
 
 func isSolvable(words []string, result string) bool {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	letterSet := make(map[byte]bool)
 	addLetters := func(s string) {
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(s); i++ {
 			letterSet[s[i]] = true
 		}
@@ -65,7 +57,7 @@ func isSolvable(words []string, result string) bool {
 		return false
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	nonZero := make(map[byte]bool)
 	for _, w := range words {
 		if len(w) > 1 {
@@ -76,7 +68,7 @@ func isSolvable(words []string, result string) bool {
 		nonZero[result[0]] = true
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	mapping := make(map[byte]int)
 	used := make([]bool, 10)
 
@@ -86,14 +78,14 @@ func isSolvable(words []string, result string) bool {
 			sum := 0
 			for _, w := range words {
 				val := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 				for i := 0; i < len(w); i++ {
 					val = val*10 + mapping[w[i]]
 				}
 				sum += val
 			}
 			res := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 			for i := 0; i < len(result); i++ {
 				res = res*10 + mapping[result[i]]
 			}

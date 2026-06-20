@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lexSmallestAfterDeletion(s string) string
-```
-
-> **💡 Hint:** Monotonic stack. Track last occurrence of each char.
+**Fungsi Solusi:** `func lexSmallestAfterDeletion(s string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
+**Teknik:** Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,9 +49,9 @@ func main() {
 }
 
 func lexSmallestAfterDeletion(s string) string {
-  // Alokasi slice integer
+  // Alokasi slice
 	lastPos := make([]int, 26)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range lastPos {
 		lastPos[i] = -1
 	}
@@ -70,7 +62,7 @@ func lexSmallestAfterDeletion(s string) string {
 	used := make([]bool, 26)
 	stack := make([]byte, 0, len(s))
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		c := s[i] - 'a'
 		if used[c] {

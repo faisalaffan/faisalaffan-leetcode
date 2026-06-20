@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func largestIsland(grid [][]int) int
-```
-
-> **💡 Hint:** DFS labeling with Union-Find
+**Fungsi Solusi:** `func largestIsland(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS, Union-Find (DSU)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -89,7 +81,7 @@ func largestIsland(grid [][]int) int {
 
 	// Label each island with a unique ID (2, 3, 4, ...)
 	id := 2
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	size := make(map[int]int)
 
 	var dfs func(i, j, id int) int
@@ -133,7 +125,7 @@ func largestIsland(grid [][]int) int {
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
 			if grid[i][j] == 0 {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 				seen := make(map[int]bool)
 				total := 1 // the flipped cell
 				for _, d := range dirs {

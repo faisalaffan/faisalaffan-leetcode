@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findShortestCycle(n int, edges [][]int) int
-```
+**Fungsi Solusi:** `func findShortestCycle(n int, edges [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -44,7 +35,7 @@ import (
 //
 // Complexity: O(n * (n+m)) time, O(n+m) space
 func findShortestCycle(n int, edges [][]int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -55,15 +46,15 @@ func findShortestCycle(n int, edges [][]int) int {
 	ans := math.MaxInt32
 
 	for start := 0; start < n; start++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		dist := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range dist {
 			dist[i] = -1
 		}
-  // Alokasi slice integer
+  // Alokasi slice
 		parent := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range parent {
 			parent[i] = -1
 		}

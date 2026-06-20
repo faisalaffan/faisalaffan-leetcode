@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func dfs(a, b, n int) []int
-```
+**Fungsi Solusi:** `func dfs(a, b, n int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming, Bitmask
+**Teknik:** HashMap, DFS, DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +54,7 @@ func dfs(a, b, n int) []int {
 	pairB := min(b, n-1-b)
 
 	// Other pair indices (0..pairs-1), excluding pairA and pairB
-  // Alokasi slice integer
+  // Alokasi slice
 	otherPairs := make([]int, 0)
 	for i := 0; i < pairs; i++ {
 		if i != pairA && i != pairB {
@@ -73,9 +67,9 @@ func dfs(a, b, n int) []int {
 	m := len(otherPairs)
 
 	for mask := 0; mask < (1 << m); mask++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		winners := make([]int, half)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range winners {
 			winners[i] = -1
 		}

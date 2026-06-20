@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func kthSmallest(parent []int, vals []int, queries [][]int) []int
-```
-
-> **💡 Hint:** DFS to compute root-to-node XOR. For each subtree, collect distinct
+**Fungsi Solusi:** `func kthSmallest(parent []int, vals []int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Binary Search
+**Teknik:** HashMap, Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,12 +50,12 @@ func main() {
 
 func kthSmallest(parent []int, vals []int, queries [][]int) []int {
 	n := len(parent)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return []int{}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	children := make([][]int, n)
 	root := -1
 	for i := 0; i < n; i++ {
@@ -75,7 +67,7 @@ func kthSmallest(parent []int, vals []int, queries [][]int) []int {
 	}
 
 	// Compute root-to-node XOR
-  // Alokasi slice integer
+  // Alokasi slice
 	xorToRoot := make([]int, n)
 	var dfsXor func(u int, x int)
 	dfsXor = func(u int, x int) {
@@ -89,11 +81,11 @@ func kthSmallest(parent []int, vals []int, queries [][]int) []int {
 
 	// For each node, collect distinct XOR values in its subtree
 	// Map node -> sorted list of distinct XOR values
-  // Alokasi slice integer
+  // Alokasi slice
 	subtreeXors := make([]map[int]bool, n)
 	var dfsCollect func(u int) map[int]bool
 	dfsCollect = func(u int) map[int]bool {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		set := make(map[int]bool)
 		set[xorToRoot[u]] = true
 		for _, v := range children[u] {
@@ -112,17 +104,17 @@ func kthSmallest(parent []int, vals []int, queries [][]int) []int {
 	dfsCollect(root)
 
 	// Sort subtree XOR values for binary search
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	sortedXors := make([][]int, n)
 	for i := 0; i < n; i++ {
 		for x := range subtreeXors[i] {
 			sortedXors[i] = append(sortedXors[i], x)
 		}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(sortedXors[i])
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(queries))
 	for qi, q := range queries {
 		u, k := q[0], q[1]

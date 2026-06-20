@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewUnionFind(n int) *UnionFind
-```
-
-> **💡 Hint:** Union-Find (Disjoint Set Union) with path compression and union by size.
+**Fungsi Solusi:** `func NewUnionFind(n int) *UnionFind`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Union-Find** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -74,9 +66,9 @@ type UnionFind struct {
 
 // NewUnionFind creates a new UnionFind for n elements.
 func NewUnionFind(n int) *UnionFind {
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	size := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -118,14 +110,14 @@ func numIslands2(m int, n int, positions [][]int) []int {
 		return []int{}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	grid := make([][]bool, m)
 	for i := 0; i < m; i++ {
 		grid[i] = make([]bool, n)
 	}
 
 	uf := NewUnionFind(m * n)
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0, len(positions))
 	islands := 0
 

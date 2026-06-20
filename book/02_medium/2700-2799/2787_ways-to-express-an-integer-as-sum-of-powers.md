@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int
-```
+**Fungsi Solusi:** `func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,7 +34,7 @@ func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int {
 	const mod = 1_000_000_007
 
 	// Generate powers
-  // Alokasi slice integer
+  // Alokasi slice
 	powers := make([]int, 0)
 	for i := 1; ; i++ {
 		p := 1
@@ -53,7 +47,7 @@ func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int {
 		powers = append(powers, p)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n+1)
 	dp[0] = 1
 

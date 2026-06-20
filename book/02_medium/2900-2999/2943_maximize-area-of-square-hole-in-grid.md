@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximizeSquareArea(m int, n int, hBars []int, vBars []int) int
-```
+**Fungsi Solusi:** `func maximizeSquareArea(m int, n int, hBars []int, vBars []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(h log h + v log v)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(h log h + v log v)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +42,7 @@ func maximizeSquareArea(m int, n int, hBars []int, vBars []int) int {
 	calc := func(nums []int, limit int) int {
 		nums = append(nums, 1)
 		nums = append(nums, limit)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(nums)
 		ans, cnt := 1, 1
 		for i := 1; i < len(nums); i++ {

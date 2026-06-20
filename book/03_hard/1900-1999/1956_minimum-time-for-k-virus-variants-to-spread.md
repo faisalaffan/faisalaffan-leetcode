@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minTimeForKVirusVariantsToSpread(points [][]int, k int) int
-```
+**Fungsi Solusi:** `func minTimeForKVirusVariantsToSpread(points [][]int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Binary Search
+**Teknik:** HashMap, Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -124,7 +118,7 @@ func canMeet(points [][]int, k, T int) bool {
 	}
 
 	var events []event
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	vSet := make(map[int]bool)
 
 	for _, p := range points {
@@ -142,24 +136,24 @@ func canMeet(points [][]int, k, T int) bool {
 	for v := range vSet {
 		vVals = append(vVals, v)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(vVals)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	vComp := make(map[int]int)
 	for i, v := range vVals {
 		vComp[v] = i
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(events, func(i, j int) bool {
 		return events[i].u < events[j].u
 	})
 
 	// Difference array over compressed v
-  // Alokasi slice integer
+  // Alokasi slice
 	diff := make([]int, len(vVals)+1)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(events); {
 		curU := events[i].u
 		// Apply all events at this u

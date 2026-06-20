@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewBIT(size int) *BIT
-```
-
-> **💡 Hint:** Fenwick Tree (Binary Indexed Tree) for O(log n) counting
+**Fungsi Solusi:** `func NewBIT(size int) *BIT`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Fenwick Tree (BIT)
+**Teknik:** HashMap, Sorting, Fenwick Tree
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -86,12 +78,12 @@ func ResultArray(nums []int) []int {
 	n := len(nums)
 
 	// Coordinate compression
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, n)
 	copy(sorted, nums)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(sorted)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	coord := make(map[int]int)
 	for i, v := range sorted {
 		if _, ok := coord[v]; !ok {

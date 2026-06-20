@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func SortingThreeGroups(nums []int) int
-```
+**Fungsi Solusi:** `func SortingThreeGroups(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -39,7 +33,7 @@ import "fmt"
 func SortingThreeGroups(nums []int) int {
 	n := len(nums)
 	// dp[i][j] = min operations to make first i+1 elements sorted with last element == j+1
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([][3]int, n+1)
 
 	for i := 1; i <= n; i++ {

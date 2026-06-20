@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minWindow(S string, T string) string
-```
+**Fungsi Solusi:** `func minWindow(S string, T string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window, Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,7 +52,7 @@ func minWindow(S string, T string) string {
 	// Precompute next occurrence of each character from each position
 	// nextPos[i][char] = smallest index >= i such that S[index] == char
 	const totalChars = 26
-  // Alokasi slice integer
+  // Alokasi slice
 	nextPos := make([][totalChars]int, m+1)
 	for c := 0; c < totalChars; c++ {
 		nextPos[m][c] = math.MaxInt32

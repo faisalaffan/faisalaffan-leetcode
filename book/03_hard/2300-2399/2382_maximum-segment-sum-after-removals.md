@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumSegmentSum(nums []int, removeQueries []int) []int64
-```
-
-> **💡 Hint:** Process removals in reverse. Start with all elements removed and
+**Fungsi Solusi:** `func maximumSegmentSum(nums []int, removeQueries []int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Union-Find (DSU)
+**Teknik:** Two Pointer, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,9 +41,9 @@ import "fmt"
 func maximumSegmentSum(nums []int, removeQueries []int) []int64 {
 	n := len(nums)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	segSum := make([]int64, n)
 	active := make([]bool, n)
 
@@ -67,7 +59,7 @@ func maximumSegmentSum(nums []int, removeQueries []int) []int64 {
 		return parent[x]
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, n)
 	var maxSum int64
 

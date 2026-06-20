@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func longestSpecialPath(edges [][]int, nums []int) []int
-```
-
-> **💡 Hint:** DFS with hash set tracking edge weights used along the path.
+**Fungsi Solusi:** `func longestSpecialPath(edges [][]int, nums []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS, Backtracking
+**Teknik:** HashMap, DFS, Backtracking
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,12 +48,12 @@ func main() {
 
 func longestSpecialPath(edges [][]int, nums []int) []int {
 	n := len(nums)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return []int{0, 0}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -94,7 +86,7 @@ func longestSpecialPath(edges [][]int, nums []int) []int {
 
 	// For each starting node, do DFS
 	for start := 0; start < n; start++ {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		used := make(map[int]bool)
 		dfs(start, -1, used, 0, 1)
 	}

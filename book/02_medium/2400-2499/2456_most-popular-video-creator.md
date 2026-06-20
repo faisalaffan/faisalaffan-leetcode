@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func mostPopularCreator(creators []string, ids []string, views []int) [][]string
-```
+**Fungsi Solusi:** `func mostPopularCreator(creators []string, ids []string, views []int) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -52,7 +46,7 @@ type Creator struct {
 }
 
 func mostPopularCreator(creators []string, ids []string, views []int) [][]string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	creatorsMap := make(map[string]*Creator)
 	maxTotal := 0
 
@@ -72,7 +66,7 @@ func mostPopularCreator(creators []string, ids []string, views []int) [][]string
 		}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	ans := make([][]string, 0)
 	for name, c := range creatorsMap {
 		if c.total == maxTotal {

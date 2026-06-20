@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func calculateSalaries(employees []Employee) map[int]int
-```
+**Fungsi Solusi:** `func calculateSalaries(employees []Employee) map[int]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ type Employee struct {
 // calculateSalaries computes post-tax salaries for all employees.
 func calculateSalaries(employees []Employee) map[int]int {
 	// Find max salary per department
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	deptMax := make(map[string]int)
 	for _, e := range employees {
 		if e.Salary > deptMax[e.Department] {
@@ -60,7 +54,7 @@ func calculateSalaries(employees []Employee) map[int]int {
 	}
 
 	// Calculate tax rate per department and apply to each employee
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	result := make(map[int]int)
 	for _, e := range employees {
 		maxSal := deptMax[e.Department]

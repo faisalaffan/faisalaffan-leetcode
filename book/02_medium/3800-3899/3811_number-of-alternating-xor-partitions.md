@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NumberOfAlternatingXorPartitions(nums []int, target1 int, target2 int) int
-```
-
-> **💡 Hint:** DP with prefix XOR and two hash maps to track alternating pattern.
+**Fungsi Solusi:** `func NumberOfAlternatingXorPartitions(nums []int, target1 int, target2 int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming, Prefix Sum
+**Teknik:** HashMap, DP, Prefix Sum
 
-**Kompleksitas Waktu:** O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,9 +34,9 @@ import "fmt"
 const MOD = 1000000007
 
 func NumberOfAlternatingXorPartitions(nums []int, target1 int, target2 int) int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	cnt1 := make(map[int]int) // ends with target1
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	cnt2 := make(map[int]int) // ends with target2
 
 	cnt2[0] = 1

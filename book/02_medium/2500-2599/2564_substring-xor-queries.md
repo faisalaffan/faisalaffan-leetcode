@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func substringXorQueries(s string, queries [][]int) [][]int
-```
+**Fungsi Solusi:** `func substringXorQueries(s string, queries [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n * 31 + q)  
-**Kompleksitas Ruang:** O(n * 31)
+**Waktu:** O(n * 31 + q)  |  **Ruang:** O(n * 31)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -39,7 +33,7 @@ import "fmt"
 func substringXorQueries(s string, queries [][]int) [][]int {
 	// For each possible value, store earliest [l, r]
 	n := len(s)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	posMap := make(map[int][2]int)
 
 	// For each starting position, compute values up to 31 bits (since val <= 10^9 < 2^30)
@@ -59,7 +53,7 @@ func substringXorQueries(s string, queries [][]int) [][]int {
 		}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	ans := make([][]int, len(queries))
 	for idx, q := range queries {
 		first, second := q[0], q[1]

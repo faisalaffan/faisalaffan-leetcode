@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newMedianKeeper(m int) *medianKeeper
-```
-
-> **💡 Hint:** Sliding window with two heaps (lazy deletion)
+**Fungsi Solusi:** `func newMedianKeeper(m int) *medianKeeper`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Sliding Window, Heap / Priority Queue, Stack
+**Teknik:** HashMap, Two Pointer, Sliding Window, Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -103,11 +95,11 @@ func newMedianKeeper(m int) *medianKeeper {
 
 func (mk *medianKeeper) add(val int) {
 	if mk.small.Len() > 0 && val <= (*mk.small)[0] {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(mk.small, val)
 		mk.sum += int64(val)
 	} else {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(mk.large, val)
 	}
 	mk.rebalance()
@@ -124,7 +116,7 @@ func (mk *medianKeeper) remove(val int) {
 
 	// Clean top of small heap
 	for mk.small.Len() > 0 && mk.lazy[(*mk.small)[0]] > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		popped := heap.Pop(mk.small).(int)
 		mk.lazy[popped]--
 		if mk.lazy[popped] == 0 {
@@ -136,7 +128,7 @@ func (mk *medianKeeper) remove(val int) {
 
 	// Clean top of large heap
 	for mk.large.Len() > 0 && mk.lazy[(*mk.large)[0]] > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		popped := heap.Pop(mk.large).(int)
 		mk.lazy[popped]--
 		if mk.lazy[popped] == 0 {
@@ -148,15 +140,15 @@ func (mk *medianKeeper) remove(val int) {
 func (mk *medianKeeper) rebalance() {
 	// Move excess from small to large
 	for mk.small.Len() > mk.m {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		popped := heap.Pop(mk.small).(int)
 		mk.sum -= int64(popped)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(mk.large, popped)
 	}
 	// Move from large to small if needed
 	for mk.small.Len() < mk.m && mk.large.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		popped := heap.Pop(mk.large).(int)
 		// Skip if this element was lazy-deleted
 		if mk.lazy[popped] > 0 {
@@ -167,7 +159,7 @@ func (mk *medianKeeper) rebalance() {
 			continue
 		}
 		mk.sum += int64(popped)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(mk.small, popped)
 	}
 }

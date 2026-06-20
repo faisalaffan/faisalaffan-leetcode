@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu adalah memeriksa apakah string tersebut palindrome — dibaca sama dari depan dan belakang. Abaikan non-alfanumerik dan case.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** Two Pointer — kiri dan kanan. Skip non-alfanumerik. Bandingkan.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func partition(s string) [][]string
-```
+**Fungsi Solusi:** `func partition(s string) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking
 
-**Kompleksitas Waktu:** O(n * 2^n)  
-**Kompleksitas Ruang:** O(n^2)
+**Waktu:** O(n * 2^n)  |  **Ruang:** O(n^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,9 +34,9 @@ func partition(s string) [][]string {
 	n := len(s)
 
 	// Precompute palindrome table
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	pal := make([][]bool, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range pal {
 		pal[i] = make([]bool, n)
 	}

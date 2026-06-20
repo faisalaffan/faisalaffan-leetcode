@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumDeletionsForAtMostKDistinctCharacters(s string, k int) int
-```
+**Fungsi Solusi:** `func MinimumDeletionsForAtMostKDistinctCharacters(s string, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n). Space: O(1).  
-**Kompleksitas Ruang:** O(1).
+**Waktu:** O(n log n). Space: O(1).  |  **Ruang:** O(1).
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,13 +40,13 @@ func main() {
 // MinimumDeletionsForAtMostKDistinctCharacters returns min deletions so the string has at most k distinct characters.
 // Time: O(n log n). Space: O(1).
 func MinimumDeletionsForAtMostKDistinctCharacters(s string, k int) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 26)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		freq[s[i]-'a']++
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(freq, func(i, j int) bool {
 		return freq[i] > freq[j]
 	})

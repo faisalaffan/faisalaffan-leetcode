@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array integer dan sebuah target. Tugasmu adalah mencari **dua angka** yang jika dijumlahkan menghasilkan target. Kembalikan **indeks** (posisi) kedua angka.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+Contoh: `nums=[2,7,11,15], target=9` → `2+7=9` → `[0,1]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+**Cara berpikir:** Gunakan HashMap. Untuk setiap angka, cek apakah `target-angka` sudah ada di map. Kalau sudah → ketemu pasangan. Kalau belum → simpan angka ke map.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumXorSum(nums1 []int, nums2 []int) int
-```
+**Fungsi Solusi:** `func minimumXorSum(nums1 []int, nums2 []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,9 +37,9 @@ import (
 func minimumXorSum(nums1 []int, nums2 []int) int {
 	n := len(nums1)
 	size := 1 << n
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, size)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = math.MaxInt32
 	}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FriendsOfAppropriateAges(ages []int) int
-```
+**Fungsi Solusi:** `func FriendsOfAppropriateAges(ages []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n + R) where R = 120  
-**Kompleksitas Ruang:** O(R)
+**Waktu:** O(n + R) where R = 120  |  **Ruang:** O(R)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,13 +37,13 @@ func main() {
 
 // Time: O(n + R) where R = 120 | Space: O(R)
 func FriendsOfAppropriateAges(ages []int) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	cnt := make([]int, 121)
 	for _, age := range ages {
 		cnt[age]++
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, 121)
 	for i := 1; i <= 120; i++ {
 		prefix[i] = prefix[i-1] + cnt[i]

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem
-```
+**Fungsi Solusi:** `func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Merge Sort
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n + m)  
-**Kompleksitas Ruang:** O(n + m)
+**Waktu:** O(n + m)  |  **Ruang:** O(n + m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,7 +39,7 @@ type MapItem struct {
 }
 
 func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	merged := make(map[int]map[string]int)
 
 	for _, item := range arr1 {
@@ -69,7 +63,7 @@ func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem {
 	for id, vals := range merged {
 		result = append(result, MapItem{ID: id, Values: vals})
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].ID < result[j].ID
 	})

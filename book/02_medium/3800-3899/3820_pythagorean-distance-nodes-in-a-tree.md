@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) int
-```
-
-> **💡 Hint:** BFS from each target node x, y, z to compute distances,
+**Fungsi Solusi:** `func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS, Sorting
 
-**Kompleksitas Waktu:** O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,7 +37,7 @@ import (
 
 func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) int {
 	// Build adjacency list
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -55,9 +47,9 @@ func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) 
 
 	// BFS to compute distances from a source
 	bfs := func(src int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 		dist := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range dist {
 			dist[i] = -1
 		}
@@ -83,7 +75,7 @@ func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) 
 	ans := 0
 	for i := 0; i < n; i++ {
 		d := []int{distX[i], distY[i], distZ[i]}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(d)
 		a, b, c := d[0], d[1], d[2]
 		if a*a+b*b == c*c {

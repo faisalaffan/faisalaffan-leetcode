@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countGoodTriplets(nums1 []int, nums2 []int) int64
-```
+**Fungsi Solusi:** `func countGoodTriplets(nums1 []int, nums2 []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Fenwick Tree (BIT)
+**Teknik:** Two Pointer, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,20 +41,20 @@ func main() {
 
 func countGoodTriplets(nums1 []int, nums2 []int) int64 {
 	n := len(nums1)
-  // Alokasi slice integer
+  // Alokasi slice
 	pos1 := make([]int, n)
 	for i, v := range nums1 {
 		pos1[v] = i
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	arr := make([]int, n)
 	for i, v := range nums2 {
 		arr[i] = pos1[v]
 	}
 
 	// leftLess[i] = count of j < i with arr[j] < arr[i]
-  // Alokasi slice integer
+  // Alokasi slice
 	leftLess := make([]int, n)
 	bit := newFenwick(n)
 	for i, v := range arr {
@@ -69,7 +63,7 @@ func countGoodTriplets(nums1 []int, nums2 []int) int64 {
 	}
 
 	// rightGreater[i] = count of j > i with arr[j] > arr[i]
-  // Alokasi slice integer
+  // Alokasi slice
 	rightGreater := make([]int, n)
 	bit = newFenwick(n)
 	for i := n - 1; i >= 0; i-- {

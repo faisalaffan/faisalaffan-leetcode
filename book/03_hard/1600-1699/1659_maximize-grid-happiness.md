@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int) int
-```
+**Fungsi Solusi:** `func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,11 +53,11 @@ func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int)
 	// Precompute for each state:
 	// - rowScore: total happiness within the row
 	// - intro count, extro count
-  // Alokasi slice integer
+  // Alokasi slice
 	rowScore := make([]int, states)
-  // Alokasi slice integer
+  // Alokasi slice
 	introCount := make([]int, states)
-  // Alokasi slice integer
+  // Alokasi slice
 	extroCount := make([]int, states)
 
 	for s := 0; s < states; s++ {
@@ -72,7 +66,7 @@ func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int)
 		inner := 0
 		introCnt := 0
 		extroCnt := 0
-  // Alokasi slice integer
+  // Alokasi slice
 		mask := make([]int, n)
 		for pos := 0; pos < n; pos++ {
 			cell := tmp % 3
@@ -108,7 +102,7 @@ func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int)
 	}
 
 	// Precompute vertical interaction between two states (top row and bottom row)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	vertBetween := make([][]int, states)
 	for s1 := 0; s1 < states; s1++ {
 		vertBetween[s1] = make([]int, states)
@@ -136,7 +130,7 @@ func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int)
 
 	// dp[mask][i][e] = max happiness for processed rows with previous row = mask,
 	// i introverts used, e extroverts used
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][][]int, states)
 	for s := 0; s < states; s++ {
 		dp[s] = make([][]int, introvertsCount+1)
@@ -150,7 +144,7 @@ func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int)
 	dp[0][0][0] = 0 // mask 0 = all empty
 
 	for r := 0; r < m; r++ {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		ndp := make([][][]int, states)
 		for s := 0; s < states; s++ {
 			ndp[s] = make([][]int, introvertsCount+1)

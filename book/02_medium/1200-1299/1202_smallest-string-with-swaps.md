@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newUF(n int) *uf
-```
+**Fungsi Solusi:** `func newUF(n int) *uf`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Sorting, Union-Find
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,9 +44,9 @@ type uf struct {
 }
 
 func newUF(n int) *uf {
-  // Alokasi slice integer
+  // Alokasi slice
 	p := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -89,7 +83,7 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 	}
 
 	// Group indices by root
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[int][]int)
 	for i := 0; i < n; i++ {
 		root := u.find(i)
@@ -102,10 +96,10 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 		for i, idx := range indices {
 			chars[i] = s[idx]
 		}
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(chars, func(i, j int) bool { return chars[i] < chars[j] })
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(indices)
 		for i, idx := range indices {
 			result[idx] = chars[i]

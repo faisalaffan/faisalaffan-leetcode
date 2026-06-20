@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxOfMinValues(nums []int) []int
-```
+**Fungsi Solusi:** `func MaxOfMinValues(nums []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window, Stack
+**Teknik:** Two Pointer, Stack
 
-**Kompleksitas Waktu:** O(n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,24 +37,24 @@ func main() {
 // Time: O(n), Space: O(n)
 func MaxOfMinValues(nums []int) []int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n+1) // result[k] for k-length subarrays
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range result {
 		result[i] = 0
 	}
 
 	// Find previous smaller and next smaller elements
-  // Alokasi slice integer
+  // Alokasi slice
 	left := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	right := make([]int, n)
 	for i := 0; i < n; i++ {
 		left[i] = -1
 		right[i] = n
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	stack := make([]int, 0)
 	for i := 0; i < n; i++ {
 		for len(stack) > 0 && nums[stack[len(stack)-1]] >= nums[i] {

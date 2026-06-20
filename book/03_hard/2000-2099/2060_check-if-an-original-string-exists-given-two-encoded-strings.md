@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func possiblyEquals(s1 string, s2 string) bool
-```
-
-> **💡 Hint:** DP with memoization on (i, j, diff)
+**Fungsi Solusi:** `func possiblyEquals(s1 string, s2 string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,7 +38,7 @@ func possiblyEquals(s1 string, s2 string) bool {
 	// If diff > 0, s1 has extra length (s2 needs to catch up)
 	// If diff < 0, s2 has extra length
 	// Offset diff by 2000 to make it non-negative
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	memo := make(map[[3]int]bool)
 	var dfs func(i, j, diff int) bool
 	dfs = func(i, j, diff int) bool {

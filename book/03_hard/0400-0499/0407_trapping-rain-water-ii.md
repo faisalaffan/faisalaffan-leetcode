@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func trapRainWater(heightMap [][]int) int
-```
+**Fungsi Solusi:** `func trapRainWater(heightMap [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
+**Teknik:** HashMap, BFS, Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -88,7 +82,7 @@ func trapRainWater(heightMap [][]int) int {
 	}
 	rows, cols := len(heightMap), len(heightMap[0])
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][]bool, rows)
 	for r := range visited {
 		visited[r] = make([]bool, cols)
@@ -101,7 +95,7 @@ func trapRainWater(heightMap [][]int) int {
 	for r := 0; r < rows; r++ {
 		for c := 0; c < cols; c++ {
 			if r == 0 || r == rows-1 || c == 0 || c == cols-1 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(h, cell{heightMap[r][c], r, c})
 				visited[r][c] = true
 			}
@@ -112,7 +106,7 @@ func trapRainWater(heightMap [][]int) int {
 	total := 0
 
 	for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(h).(cell)
 		for _, d := range dirs {
 			nr, nc := cur.r+d[0], cur.c+d[1]
@@ -120,10 +114,10 @@ func trapRainWater(heightMap [][]int) int {
 				visited[nr][nc] = true
 				if heightMap[nr][nc] < cur.h {
 					total += cur.h - heightMap[nr][nc]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 					heap.Push(h, cell{cur.h, nr, nc})
 				} else {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 					heap.Push(h, cell{heightMap[nr][nc], nr, nc})
 				}
 			}

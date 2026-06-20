@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindAndReplacePattern(words []string, pattern string) []string
-```
+**Fungsi Solusi:** `func FindAndReplacePattern(words []string, pattern string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n * m) where n = len(words), m = avg word length  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n * m) where n = len(words), m = avg word length  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,12 +50,12 @@ func isMatch(word, pattern string) bool {
 	if len(word) != len(pattern) {
 		return false
 	}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	w2p := make(map[byte]byte)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	p2w := make(map[byte]byte)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(word); i++ {
 		wc, pc := word[i], pattern[i]
 		if v, ok := w2p[wc]; ok && v != pc {

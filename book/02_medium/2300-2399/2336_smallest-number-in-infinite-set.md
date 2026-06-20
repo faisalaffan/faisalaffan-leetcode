@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor() SmallestInfiniteSet
-```
+**Fungsi Solusi:** `func Constructor() SmallestInfiniteSet`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
+**Teknik:** HashMap, Heap
 
-**Kompleksitas Waktu:** O(log n) for pop, O(1) for addBack  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(log n) for pop, O(1) for addBack  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,7 +63,7 @@ func Constructor() SmallestInfiniteSet {
 
 func (this *SmallestInfiniteSet) PopSmallest() int {
 	if this.added.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		val := heap.Pop(this.added).(int)
 		delete(this.addedSet, val)
 		return val
@@ -84,7 +78,7 @@ func (this *SmallestInfiniteSet) AddBack(num int) {
 		return
 	}
 	this.addedSet[num] = true
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(this.added, num)
 }
 

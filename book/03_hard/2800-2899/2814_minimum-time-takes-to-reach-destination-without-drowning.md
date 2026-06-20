@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minTimeToReachWithoutDrowning(land [][]string) int
-```
+**Fungsi Solusi:** `func minTimeToReachWithoutDrowning(land [][]string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +41,9 @@ func minTimeToReachWithoutDrowning(land [][]string) int {
 	n, m := len(land), len(land[0])
 	dirs := [][2]int{{0, 1}, {0, -1}, {1, 0}, {-1, 0}}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	waterTime := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range waterTime {
 		waterTime[i] = make([]int, m)
 		for j := range waterTime[i] {
@@ -58,7 +52,7 @@ func minTimeToReachWithoutDrowning(land [][]string) int {
 	}
 
 	var start, dest [2]int
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([][2]int, 0)
 
 	for i := 0; i < n; i++ {
@@ -96,9 +90,9 @@ func minTimeToReachWithoutDrowning(land [][]string) int {
 	}
 
 	// BFS 2: player path
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	playerTime := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range playerTime {
 		playerTime[i] = make([]int, m)
 		for j := range playerTime[i] {

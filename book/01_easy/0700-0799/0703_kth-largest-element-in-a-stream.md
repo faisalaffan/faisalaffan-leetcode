@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(k int, nums []int) KthLargest
-```
+**Fungsi Solusi:** `func Constructor(k int, nums []int) KthLargest`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O(log k). Space: O(k).  
-**Kompleksitas Ruang:** O(k).
+**Waktu:** O(log k). Space: O(k).  |  **Ruang:** O(k).
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -72,10 +66,10 @@ func Constructor(k int, nums []int) KthLargest {
 // Add adds a new value and returns the kth largest.
 // Time: O(log k). Space: O(k).
 func (kl *KthLargest) Add(val int) int {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(kl.heap, val)
 	if kl.heap.Len() > kl.k {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		heap.Pop(kl.heap)
 	}
 	return (*kl.heap)[0]

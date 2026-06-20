@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FurthestBuilding(heights []int, bricks int, ladders int) int
-```
+**Fungsi Solusi:** `func FurthestBuilding(heights []int, bricks int, ladders int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O(N log K), Space: O(K) where K = ladders  
-**Kompleksitas Ruang:** O(K) where K = ladders
+**Waktu:** O(N log K), Space: O(K) where K = ladders  |  **Ruang:** O(K) where K = ladders
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -65,19 +59,19 @@ func FurthestBuilding(heights []int, bricks int, ladders int) int {
 	h := &IntHeap{}
 	heap.Init(h)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(heights)-1; i++ {
 		diff := heights[i+1] - heights[i]
 		if diff <= 0 {
 			continue
 		}
 
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, diff)
 
 		// If we have more climbs than ladders, use bricks for the smallest climb
 		if h.Len() > ladders {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			bricks -= heap.Pop(h).(int)
 			if bricks < 0 {
 				return i

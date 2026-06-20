@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewUnionFind(n int) *UnionFind
-```
+**Fungsi Solusi:** `func NewUnionFind(n int) *UnionFind`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,9 +38,9 @@ type UnionFind struct {
 }
 
 func NewUnionFind(n int) *UnionFind {
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	rank := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -78,14 +72,14 @@ func (uf *UnionFind) Union(x, y int) {
 
 func matrixRankTransform(matrix [][]int) [][]int {
 	m, n := len(matrix), len(matrix[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, m)
 	for i := 0; i < m; i++ {
 		result[i] = make([]int, n)
 	}
 
 	// Group cells by their value
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	valToCells := make(map[int][][2]int)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -95,18 +89,18 @@ func matrixRankTransform(matrix [][]int) [][]int {
 	}
 
 	// Sort unique values
-  // Alokasi slice integer
+  // Alokasi slice
 	values := make([]int, 0, len(valToCells))
 	for v := range valToCells {
 		values = append(values, v)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(values)
 
 	// Track the current max rank for each row and column
-  // Alokasi slice integer
+  // Alokasi slice
 	rowMax := make([]int, m)
-  // Alokasi slice integer
+  // Alokasi slice
 	colMax := make([]int, n)
 
 	for _, val := range values {
@@ -114,9 +108,9 @@ func matrixRankTransform(matrix [][]int) [][]int {
 
 		// Union cells that are in the same row or column (same value)
 		uf := NewUnionFind(len(cells))
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		rowMap := make(map[int]int) // row -> first cell index
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		colMap := make(map[int]int) // col -> first cell index
 
 		for idx, cell := range cells {
@@ -134,7 +128,7 @@ func matrixRankTransform(matrix [][]int) [][]int {
 		}
 
 		// Group cells by their root (connected components)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		groups := make(map[int][]int)
 		for idx := range cells {
 			root := uf.Find(idx)

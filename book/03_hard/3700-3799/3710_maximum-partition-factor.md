@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxPartitionFactor(points [][]int) int
-```
-
-> **💡 Hint:** Sort all pairwise Manhattan distances. Binary search + bipartite
+**Fungsi Solusi:** `func maxPartitionFactor(points [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, BFS
+**Teknik:** Two Pointer, Binary Search, BFS, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -75,7 +67,7 @@ func maxPartitionFactor(points [][]int) int {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(distances, func(i, j int) bool {
 		return distances[i].d < distances[j].d
 	})
@@ -83,7 +75,7 @@ func maxPartitionFactor(points [][]int) int {
 	// Check if we can achieve partition factor >= x
 	// Two points with distance < x must be in different groups (bipartite)
 	check := func(x int) bool {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		adj := make([][]int, n)
 		for _, e := range distances {
 			if e.d >= x {
@@ -92,9 +84,9 @@ func maxPartitionFactor(points [][]int) int {
 			adj[e.u] = append(adj[e.u], e.v)
 			adj[e.v] = append(adj[e.v], e.u)
 		}
-  // Alokasi slice integer
+  // Alokasi slice
 		color := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range color {
 			color[i] = -1
 		}
@@ -131,6 +123,7 @@ func maxPartitionFactor(points [][]int) int {
 	// Binary search on distance value
 	left, right := 0, distances[len(distances)-1].d
 	result := 0
+  // Binary search loop
 	for left <= right {
 		mid := (left + right) / 2
 		if check(mid) {

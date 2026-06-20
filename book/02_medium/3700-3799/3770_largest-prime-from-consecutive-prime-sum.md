@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func largestPrimeFromConsecutivePrimeSum(n int) int
-```
+**Fungsi Solusi:** `func largestPrimeFromConsecutivePrimeSum(n int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n log log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,7 +48,7 @@ func largestPrimeFromConsecutivePrimeSum(n int) int {
 	}
 
 	// Collect primes
-  // Alokasi slice integer
+  // Alokasi slice
 	primes := make([]int, 0)
 	for i := 2; i <= n; i++ {
 		if isPrime[i] {
@@ -63,14 +57,14 @@ func largestPrimeFromConsecutivePrimeSum(n int) int {
 	}
 
 	// Prefix sums
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, len(primes)+1)
 	for i, p := range primes {
 		pref[i+1] = pref[i] + p
 	}
 
 	ans := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(primes); i++ {
 		for j := i; j < len(primes); j++ {
 			sum := pref[j+1] - pref[i]

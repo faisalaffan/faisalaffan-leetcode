@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lcm(a, b int) int
-```
+**Fungsi Solusi:** `func lcm(a, b int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** GCD / Matematika
+**Waktu:** O(n) Space: O(n)  |  **Ruang:** O(n)
 
-**Kompleksitas Waktu:** O(n) Space: O(n)  
-**Kompleksitas Ruang:** O(n)
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,14 +46,14 @@ func lcm(a, b int) int {
 
 func maxFactorScore(nums []int) int64 {
 	n := len(nums)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	preGCD := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	preLCM := make([]int, n)
 	preGCD[0] = nums[0]
 	preLCM[0] = nums[0]
@@ -71,9 +62,9 @@ func maxFactorScore(nums []int) int64 {
 		preLCM[i] = lcm(preLCM[i-1], nums[i])
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	sufGCD := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	sufLCM := make([]int, n+1)
 	sufLCM[n] = 1
 	for i := n - 1; i >= 0; i-- {

@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func matchReplacement(s string, sub string, mappings [][]byte) bool
-```
-
-> **💡 Hint:** Build a directed graph from mappings, compute transitive closure
+**Fungsi Solusi:** `func matchReplacement(s string, sub string, mappings [][]byte) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Floyd-Warshall
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Floyd-Warshall** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,9 +46,9 @@ func main() {
 
 func matchReplacement(s string, sub string, mappings [][]byte) bool {
 	// Build transitive closure: can[a][b] means a can be replaced by b
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	can := make([][]bool, 256)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range can {
 		can[i] = make([]bool, 256)
 		can[i][i] = true
@@ -85,7 +74,7 @@ func matchReplacement(s string, sub string, mappings [][]byte) bool {
 	// Slide sub through s
 	for start := 0; start <= len(s)-len(sub); start++ {
 		match := true
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(sub); i++ {
 			if !can[sub[i]][s[start+i]] {
 				match = false

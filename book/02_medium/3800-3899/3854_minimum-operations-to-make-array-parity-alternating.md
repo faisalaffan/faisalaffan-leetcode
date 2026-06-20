@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumOperationsToMakeArrayParityAlternating(nums []int) []int
-```
-
-> **💡 Hint:** Compute min operations for two patterns (even-start, odd-start).
+**Fungsi Solusi:** `func MinimumOperationsToMakeArrayParityAlternating(nums []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window
+**Teknik:** Two Pointer, Sliding Window, Sorting
 
-**Kompleksitas Waktu:** O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -78,13 +70,13 @@ func MinimumOperationsToMakeArrayParityAlternating(nums []int) []int {
 	}
 
 	// Sliding window to find min range
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(candidates, func(i, j int) bool {
 		return candidates[i][0] < candidates[j][0]
 	})
 
 	minRange := math.MaxInt32
-  // Alokasi slice integer
+  // Alokasi slice
 	cnt := make([]int, n)
 	empty := n
 	left := 0

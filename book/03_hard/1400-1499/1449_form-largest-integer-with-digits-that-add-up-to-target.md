@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func largestNumber(cost []int, target int) string
-```
-
-> **💡 Hint:** DP to find maximum length for each cost, then reconstruct
+**Fungsi Solusi:** `func largestNumber(cost []int, target int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,11 +49,11 @@ func main() {
 
 func largestNumber(cost []int, target int) string {
 	const inf = 1 << 30
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	f := make([][]int, 10)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][]int, 10)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range f {
 		f[i] = make([]int, target+1)
 		g[i] = make([]int, target+1)

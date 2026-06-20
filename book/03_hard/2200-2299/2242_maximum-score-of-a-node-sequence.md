@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumScore(scores []int, edges [][]int) int
-```
+**Fungsi Solusi:** `func maximumScore(scores []int, edges [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ func maximumScore(scores []int, edges [][]int) int {
 	n := len(scores)
 
 	// adjacency list of neighbors sorted by score descending (keep up to 3 best)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -56,11 +50,11 @@ func maximumScore(scores []int, edges [][]int) int {
 	}
 
 	// For each node, keep its top 3 neighbors by score (to limit search space)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	top3 := make([][]int, n)
 	for i := 0; i < n; i++ {
 		neighbors := adj[i]
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(neighbors, func(a, b int) bool {
 			return scores[neighbors[a]] > scores[neighbors[b]]
 		})

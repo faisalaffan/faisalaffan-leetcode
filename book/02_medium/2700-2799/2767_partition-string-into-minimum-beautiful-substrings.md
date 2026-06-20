@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func PartitionStringIntoMinimumBeautifulSubstrings(s string) int
-```
+**Fungsi Solusi:** `func PartitionStringIntoMinimumBeautifulSubstrings(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** O(2^n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(2^n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ import (
 
 func PartitionStringIntoMinimumBeautifulSubstrings(s string) int {
 	n := len(s)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	powers := make(map[string]bool)
 	for i := 0; i <= 10; i++ {
 		p := int(math.Pow(5, float64(i)))
@@ -51,9 +45,9 @@ func PartitionStringIntoMinimumBeautifulSubstrings(s string) int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	memo := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range memo {
 		memo[i] = -1
 	}

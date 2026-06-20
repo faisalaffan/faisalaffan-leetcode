@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numRollsToTarget(n int, k int, target int) int
-```
+**Fungsi Solusi:** `func numRollsToTarget(n int, k int, target int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n * target * k)  
-**Kompleksitas Ruang:** O(target) with 1D DP optimization
+**Waktu:** O(n * target * k)  |  **Ruang:** O(target) with 1D DP optimization
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,12 +40,12 @@ import (
 func numRollsToTarget(n int, k int, target int) int {
 	const mod = 1_000_000_007
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, target+1)
 	dp[0] = 1
 
 	for dice := 0; dice < n; dice++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		next := make([]int, target+1)
 		for sum := 0; sum <= target; sum++ {
 			if dp[sum] == 0 {

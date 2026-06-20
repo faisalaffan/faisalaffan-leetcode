@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findMinStep(board string, hand string) int
-```
-
-> **💡 Hint:** DFS + memoization. Try each hand ball at each position in the board.
+**Fungsi Solusi:** `func findMinStep(board string, hand string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,7 +53,7 @@ func main() {
 
 func findMinStep(board string, hand string) int {
 	// Count hand balls
-  // Alokasi slice integer
+  // Alokasi slice
 	handCount := make([]int, 26)
 	for _, ch := range hand {
 		handCount[ch-'A']++
@@ -85,7 +77,7 @@ func dfs(board string, handCount []int) int {
 	// Try every possible placement
 	minUsed := len(handCount)*5 + 1 // larger than any possible answer
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(board); i++ {
 		// Try to insert a ball from hand
 		for color := 0; color < 26; color++ {

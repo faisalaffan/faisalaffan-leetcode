@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findRightInterval(intervals [][]int) []int
-```
+**Fungsi Solusi:** `func findRightInterval(intervals [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,17 +36,17 @@ import (
 func findRightInterval(intervals [][]int) []int {
 	n := len(intervals)
 	// Create array of (start, index) pairs
-  // Alokasi slice integer
+  // Alokasi slice
 	starts := make([][2]int, n)
 	for i, iv := range intervals {
 		starts[i] = [2]int{iv[0], i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(starts, func(i, j int) bool {
 		return starts[i][0] < starts[j][0]
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n)
 	for i, iv := range intervals {
 		target := iv[1]

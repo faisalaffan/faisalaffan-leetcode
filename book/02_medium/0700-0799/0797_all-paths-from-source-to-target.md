@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func allPathsSourceTarget(graph [][]int) [][]int
-```
+**Fungsi Solusi:** `func allPathsSourceTarget(graph [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS
 
-**Kompleksitas Waktu:** O(2^n * n)  
-**Kompleksitas Ruang:** O(2^n * n)
+**Waktu:** O(2^n * n)  |  **Ruang:** O(2^n * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,16 +37,16 @@ func main() {
 }
 
 func allPathsSourceTarget(graph [][]int) [][]int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
-  // Alokasi slice integer
+  // Alokasi slice
 	path := make([]int, 0)
 	path = append(path, 0)
 
 	var dfs func(node int)
 	dfs = func(node int) {
 		if node == len(graph)-1 {
-  // Alokasi slice integer
+  // Alokasi slice
 			pathCopy := make([]int, len(path))
 			copy(pathCopy, path)
 			result = append(result, pathCopy)

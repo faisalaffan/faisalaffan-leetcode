@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumSumQueries(nums1 []int, nums2 []int, queries [][]int) []int
-```
-
-> **💡 Hint:** Sort offline + BIT (Fenwick Tree) for prefix max on compressed nums2.
+**Fungsi Solusi:** `func maximumSumQueries(nums1 []int, nums2 []int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum, Fenwick Tree (BIT)
+**Teknik:** Sorting, Prefix Sum, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,37 +51,37 @@ func maximumSumQueries(nums1 []int, nums2 []int, queries [][]int) []int {
 	m := len(queries)
 
 	// Pair nums1 and nums2, sorted by nums1 descending
-  // Alokasi slice integer
+  // Alokasi slice
 	pairs := make([][3]int, n) // [nums1, nums2, nums1+nums2]
 	for i := 0; i < n; i++ {
 		pairs[i] = [3]int{nums1[i], nums2[i], nums1[i] + nums2[i]}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(pairs, func(i, j int) bool {
 		return pairs[i][0] > pairs[j][0]
 	})
 
 	// Attach original index to queries, sort by x descending
-  // Alokasi slice integer
+  // Alokasi slice
 	qi := make([][3]int, m) // [x, y, originalIndex]
 	for i, q := range queries {
 		qi[i] = [3]int{q[0], q[1], i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(qi, func(i, j int) bool {
 		return qi[i][0] > qi[j][0]
 	})
 
 	// Coordinate compress nums2 values (sorted ascending)
-  // Alokasi slice integer
+  // Alokasi slice
 	allVals := make([]int, 0, n+m)
 	allVals = append(allVals, nums2...)
 	for _, q := range queries {
 		allVals = append(allVals, q[1])
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(allVals)
-  // Alokasi slice integer
+  // Alokasi slice
 	uniq := make([]int, 0, len(allVals))
 	for i, v := range allVals {
 		if i == 0 || v != allVals[i-1] {
@@ -101,9 +93,9 @@ func maximumSumQueries(nums1 []int, nums2 []int, queries [][]int) []int {
 	// BIT for prefix max.
 	// Reverse compression: larger nums2 value -> smaller BIT index.
 	// So query(revComp(y)) = max over all nums2 >= y.
-  // Alokasi slice integer
+  // Alokasi slice
 	bit := make([]int, k+2)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range bit {
 		bit[i] = -1
 	}
@@ -135,7 +127,7 @@ func maximumSumQueries(nums1 []int, nums2 []int, queries [][]int) []int {
 		return k - idx
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, m)
 	ptr := 0
 

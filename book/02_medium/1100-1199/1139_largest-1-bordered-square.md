@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func largest1BorderedSquare(grid [][]int) int
-```
+**Fungsi Solusi:** `func largest1BorderedSquare(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m * n * min(m, n))  |  **Ruang:** O(m * n)
 
-**Kompleksitas Waktu:** O(m * n * min(m, n))  
-**Kompleksitas Ruang:** O(m * n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -48,9 +39,9 @@ func largest1BorderedSquare(grid [][]int) int {
 		return 0
 	}
 	m, n := len(grid), len(grid[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	hor := make([][]int, m)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	ver := make([][]int, m)
 	for i := 0; i < m; i++ {
 		hor[i] = make([]int, n)

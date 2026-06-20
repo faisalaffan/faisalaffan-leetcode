@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindSortedSubmatricesWithMaximumElementAtMostK(grid [][]int, k int) int
-```
+**Fungsi Solusi:** `func FindSortedSubmatricesWithMaximumElementAtMostK(grid [][]int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
+**Teknik:** Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,7 +39,7 @@ func main() {
 
 func FindSortedSubmatricesWithMaximumElementAtMostK(grid [][]int, k int) int {
 	m, n := len(grid), len(grid[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	rows := make([][]int, m)
 	for i := 0; i < m; i++ {
 		rows[i] = make([]int, n)

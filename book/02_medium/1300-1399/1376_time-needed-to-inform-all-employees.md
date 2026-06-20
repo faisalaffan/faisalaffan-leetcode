@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numOfMinutes(n int, headID int, manager []int, informTime []int) int
-```
+**Fungsi Solusi:** `func numOfMinutes(n int, headID int, manager []int, informTime []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n) where n = number of employees  
-**Kompleksitas Ruang:** O(n) for memoization and adjacency list
+**Waktu:** O(n) where n = number of employees  |  **Ruang:** O(n) for memoization and adjacency list
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,7 +44,7 @@ func main() {
 // Space: O(n) for memoization and adjacency list
 func numOfMinutes(n int, headID int, manager []int, informTime []int) int {
 	// Build adjacency list (subordinates)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	subordinates := make([][]int, n)
 	for i := 0; i < n; i++ {
 		if manager[i] != -1 {
@@ -59,7 +53,7 @@ func numOfMinutes(n int, headID int, manager []int, informTime []int) int {
 	}
 
 	// DFS with memoization
-  // Alokasi slice integer
+  // Alokasi slice
 	memo := make([]int, n)
 	var dfs func(int) int
 	dfs = func(id int) int {

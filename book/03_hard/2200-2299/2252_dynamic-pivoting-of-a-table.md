@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewPivotTable() *PivotTable
-```
+**Fungsi Solusi:** `func NewPivotTable() *PivotTable`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -64,7 +58,7 @@ func (pt *PivotTable) AddRow(productID int, store string, price int) {
 // rows = product_ids, columns = stores (sorted), values = prices.
 func (pt *PivotTable) Pivot() ([]string, map[int]map[string]int) {
 	// collect all stores
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	storeSet := make(map[string]bool)
 	for _, stores := range pt.Data {
 		for s := range stores {
@@ -77,7 +71,7 @@ func (pt *PivotTable) Pivot() ([]string, map[int]map[string]int) {
 		stores = append(stores, s)
 	}
 	// sort stores alphabetically (simple bubble for small set)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(stores); i++ {
 		for j := i + 1; j < len(stores); j++ {
 			if stores[j] < stores[i] {

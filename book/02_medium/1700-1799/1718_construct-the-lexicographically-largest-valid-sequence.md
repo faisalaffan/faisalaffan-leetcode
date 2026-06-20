@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func constructDistancedSequence(n int) []int
-```
+**Fungsi Solusi:** `func constructDistancedSequence(n int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking
 
-**Kompleksitas Waktu:** O(n!), Space: O(n) for backtracking  
-**Kompleksitas Ruang:** O(n) for backtracking
+**Waktu:** O(n!), Space: O(n) for backtracking  |  **Ruang:** O(n) for backtracking
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,7 +34,7 @@ import "fmt"
 
 func constructDistancedSequence(n int) []int {
 	length := 2*n - 1
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, length)
 	used := make([]bool, n+1)
 

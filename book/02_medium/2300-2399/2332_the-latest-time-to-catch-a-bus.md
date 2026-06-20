@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func latestTimeCatchTheBus(buses []int, passengers []int, capacity int) int
-```
+**Fungsi Solusi:** `func latestTimeCatchTheBus(buses []int, passengers []int, capacity int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O((n + m) log(n + m))  
-**Kompleksitas Ruang:** O(n + m)
+**Waktu:** O((n + m) log(n + m))  |  **Ruang:** O(n + m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,9 +34,9 @@ import (
 )
 
 func latestTimeCatchTheBus(buses []int, passengers []int, capacity int) int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(buses)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(passengers)
 
 	pi := 0
@@ -61,7 +55,7 @@ func latestTimeCatchTheBus(buses []int, passengers []int, capacity int) int {
 
 	// Find latest possible time
 	time := buses[len(buses)-1]
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	passSet := make(map[int]bool)
 	for _, p := range passengers {
 		passSet[p] = true

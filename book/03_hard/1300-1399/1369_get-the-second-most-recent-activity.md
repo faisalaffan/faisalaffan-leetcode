@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func secondMostRecentActivity(activities []activity) []activity
-```
-
-> **💡 Hint:** Simulate SQL query in Go.
+**Fungsi Solusi:** `func secondMostRecentActivity(activities []activity) []activity`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,7 +46,7 @@ type activity struct {
 }
 
 func secondMostRecentActivity(activities []activity) []activity {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	byUser := make(map[string][]activity)
 	for _, a := range activities {
 		byUser[a.username] = append(byUser[a.username], a)
@@ -62,7 +54,7 @@ func secondMostRecentActivity(activities []activity) []activity {
 
 	var result []activity
 	for _, acts := range byUser {
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(acts, func(i, j int) bool {
 			return acts[i].startDate > acts[j].startDate
 		})
@@ -74,7 +66,7 @@ func secondMostRecentActivity(activities []activity) []activity {
 	}
 
 	// Sort by username for deterministic output
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].username < result[j].username
 	})

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumTimeRequired(jobs []int, k int) int
-```
+**Fungsi Solusi:** `func minimumTimeRequired(jobs []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,7 +39,7 @@ func minimumTimeRequired(jobs []int, k int) int {
 	n := len(jobs)
 
 	// Precompute sum of each subset
-  // Alokasi slice integer
+  // Alokasi slice
 	sum := make([]int, 1<<n)
 	for mask := 1; mask < 1<<n; mask++ {
 		lsb := mask & -mask
@@ -59,7 +53,7 @@ func minimumTimeRequired(jobs []int, k int) int {
 	}
 
 	// dp[mask] after w workers = min possible max time for jobs in mask
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, 1<<n)
 	for mask := range dp {
 		dp[mask] = sum[mask] // 1 worker = sum of all jobs in mask
@@ -67,7 +61,7 @@ func minimumTimeRequired(jobs []int, k int) int {
 
 	// For 2nd through kth worker
 	for w := 2; w <= k; w++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		next := make([]int, 1<<n)
 		for mask := range next {
 			next[mask] = dp[mask] // start with previous value (one fewer worker)

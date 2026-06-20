@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CanIWin(maxChoosableInteger int, desiredTotal int) bool
-```
+**Fungsi Solusi:** `func CanIWin(maxChoosableInteger int, desiredTotal int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** O(2^n) where n = maxChoosableInteger (max 20)  
-**Kompleksitas Ruang:** O(2^n)
+**Waktu:** O(2^n) where n = maxChoosableInteger (max 20)  |  **Ruang:** O(2^n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -52,7 +46,7 @@ func CanIWin(maxChoosableInteger int, desiredTotal int) bool {
 		return false
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	memo := make(map[int]bool)
 	var dfs func(used int, currentTotal int) bool
 	dfs = func(used int, currentTotal int) bool {

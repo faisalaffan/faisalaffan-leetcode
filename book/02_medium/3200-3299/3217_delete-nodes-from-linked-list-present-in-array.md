@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan linked list. Tugasmu traversing atau memanipulasi list.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Traverse dari head. Fast/slow pointer untuk deteksi siklus/cari tengah. Dummy node mempermudah operasi di head.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func modifiedList(nums []int, head *ListNode) *ListNode
-```
+**Fungsi Solusi:** `func modifiedList(nums []int, head *ListNode) *ListNode`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(m)
+**Waktu:** O(n)  |  **Ruang:** O(m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ type ListNode struct {
 }
 
 func modifiedList(nums []int, head *ListNode) *ListNode {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	del := make(map[int]bool)
 	for _, v := range nums {
 		del[v] = true

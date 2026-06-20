@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minReorder(n int, connections [][]int) int
-```
+**Fungsi Solusi:** `func minReorder(n int, connections [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS
 
-**Kompleksitas Waktu:** O(n) where n = number of nodes  
-**Kompleksitas Ruang:** O(n) for adjacency list
+**Waktu:** O(n) where n = number of nodes  |  **Ruang:** O(n) for adjacency list
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +47,7 @@ func minReorder(n int, connections [][]int) int {
 	// For each edge, store [neighbor, direction]
 	// direction=1 means original direction is away from 0, needs reorder
 	// direction=0 means original direction is towards 0, ok
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][][2]int, n)
 	for _, conn := range connections {
 		adj[conn[0]] = append(adj[conn[0]], [2]int{conn[1], 1}) // outgoing

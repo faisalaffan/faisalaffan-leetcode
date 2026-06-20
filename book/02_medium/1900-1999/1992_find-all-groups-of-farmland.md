@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindAllGroupsOfFarmland(land [][]int) [][]int
-```
+**Fungsi Solusi:** `func FindAllGroupsOfFarmland(land [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m*n), Space: O(1) (excluding output)  |  **Ruang:** O(1) (excluding output)
 
-**Kompleksitas Waktu:** O(m*n), Space: O(1) (excluding output)  
-**Kompleksitas Ruang:** O(1) (excluding output)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -44,7 +35,7 @@ func main() {
 // Time: O(m*n), Space: O(1) (excluding output)
 func FindAllGroupsOfFarmland(land [][]int) [][]int {
 	m, n := len(land), len(land[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
 
 	for i := 0; i < m; i++ {

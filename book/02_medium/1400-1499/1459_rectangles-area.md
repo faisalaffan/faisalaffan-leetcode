@@ -4,28 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func rectanglesArea(points []struct {
-	id   int
-	x, y int
-}) []rectResult
-```
+**Fungsi Solusi:** `func rectanglesArea(points []struct { id int x, y int }) []rectResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n^2) for finding all vertical pairs  
-**Kompleksitas Ruang:** O(n^2) for map
+**Waktu:** O(n^2) for finding all vertical pairs  |  **Ruang:** O(n^2) for map
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -72,9 +63,9 @@ func rectanglesArea(points []struct {
 	type yPair struct{ y1, y2 int }
 
 	// Group points by x
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pointsByX := make(map[int][]int) // x -> [ids]
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	coords := make(map[int]struct{ x, y int })
 
 	for _, p := range points {
@@ -82,11 +73,11 @@ func rectanglesArea(points []struct {
 		coords[p.id] = struct{ x, y int }{p.x, p.y}
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	verticals := make(map[yPair][]int)
 
 	for _, ids := range pointsByX {
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(ids); i++ {
 			for j := i + 1; j < len(ids); j++ {
 				yi := coords[ids[i]].y
@@ -107,7 +98,7 @@ func rectanglesArea(points []struct {
 	var results []rectResult
 	for yp, xs := range verticals {
 		// Sort xs
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(xs); i++ {
 			for j := i + 1; j < len(xs); j++ {
 				if xs[j] < xs[i] {
@@ -115,7 +106,7 @@ func rectanglesArea(points []struct {
 				}
 			}
 		}
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(xs); i++ {
 			for j := i + 1; j < len(xs); j++ {
 				x1, x2 := xs[i], xs[j]

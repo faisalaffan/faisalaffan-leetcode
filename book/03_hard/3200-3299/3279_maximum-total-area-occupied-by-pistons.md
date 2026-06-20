@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxTotalArea(startTime, endTime []int, yRanges [][]int) int64
-```
+**Fungsi Solusi:** `func maxTotalArea(startTime, endTime []int, yRanges [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -70,7 +64,7 @@ func main() {
 
 func maxTotalArea(startTime, endTime []int, yRanges [][]int) int64 {
 	n := len(startTime)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
@@ -86,7 +80,7 @@ func maxTotalArea(startTime, endTime []int, yRanges [][]int) int64 {
 		events = append(events, event{startTime[i], i, true})
 		events = append(events, event{endTime[i], i, false})
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(events, func(i, j int) bool {
 		if events[i].t != events[j].t {
 			return events[i].t < events[j].t
@@ -97,7 +91,7 @@ func maxTotalArea(startTime, endTime []int, yRanges [][]int) int64 {
 	// Active intervals: sweeping over y-axis.
 	// Maintain count of active intervals covering each y-position.
 	// Since y values are integers, we use a map for the difference array.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	active := make(map[int]int) // diff[y] = net change in active intervals at position y
 
 	addInterval := func(y1, y2 int) {
@@ -114,17 +108,17 @@ func maxTotalArea(startTime, endTime []int, yRanges [][]int) int64 {
 			return 0
 		}
 		// Sort the y-boundary positions.
-  // Alokasi slice integer
+  // Alokasi slice
 		ys := make([]int, 0, len(active))
 		for y := range active {
 			ys = append(ys, y)
 		}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(ys)
 
 		var length int64
 		var count int
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(ys)-1; i++ {
 			count += active[ys[i]]
 			if count > 0 {

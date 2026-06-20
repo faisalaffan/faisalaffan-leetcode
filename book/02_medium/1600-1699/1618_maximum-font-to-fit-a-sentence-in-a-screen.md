@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxFont(text string, w int, h int, fonts []int, fontInfo interface{ getFontWidth(int) int; getFontHeight(int) int }) int
-```
+**Fungsi Solusi:** `func MaxFont(text string, w int, h int, fonts []int, fontInfo interface{ getFontWidth(int) int; getFontHeight(int) int }) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search
 
-**Kompleksitas Waktu:** O(log N * L), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(log N * L), Space: O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -76,6 +70,7 @@ func MaxFont(text string, w int, h int, fonts []int, fontInfo interface{ getFont
 	left, right := 0, len(fonts)-1
 	result := -1
 
+  // Binary search loop
 	for left <= right {
 		mid := left + (right-left)/2
 		fontSize := fonts[mid]

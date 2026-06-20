@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func canMerge(trees []*TreeNode) *TreeNode
-```
+**Fungsi Solusi:** `func canMerge(trees []*TreeNode) *TreeNode`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, DFS
+**Teknik:** HashMap, Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,14 +41,14 @@ type TreeNode struct {
 
 func canMerge(trees []*TreeNode) *TreeNode {
 	// Map root values to nodes
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	rootMap := make(map[int]*TreeNode)
 	for _, t := range trees {
 		rootMap[t.Val] = t
 	}
 
 	// Count how many times each value appears as a leaf (incoming count)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	incoming := make(map[int]int)
 	for _, t := range trees {
 		if t.Left != nil {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func kthLargestValue(matrix [][]int, k int) int
-```
+**Fungsi Solusi:** `func kthLargestValue(matrix [][]int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** O(m * n * log(m*n)), Space: O(m * n)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n * log(m*n)), Space: O(m * n)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,13 +35,13 @@ import (
 
 func kthLargestValue(matrix [][]int, k int) int {
 	m, n := len(matrix), len(matrix[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	prefix := make([][]int, m)
 	for i := 0; i < m; i++ {
 		prefix[i] = make([]int, n)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	values := make([]int, 0, m*n)
 
 	for i := 0; i < m; i++ {
@@ -67,7 +61,7 @@ func kthLargestValue(matrix [][]int, k int) int {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(values, func(i, j int) bool {
 		return values[i] > values[j]
 	})

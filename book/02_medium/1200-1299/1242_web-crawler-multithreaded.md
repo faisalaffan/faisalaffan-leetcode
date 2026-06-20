@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func crawlParallel(startUrl string, parser HtmlParser) []string
-```
+**Fungsi Solusi:** `func crawlParallel(startUrl string, parser HtmlParser) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(V + E)  
-**Kompleksitas Ruang:** O(V)
+**Waktu:** O(V + E)  |  **Ruang:** O(V)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,7 +53,7 @@ func (m *mockParser) GetUrls(url string) []string {
 func crawlParallel(startUrl string, parser HtmlParser) []string {
 	getHost := func(url string) string {
 		host := ""
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(url)-7; i++ {
 			if url[i:i+7] == "http://" {
 				url = url[7:]
@@ -76,7 +70,7 @@ func crawlParallel(startUrl string, parser HtmlParser) []string {
 	}
 
 	hostname := getHost(startUrl)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	visited := make(map[string]bool)
 	var mu sync.Mutex
 	var wg sync.WaitGroup

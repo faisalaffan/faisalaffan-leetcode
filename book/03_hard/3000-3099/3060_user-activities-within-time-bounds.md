@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func userActivitiesWithinTimeBounds(sessions []UserSession) []int
-```
-
-> **💡 Hint:** Find users who have two consecutive sessions of the same type
+**Fungsi Solusi:** `func userActivitiesWithinTimeBounds(sessions []UserSession) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,21 +45,21 @@ type UserSession struct {
 }
 
 func userActivitiesWithinTimeBounds(sessions []UserSession) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	byUser := make(map[int][]UserSession)
 	for _, s := range sessions {
 		byUser[s.UserID] = append(byUser[s.UserID], s)
 	}
 	var result []int
 	for uid, sList := range byUser {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		byType := make(map[string][]UserSession)
 		for _, s := range sList {
 			byType[s.SessionType] = append(byType[s.SessionType], s)
 		}
 		found := false
 		for _, typedSessions := range byType {
-  // Custom sort dengan comparator
+  // Custom sort
 			sort.Slice(typedSessions, func(i, j int) bool {
 				return typedSessions[i].SessionStart.Before(typedSessions[j].SessionStart)
 			})
@@ -86,7 +78,7 @@ func userActivitiesWithinTimeBounds(sessions []UserSession) []int {
 			result = append(result, uid)
 		}
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func canWin(currentState string) bool
-```
+**Fungsi Solusi:** `func canWin(currentState string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** O(n!!) worst case with memo, Space: O(n!)  
-**Kompleksitas Ruang:** O(n!)
+**Waktu:** O(n!!) worst case with memo, Space: O(n!)  |  **Ruang:** O(n!)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,7 +31,7 @@ package main
 import "fmt"
 
 func canWin(currentState string) bool {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	memo := make(map[string]bool)
 	return canWinHelper(currentState, memo)
 }
@@ -48,7 +42,7 @@ func canWinHelper(state string, memo map[string]bool) bool {
 	}
 
 	bytes := []byte(state)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(state)-1; i++ {
 		if bytes[i] == '+' && bytes[i+1] == '+' {
 			bytes[i], bytes[i+1] = '-', '-'

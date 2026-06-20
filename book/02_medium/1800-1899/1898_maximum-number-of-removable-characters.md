@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxRemovals(s string, p string, removable []int) int
-```
+**Fungsi Solusi:** `func MaxRemovals(s string, p string, removable []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** O((n+m) log k) where n = len(s), m = len(p), k = len(removable)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n+m) log k) where n = len(s), m = len(p), k = len(removable)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,6 +41,7 @@ func MaxRemovals(s string, p string, removable []int) int {
 	left, right := 0, len(removable)
 	ans := 0
 
+  // Binary search loop
 	for left <= right {
 		mid := left + (right-left)/2
 		if canForm(s, p, removable, mid) {
@@ -66,7 +61,7 @@ func canForm(s string, p string, removable []int, k int) bool {
 	}
 
 	j := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s) && j < len(p); i++ {
 		if !removed[i] && s[i] == p[j] {
 			j++

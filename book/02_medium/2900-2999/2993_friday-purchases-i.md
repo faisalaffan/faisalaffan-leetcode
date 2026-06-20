@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findFridayPurchasesI(purchases []Purchase) []WeeklyResult
-```
+**Fungsi Solusi:** `func findFridayPurchasesI(purchases []Purchase) []WeeklyResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(d) where d = distinct weeks
+**Waktu:** O(n)  |  **Ruang:** O(d) where d = distinct weeks
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +54,7 @@ type WeeklyResult struct {
 // Time: O(n) | Space: O(d) where d = distinct weeks
 // n = number of purchases.
 func findFridayPurchasesI(purchases []Purchase) []WeeklyResult {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	weeklyAmount := make(map[int]int)
 
 	for _, p := range purchases {
@@ -93,7 +87,7 @@ func findFridayPurchasesI(purchases []Purchase) []WeeklyResult {
 	}
 
 	// Order by week_of_month ASC.
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].WeekOfMonth < results[j].WeekOfMonth
 	})

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countGoodIntegers(n int, k int) int64
-```
+**Fungsi Solusi:** `func countGoodIntegers(n int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,14 +54,14 @@ func main() {
 
 func countGoodIntegers(n int, k int) int64 {
 	// Precompute factorials
-  // Alokasi slice integer
+  // Alokasi slice
 	fact := make([]int64, n+1)
 	fact[0] = 1
 	for i := 1; i <= n; i++ {
 		fact[i] = fact[i-1] * int64(i)
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[string]bool)
 	var ans int64
 
@@ -95,7 +89,7 @@ func countGoodIntegers(n int, k int) int64 {
 
 		// Sort digits to get canonical form
 		digits := []byte(palStr)
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(digits, func(i, j int) bool { return digits[i] < digits[j] })
 		key := string(digits)
 
@@ -105,7 +99,7 @@ func countGoodIntegers(n int, k int) int64 {
 		seen[key] = true
 
 		// Count frequencies
-  // Alokasi slice integer
+  // Alokasi slice
 		freq := make([]int, 10)
 		for _, ch := range palStr {
 			freq[ch-'0']++

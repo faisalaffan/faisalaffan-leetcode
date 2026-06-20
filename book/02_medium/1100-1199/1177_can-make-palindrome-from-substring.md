@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu adalah memeriksa apakah string tersebut palindrome — dibaca sama dari depan dan belakang. Abaikan non-alfanumerik dan case.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Two Pointer — kiri dan kanan. Skip non-alfanumerik. Bandingkan.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func canMakePaliQueries(s string, queries [][]int) []bool
-```
+**Fungsi Solusi:** `func canMakePaliQueries(s string, queries [][]int) []bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Prefix Sum
+**Teknik:** Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** O(n * 26 + m) where m = len(queries)  
-**Kompleksitas Ruang:** O(n * 26) — prefix sums per character
+**Waktu:** O(n * 26 + m) where m = len(queries)  |  **Ruang:** O(n * 26) — prefix sums per character
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +42,7 @@ import (
 func canMakePaliQueries(s string, queries [][]int) []bool {
 	n := len(s)
 	// prefix[i][c] = count of char c in s[0:i]
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([][26]int, n+1)
 
 	for i := 0; i < n; i++ {

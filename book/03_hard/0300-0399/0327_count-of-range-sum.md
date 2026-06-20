@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countRangeSum(nums []int, lower int, upper int) int
-```
+**Fungsi Solusi:** `func countRangeSum(nums []int, lower int, upper int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Prefix Sum, Merge Sort
+**Teknik:** Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,7 +31,7 @@ import "fmt"
 
 func countRangeSum(nums []int, lower int, upper int) int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int64, n+1)
 	for i, v := range nums {
 		prefix[i+1] = prefix[i] + int64(v)
@@ -45,7 +39,7 @@ func countRangeSum(nums []int, lower int, upper int) int {
 
 	count := 0
 	// Temporary buffer for merge sort
-  // Alokasi slice integer
+  // Alokasi slice
 	temp := make([]int64, n+1)
 
 	var mergeSort func(left, right int)

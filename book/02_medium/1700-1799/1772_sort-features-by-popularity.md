@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sortFeatures(features []string, responses []string) []string
-```
+**Fungsi Solusi:** `func sortFeatures(features []string, responses []string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(f * r), Space: O(f)  
-**Kompleksitas Ruang:** O(f)
+**Waktu:** O(f * r), Space: O(f)  |  **Ruang:** O(f)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,16 +34,16 @@ import (
 )
 
 func sortFeatures(features []string, responses []string) []string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	featureRank := make(map[string]int)
 	for i, f := range features {
 		featureRank[f] = i
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	freq := make(map[string]int)
 	for _, resp := range responses {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		seen := make(map[string]bool)
 		word := ""
 		for _, ch := range resp + " " {

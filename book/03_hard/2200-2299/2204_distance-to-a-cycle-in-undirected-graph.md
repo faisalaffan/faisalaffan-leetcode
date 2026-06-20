@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func distanceToCycle(n int, edges [][]int) []int
-```
+**Fungsi Solusi:** `func distanceToCycle(n int, edges [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,9 +55,9 @@ func main() {
 }
 
 func distanceToCycle(n int, edges [][]int) []int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	deg := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -74,7 +68,7 @@ func distanceToCycle(n int, edges [][]int) []int {
 	}
 
 	// Remove leaves: set deg = 0 to mark removed.
-  // Alokasi slice integer
+  // Alokasi slice
 	q := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		if deg[i] == 1 {
@@ -98,9 +92,9 @@ func distanceToCycle(n int, edges [][]int) []int {
 	}
 
 	// BFS from all cycle nodes (deg > 0).
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([]int, 0, n)
 	inQueue := make([]bool, n)
 	for i := 0; i < n; i++ {

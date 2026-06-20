@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minOperations(nums []int, x int, k int) int64
-```
-
-> **💡 Hint:** Compute cost for each size-x window (optimal = sum of absolute
+**Fungsi Solusi:** `func minOperations(nums []int, x int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window, Dynamic Programming
+**Teknik:** Sliding Window, DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sliding Window** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -66,14 +58,14 @@ func minOperations(nums []int, x int, k int) int64 {
 	}
 
 	// Compute cost for each sliding window of size x
-  // Alokasi slice integer
+  // Alokasi slice
 	costs := make([]int64, n-x+1)
 	for i := 0; i <= n-x; i++ {
 		// Extract window
-  // Alokasi slice integer
+  // Alokasi slice
 		window := make([]int, x)
 		copy(window, nums[i:i+x])
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(window)
 		median := window[x/2]
 		var total int64
@@ -88,7 +80,7 @@ func minOperations(nums []int, x int, k int) int64 {
 	}
 
 	// DP: dp[j][i] = min cost with j subarrays using first i elements
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int64, k+1)
 	for j := 0; j <= k; j++ {
 		dp[j] = make([]int64, n+1)

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ClassifyTreeNodes(nodes [][]int) map[int]string
-```
+**Fungsi Solusi:** `func ClassifyTreeNodes(nodes [][]int) map[int]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,9 +44,9 @@ func main() {
 }
 
 func ClassifyTreeNodes(nodes [][]int) map[int]string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	parentMap := make(map[int]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	childrenMap := make(map[int][]int)
 
 	for _, node := range nodes {
@@ -65,7 +59,7 @@ func ClassifyTreeNodes(nodes [][]int) map[int]string {
 		}
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	result := make(map[int]string)
 	for _, node := range nodes {
 		id := node[0]

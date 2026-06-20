@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findOverlappingShiftsII(shifts [][]int, queries [][]int) []int
-```
+**Fungsi Solusi:** `func findOverlappingShiftsII(shifts [][]int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Trie, Prefix Sum, Fenwick Tree (BIT)
+**Teknik:** Two Pointer, Sorting, Trie, Prefix Sum, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,9 +57,9 @@ func findOverlappingShiftsII(shifts [][]int, queries [][]int) []int {
 	n := len(shifts)
 
 	// Precompute overlap for every pair of shifts.
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	overlap := make([][]bool, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range overlap {
 		overlap[i] = make([]bool, n)
 	}
@@ -83,9 +77,9 @@ func findOverlappingShiftsII(shifts [][]int, queries [][]int) []int {
 	// For each query [l, r], count overlapping pairs within [l, r].
 	// Precompute prefix sums of overlap counts to answer queries in O(1).
 	// pref[i][j] = number of overlapping pairs with first index < i and second index < j.
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	pref := make([][]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range pref {
 		pref[i] = make([]int, n+1)
 	}
@@ -108,7 +102,7 @@ func findOverlappingShiftsII(shifts [][]int, queries [][]int) []int {
 		return total / 2
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		ans[qi] = countInRange(q[0], q[1])
@@ -131,26 +125,26 @@ func findOverlappingShiftsIIFenwick(shifts [][]int, queries [][]int) []int {
 	m := len(queries)
 
 	// Sort queries by right endpoint.
-  // Alokasi slice integer
+  // Alokasi slice
 	qidx := make([]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range qidx {
 		qidx[i] = i
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(qidx, func(i, j int) bool {
 		return queries[qidx[i]][1] < queries[qidx[j]][1]
 	})
 
 	// Group shifts by right endpoint.
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	byRight := make([][]int, n)
 	for _, s := range shifts {
 		byRight[s[1]] = append(byRight[s[1]], s[0])
 	}
 
 	// Fenwick tree over left endpoints.
-  // Alokasi slice integer
+  // Alokasi slice
 	tree := make([]int, n+2)
 	add := func(pos, val int) {
 		for pos <= n {
@@ -171,15 +165,15 @@ func findOverlappingShiftsIIFenwick(shifts [][]int, queries [][]int) []int {
 	}
 	_ = rangeSum
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, m)
 	shiftPtr := 0
-  // Alokasi slice integer
+  // Alokasi slice
 	sortedShifts := make([]struct{ l, r int }, n)
 	for i, s := range shifts {
 		sortedShifts[i] = struct{ l, r int }{s[0], s[1]}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sortedShifts, func(i, j int) bool {
 		return sortedShifts[i].r < sortedShifts[j].r
 	})

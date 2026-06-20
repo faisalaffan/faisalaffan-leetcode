@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumTimeToReachDestinationInDirectedGraph(n int, edges [][]int, start, end int) int
-```
+**Fungsi Solusi:** `func MinimumTimeToReachDestinationInDirectedGraph(n int, edges [][]int, start, end int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
+**Teknik:** BFS, Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -73,15 +67,15 @@ func main() {
 }
 
 func MinimumTimeToReachDestinationInDirectedGraph(n int, edges [][]int, start, end int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]Edge, n)
 	for _, e := range edges {
 		adj[e[0]] = append(adj[e[0]], Edge{e[1], e[2]})
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = math.MaxInt32
 	}
@@ -89,11 +83,11 @@ func MinimumTimeToReachDestinationInDirectedGraph(n int, edges [][]int, start, e
 
 	pq := &PriorityQueue{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &Item{node: start, time: 0})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		curr := heap.Pop(pq).(*Item)
 		if curr.node == end {
 			return curr.time
@@ -105,7 +99,7 @@ func MinimumTimeToReachDestinationInDirectedGraph(n int, edges [][]int, start, e
 			nd := curr.time + edge.time
 			if nd < dist[edge.to] {
 				dist[edge.to] = nd
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &Item{node: edge.to, time: nd})
 			}
 		}

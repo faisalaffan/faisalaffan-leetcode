@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FrequencyBalanceSubarray(nums []int) int
-```
-
-> **💡 Hint:** Enumerate all subarrays. Track element frequencies and
+**Fungsi Solusi:** `func FrequencyBalanceSubarray(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(N^2)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N^2)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,9 +38,9 @@ func FrequencyBalanceSubarray(nums []int) int {
 	ans := 0
 
 	for l := 0; l < n; l++ {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		cnt := make(map[int]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		freq := make(map[int]int) // frequency-of-frequencies
 
 		for r := l; r < n; r++ {
@@ -70,7 +62,7 @@ func FrequencyBalanceSubarray(nums []int) int {
 				valid = true
 			} else if len(freq) == 2 {
 				// Exactly two distinct frequency values
-  // Alokasi slice integer
+  // Alokasi slice
 				vals := make([]int, 0, 2)
 				for f := range freq {
 					vals = append(vals, f)

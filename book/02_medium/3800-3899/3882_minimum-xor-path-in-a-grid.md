@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumXorPathInAGrid(grid [][]int) int
-```
-
-> **💡 Hint:** DP tracking reachable XOR values at each cell. Only right/down moves.
+**Fungsi Solusi:** `func MinimumXorPathInAGrid(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(M * N * 2^B)  
-**Kompleksitas Ruang:** O(N * 2^B) where B = 11 (grid values < 1024)
+**Waktu:** O(M * N * 2^B)  |  **Ruang:** O(N * 2^B) where B = 11 (grid values < 1024)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +40,7 @@ func MinimumXorPathInAGrid(grid [][]int) int {
 		return -1
 	}
 	n := len(grid[0])
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return -1
 	}
@@ -56,7 +48,7 @@ func MinimumXorPathInAGrid(grid [][]int) int {
 	maxXor := 2048 // 2^11 since grid[i][j] <= 1023
 
 	// Use bitset (boolean array) for each cell
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]bool, n)
 	for j := 0; j < n; j++ {
 		dp[j] = make([]bool, maxXor)

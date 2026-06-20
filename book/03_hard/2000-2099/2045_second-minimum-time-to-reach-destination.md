@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func secondMinimum(n int, edges [][]int, time int, change int) int
-```
-
-> **💡 Hint:** Modified Dijkstra / BFS with two distances
+**Fungsi Solusi:** `func secondMinimum(n int, edges [][]int, time int, change int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
+**Teknik:** Heap, Dijkstra
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +36,7 @@ import (
 
 func secondMinimum(n int, edges [][]int, time int, change int) int {
 	// Build adjacency list
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n+1)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -53,11 +45,11 @@ func secondMinimum(n int, edges [][]int, time int, change int) int {
 	}
 
 	// dist1[i] = shortest time to reach i, dist2[i] = second shortest
-  // Alokasi slice integer
+  // Alokasi slice
 	dist1 := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	dist2 := make([]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist1 {
 		dist1[i] = math.MaxInt32
 		dist2[i] = math.MaxInt32
@@ -68,11 +60,11 @@ func secondMinimum(n int, edges [][]int, time int, change int) int {
 	// Min-heap: (time, node)
 	pq := &minHeap{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, [2]int{0, 1})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(pq).([2]int)
 		t := cur[0]
 		u := cur[1]
@@ -96,11 +88,11 @@ func secondMinimum(n int, edges [][]int, time int, change int) int {
 			if nextTime < dist1[v] {
 				dist2[v] = dist1[v]
 				dist1[v] = nextTime
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, [2]int{nextTime, v})
 			} else if nextTime > dist1[v] && nextTime < dist2[v] {
 				dist2[v] = nextTime
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, [2]int{nextTime, v})
 			}
 		}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func kthSmallest(matrix [][]int, k int) int
-```
+**Fungsi Solusi:** `func kthSmallest(matrix [][]int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack, Merge Sort
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,7 +62,7 @@ func kthSmallest(matrix [][]int, k int) int {
 	// Start with sums of first row
 	h := &MinHeap{}
 	for j := 0; j < n; j++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, Item{sum: matrix[0][j], idx: j, ridx: 0})
 	}
 
@@ -78,10 +72,10 @@ func kthSmallest(matrix [][]int, k int) int {
 		// Take k smallest sums from combining current heap with next row
 		count := 0
 		for h.Len() > 0 && count < k {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			item := heap.Pop(h).(Item)
 			for j := 0; j < n; j++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(next, Item{sum: item.sum + matrix[r][j], idx: j, ridx: r})
 			}
 			count++
@@ -89,7 +83,7 @@ func kthSmallest(matrix [][]int, k int) int {
 		// Keep only k smallest for next iteration
 		h = &MinHeap{}
 		for i := 0; i < k && next.Len() > 0; i++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, heap.Pop(next).(Item))
 		}
 	}
@@ -97,7 +91,7 @@ func kthSmallest(matrix [][]int, k int) int {
 	// Result is kth smallest
 	var result int
 	for i := 0; i < k; i++ {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		result = heap.Pop(h).(Item).sum
 	}
 	return result

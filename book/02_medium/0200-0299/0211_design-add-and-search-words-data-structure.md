@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor() WordDictionary
-```
+**Fungsi Solusi:** `func Constructor() WordDictionary`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n) for add, O(26^m) worst case for search with wildcards, Space: O(total chars)  |  **Ruang:** O(total chars)
 
-**Kompleksitas Waktu:** O(n) for add, O(26^m) worst case for search with wildcards, Space: O(total chars)  
-**Kompleksitas Ruang:** O(total chars)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -51,7 +42,7 @@ func Constructor() WordDictionary {
 
 func (this *WordDictionary) AddWord(word string) {
 	node := this.root
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(word); i++ {
 		idx := word[i] - 'a'
 		if node.children[idx] == nil {

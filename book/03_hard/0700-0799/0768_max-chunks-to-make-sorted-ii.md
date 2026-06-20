@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxChunksToSorted(arr []int) int
-```
-
-> **💡 Hint:** Prefix Max / Suffix Min
+**Fungsi Solusi:** `func maxChunksToSorted(arr []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Prefix Sum
+**Teknik:** Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,13 +49,13 @@ func main() {
 
 func maxChunksToSorted(arr []int) int {
 	n := len(arr)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
 
 	// prefixMax[i] = max(arr[0..i])
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixMax := make([]int, n)
 	prefixMax[0] = arr[0]
 	for i := 1; i < n; i++ {
@@ -75,7 +67,7 @@ func maxChunksToSorted(arr []int) int {
 	}
 
 	// suffixMin[i] = min(arr[i..n-1])
-  // Alokasi slice integer
+  // Alokasi slice
 	suffixMin := make([]int, n)
 	suffixMin[n-1] = arr[n-1]
 	for i := n - 2; i >= 0; i-- {

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func longestSubsequenceRepeatedK(s string, k int) string
-```
-
-> **💡 Hint:** BFS generate candidate strings in order of length.
+**Fungsi Solusi:** `func longestSubsequenceRepeatedK(s string, k int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,14 +36,14 @@ import "fmt"
 
 func longestSubsequenceRepeatedK(s string, k int) string {
 	// Count frequencies
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 26)
 	for _, ch := range s {
 		freq[ch-'a']++
 	}
 
 	// Max uses for each character
-  // Alokasi slice integer
+  // Alokasi slice
 	maxUses := make([]int, 26)
 	for i := 0; i < 26; i++ {
 		maxUses[i] = freq[i] / k
@@ -60,7 +52,7 @@ func longestSubsequenceRepeatedK(s string, k int) string {
 	// Check if str is a subsequence of s
 	isSubseq := func(str string) bool {
 		j := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(s) && j < len(str); i++ {
 			if s[i] == str[j] {
 				j++

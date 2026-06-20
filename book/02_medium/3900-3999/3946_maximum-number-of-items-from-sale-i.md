@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumNumberOfItemsFromSaleI(items [][]int, budget int) int
-```
-
-> **💡 Hint:** 0-1 knapsack. Each item's first copy gives (1 + out_degree)
+**Fungsi Solusi:** `func MaximumNumberOfItemsFromSaleI(items [][]int, budget int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(N * budget + N^2)  
-**Kompleksitas Ruang:** O(budget) where N = len(items)
+**Waktu:** O(N * budget + N^2)  |  **Ruang:** O(budget) where N = len(items)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +40,7 @@ func MaximumNumberOfItemsFromSaleI(items [][]int, budget int) int {
 	m := len(items)
 
 	// Compute out_degree: how many other items this item's factor divides
-  // Alokasi slice integer
+  // Alokasi slice
 	outDeg := make([]int, m)
 	for i := 0; i < m; i++ {
 		for j := 0; j < m; j++ {
@@ -67,7 +59,7 @@ func MaximumNumberOfItemsFromSaleI(items [][]int, budget int) int {
 	}
 
 	// 0-1 knapsack: dp[b] = max copies from first copies with budget b
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, budget+1)
 	for b := 1; b <= budget; b++ {
 		dp[b] = math.MinInt32

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxRemoval(nums []int, queries [][]int) int
-```
+**Fungsi Solusi:** `func maxRemoval(nums []int, queries [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Heap / Priority Queue, Stack
+**Teknik:** Two Pointer, Heap, Sorting
 
-**Kompleksitas Waktu:** O(n log n) Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n) Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,7 +57,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 	m := len(queries)
 
 	// Sort queries by left endpoint
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(queries, func(i, j int) bool {
 		return queries[i][0] < queries[j][0]
 	})
@@ -73,7 +67,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 	h := &MaxHeap{}
 	heap.Init(h)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	diff := make([]int, n+1)
 	qi := 0
 	cur := 0
@@ -81,7 +75,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 	for i := 0; i < n; i++ {
 		// Add all queries that start at i
 		for qi < m && queries[qi][0] == i {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, queries[qi][1])
 			qi++
 		}
@@ -90,7 +84,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 		need := nums[i] - cur
 
 		for need > 0 && h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			r := heap.Pop(h).(int)
 			cur++
 			diff[r+1]++

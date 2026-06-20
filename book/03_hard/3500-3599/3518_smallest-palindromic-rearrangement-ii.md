@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func smallestPalindrome(s string, k int) string
-```
-
-> **💡 Hint:** Count character frequencies. Only at most one odd count is
+**Fungsi Solusi:** `func smallestPalindrome(s string, k int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +52,7 @@ func main() {
 
 func smallestPalindrome(s string, k int) string {
 	// Count frequencies
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 26)
 	for _, ch := range s {
 		freq[ch-'a']++
@@ -80,7 +72,7 @@ func smallestPalindrome(s string, k int) string {
 	}
 
 	// Build the half (first half of palindrome)
-  // Alokasi slice integer
+  // Alokasi slice
 	half := make([]int, 0)
 	for i, c := range freq {
 		for j := 0; j < c/2; j++ {
@@ -98,7 +90,7 @@ func smallestPalindrome(s string, k int) string {
 
 	// Generate k-th permutation of half using factorial number system
 	// Count total permutations
-  // Alokasi slice integer
+  // Alokasi slice
 	fact := make([]int, m+1)
 	fact[0] = 1
 	for i := 1; i <= m; i++ {
@@ -129,7 +121,7 @@ func smallestPalindrome(s string, k int) string {
 			freq int
 		}
 		var cf []charFreq
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		seen := make(map[int]int)
 		for _, v := range remaining {
 			seen[v]++
@@ -153,7 +145,7 @@ func smallestPalindrome(s string, k int) string {
 			}
 			if k <= permCount {
 				// Place this char
-  // Alokasi slice integer
+  // Alokasi slice
 				newRemaining := make([]int, 0)
 				placed := false
 				for _, v := range remaining {

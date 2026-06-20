@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func closestRoom(rooms [][]int, queries [][]int) []int
-```
-
-> **💡 Hint:** sort rooms by size descending, sort queries by minSize descending.
+**Fungsi Solusi:** `func closestRoom(rooms [][]int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search
+**Teknik:** Two Pointer, Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -76,7 +68,7 @@ func main() {
 
 func closestRoom(rooms [][]int, queries [][]int) []int {
 	// Sort rooms by size descending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(rooms, func(i, j int) bool {
 		return rooms[i][1] > rooms[j][1]
 	})
@@ -91,12 +83,12 @@ func closestRoom(rooms [][]int, queries [][]int) []int {
 	for i, q := range queries {
 		sortedQueries[i] = query{preferred: q[0], minSize: q[1], idx: i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sortedQueries, func(i, j int) bool {
 		return sortedQueries[i].minSize > sortedQueries[j].minSize
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	avail := []int{} // sorted room IDs
 	roomIdx := 0

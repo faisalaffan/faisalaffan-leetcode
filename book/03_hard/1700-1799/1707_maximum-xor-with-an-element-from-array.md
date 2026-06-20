@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewBinaryTrie() *BinaryTrie
-```
+**Fungsi Solusi:** `func NewBinaryTrie() *BinaryTrie`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Trie
+**Teknik:** Sorting, Trie
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -87,22 +81,22 @@ func (t *BinaryTrie) QueryMaxXor(num int) int {
 
 func maximizeXor(nums []int, queries [][]int) []int {
 	// Sort nums
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(nums)
 
 	// Attach original indices to queries and sort by limit
-  // Alokasi slice integer
+  // Alokasi slice
 	q := make([][3]int, len(queries)) // [x, limit, originalIdx]
 	for i, query := range queries {
 		q[i] = [3]int{query[0], query[1], i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(q, func(i, j int) bool {
 		return q[i][1] < q[j][1]
 	})
 
 	trie := NewBinaryTrie()
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	idx := 0
 

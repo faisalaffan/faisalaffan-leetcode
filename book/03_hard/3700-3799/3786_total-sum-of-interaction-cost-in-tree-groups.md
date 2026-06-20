@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func totalInteraction(n int, edges [][]int, group []int) int64
-```
-
-> **💡 Hint:** For each edge, count same-group pairs where one node
+**Fungsi Solusi:** `func totalInteraction(n int, edges [][]int, group []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS
+**Teknik:** HashMap, DFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,7 +48,7 @@ func main() {
 
 func totalInteraction(n int, edges [][]int, group []int) int64 {
 	// Build adjacency
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -65,7 +57,7 @@ func totalInteraction(n int, edges [][]int, group []int) int64 {
 	}
 
 	// Total count of each group across entire tree
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	totalGroup := make(map[int]int)
 	for _, g := range group {
 		totalGroup[g]++
@@ -76,7 +68,7 @@ func totalInteraction(n int, edges [][]int, group []int) int64 {
 	// DFS: for each edge, count subtree nodes in each group
 	var dfs func(u, parent int) map[int]int
 	dfs = func(u, parent int) map[int]int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		cnt := make(map[int]int)
 		cnt[group[u]] = 1
 

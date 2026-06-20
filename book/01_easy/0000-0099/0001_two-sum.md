@@ -4,27 +4,21 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array integer dan sebuah target. Tugasmu adalah mencari **dua angka** yang jika dijumlahkan menghasilkan target. Kembalikan **indeks** (posisi) kedua angka.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+Contoh: `nums=[2,7,11,15], target=9` → `2+7=9` → `[0,1]`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+**Cara berpikir:** Gunakan HashMap. Untuk setiap angka, cek apakah `target-angka` sudah ada di map. Kalau sudah → ketemu pasangan. Kalau belum → simpan angka ke map.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func twoSumHashMap(nums []int, target int) []int
-```
-
-> **💡 Hint:** Go runtime baseline ~2-3MB. Gak mungkin di bawah 2MB.
+**Fungsi Solusi:** `func twoSumHashMap(nums []int, target int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +47,7 @@ func main() {
 
 // --- v1 HashMap: O(n) time, O(n) space ---
 func twoSumHashMap(nums []int, target int) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[int]int, len(nums))
 	for i, n := range nums {
 		if j, ok := seen[target-n]; ok {
@@ -66,7 +60,7 @@ func twoSumHashMap(nums []int, target int) []int {
 
 // --- v2 Brute Force: O(n²) time, O(1) space ---
 func twoSumBruteForce(nums []int, target int) []int {
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(nums); i++ {
 		for j := i + 1; j < len(nums); j++ {
 			if nums[i]+nums[j] == target {

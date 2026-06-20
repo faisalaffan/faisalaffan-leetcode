@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumJumps(forbidden []int, a int, b int, x int) int
-```
+**Fungsi Solusi:** `func MinimumJumps(forbidden []int, a int, b int, x int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, BFS
+**Teknik:** HashMap, Two Pointer, BFS
 
-**Kompleksitas Waktu:** O(limit), Space: O(limit)  
-**Kompleksitas Ruang:** O(limit)
+**Waktu:** O(limit), Space: O(limit)  |  **Ruang:** O(limit)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ func main() {
 func MinimumJumps(forbidden []int, a int, b int, x int) int {
 	// Time: O(limit), Space: O(limit)
 	// BFS with state (position, direction) where direction 0=right, 1=left
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	forbiddenSet := make(map[int]bool)
 	for _, f := range forbidden {
 		forbiddenSet[f] = true
@@ -64,7 +58,7 @@ func MinimumJumps(forbidden []int, a int, b int, x int) int {
 		dir int // 0 = came from left (can go either way), 1 = came from right (can only go right)
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	visited := make(map[struct{ pos, dir int }]bool)
 	queue := []state{{pos: 0, dir: 0}}
 	visited[struct{ pos, dir int }{0, 0}] = true

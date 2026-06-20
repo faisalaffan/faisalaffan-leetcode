@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxScore(grid [][]int) int
-```
-
-> **💡 Hint:** DP over column bitmask, processing rows one by one.
+**Fungsi Solusi:** `func maxScore(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -89,9 +81,9 @@ func maxScore(grid [][]int) int {
 	// Ensure we use the smaller dimension as columns for the bitmask.
 	// If m < n, transpose the grid.
 	if m < n {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		transposed := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range transposed {
 			transposed[i] = make([]int, m)
 			for j := 0; j < m; j++ {
@@ -103,16 +95,16 @@ func maxScore(grid [][]int) int {
 	}
 
 	// dp[mask] = max score using columns indicated by mask.
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, 1<<n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = -1
 	}
 	dp[0] = 0
 
 	// For each value (1 to 100), collect cells with that value.
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	valueCells := make([][][2]int, 101)
 	seenValue := make([]bool, 101)
 	for r := 0; r < m; r++ {
@@ -127,7 +119,7 @@ func maxScore(grid [][]int) int {
 
 	// Process values from high to low.
 	// For each value, we can either skip it or pick one cell with that value.
-  // Alokasi slice integer
+  // Alokasi slice
 	newDp := make([]int, 1<<n)
 	prevDp := dp
 	for v := 100; v >= 1; v-- {

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumDifferenceByRemappingADigit(num int) int
-```
+**Fungsi Solusi:** `func MaximumDifferenceByRemappingADigit(num int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -49,7 +40,7 @@ func MaximumDifferenceByRemappingADigit(num int) int {
 
 	// Find max: replace first non-9 digit with 9
 	maxStr := []byte(s)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(maxStr); i++ {
 		if maxStr[i] != '9' {
 			replaceWith := maxStr[i]
@@ -65,7 +56,7 @@ func MaximumDifferenceByRemappingADigit(num int) int {
 
 	// Find min: replace first non-0 digit (or non-1) with 0
 	minStr := []byte(s)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(minStr); i++ {
 		if minStr[i] != '0' && minStr[i] != '1' {
 			replaceWith := minStr[i]

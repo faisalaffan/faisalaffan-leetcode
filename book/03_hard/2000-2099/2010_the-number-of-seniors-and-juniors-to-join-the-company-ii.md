@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func theNumberOfSeniorsAndJuniorsToJoinTheCompanyIi(budget int, employees [][]interface{}) []int
-```
+**Fungsi Solusi:** `func theNumberOfSeniorsAndJuniorsToJoinTheCompanyIi(budget int, employees [][]interface{}) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -130,19 +124,19 @@ func theNumberOfSeniorsAndJuniorsToJoinTheCompanyIi(budget int, employees [][]in
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(seniorSalaries)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(juniorSalaries)
 
 	// Prefix sums for quick cost calculation
-  // Alokasi slice integer
+  // Alokasi slice
 	seniorPrefix := make([]int, len(seniorSalaries)+1)
 	for i, s := range seniorSalaries {
 		seniorPrefix[i+1] = seniorPrefix[i] + s
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	juniorPrefix := make([]int, len(juniorSalaries)+1)
 	for i, s := range juniorSalaries {
 		juniorPrefix[i+1] = juniorPrefix[i] + s

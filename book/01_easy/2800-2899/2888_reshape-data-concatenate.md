@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ReshapeDataConcatenate(df1, df2 [][]int) [][]int
-```
+**Fungsi Solusi:** `func ReshapeDataConcatenate(df1, df2 [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n+m)  |  **Ruang:** O(n+m)
 
-**Kompleksitas Waktu:** O(n+m)  
-**Kompleksitas Ruang:** O(n+m)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -47,7 +38,7 @@ func main() {
 // Time: O(n+m) | Space: O(n+m)
 // LeetCode submission name: concatenateDataFrames
 func ReshapeDataConcatenate(df1, df2 [][]int) [][]int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0, len(df1)+len(df2))
 	result = append(result, df1...)
 	result = append(result, df2...)

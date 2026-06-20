@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int
-```
+**Fungsi Solusi:** `func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,12 +54,12 @@ func (h *maxHeap) Pop() any {
 
 func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	items := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		items[i] = [2]int{threshold[i], nums[i]}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(items, func(i, j int) bool {
 		return items[i][0] < items[j][0]
 	})
@@ -77,14 +71,14 @@ func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int {
 
 	for step := 1; step <= n; step++ {
 		for idx < n && items[idx][0] <= step {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, items[idx][1])
 			idx++
 		}
 		if h.Len() == 0 {
 			break
 		}
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		total += heap.Pop(h).(int)
 	}
 	return total

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewImmutable(data map[string]any) *ImmutableMap
-```
+**Fungsi Solusi:** `func NewImmutable(data map[string]any) *ImmutableMap`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ type ImmutableMap struct {
 }
 
 func NewImmutable(data map[string]any) *ImmutableMap {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	copied := make(map[string]any)
 	for k, v := range data {
 		copied[k] = v

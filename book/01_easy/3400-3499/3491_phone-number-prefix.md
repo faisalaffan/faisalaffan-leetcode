@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func PhoneNumberPrefix(numbers []string) bool
-```
+**Fungsi Solusi:** `func PhoneNumberPrefix(numbers []string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** O(n log n * m). Space: O(1).  
-**Kompleksitas Ruang:** O(1).
+**Waktu:** O(n log n * m). Space: O(1).  |  **Ruang:** O(1).
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ func main() {
 // Time: O(n log n * m). Space: O(1).
 func PhoneNumberPrefix(numbers []string) bool {
 	sort.Strings(numbers)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(numbers)-1; i++ {
 		if len(numbers[i]) <= len(numbers[i+1]) {
 			isPrefix := true

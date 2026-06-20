@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func UnhappyFriends(n int, preferences [][]int, pairs [][]int) int
-```
+**Fungsi Solusi:** `func UnhappyFriends(n int, preferences [][]int, pairs [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(N^2), Space: O(N^2)  
-**Kompleksitas Ruang:** O(N^2)
+**Waktu:** O(N^2), Space: O(N^2)  |  **Ruang:** O(N^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ func main() {
 func UnhappyFriends(n int, preferences [][]int, pairs [][]int) int {
 	// Time: O(N^2), Space: O(N^2)
 	// Build preference rank matrix: rank[i][j] = how much i prefers j
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	rank := make([][]int, n)
 	for i := 0; i < n; i++ {
 		rank[i] = make([]int, n)
@@ -54,7 +48,7 @@ func UnhappyFriends(n int, preferences [][]int, pairs [][]int) int {
 	}
 
 	// Map partner
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	partner := make(map[int]int)
 	for _, p := range pairs {
 		partner[p[0]] = p[1]

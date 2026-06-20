@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func timeTaken(edges [][]int) []int
-```
+**Fungsi Solusi:** `func timeTaken(edges [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,7 +52,7 @@ func main() {
 
 func timeTaken(edges [][]int) []int {
 	n := len(edges) + 1
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return nil
 	}
@@ -66,7 +60,7 @@ func timeTaken(edges [][]int) []int {
 		return []int{0}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		a, b := e[0], e[1]
@@ -76,9 +70,9 @@ func timeTaken(edges [][]int) []int {
 
 	// dp1[u] = max cost from u into its subtree
 	// dp2[u] = second max cost from u into its subtree (for rerooting)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp1 := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp2 := make([]int, n)
 
 	// Cost to propagate from parent to child v (depends on target node v)
@@ -107,7 +101,7 @@ func timeTaken(edges [][]int) []int {
 	}
 	dfs1(0, -1)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 
 	var dfs2 func(u, p, other int)

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func earliestAcq(logs [][]int, n int) int
-```
-
-> **💡 Hint:** Sort logs by timestamp, Union-Find
+**Fungsi Solusi:** `func earliestAcq(logs [][]int, n int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Sorting, Union-Find
 
-**Kompleksitas Waktu:** O(n log n + m * alpha(n)) where n = logs, m = N  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(n log n + m * alpha(n)) where n = logs, m = N  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,12 +42,12 @@ func main() {
 }
 
 func earliestAcq(logs [][]int, n int) int {
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(logs, func(i, j int) bool {
 		return logs[i][0] < logs[j][0]
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i

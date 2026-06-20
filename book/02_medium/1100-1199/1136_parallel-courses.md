@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumSemesters(n int, relations [][]int) int
-```
+**Fungsi Solusi:** `func minimumSemesters(n int, relations [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Topological Sort
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** O(n + len(relations))  
-**Kompleksitas Ruang:** O(n + len(relations))
+**Waktu:** O(n + len(relations))  |  **Ruang:** O(n + len(relations))
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,9 +37,9 @@ import (
 // Space: O(n + len(relations))
 
 func minimumSemesters(n int, relations [][]int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	indeg := make([]int, n+1)
 
 	for _, r := range relations {
@@ -53,7 +47,7 @@ func minimumSemesters(n int, relations [][]int) int {
 		indeg[r[1]]++
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([]int, 0)
 	for i := 1; i <= n; i++ {
 		if indeg[i] == 0 {

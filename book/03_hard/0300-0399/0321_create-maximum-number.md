@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxNumber(nums1 []int, nums2 []int, k int) []int
-```
+**Fungsi Solusi:** `func maxNumber(nums1 []int, nums2 []int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Stack
+**Teknik:** Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +37,7 @@ func maxNumber(nums1 []int, nums2 []int, k int) []int {
 		if length == 0 {
 			return []int{}
 		}
-  // Alokasi slice integer
+  // Alokasi slice
 		stack := make([]int, 0, length)
 		drop := len(nums) - length
 		for _, v := range nums {
@@ -69,7 +63,7 @@ func maxNumber(nums1 []int, nums2 []int, k int) []int {
 	}
 
 	merge := func(a, b []int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 		res := make([]int, 0, len(a)+len(b))
 		i, j := 0, 0
 		for i < len(a) || j < len(b) {

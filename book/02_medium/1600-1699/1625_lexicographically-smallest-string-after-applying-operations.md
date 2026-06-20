@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindLexSmallestString(s string, a int, b int) string
-```
+**Fungsi Solusi:** `func FindLexSmallestString(s string, a int, b int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** O(N^2), Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N^2), Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,7 +39,7 @@ func FindLexSmallestString(s string, a int, b int) string {
 	// Time: O(N^2), Space: O(N)
 	// BFS over all possible states
 	n := len(s)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[string]bool)
 	queue := []string{s}
 	seen[s] = true

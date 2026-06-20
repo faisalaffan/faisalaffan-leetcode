@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func pathsWithMaxScore(board []string) []int
-```
-
-> **💡 Hint:** DP from bottom-right to top-left.
+**Fungsi Solusi:** `func pathsWithMaxScore(board []string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming
+**Teknik:** Two Pointer, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,9 +40,9 @@ func pathsWithMaxScore(board []string) []int {
 	n := len(board)
 	const mod = 1_000_000_007
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dpScore := make([][]int, n)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dpCount := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dpScore[i] = make([]int, n)

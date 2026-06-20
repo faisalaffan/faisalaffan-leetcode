@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64
-```
+**Fungsi Solusi:** `func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ import (
 
 func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64 {
 	n := len(value)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	groups := make([][]int, n+1)
 	for i := 0; i < n; i++ {
 		l := limit[i]
@@ -53,7 +47,7 @@ func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64 {
 		if len(groups[l]) == 0 {
 			continue
 		}
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(groups[l], func(i, j int) bool {
 			return groups[l][i] > groups[l][j]
 		})

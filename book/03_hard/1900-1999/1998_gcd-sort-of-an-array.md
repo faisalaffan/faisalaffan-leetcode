@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewDSU1998(n int) *DSU1998
-```
-
-> **💡 Hint:** Union-Find over numbers and their prime factors.
+**Fungsi Solusi:** `func NewDSU1998(n int) *DSU1998`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU), GCD / Matematika
+**Teknik:** Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,9 +42,9 @@ type DSU1998 struct {
 }
 
 func NewDSU1998(n int) *DSU1998 {
-  // Alokasi slice integer
+  // Alokasi slice
 	p := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -83,7 +75,7 @@ func (d *DSU1998) Union(x, y int) {
 
 // smallestPrimeFactor using sieve
 func spfSieve(limit int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	spf := make([]int, limit+1)
 	for i := 2; i <= limit; i++ {
 		if spf[i] == 0 {
@@ -130,13 +122,13 @@ func gcdSort(nums []int) bool {
 	}
 
 	// Sort a copy and check
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, len(nums))
 	copy(sorted, nums)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(sorted)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(nums); i++ {
 		if dsu.Find(nums[i]) != dsu.Find(sorted[i]) {
 			return false

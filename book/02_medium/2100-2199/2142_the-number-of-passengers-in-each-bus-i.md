@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func busPassengers(buses [][]int, passengers []int) []int
-```
+**Fungsi Solusi:** `func busPassengers(buses [][]int, passengers []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n + m log m)  
-**Kompleksitas Ruang:** O(n + m)
+**Waktu:** O(n log n + m log m)  |  **Ruang:** O(n + m)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,16 +40,16 @@ type Bus struct {
 
 func busPassengers(buses [][]int, passengers []int) []int {
 	// Sort buses by arrival time
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(buses, func(i, j int) bool {
 		return buses[i][1] < buses[j][1]
 	})
 
 	// Sort passengers
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(passengers)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(buses))
 	pIdx := 0
 

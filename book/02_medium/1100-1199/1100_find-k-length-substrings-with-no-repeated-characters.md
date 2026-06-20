@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numKLenSubstrNoRepeats(s string, k int) int
-```
-
-> **💡 Hint:** Sliding window with frequency array
+**Fungsi Solusi:** `func numKLenSubstrNoRepeats(s string, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window
+**Teknik:** Sliding Window
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(26) = O(1)
+**Waktu:** O(n)  |  **Ruang:** O(26) = O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sliding Window** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,12 +43,12 @@ func numKLenSubstrNoRepeats(s string, k int) int {
 		return 0
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 26)
 	duplicates := 0
 	result := 0
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		freq[s[i]-'a']++
 		if freq[s[i]-'a'] == 2 {

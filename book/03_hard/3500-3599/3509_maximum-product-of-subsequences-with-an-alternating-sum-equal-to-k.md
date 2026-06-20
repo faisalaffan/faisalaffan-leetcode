@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxProduct(nums []int, k int, limit int) int
-```
-
-> **💡 Hint:** DP with maps. Track (sum, parity) -> max product, with products
+**Fungsi Solusi:** `func maxProduct(nums []int, k int, limit int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,9 +52,9 @@ func main() {
 func maxProduct(nums []int, k int, limit int) int {
 	// even[sum] = set of possible products for subsequences with even length (next sign is +)
 	// odd[sum] = set of possible products for subsequences with odd length (next sign is -)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	even := make(map[int]map[int]bool)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	odd := make(map[int]map[int]bool)
 
 	ans := -1
@@ -132,7 +124,7 @@ func maxProduct(nums []int, k int, limit int) int {
 }
 
 func copyMap(src map[int]map[int]bool) map[int]map[int]bool {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	dst := make(map[int]map[int]bool)
 	for k, v := range src {
 		dst[k] = make(map[int]bool)

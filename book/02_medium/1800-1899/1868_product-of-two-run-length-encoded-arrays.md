@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindRLEArray(encoded1 [][]int, encoded2 [][]int) [][]int
-```
+**Fungsi Solusi:** `func FindRLEArray(encoded1 [][]int, encoded2 [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n1 + n2), Space: O(n1 + n2) for result  |  **Ruang:** O(n1 + n2) for result
 
-**Kompleksitas Waktu:** O(n1 + n2), Space: O(n1 + n2) for result  
-**Kompleksitas Ruang:** O(n1 + n2) for result
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -42,7 +33,7 @@ func main() {
 
 // Time: O(n1 + n2), Space: O(n1 + n2) for result
 func FindRLEArray(encoded1 [][]int, encoded2 [][]int) [][]int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
 	i, j := 0, 0
 

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxActiveSectionsAfterTrade(s string, queries [][]int) []int
-```
-
-> **💡 Hint:** Precompute segment runs and for each query, find the maximum
+**Fungsi Solusi:** `func maxActiveSectionsAfterTrade(s string, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Prefix Sum
+**Teknik:** Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +52,7 @@ func maxActiveSectionsAfterTrade(s string, queries [][]int) []int {
 	n := len(s)
 
 	// Precompute prefix sums of '1's
-  // Alokasi slice integer
+  // Alokasi slice
 	prefOne := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefOne[i+1] = prefOne[i]
@@ -87,7 +79,7 @@ func maxActiveSectionsAfterTrade(s string, queries [][]int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]

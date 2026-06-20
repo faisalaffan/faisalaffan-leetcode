@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumCost(nums []int, cost []int, k int) int64
-```
-
-> **💡 Hint:** DP with convex hull trick (CHT) for optimization, or use
+**Fungsi Solusi:** `func minimumCost(nums []int, cost []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
+**Teknik:** DP, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,9 +51,9 @@ func minimumCost(nums []int, cost []int, k int) int64 {
 	n := len(nums)
 
 	// Prefix sums
-  // Alokasi slice integer
+  // Alokasi slice
 	prefNums := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefCost := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefNums[i+1] = prefNums[i] + nums[i]
@@ -69,7 +61,7 @@ func minimumCost(nums []int, cost []int, k int) int64 {
 	}
 
 	// DP[i] = min cost for prefix up to i
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int64, n+1)
 	for i := 1; i <= n; i++ {
 		dp[i] = 1 << 62 // large number

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func SpiralMatrixIii(rows int, cols int, rStart int, cStart int) [][]int
-```
+**Fungsi Solusi:** `func SpiralMatrixIii(rows int, cols int, rStart int, cStart int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(rows * cols)  |  **Ruang:** O(rows * cols)
 
-**Kompleksitas Waktu:** O(rows * cols)  
-**Kompleksitas Ruang:** O(rows * cols)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -43,7 +34,7 @@ func main() {
 // Time: O(rows * cols) | Space: O(rows * cols)
 func SpiralMatrixIii(rows int, cols int, rStart int, cStart int) [][]int {
 	total := rows * cols
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	ans := make([][]int, 0, total)
 	ans = append(ans, []int{rStart, cStart})
 	if total == 1 {

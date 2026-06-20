@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findRectangles(points []Point) []Rectangle
-```
+**Fungsi Solusi:** `func findRectangles(points []Point) []Rectangle`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,18 +50,18 @@ type Rectangle struct {
 // findRectangles finds all axis-aligned rectangles from given points.
 func findRectangles(points []Point) []Rectangle {
 	// Build a set of points for O(1) lookup
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pointSet := make(map[Point]bool)
 	for _, p := range points {
 		pointSet[p] = true
 	}
 
 	var rects []Rectangle
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[string]bool)
 
 	// For each pair of points, check if they can be opposite corners
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(points); i++ {
 		for j := i + 1; j < len(points); j++ {
 			p1, p2 := points[i], points[j]
@@ -103,7 +97,7 @@ func findRectangles(points []Point) []Rectangle {
 	}
 
 	// Sort by area descending, then by p1.x, p1.y, p2.x, p2.y
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(rects, func(i, j int) bool {
 		if rects[i].Area != rects[j].Area {
 			return rects[i].Area > rects[j].Area

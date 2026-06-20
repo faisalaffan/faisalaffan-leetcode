@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func earliestFinishTime(landStartTime []int, landDuration []int, waterStartTime []int, waterDuration []int) int
-```
+**Fungsi Solusi:** `func earliestFinishTime(landStartTime []int, landDuration []int, waterStartTime []int, waterDuration []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + m)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(n + m)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -39,7 +30,7 @@ import "fmt"
 func earliestFinishTime(landStartTime []int, landDuration []int, waterStartTime []int, waterDuration []int) int {
 	// Try land -> water
 	minLandEnd := int(^uint(0) >> 1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range landStartTime {
 		end := landStartTime[i] + landDuration[i]
 		if end < minLandEnd {
@@ -47,7 +38,7 @@ func earliestFinishTime(landStartTime []int, landDuration []int, waterStartTime 
 		}
 	}
 	ans := int(^uint(0) >> 1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range waterStartTime {
 		start := waterStartTime[i]
 		if minLandEnd > start {
@@ -61,14 +52,14 @@ func earliestFinishTime(landStartTime []int, landDuration []int, waterStartTime 
 
 	// Try water -> land
 	minWaterEnd := int(^uint(0) >> 1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range waterStartTime {
 		end := waterStartTime[i] + waterDuration[i]
 		if end < minWaterEnd {
 			minWaterEnd = end
 		}
 	}
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range landStartTime {
 		start := landStartTime[i]
 		if minWaterEnd > start {

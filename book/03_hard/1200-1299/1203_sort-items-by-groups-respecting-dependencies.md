@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sortItems(n int, m int, group []int, beforeItems [][]int) []int
-```
+**Fungsi Solusi:** `func sortItems(n int, m int, group []int, beforeItems [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, BFS, Topological Sort
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -78,9 +72,9 @@ func sortItems(n int, m int, group []int, beforeItems [][]int) []int {
 	numGroups := nextGroup
 
 	// --- Item-level topological sort ---
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	itemGraph := make([][]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	itemInDeg := make([]int, n)
 	for i := 0; i < n; i++ {
 		for _, dep := range beforeItems[i] {
@@ -99,9 +93,9 @@ func sortItems(n int, m int, group []int, beforeItems [][]int) []int {
 	}
 
 	// --- Group-level topological sort ---
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	groupGraph := make([][]int, numGroups)
-  // Alokasi slice integer
+  // Alokasi slice
 	groupInDeg := make([]int, numGroups)
 
 	for i := 0; i < n; i++ {
@@ -116,9 +110,9 @@ func sortItems(n int, m int, group []int, beforeItems [][]int) []int {
 
 	// Deduplicate group edges (otherwise in-degree may be inflated)
 	for g := 0; g < numGroups; g++ {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		seen := make(map[int]bool)
-  // Alokasi slice integer
+  // Alokasi slice
 		uniq := make([]int, 0, len(groupGraph[g]))
 		for _, to := range groupGraph[g] {
 			if !seen[to] {
@@ -136,7 +130,7 @@ func sortItems(n int, m int, group []int, beforeItems [][]int) []int {
 	}
 
 	// Group items by their group order
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groupItems := make(map[int][]int) // group -> items in itemOrder
 	for _, it := range itemOrder {
 		g := group[it]
@@ -144,7 +138,7 @@ func sortItems(n int, m int, group []int, beforeItems [][]int) []int {
 	}
 
 	// Concatenate in group order
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0, n)
 	for _, g := range groupOrder {
 		result = append(result, groupItems[g]...)
@@ -155,11 +149,11 @@ func sortItems(n int, m int, group []int, beforeItems [][]int) []int {
 
 // topologicalSort performs Kahn's algorithm. Returns empty slice if a cycle exists.
 func topologicalSort(n int, graph [][]int, inDeg []int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	inDegCopy := make([]int, n)
 	copy(inDegCopy, inDeg)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([]int, 0)
 	for i := 0; i < n; i++ {
 		if inDegCopy[i] == 0 {
@@ -167,7 +161,7 @@ func topologicalSort(n int, graph [][]int, inDeg []int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0, n)
 	for len(queue) > 0 {
 		node := queue[0]

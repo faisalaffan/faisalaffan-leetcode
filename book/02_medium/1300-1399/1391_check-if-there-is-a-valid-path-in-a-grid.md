@@ -4,25 +4,18 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func hasValidPath(grid [][]int) bool
-```
+**Fungsi Solusi:** `func hasValidPath(grid [][]int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Waktu:** O(m*n) where m,n = grid dimensions  |  **Ruang:** O(m*n) for visited array
 
-**Kompleksitas Waktu:** O(m*n) where m,n = grid dimensions  
-**Kompleksitas Ruang:** O(m*n) for visited array
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -75,9 +68,9 @@ var street = [7][][]int{
 // Space: O(m*n) for visited array
 func hasValidPath(grid [][]int) bool {
 	m, n := len(grid), len(grid[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][]bool, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range visited {
 		visited[i] = make([]bool, n)
 	}

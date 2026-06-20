@@ -4,28 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func restaurantGrowth(customers []struct {
-	visitedOn string
-	amount    int
-}) []avgResult
-```
+**Fungsi Solusi:** `func restaurantGrowth(customers []struct { visitedOn string amount int }) []avgResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window
+**Teknik:** HashMap, Sliding Window, Sorting
 
-**Kompleksitas Waktu:** O(n log n) due to sorting  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n) due to sorting  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -80,7 +71,7 @@ func restaurantGrowth(customers []struct {
 		count int
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	dateMap := make(map[string]*daySum)
 	for _, c := range customers {
 		if _, ok := dateMap[c.visitedOn]; !ok {
@@ -98,7 +89,7 @@ func restaurantGrowth(customers []struct {
 
 	// Sliding window of 7 days
 	var result []avgResult
-  // Alokasi slice integer
+  // Alokasi slice
 	window := make([]int, 0, 7)
 
 	for _, d := range dates {

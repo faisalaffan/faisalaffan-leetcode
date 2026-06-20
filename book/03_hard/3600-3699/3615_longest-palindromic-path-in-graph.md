@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func longestPalindromicPath(n int, edges [][]int, label string) int
-```
-
-> **💡 Hint:** Since n <= 14, use DP over bitmask representing visited
+**Fungsi Solusi:** `func longestPalindromicPath(n int, edges [][]int, label string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,7 +46,7 @@ func main() {
 }
 
 func longestPalindromicPath(n int, edges [][]int, label string) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -64,11 +56,11 @@ func longestPalindromicPath(n int, edges [][]int, label string) int {
 
 	// dp[mask][i][j] = mask includes i and j, path from i to j is palindrome
 	totalMasks := 1 << n
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][][]bool, totalMasks)
 	for mask := 0; mask < totalMasks; mask++ {
 		dp[mask] = make([][]bool, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range dp[mask] {
 			dp[mask][i] = make([]bool, n)
 		}

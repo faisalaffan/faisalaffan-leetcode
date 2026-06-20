@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func largestPathValue(colors string, edges [][]int) int
-```
-
-> **💡 Hint:** Topological Sort + DP per Color.
+**Fungsi Solusi:** `func largestPathValue(colors string, edges [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Dynamic Programming, Topological Sort
+**Teknik:** BFS, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -76,9 +68,9 @@ func largestPathValue(colors string, edges [][]int) int {
 	n := len(colors)
 
 	// Build adjacency list and in-degree array
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	inDeg := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -87,11 +79,11 @@ func largestPathValue(colors string, edges [][]int) int {
 	}
 
 	// dp[i][c] = max count of color c on any path ending at node i
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([][26]int, n)
 
 	// Kahn's topological sort
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		if inDeg[i] == 0 {

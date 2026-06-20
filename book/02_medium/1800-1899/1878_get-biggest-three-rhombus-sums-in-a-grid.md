@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func GetBiggestThree(grid [][]int) []int
-```
+**Fungsi Solusi:** `func GetBiggestThree(grid [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer, Sorting
 
-**Kompleksitas Waktu:** O(m*n*min(m,n)), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(m*n*min(m,n)), Space: O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ func main() {
 // Time: O(m*n*min(m,n)), Space: O(1)
 func GetBiggestThree(grid [][]int) []int {
 	m, n := len(grid), len(grid[0])
-  // Alokasi slice integer
+  // Alokasi slice
 	top3 := make([]int, 0)
 
 	for i := 0; i < m; i++ {

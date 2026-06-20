@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countOfIntegers(num1 string, num2 string, minSum int, maxSum int) int
-```
-
-> **💡 Hint:** Digit DP. Count integers in [num1, num2] with digit sum in [minSum, maxSum].
+**Fungsi Solusi:** `func countOfIntegers(num1 string, num2 string, minSum int, maxSum int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,9 +38,9 @@ func countOfIntegers(num1 string, num2 string, minSum int, maxSum int) int {
 	var count func(num string) int
 	count = func(num string) int {
 		n := len(num)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		memo := make([][][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range memo {
 			memo[i] = make([][]int, maxSum+1)
 			for j := range memo[i] {

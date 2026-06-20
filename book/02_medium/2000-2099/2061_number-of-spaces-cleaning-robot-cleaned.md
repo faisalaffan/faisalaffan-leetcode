@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfCleanRooms(room [][]int) int
-```
+**Fungsi Solusi:** `func numberOfCleanRooms(room [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(m*n)  
-**Kompleksitas Ruang:** O(m*n)
+**Waktu:** O(m*n)  |  **Ruang:** O(m*n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,15 +32,15 @@ import "fmt"
 
 func numberOfCleanRooms(room [][]int) int {
 	m, n := len(room), len(room[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][][4]bool, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range visited {
 		visited[i] = make([][4]bool, n)
 	}
 
 	dirs := [][2]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}} // right, down, left, up
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	cleaned := make(map[[2]int]bool)
 	dir := 0
 	r, c := 0, 0

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumPairRemoval(nums []int) int
-```
-
-> **💡 Hint:** Merge pairs from left to right. For each element,
+**Fungsi Solusi:** `func minimumPairRemoval(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Merge Sort
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,7 +50,7 @@ func minimumPairRemoval(nums []int) int {
 	// Simulate the process: repeatedly find and merge the first
 	// adjacent pair where left > right (inversion), then merge them
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	arr := make([]int64, n)
 	for i, v := range nums {
 		arr[i] = int64(v)
@@ -68,7 +60,7 @@ func minimumPairRemoval(nums []int) int {
 	for {
 		sorted := true
 		mergeIdx := -1
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(arr)-1; i++ {
 			if arr[i] > arr[i+1] {
 				sorted = false

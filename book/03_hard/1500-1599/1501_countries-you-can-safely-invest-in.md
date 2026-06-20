@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findSafeCountries(persons []Person, countries []Country, calls []Call) []SafeCountry
-```
+**Fungsi Solusi:** `func findSafeCountries(persons []Person, countries []Country, calls []Call) []SafeCountry`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Trie
+**Teknik:** HashMap, Trie
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -67,14 +61,14 @@ type SafeCountry struct {
 // exceeds the global average.
 func findSafeCountries(persons []Person, countries []Country, calls []Call) []SafeCountry {
 	// Map country ID to country name
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	countryMap := make(map[int]string)
 	for _, c := range countries {
 		countryMap[c.ID] = c.Name
 	}
 
 	// Map person ID to country ID
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	personCountry := make(map[int]int)
 	for _, p := range persons {
 		personCountry[p.ID] = p.CountryID
@@ -89,7 +83,7 @@ func findSafeCountries(persons []Person, countries []Country, calls []Call) []Sa
 		duration int
 		count    int
 	}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	countryTotals := make(map[int]*totals)
 
 	for _, c := range calls {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countSubgraphsForEachDiameter(n int, edges [][]int) []int
-```
+**Fungsi Solusi:** `func countSubgraphsForEachDiameter(n int, edges [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, BFS, Bitmask, Floyd-Warshall
+**Teknik:** HashMap, BFS, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,7 +32,7 @@ import "fmt"
 func countSubgraphsForEachDiameter(n int, edges [][]int) []int {
 	// Floyd-Warshall for all-pairs shortest paths
 	INF := 1000
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dist[i] = make([]int, n)
@@ -64,13 +58,13 @@ func countSubgraphsForEachDiameter(n int, edges [][]int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n-1) // diameters 1..n-1
 
 	// Enumerate all non-empty subsets
 	for mask := 1; mask < (1 << n); mask++ {
 		// Collect nodes in this subset
-  // Alokasi slice integer
+  // Alokasi slice
 		nodes := make([]int, 0, n)
 		for i := 0; i < n; i++ {
 			if mask&(1<<i) != 0 {
@@ -82,7 +76,7 @@ func countSubgraphsForEachDiameter(n int, edges [][]int) []int {
 		}
 
 		// Check connectivity: BFS on induced subgraph
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		visited := make(map[int]bool)
 		queue := []int{nodes[0]}
 		visited[nodes[0]] = true
@@ -102,7 +96,7 @@ func countSubgraphsForEachDiameter(n int, edges [][]int) []int {
 
 		// Compute diameter (max distance between any two nodes in subset)
 		maxDist := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(nodes); i++ {
 			for j := i + 1; j < len(nodes); j++ {
 				if dist[nodes[i]][nodes[j]] > maxDist {

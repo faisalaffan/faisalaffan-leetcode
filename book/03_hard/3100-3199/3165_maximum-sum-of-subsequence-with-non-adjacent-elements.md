@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func merge(a, b Node) Node
-```
-
-> **💡 Hint:** segment tree with 4-state nodes (s00, s01, s10, s11) for O(log n)
+**Fungsi Solusi:** `func merge(a, b Node) Node`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Segment Tree
+**Teknik:** Segment Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Segment Tree** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Segment Tree** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -109,12 +101,12 @@ func (st *SegTree) Query() int {
 }
 
 func maximumSumSubsequence(nums []int, queries [][]int) []int {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if len(nums) == 0 {
 		return make([]int, len(queries))
 	}
 	st := NewSegTree(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for i, q := range queries {
 		pos, val := q[0], q[1]

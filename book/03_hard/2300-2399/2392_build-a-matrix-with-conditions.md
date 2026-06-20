@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int
-```
-
-> **💡 Hint:** Topological sort for rows using rowConditions, and for columns
+**Fungsi Solusi:** `func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, BFS, Topological Sort
+**Teknik:** Two Pointer, BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,20 +45,20 @@ func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
 		return [][]int{}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	rowPos := make([]int, k+1)
 	for i, v := range rowOrder {
 		rowPos[v] = i
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	colPos := make([]int, k+1)
 	for i, v := range colOrder {
 		colPos[v] = i
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	matrix := make([][]int, k)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range matrix {
 		matrix[i] = make([]int, k)
 	}
@@ -78,9 +70,9 @@ func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
 }
 
 func topoSort(k int, conditions [][]int) []int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, k+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	inDeg := make([]int, k+1)
 
 	for _, c := range conditions {
@@ -89,7 +81,7 @@ func topoSort(k int, conditions [][]int) []int {
 		inDeg[v]++
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([]int, 0)
 	for i := 1; i <= k; i++ {
 		if inDeg[i] == 0 {
@@ -97,7 +89,7 @@ func topoSort(k int, conditions [][]int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	order := make([]int, 0, k)
 	for len(queue) > 0 {
 		u := queue[0]

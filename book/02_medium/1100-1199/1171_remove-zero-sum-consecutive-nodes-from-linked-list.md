@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan linked list. Tugasmu traversing atau memanipulasi list.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Traverse dari head. Fast/slow pointer untuk deteksi siklus/cari tengah. Dummy node mempermudah operasi di head.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func removeZeroSumSublists(head *ListNode) *ListNode
-```
+**Fungsi Solusi:** `func removeZeroSumSublists(head *ListNode) *ListNode`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Prefix Sum
+**Teknik:** HashMap, Prefix Sum
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ type ListNode struct {
 func removeZeroSumSublists(head *ListNode) *ListNode {
 	dummy := &ListNode{0, head}
 	prefix := 0
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[int]*ListNode)
 	seen[0] = dummy
 
@@ -70,7 +64,7 @@ func removeZeroSumSublists(head *ListNode) *ListNode {
 }
 
 func listToSlice(head *ListNode) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 	for head != nil {
 		result = append(result, head.Val)
@@ -80,7 +74,7 @@ func listToSlice(head *ListNode) []int {
 }
 
 func sliceToList(nums []int) *ListNode {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if len(nums) == 0 {
 		return nil
 	}

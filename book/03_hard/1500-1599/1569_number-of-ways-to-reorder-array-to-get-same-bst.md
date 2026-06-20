@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numOfWays(nums []int) int
-```
+**Fungsi Solusi:** `func numOfWays(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,9 +56,9 @@ const MOD = 1_000_000_007
 func numOfWays(nums []int) int {
 	n := len(nums)
 	// Precompute nCr using Pascal's triangle
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	comb := make([][]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range comb {
 		comb[i] = make([]int, n+1)
 		comb[i][0] = 1
@@ -84,9 +78,9 @@ func countWays(nums []int, comb [][]int) int {
 	}
 
 	root := nums[0]
-  // Alokasi slice integer
+  // Alokasi slice
 	left := make([]int, 0)
-  // Alokasi slice integer
+  // Alokasi slice
 	right := make([]int, 0)
 
 	for i := 1; i < len(nums); i++ {

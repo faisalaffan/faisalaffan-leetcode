@@ -4,27 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array integer dan sebuah target. Tugasmu adalah mencari **dua angka** yang jika dijumlahkan menghasilkan target. Kembalikan **indeks** (posisi) kedua angka.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+Contoh: `nums=[2,7,11,15], target=9` → `2+7=9` → `[0,1]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+**Cara berpikir:** Gunakan HashMap. Untuk setiap angka, cek apakah `target-angka` sudah ada di map. Kalau sudah → ketemu pasangan. Kalau belum → simpan angka ke map.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumDifference(nums []int) int
-```
-
-> **💡 Hint:** Meet-in-the-Middle
+**Fungsi Solusi:** `func minimumDifference(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, Bitmask
+**Teknik:** Two Pointer, Binary Search, Sorting, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,9 +44,9 @@ func minimumDifference(nums []int) int {
 	}
 
 	// Generate all subset sums for each half, grouped by subset size
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	leftSums := make([][]int, n+1)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	rightSums := make([][]int, n+1)
 
 	// Generate combinations for left half
@@ -83,7 +77,7 @@ func minimumDifference(nums []int) int {
 
 	// Sort each group in right half for binary search
 	for i := 0; i <= n; i++ {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(rightSums[i])
 	}
 

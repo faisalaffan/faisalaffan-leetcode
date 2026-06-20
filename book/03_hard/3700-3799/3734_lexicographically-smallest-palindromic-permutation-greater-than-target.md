@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func smallestPalindrome(s string, target string) string
-```
-
-> **💡 Hint:** Generate palindrome permutations by permuting the left
+**Fungsi Solusi:** `func smallestPalindrome(s string, target string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer, Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,7 +55,7 @@ func smallestPalindrome(s string, target string) string {
 	n := len(s)
 
 	// Count character frequencies
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 26)
 	for _, ch := range s {
 		freq[ch-'a']++
@@ -115,7 +107,7 @@ func smallestPalindrome(s string, target string) string {
 
 	sortedLeft := make([]byte, len(leftHalf))
 	copy(sortedLeft, leftHalf)
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sortedLeft, func(i, j int) bool {
 		return sortedLeft[i] < sortedLeft[j]
 	})

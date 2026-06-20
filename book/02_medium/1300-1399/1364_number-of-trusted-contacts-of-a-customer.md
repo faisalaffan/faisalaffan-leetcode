@@ -4,37 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func trustedContacts(invoices []struct {
-	invoiceID  int
-	customerID int
-	price      int
-}, customers []struct {
-	customerID   int
-	customerName string
-	email        string
-}, contacts []struct {
-	userID       int
-	contactEmail string
-	trusted      bool
-}) []invoiceResult
-```
+**Fungsi Solusi:** `func trustedContacts(invoices []struct { invoiceID int customerID int price int }, customers []struct { customerID int customerName string email string }, contacts []struct { userID int contactEmail string trusted bool }) []invoiceResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n) for sorting  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n) for sorting  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -109,14 +91,14 @@ func trustedContacts(invoices []struct {
 	trusted      bool
 }) []invoiceResult {
 	// Map customer emails to IDs for trusted contact lookup
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	emailToCustomerID := make(map[string]int)
 	for _, c := range customers {
 		emailToCustomerID[c.email] = c.customerID
 	}
 
 	// Count trusted contacts per customer
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	trustedCounts := make(map[int]int)
 	for _, c := range contacts {
 		if c.trusted {
@@ -127,14 +109,14 @@ func trustedContacts(invoices []struct {
 	}
 
 	// Map customer IDs to names
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	customerNames := make(map[int]string)
 	for _, c := range customers {
 		customerNames[c.customerID] = c.customerName
 	}
 
 	// Sort invoices by invoice ID
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(invoices, func(i, j int) bool {
 		return invoices[i].invoiceID < invoices[j].invoiceID
 	})

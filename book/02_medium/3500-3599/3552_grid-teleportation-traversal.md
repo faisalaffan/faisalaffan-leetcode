@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func GridTeleportationTraversal(grid [][]int, start, end []int, teleports [][]int) int
-```
+**Fungsi Solusi:** `func GridTeleportationTraversal(grid [][]int, start, end []int, teleports [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, BFS
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,7 +50,7 @@ func main() {
 func GridTeleportationTraversal(grid [][]int, start, end []int, teleports [][]int) int {
 	m, n := len(grid), len(grid[0])
 	// Build teleport map
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	tpMap := make(map[[2]int][2]int)
 	for _, tp := range teleports {
 		tpMap[[2]int{tp[0], tp[1]}] = [2]int{tp[2], tp[3]}
@@ -64,9 +58,9 @@ func GridTeleportationTraversal(grid [][]int, start, end []int, teleports [][]in
 
 	// BFS
 	dirs := [][2]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][]bool, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range visited {
 		visited[i] = make([]bool, n)
 	}

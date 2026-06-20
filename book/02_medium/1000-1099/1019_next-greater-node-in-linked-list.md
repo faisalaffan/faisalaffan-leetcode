@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan linked list. Tugasmu traversing atau memanipulasi list.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Traverse dari head. Fast/slow pointer untuk deteksi siklus/cari tengah. Dummy node mempermudah operasi di head.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func nextLargerNodes(head *ListNode) []int
-```
-
-> **💡 Hint:** Convert linked list to array, then use monotonic stack
+**Fungsi Solusi:** `func nextLargerNodes(head *ListNode) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
+**Teknik:** Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,15 +50,15 @@ func main() {
 
 func nextLargerNodes(head *ListNode) []int {
 	// Convert to array
-  // Alokasi slice integer
+  // Alokasi slice
 	vals := make([]int, 0)
 	for cur := head; cur != nil; cur = cur.Next {
 		vals = append(vals, cur.Val)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(vals))
-  // Alokasi slice integer
+  // Alokasi slice
 	stack := make([]int, 0) // indices
 
 	for i, v := range vals {

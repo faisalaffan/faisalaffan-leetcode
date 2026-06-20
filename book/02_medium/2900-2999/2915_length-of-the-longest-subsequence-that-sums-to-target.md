@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lengthOfLongestSubsequence(nums []int, target int) int
-```
+**Fungsi Solusi:** `func lengthOfLongestSubsequence(nums []int, target int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n*target)  |  **Ruang:** O(n*target)
 
-**Kompleksitas Waktu:** O(n*target)  
-**Kompleksitas Ruang:** O(n*target)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -45,9 +36,9 @@ func main() {
 func lengthOfLongestSubsequence(nums []int, target int) int {
 	n := len(nums)
 	const negInf = -(1 << 30)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	f := make([][]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range f {
 		f[i] = make([]int, target+1)
 		for j := range f[i] {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func shiftDistance(s string, t string, nextCost []int, previousCost []int) int64
-```
+**Fungsi Solusi:** `func shiftDistance(s string, t string, nextCost []int, previousCost []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n + 26) Space: O(26)  
-**Kompleksitas Ruang:** O(26)
+**Waktu:** O(n + 26) Space: O(26)  |  **Ruang:** O(26)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +41,9 @@ func shiftDistance(s string, t string, nextCost []int, previousCost []int) int64
 	// backward[i][j] = cost to go from i to j going backward
 
 	// Prefix sums for cyclic shifts
-  // Alokasi slice integer
+  // Alokasi slice
 	nextPref := make([]int, 53) // double for wrap-around
-  // Alokasi slice integer
+  // Alokasi slice
 	prevPref := make([]int, 53)
 	for i := 0; i < 52; i++ {
 		nextPref[i+1] = nextPref[i] + nextCost[i%26]
@@ -57,7 +51,7 @@ func shiftDistance(s string, t string, nextCost []int, previousCost []int) int64
 	}
 
 	var ans int64
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		a := int(s[i] - 'a')
 		b := int(t[i] - 'a')

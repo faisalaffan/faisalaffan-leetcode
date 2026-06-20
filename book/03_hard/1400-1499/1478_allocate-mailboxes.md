@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minDistance(houses []int, k int) int
-```
-
-> **💡 Hint:** DP + Median Cost
+**Fungsi Solusi:** `func minDistance(houses []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +52,7 @@ func main() {
 }
 
 func minDistance(houses []int, k int) int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(houses)
 	n := len(houses)
 
@@ -69,9 +61,9 @@ func minDistance(houses []int, k int) int {
 	}
 
 	// precompute cost[i][j] = min dist for 1 mailbox serving houses[i..j]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	cost := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range cost {
 		cost[i] = make([]int, n)
 	}
@@ -89,9 +81,9 @@ func minDistance(houses []int, k int) int {
 	}
 
 	// dp[i][j] = min distance for first i+1 houses with j+1 mailboxes
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, k)
 		for j := range dp[i] {

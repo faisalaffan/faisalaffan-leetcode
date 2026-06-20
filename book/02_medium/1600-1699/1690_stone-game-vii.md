@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func stoneGameVII(stones []int) int
-```
+**Fungsi Solusi:** `func stoneGameVII(stones []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum
+**Teknik:** Two Pointer, DP, Prefix Sum
 
-**Kompleksitas Waktu:** O(n^2), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n^2), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,14 +32,14 @@ import "fmt"
 
 func stoneGameVII(stones []int) int {
 	n := len(stones)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, n+1)
 	for i, v := range stones {
 		prefix[i+1] = prefix[i] + v
 	}
 
 	// dp[i][j] = max score difference (current player - other player) for subarray i..j
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n)
 
 	for length := 2; length <= n; length++ {

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func longestCommonSubpath(n int, paths [][]int) int
-```
-
-> **💡 Hint:** binary search on length + rolling hash (Rabin-Karp).
+**Fungsi Solusi:** `func longestCommonSubpath(n int, paths [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Binary Search
+**Teknik:** HashMap, Binary Search
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -116,7 +108,7 @@ func hasCommonSubpath(paths [][]int, length int) bool {
 	}
 
 	// Get all subarray hashes from first path
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	common := make(map[[2]int]bool)
 	var h1, h2 int
 
@@ -142,7 +134,7 @@ func hasCommonSubpath(paths [][]int, length int) bool {
 
 	// Check each remaining path
 	for _, path := range paths[1:] {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		current := make(map[[2]int]bool)
 		h1, h2 = 0, 0
 

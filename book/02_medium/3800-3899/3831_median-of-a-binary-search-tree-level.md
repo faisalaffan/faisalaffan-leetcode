@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MedianOfABinarySearchTreeLevel(root *TreeNode, level int) int
-```
-
-> **💡 Hint:** DFS to collect all values at target level, sort, compute upper median.
+**Fungsi Solusi:** `func MedianOfABinarySearchTreeLevel(root *TreeNode, level int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, DFS
+**Teknik:** Binary Search, DFS, Sorting
 
-**Kompleksitas Waktu:** O(N log W)  
-**Kompleksitas Ruang:** O(W)
+**Waktu:** O(N log W)  |  **Ruang:** O(W)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,7 +61,7 @@ func MedianOfABinarySearchTreeLevel(root *TreeNode, level int) int {
 		return -1
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(values)
 	return values[len(values)/2] // upper median
 }

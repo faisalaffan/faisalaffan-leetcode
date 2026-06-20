@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countWays(mat [][]int) int
-```
-
-> **💡 Hint:** DP over GCD values. For each row, compute new GCDs.
+**Fungsi Solusi:** `func countWays(mat [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming, GCD / Matematika
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,14 +52,14 @@ func countWays(mat [][]int) int {
 		return 0
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	dp := make(map[int]int)
 	for _, v := range mat[0] {
 		dp[v] = (dp[v] + 1) % mod
 	}
 
 	for r := 1; r < m; r++ {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		ndp := make(map[int]int)
 		for g, cnt := range dp {
 			for _, v := range mat[r] {

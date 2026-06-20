@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxPoints(grid [][]int, queries []int) []int
-```
+**Fungsi Solusi:** `func maxPoints(grid [][]int, queries []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -84,19 +78,19 @@ func maxPoints(grid [][]int, queries []int) []int {
 	for i, v := range queries {
 		sorted[i] = Query{v, i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sorted, func(i, j int) bool {
 		return sorted[i].val < sorted[j].val
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, k)
 	h := &MinHeap{}
 	heap.Init(h)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(h, Cell{grid[0][0], 0, 0})
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][]bool, m)
 	for i := 0; i < m; i++ {
 		visited[i] = make([]bool, n)
@@ -109,14 +103,14 @@ func maxPoints(grid [][]int, queries []int) []int {
 	for _, q := range sorted {
 		// Pop all cells with value < query value
 		for h.Len() > 0 && (*h)[0].val < q.val {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			cell := heap.Pop(h).(Cell)
 			count++
 			for _, d := range dirs {
 				nr, nc := cell.r+d[0], cell.c+d[1]
 				if nr >= 0 && nr < m && nc >= 0 && nc < n && !visited[nr][nc] {
 					visited[nr][nc] = true
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 					heap.Push(h, Cell{grid[nr][nc], nr, nc})
 				}
 			}

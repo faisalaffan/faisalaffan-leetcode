@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindCitiesInEachState(data [][]string) [][]string
-```
+**Fungsi Solusi:** `func FindCitiesInEachState(data [][]string) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n). Space: O(n).  
-**Kompleksitas Ruang:** O(n).
+**Waktu:** O(n log n). Space: O(n).  |  **Ruang:** O(n).
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,7 +50,7 @@ func main() {
 // FindCitiesInEachState groups cities by state and returns them as comma-separated strings.
 // Time: O(n log n). Space: O(n).
 func FindCitiesInEachState(data [][]string) [][]string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	stateCities := make(map[string][]string)
 	for _, row := range data {
 		state, city := row[0], row[1]
@@ -69,7 +63,7 @@ func FindCitiesInEachState(data [][]string) [][]string {
 	}
 	sort.Strings(states)
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]string, len(states))
 	for i, s := range states {
 		cities := stateCities[s]

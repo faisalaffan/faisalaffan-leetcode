@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func init() 
-```
+**Fungsi Solusi:** `func init() `
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O(N log N) Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N) Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -88,9 +82,9 @@ func minOperations(n int, m int) int {
 		return -1
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([]int, MAX+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = 1 << 60
 	}
@@ -98,11 +92,11 @@ func minOperations(n int, m int) int {
 
 	h := &ItemHeap{}
 	heap.Init(h)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(h, Item{n, n})
 
 	for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		item := heap.Pop(h).(Item)
 		if item.cost > dist[item.num] {
 			continue
@@ -124,7 +118,7 @@ func minOperations(n int, m int) int {
 					nc := item.cost + next
 					if nc < dist[next] {
 						dist[next] = nc
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 						heap.Push(h, Item{nc, next})
 					}
 				}
@@ -140,7 +134,7 @@ func minOperations(n int, m int) int {
 						nc := item.cost + next
 						if nc < dist[next] {
 							dist[next] = nc
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 							heap.Push(h, Item{nc, next})
 						}
 					}

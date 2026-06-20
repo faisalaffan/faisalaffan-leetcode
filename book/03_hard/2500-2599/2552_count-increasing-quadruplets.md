@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countQuadruplets(nums []int) int64
-```
+**Fungsi Solusi:** `func countQuadruplets(nums []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Prefix Sum
+**Teknik:** Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,9 +42,9 @@ func countQuadruplets(nums []int) int64 {
 	n := len(nums)
 
 	// prefixLess[i][v] = count of elements before position i that are < v
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	prefixLess := make([][]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range prefixLess {
 		prefixLess[i] = make([]int, n+2)
 	}
@@ -62,9 +56,9 @@ func countQuadruplets(nums []int) int64 {
 	}
 
 	// suffixGreater[i][v] = count of elements after position i that are > v
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	suffixGreater := make([][]int, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range suffixGreater {
 		suffixGreater[i] = make([]int, n+2)
 	}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func reconstructQueue(people [][]int) [][]int
-```
+**Fungsi Solusi:** `func reconstructQueue(people [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS, Sorting
 
-**Kompleksitas Waktu:** O(n^2)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n^2)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ import (
 
 func reconstructQueue(people [][]int) [][]int {
 	// Sort by height descending, then by k ascending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(people, func(i, j int) bool {
 		if people[i][0] != people[j][0] {
 			return people[i][0] > people[j][0]
@@ -49,7 +43,7 @@ func reconstructQueue(people [][]int) [][]int {
 		return people[i][1] < people[j][1]
 	})
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0, len(people))
 	for _, p := range people {
 		// Insert at index k

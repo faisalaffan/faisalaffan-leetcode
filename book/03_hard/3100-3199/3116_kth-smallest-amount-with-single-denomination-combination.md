@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lcmSafe(a, b, limit int64) int64
-```
+**Fungsi Solusi:** `func lcmSafe(a, b, limit int64) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, DFS, GCD / Matematika
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** O(2^m * log(k * min_coin)) where m = filtered coin count  
-**Kompleksitas Ruang:** O(m)
+**Waktu:** O(2^m * log(k * min_coin)) where m = filtered coin count  |  **Ruang:** O(m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,9 +54,9 @@ func lcmSafe(a, b, limit int64) int64 {
 }
 
 func kthSmallestAmount(coins []int, k int) int64 {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(coins)
-  // Alokasi slice integer
+  // Alokasi slice
 	filtered := make([]int, 0)
 	for _, c := range coins {
 		redundant := false
@@ -78,7 +72,7 @@ func kthSmallestAmount(coins []int, k int) int64 {
 	}
 
 	m := len(filtered)
-  // Alokasi slice integer
+  // Alokasi slice
 	coinI64 := make([]int64, m)
 	for i, c := range filtered {
 		coinI64[i] = int64(c)

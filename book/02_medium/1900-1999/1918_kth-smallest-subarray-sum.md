@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func KthSmallestSubarraySum(nums []int, k int) int
-```
+**Fungsi Solusi:** `func KthSmallestSubarraySum(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum
+**Teknik:** Two Pointer, Binary Search, Prefix Sum
 
-**Kompleksitas Waktu:** O(n log sum), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n log sum), Space: O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,7 +39,7 @@ func main() {
 // Time: O(n log sum), Space: O(1)
 func KthSmallestSubarraySum(nums []int, k int) int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + nums[i]
@@ -54,7 +48,7 @@ func KthSmallestSubarraySum(nums []int, k int) int {
 
 	// Binary search on sum value
 	left, right := 0, totalSum
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 	for left < right {
 		mid := left + (right-left)/2
 		if countSubarraysLE(nums, prefix, mid) >= k {
@@ -68,7 +62,7 @@ func KthSmallestSubarraySum(nums []int, k int) int {
 
 func countSubarraysLE(nums []int, prefix []int, target int) int {
 	count := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(nums); i++ {
 		// Find first j where prefix[j+1]-prefix[i] > target
 		lo, hi := i, len(nums)-1

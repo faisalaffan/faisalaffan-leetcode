@@ -2,27 +2,21 @@
 
 ## 📖 Deskripsi Soal
 
-**Tingkat Kesulitan:** Sulit
+**Tingkat Kesulitan:** —
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func idealArrays(n int, maxValue int) int
-```
+**Fungsi Solusi:** `func idealArrays(n int, maxValue int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,9 +62,9 @@ func idealArrays(n int, maxValue int) int {
 	if maxK > n {
 		maxK = n
 	}
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	C := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range C {
 		C[i] = make([]int, maxK+1)
 		C[i][0] = 1
@@ -80,18 +74,18 @@ func idealArrays(n int, maxValue int) int {
 	}
 
 	// dp[k][v] — we only need two layers at a time.
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, maxValue+1)
 	for v := 1; v <= maxValue; v++ {
 		dp[v] = 1 // k = 1
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	f := make([]int, maxK+1)
 	f[1] = maxValue
 
 	for k := 2; k <= maxK; k++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, maxValue+1)
 		total := 0
 		// For each d, add dp[d] to its multiples.

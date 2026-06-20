@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumMinutes(grid [][]int) int
-```
+**Fungsi Solusi:** `func maximumMinutes(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, BFS
+**Teknik:** Binary Search, BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -52,9 +46,9 @@ func maximumMinutes(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
 
 	// fireDist[i][j] = minute when fire reaches (i,j), or INF
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	fireDist := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range fireDist {
 		fireDist[i] = make([]int, n)
 		for j := range fireDist[i] {
@@ -64,7 +58,7 @@ func maximumMinutes(grid [][]int) int {
 
 	// BFS from all fire sources
 	type point struct{ x, y int }
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([]point, 0)
 
 	for i := 0; i < m; i++ {
@@ -93,14 +87,14 @@ func maximumMinutes(grid [][]int) int {
 	// Binary search: can we wait `wait` minutes?
 	canEscape := func(wait int) bool {
 		// BFS for person
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		visited := make([][]bool, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range visited {
 			visited[i] = make([]bool, n)
 		}
 
-  // Alokasi slice integer
+  // Alokasi slice
 		pq := make([]point, 0)
 		pq = append(pq, point{0, 0})
 		visited[0][0] = true

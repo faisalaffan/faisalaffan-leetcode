@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumBeauty(items [][]int, queries []int) []int
-```
+**Fungsi Solusi:** `func maximumBeauty(items [][]int, queries []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Monotonic Stack/Queue
+**Teknik:** Binary Search, Sorting, Monotonic Stack
 
-**Kompleksitas Waktu:** O((n+q) log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n+q) log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +35,7 @@ import (
 
 func maximumBeauty(items [][]int, queries []int) []int {
 	// Sort items by price
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(items, func(i, j int) bool {
 		return items[i][0] < items[j][0]
 	})
@@ -61,7 +55,7 @@ func maximumBeauty(items [][]int, queries []int) []int {
 	}
 
 	// Handle queries
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(queries))
 	for i, q := range queries {
 		// Binary search for last item with price <= q

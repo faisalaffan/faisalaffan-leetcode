@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lcm(a, b int) int
-```
+**Fungsi Solusi:** `func lcm(a, b int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, GCD / Matematika, Bitmask
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -65,7 +59,7 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 	M := 1 << m
 
 	// Precompute LCM for each subset mask
-  // Alokasi slice integer
+  // Alokasi slice
 	lcmMask := make([]int, M)
 	lcmMask[0] = 1
 	for mask := 1; mask < M; mask++ {
@@ -88,7 +82,7 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 
 	// For each element, min increment to cover each mask
 	// cost[i][mask] = min increment to make nums[i] divisible by lcmMask[mask]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	elemCost := make([][]int, n)
 	for i, x := range nums {
 		elemCost[i] = make([]int, M)
@@ -109,14 +103,14 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 	}
 
 	// 0/1 knapSack DP over elements
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, M)
 	for mask := 1; mask < M; mask++ {
 		dp[mask] = INF
 	}
 
 	for _, cost := range elemCost {
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, M)
 		copy(ndp, dp)
 		for oldMask := 0; oldMask < M; oldMask++ {

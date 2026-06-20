@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumTime(n int, relations [][]int, time []int) int
-```
-
-> **💡 Hint:** Topological Sort + DP
+**Fungsi Solusi:** `func minimumTime(n int, relations [][]int, time []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Dynamic Programming, Topological Sort
+**Teknik:** BFS, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,9 +32,9 @@ import "fmt"
 
 func minimumTime(n int, relations [][]int, time []int) int {
 	// Build graph and indegree
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	indeg := make([]int, n+1)
 	for _, r := range relations {
 		prev, next := r[0], r[1]
@@ -51,9 +43,9 @@ func minimumTime(n int, relations [][]int, time []int) int {
 	}
 
 	// dp[i] = earliest completion time for course i (1-indexed)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([]int, 0)
 
 	for i := 1; i <= n; i++ {

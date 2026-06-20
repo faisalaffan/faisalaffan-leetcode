@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countPairs(n int, edges [][]int, queries []int) []int
-```
-
-> **💡 Hint:** Degree sort + Binary Search.
+**Fungsi Solusi:** `func countPairs(n int, edges [][]int, queries []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Binary Search
+**Teknik:** HashMap, Two Pointer, Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,10 +43,10 @@ import (
 
 func countPairs(n int, edges [][]int, queries []int) []int {
 	// Degree of each node
-  // Alokasi slice integer
+  // Alokasi slice
 	deg := make([]int, n+1)
 	// Edge pair counts: key = (min*100000 + max) for uniqueness
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	edgeCount := make(map[int]int)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -67,19 +59,19 @@ func countPairs(n int, edges [][]int, queries []int) []int {
 	}
 
 	// Sorted degrees (1-indexed)
-  // Alokasi slice integer
+  // Alokasi slice
 	sortedDeg := make([]int, n)
 	copy(sortedDeg, deg[1:])
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(sortedDeg)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		// Two-pointer: count pairs with deg[i] + deg[j] > q
 		total := 0
 		left, right := 0, n-1
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 		for left < right {
 			if sortedDeg[left]+sortedDeg[right] > q {
 				total += right - left
@@ -90,7 +82,7 @@ func countPairs(n int, edges [][]int, queries []int) []int {
 		}
 
 		// Subtract edge pairs that don't satisfy when considering shared edges
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		seen := make(map[int]bool)
 		for _, e := range edges {
 			u, v := e[0], e[1]

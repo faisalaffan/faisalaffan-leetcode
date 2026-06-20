@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func dijkstra(n int, adj [][][]int, start int) []int
-```
+**Fungsi Solusi:** `func dijkstra(n int, adj [][][]int, start int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
+**Teknik:** BFS, Heap, Dijkstra
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +51,7 @@ func (pq *PriorityQueue) Pop() interface{}    { old := *pq; n := len(old); it :=
 
 func dijkstra(n int, adj [][][]int, start int) []int {
 	const INF = 1 << 60
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([]int, n)
 	for i := 0; i < n; i++ {
 		dist[i] = INF
@@ -65,10 +59,10 @@ func dijkstra(n int, adj [][][]int, start int) []int {
 	dist[start] = 0
 	pq := &PriorityQueue{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &Item{node: start, dist: 0})
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		item := heap.Pop(pq).(*Item)
 		u, d := item.node, item.dist
 		if d > dist[u] {
@@ -78,7 +72,7 @@ func dijkstra(n int, adj [][][]int, start int) []int {
 			v, w := edge[0], edge[1]
 			if nd := d + w; nd < dist[v] {
 				dist[v] = nd
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &Item{node: v, dist: nd})
 			}
 		}
@@ -87,7 +81,7 @@ func dijkstra(n int, adj [][][]int, start int) []int {
 }
 
 func findEdgesInShortestPaths(n int, edges [][]int) []bool {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][][]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]

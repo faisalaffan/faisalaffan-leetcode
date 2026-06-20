@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numDupDigitsAtMostN(n int) int
-```
-
-> **💡 Hint:** Digit DP.
+**Fungsi Solusi:** `func numDupDigitsAtMostN(n int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,9 +49,9 @@ func numDupDigitsAtMostN(n int) int {
 	// Count numbers with all-unique digits from 0 to n (inclusive)
 	// Use digit DP: tight + mask of used digits
 	var countUnique func(pos int, tight bool, started bool, mask int) int
-  // Alokasi slice integer
+  // Alokasi slice
 	memo := make([][1 << 10][2][2]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range memo {
 		for j := range memo[i] {
 			memo[i][j] = [2][2]int{{-1, -1}, {-1, -1}}

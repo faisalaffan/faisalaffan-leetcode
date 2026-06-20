@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lastMarkedNodes(edges [][]int) []int
-```
+**Fungsi Solusi:** `func lastMarkedNodes(edges [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,7 +54,7 @@ func main() {
 
 func lastMarkedNodes(edges [][]int) []int {
 	n := len(edges) + 1
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -80,7 +74,7 @@ func lastMarkedNodes(edges [][]int) []int {
 	}
 
 	// Step 1: Find A (farthest from node 0)
-  // Alokasi slice integer
+  // Alokasi slice
 	dist0 := make([]int, n)
 	dfs(0, -1, dist0)
 	a := 0
@@ -91,7 +85,7 @@ func lastMarkedNodes(edges [][]int) []int {
 	}
 
 	// Step 2: Find B (farthest from A) and compute distances from A
-  // Alokasi slice integer
+  // Alokasi slice
 	distA := make([]int, n)
 	dfs(a, -1, distA)
 	b := 0
@@ -102,12 +96,12 @@ func lastMarkedNodes(edges [][]int) []int {
 	}
 
 	// Step 3: Compute distances from B
-  // Alokasi slice integer
+  // Alokasi slice
 	distB := make([]int, n)
 	dfs(b, -1, distB)
 
 	// Step 4: For each node, answer = farther endpoint
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 	for i := 0; i < n; i++ {
 		if distA[i] > distB[i] {

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountCaesarCipherPairs(words []string) int
-```
-
-> **💡 Hint:** Normalize each string by shifting so that its first character
+**Fungsi Solusi:** `func CountCaesarCipherPairs(words []string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(N * M)  
-**Kompleksitas Ruang:** O(N * M)
+**Waktu:** O(N * M)  |  **Ruang:** O(N * M)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,14 +37,14 @@ func CountCaesarCipherPairs(words []string) int {
 	normalize := func(s string) string {
 		shift := int(s[0] - 'a')
 		res := make([]byte, len(s))
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(s); i++ {
 			res[i] = byte((int(s[i]-'a')-shift+26)%26 + 'a')
 		}
 		return string(res)
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	count := make(map[string]int)
 	ans := 0
 

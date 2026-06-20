@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor() StatisticsTracker
-```
-
-> **💡 Hint:** Use heaps for median (two heaps), maps for frequency tracking.
+**Fungsi Solusi:** `func Constructor() StatisticsTracker`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Heap / Priority Queue, Stack
+**Teknik:** HashMap, Two Pointer, Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -162,19 +154,19 @@ func (st *StatisticsTracker) AddElement(val int) {
 
 	// Add to heaps for median
 	if st.low.Len() == 0 || val <= (*st.low)[0] {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(st.low, val)
 	} else {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(st.high, val)
 	}
 
 	// Rebalance
 	if st.low.Len() > st.high.Len()+1 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(st.high, heap.Pop(st.low))
 	} else if st.high.Len() > st.low.Len() {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(st.low, heap.Pop(st.high))
 	}
 }

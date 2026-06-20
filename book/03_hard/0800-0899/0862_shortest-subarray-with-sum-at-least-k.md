@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func shortestSubarray(nums []int, k int) int
-```
-
-> **💡 Hint:** Monotonic increasing deque of prefix sums. For each prefix sum, maintain
+**Fungsi Solusi:** `func shortestSubarray(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Trie, Prefix Sum, Monotonic Stack/Queue
+**Teknik:** Trie, Prefix Sum, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Trie** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +35,7 @@ import "fmt"
 
 func shortestSubarray(nums []int, k int) int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + nums[i]
@@ -51,7 +43,7 @@ func shortestSubarray(nums []int, k int) int {
 
 	ans := n + 1
 	// deque stores indices with increasing prefix sums
-  // Alokasi slice integer
+  // Alokasi slice
 	deque := make([]int, 0)
 
 	for i := 0; i <= n; i++ {

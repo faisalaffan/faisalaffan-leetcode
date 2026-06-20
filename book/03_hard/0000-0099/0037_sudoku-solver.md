@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan papan Sudoku 9x9. Isi sel kosong dengan angka 1-9 sehingga setiap baris, kolom, dan sub-box 3x3 berisi 1-9 tanpa pengulangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Backtracking — coba angka 1-9, jika buntu mundur dan coba yang lain.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func solveSudoku(board [][]byte) 
-```
+**Fungsi Solusi:** `func solveSudoku(board [][]byte) `
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func addToArrayForm(num []int, k int) []int
-```
+**Fungsi Solusi:** `func addToArrayForm(num []int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(max(n, log k)). Space: O(max(n, log k)).  |  **Ruang:** O(max(n, log k)).
 
-**Kompleksitas Waktu:** O(max(n, log k)). Space: O(max(n, log k)).  
-**Kompleksitas Ruang:** O(max(n, log k)).
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -45,7 +36,7 @@ func main() {
 // Time: O(max(n, log k)). Space: O(max(n, log k)).
 func addToArrayForm(num []int, k int) []int {
 	i := len(num) - 1
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 	carry := 0
 	for i >= 0 || k > 0 || carry > 0 {
@@ -63,7 +54,6 @@ func addToArrayForm(num []int, k int) []int {
 	}
 	// Reverse
 	l, r := 0, len(result)-1
-  // Two-pointer: gerakkan kiri atau kanan
 	for l < r {
 		result[l], result[r] = result[r], result[l]
 		l++

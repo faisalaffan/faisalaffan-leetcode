@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func oddEvenJumps(A []int) int
-```
+**Fungsi Solusi:** `func oddEvenJumps(A []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, Dynamic Programming
+**Teknik:** Two Pointer, Binary Search, DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,7 +34,7 @@ import (
 
 func oddEvenJumps(A []int) int {
 	n := len(A)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
@@ -62,7 +56,7 @@ func oddEvenJumps(A []int) int {
 	for i, v := range A {
 		pairs[i] = pair{v, i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(pairs, func(i, j int) bool {
 		if pairs[i].val != pairs[j].val {
 			return pairs[i].val < pairs[j].val
@@ -72,11 +66,11 @@ func oddEvenJumps(A []int) int {
 
 	// For each index, find the next odd jump (smallest value >= current)
 	// and next even jump (largest value <= current)
-  // Alokasi slice integer
+  // Alokasi slice
 	nextOdd := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	nextEven := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range nextOdd {
 		nextOdd[i] = -1
 		nextEven[i] = -1

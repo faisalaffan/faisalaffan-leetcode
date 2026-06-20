@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sortMatrix(grid [][]int) [][]int
-```
+**Fungsi Solusi:** `func sortMatrix(grid [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** O(n^2 log n) Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n^2 log n) Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,7 +43,7 @@ func sortMatrix(grid [][]int) [][]int {
 	for i := 0; i < n; i++ {
 		r, c := i, 0
 		length := n - i
-  // Alokasi slice integer
+  // Alokasi slice
 		diag := make([]int, length)
 		for j := 0; j < length; j++ {
 			diag[j] = grid[r+j][c+j]
@@ -64,7 +58,7 @@ func sortMatrix(grid [][]int) [][]int {
 	for j := 1; j < n; j++ {
 		r, c := 0, j
 		length := n - j
-  // Alokasi slice integer
+  // Alokasi slice
 		diag := make([]int, length)
 		for k := 0; k < length; k++ {
 			diag[k] = grid[r+k][c+k]

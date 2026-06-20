@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ClosestEqualElementQueries(nums []int, queries []int) []int
-```
+**Fungsi Solusi:** `func ClosestEqualElementQueries(nums []int, queries []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Binary Search
+**Teknik:** HashMap, Binary Search
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,13 +48,13 @@ func main() {
 }
 
 func ClosestEqualElementQueries(nums []int, queries []int) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pos := make(map[int][]int)
 	for i, v := range nums {
 		pos[v] = append(pos[v], i)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(queries))
 	for idx, q := range queries {
 		positions := pos[nums[q]]
@@ -71,6 +65,7 @@ func ClosestEqualElementQueries(nums []int, queries []int) []int {
 		// binary search for q in positions
 		left, right := 0, len(positions)-1
 		best := -1
+  // Binary search loop
 		for left <= right {
 			mid := left + (right-left)/2
 			if positions[mid] == q {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minMaxWeight(n int, edges [][]int, _ int) int
-```
+**Fungsi Solusi:** `func minMaxWeight(n int, edges [][]int, _ int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O((n+m) log n) Space: O(n+m)  
-**Kompleksitas Ruang:** O(n+m)
+**Waktu:** O((n+m) log n) Space: O(n+m)  |  **Ruang:** O(n+m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,23 +50,23 @@ func minMaxWeight(n int, edges [][]int, _ int) int {
 		return -1
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][]edge, n)
 	for _, e := range edges {
 		x, y, w := e[0], e[1], e[2]
 		g[y] = append(g[y], edge{x, w}) // reverse graph
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dis := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dis {
 		dis[i] = math.MaxInt
 	}
 	dis[0] = 0
 	h := &hp{{}}
 	for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		p := heap.Pop(h).(pair)
 		x := p.x
 		d := p.dis
@@ -83,7 +77,7 @@ func minMaxWeight(n int, edges [][]int, _ int) int {
 			nd := max(d, e.w)
 			if nd < dis[e.to] {
 				dis[e.to] = nd
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(h, pair{nd, e.to})
 			}
 		}

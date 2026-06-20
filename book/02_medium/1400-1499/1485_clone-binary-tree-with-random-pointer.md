@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func copyRandomBinaryTree(root *Node) *NodeCopy
-```
+**Fungsi Solusi:** `func copyRandomBinaryTree(root *Node) *NodeCopy`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n) where n = number of nodes  
-**Kompleksitas Ruang:** O(n) for the map
+**Waktu:** O(n) where n = number of nodes  |  **Ruang:** O(n) for the map
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -81,7 +75,7 @@ func copyRandomBinaryTree(root *Node) *NodeCopy {
 	}
 
 	// Map from original node to copy
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	nodeMap := make(map[*Node]*NodeCopy)
 
 	var dfs func(*Node) *NodeCopy

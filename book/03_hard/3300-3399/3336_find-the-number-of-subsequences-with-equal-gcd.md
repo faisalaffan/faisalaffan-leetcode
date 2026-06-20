@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func subsequencePairCount(nums []int) int
-```
+**Fungsi Solusi:** `func subsequencePairCount(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** GCD / Matematika
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -76,14 +67,14 @@ func subsequencePairCount(nums []int) int {
 	}
 
 	// Count frequency of each value
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, maxVal+1)
 	for _, v := range nums {
 		freq[v]++
 	}
 
 	// Precompute combination nCk for n up to n, k up to 5
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	C := make([][]int, n+1)
 	for i := 0; i <= n; i++ {
 		C[i] = make([]int, 6)
@@ -94,7 +85,7 @@ func subsequencePairCount(nums []int) int {
 	}
 
 	// cntMult[g] = number of elements divisible by g
-  // Alokasi slice integer
+  // Alokasi slice
 	cntMult := make([]int, maxVal+1)
 	for g := 1; g <= maxVal; g++ {
 		for m := g; m <= maxVal; m += g {
@@ -105,7 +96,7 @@ func subsequencePairCount(nums []int) int {
 	// f[g] = number of ways to pick 2 non-empty disjoint subsequences
 	// where each element in each subsequence is divisible by g
 	// (i.e., both GCDs are multiples of g)
-  // Alokasi slice integer
+  // Alokasi slice
 	f := make([]int, maxVal+1)
 	for g := 1; g <= maxVal; g++ {
 		c := cntMult[g]
@@ -125,7 +116,7 @@ func subsequencePairCount(nums []int) int {
 
 	// Use MObius-like inclusion-exclusion to get exact GCD = g
 	// gExact[g] = exact pairs with GCD = g
-  // Alokasi slice integer
+  // Alokasi slice
 	gExact := make([]int, maxVal+1)
 	for g := maxVal; g >= 1; g-- {
 		gExact[g] = f[g]

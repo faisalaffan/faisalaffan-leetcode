@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfPairs(points [][]int) int
-```
-
-> **💡 Hint:** Sort + geometry
+**Fungsi Solusi:** `func numberOfPairs(points [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,7 +51,7 @@ import (
 func numberOfPairs(points [][]int) int {
 	ans := 0
 	// Sort by x ascending, then y descending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(points, func(i, j int) bool {
 		if points[i][0] == points[j][0] {
 			return points[i][1] > points[j][1]
@@ -67,7 +59,7 @@ func numberOfPairs(points [][]int) int {
 		return points[i][0] < points[j][0]
 	})
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(points)-1; i++ {
 		xMax := math.MaxInt32
 		yMin := math.MinInt32

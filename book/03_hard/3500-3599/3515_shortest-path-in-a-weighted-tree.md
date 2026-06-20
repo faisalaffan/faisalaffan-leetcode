@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewFenwick(n int) *Fenwick
-```
+**Fungsi Solusi:** `func NewFenwick(n int) *Fenwick`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Binary Lifting, Bitmask, Fenwick Tree (BIT)
+**Teknik:** DFS, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -78,7 +72,7 @@ func shortestPathWeightedTree(n int, edges [][]int, queries [][]int) []int64 {
 		LOG++
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -86,30 +80,30 @@ func shortestPathWeightedTree(n int, edges [][]int, queries [][]int) []int64 {
 		adj[v] = append(adj[v], [2]int{u, w})
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	tin := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	tout := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	depth := make([]int, n)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	up := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range up {
 		up[i] = make([]int, LOG)
 	}
 	// edgeParent[child] = parent node (for edge weight lookup)
-  // Alokasi slice integer
+  // Alokasi slice
 	edgeParent := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range edgeParent {
 		edgeParent[i] = -1
 	}
 	// edgeWeightToParent[child] = weight of edge to parent
-  // Alokasi slice integer
+  // Alokasi slice
 	edgeW := make([]int64, n)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	euler := make([]int, 0, 2*n)
 
 	var dfs func(u, p int)
@@ -209,7 +203,7 @@ func shortestPathWeightedTree(n int, edges [][]int, queries [][]int) []int64 {
 		return ft.sum(tin[u])
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int64, 0, len(queries))
 	for _, q := range queries {
 		if q[0] == 0 {

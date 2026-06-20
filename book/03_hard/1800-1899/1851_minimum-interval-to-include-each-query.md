@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minInterval(intervals [][]int, queries []int) []int
-```
-
-> **💡 Hint:** sort intervals by length ascending, sort queries with index.
+**Fungsi Solusi:** `func minInterval(intervals [][]int, queries []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Union-Find (DSU)
+**Teknik:** Two Pointer, Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -86,13 +78,13 @@ func minInterval(intervals [][]int, queries []int) []int {
 	for i, q := range queries {
 		qSorted[i] = qi{val: q, idx: i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(qSorted, func(i, j int) bool {
 		return qSorted[i].val < qSorted[j].val
 	})
 
 	// Sort intervals by length ascending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(intervals, func(i, j int) bool {
 		li := intervals[i][1] - intervals[i][0] + 1
 		lj := intervals[j][1] - intervals[j][0] + 1
@@ -100,7 +92,7 @@ func minInterval(intervals [][]int, queries []int) []int {
 	})
 
 	// DSU: parent[i] = next unprocessed query index (or i itself)
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n+1)
 	for i := 0; i <= n; i++ {
 		parent[i] = i
@@ -114,9 +106,9 @@ func minInterval(intervals [][]int, queries []int) []int {
 		return parent[x]
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range ans {
 		ans[i] = -1
 	}

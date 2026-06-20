@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numSquarefulPerms(nums []int) int
-```
-
-> **💡 Hint:** DFS + backtracking + bitmask.
+**Fungsi Solusi:** `func numSquarefulPerms(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming, Backtracking, Bitmask
+**Teknik:** HashMap, DFS, DP, Backtracking, Sorting, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -52,11 +44,11 @@ func main() {
 }
 
 func numSquarefulPerms(nums []int) int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(nums)
 	n := len(nums)
 	mask := 1<<n - 1
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	memo := make(map[int]int)
 	return dfs(nums, 0, mask, -1, memo)
 }
@@ -70,7 +62,7 @@ func dfs(nums []int, used int, all int, last int, memo map[int]int) int {
 		return val
 	}
 	total := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(nums); i++ {
 		if used&(1<<i) != 0 {
 			continue

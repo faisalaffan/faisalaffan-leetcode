@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxProduct(s string) int64
-```
+**Fungsi Solusi:** `func maxProduct(s string) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -40,7 +31,7 @@ import "fmt"
 func maxProduct(s string) int64 {
 	n := len(s)
 	// Odd palindrome radii (center is a character)
-  // Alokasi slice integer
+  // Alokasi slice
 	odd := make([]int, n)
 	center, right := 0, 0
 	for i := 0; i < n; i++ {
@@ -57,7 +48,7 @@ func maxProduct(s string) int64 {
 
 	// Even palindrome radii (centered between s[i-1] and s[i])
 	// even[i] = radius for even palindrome centered between i-1 and i
-  // Alokasi slice integer
+  // Alokasi slice
 	even := make([]int, n+1)
 	l, r := 0, 0
 	for i := 0; i <= n; i++ {
@@ -73,7 +64,7 @@ func maxProduct(s string) int64 {
 	}
 
 	// L[i] = longest palindrome ending at i
-  // Alokasi slice integer
+  // Alokasi slice
 	L := make([]int, n)
 	for i := 0; i < n; i++ {
 		L[i] = 1
@@ -107,7 +98,7 @@ func maxProduct(s string) int64 {
 	}
 
 	// R[i] = longest palindrome starting at i
-  // Alokasi slice integer
+  // Alokasi slice
 	R := make([]int, n)
 	for i := 0; i < n; i++ {
 		R[i] = 1
@@ -141,7 +132,7 @@ func maxProduct(s string) int64 {
 	}
 
 	// Suffix max of R so we can check any split, not just adjacent positions
-  // Alokasi slice integer
+  // Alokasi slice
 	suffixMaxR := make([]int, n)
 	suffixMaxR[n-1] = R[n-1]
 	for i := n - 2; i >= 0; i-- {

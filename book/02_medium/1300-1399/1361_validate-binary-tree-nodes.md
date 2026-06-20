@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool
-```
+**Fungsi Solusi:** `func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, DFS
+**Teknik:** Two Pointer, DFS
 
-**Kompleksitas Waktu:** O(n) where n = number of nodes  
-**Kompleksitas Ruang:** O(n) for in-degree and visited arrays
+**Waktu:** O(n) where n = number of nodes  |  **Ruang:** O(n) for in-degree and visited arrays
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +49,7 @@ func main() {
 // Space: O(n) for in-degree and visited arrays
 func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool {
 	// Track in-degree of each node (how many parents)
-  // Alokasi slice integer
+  // Alokasi slice
 	inDegree := make([]int, n)
 	for i := 0; i < n; i++ {
 		if leftChild[i] != -1 {

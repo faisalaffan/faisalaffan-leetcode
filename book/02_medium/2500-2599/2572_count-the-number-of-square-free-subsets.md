@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func squareFreeSubsets(nums []int) int
-```
+**Fungsi Solusi:** `func squareFreeSubsets(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** O(n * 2^p)  
-**Kompleksitas Ruang:** O(2^p)
+**Waktu:** O(n * 2^p)  |  **Ruang:** O(2^p)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ func squareFreeSubsets(nums []int) int {
 	p := len(primes)
 
 	// Map each number to its prime mask
-  // Alokasi slice integer
+  // Alokasi slice
 	primeMask := make([]int, 31)
 	for i := 1; i <= 30; i++ {
 		mask := 0
@@ -67,14 +61,14 @@ func squareFreeSubsets(nums []int) int {
 	}
 
 	// Count frequency of each number
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 31)
 	for _, v := range nums {
 		freq[v]++
 	}
 
 	// DP: dp[mask] = number of ways to get this mask
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, 1<<p)
 	dp[0] = 1
 
@@ -97,7 +91,7 @@ func squareFreeSubsets(nums []int) int {
 		ways := (pow - 1 + mod) % mod
 
 		// Update DP (knapsack style)
-  // Alokasi slice integer
+  // Alokasi slice
 		newDP := make([]int, 1<<p)
 		copy(newDP, dp)
 		for m := 0; m < (1 << p); m++ {

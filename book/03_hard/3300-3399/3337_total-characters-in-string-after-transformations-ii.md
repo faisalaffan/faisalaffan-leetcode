@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lengthAfterTransformations(s string, t int, nums []int) int
-```
-
-> **💡 Hint:** Matrix exponentiation of the 26x26 transformation matrix. Since
+**Fungsi Solusi:** `func lengthAfterTransformations(s string, t int, nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -60,7 +49,7 @@ const MOD = 1000000007
 
 func lengthAfterTransformations(s string, t int, nums []int) int {
 	// Build initial count vector (size 26)
-  // Alokasi slice integer
+  // Alokasi slice
 	cnt := make([]int64, 26)
 	for _, ch := range s {
 		cnt[ch-'a']++
@@ -68,9 +57,9 @@ func lengthAfterTransformations(s string, t int, nums []int) int {
 
 	// Build transformation matrix M (26x26)
 	// M[i][j] = 1 if character i transforms into character j
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	M := make([][]int64, 26)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range M {
 		M[i] = make([]int64, 26)
 		for j := 1; j <= nums[i]; j++ {
@@ -82,7 +71,7 @@ func lengthAfterTransformations(s string, t int, nums []int) int {
 	power := matPow(M, int64(t))
 
 	// Result = cnt * M^t (as row vector)
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int64, 26)
 	for j := 0; j < 26; j++ {
 		var sum int64
@@ -101,9 +90,9 @@ func lengthAfterTransformations(s string, t int, nums []int) int {
 
 // matMul multiplies two 26x26 matrices
 func matMul(a, b [][]int64) [][]int64 {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	res := make([][]int64, 26)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range res {
 		res[i] = make([]int64, 26)
 		for k := 0; k < 26; k++ {
@@ -120,9 +109,9 @@ func matMul(a, b [][]int64) [][]int64 {
 
 // matPow computes matrix^exp
 func matPow(mat [][]int64, exp int64) [][]int64 {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	res := make([][]int64, 26)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range res {
 		res[i] = make([]int64, 26)
 		res[i][i] = 1 // identity

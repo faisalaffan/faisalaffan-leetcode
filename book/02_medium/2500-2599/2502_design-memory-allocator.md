@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(n int) Allocator
-```
+**Fungsi Solusi:** `func Constructor(n int) Allocator`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n) per allocate  |  **Ruang:** —
 
-**Kompleksitas Waktu:** O(n) per allocate  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -80,7 +71,7 @@ func (a *Allocator) Allocate(size int, mID int) int {
 
 func (a *Allocator) Free(mID int) int {
 	count := 0
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range a.mem {
 		if a.mem[i] == mID {
 			a.mem[i] = 0

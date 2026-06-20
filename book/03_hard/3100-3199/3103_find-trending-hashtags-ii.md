@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findTrendingHashtags(tweets [][]string) []string
-```
+**Fungsi Solusi:** `func findTrendingHashtags(tweets [][]string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,7 +44,7 @@ type HashtagCount struct {
 }
 
 func findTrendingHashtags(tweets [][]string) []string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	counts := make(map[string]int)
 
 	for _, tweet := range tweets {
@@ -74,7 +68,7 @@ func findTrendingHashtags(tweets [][]string) []string {
 	for h, c := range counts {
 		hcs = append(hcs, HashtagCount{h, c})
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(hcs, func(i, j int) bool {
 		if hcs[i].count != hcs[j].count {
 			return hcs[i].count > hcs[j].count

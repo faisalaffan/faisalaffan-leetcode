@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindEmotionallyConsistentUsers(reactions []Reaction) []ConsistentUser
-```
+**Fungsi Solusi:** `func FindEmotionallyConsistentUsers(reactions []Reaction) []ConsistentUser`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(N + U log U) where N = reactions, U = unique users  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N + U log U) where N = reactions, U = unique users  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -67,9 +61,9 @@ func main() {
 // Space: O(N)
 func FindEmotionallyConsistentUsers(reactions []Reaction) []ConsistentUser {
 	// userID -> reaction -> count
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userReactionCounts := make(map[int]map[string]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userTotal := make(map[int]int)
 
 	for _, r := range reactions {
@@ -106,7 +100,7 @@ func FindEmotionallyConsistentUsers(reactions []Reaction) []ConsistentUser {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].ReactionRatio != result[j].ReactionRatio {
 			return result[i].ReactionRatio > result[j].ReactionRatio

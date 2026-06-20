@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumGenerationsToTargetPoint(points [][]int, target []int) int
-```
-
-> **💡 Hint:** BFS simulation. Generate new points by pairing all distinct seen points,
+**Fungsi Solusi:** `func MinimumGenerationsToTargetPoint(points [][]int, target []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(K * N^2)  |  **Ruang:** O(7^3) where N = seen points ≤ 343, K = max generations
 
-**Kompleksitas Waktu:** O(K * N^2)  
-**Kompleksitas Ruang:** O(7^3) where N = seen points ≤ 343, K = max generations
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -63,7 +52,7 @@ func MinimumGenerationsToTargetPoint(points [][]int, target []int) int {
 	// BFS generation by generation
 	for gen := 1; gen <= 7; gen++ {
 		// Collect all points seen so far
-  // Alokasi slice integer
+  // Alokasi slice
 		allPoints := make([][3]int, 0, 343)
 		for x := 0; x <= 6; x++ {
 			for y := 0; y <= 6; y++ {
@@ -80,7 +69,7 @@ func MinimumGenerationsToTargetPoint(points [][]int, target []int) int {
 		}
 
 		var nextGen [][3]int
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(allPoints); i++ {
 			for j := i + 1; j < len(allPoints); j++ {
 				// Compute floor midpoint

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func premierLeagueRanking(stats []SeasonStats) []TeamRank
-```
+**Fungsi Solusi:** `func premierLeagueRanking(stats []SeasonStats) []TeamRank`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(t log t) Space: O(t)  
-**Kompleksitas Ruang:** O(t)
+**Waktu:** O(t log t) Space: O(t)  |  **Ruang:** O(t)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -85,7 +79,7 @@ func premierLeagueRanking(stats []SeasonStats) []TeamRank {
 	}
 
 	// Group by season and rank
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seasonTeams := make(map[int][]teamData)
 	for _, d := range data {
 		seasonTeams[d.SeasonID] = append(seasonTeams[d.SeasonID], d)
@@ -93,7 +87,7 @@ func premierLeagueRanking(stats []SeasonStats) []TeamRank {
 
 	var result []TeamRank
 	for _, teams := range seasonTeams {
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(teams, func(i, j int) bool {
 			if teams[i].Points != teams[j].Points {
 				return teams[i].Points > teams[j].Points
@@ -111,7 +105,7 @@ func premierLeagueRanking(stats []SeasonStats) []TeamRank {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].SeasonID != result[j].SeasonID {
 			return result[i].SeasonID < result[j].SeasonID

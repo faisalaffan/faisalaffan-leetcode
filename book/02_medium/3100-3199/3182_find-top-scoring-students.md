@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findTopScoringStudents(scores [][]int, threshold int) []int
-```
+**Fungsi Solusi:** `func findTopScoringStudents(scores [][]int, threshold int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,7 +44,7 @@ func findTopScoringStudents(scores [][]int, threshold int) []int {
 		list = append(list, student{s[0], s[1]})
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(list, func(i, j int) bool {
 		if list[i].total != list[j].total {
 			return list[i].total > list[j].total
@@ -58,7 +52,7 @@ func findTopScoringStudents(scores [][]int, threshold int) []int {
 		return list[i].id < list[j].id
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, 0)
 	for _, s := range list {
 		if s.total >= threshold {

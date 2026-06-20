@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func GenerateTheInvoice(products []Product, purchases []Purchase) []Invoice
-```
+**Fungsi Solusi:** `func GenerateTheInvoice(products []Product, purchases []Purchase) []Invoice`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,13 +54,13 @@ type Invoice struct {
 
 // GenerateTheInvoice returns invoices with the maximum total price.
 func GenerateTheInvoice(products []Product, purchases []Purchase) []Invoice {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	priceMap := make(map[int]int)
 	for _, p := range products {
 		priceMap[p.ID] = p.Price
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	totals := make(map[int]int)
 	for _, p := range purchases {
 		totals[p.InvoiceID] += priceMap[p.ProductID] * p.Quantity
@@ -86,7 +80,7 @@ func GenerateTheInvoice(products []Product, purchases []Purchase) []Invoice {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].InvoiceID < result[j].InvoiceID
 	})

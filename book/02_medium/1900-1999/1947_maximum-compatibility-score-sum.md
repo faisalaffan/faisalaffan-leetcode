@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxCompatibilitySum(students [][]int, mentors [][]int) int
-```
+**Fungsi Solusi:** `func MaxCompatibilitySum(students [][]int, mentors [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking
 
-**Kompleksitas Waktu:** O(m! * n * k) where m = len(students) <= 8, Space: O(m)  
-**Kompleksitas Ruang:** O(m)
+**Waktu:** O(m! * n * k) where m = len(students) <= 8, Space: O(m)  |  **Ruang:** O(m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +37,7 @@ func main() {
 // Time: O(m! * n * k) where m = len(students) <= 8, Space: O(m)
 func MaxCompatibilitySum(students [][]int, mentors [][]int) int {
 	m := len(students)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	score := make([][]int, m)
 	for i := 0; i < m; i++ {
 		score[i] = make([]int, m)

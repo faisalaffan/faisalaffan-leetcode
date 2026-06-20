@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func subsequencesWithMiddleMode(nums []int) int
-```
+**Fungsi Solusi:** `func subsequencesWithMiddleMode(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
+**Teknik:** HashMap, Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -64,7 +58,7 @@ func subsequencesWithMiddleMode(nums []int) int {
 	}
 
 	// Coordinate compression
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	comp := make(map[int]int)
 	for _, v := range nums {
 		comp[v] = 1
@@ -74,21 +68,21 @@ func subsequencesWithMiddleMode(nums []int) int {
 		comp[k] = m
 		m++
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	arr := make([]int, n)
 	for i, v := range nums {
 		arr[i] = comp[v]
 	}
 
 	// Total count of each value
-  // Alokasi slice integer
+  // Alokasi slice
 	tot := make([]int, m)
 	for _, v := range arr {
 		tot[v]++
 	}
 
 	// Precompute combinations up to n, choose up to 5
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	C := make([][]int, n+1)
 	for i := 0; i <= n; i++ {
 		C[i] = make([]int, 6)
@@ -105,7 +99,7 @@ func subsequencesWithMiddleMode(nums []int) int {
 	}
 
 	ans := 0
-  // Alokasi slice integer
+  // Alokasi slice
 	cnt := make([]int, m) // prefix count as we sweep
 
 	for i := 0; i < n; i++ {

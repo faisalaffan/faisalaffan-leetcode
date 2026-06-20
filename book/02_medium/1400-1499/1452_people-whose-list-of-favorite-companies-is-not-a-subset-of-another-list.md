@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func peopleIndexes(favoriteCompanies [][]string) []int
-```
+**Fungsi Solusi:** `func peopleIndexes(favoriteCompanies [][]string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n^2 * m) where n = number of people, m = avg companies per person  
-**Kompleksitas Ruang:** O(n * m) for storing company sets
+**Waktu:** O(n^2 * m) where n = number of people, m = avg companies per person  |  **Ruang:** O(n * m) for storing company sets
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -79,13 +73,13 @@ func peopleIndexes(favoriteCompanies [][]string) []int {
 	}
 
 	// Sort by company list size descending to check larger lists first
-  // Alokasi slice integer
+  // Alokasi slice
 	indices := make([]int, len(favoriteCompanies))
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range indices {
 		indices[i] = i
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(indices, func(i, j int) bool {
 		return len(favoriteCompanies[indices[i]]) > len(favoriteCompanies[indices[j]])
 	})
@@ -107,7 +101,7 @@ func peopleIndexes(favoriteCompanies [][]string) []int {
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

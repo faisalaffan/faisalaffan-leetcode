@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor() TodoList
-```
+**Fungsi Solusi:** `func Constructor() TodoList`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n) per getUserTasks  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n) per getUserTasks  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -82,7 +76,7 @@ func (this *TodoList) GetAllTasks(userId int) []string {
 			userTasks = append(userTasks, t)
 		}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(userTasks, func(i, j int) bool {
 		if userTasks[i].DueDate != userTasks[j].DueDate {
 			return userTasks[i].DueDate < userTasks[j].DueDate
@@ -108,7 +102,7 @@ func (this *TodoList) GetTasksForTag(userId int, tag string) []string {
 			}
 		}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(userTasks, func(i, j int) bool {
 		if userTasks[i].DueDate != userTasks[j].DueDate {
 			return userTasks[i].DueDate < userTasks[j].DueDate

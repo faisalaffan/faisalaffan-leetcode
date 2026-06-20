@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumOperations(grid [][]int) int
-```
+**Fungsi Solusi:** `func minimumOperations(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n * m * 10)  
-**Kompleksitas Ruang:** O(m * 10)
+**Waktu:** O(n * m * 10)  |  **Ruang:** O(m * 10)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,7 +40,7 @@ func minimumOperations(grid [][]int) int {
 	}
 	n := len(grid[0])
 
-  // Alokasi slice integer
+  // Alokasi slice
 	cost := make([][10]int, n)
 	for j := 0; j < n; j++ {
 		for d := 0; d < 10; d++ {
@@ -60,7 +54,7 @@ func minimumOperations(grid [][]int) int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([][10]int, n)
 	for j := 0; j < n; j++ {
 		for d := 0; d < 10; d++ {

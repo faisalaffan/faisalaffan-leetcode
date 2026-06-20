@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxTargetNodes(edges1 [][]int, edges2 [][]int) []int
-```
+**Fungsi Solusi:** `func maxTargetNodes(edges1 [][]int, edges2 [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -62,7 +53,7 @@ func main() {
 func maxTargetNodes(edges1 [][]int, edges2 [][]int) []int {
 	// Process tree 1
 	n1 := len(edges1) + 1
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj1 := make([][]int, n1)
 	for _, e := range edges1 {
 		u, v := e[0], e[1]
@@ -70,7 +61,7 @@ func maxTargetNodes(edges1 [][]int, edges2 [][]int) []int {
 		adj1[v] = append(adj1[v], u)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	color1 := make([]int, n1)
 	cnt1 := [2]int{}
 	var dfs1 func(u, parent, col int)
@@ -87,7 +78,7 @@ func maxTargetNodes(edges1 [][]int, edges2 [][]int) []int {
 
 	// Process tree 2
 	n2 := len(edges2) + 1
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj2 := make([][]int, n2)
 	for _, e := range edges2 {
 		u, v := e[0], e[1]
@@ -109,7 +100,7 @@ func maxTargetNodes(edges1 [][]int, edges2 [][]int) []int {
 
 	maxFromTree2 := max(cnt2[0], cnt2[1])
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n1)
 	for i := 0; i < n1; i++ {
 		ans[i] = cnt1[color1[i]] + maxFromTree2

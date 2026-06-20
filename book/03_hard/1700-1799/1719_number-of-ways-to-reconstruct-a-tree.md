@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func checkWays(pairs [][]int) int
-```
+**Fungsi Solusi:** `func checkWays(pairs [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,11 +36,11 @@ import (
 
 func checkWays(pairs [][]int) int {
 	// Build adjacency and degrees
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	adj := make(map[int]map[int]bool)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	deg := make(map[int]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	nodeSet := make(map[int]bool)
 
 	for _, p := range pairs {
@@ -68,12 +62,12 @@ func checkWays(pairs [][]int) int {
 	n := len(nodeSet)
 
 	// Build sorted node list
-  // Alokasi slice integer
+  // Alokasi slice
 	nodes := make([]int, 0, n)
 	for node := range nodeSet {
 		nodes = append(nodes, node)
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(nodes, func(i, j int) bool {
 		if deg[nodes[i]] != deg[nodes[j]] {
 			return deg[nodes[i]] > deg[nodes[j]]
@@ -105,12 +99,12 @@ func checkWays(pairs [][]int) int {
 	}
 
 	// Root = first node (highest degree). No deg=n-1 requirement.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	parent := make(map[int]int)
 	parent[nodes[0]] = -1
 
 	// Processing order for tiebreaking
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	order := make(map[int]int)
 	for i, v := range nodes {
 		order[v] = i

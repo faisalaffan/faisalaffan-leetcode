@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumEnergyToMaintainBrightness(n int, brightness int, intervals [][]int) int64
-```
-
-> **💡 Hint:** Each bulb illuminates 3 positions (self + adjacents). Need
+**Fungsi Solusi:** `func MinimumEnergyToMaintainBrightness(n int, brightness int, intervals [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Merge Sort
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(N log N)  
-**Kompleksitas Ruang:** O(N) where N = len(intervals)
+**Waktu:** O(N log N)  |  **Ruang:** O(N) where N = len(intervals)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +39,7 @@ import (
 func MinimumEnergyToMaintainBrightness(n int, brightness int, intervals [][]int) int64 {
 	bulbs := int64((brightness + 2) / 3)
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]
 	})

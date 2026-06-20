@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findPersistentPatterns(actions []UserAction, minLength int) []UserPattern
-```
+**Fungsi Solusi:** `func findPersistentPatterns(actions []UserAction, minLength int) []UserPattern`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,7 +63,7 @@ func main() {
 
 func findPersistentPatterns(actions []UserAction, minLength int) []UserPattern {
 	// Group by user, sort by day
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userActions := make(map[int][]struct {
 		action string
 		day    int
@@ -84,7 +78,7 @@ func findPersistentPatterns(actions []UserAction, minLength int) []UserPattern {
 
 	var result []UserPattern
 	for userID, acts := range userActions {
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(acts, func(i, j int) bool {
 			return acts[i].day < acts[j].day
 		})
@@ -111,7 +105,7 @@ func findPersistentPatterns(actions []UserAction, minLength int) []UserPattern {
 	}
 
 	// Sort by user, then pattern
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].UserID != result[j].UserID {
 			return result[i].UserID < result[j].UserID

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumRemovalsToAchieveTargetXor(nums []int, target int) int
-```
-
-> **💡 Hint:** DP tracking max selectable elements to achieve each XOR value.
+**Fungsi Solusi:** `func MinimumRemovalsToAchieveTargetXor(nums []int, target int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(N * 2^M)  
-**Kompleksitas Ruang:** O(2^M) where M = max bit length (14)
+**Waktu:** O(N * 2^M)  |  **Ruang:** O(2^M) where M = max bit length (14)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,16 +46,16 @@ func MinimumRemovalsToAchieveTargetXor(nums []int, target int) int {
 	}
 
 	// dp[x] = max elements selectable to achieve XOR x
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, maxXor)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = -1
 	}
 	dp[0] = 0
 
 	for _, v := range nums {
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, maxXor)
 		copy(ndp, dp)
 		for x := 0; x < maxXor; x++ {

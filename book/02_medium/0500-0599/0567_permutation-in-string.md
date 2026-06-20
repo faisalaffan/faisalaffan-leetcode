@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CheckInclusion(s1 string, s2 string) bool
-```
+**Fungsi Solusi:** `func CheckInclusion(s1 string, s2 string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + m) where n = len(s1), m = len(s2)  |  **Ruang:** O(1) (fixed 26 chars)
 
-**Kompleksitas Waktu:** O(n + m) where n = len(s1), m = len(s2)  
-**Kompleksitas Ruang:** O(1) (fixed 26 chars)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -50,7 +41,7 @@ func CheckInclusion(s1 string, s2 string) bool {
 	count1 := [26]int{}
 	count2 := [26]int{}
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s1); i++ {
 		count1[s1[i]-'a']++
 		count2[s2[i]-'a']++

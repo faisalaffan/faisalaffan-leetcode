@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countNonAdjacentSubsets(parent []int, nums []int, k int) int
-```
-
-> **💡 Hint:** Tree DP. dp[u][j][0/1] = count of subsets of size j
+**Fungsi Solusi:** `func countNonAdjacentSubsets(parent []int, nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,12 +49,12 @@ const TREE_MOD = 1000000007
 
 func countNonAdjacentSubsets(parent []int, nums []int, k int) int {
 	n := len(parent)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	children := make([][]int, n)
 	root := -1
 	for i, p := range parent {
@@ -75,17 +67,17 @@ func countNonAdjacentSubsets(parent []int, nums []int, k int) int {
 
 	var dfs func(u int) ([]int, []int)
 	dfs = func(u int) ([]int, []int) {
-  // Alokasi slice integer
+  // Alokasi slice
 		dp0 := make([]int, k+1)
-  // Alokasi slice integer
+  // Alokasi slice
 		dp1 := make([]int, k+1)
 		dp0[0] = 1
 
 		for _, v := range children[u] {
 			cdp0, cdp1 := dfs(v)
-  // Alokasi slice integer
+  // Alokasi slice
 			ndp0 := make([]int, k+1)
-  // Alokasi slice integer
+  // Alokasi slice
 			ndp1 := make([]int, k+1)
 
 			for j := 0; j <= k; j++ {

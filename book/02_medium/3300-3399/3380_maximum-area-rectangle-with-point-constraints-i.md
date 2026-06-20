@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxRectangleArea(points [][]int) int
-```
+**Fungsi Solusi:** `func maxRectangleArea(points [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n^4) Space: O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n^4) Space: O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,7 +40,7 @@ func main() {
 
 func maxRectangleArea(points [][]int) int {
 	n := len(points)
-  // Alokasi slice integer
+  // Alokasi slice
 	sp := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		sp[i] = [2]int{points[i][0], points[i][1]}
@@ -69,9 +63,9 @@ func maxRectangleArea(points [][]int) int {
 }
 
 func isRect3380(idx []int, pts [][2]int) (int, bool) {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	xSet := make(map[int]bool)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	ySet := make(map[int]bool)
 	for _, i := range idx {
 		xSet[pts[i][0]] = true
@@ -88,14 +82,14 @@ func isRect3380(idx []int, pts [][2]int) (int, bool) {
 	for y := range ySet {
 		ys = append(ys, y)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(xs)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(ys)
 	x1, x2 := xs[0], xs[1]
 	y1, y2 := ys[0], ys[1]
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	cornerSet := make(map[[2]int]bool)
 	for _, i := range idx {
 		cornerSet[pts[i]] = true

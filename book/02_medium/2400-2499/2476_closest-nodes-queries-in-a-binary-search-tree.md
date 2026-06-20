@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func closestNodes(root *TreeNode, queries []int) [][]int
-```
+**Fungsi Solusi:** `func closestNodes(root *TreeNode, queries []int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** O(n + q log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + q log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -64,7 +58,7 @@ func main() {
 }
 
 func closestNodes(root *TreeNode, queries []int) [][]int {
-  // Alokasi slice integer
+  // Alokasi slice
 	vals := make([]int, 0)
 	var inorder func(node *TreeNode)
 	inorder = func(node *TreeNode) {
@@ -77,7 +71,7 @@ func closestNodes(root *TreeNode, queries []int) [][]int {
 	}
 	inorder(root)
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	ans := make([][]int, len(queries))
 	for i, q := range queries {
 		// Find smallest >= q

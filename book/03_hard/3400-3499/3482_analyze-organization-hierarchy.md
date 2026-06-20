@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func analyzeOrg(org [][]string) []Employee
-```
-
-> **💡 Hint:** Build the org tree from edges and compute depth/level
+**Fungsi Solusi:** `func analyzeOrg(org [][]string) []Employee`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** HashMap, BFS, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,11 +54,11 @@ type Employee struct {
 
 func analyzeOrg(org [][]string) []Employee {
 	// Build parent -> children map
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	children := make(map[string][]string)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	parent := make(map[string]string)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	allEmps := make(map[string]bool)
 
 	for _, rel := range org {
@@ -109,7 +101,7 @@ func analyzeOrg(org [][]string) []Employee {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].Depth != result[j].Depth {
 			return result[i].Depth < result[j].Depth

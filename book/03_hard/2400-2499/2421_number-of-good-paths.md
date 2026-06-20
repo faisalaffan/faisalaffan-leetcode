@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newUF(n int) *uf
-```
+**Fungsi Solusi:** `func newUF(n int) *uf`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,9 +55,9 @@ type uf struct {
 }
 
 func newUF(n int) *uf {
-  // Alokasi slice integer
+  // Alokasi slice
 	p := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -100,7 +94,7 @@ func numberOfGoodPaths(vals []int, edges [][]int) int {
 	}
 
 	// Build adjacency list
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		a, b := e[0], e[1]
@@ -109,12 +103,12 @@ func numberOfGoodPaths(vals []int, edges [][]int) int {
 	}
 
 	// Sort nodes by value
-  // Alokasi slice integer
+  // Alokasi slice
 	nodes := make([]int, n)
 	for i := 0; i < n; i++ {
 		nodes[i] = i
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(nodes, func(i, j int) bool {
 		return vals[nodes[i]] < vals[nodes[j]]
 	})
@@ -139,7 +133,7 @@ func numberOfGoodPaths(vals []int, edges [][]int) int {
 			}
 		}
 		// Count nodes in each component for this value
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		compCount := make(map[int]int)
 		for k := i; k < j; k++ {
 			root := u.find(nodes[k])

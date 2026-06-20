@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minStable(nums []int, maxC int) int
-```
-
-> **💡 Hint:** Binary search on stability factor + sliding window with GCD tracking.
+**Fungsi Solusi:** `func minStable(nums []int, maxC int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window, Binary Search, GCD / Matematika, Bitmask
+**Teknik:** Two Pointer, Sliding Window, Binary Search
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,21 +49,21 @@ func main() {
 
 func minStable(nums []int, maxC int) int {
 	n := len(nums)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
 
 	// Precompute GCD for range queries using sparse table
-  // Alokasi slice integer
+  // Alokasi slice
 	log := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		log[i] = log[i/2] + 1
 	}
 	K := log[n] + 1
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	st := make([][]int, K)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range st {
 		st[i] = make([]int, n)
 	}
@@ -126,6 +118,7 @@ func minStable(nums []int, maxC int) int {
 	// Binary search for minimum possible maximum stable subarray length
 	left, right := 0, n
 	result := n
+  // Binary search loop
 	for left <= right {
 		mid := (left + right) / 2
 		if check(mid) {

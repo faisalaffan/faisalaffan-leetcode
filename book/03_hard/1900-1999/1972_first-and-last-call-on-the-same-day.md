@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface
-```
+**Fungsi Solusi:** `func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -94,7 +88,7 @@ func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface{} {
 		other int
 		time  string
 	}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userDayCalls := make(map[[2]string][]callInfo) // (user_id, date) -> calls
 
 	for _, c := range calls {
@@ -116,7 +110,7 @@ func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface{} {
 
 	for key, calls := range userDayCalls {
 		// Sort calls by time
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(calls, func(i, j int) bool {
 			return calls[i].time < calls[j].time
 		})
@@ -132,7 +126,7 @@ func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface{} {
 	}
 
 	// Sort result by user_id, then date
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		ui := result[i][0].(int)
 		uj := result[j][0].(int)

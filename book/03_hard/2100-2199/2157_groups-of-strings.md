@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func groupStrings(words []string) []int
-```
+**Fungsi Solusi:** `func groupStrings(words []string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU), Bitmask
+**Teknik:** HashMap, Union-Find, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +41,9 @@ func main() {
 
 func groupStrings(words []string) []int {
 	n := len(words)
-  // Alokasi slice integer
+  // Alokasi slice
 	masks := make([]uint32, n)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	idxOf := make(map[uint32]int)
 
 	for i, w := range words {
@@ -62,9 +56,9 @@ func groupStrings(words []string) []int {
 	}
 
 	// Union-Find
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	sz := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -100,7 +94,7 @@ func groupStrings(words []string) []int {
 	}
 
 	// For each unique mask, try transforms
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[uint32]bool)
 	for i, m := range masks {
 		if seen[m] {
@@ -145,7 +139,7 @@ func groupStrings(words []string) []int {
 		}
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groupSizes := make(map[int]int)
 	maxSize := 0
 	for i := 0; i < n; i++ {

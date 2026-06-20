@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func gcdValues(nums []int, queries []int64) []int
-```
-
-> **💡 Hint:** Use divisor enumeration + inclusion-exclusion to count pairs by
+**Fungsi Solusi:** `func gcdValues(nums []int, queries []int64) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Prefix Sum, GCD / Matematika
+**Teknik:** Binary Search, Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -66,14 +58,14 @@ func gcdValues(nums []int, queries []int64) []int {
 	}
 
 	// Count frequency of each value
-  // Alokasi slice integer
+  // Alokasi slice
 	cnt := make([]int, mx+1)
 	for _, v := range nums {
 		cnt[v]++
 	}
 
 	// Count divisor frequencies
-  // Alokasi slice integer
+  // Alokasi slice
 	divCnt := make([]int, mx+1)
 	for _, v := range nums {
 		for d := 1; d*d <= v; d++ {
@@ -87,7 +79,7 @@ func gcdValues(nums []int, queries []int64) []int {
 	}
 
 	// Inclusion-exclusion: count pairs with exact GCD = g
-  // Alokasi slice integer
+  // Alokasi slice
 	pairCnt := make([]int, mx+1)
 	for g := mx; g >= 1; g-- {
 		c := divCnt[g]
@@ -98,13 +90,13 @@ func gcdValues(nums []int, queries []int64) []int {
 	}
 
 	// Prefix sum
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, mx+1)
 	for i := 1; i <= mx; i++ {
 		prefix[i] = prefix[i-1] + pairCnt[i]
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for i, q := range queries {
 		ans[i] = sort.Search(mx+1, func(j int) bool {

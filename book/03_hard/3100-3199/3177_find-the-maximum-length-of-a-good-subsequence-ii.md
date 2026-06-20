@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumLength(nums []int, k int) int
-```
-
-> **💡 Hint:** DP tracking best[val][k] and overall best[k].
+**Fungsi Solusi:** `func maximumLength(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,15 +48,15 @@ func max(a, b int) int {
 }
 
 func maximumLength(nums []int, k int) int {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if len(nums) == 0 {
 		return 0
 	}
 	// bestSame[val][kk] = max length ending with val using at most kk diffs.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	bestSame := make(map[int][]int)
 	// global[kk] = overall max length using at most kk diffs.
-  // Alokasi slice integer
+  // Alokasi slice
 	global := make([]int, k+1)
 
 	for _, v := range nums {
@@ -74,7 +66,7 @@ func maximumLength(nums []int, k int) int {
 		row := bestSame[v]
 		// Use temporary slice to avoid using updated values within the same
 		// iteration (we need the state before processing this element).
-  // Alokasi slice integer
+  // Alokasi slice
 		newBest := make([]int, k+1)
 		copy(newBest, row)
 

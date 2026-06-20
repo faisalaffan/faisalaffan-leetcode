@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NonDecreasingSubsequences(nums []int) [][]int
-```
+**Fungsi Solusi:** `func NonDecreasingSubsequences(nums []int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Backtracking
+**Teknik:** HashMap, Backtracking
 
-**Kompleksitas Waktu:** O(2^n * n) worst case  
-**Kompleksitas Ruang:** O(2^n * n)
+**Waktu:** O(2^n * n) worst case  |  **Ruang:** O(2^n * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,12 +41,12 @@ func NonDecreasingSubsequences(nums []int) [][]int {
 	var backtrack func(start int, path []int)
 	backtrack = func(start int, path []int) {
 		if len(path) >= 2 {
-  // Alokasi slice integer
+  // Alokasi slice
 			cp := make([]int, len(path))
 			copy(cp, path)
 			result = append(result, cp)
 		}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		used := make(map[int]bool)
 		for i := start; i < len(nums); i++ {
 			if used[nums[i]] {

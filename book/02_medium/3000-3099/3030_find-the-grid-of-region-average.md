@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func resultGrid(image [][]int, threshold int) [][]int
-```
+**Fungsi Solusi:** `func resultGrid(image [][]int, threshold int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m*n)  |  **Ruang:** O(m*n)
 
-**Kompleksitas Waktu:** O(m*n)  
-**Kompleksitas Ruang:** O(m*n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -44,11 +35,11 @@ func main() {
 
 func resultGrid(image [][]int, threshold int) [][]int {
 	m, n := len(image), len(image[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	sum := make([][]int, m)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	cnt := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range sum {
 		sum[i] = make([]int, n)
 		cnt[i] = make([]int, n)
@@ -85,9 +76,9 @@ func resultGrid(image [][]int, threshold int) [][]int {
 		}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	ans := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range ans {
 		ans[i] = make([]int, n)
 		for j := range ans[i] {

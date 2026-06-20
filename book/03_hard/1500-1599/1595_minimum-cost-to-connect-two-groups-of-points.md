@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func connectTwoGroups(cost [][]int) int
-```
+**Fungsi Solusi:** `func connectTwoGroups(cost [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Bitmask
+**Teknik:** DP, Prefix Sum, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -64,16 +58,16 @@ func connectTwoGroups(cost [][]int) int {
 	INF := math.MaxInt32
 
 	// dp[mask] = min cost after processing current prefix of group 1
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, size)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = INF
 	}
 	dp[0] = 0
 
 	// Precompute minCostTo[j]: cheapest connection from ANY group-1 point to group-2 point j
-  // Alokasi slice integer
+  // Alokasi slice
 	minCostTo := make([]int, n)
 	for j := 0; j < n; j++ {
 		minVal := math.MaxInt32
@@ -87,7 +81,7 @@ func connectTwoGroups(cost [][]int) int {
 
 	// Process each point in group 1
 	for i := 0; i < m; i++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, size)
 		for mask := range ndp {
 			ndp[mask] = INF
@@ -117,7 +111,7 @@ func connectTwoGroups(cost [][]int) int {
 
 
 	// Precompute extra cost to cover missing group-2 points for each mask
-  // Alokasi slice integer
+  // Alokasi slice
 	extra := make([]int, size)
 	for mask := 0; mask < size; mask++ {
 		sum := 0

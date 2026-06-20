@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxBalancedSubsequenceSum(nums []int) int64
-```
+**Fungsi Solusi:** `func maxBalancedSubsequenceSum(nums []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Fenwick Tree (BIT)
+**Teknik:** DP, Sorting, Prefix Sum, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,17 +43,17 @@ import (
 
 func maxBalancedSubsequenceSum(nums []int) int64 {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	keys := make([]int, n)
 	for i, v := range nums {
 		keys[i] = v - i
 	}
 
 	// Coordinate compression
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, n)
 	copy(sorted, keys)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(sorted)
 	m := 1
 	for i := 1; i < n; i++ {
@@ -71,9 +65,9 @@ func maxBalancedSubsequenceSum(nums []int) int64 {
 	sorted = sorted[:m]
 
 	// BIT for prefix maximum
-  // Alokasi slice integer
+  // Alokasi slice
 	bit := make([]int64, m+2)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range bit {
 		bit[i] = math.MinInt64
 	}

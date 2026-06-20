@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfIntegers(n int64, k int) int64
-```
-
-> **💡 Hint:** Precompute popcount-depth for all values up to 1000
+**Fungsi Solusi:** `func numberOfIntegers(n int64, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +49,7 @@ func main() {
 
 func numberOfIntegers(n int64, k int) int64 {
 	// Precompute depth for all possible popcount values (1..60)
-  // Alokasi slice integer
+  // Alokasi slice
 	depth := make([]int, 61)
 	for i := 2; i <= 60; i++ {
 		depth[i] = depth[popcount(i)] + 1
@@ -67,9 +59,9 @@ func numberOfIntegers(n int64, k int) int64 {
 	s := fmt.Sprintf("%b", n)
 	m := len(s)
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	memo := make([][][]int64, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range memo {
 		memo[i] = make([][]int64, 2)
 		for j := range memo[i] {

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func alternatingGroupsIII(colors []int, queries [][]int) []int64
-```
-
-> **💡 Hint:** Maintain maximal alternating intervals in a circular array using
+**Fungsi Solusi:** `func alternatingGroupsIII(colors []int, queries [][]int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Fenwick Tree (BIT), Merge Sort
+**Teknik:** Fenwick Tree
 
-**Kompleksitas Waktu:** O((n+q) log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n+q) log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Fenwick Tree** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -81,14 +73,14 @@ func main() {
 
 func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 	n := len(colors)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return nil
 	}
 
 	// BIT for range updates and point queries (difference array of interval counts)
 	bitSize := n + 2
-  // Alokasi slice integer
+  // Alokasi slice
 	bitVal := make([]int64, bitSize+1)
 
 	addVal := func(idx int, val int64) {
@@ -126,7 +118,7 @@ func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 	}
 
 	// intervals sorted by l
-  // Alokasi slice integer
+  // Alokasi slice
 	intervals := make([]interval, 0)
 	addInterval := func(l, r int) {
 		if l > r {
@@ -141,7 +133,7 @@ func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 		for pos < len(intervals) && intervals[pos].l < l {
 			pos++
 		}
-  // Alokasi slice integer
+  // Alokasi slice
 		newIntervals := make([]interval, len(intervals)+1)
 		copy(newIntervals, intervals[:pos])
 		newIntervals[pos] = interval{l, r}
@@ -193,7 +185,7 @@ func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, 0)
 
 	for _, q := range queries {

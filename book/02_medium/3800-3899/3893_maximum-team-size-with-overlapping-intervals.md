@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumTeamSizeWithOverlappingIntervals(startTime []int, endTime []int) int
-```
-
-> **💡 Hint:** For each employee, count overlapping intervals using binary search
+**Fungsi Solusi:** `func MaximumTeamSizeWithOverlappingIntervals(startTime []int, endTime []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** O(N log N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,15 +37,15 @@ import (
 
 func MaximumTeamSizeWithOverlappingIntervals(startTime []int, endTime []int) int {
 	n := len(startTime)
-  // Alokasi slice integer
+  // Alokasi slice
 	st := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	et := make([]int, n)
 	copy(st, startTime)
 	copy(et, endTime)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(st)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(et)
 
 	ans := 0

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findShortestWay(maze [][]int, ball []int, hole []int) string
-```
-
-> **💡 Hint:** Dijkstra with lexicographic path. The ball rolls until it hits a wall.
+**Fungsi Solusi:** `func findShortestWay(maze [][]int, ball []int, hole []int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, BFS, Heap / Priority Queue, Stack, Dijkstra
+**Teknik:** Two Pointer, BFS, Heap, Dijkstra
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -156,9 +148,9 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 	holeR, holeC := hole[0], hole[1]
 
 	// dist[r][c] = minimum distance to reach (r,c)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -167,9 +159,9 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 	}
 
 	// path[r][c] = lexicographically smallest path to reach (r,c)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	path := make([][]string, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range path {
 		path[i] = make([]string, n)
 	}
@@ -179,11 +171,11 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 
 	dist[startR][startC] = 0
 	path[startR][startC] = ""
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &State{r: startR, c: startC, dist: 0, path: ""})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(pq).(*State)
 
 		// Skip if we already found a better path to this cell
@@ -233,7 +225,7 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 			if newDist < dist[nr][nc] || (newDist == dist[nr][nc] && newPath < path[nr][nc]) {
 				dist[nr][nc] = newDist
 				path[nr][nc] = newPath
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &State{r: nr, c: nc, dist: newDist, path: newPath})
 			}
 		}

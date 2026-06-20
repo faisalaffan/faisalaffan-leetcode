@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxTargetNodes(edges1 [][]int, edges2 [][]int, k int) []int
-```
+**Fungsi Solusi:** `func maxTargetNodes(edges1 [][]int, edges2 [][]int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** O(n^2 + m^2) Space: O(n + m)  
-**Kompleksitas Ruang:** O(n + m)
+**Waktu:** O(n^2 + m^2) Space: O(n + m)  |  **Ruang:** O(n + m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,7 +50,7 @@ func maxTargetNodes(edges1 [][]int, edges2 [][]int, k int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 	for i := 0; i < n; i++ {
 		ans[i] = countWithinDist3372(g1, i, k, n) + maxFrom2
@@ -65,7 +59,7 @@ func maxTargetNodes(edges1 [][]int, edges2 [][]int, k int) []int {
 }
 
 func buildGraph3372(edges [][]int, n int) [][]int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]

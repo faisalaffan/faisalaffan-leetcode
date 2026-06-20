@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ways(pizza []string, k int) int
-```
+**Fungsi Solusi:** `func ways(pizza []string, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
+**Teknik:** DP, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,9 +36,9 @@ func ways(pizza []string, k int) int {
 	cols := len(pizza[0])
 
 	// Prefix sum to check if any sub-rectangle has apple
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	pref := make([][]int, rows+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range pref {
 		pref[i] = make([]int, cols+1)
 	}
@@ -65,9 +59,9 @@ func ways(pizza []string, k int) int {
 	}
 
 	// dp[r][c][p] = ways to cut pizza from (r,c) to bottom-right with p pieces
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][][]int, rows)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([][]int, cols)
 		for j := range dp[i] {

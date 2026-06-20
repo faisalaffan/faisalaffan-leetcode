@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countOfPairs(nums []int) int
-```
+**Fungsi Solusi:** `func countOfPairs(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Monotonic Stack/Queue
+**Teknik:** DP, Prefix Sum, Monotonic Stack
 
-**Kompleksitas Waktu:** O(n * M) where M = max(nums) ≤ 50  
-**Kompleksitas Ruang:** O(M)
+**Waktu:** O(n * M) where M = max(nums) ≤ 50  |  **Ruang:** O(M)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,7 +62,7 @@ const MOD = 1_000_000_007
 
 func countOfPairs(nums []int) int {
 	n := len(nums)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
@@ -81,7 +75,7 @@ func countOfPairs(nums []int) int {
 	}
 
 	// dp[j] = number of ways where arr1[current] = j
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int64, maxVal+1)
 	for j := 0; j <= nums[0]; j++ {
 		dp[j] = 1
@@ -92,13 +86,13 @@ func countOfPairs(nums []int) int {
 		curr := nums[i]
 
 		// prefix sums of dp
-  // Alokasi slice integer
+  // Alokasi slice
 		prefix := make([]int64, maxVal+2)
 		for j := 0; j <= maxVal; j++ {
 			prefix[j+1] = (prefix[j] + dp[j]) % MOD
 		}
 
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int64, maxVal+1)
 		for j := 0; j <= curr; j++ {
 			// maxPrev = min(j, j + prev - curr)

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NumSubmat(mat [][]int) int
-```
+**Fungsi Solusi:** `func NumSubmat(mat [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
+**Teknik:** Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** O(R*C), Space: O(C)  
-**Kompleksitas Ruang:** O(C)
+**Waktu:** O(R*C), Space: O(C)  |  **Ruang:** O(C)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ func NumSubmat(mat [][]int) int {
 		return 0
 	}
 	rows, cols := len(mat), len(mat[0])
-  // Alokasi slice integer
+  // Alokasi slice
 	height := make([]int, cols)
 	total := 0
 
@@ -66,9 +60,9 @@ func NumSubmat(mat [][]int) int {
 		}
 
 		// Count submatrices ending at row r using monotonic stack
-  // Alokasi slice integer
+  // Alokasi slice
 		stack := make([]int, 0)
-  // Alokasi slice integer
+  // Alokasi slice
 		sum := make([]int, cols)
 
 		for c := 0; c < cols; c++ {

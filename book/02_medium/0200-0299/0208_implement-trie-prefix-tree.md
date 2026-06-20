@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor() Trie
-```
+**Fungsi Solusi:** `func Constructor() Trie`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Trie, Prefix Sum
+**Teknik:** Trie, Prefix Sum
 
-**Kompleksitas Waktu:** O(n) per operation, Space: O(total characters)  
-**Kompleksitas Ruang:** O(total characters)
+**Waktu:** O(n) per operation, Space: O(total characters)  |  **Ruang:** O(total characters)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Trie** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ func Constructor() Trie {
 
 func (this *Trie) Insert(word string) {
 	node := this.root
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(word); i++ {
 		idx := word[i] - 'a'
 		if node.children[idx] == nil {
@@ -64,7 +58,7 @@ func (this *Trie) Insert(word string) {
 
 func (this *Trie) Search(word string) bool {
 	node := this.root
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(word); i++ {
 		idx := word[i] - 'a'
 		if node.children[idx] == nil {
@@ -77,7 +71,7 @@ func (this *Trie) Search(word string) bool {
 
 func (this *Trie) StartsWith(prefix string) bool {
 	node := this.root
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(prefix); i++ {
 		idx := prefix[i] - 'a'
 		if node.children[idx] == nil {

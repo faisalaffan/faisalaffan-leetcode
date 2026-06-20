@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindQuietStudents(students []Student, exams []Exam) []string
-```
-
-> **💡 Hint:** For each student, check each exam. If any exam has this
+**Fungsi Solusi:** `func FindQuietStudents(students []Student, exams []Exam) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,10 +48,10 @@ type Exam struct {
 // score in any exam they participated in.
 func FindQuietStudents(students []Student, exams []Exam) []string {
 	// Group exams by student
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	studentScores := make(map[int][]int)
 	// Also track which students took exams
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	studentHasExam := make(map[int]bool)
 
 	for _, e := range exams {
@@ -97,7 +89,7 @@ func FindQuietStudents(students []Student, exams []Exam) []string {
 	// of exams that share the same set of student IDs as the same exam.
 	//
 	// Better approach: We'll track per-student if they're disqualified.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	disqualified := make(map[int]bool) // student ID -> true if not quiet
 
 	// For each student, compute min/max across THEIR exams
@@ -157,7 +149,7 @@ func QuietStudentsSQL(students []Student, exams []struct {
 		StudentID int
 		Score     int
 	}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	examGroups := make(map[int][]examScore)
 
 	for _, e := range exams {
@@ -165,7 +157,7 @@ func QuietStudentsSQL(students []Student, exams []struct {
 	}
 
 	// Find min and max for each exam, mark those students
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	disqualified := make(map[int]bool)
 	for _, scores := range examGroups {
 		if len(scores) <= 1 {
@@ -187,13 +179,13 @@ func QuietStudentsSQL(students []Student, exams []struct {
 		}
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	studentMap := make(map[int]string)
 	for _, s := range students {
 		studentMap[s.ID] = s.FullName
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	takenExam := make(map[int]bool)
 	for _, e := range exams {
 		takenExam[e.StudentID] = true

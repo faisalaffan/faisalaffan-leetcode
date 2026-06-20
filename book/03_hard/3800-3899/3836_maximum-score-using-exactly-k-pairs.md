@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxScore(nums1 []int, nums2 []int, K int) int64
-```
-
-> **💡 Hint:** Sort both arrays. The optimal strategy pairs the largest
+**Fungsi Solusi:** `func maxScore(nums1 []int, nums2 []int, K int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,9 +54,9 @@ func maxScore(nums1 []int, nums2 []int, K int) int64 {
 		return 0
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(nums1, func(i, j int) bool { return nums1[i] > nums1[j] })
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(nums2, func(i, j int) bool { return nums2[i] > nums2[j] })
 
 	var total int64

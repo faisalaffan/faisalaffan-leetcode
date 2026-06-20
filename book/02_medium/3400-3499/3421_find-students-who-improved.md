@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findStudentsWhoImproved(scores []Score) []ImprovedStudent
-```
+**Fungsi Solusi:** `func findStudentsWhoImproved(scores []Score) []ImprovedStudent`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n) Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n) Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,7 +48,7 @@ type ImprovedStudent struct {
 }
 
 func findStudentsWhoImproved(scores []Score) []ImprovedStudent {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	group := make(map[[2]interface{}][]Score)
 
 	for _, s := range scores {
@@ -64,7 +58,7 @@ func findStudentsWhoImproved(scores []Score) []ImprovedStudent {
 
 	var result []ImprovedStudent
 	for key, exams := range group {
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(exams, func(i, j int) bool { return exams[i].ExamDate < exams[j].ExamDate })
 		first := exams[0].Score
 		last := exams[len(exams)-1].Score
@@ -78,7 +72,7 @@ func findStudentsWhoImproved(scores []Score) []ImprovedStudent {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].StudentID != result[j].StudentID {
 			return result[i].StudentID < result[j].StudentID

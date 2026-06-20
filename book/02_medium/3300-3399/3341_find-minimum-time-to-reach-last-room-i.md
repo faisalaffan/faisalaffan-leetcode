@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minTimeToReach(moveTime [][]int) int
-```
+**Fungsi Solusi:** `func minTimeToReach(moveTime [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O(m * n * log(m * n)) Space: O(m * n)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n * log(m * n)) Space: O(m * n)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -66,9 +60,9 @@ func (h *MinHeap) Pop() interface{} {
 
 func minTimeToReach(moveTime [][]int) int {
 	m, n := len(moveTime), len(moveTime[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -79,12 +73,12 @@ func minTimeToReach(moveTime [][]int) int {
 
 	h := &MinHeap{}
 	heap.Init(h)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(h, State{0, 0, 0})
 	dirs := [][2]int{{0, 1}, {0, -1}, {1, 0}, {-1, 0}}
 
 	for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(h).(State)
 		if cur.time > dist[cur.r][cur.c] {
 			continue
@@ -102,7 +96,7 @@ func minTimeToReach(moveTime [][]int) int {
 				nt := cur.time + 1 + wait
 				if nt < dist[nr][nc] {
 					dist[nr][nc] = nt
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 					heap.Push(h, State{nt, nr, nc})
 				}
 			}

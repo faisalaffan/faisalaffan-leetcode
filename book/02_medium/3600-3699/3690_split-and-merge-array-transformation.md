@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int
-```
+**Fungsi Solusi:** `func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** O(n! * n^4)  
-**Kompleksitas Ruang:** O(n! * n)
+**Waktu:** O(n! * n^4)  |  **Ruang:** O(n! * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,7 +32,7 @@ import "fmt"
 
 func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int {
 	n := len(nums1)
-  // Alokasi slice integer
+  // Alokasi slice
 	target := make([]int, n)
 	copy(target, nums2)
 
@@ -48,7 +42,7 @@ func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int {
 	}
 
 	queue := []state{{arr: append([]int(nil), nums1...), steps: 0}}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	visited := make(map[string]bool)
 
 	key := func(arr []int) string {
@@ -75,18 +69,18 @@ func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int {
 		// Try all subarrays [L, R]
 		for L := 0; L < n; L++ {
 			for R := L; R < n; R++ {
-  // Alokasi slice integer
+  // Alokasi slice
 				sub := make([]int, R-L+1)
 				copy(sub, cur.arr[L:R+1])
 
-  // Alokasi slice integer
+  // Alokasi slice
 				remain := make([]int, 0, n-(R-L+1))
 				remain = append(remain, cur.arr[:L]...)
 				remain = append(remain, cur.arr[R+1:]...)
 
 				// Insert sub at all positions in remain
 				for pos := 0; pos <= len(remain); pos++ {
-  // Alokasi slice integer
+  // Alokasi slice
 					next := make([]int, 0, n)
 					next = append(next, remain[:pos]...)
 					next = append(next, sub...)

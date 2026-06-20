@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func goodDaysToRobBank(security []int, time int) []int
-```
+**Fungsi Solusi:** `func goodDaysToRobBank(security []int, time int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +37,7 @@ func goodDaysToRobBank(security []int, time int) []int {
 	}
 
 	// left[i] = number of consecutive non-increasing days ending at i
-  // Alokasi slice integer
+  // Alokasi slice
 	left := make([]int, n)
 	for i := 1; i < n; i++ {
 		if security[i] <= security[i-1] {
@@ -52,7 +46,7 @@ func goodDaysToRobBank(security []int, time int) []int {
 	}
 
 	// right[i] = number of consecutive non-decreasing days starting at i
-  // Alokasi slice integer
+  // Alokasi slice
 	right := make([]int, n)
 	for i := n - 2; i >= 0; i-- {
 		if security[i] <= security[i+1] {

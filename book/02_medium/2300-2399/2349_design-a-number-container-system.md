@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor2() NumberContainers
-```
+**Fungsi Solusi:** `func Constructor2() NumberContainers`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
+**Teknik:** HashMap, Heap
 
-**Kompleksitas Waktu:** O(log n) per operation  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(log n) per operation  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -70,7 +64,7 @@ func (this *NumberContainers) Change(index int, number int) {
 	if this.numToIndex[number] == nil {
 		this.numToIndex[number] = &minHeap3{}
 	}
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(this.numToIndex[number], index)
 }
 
@@ -83,7 +77,7 @@ func (this *NumberContainers) Find(number int) int {
 		if this.indexToNum[idx] == number {
 			return idx
 		}
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		heap.Pop(this.numToIndex[number])
 	}
 	return -1

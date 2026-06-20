@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindSafeCountries(personCountry map[int]string, countryName map[string]string, calls [][3]int) []string
-```
+**Fungsi Solusi:** `func FindSafeCountries(personCountry map[int]string, countryName map[string]string, calls [][3]int) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Trie
+**Teknik:** HashMap, Trie
 
-**Kompleksitas Waktu:** O(N), Space: O(K) where N = calls, K = countries  
-**Kompleksitas Ruang:** O(K) where N = calls, K = countries
+**Waktu:** O(N), Space: O(K) where N = calls, K = countries  |  **Ruang:** O(K) where N = calls, K = countries
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,9 +47,9 @@ func main() {
 
 func FindSafeCountries(personCountry map[int]string, countryName map[string]string, calls [][3]int) []string {
 	// Time: O(N), Space: O(K) where N = calls, K = countries
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	countryDur := make(map[string]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	countryCount := make(map[string]int)
 	globalDur := 0
 	globalCount := 0

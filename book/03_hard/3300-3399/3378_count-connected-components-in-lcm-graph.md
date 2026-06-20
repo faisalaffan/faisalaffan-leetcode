@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewDSU(n int) *DSU
-```
-
-> **💡 Hint:** Union-Find with multiples. For each num <= threshold, connect
+**Fungsi Solusi:** `func NewDSU(n int) *DSU`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,11 +55,11 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Alokasi slice integer
+  // Alokasi slice
 	p := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	r := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range p {
 		p[i] = i
 	}
@@ -97,7 +89,7 @@ func (d *DSU) Union(x, y int) {
 }
 
 func countComponents(nums []int, threshold int) int {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if len(nums) == 0 {
 		return 0
 	}
@@ -119,7 +111,7 @@ func countComponents(nums []int, threshold int) int {
 	}
 
 	// Count unique roots among numbers <= threshold
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	roots := make(map[int]bool)
 	for _, num := range nums {
 		if num <= threshold {

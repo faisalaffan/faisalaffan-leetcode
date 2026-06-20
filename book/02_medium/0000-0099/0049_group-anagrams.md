@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan dua string. Tugasmu adalah menentukan apakah keduanya **anagram** — mengandung huruf yang sama dengan jumlah sama, hanya urutan berbeda.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Hitung frekuensi huruf string pertama, kurangi dengan string kedua. Semua harus nol.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func groupAnagrams(strs []string) [][]string
-```
+**Fungsi Solusi:** `func groupAnagrams(strs []string) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n * k)  
-**Kompleksitas Ruang:** O(n * k)
+**Waktu:** O(n * k)  |  **Ruang:** O(n * k)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -36,19 +30,19 @@ package main
 import "fmt"
 
 func groupAnagrams(strs []string) [][]string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[[26]byte][]string)
 
 	for _, s := range strs {
 		var key [26]byte
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(s); i++ {
 			key[s[i]-'a']++
 		}
 		groups[key] = append(groups[key], s)
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]string, 0, len(groups))
 	for _, v := range groups {
 		result = append(result, v)

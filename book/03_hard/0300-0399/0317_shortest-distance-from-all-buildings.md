@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func shortestDistance(grid [][]int) int
-```
+**Fungsi Solusi:** `func shortestDistance(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,10 +36,10 @@ func shortestDistance(grid [][]int) int {
 	rows, cols := len(grid), len(grid[0])
 
 	// totalDist[r][c] = sum of distances from all reachable buildings
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	totalDist := make([][]int, rows)
 	// reachable[r][c] = count of buildings that can reach this cell
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	reachable := make([][]int, rows)
 	for r := 0; r < rows; r++ {
 		totalDist[r] = make([]int, cols)
@@ -70,7 +64,7 @@ func shortestDistance(grid [][]int) int {
 				continue
 			}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 			visited := make([][]bool, rows)
 			for i := 0; i < rows; i++ {
 				visited[i] = make([]bool, cols)

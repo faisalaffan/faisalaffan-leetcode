@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countOperationsToMakeArrayEmpty(nums []int) int64
-```
-
-> **💡 Hint:** BIT (Fenwick Tree) + sorted order.
+**Fungsi Solusi:** `func countOperationsToMakeArrayEmpty(nums []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Fenwick Tree (BIT)
+**Teknik:** Sorting, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -65,7 +57,7 @@ func countOperationsToMakeArrayEmpty(nums []int) int64 {
 	for i, v := range nums {
 		sorted[i] = pair{v, i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sorted, func(i, j int) bool {
 		if sorted[i].val != sorted[j].val {
 			return sorted[i].val < sorted[j].val
@@ -74,7 +66,7 @@ func countOperationsToMakeArrayEmpty(nums []int) int64 {
 	})
 
 	// BIT: 1 = element present, 0 = removed
-  // Alokasi slice integer
+  // Alokasi slice
 	bit := make([]int, n+1)
 	add := func(idx int, v int) {
 		for idx++; idx <= n; idx += idx & -idx {

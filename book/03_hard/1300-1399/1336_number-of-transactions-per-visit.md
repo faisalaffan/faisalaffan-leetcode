@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countTransactionsPerVisit(visits []visit, transactions []transaction) []rowCount
-```
-
-> **💡 Hint:** Simulate SQL aggregation in Go.
+**Fungsi Solusi:** `func countTransactionsPerVisit(visits []visit, transactions []transaction) []rowCount`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -66,7 +58,7 @@ type rowCount struct {
 
 func countTransactionsPerVisit(visits []visit, transactions []transaction) []rowCount {
 	// Count transactions per visit
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	txPerVisit := make(map[[2]string]int)
 	for _, t := range transactions {
 		key := [2]string{fmt.Sprintf("%d", t.userID), t.date}
@@ -74,7 +66,7 @@ func countTransactionsPerVisit(visits []visit, transactions []transaction) []row
 	}
 
 	// Count visits per transaction count
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	visitDist := make(map[int]int)
 	for _, v := range visits {
 		key := [2]string{fmt.Sprintf("%d", v.userID), v.date}
@@ -99,7 +91,7 @@ func countTransactionsPerVisit(visits []visit, transactions []transaction) []row
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(res, func(i, j int) bool { return res[i].txCount < res[j].txCount })
 	return res
 }

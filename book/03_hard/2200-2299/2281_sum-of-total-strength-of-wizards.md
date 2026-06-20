@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func totalStrength(strength []int) int
-```
+**Fungsi Solusi:** `func totalStrength(strength []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Stack, Prefix Sum, Monotonic Stack/Queue
+**Teknik:** Two Pointer, Stack, Prefix Sum, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,9 +52,9 @@ func totalStrength(strength []int) int {
 	n := len(strength)
 
 	// Previous smaller element (strictly smaller, index).
-  // Alokasi slice integer
+  // Alokasi slice
 	left := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	stack := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		for len(stack) > 0 && strength[stack[len(stack)-1]] >= strength[i] {
@@ -75,7 +69,7 @@ func totalStrength(strength []int) int {
 	}
 
 	// Next smaller element (strictly smaller, index).
-  // Alokasi slice integer
+  // Alokasi slice
 	right := make([]int, n)
 	stack = stack[:0]
 	for i := n - 1; i >= 0; i-- {
@@ -91,14 +85,14 @@ func totalStrength(strength []int) int {
 	}
 
 	// Prefix sums.
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		pref[i+1] = (pref[i] + strength[i]) % mod
 	}
 
 	// Prefix sums of prefix sums.
-  // Alokasi slice integer
+  // Alokasi slice
 	pref2 := make([]int, n+2)
 	for i := 0; i <= n; i++ {
 		pref2[i+1] = (pref2[i] + pref[i]) % mod

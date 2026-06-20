@@ -4,25 +4,18 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan sebuah bilangan bulat (integer). Tugasmu adalah menentukan apakah bilangan tersebut adalah **palindrome** — dibaca sama dari depan maupun dari belakang.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+Contoh: `121` → palindrome. `-121` → bukan (tanda minus!). `10` → bukan.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+**Cara berpikir:** Balik setengah digit secara matematika menggunakan modulo (`%`) dan pembagian (`/`). Tidak perlu konversi ke string.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func canConstruct(s string, k int) bool
-```
+**Fungsi Solusi:** `func canConstruct(s string, k int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n) where n = length of string  |  **Ruang:** O(1) - fixed array of 26
 
-**Kompleksitas Waktu:** O(n) where n = length of string  
-**Kompleksitas Ruang:** O(1) - fixed array of 26
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -56,9 +49,9 @@ func canConstruct(s string, k int) bool {
 		return false
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, 26)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		freq[s[i]-'a']++
 	}

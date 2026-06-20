@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func shortestDistanceColor(colors []int, queries [][]int) []int
-```
+**Fungsi Solusi:** `func shortestDistanceColor(colors []int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Trie
+**Teknik:** Binary Search, Trie
 
-**Kompleksitas Waktu:** O(n + m) where m = len(queries)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + m) where m = len(queries)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ func shortestDistanceColor(colors []int, queries [][]int) []int {
 	n := len(colors)
 
 	// left[i][c] = nearest distance to color c from left side up to i
-  // Alokasi slice integer
+  // Alokasi slice
 	left := make([][3]int, n)
 	for i := 0; i < n; i++ {
 		for c := 0; c < 3; c++ {
@@ -69,7 +63,7 @@ func shortestDistanceColor(colors []int, queries [][]int) []int {
 	}
 
 	// Simpler approach: for each color, store sorted positions
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	positions := make([][]int, 4) // 1-indexed colors
 	for i, c := range colors {
 		positions[c] = append(positions[c], i)
@@ -103,7 +97,7 @@ func shortestDistanceColor(colors []int, queries [][]int) []int {
 		return pos[lo]
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(queries))
 	for i, q := range queries {
 		idx, color := q[0], q[1]

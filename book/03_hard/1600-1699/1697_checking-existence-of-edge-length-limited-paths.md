@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewDSU(n int) *DSU
-```
+**Fungsi Solusi:** `func NewDSU(n int) *DSU`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +41,9 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	rank := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -81,18 +75,18 @@ func (d *DSU) Union(x, y int) {
 
 func distanceLimitedPathsExist(n int, edgeList [][]int, queries [][]int) []bool {
 	// Sort edges by weight
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(edgeList, func(i, j int) bool {
 		return edgeList[i][2] < edgeList[j][2]
 	})
 
 	// Sort queries by limit, keeping original indices
-  // Alokasi slice integer
+  // Alokasi slice
 	q := make([][4]int, len(queries)) // [limit, u, v, originalIdx]
 	for i, query := range queries {
 		q[i] = [4]int{query[2], query[0], query[1], i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(q, func(i, j int) bool {
 		return q[i][0] < q[j][0]
 	})

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindPaths(m int, n int, maxMove int, startRow int, startColumn int) int
-```
+**Fungsi Solusi:** `func FindPaths(m int, n int, maxMove int, startRow int, startColumn int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(m * n * maxMove)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n * maxMove)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,9 +38,9 @@ func main() {
 
 func FindPaths(m int, n int, maxMove int, startRow int, startColumn int) int {
 	const mod = 1_000_000_007
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}
@@ -55,9 +49,9 @@ func FindPaths(m int, n int, maxMove int, startRow int, startColumn int) int {
 	dirs := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
 
 	for move := 1; move <= maxMove; move++ {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		next := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range next {
 			next[i] = make([]int, n)
 		}

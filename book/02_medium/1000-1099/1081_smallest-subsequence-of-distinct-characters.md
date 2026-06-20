@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func smallestSubsequence(s string) string
-```
-
-> **💡 Hint:** Monotonic stack (greedy). Track last occurrence and used set.
+**Fungsi Solusi:** `func smallestSubsequence(s string) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
+**Teknik:** Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(26) = O(1)
+**Waktu:** O(n)  |  **Ruang:** O(26) = O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Stack** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +39,9 @@ func main() {
 }
 
 func smallestSubsequence(s string) string {
-  // Alokasi slice integer
+  // Alokasi slice
 	lastOccur := make([]int, 26)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		lastOccur[s[i]-'a'] = i
 	}
@@ -57,7 +49,7 @@ func smallestSubsequence(s string) string {
 	used := make([]bool, 26)
 	stack := make([]byte, 0)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		ch := s[i]
 		if used[ch-'a'] {

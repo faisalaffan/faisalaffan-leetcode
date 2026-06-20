@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minRefuelStops(target int, startFuel int, stations [][]int) int
-```
+**Fungsi Solusi:** `func minRefuelStops(target int, startFuel int, stations [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -70,7 +64,7 @@ func minRefuelStops(target int, startFuel int, stations [][]int) int {
 	for currFuel < target {
 		// Add all stations reachable from current position.
 		for i < n && stations[i][0] <= currFuel {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(pq, stations[i][1])
 			i++
 		}
@@ -78,7 +72,7 @@ func minRefuelStops(target int, startFuel int, stations [][]int) int {
 			return -1 // cannot reach target
 		}
 		// Stop at the station with the most fuel.
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		currFuel += heap.Pop(pq).(int)
 		stops++
 	}

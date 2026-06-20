@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minPushBox(grid [][]byte) int
-```
+**Fungsi Solusi:** `func minPushBox(grid [][]byte) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -105,7 +99,7 @@ func minPushBox(grid [][]byte) int {
 
 	// dist[boxR][boxC] = minimum pushes to get box here
 	const INF = 1 << 30
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, rows)
 	for r := 0; r < rows; r++ {
 		dist[r] = make([]int, cols)
@@ -121,7 +115,7 @@ func minPushBox(grid [][]byte) int {
 	}
 
 	queue := make([]State, 0, rows*cols*4)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	visited := make(map[State]bool)
 
 	start := State{boxR, boxC, playerR, playerC}
@@ -187,13 +181,13 @@ func canReach(grid [][]byte, sr, sc, tr, tc, boxR, boxC int) bool {
 
 	rows := len(grid)
 	cols := len(grid[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][]bool, rows)
 	for r := 0; r < rows; r++ {
 		visited[r] = make([]bool, cols)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	queue := make([][2]int, 0, rows*cols)
 	queue = append(queue, [2]int{sr, sc})
 	visited[sr][sc] = true

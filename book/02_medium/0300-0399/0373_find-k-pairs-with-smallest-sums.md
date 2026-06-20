@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int
-```
+**Fungsi Solusi:** `func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O(k log min(k, n))  
-**Kompleksitas Ruang:** O(k)
+**Waktu:** O(k log min(k, n))  |  **Ruang:** O(k)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,18 +62,18 @@ func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int {
 
 	// Push first element of nums1 paired with each element of nums2
 	for j := 0; j < len(nums2) && j < k; j++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, pair{0, j, nums1[0] + nums2[j]})
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0, k)
 	for h.Len() > 0 && len(result) < k {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		p := heap.Pop(h).(pair)
 		result = append(result, []int{nums1[p.i], nums2[p.j]})
 		if p.i+1 < len(nums1) {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, pair{p.i + 1, p.j, nums1[p.i+1] + nums2[p.j]})
 		}
 	}

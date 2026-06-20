@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findCategoryPairs(categories []string, relations [][]string) [][]string
-```
-
-> **💡 Hint:** Build a graph of category relationships, find pairs that
+**Fungsi Solusi:** `func findCategoryPairs(categories []string, relations [][]string) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,7 +47,7 @@ func main() {
 
 func findCategoryPairs(categories []string, relations [][]string) [][]string {
 	// Build adjacency
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	adj := make(map[string]map[string]bool)
 	for _, cat := range categories {
 		adj[cat] = make(map[string]bool)
@@ -71,7 +63,7 @@ func findCategoryPairs(categories []string, relations [][]string) [][]string {
 		a, b string
 	}
 	var pairs []pair
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[string]bool)
 
 	for _, a := range categories {
@@ -97,7 +89,7 @@ func findCategoryPairs(categories []string, relations [][]string) [][]string {
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(pairs, func(i, j int) bool {
 		if pairs[i].a != pairs[j].a {
 			return pairs[i].a < pairs[j].a
@@ -105,7 +97,7 @@ func findCategoryPairs(categories []string, relations [][]string) [][]string {
 		return pairs[i].b < pairs[j].b
 	})
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]string, len(pairs))
 	for i, p := range pairs {
 		result[i] = []string{p.a, p.b}

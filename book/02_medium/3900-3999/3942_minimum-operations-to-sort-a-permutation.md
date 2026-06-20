@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumOperationsToSortAPermutation(nums []int) int
-```
-
-> **💡 Hint:** Available ops are reverse and rotate left. Sorted array must be
+**Fungsi Solusi:** `func MinimumOperationsToSortAPermutation(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(N)  |  **Ruang:** O(N)
 
-**Kompleksitas Waktu:** O(N)  
-**Kompleksitas Ruang:** O(N)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -48,7 +37,7 @@ func MinimumOperationsToSortAPermutation(nums []int) int {
 	}
 
 	// Expected sorted array
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, n)
 	for i := 0; i < n; i++ {
 		sorted[i] = i
@@ -96,7 +85,7 @@ func MinimumOperationsToSortAPermutation(nums []int) int {
 
 	// Try: reverse then rotate to match sorted
 	// Reverse: [nums[n-1], nums[n-2], ..., nums[0]]
-  // Alokasi slice integer
+  // Alokasi slice
 	reversed := make([]int, n)
 	for i := 0; i < n; i++ {
 		reversed[i] = nums[n-1-i]

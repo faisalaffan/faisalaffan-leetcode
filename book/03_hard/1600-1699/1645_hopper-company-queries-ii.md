@@ -4,36 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func hopperQueriesII(drivers []struct {
-	id       int
-	joinDate string
-}, rides []struct {
-	id      int
-	reqDate string
-}, accepted []struct {
-	rideID   int
-	driverID int
-}) []struct
-```
-
-> **💡 Hint:** Process driver and ride data in Go.
+**Fungsi Solusi:** `func hopperQueriesII(drivers []struct { id int joinDate string }, rides []struct { id int reqDate string }, accepted []struct { rideID int driverID int }) []struct`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -115,14 +98,14 @@ func hopperQueriesII(drivers []struct {
 	workingPercentage float64
 } {
 	// Build a set of accepted ride IDs
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	accSet := make(map[int]bool)
 	for _, a := range accepted {
 		accSet[a.rideID] = true
 	}
 
 	// Map ride ID -> month and month -> set of working drivers
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	rideMonth := make(map[int]int)
 	for _, r := range rides {
 		t, _ := time.Parse("2006-1-2", r.reqDate)
@@ -131,9 +114,9 @@ func hopperQueriesII(drivers []struct {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	workingDrivers := make([]map[int]bool, 13)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range workingDrivers {
 		workingDrivers[i] = make(map[int]bool)
 	}
@@ -148,7 +131,7 @@ func hopperQueriesII(drivers []struct {
 	}
 
 	// Count available drivers by end of each month
-  // Alokasi slice integer
+  // Alokasi slice
 	available := make([]int, 13)
 	for _, d := range drivers {
 		t, _ := time.Parse("2006-1-2", d.joinDate)

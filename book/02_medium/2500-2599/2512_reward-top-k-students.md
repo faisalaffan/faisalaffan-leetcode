@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func topStudents(positiveFeedback []string, negativeFeedback []string, report [][]string, studentID []int, k int) []int
-```
+**Fungsi Solusi:** `func topStudents(positiveFeedback []string, negativeFeedback []string, report [][]string, studentID []int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n * L + n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n * L + n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,9 +50,9 @@ func main() {
 }
 
 func topStudents(positiveFeedback []string, negativeFeedback []string, report [][]string, studentID []int, k int) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pos := make(map[string]bool)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	neg := make(map[string]bool)
 	for _, w := range positiveFeedback {
 		pos[w] = true
@@ -85,7 +79,7 @@ func topStudents(positiveFeedback []string, negativeFeedback []string, report []
 		students[i] = student{id, score}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(students, func(i, j int) bool {
 		if students[i].score != students[j].score {
 			return students[i].score > students[j].score
@@ -93,7 +87,7 @@ func topStudents(positiveFeedback []string, negativeFeedback []string, report []
 		return students[i].id < students[j].id
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, k)
 	for i := 0; i < k; i++ {
 		ans[i] = students[i].id

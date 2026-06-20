@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func differenceOfDistinctValues(grid [][]int) [][]int
-```
+**Fungsi Solusi:** `func differenceOfDistinctValues(grid [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer
+**Teknik:** HashMap, Two Pointer
 
-**Kompleksitas Waktu:** O(m*n*(m+n))  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(m*n*(m+n))  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,9 +32,9 @@ import "fmt"
 
 func differenceOfDistinctValues(grid [][]int) [][]int {
 	m, n := len(grid), len(grid[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	ans := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range ans {
 		ans[i] = make([]int, n)
 	}
@@ -48,7 +42,7 @@ func differenceOfDistinctValues(grid [][]int) [][]int {
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
 			// Count distinct values above-left diagonal
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 			aboveLeft := make(map[int]bool)
 			r, c := i-1, j-1
 			for r >= 0 && c >= 0 {
@@ -58,7 +52,7 @@ func differenceOfDistinctValues(grid [][]int) [][]int {
 			}
 
 			// Count distinct values below-right diagonal
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 			belowRight := make(map[int]bool)
 			r, c = i+1, j+1
 			for r < m && c < n {

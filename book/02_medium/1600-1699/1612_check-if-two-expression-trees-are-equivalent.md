@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CheckEquivalence(root1 *Node, root2 *Node) bool
-```
+**Fungsi Solusi:** `func CheckEquivalence(root1 *Node, root2 *Node) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** HashMap, Two Pointer
 
-**Kompleksitas Waktu:** O(N), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(N), Space: O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,9 +62,9 @@ func main() {
 func CheckEquivalence(root1 *Node, root2 *Node) bool {
 	// Time: O(N), Space: O(1)
 	// Expression trees only contain '+', so equivalence = same multiset of leaf values
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	count1 := make(map[byte]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	count2 := make(map[byte]int)
 
 	countLeaves(root1, count1)

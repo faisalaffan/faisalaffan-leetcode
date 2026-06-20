@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumEffortPath(heights [][]int) int
-```
+**Fungsi Solusi:** `func MinimumEffortPath(heights [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
+**Teknik:** Heap, Dijkstra
 
-**Kompleksitas Waktu:** O(R*C log(R*C)), Space: O(R*C)  
-**Kompleksitas Ruang:** O(R*C)
+**Waktu:** O(R*C log(R*C)), Space: O(R*C)  |  **Ruang:** O(R*C)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -83,7 +77,7 @@ func MinimumEffortPath(heights [][]int) int {
 		return 0
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	effort := make([][]int, rows)
 	for i := 0; i < rows; i++ {
 		effort[i] = make([]int, cols)
@@ -94,13 +88,13 @@ func MinimumEffortPath(heights [][]int) int {
 	effort[0][0] = 0
 
 	pq := &EffortPQ{}
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &Point{x: 0, y: 0, effort: 0})
 
 	dirs := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		p := heap.Pop(pq).(*Point)
 		if p.effort > effort[p.x][p.y] {
 			continue
@@ -124,7 +118,7 @@ func MinimumEffortPath(heights [][]int) int {
 			}
 			if newEffort < effort[nx][ny] {
 				effort[nx][ny] = newEffort
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &Point{x: nx, y: ny, effort: newEffort})
 			}
 		}

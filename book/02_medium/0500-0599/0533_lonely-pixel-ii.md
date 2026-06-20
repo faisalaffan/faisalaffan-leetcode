@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindBlackPixel(picture [][]byte, target int) int
-```
+**Fungsi Solusi:** `func FindBlackPixel(picture [][]byte, target int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(m * n)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,11 +43,11 @@ func main() {
 
 func FindBlackPixel(picture [][]byte, target int) int {
 	m, n := len(picture), len(picture[0])
-  // Alokasi slice integer
+  // Alokasi slice
 	rows := make([]int, m)
-  // Alokasi slice integer
+  // Alokasi slice
 	cols := make([]int, n)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	rowPattern := make(map[string]int)
 
 	for i := 0; i < m; i++ {

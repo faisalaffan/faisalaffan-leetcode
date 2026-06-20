@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countKConstraintSubstrings(s string, k int, queries [][]int) []int64
-```
-
-> **💡 Hint:** //   1. Precompute right[l] = first index where substring s[l..right[l]] becomes
+**Fungsi Solusi:** `func countKConstraintSubstrings(s string, k int, queries [][]int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n + q), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + q), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,9 +60,9 @@ func countKConstraintSubstrings(s string, k int, queries [][]int) []int64 {
 	n := len(s)
 
 	// right[l] = first index where s[l..right[l]] is invalid (or n if always valid)
-  // Alokasi slice integer
+  // Alokasi slice
 	right := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range right {
 		right[i] = n
 	}
@@ -89,7 +81,7 @@ func countKConstraintSubstrings(s string, k int, queries [][]int) []int64 {
 	// For remaining starts, all substrings to end are valid (right[i] stays n)
 
 	// prefix[i] = total valid substrings in s[0..i-1]
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int64, n+1)
 	l = 0
 	for r := 0; r < n; r++ {
@@ -113,7 +105,7 @@ func countKConstraintSubstrings(s string, k int, queries [][]int) []int64 {
 		prefix[i+1] = prefix[i] + int64(validEnd)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, len(queries))
 
 	for qi, q := range queries {

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfDivisibleSubstrings(s string) int
-```
+**Fungsi Solusi:** `func numberOfDivisibleSubstrings(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n^2)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(n^2)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -41,7 +32,7 @@ func numberOfDivisibleSubstrings(s string) int {
 	// Build mapping: old phone keypad, each char maps to a digit
 	// a,b,c->1; d,e,f->2; g,h,i->3; j,k,l->4; m,n,o->5;
 	// p,q,r->6; s,t,u->7; v,w,x->8; y,z->9
-  // Alokasi slice integer
+  // Alokasi slice
 	mapping := make([]int, 26)
 	for i := 0; i < 26; i++ {
 		if i <= 2 { // a,b,c -> 1

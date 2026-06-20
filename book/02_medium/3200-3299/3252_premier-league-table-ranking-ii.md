@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func premierLeagueRanking(teams [][]int) []int
-```
+**Fungsi Solusi:** `func premierLeagueRanking(teams [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ func premierLeagueRanking(teams [][]int) []int {
 		list = append(list, team{t[0], t[1], t[2]})
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(list, func(i, j int) bool {
 		if list[i].points != list[j].points {
 			return list[i].points > list[j].points
@@ -62,7 +56,7 @@ func premierLeagueRanking(teams [][]int) []int {
 		return list[i].id < list[j].id
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(list))
 	for i, t := range list {
 		ans[i] = t.id

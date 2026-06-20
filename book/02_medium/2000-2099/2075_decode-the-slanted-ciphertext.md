@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func decodeCiphertext(encodedText string, rows int) string
-```
+**Fungsi Solusi:** `func decodeCiphertext(encodedText string, rows int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(r*c)  |  **Ruang:** O(r*c)
 
-**Kompleksitas Waktu:** O(r*c)  
-**Kompleksitas Ruang:** O(r*c)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -42,7 +33,7 @@ import (
 func decodeCiphertext(encodedText string, rows int) string {
 	n := len(encodedText)
 	cols := n / rows
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	grid := make([][]byte, rows)
 	for i := 0; i < rows; i++ {
 		grid[i] = []byte(encodedText[i*cols : (i+1)*cols])

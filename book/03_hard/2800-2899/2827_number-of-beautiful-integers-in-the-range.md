@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfBeautifulIntegers(low int, high int, k int) int
-```
+**Fungsi Solusi:** `func numberOfBeautifulIntegers(low int, high int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,15 +45,15 @@ func numberOfBeautifulIntegers(low int, high int, k int) int {
 
 func countLE(s string, k int) int {
 	n := len(s)
-  // Alokasi slice integer
+  // Alokasi slice
 	digits := make([]int, n)
 	for i, c := range s {
 		digits[i] = int(c - '0')
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	memo := make([][][][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range memo {
 		memo[i] = make([][][]int, k)
 		for j := range memo[i] {

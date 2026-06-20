@@ -4,31 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func unpopularBooks(books []string, orders []struct {
-	name     string
-	quantity int
-	daysAgo  int
-}) []string
-```
-
-> **💡 Hint:** Filter books ordered less than 10 times in the last year
+**Fungsi Solusi:** `func unpopularBooks(books []string, orders []struct { name string quantity int daysAgo int }) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n + m) where n = books, m = orders  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + m) where n = books, m = orders  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -66,7 +54,7 @@ func unpopularBooks(books []string, orders []struct {
 	quantity int
 	daysAgo  int
 }) []string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	orderCount := make(map[string]int)
 	for _, o := range orders {
 		if o.daysAgo <= 365 {

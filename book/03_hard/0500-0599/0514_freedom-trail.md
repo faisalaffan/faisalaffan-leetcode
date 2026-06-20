@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findRotateSteps(ring string, key string) int
-```
+**Fungsi Solusi:** `func findRotateSteps(ring string, key string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ func main() {
 func findRotateSteps(ring string, key string) int {
 	m, n := len(ring), len(key)
 	// pos[c] = list of indices in ring where character c appears
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	pos := make([][]int, 26)
 	for i := 0; i < m; i++ {
 		c := ring[i] - 'a'
@@ -50,7 +44,7 @@ func findRotateSteps(ring string, key string) int {
 	}
 
 	// dp[j] = min steps to spell up to current key char ending at ring index j
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, m)
 	for j := 0; j < m; j++ {
 		if ring[j] == key[0] {
@@ -61,7 +55,7 @@ func findRotateSteps(ring string, key string) int {
 	}
 
 	for i := 1; i < n; i++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		next := make([]int, m)
 		for j := 0; j < m; j++ {
 			next[j] = 1 << 30

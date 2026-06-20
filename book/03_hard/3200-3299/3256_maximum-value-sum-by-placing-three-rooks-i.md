@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumValueSum(board [][]int) int64
-```
-
-> **💡 Hint:** For each row, keep only the top 3 (value, column) pairs.
+**Fungsi Solusi:** `func maximumValueSum(board [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(m^3 * 27) = O(m^3), but m ≤ 100 so acceptable for Part I.  
-**Kompleksitas Ruang:** O(m)
+**Waktu:** O(m^3 * 27) = O(m^3), but m ≤ 100 so acceptable for Part I.  |  **Ruang:** O(m)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -88,14 +80,14 @@ func maximumValueSum(board [][]int) int64 {
 	}
 
 	// For each row, find top 3 (value, column) pairs
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	rowTop := make([][]cell, m)
 	for i := 0; i < m; i++ {
 		row := make([]cell, n)
 		for j := 0; j < n; j++ {
 			row[j] = cell{board[i][j], j}
 		}
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(row, func(a, b int) bool {
 			return row[a].val > row[b].val
 		})

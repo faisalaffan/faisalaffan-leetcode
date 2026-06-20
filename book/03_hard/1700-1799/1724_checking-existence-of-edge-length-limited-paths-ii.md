@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist
-```
+**Fungsi Solusi:** `func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,10 +38,10 @@ type DistanceLimitedPathsExist struct {
 }
 
 func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	sortedEdges := make([][]int, len(edgeList))
 	copy(sortedEdges, edgeList)
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sortedEdges, func(i, j int) bool {
 		return sortedEdges[i][2] < sortedEdges[j][2]
 	})
@@ -55,7 +49,7 @@ func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist {
 }
 
 func (this *DistanceLimitedPathsExist) Query(p int, q int, limit int) bool {
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, this.n)
 	for i := 0; i < this.n; i++ {
 		parent[i] = i

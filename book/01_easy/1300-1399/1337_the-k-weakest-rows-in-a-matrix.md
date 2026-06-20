@@ -4,32 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func kWeakestRows(mat [][]int, k int) []int
-
-import (
-	"fmt"
-	"sort"
-)
-
-func main()
-```
+**Fungsi Solusi:** `func kWeakestRows(mat [][]int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(m * n + m log m), Space: O(m)  
-**Kompleksitas Ruang:** O(m)
+**Waktu:** O(m * n + m log m), Space: O(m)  |  **Ruang:** O(m)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,7 +55,7 @@ func main() {
 
 // Time: O(m * n + m log m), Space: O(m)
 func TheKWeakestRowsInAMatrix(mat [][]int, k int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	strength := make([][2]int, len(mat))
 	for i, row := range mat {
 		s := 0
@@ -81,7 +68,7 @@ func TheKWeakestRowsInAMatrix(mat [][]int, k int) []int {
 		strength[i] = [2]int{s, i}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(strength, func(i, j int) bool {
 		if strength[i][0] != strength[j][0] {
 			return strength[i][0] < strength[j][0]
@@ -89,7 +76,7 @@ func TheKWeakestRowsInAMatrix(mat [][]int, k int) []int {
 		return strength[i][1] < strength[j][1]
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	res := make([]int, k)
 	for i := 0; i < k; i++ {
 		res[i] = strength[i][1]

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func popcountDepthII(nums []int64, queries [][]int64) []int
-```
-
-> **💡 Hint:** Precompute depth for all numbers, use Fenwick tree per depth level.
+**Fungsi Solusi:** `func popcountDepthII(nums []int64, queries [][]int64) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Fenwick Tree (BIT)
+**Teknik:** Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Fenwick Tree** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -56,7 +48,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 	n := len(nums)
 	// Precompute depth for numbers up to 60 (max bits for 10^15)
 	// Depth = number of popcount steps until reaching 1
-  // Alokasi slice integer
+  // Alokasi slice
 	depth := make([]int, 61)
 	depth[0] = 0
 	depth[1] = 1
@@ -71,7 +63,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 	}
 
 	// Current depths for each element
-  // Alokasi slice integer
+  // Alokasi slice
 	curDepth := make([]int, n)
 	for i := 0; i < n; i++ {
 		pop := bits.OnesCount64(uint64(nums[i]))
@@ -82,7 +74,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 
 	// Fenwick trees for each depth (0..5, since max depth is ~5 for 10^15)
 	const MAX_DEPTH = 6
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	fenwick := make([][]int, MAX_DEPTH)
 	for d := 0; d < MAX_DEPTH; d++ {
 		fenwick[d] = make([]int, n+1)
@@ -110,7 +102,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 	for _, q := range queries {
 		if q[0] == 1 {

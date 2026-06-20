@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan linked list. Tugasmu traversing atau memanipulasi list.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Traverse dari head. Fast/slow pointer untuk deteksi siklus/cari tengah. Dummy node mempermudah operasi di head.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode
-```
+**Fungsi Solusi:** `func MergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Merge Sort
+**Waktu:** O(n+m)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(n+m)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 

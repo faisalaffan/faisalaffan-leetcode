@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sumOfPowers(nums []int, k int) int
-```
-
-> **💡 Hint:** DP with difference threshold
+**Fungsi Solusi:** `func sumOfPowers(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming
+**Teknik:** HashMap, DP, Sorting
 
-**Kompleksitas Waktu:** O(n^2 * k + D * n * k)  
-**Kompleksitas Ruang:** O(n * k)
+**Waktu:** O(n^2 * k + D * n * k)  |  **Ruang:** O(n * k)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,11 +45,11 @@ const MOD = 1_000_000_007
 
 func sumOfPowers(nums []int, k int) int {
 	n := len(nums)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(nums)
 
 	// Collect distinct pairwise differences
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	diffSet := make(map[int]bool)
 	for i := 0; i < n; i++ {
 		for j := i + 1; j < n; j++ {
@@ -65,23 +57,23 @@ func sumOfPowers(nums []int, k int) int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	diffs := make([]int, 0, len(diffSet))
 	for d := range diffSet {
 		diffs = append(diffs, d)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(diffs)
 
 	// countGe(threshold) = count of k-length subsequences whose min_abs_diff >= threshold
 	countGe := func(threshold int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		dp := make([][]int, n)
 		for i := 0; i < n; i++ {
 			dp[i] = make([]int, k+1)
 		}
 
-  // Alokasi slice integer
+  // Alokasi slice
 		runningSum := make([]int, k+1)
 		ptr := 0
 

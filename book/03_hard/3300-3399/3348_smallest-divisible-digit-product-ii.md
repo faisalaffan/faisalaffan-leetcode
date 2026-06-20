@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func gcd64(a, b int64) int64
-```
+**Fungsi Solusi:** `func gcd64(a, b int64) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -52,7 +43,7 @@ func gcd64(a, b int64) int64 {
 func SmallestDivisibleDigitProductIi(num string, t int64) string {
 	if t == 1 {
 		b := []byte(num)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range b {
 			if b[i] == '0' {
 				b[i] = '1'
@@ -72,7 +63,7 @@ func SmallestDivisibleDigitProductIi(num string, t int64) string {
 	}
 
 	n := len(num)
-  // Alokasi slice integer
+  // Alokasi slice
 	leftT := make([]int64, n+1)
 	leftT[0] = t
 	firstZero := n - 1

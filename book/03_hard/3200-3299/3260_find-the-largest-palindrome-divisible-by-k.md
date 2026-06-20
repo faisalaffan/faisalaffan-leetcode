@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan sebuah bilangan bulat (integer). Tugasmu adalah menentukan apakah bilangan tersebut adalah **palindrome** — dibaca sama dari depan maupun dari belakang.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+Contoh: `121` → palindrome. `-121` → bukan (tanda minus!). `10` → bukan.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+**Cara berpikir:** Balik setengah digit secara matematika menggunakan modulo (`%`) dan pembagian (`/`). Tidak perlu konversi ke string.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func largestPalindrome(n int, k int) string
-```
+**Fungsi Solusi:** `func largestPalindrome(n int, k int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DFS, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,7 +54,7 @@ func main() {
 
 func largestPalindrome(n int, k int) string {
 	// Precompute pow10[i] = 10^i mod k
-  // Alokasi slice integer
+  // Alokasi slice
 	pow10 := make([]int, n)
 	pow10[0] = 1 % k
 	for i := 1; i < n; i++ {
@@ -69,9 +65,9 @@ func largestPalindrome(n int, k int) string {
 
 	// dp[pos][mod] = true if we can fill positions [pos, half) to reach 0 mod k
 	// with the current accumulated remainder = mod
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	memo := make([][]int, half)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range memo {
 		memo[i] = make([]int, k)
 		for j := range memo[i] {
@@ -81,7 +77,7 @@ func largestPalindrome(n int, k int) string {
 
 	// ans stores the digits of the result
 	ans := make([]byte, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range ans {
 		ans[i] = '0'
 	}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu adalah memeriksa apakah string tersebut palindrome — dibaca sama dari depan dan belakang. Abaikan non-alfanumerik dan case.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** Two Pointer — kiri dan kanan. Skip non-alfanumerik. Bandingkan.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func generatePalindromes(s string) []string
-```
+**Fungsi Solusi:** `func generatePalindromes(s string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking
 
-**Kompleksitas Waktu:** O((n/2)!), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n/2)!), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,14 +32,14 @@ import "fmt"
 
 func generatePalindromes(s string) []string {
 	charCount := make([]byte, 128)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		charCount[s[i]]++
 	}
 
 	oddChar := byte(0)
 	oddCount := 0
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range charCount {
 		if charCount[i]%2 == 1 {
 			oddChar = byte(i)
@@ -58,7 +52,7 @@ func generatePalindromes(s string) []string {
 	}
 
 	half := []byte{}
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range charCount {
 		for j := 0; j < int(charCount[i])/2; j++ {
 			half = append(half, byte(i))
@@ -82,7 +76,7 @@ func generatePalindromes(s string) []string {
 			return
 		}
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(half); i++ {
 			if used[i] {
 				continue

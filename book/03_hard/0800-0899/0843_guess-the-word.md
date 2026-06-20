@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findSecretWord(words []string, master *Master) 
-```
-
-> **💡 Hint:** Minimax + filtering. For each candidate, compute match counts against other
+**Fungsi Solusi:** `func findSecretWord(words []string, master *Master) `
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -47,7 +36,7 @@ type Master struct {
 
 func (m *Master) guess(word string) int {
 	matches := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(word); i++ {
 		if word[i] == m.secret[i] {
 			matches++
@@ -68,9 +57,9 @@ func findSecretWord(words []string, master *Master) {
 		return cnt
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	candidates := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range candidates {
 		candidates[i] = i
 	}
@@ -80,7 +69,7 @@ func findSecretWord(words []string, master *Master) {
 		bestIdx := 0
 		bestScore := n + 1
 		for _, idx := range candidates {
-  // Alokasi slice integer
+  // Alokasi slice
 			groups := make([]int, 7)
 			for _, other := range candidates {
 				m := match(words[idx], words[other])

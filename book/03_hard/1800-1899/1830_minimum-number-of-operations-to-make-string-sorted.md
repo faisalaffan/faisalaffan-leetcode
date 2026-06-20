@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func makeStringSorted(s string) int
-```
-
-> **💡 Hint:** Combinatorics with Modular Arithmetic.
+**Fungsi Solusi:** `func makeStringSorted(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -87,9 +76,9 @@ func makeStringSorted(s string) int {
 	}
 
 	// Precompute factorials and inverse factorials
-  // Alokasi slice integer
+  // Alokasi slice
 	fact := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	invFact := make([]int, n+1)
 	fact[0] = 1
 	for i := 1; i <= n; i++ {
@@ -101,7 +90,7 @@ func makeStringSorted(s string) int {
 	}
 
 	// Count character frequencies (lowercase English letters)
-  // Alokasi slice integer
+  // Alokasi slice
 	cnt := make([]int, 26)
 	for i := 0; i < n; i++ {
 		cnt[s[i]-'a']++

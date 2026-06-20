@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu adalah memeriksa apakah string tersebut palindrome — dibaca sama dari depan dan belakang. Abaikan non-alfanumerik dan case.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** Two Pointer — kiri dan kanan. Skip non-alfanumerik. Bandingkan.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxPalindromesAfterOperations(words []string) int
-```
+**Fungsi Solusi:** `func maxPalindromesAfterOperations(words []string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n * L + A log A)  
-**Kompleksitas Ruang:** O(A)
+**Waktu:** O(n * L + A log A)  |  **Ruang:** O(A)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ func main() {
 
 func maxPalindromesAfterOperations(words []string) int {
 	freq := [26]int{}
-  // Alokasi slice integer
+  // Alokasi slice
 	lens := make([]int, len(words))
 	for i, w := range words {
 		lens[i] = len(w)
@@ -59,7 +53,7 @@ func maxPalindromesAfterOperations(words []string) int {
 	for _, c := range freq {
 		pairs += c / 2
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(lens, func(i, j int) bool {
 		return lens[i] < lens[j]
 	})

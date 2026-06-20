@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximalNetworkRank(n int, roads [][]int) int
-```
+**Fungsi Solusi:** `func MaximalNetworkRank(n int, roads [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(N^2), Space: O(N^2)  |  **Ruang:** O(N^2)
 
-**Kompleksitas Waktu:** O(N^2), Space: O(N^2)  
-**Kompleksitas Ruang:** O(N^2)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -43,9 +34,9 @@ func main() {
 
 func MaximalNetworkRank(n int, roads [][]int) int {
 	// Time: O(N^2), Space: O(N^2)
-  // Alokasi slice integer
+  // Alokasi slice
 	degree := make([]int, n)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	connected := make([][]bool, n)
 	for i := 0; i < n; i++ {
 		connected[i] = make([]bool, n)

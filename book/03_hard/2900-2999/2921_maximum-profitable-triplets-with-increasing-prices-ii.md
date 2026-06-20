@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newSegTree2921(n int) *segTree2921
-```
-
-> **💡 Hint:** For each j as the middle element, find the best i (left of j with
+**Fungsi Solusi:** `func newSegTree2921(n int) *segTree2921`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, Segment Tree
+**Teknik:** Two Pointer, Binary Search, Sorting, Segment Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,7 +54,7 @@ type segTree2921 struct {
 
 func newSegTree2921(n int) *segTree2921 {
 	tree := make([]segTreeNode, 4*n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range tree {
 		tree[i].maxVal = minInt
 	}
@@ -108,10 +100,10 @@ func (st *segTree2921) query(idx, l, r, ql, qr int) int {
 func maxProfitableTriplet(prices []int, profits []int) int {
 	n := len(prices)
 	// Coordinate compress prices
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, n)
 	copy(sorted, prices)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(sorted)
 	m := 1
 	for i := 1; i < n; i++ {
@@ -127,7 +119,7 @@ func maxProfitableTriplet(prices []int, profits []int) int {
 	}
 
 	// Left pass: best profit for i < j with price[i] < price[j]
-  // Alokasi slice integer
+  // Alokasi slice
 	leftBest := make([]int, n)
 	segLeft := newSegTree2921(m)
 	for j := 0; j < n; j++ {
@@ -142,7 +134,7 @@ func maxProfitableTriplet(prices []int, profits []int) int {
 	}
 
 	// Right pass: best profit for k > j with price[k] > price[j]
-  // Alokasi slice integer
+  // Alokasi slice
 	rightBest := make([]int, n)
 	segRight := newSegTree2921(m)
 	for j := n - 1; j >= 0; j-- {

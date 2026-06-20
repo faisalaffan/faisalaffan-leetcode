@@ -2,27 +2,21 @@
 
 ## 📖 Deskripsi Soal
 
-**Tingkat Kesulitan:** Sulit
+**Tingkat Kesulitan:** —
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newSegTree(heights []int) *segTree
-```
+**Fungsi Solusi:** `func newSegTree(heights []int) *segTree`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Segment Tree
+**Teknik:** Binary Search, Segment Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +42,7 @@ type segTree struct {
 
 func newSegTree(heights []int) *segTree {
 	n := len(heights)
-  // Alokasi slice integer
+  // Alokasi slice
 	tr := make([]int, 4*n)
 	var build func(idx, l, r int)
 	build = func(idx, l, r int) {
@@ -98,7 +92,7 @@ func (st *segTree) rangeMax(l, r int) int {
 func leftmostBuilding(heights []int, queries [][]int) []int {
 	n := len(heights)
 	st := newSegTree(heights)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 
 	for qi, q := range queries {

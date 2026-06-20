@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func displayTable(orders [][]string) [][]string
-```
+**Fungsi Solusi:** `func displayTable(orders [][]string) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n) where n = number of orders  
-**Kompleksitas Ruang:** O(n) for maps
+**Waktu:** O(n log n) where n = number of orders  |  **Ruang:** O(n) for maps
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,9 +55,9 @@ func main() {
 // Time: O(n log n) where n = number of orders
 // Space: O(n) for maps
 func displayTable(orders [][]string) [][]string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	foodItems := make(map[string]bool)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	tableOrders := make(map[int]map[string]int)
 
 	for _, o := range orders {
@@ -85,16 +79,16 @@ func displayTable(orders [][]string) [][]string {
 	sort.Strings(foods)
 
 	// Sort table numbers
-  // Alokasi slice integer
+  // Alokasi slice
 	tables := make([]int, 0, len(tableOrders))
 	for t := range tableOrders {
 		tables = append(tables, t)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(tables)
 
 	// Build result
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]string, 0, len(tables)+1)
 	header := make([]string, 0, len(foods)+1)
 	header = append(header, "Table")

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func oddCells(m, n int, indices [][]int) int
-```
+**Fungsi Solusi:** `func oddCells(m, n int, indices [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + m + k)  |  **Ruang:** O(n + m)
 
-**Kompleksitas Waktu:** O(n + m + k)  
-**Kompleksitas Ruang:** O(n + m)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -43,9 +34,9 @@ func main() {
 
 // LeetCode submission: oddCells
 func oddCells(m, n int, indices [][]int) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	rows := make([]int, m)
-  // Alokasi slice integer
+  // Alokasi slice
 	cols := make([]int, n)
 	for _, idx := range indices {
 		rows[idx[0]]++

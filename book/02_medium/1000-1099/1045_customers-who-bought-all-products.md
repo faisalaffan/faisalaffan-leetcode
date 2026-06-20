@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func customersWhoBoughtAllProducts(customer, product []int, totalProducts int) []int
-```
-
-> **💡 Hint:** Count distinct products per customer, compare to total products.
+**Fungsi Solusi:** `func customersWhoBoughtAllProducts(customer, product []int, totalProducts int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n) where n = len(customer_product)  
-**Kompleksitas Ruang:** O(m) where m = number of customers
+**Waktu:** O(n) where n = len(customer_product)  |  **Ruang:** O(m) where m = number of customers
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,12 +45,12 @@ func main() {
 }
 
 func customersWhoBoughtAllProducts(customer, product []int, totalProducts int) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	bought := make(map[int]map[int]bool)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	customerSet := make(map[int]bool)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(customer); i++ {
 		c, p := customer[i], product[i]
 		customerSet[c] = true
@@ -68,7 +60,7 @@ func customersWhoBoughtAllProducts(customer, product []int, totalProducts int) [
 		bought[c][p] = true
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 	for c := range customerSet {
 		if len(bought[c]) == totalProducts {

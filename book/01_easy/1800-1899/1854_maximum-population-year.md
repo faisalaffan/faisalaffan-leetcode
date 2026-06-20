@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumPopulation(logs [][]int) int
-```
+**Fungsi Solusi:** `func MaximumPopulation(logs [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + range), Space: O(range)  |  **Ruang:** O(range)
 
-**Kompleksitas Waktu:** O(n + range), Space: O(range)  
-**Kompleksitas Ruang:** O(range)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -37,7 +28,7 @@ import "fmt"
 
 // Time: O(n + range), Space: O(range)
 func MaximumPopulation(logs [][]int) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	delta := make([]int, 101) // 1950 to 2050
 	for _, log := range logs {
 		delta[log[0]-1950]++

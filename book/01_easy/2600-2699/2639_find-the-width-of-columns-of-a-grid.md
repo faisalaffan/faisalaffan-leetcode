@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindTheWidthOfColumnsOfAGrid(grid [][]int) []int
-```
+**Fungsi Solusi:** `func FindTheWidthOfColumnsOfAGrid(grid [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m * n)  |  **Ruang:** O(n)
 
-**Kompleksitas Waktu:** O(m * n)  
-**Kompleksitas Ruang:** O(n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -46,7 +37,7 @@ func main() {
 
 func FindTheWidthOfColumnsOfAGrid(grid [][]int) []int {
 	m, n := len(grid), len(grid[0])
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 	for j := 0; j < n; j++ {
 		maxLen := 0

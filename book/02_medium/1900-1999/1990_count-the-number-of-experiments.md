@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countExperiments(experiments []Experiment) []ExperimentResult
-```
+**Fungsi Solusi:** `func countExperiments(experiments []Experiment) []ExperimentResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n + 9) = O(n)  
-**Kompleksitas Ruang:** O(p * n) where p = platforms, n = names
+**Waktu:** O(n + 9) = O(n)  |  **Ruang:** O(p * n) where p = platforms, n = names
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,7 +57,7 @@ func countExperiments(experiments []Experiment) []ExperimentResult {
 	names := []string{"Reading", "Sports", "Programming"}
 
 	// Count existing experiments.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	counts := make(map[string]map[string]int)
 	for _, e := range experiments {
 		if counts[e.Platform] == nil {

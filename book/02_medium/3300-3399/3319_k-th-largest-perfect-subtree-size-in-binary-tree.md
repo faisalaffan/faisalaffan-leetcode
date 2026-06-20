@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func kthLargestPerfectSubtree(root *TreeNode, k int) int
-```
+**Fungsi Solusi:** `func kthLargestPerfectSubtree(root *TreeNode, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS, Sorting
 
-**Kompleksitas Waktu:** O(n) Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n) Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -80,7 +74,7 @@ func kthLargestPerfectSubtree(root *TreeNode, k int) int {
 	if len(sizes) < k {
 		return -1
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sizes, func(i, j int) bool { return sizes[i] > sizes[j] })
 	return sizes[k-1]
 }

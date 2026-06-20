@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountSubarraysWithCostLessThanOrEqualToK(nums []int, k int) int
-```
-
-> **💡 Hint:** Sliding window with two monotonic deques for max and min.
+**Fungsi Solusi:** `func CountSubarraysWithCostLessThanOrEqualToK(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window, Monotonic Stack/Queue
+**Teknik:** Two Pointer, Sliding Window, Monotonic Stack
 
-**Kompleksitas Waktu:** O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,9 +38,9 @@ func CountSubarraysWithCostLessThanOrEqualToK(nums []int, k int) int {
 	left := 0
 
 	// Monotonic deques for max (decreasing) and min (increasing)
-  // Alokasi slice integer
+  // Alokasi slice
 	maxQ := make([]int, 0) // indices, values decreasing
-  // Alokasi slice integer
+  // Alokasi slice
 	minQ := make([]int, 0) // indices, values increasing
 
 	for right := 0; right < n; right++ {
@@ -65,6 +57,7 @@ func CountSubarraysWithCostLessThanOrEqualToK(nums []int, k int) int {
 		minQ = append(minQ, right)
 
 		// Shrink window while cost > k
+  // Binary search loop
 		for left <= right {
 			curMin := nums[minQ[0]]
 			curMax := nums[maxQ[0]]

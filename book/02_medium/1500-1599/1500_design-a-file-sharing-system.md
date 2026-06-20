@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(m int) FileSharing
-```
+**Fungsi Solusi:** `func Constructor(m int) FileSharing`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,7 +56,7 @@ func (fs *FileSharing) Join(ownedChunks []int) int {
 	}
 
 	// Store a copy of chunks
-  // Alokasi slice integer
+  // Alokasi slice
 	chunks := make([]int, len(ownedChunks))
 	copy(chunks, ownedChunks)
 	fs.chunks[userID] = chunks
@@ -82,7 +76,7 @@ func (fs *FileSharing) Leave(userID int) {
 }
 
 func (fs *FileSharing) Request(userID int, chunkID int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	owners := make([]int, 0)
 	for uid, chunks := range fs.chunks {
 		if uid != userID {
@@ -105,7 +99,7 @@ func (fs *FileSharing) Request(userID int, chunkID int) []int {
 }
 
 func sortInts(arr []int) {
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(arr); i++ {
 		for j := i + 1; j < len(arr); j++ {
 			if arr[i] > arr[j] {

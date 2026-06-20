@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func jobScheduling(startTime []int, endTime []int, profit []int) int
-```
+**Fungsi Solusi:** `func jobScheduling(startTime []int, endTime []int, profit []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Dynamic Programming
+**Teknik:** Binary Search, DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,15 +44,15 @@ func jobScheduling(startTime []int, endTime []int, profit []int) int {
 	}
 
 	// Sort by end time
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(jobs, func(i, j int) bool {
 		return jobs[i].end < jobs[j].end
 	})
 
 	// dp[i] = max profit considering first i jobs (i = number of jobs processed)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	endTimes := make([]int, n)
 	for i := 0; i < n; i++ {
 		endTimes[i] = jobs[i].end

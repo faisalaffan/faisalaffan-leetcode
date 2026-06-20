@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxTotalFruits(fruits [][]int, startPos int, k int) int
-```
-
-> **💡 Hint:** Prefix sum + sliding window.
+**Fungsi Solusi:** `func maxTotalFruits(fruits [][]int, startPos int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window, Prefix Sum
+**Teknik:** Two Pointer, Sliding Window, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -67,13 +59,13 @@ func main() {
 
 func maxTotalFruits(fruits [][]int, startPos int, k int) int {
 	const maxPos = 200000
-  // Alokasi slice integer
+  // Alokasi slice
 	amount := make([]int, maxPos+1)
 	for _, f := range fruits {
 		amount[f[0]] = f[1]
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, maxPos+2)
 	for i := 0; i <= maxPos; i++ {
 		prefix[i+1] = prefix[i] + amount[i]

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getSkyline(buildings [][]int) [][]int
-```
+**Fungsi Solusi:** `func getSkyline(buildings [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, BFS, Heap / Priority Queue, Stack
+**Teknik:** HashMap, BFS, Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,14 +53,14 @@ func (h *MaxHeap) Pop() any {
 
 func getSkyline(buildings [][]int) [][]int {
 	n := len(buildings)
-  // Alokasi slice integer
+  // Alokasi slice
 	points := make([][2]int, 0, 2*n)
 	for _, b := range buildings {
 		points = append(points, [2]int{b[0], -b[2]})
 		points = append(points, [2]int{b[1], b[2]})
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(points, func(i, j int) bool {
 		if points[i][0] != points[j][0] {
 			return points[i][0] < points[j][0]
@@ -74,24 +68,24 @@ func getSkyline(buildings [][]int) [][]int {
 		return points[i][1] < points[j][1]
 	})
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
 	h := &MaxHeap{}
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(h, 0)
 	prev := 0
 
 	for _, p := range points {
 		x, y := p[0], p[1]
 		if y < 0 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, -y)
 		} else {
-  // Alokasi slice integer
+  // Alokasi slice
 			toRemove := make([]int, 0)
 			temp := &MaxHeap{}
 			for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 				top := heap.Pop(h).(int)
 				if top == y {
 					break
@@ -99,11 +93,11 @@ func getSkyline(buildings [][]int) [][]int {
 				toRemove = append(toRemove, top)
 			}
 			for _, v := range toRemove {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(h, v)
 			}
 			for temp.Len() > 0 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(h, heap.Pop(temp).(int))
 			}
 		}
@@ -111,17 +105,17 @@ func getSkyline(buildings [][]int) [][]int {
 		// rebuild heap to remove stale heights
 		cleaned := &MaxHeap{}
 		for h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			top := heap.Pop(h).(int)
 			if top != y {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(cleaned, top)
 			} else {
 				break
 			}
 		}
 		for cleaned.Len() > 0 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, heap.Pop(cleaned).(int))
 		}
 
@@ -140,14 +134,14 @@ func getSkyline(buildings [][]int) [][]int {
 // Alternative approach using lazy deletion (priority queue)
 func getSkyline2(buildings [][]int) [][]int {
 	n := len(buildings)
-  // Alokasi slice integer
+  // Alokasi slice
 	points := make([][2]int, 0, 2*n)
 	for _, b := range buildings {
 		points = append(points, [2]int{b[0], -b[2]})
 		points = append(points, [2]int{b[1], b[2]})
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(points, func(i, j int) bool {
 		if points[i][0] != points[j][0] {
 			return points[i][0] < points[j][0]
@@ -156,11 +150,11 @@ func getSkyline2(buildings [][]int) [][]int {
 	})
 
 	// simpler: use a map-based multi-set for heights
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	heights := make(map[int]int)
 	heights[0] = 1
 	prev := 0
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
 	// max queue using slice
 	maxHeight := func() int {

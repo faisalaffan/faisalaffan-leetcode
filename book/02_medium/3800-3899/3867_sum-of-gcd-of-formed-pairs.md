@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func SumOfGcdOfFormedPairs(nums []int) int
-```
-
-> **💡 Hint:** Build prefixGcd array where prefixGcd[i] = gcd(nums[i], max(nums[0..i])).
+**Fungsi Solusi:** `func SumOfGcdOfFormedPairs(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum, GCD / Matematika
+**Teknik:** Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** O(N log M)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log M)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -52,7 +44,7 @@ func gcd(a, b int) int {
 
 func SumOfGcdOfFormedPairs(nums []int) int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixGcd := make([]int, n)
 	mx := 0
 	for i, v := range nums {
@@ -62,7 +54,7 @@ func SumOfGcdOfFormedPairs(nums []int) int {
 		prefixGcd[i] = gcd(v, mx)
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(prefixGcd)
 
 	ans := 0

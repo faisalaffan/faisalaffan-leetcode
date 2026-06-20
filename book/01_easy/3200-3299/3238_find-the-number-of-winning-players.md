@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindTheNumberOfWinningPlayers(n int, pick [][]int) int
-```
+**Fungsi Solusi:** `func FindTheNumberOfWinningPlayers(n int, pick [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n). Space: O(n).  
-**Kompleksitas Ruang:** O(n).
+**Waktu:** O(n). Space: O(n).  |  **Ruang:** O(n).
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,9 +38,9 @@ func main() {
 // Time: O(n). Space: O(n).
 func FindTheNumberOfWinningPlayers(n int, pick [][]int) int {
 	// Count colors per player
-  // Alokasi slice integer
+  // Alokasi slice
 	playerColors := make([]map[int]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range playerColors {
 		playerColors[i] = make(map[int]int)
 	}

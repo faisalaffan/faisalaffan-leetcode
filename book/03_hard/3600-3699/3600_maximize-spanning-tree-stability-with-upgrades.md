@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxStability(n int, edges [][]int, k int) int
-```
-
-> **💡 Hint:** Binary search on answer. For a given x, check if we can build a
+**Fungsi Solusi:** `func maxStability(n int, edges [][]int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search, Union-Find (DSU)
+**Teknik:** Two Pointer, Binary Search, Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,18 +54,19 @@ func maxStability(n int, edges [][]int, k int) int {
 	}
 
 	// Extract unique strengths for binary search range
-  // Alokasi slice integer
+  // Alokasi slice
 	strengths := make([]int, 0)
 	for _, e := range edges {
 		strengths = append(strengths, e[2])
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(strengths)
 
 	// Binary search
 	left, right := 0, len(strengths)-1
 	result := -1
 
+  // Binary search loop
 	for left <= right {
 		mid := (left + right) / 2
 		if canBuild(n, edges, k, strengths[mid]) {
@@ -89,9 +82,9 @@ func maxStability(n int, edges [][]int, k int) int {
 
 func canBuild(n int, edges [][]int, k int, minStrength int) bool {
 	// DSU
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	size := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i

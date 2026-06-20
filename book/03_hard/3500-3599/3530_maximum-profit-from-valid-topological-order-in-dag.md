@@ -4,27 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxProfit(n int, edges [][]int, score []int) int
-```
-
-> **💡 Hint:** DP over subsets (bitmask DP). For each mask, try adding any
+**Fungsi Solusi:** `func maxProfit(n int, edges [][]int, score []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Topological Sort, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,9 +51,9 @@ func main() {
 
 func maxProfit(n int, edges [][]int, score []int) int {
 	// Build adjacency and indegree
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	inDegree := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -69,9 +63,9 @@ func maxProfit(n int, edges [][]int, score []int) int {
 
 	// DP over masks
 	totalMasks := 1 << n
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, totalMasks)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = -1 << 30
 	}
@@ -91,7 +85,7 @@ func maxProfit(n int, edges [][]int, score []int) int {
 		}
 
 		// Track current indegree state
-  // Alokasi slice integer
+  // Alokasi slice
 		curDegree := make([]int, n)
 		copy(curDegree, inDegree)
 

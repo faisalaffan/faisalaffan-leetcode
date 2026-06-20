@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findSubstring(s string, words []string) []int
-```
+**Fungsi Solusi:** `func findSubstring(s string, words []string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window
+**Teknik:** HashMap, Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -52,7 +46,7 @@ func findSubstring(s string, words []string) []int {
 	}
 
 	// Build frequency map for words
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	wordFreq := make(map[string]int)
 	for _, w := range words {
 		wordFreq[w]++
@@ -64,7 +58,7 @@ func findSubstring(s string, words []string) []int {
 	for i := 0; i < wordLen; i++ {
 		left := i
 		right := i
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		windowFreq := make(map[string]int)
 		count := 0
 

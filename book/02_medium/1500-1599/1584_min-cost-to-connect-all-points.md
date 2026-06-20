@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinCostConnectPoints(points [][]int) int
-```
+**Fungsi Solusi:** `func MinCostConnectPoints(points [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O(N^2 log N), Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N^2 log N), Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -91,14 +85,14 @@ func MinCostConnectPoints(points [][]int) int {
 	visited := make([]bool, n)
 	pq := &PQ{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &PQItem{dist: 0, node: 0})
 
 	totalCost := 0
 	edgesUsed := 0
 
 	for pq.Len() > 0 && edgesUsed < n {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		item := heap.Pop(pq).(*PQItem)
 		if visited[item.node] {
 			continue
@@ -110,7 +104,7 @@ func MinCostConnectPoints(points [][]int) int {
 		for i := 0; i < n; i++ {
 			if !visited[i] {
 				dist := abs(points[item.node][0]-points[i][0]) + abs(points[item.node][1]-points[i][1])
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &PQItem{dist: dist, node: i})
 			}
 		}

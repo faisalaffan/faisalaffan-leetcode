@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func newDSU(n int) *dSU
-```
-
-> **💡 Hint:** Kruskal per Edge
+**Fungsi Solusi:** `func newDSU(n int) *dSU`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -76,9 +68,9 @@ type dSU struct {
 }
 
 func newDSU(n int) *dSU {
-  // Alokasi slice integer
+  // Alokasi slice
 	p := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -114,7 +106,7 @@ func findCriticalAndPseudoCriticalEdges(n int, edges [][]int) [][]int {
 	for i, e := range edges {
 		elist[i] = edge{u: e[0], v: e[1], w: e[2], idx: i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(elist, func(i, j int) bool {
 		return elist[i].w < elist[j].w
 	})
@@ -155,9 +147,9 @@ func findCriticalAndPseudoCriticalEdges(n int, edges [][]int) [][]int {
 
 	baseWeight := mstWeight(nil, -1)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	critical := make([]int, 0)
-  // Alokasi slice integer
+  // Alokasi slice
 	pseudo := make([]int, 0)
 
 	for _, e := range elist {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func SmallestChair(times [][]int, targetFriend int) int
-```
+**Fungsi Solusi:** `func SmallestChair(times [][]int, targetFriend int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
+**Teknik:** HashMap, Heap, Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -79,7 +73,7 @@ func SmallestChair(times [][]int, targetFriend int) int {
 	for i, t := range times {
 		friends[i] = friend{t[0], t[1], i}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(friends, func(i, j int) bool {
 		return friends[i].arrival < friends[j].arrival
 	})
@@ -88,7 +82,7 @@ func SmallestChair(times [][]int, targetFriend int) int {
 	available := &MinHeapInt{}
 	heap.Init(available)
 	for i := 0; i < n; i++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(available, i)
 	}
 
@@ -99,7 +93,7 @@ func SmallestChair(times [][]int, targetFriend int) int {
 	}
 	occupiedHeap := make([]occupied, 0)
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	chairOf := make(map[int]int) // friend -> chair
 
 	for _, f := range friends {
@@ -107,18 +101,18 @@ func SmallestChair(times [][]int, targetFriend int) int {
 		for len(occupiedHeap) > 0 && occupiedHeap[0].leaveTime <= f.arrival {
 			o := occupiedHeap[0]
 			occupiedHeap = occupiedHeap[1:]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(available, o.chair)
 		}
 
 		// Assign smallest available chair
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		chair := heap.Pop(available).(int)
 		chairOf[f.friendIdx] = chair
 
 		// Insert into occupied (sorted by leave time)
 		occupiedHeap = append(occupiedHeap, occupied{f.leaving, chair})
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(occupiedHeap, func(i, j int) bool {
 			return occupiedHeap[i].leaveTime < occupiedHeap[j].leaveTime
 		})

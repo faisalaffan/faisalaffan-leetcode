@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindSubsequenceOfLengthKWithTheLargestSum(nums []int, k int) []int
-```
+**Fungsi Solusi:** `func FindSubsequenceOfLengthKWithTheLargestSum(nums []int, k int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +51,7 @@ func FindSubsequenceOfLengthKWithTheLargestSum(nums []int, k int) []int {
 	}
 
 	// Sort by value descending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(pairs, func(i, j int) bool {
 		return pairs[i].val > pairs[j].val
 	})
@@ -66,12 +60,12 @@ func FindSubsequenceOfLengthKWithTheLargestSum(nums []int, k int) []int {
 	selected := pairs[:k]
 
 	// Sort by original index to preserve order
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(selected, func(i, j int) bool {
 		return selected[i].idx < selected[j].idx
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, k)
 	for i, p := range selected {
 		result[i] = p.val

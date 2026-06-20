@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func hasValidPath(grid [][]byte) bool
-```
+**Fungsi Solusi:** `func hasValidPath(grid [][]byte) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Dynamic Programming, Prefix Sum
+**Teknik:** HashMap, Two Pointer, DP, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,9 +54,9 @@ func hasValidPath(grid [][]byte) bool {
 
 	// DP with set of possible open counts at each cell
 	// dp[i][j] = set of possible open parenthesis counts when reaching (i,j)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]map[int]bool, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]map[int]bool, n)
 	}
@@ -75,7 +71,7 @@ func hasValidPath(grid [][]byte) bool {
 			}
 			dp[i][j] = make(map[int]bool)
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 			possibleOpen := make(map[int]bool)
 			// from top
 			if i > 0 {

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumScore(nums []int, maxVal int) int
-```
-
-> **💡 Hint:** For each value <= maxVal, compute its score (how many
+**Fungsi Solusi:** `func maximumScore(nums []int, maxVal int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, GCD / Matematika, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +49,7 @@ func main() {
 
 func maximumScore(nums []int, maxVal int) int {
 	// Count frequency of each value
-  // Alokasi slice integer
+  // Alokasi slice
 	freq := make([]int, maxVal+1)
 	for _, v := range nums {
 		if v <= maxVal {
@@ -66,7 +58,7 @@ func maximumScore(nums []int, maxVal int) int {
 	}
 
 	// For each value, compute its "score" = value * frequency
-  // Alokasi slice integer
+  // Alokasi slice
 	score := make([]int, maxVal+1)
 	for v := 1; v <= maxVal; v++ {
 		score[v] = v * freq[v]
@@ -76,7 +68,7 @@ func maximumScore(nums []int, maxVal int) int {
 	// Since we need pairwise coprime, we track prime factor mask.
 	// Precompute prime mask for each value
 	primes := []int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31}
-  // Alokasi slice integer
+  // Alokasi slice
 	maskOf := make([]int, maxVal+1)
 	for v := 2; v <= maxVal; v++ {
 		m := 0
@@ -93,7 +85,7 @@ func maximumScore(nums []int, maxVal int) int {
 	}
 
 	// dp[mask] = max score with prime factors covered by mask
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, 1<<len(primes))
 	for v := 1; v <= maxVal; v++ {
 		if score[v] == 0 {

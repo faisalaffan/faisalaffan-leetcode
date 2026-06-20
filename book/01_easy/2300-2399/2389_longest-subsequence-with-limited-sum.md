@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func LongestSubsequenceWithLimitedSum(nums []int, queries []int) []int
-```
+**Fungsi Solusi:** `func LongestSubsequenceWithLimitedSum(nums []int, queries []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Prefix Sum
+**Teknik:** Binary Search, Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,9 +39,9 @@ func main() {
 }
 
 func LongestSubsequenceWithLimitedSum(nums []int, queries []int) []int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, len(nums))
 	sum := 0
 	for i, n := range nums {
@@ -55,7 +49,7 @@ func LongestSubsequenceWithLimitedSum(nums []int, queries []int) []int {
 		prefix[i] = sum
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	res := make([]int, len(queries))
 	for i, q := range queries {
 		// Binary search for rightmost index where prefix <= q

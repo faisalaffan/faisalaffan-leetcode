@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getDistances(arr []int) []int64
-```
+**Fungsi Solusi:** `func getDistances(arr []int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
+**Teknik:** HashMap, Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -39,13 +33,13 @@ import "fmt"
 func getDistances(arr []int) []int64 {
 	n := len(arr)
 	// Group indices by value
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[int][]int)
 	for i, v := range arr {
 		groups[v] = append(groups[v], i)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int64, n)
 	for _, indices := range groups {
 		m := len(indices)
@@ -53,7 +47,7 @@ func getDistances(arr []int) []int64 {
 			continue
 		}
 		// Prefix sum of distances
-  // Alokasi slice integer
+  // Alokasi slice
 		prefix := make([]int64, m+1)
 		for i := 0; i < m; i++ {
 			prefix[i+1] = prefix[i] + int64(indices[i])

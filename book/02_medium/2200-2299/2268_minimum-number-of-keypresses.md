@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumKeypresses(s string) int
-```
+**Fungsi Solusi:** `func minimumKeypresses(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n + 26 log 26)  
-**Kompleksitas Ruang:** O(26)
+**Waktu:** O(n + 26 log 26)  |  **Ruang:** O(26)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,13 +34,13 @@ import (
 )
 
 func minimumKeypresses(s string) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	count := make([]int, 26)
 	for _, ch := range s {
 		count[ch-'a']++
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(count, func(i, j int) bool {
 		return count[i] > count[j]
 	})

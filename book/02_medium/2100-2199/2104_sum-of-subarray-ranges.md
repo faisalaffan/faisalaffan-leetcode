@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func subArrayRanges(nums []int) int64
-```
+**Fungsi Solusi:** `func subArrayRanges(nums []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Stack, Monotonic Stack/Queue
+**Teknik:** Two Pointer, Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,11 +38,11 @@ func subArrayRanges(nums []int) int64 {
 	// Use monotonic stack to find prev/next greater/smaller
 
 	// As max: prevGreater, nextGreater
-  // Alokasi slice integer
+  // Alokasi slice
 	prevGreater := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	nextGreater := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range prevGreater {
 		prevGreater[i] = -1
 		nextGreater[i] = n
@@ -67,11 +61,11 @@ func subArrayRanges(nums []int) int64 {
 	}
 
 	// As min: prevSmaller, nextSmaller
-  // Alokasi slice integer
+  // Alokasi slice
 	prevSmaller := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	nextSmaller := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range prevSmaller {
 		prevSmaller[i] = -1
 		nextSmaller[i] = n

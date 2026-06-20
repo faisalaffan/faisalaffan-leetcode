@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countAlmostEqualPairsII(nums []int) int64
-```
+**Fungsi Solusi:** `func countAlmostEqualPairsII(nums []int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,12 +54,12 @@ func main() {
 func countAlmostEqualPairsII(nums []int) int64 {
 	// Group numbers by their sorted digit multiset.
 	// Only numbers with the same multiset can be almost equal.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[string][]string)
 	for _, num := range nums {
 		s := strconv.Itoa(num)
 		b := []byte(s)
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(b, func(i, j int) bool { return b[i] < b[j] })
 		key := string(b)
 		groups[key] = append(groups[key], s)
@@ -75,7 +69,7 @@ func countAlmostEqualPairsII(nums []int) int64 {
 
 	for _, group := range groups {
 		// Count frequency of each distinct string in this group.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		freq := make(map[string]int)
 		for _, s := range group {
 			freq[s]++
@@ -93,7 +87,7 @@ func countAlmostEqualPairsII(nums []int) int64 {
 		for s, f := range freq {
 			b := []byte(s)
 			n := len(b)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 			seen := make(map[string]bool)
 			for p := 0; p < n; p++ {
 				for q := p + 1; q < n; q++ {

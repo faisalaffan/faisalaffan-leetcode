@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func parseDate(s string) int
-```
+**Fungsi Solusi:** `func biggestWindow(visits []Visit) []UserWindow`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Sliding Window
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -84,9 +78,9 @@ func parseDate(s string) int {
 }
 
 func biggestWindow(visits []Visit) []UserWindow {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userVisits := make(map[int][]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userSet := make(map[int]bool)
 
 	for _, v := range visits {
@@ -97,7 +91,7 @@ func biggestWindow(visits []Visit) []UserWindow {
 	result := make([]UserWindow, 0)
 	for uid := range userSet {
 		dates := userVisits[uid]
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(dates)
 
 		maxGap := 0

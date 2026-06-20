@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu adalah memeriksa apakah string tersebut palindrome — dibaca sama dari depan dan belakang. Abaikan non-alfanumerik dan case.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Two Pointer — kiri dan kanan. Skip non-alfanumerik. Bandingkan.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func init() 
-```
+**Fungsi Solusi:** `func init() `
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n * log M)  
-**Kompleksitas Ruang:** O(M)
+**Waktu:** O(n * log M)  |  **Ruang:** O(M)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +47,6 @@ func init() {
 
 func isPalindromeStr(s string) bool {
 	l, r := 0, len(s)-1
-  // Two-pointer: gerakkan kiri atau kanan
 	for l < r {
 		if s[l] != s[r] {
 			return false
@@ -65,7 +58,7 @@ func isPalindromeStr(s string) bool {
 }
 
 func minimumOperationsToMakeBinaryPalindrome(nums []int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(nums))
 	for idx, x := range nums {
 		pos := sort.SearchInts(binaryPalindromes, x)

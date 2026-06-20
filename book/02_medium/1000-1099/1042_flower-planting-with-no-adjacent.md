@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func gardenNoAdj(n int, paths [][]int) []int
-```
-
-> **💡 Hint:** Greedy coloring with a graph. Each garden gets a flower type
+**Fungsi Solusi:** `func gardenNoAdj(n int, paths [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + e) where e = len(paths)  |  **Ruang:** O(n + e)
 
-**Kompleksitas Waktu:** O(n + e) where e = len(paths)  
-**Kompleksitas Ruang:** O(n + e)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -48,7 +37,7 @@ func main() {
 }
 
 func gardenNoAdj(n int, paths [][]int) []int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n)
 	for i := 0; i < n; i++ {
 		graph[i] = make([]int, 0)
@@ -60,7 +49,7 @@ func gardenNoAdj(n int, paths [][]int) []int {
 		graph[v] = append(graph[v], u)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n)
 	for i := 0; i < n; i++ {
 		used := make([]bool, 5)

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxHeight(cuboids [][]int) int
-```
+**Fungsi Solusi:** `func maxHeight(cuboids [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Stack
+**Teknik:** DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,11 +37,11 @@ import (
 func maxHeight(cuboids [][]int) int {
 	// For each cuboid, sort dimensions so the largest is height
 	for _, c := range cuboids {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(c)
 	}
 	// Sort cuboids by dimensions (width, depth, height)
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(cuboids, func(i, j int) bool {
 		if cuboids[i][0] != cuboids[j][0] {
 			return cuboids[i][0] < cuboids[j][0]
@@ -59,7 +53,7 @@ func maxHeight(cuboids [][]int) int {
 	})
 
 	n := len(cuboids)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n)
 	ans := 0
 	for i := 0; i < n; i++ {

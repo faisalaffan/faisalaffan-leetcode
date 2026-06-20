@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countSubarrays(nums1 []int, nums2 []int) int
-```
+**Fungsi Solusi:** `func countSubarrays(nums1 []int, nums2 []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Prefix Sum
+**Teknik:** HashMap, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,10 +52,10 @@ func countSubarrays(nums1 []int, nums2 []int) int {
 	n := len(nums1)
 
 	// prefixDiff[i] = sum(nums1[0..i-1]) - sum(nums2[0..i-1])
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixDiff := make([]int, n+1)
 	// prefixOdd[i] = count of odd values in nums1[0..i-1] + nums2[0..i-1]
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixOdd := make([]int, n+1)
 
 	for i := 0; i < n; i++ {
@@ -78,7 +72,7 @@ func countSubarrays(nums1 []int, nums2 []int) int {
 
 	// Map: prefixDiff -> list of prefixOdd values at that diff
 	// We'll use a map from diff to a map of oddCount->frequency
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	diffMap := make(map[int]map[int]int)
 	ans := 0
 

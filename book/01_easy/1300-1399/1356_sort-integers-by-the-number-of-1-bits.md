@@ -4,32 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sortByBits(arr []int) []int
-
-import (
-	"fmt"
-	"sort"
-)
-
-func main()
-```
+**Fungsi Solusi:** `func sortByBits(arr []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n log n), Space: O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,7 +41,7 @@ func main() {
 
 // Time: O(n log n), Space: O(1)
 func SortIntegersByTheNumberOfOneBits(arr []int) []int {
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(arr, func(i, j int) bool {
 		bi, bj := popcount(arr[i]), popcount(arr[j])
 		if bi != bj {

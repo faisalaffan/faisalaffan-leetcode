@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan aturan permainan. Tugasmu menentukan pemenang atau skor optimal.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** DP dari end-state mundur ke awal. Atau analisis pola matematika.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func roundTo2(f float64) float64
-```
+**Fungsi Solusi:** `func roundTo2(f float64) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(N log N) for sorting, Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N) for sorting, Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -72,7 +66,7 @@ func gamePlayAnalysisV(activities []Activity) []InstallRetention {
 	}
 
 	// Find first login date for each player.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	firstLogin := make(map[int]string) // player_id -> install date
 	for _, a := range activities {
 		if existing, ok := firstLogin[a.PlayerID]; !ok || a.EventDate < existing {
@@ -81,7 +75,7 @@ func gamePlayAnalysisV(activities []Activity) []InstallRetention {
 	}
 
 	// Build player -> set of login dates for quick lookup.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	playerLogins := make(map[int]map[string]bool)
 	for _, a := range activities {
 		if playerLogins[a.PlayerID] == nil {
@@ -116,7 +110,7 @@ func gamePlayAnalysisV(activities []Activity) []InstallRetention {
 	}
 
 	// Group by install date.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	installGroups := make(map[string][]int) // install date -> player IDs
 	for playerID, installDate := range firstLogin {
 		installGroups[installDate] = append(installGroups[installDate], playerID)

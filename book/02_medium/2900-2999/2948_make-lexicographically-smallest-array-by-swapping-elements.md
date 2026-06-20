@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func lexicographicallySmallestArray(nums []int, limit int) []int
-```
+**Fungsi Solusi:** `func lexicographicallySmallestArray(nums []int, limit int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,27 +41,27 @@ func main() {
 
 func lexicographicallySmallestArray(nums []int, limit int) []int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	idx := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range idx {
 		idx[i] = i
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(idx, func(i, j int) bool {
 		return nums[idx[i]] < nums[idx[j]]
 	})
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 	for i := 0; i < n; {
 		j := i + 1
 		for j < n && nums[idx[j]]-nums[idx[j-1]] <= limit {
 			j++
 		}
-  // Alokasi slice integer
+  // Alokasi slice
 		t := make([]int, j-i)
 		copy(t, idx[i:j])
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(t)
 		for k := i; k < j; k++ {
 			ans[t[k-i]] = nums[idx[k]]

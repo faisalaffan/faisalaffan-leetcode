@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxSequenceValue(nums []int, k int) int
-```
-
-> **💡 Hint:** //  1. For each split point, consider elements before the split (left part)
+**Fungsi Solusi:** `func maxSequenceValue(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum, Bitmask
+**Teknik:** Two Pointer, DP, Prefix Sum, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -72,9 +64,9 @@ func maxSequenceValue(nums []int, k int) int {
 
 	// leftDP[i][j] = bitmask of OR values achievable using j elements
 	// from prefix nums[0..i-1].
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	leftDP := make([][]uint64, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range leftDP {
 		leftDP[i] = make([]uint64, leftSize+1)
 	}
@@ -102,9 +94,9 @@ func maxSequenceValue(nums []int, k int) int {
 
 	// rightDP[i][j] = bitmask of OR values achievable using j elements
 	// from suffix nums[i..n-1].
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	rightDP := make([][]uint64, n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range rightDP {
 		rightDP[i] = make([]uint64, rightSize+1)
 	}

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64
-```
-
-> **💡 Hint:** Build directed cost graph. From x to closest(x) costs 1, else
+**Fungsi Solusi:** `func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Prefix Sum
+**Teknik:** Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** O(N + Q)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N + Q)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,16 +36,16 @@ import "fmt"
 func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64 {
 	n := len(nums)
 	if n <= 1 {
-  // Alokasi slice integer
+  // Alokasi slice
 		ans := make([]int64, len(queries))
 		return ans
 	}
 
 	// costLR[i] = min cost from i to i+1
 	// costRL[i] = min cost from i+1 to i
-  // Alokasi slice integer
+  // Alokasi slice
 	costLR := make([]int64, n-1)
-  // Alokasi slice integer
+  // Alokasi slice
 	costRL := make([]int64, n-1)
 
 	for i := 0; i < n; i++ {
@@ -79,20 +71,20 @@ func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64 {
 	}
 
 	// prefLR[k] = cost from 0 to k (going right)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefLR := make([]int64, n)
 	for i := 0; i < n-1; i++ {
 		prefLR[i+1] = prefLR[i] + costLR[i]
 	}
 
 	// prefRL[k] = cost from k to 0 (going left)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefRL := make([]int64, n)
 	for i := 0; i < n-1; i++ {
 		prefRL[i+1] = prefRL[i] + costRL[i]
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, len(queries))
 	for i, q := range queries {
 		l, r := q[0], q[1]

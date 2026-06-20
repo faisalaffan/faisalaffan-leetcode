@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countRectangles(rectangles [][]int, points [][]int) []int
-```
+**Fungsi Solusi:** `func countRectangles(rectangles [][]int, points [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** O((n + m) log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n + m) log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,18 +35,18 @@ import (
 
 func countRectangles(rectangles [][]int, points [][]int) []int {
 	// Group rectangles by height
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	byHeight := make([][]int, 101)
 	for _, r := range rectangles {
 		h := r[1]
 		byHeight[h] = append(byHeight[h], r[0])
 	}
 	for h := 0; h <= 100; h++ {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(byHeight[h])
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(points))
 	for i, p := range points {
 		x, y := p[0], p[1]

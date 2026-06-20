@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func studentsReportByGeography(students []Student) map[string][]string
-```
+**Fungsi Solusi:** `func studentsReportByGeography(students []Student) map[string][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(N log N) for sorting within each continent, Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N) for sorting within each continent, Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +47,7 @@ type Student struct {
 // Time: O(N log N) for sorting within each continent, Space: O(N)
 func studentsReportByGeography(students []Student) map[string][]string {
 	// Group by continent, sort names within each group.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	byContinent := make(map[string][]string)
 	for _, s := range students {
 		byContinent[s.Continent] = append(byContinent[s.Continent], s.Name)
@@ -65,7 +59,7 @@ func studentsReportByGeography(students []Student) map[string][]string {
 	}
 
 	// Build output columns.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	result := make(map[string][]string)
 
 	// Get sorted continent names for deterministic iteration.

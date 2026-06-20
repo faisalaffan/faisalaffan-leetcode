@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxNumberOfWaysToPartition(nums []int, k int) int
-```
-
-> **💡 Hint:** Prefix sum + hash maps.
+**Fungsi Solusi:** `func maxNumberOfWaysToPartition(nums []int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
+**Teknik:** HashMap, Two Pointer, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,7 +42,7 @@ func maxNumberOfWaysToPartition(nums []int, k int) int {
 	}
 
 	// Compute prefix sums
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, n)
 	prefix[0] = nums[0]
 	for i := 1; i < n; i++ {
@@ -73,9 +65,9 @@ func maxNumberOfWaysToPartition(nums []int, k int) int {
 	// With changes: try changing each nums[i] to k
 	// leftFreq: prefix values for partition positions j < i
 	// rightFreq: prefix values for partition positions j >= i
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	leftFreq := make(map[int]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	rightFreq := make(map[int]int)
 	for j := 0; j < n-1; j++ {
 		rightFreq[prefix[j]]++

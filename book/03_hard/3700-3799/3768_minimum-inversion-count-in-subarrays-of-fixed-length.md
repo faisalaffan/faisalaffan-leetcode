@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minInversionCount(nums []int, k int) int64
-```
-
-> **💡 Hint:** Sliding window with Fenwick tree. Maintain inversion
+**Fungsi Solusi:** `func minInversionCount(nums []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Sliding Window, Fenwick Tree (BIT)
+**Teknik:** HashMap, Two Pointer, Sliding Window, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,11 +53,11 @@ func minInversionCount(nums []int, k int) int64 {
 	}
 
 	// Coordinate compress
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, n)
 	copy(sorted, nums)
 	sortInts(sorted)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	comp := make(map[int]int)
 	for i, v := range sorted {
 		if i == 0 || v != sorted[i-1] {
@@ -74,7 +66,7 @@ func minInversionCount(nums []int, k int) int64 {
 	}
 
 	size := len(comp) + 2
-  // Alokasi slice integer
+  // Alokasi slice
 	bit := make([]int, size)
 
 	add := func(idx, val int) {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findRoot(tree []*Node) *Node
-```
+**Fungsi Solusi:** `func findRoot(tree []*Node) *Node`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,7 +56,7 @@ func findRoot(tree []*Node) *Node {
 	}
 
 	// Count indegree: how many times each node appears as a child
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	indegree := make(map[*Node]int)
 	for _, node := range tree {
 		for _, child := range node.Children {
@@ -91,7 +85,7 @@ func findRootByXOR(tree []*Node) *Node {
 	}
 
 	var xorSum int
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	valueToNode := make(map[int]*Node)
 
 	for _, node := range tree {

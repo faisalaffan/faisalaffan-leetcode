@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func charIdx(c byte) int
-```
+**Fungsi Solusi:** `func charIdx(c byte) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Trie, Prefix Sum
+**Teknik:** Sorting, Trie, Prefix Sum
 
-**Kompleksitas Waktu:** O(N * L) where N=#sentences, L=avg length  
-**Kompleksitas Ruang:** —
+**Waktu:** O(N * L) where N=#sentences, L=avg length  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -83,7 +77,7 @@ func NewAutocompleteSystem(sentences []string, times []int) *AutocompleteSystem 
 // insert adds a sentence into the trie with the given frequency.
 func (as *AutocompleteSystem) insert(sentence string, times int) {
 	node := as.root
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(sentence); i++ {
 		idx := charIdx(sentence[i])
 		if node.children[idx] == nil {
@@ -151,7 +145,7 @@ func (as *AutocompleteSystem) Input(c byte) []string {
 	as.traverseAndCollect(as.currNode, as.prefix.String(), &candidates)
 
 	// Sort by frequency desc, then lexicographically asc.
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(candidates, func(i, j int) bool {
 		if candidates[i].times != candidates[j].times {
 			return candidates[i].times > candidates[j].times
@@ -161,7 +155,7 @@ func (as *AutocompleteSystem) Input(c byte) []string {
 
 	// Return top 3.
 	top := make([]string, 0, 3)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(candidates) && i < 3; i++ {
 		top = append(top, candidates[i].sentence)
 	}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumStrictlyIncreasingCellsInAMatrix(mat [][]int) int
-```
+**Fungsi Solusi:** `func MaximumStrictlyIncreasingCellsInAMatrix(mat [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming
+**Teknik:** HashMap, DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +47,7 @@ func MaximumStrictlyIncreasingCellsInAMatrix(mat [][]int) int {
 	m, n := len(mat), len(mat[0])
 
 	type cell struct{ r, c int }
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	byVal := make(map[int][]cell)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -61,23 +55,23 @@ func MaximumStrictlyIncreasingCellsInAMatrix(mat [][]int) int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	vals := make([]int, 0, len(byVal))
 	for v := range byVal {
 		vals = append(vals, v)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(vals)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	rowMax := make([]int, m)
-  // Alokasi slice integer
+  // Alokasi slice
 	colMax := make([]int, n)
 	result := 0
 
 	for _, val := range vals {
 		cells := byVal[val]
-  // Alokasi slice integer
+  // Alokasi slice
 		tmp := make([]int, len(cells))
 		for k, c := range cells {
 			best := 1

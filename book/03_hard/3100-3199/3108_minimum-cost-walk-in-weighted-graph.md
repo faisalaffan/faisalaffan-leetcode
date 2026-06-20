@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewDSU(n int) *DSU
-```
+**Fungsi Solusi:** `func NewDSU(n int) *DSU`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Union-Find
 
-**Kompleksitas Waktu:** O(n + m + q * alpha(n))  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + m + q * alpha(n))  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Union-Find** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,9 +42,9 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	and := make([]int, n)
 	mask := (1 << 30) - 1 // all 1s in lower 30 bits (max weight < 2^30)
 	for i := 0; i < n; i++ {
@@ -89,7 +83,7 @@ func minimumCostWalk(n int, edges [][]int, query [][]int) []int {
 		dsu.Union(u, v, w)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(query))
 	for i, q := range query {
 		u, v := q[0], q[1]

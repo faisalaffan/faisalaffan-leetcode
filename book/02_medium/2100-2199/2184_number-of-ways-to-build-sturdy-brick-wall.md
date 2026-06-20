@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func buildWall(height int, width int, bricks []int) int
-```
+**Fungsi Solusi:** `func buildWall(height int, width int, bricks []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DFS, DP
 
-**Kompleksitas Waktu:** O(n * m)  
-**Kompleksitas Ruang:** O(w) where w = max width
+**Waktu:** O(n * m)  |  **Ruang:** O(w) where w = max width
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ func buildWall(height int, width int, bricks []int) int {
 	var dfs func(curr []int, w int)
 	dfs = func(curr []int, w int) {
 		if w == width {
-  // Alokasi slice integer
+  // Alokasi slice
 			row := make([]int, len(curr))
 			copy(row, curr)
 			rows = append(rows, row)
@@ -60,7 +54,7 @@ func buildWall(height int, width int, bricks []int) int {
 
 	// Precompute which rows are compatible (no shared seam)
 	n := len(rows)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	compat := make([][]bool, n)
 	for i := 0; i < n; i++ {
 		compat[i] = make([]bool, n)
@@ -91,7 +85,7 @@ func buildWall(height int, width int, bricks []int) int {
 	}
 
 	// DP: ways[h][r] = ways to build up to height h ending with row r
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, height)
 	for h := 0; h < height; h++ {
 		dp[h] = make([]int, n)

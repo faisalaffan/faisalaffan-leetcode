@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func AssignTasks(servers []int, tasks []int) []int
-```
+**Fungsi Solusi:** `func AssignTasks(servers []int, tasks []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O((m + n) log n) where m = len(tasks), n = len(servers)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((m + n) log n) where m = len(tasks), n = len(servers)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -96,14 +90,14 @@ func AssignTasks(servers []int, tasks []int) []int {
 	available := &MinHeapAvailable{}
 	heap.Init(available)
 	for i, w := range servers {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(available, Server{index: i, weight: w, freeTime: 0})
 	}
 
 	busy := &MinHeapBusy{}
 	heap.Init(busy)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, m)
 	time := 0
 
@@ -111,9 +105,9 @@ func AssignTasks(servers []int, tasks []int) []int {
 		time = max(time, j)
 		// Release completed servers
 		for busy.Len() > 0 && (*busy)[0].freeTime <= time {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			s := heap.Pop(busy).(Server)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(available, s)
 		}
 
@@ -121,18 +115,18 @@ func AssignTasks(servers []int, tasks []int) []int {
 			// Jump to next available server's free time
 			time = (*busy)[0].freeTime
 			for busy.Len() > 0 && (*busy)[0].freeTime <= time {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 				s := heap.Pop(busy).(Server)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(available, s)
 			}
 		}
 
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		s := heap.Pop(available).(Server)
 		result[j] = s.index
 		s.freeTime = time + tasks[j]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(busy, s)
 	}
 

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func basicCalculatorIV(expression string, evalvars []string, evalints []int) []string
-```
+**Fungsi Solusi:** `func basicCalculatorIV(expression string, evalvars []string, evalints []int) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Merge Sort
+**Teknik:** HashMap, Two Pointer, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -66,7 +60,7 @@ func main() {
 
 func basicCalculatorIV(expression string, evalvars []string, evalints []int) []string {
 	// Build substitution map
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	subst := make(map[string]int)
 	for i, v := range evalvars {
 		subst[v] = evalints[i]
@@ -263,7 +257,7 @@ func formatPoly(p Poly) []string {
 	}
 
 	// Sort by degree desc, then lexicographically
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(terms, func(i, j int) bool {
 		degI := 0
 		if terms[i].sig != "" {

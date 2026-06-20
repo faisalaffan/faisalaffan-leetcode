@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NumberOfPairsOfInterchangeableRectangles(rectangles [][]int) int64
-```
+**Fungsi Solusi:** `func NumberOfPairsOfInterchangeableRectangles(rectangles [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n log max(w,h)), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log max(w,h)), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ func main() {
 
 // Time: O(n log max(w,h)), Space: O(n)
 func NumberOfPairsOfInterchangeableRectangles(rectangles [][]int) int64 {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	cnt := make(map[[2]int]int64)
 	for _, r := range rectangles {
 		w, h := r[0], r[1]

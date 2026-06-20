@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func boxDelivering(boxes [][]int, portsCount int, maxBoxes int, maxWeight int) int
-```
+**Fungsi Solusi:** `func boxDelivering(boxes [][]int, portsCount int, maxBoxes int, maxWeight int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window, Dynamic Programming, Prefix Sum
+**Teknik:** Sliding Window, DP, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sliding Window** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ func boxDelivering(boxes [][]int, portsCount int, maxBoxes int, maxWeight int) i
 	n := len(boxes)
 
 	// diffTrips[i] = number of port changes between box i-1 and box i
-  // Alokasi slice integer
+  // Alokasi slice
 	diffTrips := make([]int, n+2)
 	for i := 1; i < n; i++ {
 		if boxes[i][0] != boxes[i-1][0] {
@@ -50,7 +44,7 @@ func boxDelivering(boxes [][]int, portsCount int, maxBoxes int, maxWeight int) i
 		}
 	}
 	// prefix sum of diffTrips (size n+2 to allow safe access at index n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefDiff := make([]int, n+2)
 	for i := 1; i <= n; i++ {
 		prefDiff[i] = prefDiff[i-1] + diffTrips[i-1]
@@ -58,17 +52,17 @@ func boxDelivering(boxes [][]int, portsCount int, maxBoxes int, maxWeight int) i
 	prefDiff[n+1] = prefDiff[n] // diffTrips[n] is always 0
 
 	// prefix sum of weights
-  // Alokasi slice integer
+  // Alokasi slice
 	prefW := make([]int, n+1)
 	for i := 1; i <= n; i++ {
 		prefW[i] = prefW[i-1] + boxes[i-1][1]
 	}
 
 	// DP: dp[i] = min trips to deliver first i boxes
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n+1)
 	// deque stores indices j, maintaining dp[j] - prefDiff[j+1] in increasing order
-  // Alokasi slice integer
+  // Alokasi slice
 	deque := make([]int, 0, n+1)
 	deque = append(deque, 0)
 

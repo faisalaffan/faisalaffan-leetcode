@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+Kamu diminta mendesain struktur data kustom dengan operasi spesifik (insert, delete, search). Target: O(1) atau O(log n) per operasi.
 
-Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+**Cara berpikir:** Kombinasikan HashMap + Heap + Linked List sesuai kebutuhan.
 
-**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor(events [][]int) EventManager
-```
-
-> **💡 Hint:** Use max-heap (priority queue) on (-priority, eventId) + map for event priorities.
+**Fungsi Solusi:** `func Constructor(events [][]int) EventManager`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, BFS, Heap / Priority Queue, Stack
+**Teknik:** HashMap, BFS, Heap
 
-**Kompleksitas Waktu:** O(N log N) init, O(log N) per operation  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N) init, O(log N) per operation  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -74,12 +66,12 @@ type EventManager struct {
 func Constructor(events [][]int) EventManager {
 	pq := &MaxHeap{}
 	heap.Init(pq)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pm := make(map[int]int)
 	for _, e := range events {
 		id, pri := e[0], e[1]
 		pm[id] = pri
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(pq, Event{priority: pri, eventId: id})
 	}
 	return EventManager{pq: pq, priorities: pm}
@@ -87,7 +79,7 @@ func Constructor(events [][]int) EventManager {
 
 func (em *EventManager) UpdatePriority(eventId int, newPriority int) {
 	em.priorities[eventId] = newPriority
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(em.pq, Event{priority: newPriority, eventId: eventId})
 }
 
@@ -95,12 +87,12 @@ func (em *EventManager) PollHighest() int {
 	for em.pq.Len() > 0 {
 		top := (*em.pq)[0]
 		if pri, ok := em.priorities[top.eventId]; ok && pri == top.priority {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			heap.Pop(em.pq)
 			delete(em.priorities, top.eventId)
 			return top.eventId
 		}
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		heap.Pop(em.pq) // stale entry
 	}
 	return -1

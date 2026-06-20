@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func mincostToHireWorkers(quality []int, wage []int, k int) float64
-```
-
-> **💡 Hint:** Sort workers by wage/quality ratio. For any group hired at a given ratio,
+**Fungsi Solusi:** `func mincostToHireWorkers(quality []int, wage []int, k int) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -73,7 +65,7 @@ func mincostToHireWorkers(quality []int, wage []int, k int) float64 {
 	for i := 0; i < n; i++ {
 		workers[i] = worker{quality: quality[i], ratio: float64(wage[i]) / float64(quality[i])}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(workers, func(i, j int) bool {
 		return workers[i].ratio < workers[j].ratio
 	})
@@ -84,7 +76,7 @@ func mincostToHireWorkers(quality []int, wage []int, k int) float64 {
 
 	for i := 0; i < k; i++ {
 		sumQ += workers[i].quality
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, workers[i].quality)
 	}
 
@@ -92,12 +84,12 @@ func mincostToHireWorkers(quality []int, wage []int, k int) float64 {
 
 	for i := k; i < n; i++ {
 		// Remove worker with largest quality, add current
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		largest := heap.Pop(h).(int)
 		sumQ -= largest
 
 		sumQ += workers[i].quality
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, workers[i].quality)
 
 		cost := workers[i].ratio * float64(sumQ)

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePair
-```
+**Fungsi Solusi:** `func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePair`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -72,7 +66,7 @@ func main() {
 func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePair {
 	// Filter to high achievers (grade >= minGrade)
 	// Group by user, order by term, find consecutive pairs
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userCourses := make(map[int][]int)
 
 	for _, c := range completions {
@@ -83,13 +77,13 @@ func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePa
 
 	// Sort each user's courses by term (assumes input order is term order)
 	// Count pairs
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pairCount := make(map[[2]int]int)
 
 	for _, courses := range userCourses {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(courses) // sort by course ID to establish canonical order
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(courses)-1; i++ {
 			a, b := courses[i], courses[i+1]
 			if a > b {
@@ -111,7 +105,7 @@ func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePa
 		}
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].CourseA != result[j].CourseA {
 			return result[i].CourseA < result[j].CourseA

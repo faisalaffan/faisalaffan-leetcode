@@ -4,25 +4,21 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string berisi tanda kurung: `()`, `[]`, `{}`. Tugasmu adalah memeriksa apakah string tersebut **valid** — setiap kurung buka harus ditutup oleh kurung yang sesuai dalam urutan benar.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+Contoh valid: `()[]{}`, `({[]})`. Tidak valid: `(]`, `([)]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+**Cara berpikir:** Gunakan Stack. Kurung buka → push. Kurung tutup → pop dan cek kecocokan. Di akhir, stack harus kosong.
 
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countCombinations(pieces []string, positions [][]int) int
-```
+**Fungsi Solusi:** `func countCombinations(pieces []string, positions [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Backtracking
+**Teknik:** DFS, Backtracking
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -67,15 +63,15 @@ func main() {
 func countCombinations(pieces []string, positions [][]int) int {
 	n := len(pieces)
 	pts := make([]piece, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	start := make([][2]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range pieces {
 		pts[i] = piece(pieces[i][0])
 		start[i] = [2]int{positions[i][0] - 1, positions[i][1] - 1}
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	allMoves := make([][]move, n)
 	for i := 0; i < n; i++ {
 		allMoves[i] = genMoves(pts[i], start[i])
@@ -132,7 +128,7 @@ func genMoves(pt piece, pos [2]int) []move {
 
 func simulate(start [][2]int, chosen []move) bool {
 	n := len(start)
-  // Alokasi slice integer
+  // Alokasi slice
 	pos := make([][2]int, n)
 	copy(pos, start)
 

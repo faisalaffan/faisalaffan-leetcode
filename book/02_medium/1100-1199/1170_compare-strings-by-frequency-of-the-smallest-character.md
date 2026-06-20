@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func f(s string) int
-```
+**Fungsi Solusi:** `func f(s string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** O((n + m) * L) where L = average string length  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n + m) * L) where L = average string length  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ import (
 func f(s string) int {
 	minChar := s[0]
 	count := 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		if s[i] < minChar {
 			minChar = s[i]
@@ -60,15 +54,15 @@ func f(s string) int {
 }
 
 func numSmallerByFrequency(queries []string, words []string) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	wordFreqs := make([]int, len(words))
 	for i, w := range words {
 		wordFreqs[i] = f(w)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(wordFreqs)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(queries))
 	for i, q := range queries {
 		qf := f(q)

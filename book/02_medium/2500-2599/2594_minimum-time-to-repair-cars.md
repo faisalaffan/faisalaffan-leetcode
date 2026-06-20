@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func repairCars(ranks []int, cars int) int64
-```
+**Fungsi Solusi:** `func repairCars(ranks []int, cars int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search
 
-**Kompleksitas Waktu:** O(n log minTime)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n log minTime)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +47,7 @@ func repairCars(ranks []int, cars int) int64 {
 
 	left := int64(1)
 	right := int64(ranks[0]) * int64(cars) * int64(cars)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range ranks {
 		candidate := int64(ranks[i]) * int64(cars) * int64(cars)
 		if candidate < right {
@@ -61,7 +55,7 @@ func repairCars(ranks []int, cars int) int64 {
 		}
 	}
 
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 	for left < right {
 		mid := left + (right-left)/2
 		if canRepair(mid) {

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func totalWaviness(a int64, b int64) int64
-```
-
-> **💡 Hint:** Digit DP. Count numbers and accumulate waviness.
+**Fungsi Solusi:** `func totalWaviness(a int64, b int64) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming
+**Teknik:** Two Pointer, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -75,11 +67,11 @@ func sumWavy(n int64) int64 {
 
 	// cnt[pos][tight][started] = count
 	// sum[pos][tight][started] = total waviness sum
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	cnt := make([][][]int64, m+1)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	sum := make([][][]int64, m+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range cnt {
 		cnt[i] = make([][]int64, 2)
 		sum[i] = make([][]int64, 2)
@@ -130,9 +122,9 @@ func sumWavy(n int64) int64 {
 		cnt int64
 		sum int64
 	}
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][][][]pair, m+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([][][]pair, 2)
 		for j := range dp[i] {
@@ -192,7 +184,7 @@ func sumWavy(n int64) int64 {
 }
 
 func getDigits(n int64) []int {
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return []int{0}
 	}

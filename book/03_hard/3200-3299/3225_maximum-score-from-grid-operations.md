@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumScore(grid [][]int) int64
-```
+**Fungsi Solusi:** `func maximumScore(grid [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum
+**Teknik:** Two Pointer, DP, Prefix Sum
 
-**Kompleksitas Waktu:** O(n^3), Space: O(n^2)  
-**Kompleksitas Ruang:** O(n^2)
+**Waktu:** O(n^3), Space: O(n^2)  |  **Ruang:** O(n^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +51,7 @@ func main() {
 
 func maximumScore(grid [][]int) int64 {
 	n := len(grid)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
@@ -66,7 +60,7 @@ func maximumScore(grid [][]int) int64 {
 	}
 
 	// prefix[col][row] = sum of grid[0..row-1][col]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	prefix := make([][]int64, n)
 	for c := 0; c < n; c++ {
 		prefix[c] = make([]int64, n+1)
@@ -75,15 +69,15 @@ func maximumScore(grid [][]int) int64 {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	pick := make([]int64, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	skip := make([]int64, n+1)
 
 	for col := 1; col < n; col++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		currPick := make([]int64, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 		currSkip := make([]int64, n+1)
 
 		for hCurr := 0; hCurr <= n; hCurr++ {

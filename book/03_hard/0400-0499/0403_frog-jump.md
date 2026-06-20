@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func canCross(stones []int) bool
-```
+**Fungsi Solusi:** `func canCross(stones []int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Dynamic Programming
+**Teknik:** HashMap, DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -61,7 +55,7 @@ func canCross(stones []int) bool {
 	}
 
 	// Map stone position -> set of jump sizes
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	dp := make(map[int]map[int]bool, len(stones))
 	for _, s := range stones {
 		dp[s] = make(map[int]bool)
@@ -69,7 +63,7 @@ func canCross(stones []int) bool {
 	dp[stones[0]][0] = true // start with jump 0
 
 	lastStone := stones[len(stones)-1]
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	stoneSet := make(map[int]bool, len(stones))
 	for _, s := range stones {
 		stoneSet[s] = true

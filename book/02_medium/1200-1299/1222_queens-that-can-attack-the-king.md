@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func queensAttacktheKing(queens [][]int, king []int) [][]int
-```
+**Fungsi Solusi:** `func queensAttacktheKing(queens [][]int, king []int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n) where n = number of queens  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(n) where n = number of queens  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,7 +38,7 @@ import (
 // Space: O(1)
 
 func queensAttacktheKing(queens [][]int, king []int) [][]int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	queenSet := make(map[[2]int]bool)
 	for _, q := range queens {
 		queenSet[[2]int{q[0], q[1]}] = true
@@ -53,7 +47,7 @@ func queensAttacktheKing(queens [][]int, king []int) [][]int {
 	dirs := [][]int{{0, 1}, {0, -1}, {1, 0}, {-1, 0},
 		{1, 1}, {1, -1}, {-1, 1}, {-1, -1}}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
 
 	for _, d := range dirs {

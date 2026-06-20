@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumValueSumII(board [][]int) int64
-```
-
-> **💡 Hint:** Fix the middle row r2, then use prefix/suffix decomposition.
+**Fungsi Solusi:** `func maximumValueSumII(board [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(m * n), Space: O(m * n)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n), Space: O(m * n)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -123,7 +115,7 @@ func maximumValueSumII(board [][]int) int64 {
 	init3 := []cand{{ng, -1}, {ng, -1}, {ng, -1}}
 
 	// pref[i] = top 3 cells in rows [0..i]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	pref := make([][]cand, m)
 	top := make([]cand, 3)
 	copy(top, init3)
@@ -136,7 +128,7 @@ func maximumValueSumII(board [][]int) int64 {
 	}
 
 	// suff[i] = top 3 cells in rows [i..m-1]
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	suff := make([][]cand, m)
 	top = make([]cand, 3)
 	copy(top, init3)

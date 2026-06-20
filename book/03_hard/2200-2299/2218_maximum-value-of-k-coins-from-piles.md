@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxValueOfCoins(piles [][]int, k int) int
-```
+**Fungsi Solusi:** `func maxValueOfCoins(piles [][]int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
+**Teknik:** DP, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,7 +62,7 @@ func max(a, b int) int {
 
 func maxValueOfCoins(piles [][]int, k int) int {
 	// Prefix sums for each pile.
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	pref := make([][]int, len(piles))
 	for i, pile := range piles {
 		pref[i] = make([]int, len(pile)+1)
@@ -79,16 +73,16 @@ func maxValueOfCoins(piles [][]int, k int) int {
 
 	// dp[x] = max value using x coins from processed piles.
 	// Use -1 as unreachable sentinel.
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, k+1)
 	for i := 1; i <= k; i++ {
 		dp[i] = -1
 	}
 	dp[0] = 0
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(piles); i++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, k+1)
 		copy(ndp, dp)
 		maxTake := len(piles[i])

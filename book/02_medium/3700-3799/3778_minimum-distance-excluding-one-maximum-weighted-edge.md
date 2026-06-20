@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumDistanceExcludingOneMaximumWeightedEdge(n int, edges [][]int) int
-```
+**Fungsi Solusi:** `func minimumDistanceExcludingOneMaximumWeightedEdge(n int, edges [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
+**Teknik:** BFS, Heap
 
-**Kompleksitas Waktu:** O(E log V)  
-**Kompleksitas Ruang:** O(V + E)
+**Waktu:** O(E log V)  |  **Ruang:** O(V + E)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -79,7 +73,7 @@ func (pq *priorityQueue) Pop() any {
 }
 
 func minimumDistanceExcludingOneMaximumWeightedEdge(n int, edges [][]int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]edge, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -88,7 +82,7 @@ func minimumDistanceExcludingOneMaximumWeightedEdge(n int, edges [][]int) int {
 	}
 
 	// dist[node][used] = min effective cost (sum - maxEdge)
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		dist[i][0] = math.MaxInt32
@@ -98,11 +92,11 @@ func minimumDistanceExcludingOneMaximumWeightedEdge(n int, edges [][]int) int {
 
 	pq := &priorityQueue{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &pqItem{node: 0, total: 0, maxEdge: 0, used: false})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(pq).(*pqItem)
 		effective := cur.total - cur.maxEdge
 		if effective != dist[cur.node][btoi(cur.used)] {
@@ -122,7 +116,7 @@ func minimumDistanceExcludingOneMaximumWeightedEdge(n int, edges [][]int) int {
 			eff := newTotal - newMax
 			if eff < dist[e.to][btoi(cur.used)] {
 				dist[e.to][btoi(cur.used)] = eff
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &pqItem{
 					node: e.to, total: newTotal, maxEdge: newMax, used: cur.used,
 				})
@@ -134,7 +128,7 @@ func minimumDistanceExcludingOneMaximumWeightedEdge(n int, edges [][]int) int {
 				// Actually: we just skip this edge's weight entirely
 				if cur.total < dist[e.to][1] {
 					dist[e.to][1] = cur.total
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 					heap.Push(pq, &pqItem{
 						node: e.to, total: cur.total, maxEdge: cur.total, used: true,
 					})

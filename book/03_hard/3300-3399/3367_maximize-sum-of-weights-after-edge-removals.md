@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximizeSumOfWeights(edges [][]int, k int) int64
-```
-
-> **💡 Hint:** Tree DP. For each node, compute dp[node][0] = max sum in subtree
+**Fungsi Solusi:** `func maximizeSumOfWeights(edges [][]int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming
+**Teknik:** DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -63,7 +55,7 @@ func main() {
 
 func maximizeSumOfWeights(edges [][]int, k int) int64 {
 	n := len(edges) + 1
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -89,7 +81,7 @@ func maximizeSumOfWeights(edges [][]int, k int) int64 {
 			}
 		}
 
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(gains, func(i, j int) bool {
 			return gains[i] > gains[j]
 		})

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CheckArithmeticSubarrays(nums []int, l []int, r []int) []bool
-```
+**Fungsi Solusi:** `func CheckArithmeticSubarrays(nums []int, l []int, r []int) []bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(M * N log N), Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(M * N log N), Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,9 +41,9 @@ func CheckArithmeticSubarrays(nums []int, l []int, r []int) []bool {
 	// Time: O(M * N log N), Space: O(N)
 	result := make([]bool, len(l))
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(l); i++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		sub := make([]int, r[i]-l[i]+1)
 		copy(sub, nums[l[i]:r[i]+1])
 		result[i] = isArithmetic(sub)
@@ -63,7 +57,7 @@ func isArithmetic(arr []int) bool {
 		return true
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(arr)
 	diff := arr[1] - arr[0]
 	for i := 2; i < len(arr); i++ {

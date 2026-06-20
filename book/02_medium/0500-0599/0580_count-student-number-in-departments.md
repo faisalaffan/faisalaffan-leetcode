@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountStudents(departments map[int]string, studentDepts []int) [][]interface
-```
+**Fungsi Solusi:** `func CountStudents(departments map[int]string, studentDepts []int) [][]interface`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n + m) where n = departments, m = students  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + m) where n = departments, m = students  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,7 +56,7 @@ type DeptCount struct {
 }
 
 func CountStudents(departments map[int]string, studentDepts []int) [][]interface{} {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	counts := make(map[int]int)
 	for _, deptID := range studentDepts {
 		counts[deptID]++
@@ -85,7 +79,7 @@ func CountStudents(departments map[int]string, studentDepts []int) [][]interface
 		result = append(result, []interface{}{deptName, counts[deptID]})
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		return result[i][0].(string) < result[j][0].(string)
 	})

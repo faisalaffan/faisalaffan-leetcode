@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func LoudAndRich(richer [][]int, quiet []int) []int
-```
+**Fungsi Solusi:** `func LoudAndRich(richer [][]int, quiet []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** BFS
 
-**Kompleksitas Waktu:** O(n + m)  
-**Kompleksitas Ruang:** O(n + m) where m = len(richer)
+**Waktu:** O(n + m)  |  **Ruang:** O(n + m) where m = len(richer)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,9 +38,9 @@ func main() {
 // Time: O(n + m) | Space: O(n + m) where m = len(richer)
 func LoudAndRich(richer [][]int, quiet []int) []int {
 	n := len(quiet)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	indeg := make([]int, n)
 
 	for _, r := range richer {
@@ -55,9 +49,9 @@ func LoudAndRich(richer [][]int, quiet []int) []int {
 		indeg[b]++
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range ans {
 		ans[i] = i
 	}

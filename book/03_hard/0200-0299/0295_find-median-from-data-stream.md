@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Constructor() MedianFinder
-```
-
-> **💡 Hint:** Two Heaps.
+**Fungsi Solusi:** `func Constructor() MedianFinder`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -117,16 +109,16 @@ func Constructor() MedianFinder {
 // AddNum adds a number to the data stream.
 func (mf *MedianFinder) AddNum(num int) {
 	// Step 1: Add to lo (max-heap).
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(mf.lo, num)
 
 	// Step 2: Move the largest from lo to hi to maintain ordering.
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(mf.hi, heap.Pop(mf.lo).(int))
 
 	// Step 3: Balance: lo size should be >= hi size.
 	if mf.lo.Len() < mf.hi.Len() {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(mf.lo, heap.Pop(mf.hi).(int))
 	}
 }

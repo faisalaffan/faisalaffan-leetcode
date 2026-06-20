@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func isEscapePossible(blocked [][]int, source []int, target []int) bool
-```
-
-> **💡 Hint:** BFS limited by blocked cells.
+**Fungsi Solusi:** `func isEscapePossible(blocked [][]int, source []int, target []int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, BFS
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,14 +47,14 @@ func main() {
 
 func isEscapePossible(blocked [][]int, source []int, target []int) bool {
 	n := len(blocked)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return true
 	}
 	// Maximum cells we need to explore before determining escape
 	limit := n * (n + 1) / 2
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	blockedSet := make(map[[2]int]bool)
 	for _, b := range blocked {
 		blockedSet[[2]int{b[0], b[1]}] = true
@@ -70,7 +62,7 @@ func isEscapePossible(blocked [][]int, source []int, target []int) bool {
 
 	dirs := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
 	bfs := func(start, target []int) bool {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		visited := make(map[[2]int]bool)
 		queue := [][2]int{{start[0], start[1]}}
 		visited[[2]int{start[0], start[1]}] = true

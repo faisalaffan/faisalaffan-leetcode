@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewBIT(n int) *BIT
-```
+**Fungsi Solusi:** `func NewBIT(n int) *BIT`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Fenwick Tree (BIT)
+**Teknik:** HashMap, Two Pointer, Sorting, Fenwick Tree
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -101,33 +95,33 @@ func maxRectangleArea(points [][]int) int {
 	}
 
 	// Coordinate compression for y
-  // Alokasi slice integer
+  // Alokasi slice
 	yVals := make([]int, n)
 	for i, p := range points {
 		yVals[i] = p[1]
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(yVals)
-  // Alokasi slice integer
+  // Alokasi slice
 	uniqY := make([]int, 0)
 	for i, y := range yVals {
 		if i == 0 || y != yVals[i-1] {
 			uniqY = append(uniqY, y)
 		}
 	}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	yComp := make(map[int]int)
 	for i, y := range uniqY {
 		yComp[y] = i
 	}
 
 	// Sort points by x, then y
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([][2]int, n)
 	for i, p := range points {
 		sorted[i] = [2]int{p[0], p[1]}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(sorted, func(i, j int) bool {
 		if sorted[i][0] != sorted[j][0] {
 			return sorted[i][0] < sorted[j][0]
@@ -137,7 +131,7 @@ func maxRectangleArea(points [][]int) int {
 
 	bit := NewBIT(len(uniqY))
 	// key = (y1, y2) -> [x_of_left_side, point_count_at_that_x]
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[[2]int][2]int)
 	ans := -1
 

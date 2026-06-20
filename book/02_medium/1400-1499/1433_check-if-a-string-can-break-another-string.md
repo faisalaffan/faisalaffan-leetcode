@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func checkIfCanBreak(s1 string, s2 string) bool
-```
+**Fungsi Solusi:** `func checkIfCanBreak(s1 string, s2 string) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n) for sorting  
-**Kompleksitas Ruang:** O(n) for byte slices
+**Waktu:** O(n log n) for sorting  |  **Ruang:** O(n) for byte slices
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,14 +49,14 @@ func main() {
 func checkIfCanBreak(s1 string, s2 string) bool {
 	b1 := []byte(s1)
 	b2 := []byte(s2)
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(b1, func(i, j int) bool { return b1[i] < b1[j] })
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(b2, func(i, j int) bool { return b2[i] < b2[j] })
 
 	// Check if s1 can break s2
 	canBreak1 := true
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(b1); i++ {
 		if b1[i] < b2[i] {
 			canBreak1 = false
@@ -72,7 +66,7 @@ func checkIfCanBreak(s1 string, s2 string) bool {
 
 	// Check if s2 can break s1
 	canBreak2 := true
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(b1); i++ {
 		if b2[i] < b1[i] {
 			canBreak2 = false

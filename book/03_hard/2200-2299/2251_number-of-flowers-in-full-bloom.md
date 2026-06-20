@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func fullBloomFlowers(flowers [][]int, people []int) []int
-```
+**Fungsi Solusi:** `func fullBloomFlowers(flowers [][]int, people []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,21 +42,21 @@ func fullBloomFlowers(flowers [][]int, people []int) []int {
 	n := len(flowers)
 	m := len(people)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	starts := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	ends := make([]int, n)
 	for i, f := range flowers {
 		starts[i] = f[0]
 		ends[i] = f[1]
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(starts)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(ends)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, m)
 	for i, p := range people {
 		// number of flowers that started blooming <= p

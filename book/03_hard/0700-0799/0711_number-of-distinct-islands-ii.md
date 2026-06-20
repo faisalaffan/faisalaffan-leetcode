@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numDistinctIslandsII(grid [][]int) int
-```
+**Fungsi Solusi:** `func numDistinctIslandsII(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, DFS
+**Teknik:** HashMap, Two Pointer, DFS, Sorting
 
-**Kompleksitas Waktu:** O(rows*cols * log(rows*cols)) for island detection and normalization  
-**Kompleksitas Ruang:** O(rows*cols)
+**Waktu:** O(rows*cols * log(rows*cols)) for island detection and normalization  |  **Ruang:** O(rows*cols)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,9 +49,9 @@ func numDistinctIslandsII(grid [][]int) int {
 		return 0
 	}
 	rows, cols := len(grid), len(grid[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	visited := make([][]bool, rows)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range visited {
 		visited[i] = make([]bool, cols)
 	}
@@ -106,7 +100,7 @@ func numDistinctIslandsII(grid [][]int) int {
 			}
 
 			// Sort transformed points.
-  // Custom sort dengan comparator
+  // Custom sort
 			sort.Slice(transformed, func(i, j int) bool {
 				if transformed[i].r != transformed[j].r {
 					return transformed[i].r < transformed[j].r
@@ -116,7 +110,7 @@ func numDistinctIslandsII(grid [][]int) int {
 
 			// Translate to origin (subtract min r, min c).
 			minR, minC := transformed[0].r, transformed[0].c
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 			for i := range transformed {
 				transformed[i].r -= minR
 				transformed[i].c -= minC
@@ -149,7 +143,7 @@ func numDistinctIslandsII(grid [][]int) int {
 		dfs(r, c+1, shape)
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	islandSet := make(map[string]bool)
 
 	for r := 0; r < rows; r++ {

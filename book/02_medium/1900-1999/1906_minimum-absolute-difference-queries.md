@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinDifference(nums []int, queries [][]int) []int
-```
+**Fungsi Solusi:** `func MinDifference(nums []int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O((n+q)*maxVal), Space: O(n*maxVal)  
-**Kompleksitas Ruang:** O(n*maxVal)
+**Waktu:** O((n+q)*maxVal), Space: O(n*maxVal)  |  **Ruang:** O(n*maxVal)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,14 +40,14 @@ const maxVal = 100
 func MinDifference(nums []int, queries [][]int) []int {
 	n := len(nums)
 	// prefixCount[i][v] = count of value v in nums[0..i-1]
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixCount := make([][maxVal + 1]int, n+1)
 	for i := 0; i < n; i++ {
 		prefixCount[i+1] = prefixCount[i]
 		prefixCount[i+1][nums[i]]++
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(queries))
 	for qIdx, q := range queries {
 		l, r := q[0], q[1]

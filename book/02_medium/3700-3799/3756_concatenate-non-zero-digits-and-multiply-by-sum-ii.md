@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int
-```
+**Fungsi Solusi:** `func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n + q)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n + q)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -40,11 +34,11 @@ const mod3756 = 1000000007
 
 func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int {
 	n := len(s)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixCnt := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixSum := make([]int, n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	prefixNum := make([]int64, n+1)
 
 	for i, ch := range s {
@@ -59,7 +53,7 @@ func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]

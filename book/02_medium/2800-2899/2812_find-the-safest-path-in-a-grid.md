@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindTheSafestPathInAGrid(grid [][]int) int
-```
+**Fungsi Solusi:** `func FindTheSafestPathInAGrid(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, BFS
+**Teknik:** Binary Search, BFS
 
-**Kompleksitas Waktu:** O(n^2 log n)  
-**Kompleksitas Ruang:** O(n^2)
+**Waktu:** O(n^2 log n)  |  **Ruang:** O(n^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,9 +37,9 @@ func FindTheSafestPathInAGrid(grid [][]int) int {
 	n := len(grid)
 
 	// Multi-source BFS to compute distance to nearest thief (1)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -82,9 +76,9 @@ func FindTheSafestPathInAGrid(grid [][]int) int {
 		if dist[0][0] < minDist {
 			return false
 		}
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		visited := make([][]bool, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range visited {
 			visited[i] = make([]bool, n)
 		}

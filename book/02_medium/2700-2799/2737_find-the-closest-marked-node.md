@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func FindTheClosestMarkedNode(n int, edges [][]int, marked []int, start int) int
-```
+**Fungsi Solusi:** `func FindTheClosestMarkedNode(n int, edges [][]int, marked []int, start int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
+**Teknik:** BFS, Heap
 
-**Kompleksitas Waktu:** O((V+E) log V)  
-**Kompleksitas Ruang:** O(V+E)
+**Waktu:** O((V+E) log V)  |  **Ruang:** O(V+E)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,16 +52,16 @@ func (pq *PriorityQueue) Push(x interface{}) { n := len(*pq); item := x.(*Item);
 func (pq *PriorityQueue) Pop() interface{}   { old := *pq; n := len(old); item := old[n-1]; old[n-1] = nil; item.index = -1; *pq = old[:n-1]; return item }
 
 func FindTheClosestMarkedNode(n int, edges [][]int, marked []int, start int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]Edge, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
 		graph[u] = append(graph[u], Edge{v, w})
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dist := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = math.MaxInt32
 	}
@@ -75,11 +69,11 @@ func FindTheClosestMarkedNode(n int, edges [][]int, marked []int, start int) int
 
 	pq := &PriorityQueue{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &Item{node: start, dist: 0})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cur := heap.Pop(pq).(*Item)
 		if cur.dist > dist[cur.node] {
 			continue
@@ -87,7 +81,7 @@ func FindTheClosestMarkedNode(n int, edges [][]int, marked []int, start int) int
 		for _, e := range graph[cur.node] {
 			if nd := cur.dist + e.weight; nd < dist[e.to] {
 				dist[e.to] = nd
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &Item{node: e.to, dist: nd})
 			}
 		}

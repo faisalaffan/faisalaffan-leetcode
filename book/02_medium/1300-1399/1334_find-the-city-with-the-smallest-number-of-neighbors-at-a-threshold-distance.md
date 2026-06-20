@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findTheCity(n int, edges [][]int, distanceThreshold int) int
-```
+**Fungsi Solusi:** `func findTheCity(n int, edges [][]int, distanceThreshold int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Floyd-Warshall
+**Waktu:** O(n^3) where n = number of cities (Floyd-Warshall)  |  **Ruang:** O(n^2) for distance matrix
 
-**Kompleksitas Waktu:** O(n^3) where n = number of cities (Floyd-Warshall)  
-**Kompleksitas Ruang:** O(n^2) for distance matrix
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Floyd-Warshall** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,9 +46,9 @@ func main() {
 // Space: O(n^2) for distance matrix
 func findTheCity(n int, edges [][]int, distanceThreshold int) int {
 	// Initialize distance matrix
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {

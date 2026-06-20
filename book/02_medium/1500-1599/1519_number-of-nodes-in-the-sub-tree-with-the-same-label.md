@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func CountSubTrees(n int, edges [][]int, labels string) []int
-```
+**Fungsi Solusi:** `func CountSubTrees(n int, edges [][]int, labels string) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS
 
-**Kompleksitas Waktu:** O(N), Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N), Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +37,7 @@ func main() {
 
 func CountSubTrees(n int, edges [][]int, labels string) []int {
 	// Time: O(N), Space: O(N)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -51,7 +45,7 @@ func CountSubTrees(n int, edges [][]int, labels string) []int {
 		graph[v] = append(graph[v], u)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n)
 	visited := make([]bool, n)
 
@@ -59,7 +53,7 @@ func CountSubTrees(n int, edges [][]int, labels string) []int {
 	dfs = func(node int) []int {
 		visited[node] = true
 		// Count array for 26 lowercase letters
-  // Alokasi slice integer
+  // Alokasi slice
 		count := make([]int, 26)
 		count[labels[node]-'a'] = 1
 

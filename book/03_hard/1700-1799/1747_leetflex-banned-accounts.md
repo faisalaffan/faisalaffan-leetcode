@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func leetflexBannedAccounts(logs []LogInfo) []int
-```
+**Fungsi Solusi:** `func leetflexBannedAccounts(logs []LogInfo) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Merge Sort
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -77,17 +71,17 @@ func main() {
 
 func leetflexBannedAccounts(logs []LogInfo) []int {
 	// Group sessions by account
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	byAccount := make(map[int][]LogInfo)
 	for _, l := range logs {
 		byAccount[l.AccountId] = append(byAccount[l.AccountId], l)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	banned := make([]int, 0)
 	for accountId, sessions := range byAccount {
 		// Merge overlapping sessions for each IP, then check for overlap across IPs
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		ipSessions := make(map[int][]LogInfo)
 		for _, s := range sessions {
 			ipSessions[s.IpAddress] = append(ipSessions[s.IpAddress], s)
@@ -96,7 +90,7 @@ func leetflexBannedAccounts(logs []LogInfo) []int {
 		// Merge per-IP sessions
 		merged := make([]LogInfo, 0)
 		for _, ipSess := range ipSessions {
-  // Custom sort dengan comparator
+  // Custom sort
 			sort.Slice(ipSess, func(i, j int) bool {
 				return ipSess[i].Login < ipSess[j].Login
 			})
@@ -115,7 +109,7 @@ func leetflexBannedAccounts(logs []LogInfo) []int {
 		}
 
 		// Sort all merged sessions by login time
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(merged, func(i, j int) bool {
 			return merged[i].Login < merged[j].Login
 		})
@@ -129,7 +123,7 @@ func leetflexBannedAccounts(logs []LogInfo) []int {
 		}
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(banned)
 	return banned
 }

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func StrongFriendship(friendships [][]int) int
-```
+**Fungsi Solusi:** `func StrongFriendship(friendships [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n^2), Space: O(n^2)  
-**Kompleksitas Ruang:** O(n^2)
+**Waktu:** O(n^2), Space: O(n^2)  |  **Ruang:** O(n^2)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +37,7 @@ func main() {
 
 // Time: O(n^2), Space: O(n^2)
 func StrongFriendship(friendships [][]int) int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	friendSet := make(map[int]map[int]bool)
 	for _, f := range friendships {
 		a, b := f[0], f[1]
@@ -59,13 +53,13 @@ func StrongFriendship(friendships [][]int) int {
 
 	count := 0
 	// For each pair of users, check if they have at least 3 common friends
-  // Alokasi slice integer
+  // Alokasi slice
 	users := make([]int, 0, len(friendSet))
 	for u := range friendSet {
 		users = append(users, u)
 	}
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(users); i++ {
 		for j := i + 1; j < len(users); j++ {
 			a, b := users[i], users[j]

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxPoints(points [][]int) int64
-```
+**Fungsi Solusi:** `func MaxPoints(points [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming
+**Teknik:** Two Pointer, DP
 
-**Kompleksitas Waktu:** O(m*n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(m*n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,16 +37,16 @@ func main() {
 // Time: O(m*n), Space: O(n)
 func MaxPoints(points [][]int) int64 {
 	m, n := len(points), len(points[0])
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int64, n)
 	for j := 0; j < n; j++ {
 		dp[j] = int64(points[0][j])
 	}
 
 	for i := 1; i < m; i++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		left := make([]int64, n)
-  // Alokasi slice integer
+  // Alokasi slice
 		right := make([]int64, n)
 
 		// Left to right: max of dp[k] + k for k <= j
@@ -75,7 +69,7 @@ func MaxPoints(points [][]int) int64 {
 			}
 		}
 
-  // Alokasi slice integer
+  // Alokasi slice
 		newDp := make([]int64, n)
 		for j := 0; j < n; j++ {
 			newDp[j] = int64(points[i][j]) + max64(left[j]-int64(j), right[j]+int64(j))

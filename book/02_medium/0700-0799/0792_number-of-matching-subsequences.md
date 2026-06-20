@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numMatchingSubseq(s string, words []string) int
-```
+**Fungsi Solusi:** `func numMatchingSubseq(s string, words []string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n + m * L) where n = len(s), m = len(words)  |  **Ruang:** O(m)
 
-**Kompleksitas Waktu:** O(n + m * L) where n = len(s), m = len(words)  
-**Kompleksitas Ruang:** O(m)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -43,9 +34,9 @@ func main() {
 }
 
 func numMatchingSubseq(s string, words []string) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	buckets := make([][]string, 26)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range buckets {
 		buckets[i] = make([]string, 0)
 	}

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfSubarraysWithAndValueOfK(nums []int, k int) int64
-```
-
-> **💡 Hint:** maintain map of (AND value -> count) for subarrays ending at the
+**Fungsi Solusi:** `func numberOfSubarraysWithAndValueOfK(nums []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Monotonic Stack/Queue
+**Teknik:** HashMap, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,11 +38,11 @@ import "fmt"
 
 func numberOfSubarraysWithAndValueOfK(nums []int, k int) int64 {
 	var ans int64 = 0
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	cur := make(map[int]int)
 
 	for _, x := range nums {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		nxt := make(map[int]int)
 		nxt[x] = 1
 		for val, cnt := range cur {

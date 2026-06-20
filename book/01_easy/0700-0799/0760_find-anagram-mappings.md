@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan dua string. Tugasmu adalah menentukan apakah keduanya **anagram** — mengandung huruf yang sama dengan jumlah sama, hanya urutan berbeda.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Hitung frekuensi huruf string pertama, kurangi dengan string kedua. Semua harus nol.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func anagramMappings(nums1 []int, nums2 []int) []int
-```
+**Fungsi Solusi:** `func anagramMappings(nums1 []int, nums2 []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n). Space: O(n).  
-**Kompleksitas Ruang:** O(n).
+**Waktu:** O(n). Space: O(n).  |  **Ruang:** O(n).
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -44,12 +38,12 @@ func main() {
 // anagramMappings returns a mapping array P where P[i] is the index of A[i] in B.
 // Time: O(n). Space: O(n).
 func anagramMappings(nums1 []int, nums2 []int) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pos := make(map[int]int)
 	for i, v := range nums2 {
 		pos[v] = i
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(nums1))
 	for i, v := range nums1 {
 		result[i] = pos[v]

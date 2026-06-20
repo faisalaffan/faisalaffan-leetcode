@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func containVirus(isInfected [][]int) int
-```
+**Fungsi Solusi:** `func containVirus(isInfected [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Stack
+**Teknik:** HashMap, Two Pointer, Stack
 
-**Kompleksitas Waktu:** O(R*C * rounds) in worst case, Space: O(R*C)  
-**Kompleksitas Ruang:** O(R*C)
+**Waktu:** O(R*C * rounds) in worst case, Space: O(R*C)  |  **Ruang:** O(R*C)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,9 +63,9 @@ func containVirus(isInfected [][]int) int {
 
 	for {
 		// Step 1: Find all virus regions via DFS.
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		visited := make([][]bool, rows)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range visited {
 			visited[i] = make([]bool, cols)
 		}
@@ -86,7 +80,7 @@ func containVirus(isInfected [][]int) int {
 					visited[r][c] = true
 
 					// Use a set for threat cells to count distinct ones.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 					threatSet := make(map[[2]int]bool)
 
 					for len(stack) > 0 {
@@ -136,7 +130,7 @@ func containVirus(isInfected [][]int) int {
 
 		// Step 4: Spread remaining virus.
 		// Collect cells that will become infected (adjacent to any remaining 1).
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		toInfect := make(map[[2]int]bool)
 		for r := 0; r < rows; r++ {
 			for c := 0; c < cols; c++ {

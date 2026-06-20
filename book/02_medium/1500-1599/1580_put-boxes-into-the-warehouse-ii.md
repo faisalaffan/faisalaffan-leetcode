@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxBoxesInWarehouseII(boxes []int, warehouse []int) int
-```
+**Fungsi Solusi:** `func MaxBoxesInWarehouseII(boxes []int, warehouse []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Prefix Sum
+**Teknik:** Two Pointer, Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** O(N log N + M), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
+**Waktu:** O(N log N + M), Space: O(1)  |  **Ruang:** O(1)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,14 +43,14 @@ func MaxBoxesInWarehouseII(boxes []int, warehouse []int) int {
 	// In warehouse II, boxes can enter from either left or right side.
 	// We can think of it as: each position's max height is the min of
 	// the prefix max from left and prefix max from right.
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(boxes)
 
 	n := len(warehouse)
 	// Preprocess: effective height at each position
-  // Alokasi slice integer
+  // Alokasi slice
 	leftMax := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	rightMax := make([]int, n)
 
 	leftMax[0] = warehouse[0]
@@ -78,7 +72,7 @@ func MaxBoxesInWarehouseII(boxes []int, warehouse []int) int {
 	}
 
 	// Effective height = max(leftMax, rightMax) since we can enter from either side
-  // Alokasi slice integer
+  // Alokasi slice
 	effective := make([]int, n)
 	for i := 0; i < n; i++ {
 		if leftMax[i] > rightMax[i] {

@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func collectCoins(coins []int, edges [][]int) int
-```
-
-> **💡 Hint:** Two-phase topological pruning.
+**Fungsi Solusi:** `func collectCoins(coins []int, edges [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Topological Sort
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Topological Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -55,9 +44,9 @@ func collectCoins(coins []int, edges [][]int) int {
 		return 0
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	degree := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -70,7 +59,7 @@ func collectCoins(coins []int, edges [][]int) int {
 	removed := make([]bool, n)
 
 	// Phase 1: Remove leaf nodes with no coins (topological pruning)
-  // Alokasi slice integer
+  // Alokasi slice
 	q := make([]int, 0)
 	for i := 0; i < n; i++ {
 		if degree[i] == 1 && coins[i] == 0 {

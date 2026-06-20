@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxCommonFollowers(relations [][]int) [][]int
-```
+**Fungsi Solusi:** `func MaxCommonFollowers(relations [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n^2 * m) roughly, Space: O(n*m)  
-**Kompleksitas Ruang:** O(n*m)
+**Waktu:** O(n^2 * m) roughly, Space: O(n*m)  |  **Ruang:** O(n*m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,7 +40,7 @@ func main() {
 
 // Time: O(n^2 * m) roughly, Space: O(n*m)
 func MaxCommonFollowers(relations [][]int) [][]int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	followers := make(map[int]map[int]bool)
 	for _, r := range relations {
 		user, follower := r[0], r[1]
@@ -56,19 +50,19 @@ func MaxCommonFollowers(relations [][]int) [][]int {
 		followers[user][follower] = true
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	users := make([]int, 0, len(followers))
 	for u := range followers {
 		users = append(users, u)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(users)
 
 	maxCommon := 0
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, 0)
 
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(users); i++ {
 		for j := i + 1; j < len(users); j++ {
 			a, b := users[i], users[j]

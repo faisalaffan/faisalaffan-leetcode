@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func expand(s string) []string
-```
-
-> **💡 Hint:** Backtracking - parse braces and generate all expansions
+**Fungsi Solusi:** `func expand(s string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Backtracking
+**Teknik:** Backtracking, Sorting
 
-**Kompleksitas Waktu:** O(n * k) where k is number of expansions  
-**Kompleksitas Ruang:** O(n * k)
+**Waktu:** O(n * k) where k is number of expansions  |  **Ruang:** O(n * k)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Backtracking** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -75,7 +67,7 @@ func backtrack(s string, idx int, cur string, result *[]string) {
 				options = append(options, s[k])
 			}
 		}
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(options, func(i, j int) bool {
 			return options[i] < options[j]
 		})

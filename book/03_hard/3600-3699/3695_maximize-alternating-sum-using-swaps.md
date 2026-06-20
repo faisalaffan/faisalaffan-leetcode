@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxAlternatingSum(nums []int, swaps [][]int) int64
-```
-
-> **💡 Hint:** DSU to find connected components of swappable indices.
+**Fungsi Solusi:** `func maxAlternatingSum(nums []int, swaps [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Union-Find (DSU)
+**Teknik:** HashMap, Sorting, Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,9 +52,9 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 	n := len(nums)
 
 	// DSU
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range parent {
 		parent[i] = i
 	}
@@ -85,7 +77,7 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 	}
 
 	// Group indices by component
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	compGroups := make(map[int][]int)
 	for i := 0; i < n; i++ {
 		r := find(i)
@@ -96,7 +88,7 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 
 	for _, indices := range compGroups {
 		// Extract values
-  // Alokasi slice integer
+  // Alokasi slice
 		vals := make([]int, len(indices))
 		for i, idx := range indices {
 			vals[i] = nums[idx]
@@ -115,17 +107,17 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 
 		// Assign largest values to even positions (positive contribution)
 		// and smallest to odd positions (negative contribution)
-  // Alokasi slice integer
+  // Alokasi slice
 		evenVals := make([]int, len(evens))
-  // Alokasi slice integer
+  // Alokasi slice
 		oddVals := make([]int, len(odds))
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range evenVals {
 			if i < len(vals) {
 				evenVals[i] = vals[i]
 			}
 		}
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 		for i := range oddVals {
 			if len(vals)-1-i >= 0 {
 				oddVals[i] = vals[len(vals)-1-i]
@@ -133,14 +125,14 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 		}
 
 		// Sort even indices and assign
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(evens)
 		for i, idx := range evens {
 			if i < len(evenVals) {
 				nums[idx] = evenVals[i]
 			}
 		}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(odds)
 		for i, idx := range odds {
 			if i < len(oddVals) {

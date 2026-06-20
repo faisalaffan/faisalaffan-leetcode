@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumStrength(nums []int, k int) int64
-```
-
-> **💡 Hint:** DP with two states
+**Fungsi Solusi:** `func MaximumStrength(nums []int, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n*k)  
-**Kompleksitas Ruang:** O(k)
+**Waktu:** O(n*k)  |  **Ruang:** O(k)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,9 +41,9 @@ import (
 func MaximumStrength(nums []int, k int) int64 {
 	n := len(nums)
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dp0 := make([]int64, k+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp1 := make([]int64, k+1)
 
 	weight := func(j int) int64 {
@@ -70,9 +62,9 @@ func MaximumStrength(nums []int, k int) int64 {
 	dp0[0] = 0
 
 	for i := 0; i < n; i++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp0 := make([]int64, k+1)
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp1 := make([]int64, k+1)
 		for j := 0; j <= k; j++ {
 			ndp0[j] = negInf

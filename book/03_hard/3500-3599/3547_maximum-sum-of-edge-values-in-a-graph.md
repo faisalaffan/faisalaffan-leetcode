@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maximumSumOfEdgeValues(n int, edges [][]int) int64
-```
-
-> **💡 Hint:** Maximum weight matching in a general graph. For bipartite graphs,
+**Fungsi Solusi:** `func maximumSumOfEdgeValues(n int, edges [][]int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,7 +50,7 @@ func maximumSumOfEdgeValues(n int, edges [][]int) int64 {
 		v int
 		w int64
 	}
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]edge, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], int64(e[2])
@@ -68,7 +60,7 @@ func maximumSumOfEdgeValues(n int, edges [][]int) int64 {
 
 	// DP over subsets for maximum weight matching
 	m := 1 << n
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int64, m)
 	for i := 1; i < m; i++ {
 		dp[i] = -1

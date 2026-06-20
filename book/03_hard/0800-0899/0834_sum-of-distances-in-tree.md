@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func sumOfDistancesInTree(n int, edges [][]int) []int
-```
-
-> **💡 Hint:** Rerooting DP. First DFS from root to get subtree sizes and sum of distances
+**Fungsi Solusi:** `func sumOfDistancesInTree(n int, edges [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -41,7 +33,7 @@ package main
 import "fmt"
 
 func sumOfDistancesInTree(n int, edges [][]int) []int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -49,9 +41,9 @@ func sumOfDistancesInTree(n int, edges [][]int) []int {
 		graph[v] = append(graph[v], u)
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	subtree := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 
 	var dfs1 func(u, parent int)

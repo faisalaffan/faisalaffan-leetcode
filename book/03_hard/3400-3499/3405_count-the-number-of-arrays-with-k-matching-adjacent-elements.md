@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func powMod(a, b int64) int64
-```
+**Fungsi Solusi:** `func powMod(a, b int64) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -62,13 +53,13 @@ func CountTheNumberOfArraysWithKMatchingAdjacentElements(n, m, k int) int {
 
 	// Precompute factorials
 	size := n
-  // Alokasi slice integer
+  // Alokasi slice
 	fact := make([]int64, size+1)
 	fact[0] = 1
 	for i := 1; i <= size; i++ {
 		fact[i] = fact[i-1] * int64(i) % MOD3405
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	invFact := make([]int64, size+1)
 	invFact[size] = powMod(fact[size], MOD3405-2)
 	for i := size - 1; i >= 0; i-- {

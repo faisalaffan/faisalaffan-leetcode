@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func rearrangeString(s string, k int) string
-```
+**Fungsi Solusi:** `func rearrangeString(s string, k int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
+**Teknik:** HashMap, BFS, Heap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -87,9 +81,9 @@ func rearrangeString(s string, k int) string {
 	}
 
 	// Count frequencies
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	freq := make(map[byte]int)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(s); i++ {
 		freq[s[i]]++
 	}
@@ -98,7 +92,7 @@ func rearrangeString(s string, k int) string {
 	h := &maxHeap{}
 	heap.Init(h)
 	for ch, cnt := range freq {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, charFreq{ch, cnt})
 	}
 
@@ -110,7 +104,7 @@ func rearrangeString(s string, k int) string {
 		if len(q) > 0 && q[0].readyAt <= len(result) {
 			item := q[0]
 			q = q[1:]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(h, charFreq{item.ch, item.count})
 		}
 
@@ -118,7 +112,7 @@ func rearrangeString(s string, k int) string {
 			return "" // impossible
 		}
 
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		cf := heap.Pop(h).(charFreq)
 		result = append(result, cf.ch)
 		cf.count--

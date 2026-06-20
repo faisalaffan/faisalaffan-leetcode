@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countSteppingNumbers(low int, high int) []int
-```
+**Fungsi Solusi:** `func countSteppingNumbers(low int, high int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Teknik:** DFS, Sorting
 
-**Kompleksitas Waktu:** O(2^n) where n = number of digits in high  
-**Kompleksitas Ruang:** O(2^n)
+**Waktu:** O(2^n) where n = number of digits in high  |  **Ruang:** O(2^n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -45,7 +39,7 @@ import (
 // Space: O(2^n)
 
 func countSteppingNumbers(low int, high int) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 
 	var dfs func(num int)
@@ -69,7 +63,7 @@ func countSteppingNumbers(low int, high int) []int {
 		dfs(i)
 	}
 
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

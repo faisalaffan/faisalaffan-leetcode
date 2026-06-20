@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countCharacters(words []string, chars string) int
-```
+**Fungsi Solusi:** `func countCharacters(words []string, chars string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n * k) where k is max word length  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(n * k) where k is max word length  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -43,18 +34,18 @@ func main() {
 
 // LeetCode submission: countCharacters
 func countCharacters(words []string, chars string) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	ch := make([]int, 26)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(chars); i++ {
 		ch[chars[i]-'a']++
 	}
 	ans := 0
 	for _, w := range words {
-  // Alokasi slice integer
+  // Alokasi slice
 		need := make([]int, 26)
 		ok := true
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(w); i++ {
 			idx := w[i] - 'a'
 			need[idx]++

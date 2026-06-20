@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func smallestCommonElement(mat [][]int) int
-```
+**Fungsi Solusi:** `func smallestCommonElement(mat [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m * n)  |  **Ruang:** O(max value) = O(10000) since values are 1..10000
 
-**Kompleksitas Waktu:** O(m * n)  
-**Kompleksitas Ruang:** O(max value) = O(10000) since values are 1..10000
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -47,7 +38,7 @@ func smallestCommonElement(mat [][]int) int {
 		return -1
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	count := make([]int, 10001)
 	for _, v := range mat[0] {
 		count[v] = 1

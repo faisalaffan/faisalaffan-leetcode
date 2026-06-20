@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxSubgraphScore(n int, edges [][]int, good []int) []int64
-```
-
-> **💡 Hint:** Tree DP. First pass computes best downward score from each
+**Fungsi Solusi:** `func maxSubgraphScore(n int, edges [][]int, good []int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +49,7 @@ func main() {
 
 func maxSubgraphScore(n int, edges [][]int, good []int) []int64 {
 	// Build adjacency
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -66,9 +58,9 @@ func maxSubgraphScore(n int, edges [][]int, good []int) []int64 {
 	}
 
 	// good[i] = 1 (good) or 0 (bad)
-  // Alokasi slice integer
+  // Alokasi slice
 	val := make([]int64, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range val {
 		if good[i] == 1 {
 			val[i] = 1
@@ -79,10 +71,10 @@ func maxSubgraphScore(n int, edges [][]int, good []int) []int64 {
 
 	// dpDown[i] = best score of connected subgraph containing i,
 	// restricted to i's subtree (downward only)
-  // Alokasi slice integer
+  // Alokasi slice
 	dpDown := make([]int64, n)
 	// ans[i] = final answer for node i
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, n)
 
 	var dfs1 func(u, parent int)

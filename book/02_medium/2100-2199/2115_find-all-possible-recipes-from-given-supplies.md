@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findAllRecipes(recipes []string, ingredients [][]string, supplies []string) []string
-```
+**Fungsi Solusi:** `func findAllRecipes(recipes []string, ingredients [][]string, supplies []string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS
+**Teknik:** HashMap, BFS
 
-**Kompleksitas Waktu:** O(n + m + s)  
-**Kompleksitas Ruang:** O(n + m + s)
+**Waktu:** O(n + m + s)  |  **Ruang:** O(n + m + s)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,23 +31,23 @@ package main
 import "fmt"
 
 func findAllRecipes(recipes []string, ingredients [][]string, supplies []string) []string {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	supplySet := make(map[string]bool)
 	for _, s := range supplies {
 		supplySet[s] = true
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	recipeIdx := make(map[string]int)
 	for i, r := range recipes {
 		recipeIdx[r] = i
 	}
 
 	// indegree for recipes (how many ingredients still needed)
-  // Alokasi slice integer
+  // Alokasi slice
 	indegree := make([]int, len(recipes))
 	// For each recipe ingredient, which recipes need it
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	graph := make(map[string][]int)
 	for i, ing := range ingredients {
 		for _, ig := range ing {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func isPossible(n int, edges [][]int) bool
-```
+**Fungsi Solusi:** `func isPossible(n int, edges [][]int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,7 +51,7 @@ func main() {
 
 func isPossible(n int, edges [][]int) bool {
 	// Track which edges exist (dense graph, use adjacency matrix/set)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	adjSet := make(map[int]map[int]bool)
 	for i := 1; i <= n; i++ {
 		adjSet[i] = make(map[int]bool)
@@ -68,7 +62,7 @@ func isPossible(n int, edges [][]int) bool {
 		adjSet[b][a] = true
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	deg := make([]int, n+1)
 	for _, e := range edges {
 		deg[e[0]]++

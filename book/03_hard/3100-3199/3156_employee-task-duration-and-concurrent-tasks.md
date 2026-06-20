@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func employeeTaskDurationAndConcurrentTasks(tasks []Task) []EmployeeResult
-```
-
-> **💡 Hint:** group tasks by employee, then sweep-line for concurrency.
+**Fungsi Solusi:** `func employeeTaskDurationAndConcurrentTasks(tasks []Task) []EmployeeResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -65,19 +57,19 @@ func employeeTaskDurationAndConcurrentTasks(tasks []Task) []EmployeeResult {
 
 	// Group tasks by employee.
 	type interval struct{ start, end int }
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	empMap := make(map[int][]interval)
 	for _, t := range tasks {
 		empMap[t.EmpID] = append(empMap[t.EmpID], interval{t.Start, t.End})
 	}
 
 	// Collect and sort employee IDs.
-  // Alokasi slice integer
+  // Alokasi slice
 	empIDs := make([]int, 0, len(empMap))
 	for id := range empMap {
 		empIDs = append(empIDs, id)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(empIDs)
 
 	res := make([]EmployeeResult, len(empIDs))
@@ -88,7 +80,7 @@ func employeeTaskDurationAndConcurrentTasks(tasks []Task) []EmployeeResult {
 		total := 0
 		// Events for sweep-line.
 		type event struct{ pos, delta int }
-  // Alokasi slice integer
+  // Alokasi slice
 		events := make([]event, 0, len(intervals)*2)
 		for _, iv := range intervals {
 			total += iv.end - iv.start
@@ -97,7 +89,7 @@ func employeeTaskDurationAndConcurrentTasks(tasks []Task) []EmployeeResult {
 		}
 
 		// Sort events: by position, then end (-1) before start (+1).
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(events, func(i, j int) bool {
 			if events[i].pos != events[j].pos {
 				return events[i].pos < events[j].pos

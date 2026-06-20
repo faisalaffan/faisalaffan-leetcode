@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func unmarkedSumArray(nums []int, queries [][]int) []int64
-```
+**Fungsi Solusi:** `func unmarkedSumArray(nums []int, queries [][]int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O((n + q) log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O((n + q) log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -69,11 +63,11 @@ func unmarkedSumArray(nums []int, queries [][]int) []int64 {
 	heap.Init(h)
 	for i, x := range nums {
 		sum += int64(x)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, pair3080{x, i})
 	}
 	marked := make([]bool, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, len(queries))
 	for qi, q := range queries {
 		idx, k := q[0], q[1]
@@ -82,7 +76,7 @@ func unmarkedSumArray(nums []int, queries [][]int) []int64 {
 			sum -= int64(nums[idx])
 		}
 		for k > 0 && h.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			p := heap.Pop(h).(pair3080)
 			if !marked[p.idx] {
 				marked[p.idx] = true

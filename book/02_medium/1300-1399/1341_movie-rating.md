@@ -4,36 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func movieRating(ratings []struct {
-	userID    int
-	movieID   int
-	rating    int
-	createdAt string
-}, users []struct {
-	id   int
-	name string
-}, movies []struct {
-	id    int
-	title string
-}) string
-```
+**Fungsi Solusi:** `func movieRating(ratings []struct { userID int movieID int rating int createdAt string }, users []struct { id int name string }, movies []struct { id int title string }) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n) for counting  
-**Kompleksitas Ruang:** O(n) for maps
+**Waktu:** O(n) for counting  |  **Ruang:** O(n) for maps
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -98,7 +81,7 @@ func movieRating(ratings []struct {
 	title string
 }) string {
 	// Count ratings per user
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	userRatings := make(map[int]int)
 	for _, r := range ratings {
 		userRatings[r.userID]++
@@ -115,7 +98,7 @@ func movieRating(ratings []struct {
 	}
 
 	// Average rating in Feb 2020
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	movieScores := make(map[int]struct{ sum, count int })
 	for _, r := range ratings {
 		if r.createdAt >= "2020-02-01" && r.createdAt <= "2020-02-29" {

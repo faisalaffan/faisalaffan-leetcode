@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func totalCost(costs []int, k int, candidates int) int64
-```
+**Fungsi Solusi:** `func totalCost(costs []int, k int, candidates int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Heap / Priority Queue, Stack
+**Teknik:** Two Pointer, Heap
 
-**Kompleksitas Waktu:** O((candidates + k) log candidates)  
-**Kompleksitas Ruang:** O(candidates)
+**Waktu:** O((candidates + k) log candidates)  |  **Ruang:** O(candidates)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,12 +62,12 @@ func totalCost(costs []int, k int, candidates int) int64 {
 
 	left, right := 0, n-1
 	for i := 0; i < candidates && left <= right; i++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(leftH, costs[left])
 		left++
 	}
 	for i := 0; i < candidates && left <= right; i++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(rightH, costs[right])
 		right--
 	}
@@ -81,18 +75,18 @@ func totalCost(costs []int, k int, candidates int) int64 {
 	var total int64
 	for i := 0; i < k; i++ {
 		if rightH.Len() == 0 || (leftH.Len() > 0 && (*leftH)[0] <= (*rightH)[0]) {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			total += int64(heap.Pop(leftH).(int))
 			if left <= right {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(leftH, costs[left])
 				left++
 			}
 		} else {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			total += int64(heap.Pop(rightH).(int))
 			if left <= right {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(rightH, costs[right])
 				right--
 			}

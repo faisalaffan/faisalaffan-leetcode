@@ -4,29 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func busyStudent(startTime []int, endTime []int, queryTime int) int
-
-import "fmt"
-
-func main()
-```
+**Fungsi Solusi:** `func busyStudent(startTime []int, endTime []int, queryTime int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n), Space: O(1)  |  **Ruang:** O(1)
 
-**Kompleksitas Waktu:** O(n), Space: O(1)  
-**Kompleksitas Ruang:** O(1)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -49,7 +36,7 @@ func main() {
 // Time: O(n), Space: O(1)
 func NumberOfStudentsDoingHomeworkAtAGivenTime(startTime []int, endTime []int, queryTime int) int {
 	count := 0
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range startTime {
 		if startTime[i] <= queryTime && queryTime <= endTime[i] {
 			count++

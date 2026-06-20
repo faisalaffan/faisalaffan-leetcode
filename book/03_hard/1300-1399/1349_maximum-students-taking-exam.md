@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxStudents(seats [][]byte) int
-```
-
-> **💡 Hint:** Bitmask DP.
+**Fungsi Solusi:** `func maxStudents(seats [][]byte) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +40,7 @@ func maxStudents(seats [][]byte) int {
 	m, n := len(seats), len(seats[0])
 
 	// Row broken-seat masks (1 = broken, cannot sit there)
-  // Alokasi slice integer
+  // Alokasi slice
 	broken := make([]int, m)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -59,7 +51,7 @@ func maxStudents(seats [][]byte) int {
 	}
 
 	// Precompute all valid row masks (no adjacent 1s)
-  // Alokasi slice integer
+  // Alokasi slice
 	valid := make([]int, 0, 1<<n)
 	for mask := 0; mask < (1 << n); mask++ {
 		if mask&(mask<<1) == 0 {
@@ -76,7 +68,7 @@ func maxStudents(seats [][]byte) int {
 		return c
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, m)
 	for i := 0; i < m; i++ {
 		dp[i] = make([]int, 1<<n)

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfPairs(nums1 []int, nums2 []int, queries [][]int) []int
-```
-
-> **💡 Hint:** Maintain sorted nums2. Binary search to count how
+**Fungsi Solusi:** `func numberOfPairs(nums1 []int, nums2 []int, queries [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -57,9 +49,9 @@ func main() {
 }
 
 func numberOfPairs(nums1 []int, nums2 []int, queries [][]int) []int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(nums2)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 
 	for idx, q := range queries {
@@ -74,7 +66,7 @@ func numberOfPairs(nums1 []int, nums2 []int, queries [][]int) []int {
 		}
 
 		if false {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 			sort.Ints([]int{}) // keep sort import
 		}
 	}

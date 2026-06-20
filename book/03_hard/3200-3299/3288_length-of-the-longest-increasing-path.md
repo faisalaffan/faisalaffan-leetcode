@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func longestIncreasingPath(coordinates [][]int) int
-```
-
-> **💡 Hint:** //  1. Sort points by (x, y) ascending.
+**Fungsi Solusi:** `func longestIncreasingPath(coordinates [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search
+**Teknik:** Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -68,13 +60,13 @@ func main() {
 
 func longestIncreasingPath(coordinates [][]int) int {
 	n := len(coordinates)
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
 
 	// Sort by x ascending, then y ascending.
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(coordinates, func(i, j int) bool {
 		if coordinates[i][0] != coordinates[j][0] {
 			return coordinates[i][0] < coordinates[j][0]
@@ -85,7 +77,7 @@ func longestIncreasingPath(coordinates [][]int) int {
 	// Patience sorting (LIS) on y.
 	// Process points grouped by x. Within each group, process y in descending
 	// order to avoid taking two points from the same x.
-  // Alokasi slice integer
+  // Alokasi slice
 	tails := make([]int, 0, n)
 
 	i := 0
@@ -132,7 +124,6 @@ func longestIncreasingPath(coordinates [][]int) int {
 
 func lowerBound(arr []int, target int) int {
 	l, r := 0, len(arr)
-  // Two-pointer: gerakkan kiri atau kanan
 	for l < r {
 		mid := (l + r) / 2
 		if arr[mid] < target {

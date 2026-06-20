@@ -2,27 +2,21 @@
 
 ## 📖 Deskripsi Soal
 
-**Tingkat Kesulitan:** Sulit
+**Tingkat Kesulitan:** —
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func validSubarraySize(nums []int, threshold int) int
-```
+**Fungsi Solusi:** `func validSubarraySize(nums []int, threshold int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Stack, Monotonic Stack/Queue
+**Teknik:** Two Pointer, Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -60,13 +54,13 @@ import (
 
 func validSubarraySize(nums []int, threshold int) int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	prevSmaller := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	nextSmaller := make([]int, n)
 
 	// Previous strictly smaller element.
-  // Alokasi slice integer
+  // Alokasi slice
 	stack := make([]int, 0)
 	for i := 0; i < n; i++ {
 		for len(stack) > 0 && nums[stack[len(stack)-1]] >= nums[i] {

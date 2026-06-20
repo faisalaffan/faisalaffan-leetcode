@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func mostProfitablePath(edges [][]int, bob int, amount []int) int
-```
+**Fungsi Solusi:** `func mostProfitablePath(edges [][]int, bob int, amount []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -51,7 +42,7 @@ func main() {
 
 func mostProfitablePath(edges [][]int, bob int, amount []int) int {
 	n := len(amount)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -60,7 +51,7 @@ func mostProfitablePath(edges [][]int, bob int, amount []int) int {
 	}
 
 	// Bob's path from bob to 0
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, n)
 	var dfsParent func(u, p int)
 	dfsParent = func(u, p int) {
@@ -74,9 +65,9 @@ func mostProfitablePath(edges [][]int, bob int, amount []int) int {
 	dfsParent(0, -1)
 
 	// Bob's arrival time at each node
-  // Alokasi slice integer
+  // Alokasi slice
 	bobTime := make([]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range bobTime {
 		bobTime[i] = math.MaxInt32
 	}

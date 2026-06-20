@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func smallestMissingValueSubtree(parents []int, nums []int) []int
-```
-
-> **💡 Hint:** DFS + set.
+**Fungsi Solusi:** `func smallestMissingValueSubtree(parents []int, nums []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS
+**Teknik:** HashMap, DFS
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -43,7 +35,7 @@ import "fmt"
 
 func smallestMissingValueSubtree(parents []int, nums []int) []int {
 	n := len(parents)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 	for i := 0; i < n; i++ {
 		ans[i] = 1
@@ -62,7 +54,7 @@ func smallestMissingValueSubtree(parents []int, nums []int) []int {
 	}
 
 	// Build children adjacency
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	children := make([][]int, n)
 	for i := 1; i < n; i++ {
 		p := parents[i]
@@ -70,7 +62,7 @@ func smallestMissingValueSubtree(parents []int, nums []int) []int {
 	}
 
 	// Reconstruct parent chain from oneNode to root
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	pathSet := make(map[int]bool)
 	curr := oneNode
 	for curr != -1 {
@@ -81,7 +73,7 @@ func smallestMissingValueSubtree(parents []int, nums []int) []int {
 		}
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	visited := make(map[int]bool)
 	mex := 1
 

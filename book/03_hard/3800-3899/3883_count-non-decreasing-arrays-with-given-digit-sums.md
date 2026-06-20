@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countNonDecreasingArrays(digitSum []int) int
-```
-
-> **💡 Hint:** For each digit sum value, precompute all numbers <= limit
+**Fungsi Solusi:** `func countNonDecreasingArrays(digitSum []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Monotonic Stack/Queue
+**Teknik:** DP, Prefix Sum, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -65,7 +57,7 @@ func countNonDecreasingArrays(digitSum []int) int {
 	}
 
 	// Precompute numbers grouped by digit sum
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	bySum := make([][]int, 55) // max digit sum for numbers <= 1000
 	for v := 0; v <= maxVal; v++ {
 		s := digitSumOf(v)
@@ -75,7 +67,7 @@ func countNonDecreasingArrays(digitSum []int) int {
 	}
 
 	// cand[i] = candidates for position i
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	cand := make([][]int, len(digitSum))
 	for i, s := range digitSum {
 		if s >= len(bySum) || len(bySum[s]) == 0 {
@@ -85,17 +77,17 @@ func countNonDecreasingArrays(digitSum []int) int {
 	}
 
 	// DP: dp[j] = ways ending with candidates[i][j]
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, len(cand[0]))
 	for j := range dp {
 		dp[j] = 1
 	}
 
 	for i := 1; i < len(digitSum); i++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		ndp := make([]int, len(cand[i]))
 		// Build prefix sums of dp
-  // Alokasi slice integer
+  // Alokasi slice
 		prefix := make([]int, len(dp)+1)
 		for j := 0; j < len(dp); j++ {
 			prefix[j+1] = (prefix[j] + dp[j]) % mod

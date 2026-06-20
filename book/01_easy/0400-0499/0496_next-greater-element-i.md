@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NextGreaterElementI(nums1, nums2 []int) []int
-```
+**Fungsi Solusi:** `func NextGreaterElementI(nums1, nums2 []int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Stack
+**Teknik:** HashMap, Stack
 
-**Kompleksitas Waktu:** O(n+m), Space: O(m)  
-**Kompleksitas Ruang:** O(m)
+**Waktu:** O(n+m), Space: O(m)  |  **Ruang:** O(m)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,7 +31,7 @@ import "fmt"
 
 // Time: O(n+m), Space: O(m)
 func NextGreaterElementI(nums1, nums2 []int) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	nextGreater := make(map[int]int)
 	var stack []int
 	for _, v := range nums2 {
@@ -47,7 +41,7 @@ func NextGreaterElementI(nums1, nums2 []int) []int {
 		}
 		stack = append(stack, v)
 	}
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(nums1))
 	for i, v := range nums1 {
 		if val, ok := nextGreater[v]; ok {

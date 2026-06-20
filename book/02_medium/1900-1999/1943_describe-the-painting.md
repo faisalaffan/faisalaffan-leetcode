@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func SplitPainting(segments [][]int) [][]int64
-```
+**Fungsi Solusi:** `func SplitPainting(segments [][]int) [][]int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,9 +40,9 @@ func main() {
 
 // Time: O(n log n), Space: O(n)
 func SplitPainting(segments [][]int) [][]int64 {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	diff := make(map[int]int64)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	endpoints := make(map[int]bool)
 
 	for _, seg := range segments {
@@ -60,18 +54,18 @@ func SplitPainting(segments [][]int) [][]int64 {
 	}
 
 	// Sort unique endpoints
-  // Alokasi slice integer
+  // Alokasi slice
 	points := make([]int, 0, len(endpoints))
 	for p := range endpoints {
 		points = append(points, p)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(points)
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int64, 0)
 	var sum int64 = 0
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(points)-1; i++ {
 		sum += diff[points[i]]
 		if sum != 0 {

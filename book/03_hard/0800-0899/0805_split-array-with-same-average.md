@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func splitArraySameAverage(nums []int) bool
-```
-
-> **💡 Hint:** Meet-in-the-Middle
+**Fungsi Solusi:** `func splitArraySameAverage(nums []int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer
+**Teknik:** HashMap, Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -90,9 +82,9 @@ func splitArraySameAverage(nums []int) bool {
 	// Meet-in-the-middle
 	n1 := n / 2
 	// leftSums[size] = set of achievable sums with given subset size
-  // Alokasi slice integer
+  // Alokasi slice
 	leftSums := make([]map[int]bool, n1+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range leftSums {
 		leftSums[i] = make(map[int]bool)
 	}

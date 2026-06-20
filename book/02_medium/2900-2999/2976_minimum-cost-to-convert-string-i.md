@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumCostConvert(source string, target string, original []byte, changed []byte, cost []int) (ans int64)
-```
+**Fungsi Solusi:** `func minimumCostConvert(source string, target string, original []byte, changed []byte, cost []int) (ans int64)`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(26^3 + n)  |  **Ruang:** O(26^2)
 
-**Kompleksitas Waktu:** O(26^3 + n)  
-**Kompleksitas Ruang:** O(26^2)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -43,9 +34,9 @@ func main() {
 
 func minimumCostConvert(source string, target string, original []byte, changed []byte, cost []int) (ans int64) {
 	const inf = 1 << 29
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][]int, 26)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range g {
 		g[i] = make([]int, 26)
 		for j := range g[i] {
@@ -56,7 +47,7 @@ func minimumCostConvert(source string, target string, original []byte, changed [
 			}
 		}
 	}
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(original); i++ {
 		x := int(original[i] - 'a')
 		y := int(changed[i] - 'a')
@@ -74,7 +65,7 @@ func minimumCostConvert(source string, target string, original []byte, changed [
 			}
 		}
 	}
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(source); i++ {
 		x := int(source[i] - 'a')
 		y := int(target[i] - 'a')

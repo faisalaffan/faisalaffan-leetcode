@@ -4,30 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func runningTotal(scores []struct {
-	playerName string
-	gender     string
-	day        string
-	scorePoints int
-}) []result
-```
+**Fungsi Solusi:** `func runningTotal(scores []struct { playerName string gender string day string scorePoints int }) []result`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n log n) due to sorting  
-**Kompleksitas Ruang:** O(n) for storing results
+**Waktu:** O(n log n) due to sorting  |  **Ruang:** O(n) for storing results
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -86,7 +75,7 @@ func runningTotal(scores []struct {
 		score       int
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[string][]playerScore)
 	for _, s := range scores {
 		groups[s.gender] = append(groups[s.gender], playerScore{s.playerName, s.day, s.scorePoints})
@@ -96,7 +85,7 @@ func runningTotal(scores []struct {
 	for gender := range groups {
 		// Bubble sort for simplicity - in real SQL this is ORDER BY
 		group := groups[gender]
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(group); i++ {
 			for j := i + 1; j < len(group); j++ {
 				if group[j].day < group[i].day ||

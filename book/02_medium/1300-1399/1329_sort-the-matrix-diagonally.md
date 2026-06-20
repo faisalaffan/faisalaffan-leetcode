@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func diagonalSort(mat [][]int) [][]int
-```
+**Fungsi Solusi:** `func diagonalSort(mat [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(m*n*log(min(m,n))) - sorting each diagonal  
-**Kompleksitas Ruang:** O(m*n) for storing diagonal elements
+**Waktu:** O(m*n*log(min(m,n))) - sorting each diagonal  |  **Ruang:** O(m*n) for storing diagonal elements
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -58,7 +52,7 @@ func diagonalSort(mat [][]int) [][]int {
 	// Key insight: elements on same diagonal have same (i-j)
 
 	// Group diagonals by (row - col) offset
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	diagonals := make(map[int][]int)
 
 	for i := 0; i < m; i++ {
@@ -69,13 +63,13 @@ func diagonalSort(mat [][]int) [][]int {
 
 	// Sort each diagonal
 	for _, d := range diagonals {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(d)
 	}
 
 	// Place sorted values back
 	// We need to track where we are in each diagonal
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	counters := make(map[int]int)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {

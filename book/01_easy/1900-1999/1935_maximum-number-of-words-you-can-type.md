@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumNumberOfWordsYouCanType(text string, brokenLetters string) int
-```
+**Fungsi Solusi:** `func MaximumNumberOfWordsYouCanType(text string, brokenLetters string) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n + m), Space: O(k) where k = len(brokenLetters)  
-**Kompleksitas Ruang:** O(k) where k = len(brokenLetters)
+**Waktu:** O(n + m), Space: O(k) where k = len(brokenLetters)  |  **Ruang:** O(k) where k = len(brokenLetters)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,9 +40,9 @@ func main() {
 
 // Time: O(n + m), Space: O(k) where k = len(brokenLetters)
 func MaximumNumberOfWordsYouCanType(text string, brokenLetters string) int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	broken := make(map[byte]bool)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 	for i := 0; i < len(brokenLetters); i++ {
 		broken[brokenLetters[i]] = true
 	}
@@ -57,7 +51,7 @@ func MaximumNumberOfWordsYouCanType(text string, brokenLetters string) int {
 	count := 0
 	for _, word := range words {
 		canType := true
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(word); i++ {
 			if broken[word[i]] {
 				canType = false

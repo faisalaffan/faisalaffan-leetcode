@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfNodes(n int, queries []int) int
-```
+**Fungsi Solusi:** `func numberOfNodes(n int, queries []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(sqrt(n) + q * log n)  |  **Ruang:** O(log n)
 
-**Kompleksitas Waktu:** O(sqrt(n) + q * log n)  
-**Kompleksitas Ruang:** O(log n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -58,7 +49,7 @@ func numberOfNodes(n int, queries []int) int {
 	}
 
 	// Nodes at each depth (excluding last might be incomplete)
-  // Alokasi slice integer
+  // Alokasi slice
 	nodesAtDepth := make([]int, maxDepth+1)
 	remaining := n
 	for d := 1; d <= maxDepth; d++ {
@@ -73,7 +64,7 @@ func numberOfNodes(n int, queries []int) int {
 	}
 
 	// Toggle depths that are multiples of each query k
-  // Alokasi slice integer
+  // Alokasi slice
 	toggle := make([]int, maxDepth+1)
 	for _, k := range queries {
 		if k <= maxDepth {

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int
-```
+**Fungsi Solusi:** `func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Sliding Window
+**Waktu:** O(n) Space: O(n)  |  **Ruang:** O(n)
 
-**Kompleksitas Waktu:** O(n) Space: O(n)  
-**Kompleksitas Ruang:** O(n)
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -38,7 +29,7 @@ import "fmt"
 
 func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int {
 	n := len(startTime)
-  // Alokasi slice integer
+  // Alokasi slice
 	gaps := make([]int, 0, n+1)
 	gaps = append(gaps, startTime[0])
 	for i := 1; i < n; i++ {

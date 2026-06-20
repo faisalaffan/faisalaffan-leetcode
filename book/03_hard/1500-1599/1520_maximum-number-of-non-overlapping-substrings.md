@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxNumOfSubstrings(s string) []string
-```
-
-> **💡 Hint:** Greedy Interval
+**Fungsi Solusi:** `func maxNumOfSubstrings(s string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,9 +54,9 @@ func maxNumOfSubstrings(s string) []string {
 	n := len(s)
 
 	// First and last occurrence of each char
-  // Alokasi slice integer
+  // Alokasi slice
 	first := make([]int, 26)
-  // Alokasi slice integer
+  // Alokasi slice
 	last := make([]int, 26)
 	for i := 0; i < 26; i++ {
 		first[i] = n
@@ -106,7 +98,7 @@ func maxNumOfSubstrings(s string) []string {
 	}
 
 	// Dedup by (l,r)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[int]map[int]bool)
 	unique := make([]iv, 0)
 	for _, inv := range minIntervals {
@@ -120,7 +112,7 @@ func maxNumOfSubstrings(s string) []string {
 	}
 
 	// Sort by end ascending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(unique, func(i, j int) bool {
 		return unique[i].r < unique[j].r
 	})

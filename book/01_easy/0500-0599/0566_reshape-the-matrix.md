@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func ReshapeTheMatrix(mat [][]int, r, c int) [][]int
-```
+**Fungsi Solusi:** `func ReshapeTheMatrix(mat [][]int, r, c int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m*n), Space: O(m*n)  |  **Ruang:** O(m*n)
 
-**Kompleksitas Waktu:** O(m*n), Space: O(m*n)  
-**Kompleksitas Ruang:** O(m*n)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -41,9 +32,9 @@ func ReshapeTheMatrix(mat [][]int, r, c int) [][]int {
 	if m*n != r*c {
 		return mat
 	}
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, r)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range result {
 		result[i] = make([]int, c)
 	}

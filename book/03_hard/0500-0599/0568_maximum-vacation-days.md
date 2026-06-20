@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxVacationDays(flights [][]int, days [][]int) int
-```
+**Fungsi Solusi:** `func maxVacationDays(flights [][]int, days [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -56,7 +47,7 @@ func maxVacationDays(flights [][]int, days [][]int) int {
 	k := len(days[0])   // weeks
 
 	// prev[j] = max vacation days ending at city j for current week
-  // Alokasi slice integer
+  // Alokasi slice
 	prev := make([]int, n)
 	for j := 0; j < n; j++ {
 		// Week 0: can we reach city j?
@@ -68,7 +59,7 @@ func maxVacationDays(flights [][]int, days [][]int) int {
 	}
 
 	for w := 1; w < k; w++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		cur := make([]int, n)
 		for j := 0; j < n; j++ {
 			cur[j] = -1

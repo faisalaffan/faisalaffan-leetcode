@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findBanned(logins []Login) []int
-```
+**Fungsi Solusi:** `func findBanned(logins []Login) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,21 +42,21 @@ type Login struct {
 
 func findBanned(logins []Login) []int {
 	// Group by account
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groups := make(map[int][]Login)
 	for _, l := range logins {
 		groups[l.AccountID] = append(groups[l.AccountID], l)
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	banned := make(map[int]bool)
 	for accID, records := range groups {
-  // Custom sort dengan comparator
+  // Custom sort
 		sort.Slice(records, func(i, j int) bool {
 			return records[i].LoginTime < records[j].LoginTime
 		})
 		// Track latest login time per IP for this account
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		lastTime := make(map[string]int)
 		for _, r := range records {
 			if prevTime, ok := lastTime[r.IPAddress]; ok {
@@ -73,7 +67,7 @@ func findBanned(logins []Login) []int {
 		}
 
 		// Check if any IP has concurrent sessions
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		active := make(map[string]int)
 		for _, r := range records {
 			if _, ok := active[r.IPAddress]; ok {
@@ -90,12 +84,12 @@ func findBanned(logins []Login) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0, len(banned))
 	for id := range banned {
 		result = append(result, id)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

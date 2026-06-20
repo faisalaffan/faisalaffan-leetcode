@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MinimumSumOfMountainTripletsI(nums []int) int
-```
+**Fungsi Solusi:** `func MinimumSumOfMountainTripletsI(nums []int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Prefix Sum
 
-**Kompleksitas Waktu:** O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Prefix Sum** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -51,7 +45,7 @@ func MinimumSumOfMountainTripletsI(nums []int) int {
 	}
 
 	// prefix[i] = min value in nums[0..i]
-  // Alokasi slice integer
+  // Alokasi slice
 	prefix := make([]int, n)
 	prefix[0] = nums[0]
 	for i := 1; i < n; i++ {
@@ -63,7 +57,7 @@ func MinimumSumOfMountainTripletsI(nums []int) int {
 	}
 
 	// suffix[i] = min value in nums[i..n-1]
-  // Alokasi slice integer
+  // Alokasi slice
 	suffix := make([]int, n)
 	suffix[n-1] = nums[n-1]
 	for i := n - 2; i >= 0; i-- {

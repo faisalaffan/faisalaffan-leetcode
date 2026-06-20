@@ -4,29 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getLonelyNodes(root *TreeNode) []int
-
-import "fmt"
-
-type TreeNode struct
-```
+**Fungsi Solusi:** `func getLonelyNodes(root *TreeNode) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n), Space: O(h) recursive + O(n) output  |  **Ruang:** O(h) recursive + O(n) output
 
-**Kompleksitas Waktu:** O(n), Space: O(h) recursive + O(n) output  
-**Kompleksitas Ruang:** O(h) recursive + O(n) output
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -65,7 +52,7 @@ func main() {
 
 // Time: O(n), Space: O(h) recursive + O(n) output
 func FindAllTheLonelyNodes(root *TreeNode) []int {
-  // Alokasi slice integer
+  // Alokasi slice
 	res := make([]int, 0)
 	collectLonely(root, &res)
 	return res

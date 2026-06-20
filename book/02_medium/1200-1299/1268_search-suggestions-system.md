@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func suggestedProducts(products []string, searchWord string) [][]string
-```
+**Fungsi Solusi:** `func suggestedProducts(products []string, searchWord string) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Prefix Sum
+**Teknik:** Sorting, Prefix Sum
 
-**Kompleksitas Waktu:** O(n log n + m * n) where m = len(searchWord)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n + m * n) where m = len(searchWord)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,7 +41,7 @@ import (
 func suggestedProducts(products []string, searchWord string) [][]string {
 	sort.Strings(products)
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]string, len(searchWord))
 
 	for i := 1; i <= len(searchWord); i++ {

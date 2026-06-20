@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxTastiness(fruits []Fruit, budget int, couponCount int) int
-```
+**Fungsi Solusi:** `func maxTastiness(fruits []Fruit, budget int, couponCount int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP
 
-**Kompleksitas Waktu:** O(n * budget * coupon)  
-**Kompleksitas Ruang:** O(budget * coupon)
+**Waktu:** O(n * budget * coupon)  |  **Ruang:** O(budget * coupon)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,7 +44,7 @@ func main() {
 }
 
 func maxTastiness(fruits []Fruit, budget int, couponCount int) int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, budget+1)
 	for b := range dp {
 		dp[b] = make([]int, couponCount+1)
@@ -62,7 +56,7 @@ func maxTastiness(fruits []Fruit, budget int, couponCount int) int {
 	ans := 0
 
 	for _, f := range fruits {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 		newDp := make([][]int, budget+1)
 		for b := range newDp {
 			newDp[b] = make([]int, couponCount+1)

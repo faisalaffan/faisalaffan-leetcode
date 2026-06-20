@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func customersWithMaxConsecutiveDays(transactions [][]int) []int
-```
-
-> **💡 Hint:** Group transactions by customer, sort by day (dedup), find longest
+**Fungsi Solusi:** `func customersWithMaxConsecutiveDays(transactions [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,7 +41,7 @@ type transaction struct {
 }
 
 func customersWithMaxConsecutiveDays(transactions [][]int) []int {
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	custDays := make(map[int][]int)
 	for _, t := range transactions {
 		custID, day := t[0], t[1]
@@ -57,13 +49,13 @@ func customersWithMaxConsecutiveDays(transactions [][]int) []int {
 	}
 
 	maxStreak := 0
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	custMaxStreak := make(map[int]int)
 
 	for cid, days := range custDays {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(days)
-  // Alokasi slice integer
+  // Alokasi slice
 		uniq := make([]int, 0, len(days))
 		for i, d := range days {
 			if i == 0 || d != days[i-1] {
@@ -95,14 +87,14 @@ func customersWithMaxConsecutiveDays(transactions [][]int) []int {
 		custMaxStreak[cid] = streak
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 	for cid, streak := range custMaxStreak {
 		if streak == maxStreak {
 			result = append(result, cid)
 		}
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

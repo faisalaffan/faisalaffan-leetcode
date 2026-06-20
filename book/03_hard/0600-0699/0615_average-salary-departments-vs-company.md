@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func calcAvg(vals []int) float64
-```
+**Fungsi Solusi:** `func calcAvg(vals []int) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(S + E + M*D) where S=salaries, E=employees, M=months, D=depts  
-**Kompleksitas Ruang:** O(S + E)
+**Waktu:** O(S + E + M*D) where S=salaries, E=employees, M=months, D=depts  |  **Ruang:** O(S + E)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -79,17 +73,17 @@ func calcAvg(vals []int) float64 {
 // Space: O(S + E)
 func averageSalaryDepartmentsVsCompany(employees []Employee, salaries []SalaryRecord) []DeptComparison {
 	// Map employee ID to department ID.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	empDept := make(map[int]int)
 	for _, e := range employees {
 		empDept[e.ID] = e.DepartmentID
 	}
 
 	// Group salaries by month (company-wide).
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	monthSalaries := make(map[string][]int)
 	// Group salaries by month then department.
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	deptMonthSalaries := make(map[string]map[int][]int) // month -> deptID -> []amount
 
 	for _, s := range salaries {
@@ -134,7 +128,7 @@ func averageSalaryDepartmentsVsCompany(employees []Employee, salaries []SalaryRe
 	}
 
 	// Sort for deterministic output.
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].PayMonth != result[j].PayMonth {
 			return result[i].PayMonth < result[j].PayMonth

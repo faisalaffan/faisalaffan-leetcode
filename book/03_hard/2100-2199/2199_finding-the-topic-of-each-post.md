@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findingTheTopicOfEachPost(posts []Post, keywords []Keyword) map[int][]int
-```
+**Fungsi Solusi:** `func findingTheTopicOfEachPost(posts []Post, keywords []Keyword) map[int][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -59,7 +53,7 @@ type Keyword struct {
 // whose keywords appear as standalone words (case-insensitive) in the post content.
 func findingTheTopicOfEachPost(posts []Post, keywords []Keyword) map[int][]int {
 	// build topic keyword index: topicID -> set of lowercase keywords
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	topicWords := make(map[int]map[string]bool)
 	for _, kw := range keywords {
 		if topicWords[kw.TopicID] == nil {
@@ -68,7 +62,7 @@ func findingTheTopicOfEachPost(posts []Post, keywords []Keyword) map[int][]int {
 		topicWords[kw.TopicID][strings.ToLower(kw.Word)] = true
 	}
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	result := make(map[int][]int)
 
 	for _, post := range posts {
@@ -78,7 +72,7 @@ func findingTheTopicOfEachPost(posts []Post, keywords []Keyword) map[int][]int {
 			return !((r >= 'a' && r <= 'z') || (r >= '0' && r <= '9') || r == '\'')
 		})
 
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 		wordSet := make(map[string]bool)
 		for _, w := range words {
 			// strip surrounding punctuation if any
@@ -99,7 +93,7 @@ func findingTheTopicOfEachPost(posts []Post, keywords []Keyword) map[int][]int {
 		}
 
 		// sort matched topics (simple insertion sort for small slices)
-  // Loop linear O(n): iterasi setiap elemen
+  // Linear scan O(n)
 		for i := 0; i < len(matchedTopics); i++ {
 			for j := i + 1; j < len(matchedTopics); j++ {
 				if matchedTopics[j] < matchedTopics[i] {

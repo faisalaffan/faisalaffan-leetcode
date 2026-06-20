@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxMovesToKillAllPawns(kx, ky int, positions [][]int) int
-```
+**Fungsi Solusi:** `func maxMovesToKillAllPawns(kx, ky int, positions [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Dynamic Programming, Bitmask
+**Teknik:** BFS, DP, Bitmask
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -77,7 +71,7 @@ func maxMovesToKillAllPawns(kx, ky int, positions [][]int) int {
 
 	// Total points = starting position + N pawns.
 	total := n + 1
-  // Alokasi slice integer
+  // Alokasi slice
 	pts := make([][2]int, total)
 	pts[0] = [2]int{kx, ky}
 	for i, p := range positions {
@@ -85,9 +79,9 @@ func maxMovesToKillAllPawns(kx, ky int, positions [][]int) int {
 	}
 
 	// Precompute BFS distances between every pair of points.
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, total)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([]int, total)
 		for j := range dist[i] {
@@ -111,14 +105,14 @@ func maxMovesToKillAllPawns(kx, ky int, positions [][]int) int {
 	// For Bob's turn (odd popcount):
 	//   minimize over next pawn p of (dist[pos][p] + solve(mask|(1<<p), p))
 
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	memo := make([][]int, 1<<n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range memo {
 		memo[i] = make([]int, total)
 		for j := range memo[i] {
@@ -182,9 +176,9 @@ func bitsOn(mask int) int {
 
 func bfs(sx, sy int, targets [][2]int) []int {
 	n := len(targets)
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, boardSize)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([]int, boardSize)
 		for j := range dist[i] {
@@ -207,7 +201,7 @@ func bfs(sx, sy int, targets [][2]int) []int {
 		}
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, n)
 	for i, t := range targets {
 		result[i] = dist[t[0]][t[1]]

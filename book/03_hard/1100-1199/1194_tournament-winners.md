@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getTournamentWinners(players []Player, matches []Match) []GroupWinner
-```
+**Fungsi Solusi:** `func getTournamentWinners(players []Player, matches []Match) []GroupWinner`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -89,9 +83,9 @@ func main() {
 // getTournamentWinners determines each group's winner.
 func getTournamentWinners(players []Player, matches []Match) []GroupWinner {
 	// Player -> group mapping
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	playerGroup := make(map[int]int)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	groupPlayers := make(map[int][]int) // group -> player list
 
 	for _, p := range players {
@@ -100,7 +94,7 @@ func getTournamentWinners(players []Player, matches []Match) []GroupWinner {
 	}
 
 	// Compute total score per player
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	scores := make(map[int]int)
 	for _, m := range matches {
 		scores[m.FirstPlayer] += m.FirstScore
@@ -109,12 +103,12 @@ func getTournamentWinners(players []Player, matches []Match) []GroupWinner {
 
 	// Find winner per group
 	var winners []GroupWinner
-  // Alokasi slice integer
+  // Alokasi slice
 	groupIDs := make([]int, 0, len(groupPlayers))
 	for g := range groupPlayers {
 		groupIDs = append(groupIDs, g)
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(groupIDs)
 
 	for _, gid := range groupIDs {

@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimizeRoundingErrorToMeetTarget(prices []string, target int) string
-```
-
-> **💡 Hint:** For each price, floor and ceil. Compute min total error via DP.
+**Fungsi Solusi:** `func minimizeRoundingErrorToMeetTarget(prices []string, target int) string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Dynamic Programming
+**Teknik:** DP, Sorting
 
-**Kompleksitas Waktu:** O(n * target) effectively O(n) after sorting diffs  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n * target) effectively O(n) after sorting diffs  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -53,7 +45,7 @@ func main() {
 
 func minimizeRoundingErrorToMeetTarget(prices []string, target int) string {
 	n := len(prices)
-  // Alokasi slice integer
+  // Alokasi slice
 	floors := make([]int, n)
 	diffs := make([]float64, n)
 	floorSum := 0
@@ -73,7 +65,7 @@ func minimizeRoundingErrorToMeetTarget(prices []string, target int) string {
 	}
 
 	// Sort diffs descending to ceil those with smallest rounding error
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(diffs, func(i, j int) bool {
 		return diffs[i] > diffs[j]
 	})

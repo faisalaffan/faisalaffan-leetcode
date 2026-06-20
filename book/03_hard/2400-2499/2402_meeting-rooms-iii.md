@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func mostBooked(n int, meetings [][]int) int
-```
-
-> **💡 Hint:** Use two min-heaps:
+**Fungsi Solusi:** `func mostBooked(n int, meetings [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -96,19 +88,19 @@ func (h *BusyHeap) Pop() interface{} {
 
 func mostBooked(n int, meetings [][]int) int {
 	// Sort meetings by start time
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(meetings, func(i, j int) bool {
 		return meetings[i][0] < meetings[j][0]
 	})
 
 	avail := &IntHeap{}
 	for i := 0; i < n; i++ {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(avail, i)
 	}
 
 	busy := &BusyHeap{}
-  // Alokasi slice integer
+  // Alokasi slice
 	count := make([]int, n)
 
 	for _, m := range meetings {
@@ -117,20 +109,20 @@ func mostBooked(n int, meetings [][]int) int {
 
 		// Release rooms that have finished by now
 		for busy.Len() > 0 && (*busy)[0].endTime <= start {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			b := heap.Pop(busy).(Busy)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 			heap.Push(avail, b.room)
 		}
 
 		var room int
 		if avail.Len() > 0 {
 			// Room available, use smallest-numbered
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			room = heap.Pop(avail).(int)
 		} else {
 			// No room available, pick the soonest free room and delay
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			b := heap.Pop(busy).(Busy)
 			room = b.room
 			// Meeting is delayed; duration stays same
@@ -138,7 +130,7 @@ func mostBooked(n int, meetings [][]int) int {
 		}
 
 		count[room]++
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(busy, Busy{endTime: start + duration, room: room})
 	}
 

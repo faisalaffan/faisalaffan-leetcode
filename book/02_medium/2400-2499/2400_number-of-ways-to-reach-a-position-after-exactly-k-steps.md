@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func numberOfWays(startPos int, endPos int, k int) int
-```
+**Fungsi Solusi:** `func numberOfWays(startPos int, endPos int, k int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming
+**Teknik:** Two Pointer, DP
 
-**Kompleksitas Waktu:** O(k^2)  
-**Kompleksitas Ruang:** O(k)
+**Waktu:** O(k^2)  |  **Ruang:** O(k)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -54,12 +48,12 @@ func numberOfWays(startPos int, endPos int, k int) int {
 	// DP with offset to handle negative positions
 	offset := k
 	size := 2*k + 1
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, size)
 	dp[0+offset] = 1
 
 	for step := 0; step < k; step++ {
-  // Alokasi slice integer
+  // Alokasi slice
 		next := make([]int, size)
 		for pos := -k; pos <= k; pos++ {
 			idx := pos + offset

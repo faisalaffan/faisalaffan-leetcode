@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func insertXorTrie(root *xorTrieNode, val int) 
-```
-
-> **💡 Hint:** //  1. Compute prefix XOR array pref where pref[i] = XOR of nums[0..i-1].
+**Fungsi Solusi:** `func insertXorTrie(root *xorTrieNode, val int) `
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Trie, Prefix Sum
+**Teknik:** Two Pointer, DP, Trie, Prefix Sum
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -103,16 +95,16 @@ func maximumXORScoreSubarrayQueries(nums []int, queries [][]int) []int {
 	n := len(nums)
 
 	// Prefix XOR: pref[0] = 0, pref[i] = nums[0] ^ ... ^ nums[i-1].
-  // Alokasi slice integer
+  // Alokasi slice
 	pref := make([]int, n+1)
 	for i, v := range nums {
 		pref[i+1] = pref[i] ^ v
 	}
 
 	// dp[l][r] = max XOR of any subarray within [l, r].
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dp := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}
@@ -142,7 +134,7 @@ func maximumXORScoreSubarrayQueries(nums []int, queries [][]int) []int {
 	}
 
 	// Answer each query.
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, len(queries))
 	for i, q := range queries {
 		ans[i] = dp[q[0]][q[1]]

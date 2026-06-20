@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NewBIT(size int) *BIT
-```
-
-> **💡 Hint:** Process right to left. Use two BITs (even, odd) to count smaller
+**Fungsi Solusi:** `func NewBIT(size int) *BIT`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Two Pointer, Fenwick Tree (BIT)
+**Teknik:** HashMap, Two Pointer, Sorting
 
-**Kompleksitas Waktu:** O(N log M)  
-**Kompleksitas Ruang:** O(M) where M = max value
+**Waktu:** O(N log M)  |  **Ruang:** O(M) where M = max value
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -71,16 +63,16 @@ func (b *BIT) Query(idx int) int {
 
 func CountSmallerElementsWithOppositeParity(nums []int) []int {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int, n)
 
 	// Coordinate compress
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, n)
 	copy(sorted, nums)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(sorted)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	rank := make(map[int]int)
 	for i, v := range sorted {
 		rank[v] = i

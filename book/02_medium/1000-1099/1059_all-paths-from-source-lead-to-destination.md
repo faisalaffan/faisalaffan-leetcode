@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func leadsToDestination(n int, edges [][]int, source int, destination int) bool
-```
-
-> **💡 Hint:** DFS with cycle detection. Every path from source must end at destination.
+**Fungsi Solusi:** `func leadsToDestination(n int, edges [][]int, source int, destination int) bool`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS
+**Waktu:** O(V + E)  |  **Ruang:** O(V + E)
 
-**Kompleksitas Waktu:** O(V + E)  
-**Kompleksitas Ruang:** O(V + E)
-
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -47,13 +36,13 @@ func main() {
 }
 
 func leadsToDestination(n int, edges [][]int, source int, destination int) bool {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]int, n)
 	for _, e := range edges {
 		graph[e[0]] = append(graph[e[0]], e[1])
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	state := make([]int, n) // 0=unvisited, 1=visiting, 2=processed
 
 	var dfs func(node int) bool

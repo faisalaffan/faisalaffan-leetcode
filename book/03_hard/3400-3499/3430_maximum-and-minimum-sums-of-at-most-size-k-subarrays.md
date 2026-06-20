@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countContributions(leftDist, rightDist, k int) int64
-```
+**Fungsi Solusi:** `func countContributions(leftDist, rightDist, k int) int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Stack, Monotonic Stack/Queue
+**Teknik:** Two Pointer, Stack, Monotonic Stack
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -76,9 +70,9 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	// --- Monotonic stacks ---
 
 	// Previous smaller (strict)
-  // Alokasi slice integer
+  // Alokasi slice
 	ps := make([]int, n)
-  // Alokasi slice integer
+  // Alokasi slice
 	stack := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		for len(stack) > 0 && nums[stack[len(stack)-1]] > nums[i] {
@@ -93,7 +87,7 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	}
 
 	// Next smaller (strict: nums[ns[i]] < nums[i])
-  // Alokasi slice integer
+  // Alokasi slice
 	ns := make([]int, n)
 	stack = stack[:0]
 	for i := n - 1; i >= 0; i-- {
@@ -109,7 +103,7 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	}
 
 	// Previous greater (strict)
-  // Alokasi slice integer
+  // Alokasi slice
 	pg := make([]int, n)
 	stack = stack[:0]
 	for i := 0; i < n; i++ {
@@ -125,7 +119,7 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	}
 
 	// Next greater (strict: nums[ng[i]] > nums[i])
-  // Alokasi slice integer
+  // Alokasi slice
 	ng := make([]int, n)
 	stack = stack[:0]
 	for i := n - 1; i >= 0; i-- {

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func visibleMountains(mountains [][]int) int
-```
+**Fungsi Solusi:** `func visibleMountains(mountains [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer, Sorting
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,7 +36,7 @@ import (
 func visibleMountains(mountains [][]int) int {
 	// Each mountain is peak at [x, y], base at [x-y, x+y]
 	type interval struct{ left, right int }
-  // Alokasi slice integer
+  // Alokasi slice
 	intervals := make([]interval, len(mountains))
 	for i, m := range mountains {
 		x, y := m[0], m[1]
@@ -50,7 +44,7 @@ func visibleMountains(mountains [][]int) int {
 	}
 
 	// Sort by left ascending, right descending
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(intervals, func(i, j int) bool {
 		if intervals[i].left != intervals[j].left {
 			return intervals[i].left < intervals[j].left

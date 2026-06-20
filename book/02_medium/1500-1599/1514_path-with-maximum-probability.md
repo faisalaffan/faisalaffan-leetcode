@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64
-```
+**Fungsi Solusi:** `func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
+**Teknik:** BFS, Heap, Dijkstra
 
-**Kompleksitas Waktu:** O(E log V), Space: O(E + V)  
-**Kompleksitas Ruang:** O(E + V)
+**Waktu:** O(E log V), Space: O(E + V)  |  **Ruang:** O(E + V)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -83,7 +77,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
 	// Time: O(E log V), Space: O(E + V)
 	// Build adjacency list
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	graph := make([][]Edge, n)
 	for i, e := range edges {
 		u, v := e[0], e[1]
@@ -97,11 +91,11 @@ func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int
 	prob[start] = 1.0
 
 	pq := &PriorityQueue{}
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &Item{node: start, prob: 1.0})
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		item := heap.Pop(pq).(*Item)
 		node := item.node
 		curProb := item.prob
@@ -118,7 +112,7 @@ func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int
 			newProb := curProb * edge.prob
 			if newProb > prob[edge.to] {
 				prob[edge.to] = newProb
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &Item{node: edge.to, prob: newProb})
 			}
 		}

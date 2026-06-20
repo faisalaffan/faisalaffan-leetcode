@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func multiply(mat1 [][]int, mat2 [][]int) [][]int
-```
+**Fungsi Solusi:** `func multiply(mat1 [][]int, mat2 [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(m*n*k), Space: O(m*k) optimized for sparse matrices  |  **Ruang:** O(m*k) optimized for sparse matrices
 
-**Kompleksitas Waktu:** O(m*n*k), Space: O(m*k) optimized for sparse matrices  
-**Kompleksitas Ruang:** O(m*k) optimized for sparse matrices
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -38,9 +29,9 @@ import "fmt"
 
 func multiply(mat1 [][]int, mat2 [][]int) [][]int {
 	m, k, n := len(mat1), len(mat1[0]), len(mat2[0])
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range result {
 		result[i] = make([]int, n)
 	}

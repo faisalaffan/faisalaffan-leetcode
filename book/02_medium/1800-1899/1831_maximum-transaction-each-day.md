@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan data tabel database. Tugasmu adalah menganalisis data tersebut. Karena repo ini Go, query SQL disimulasikan dengan map, slice, dan struct.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** Tentukan SELECT, FROM, JOIN, GROUP BY, ORDER BY. Lalu terjemahkan ke Go.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxTransactionPerDay(transactions []Transaction) []int
-```
+**Fungsi Solusi:** `func maxTransactionPerDay(transactions []Transaction) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,7 +42,7 @@ type Transaction struct {
 
 func maxTransactionPerDay(transactions []Transaction) []int {
 	// Group by day, find max amount
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	dayMax := make(map[int]int)
 	for _, t := range transactions {
 		if t.Amount > dayMax[t.Day] {
@@ -57,14 +51,14 @@ func maxTransactionPerDay(transactions []Transaction) []int {
 	}
 
 	// Find transaction IDs that have max amount for their day
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, 0)
 	for _, t := range transactions {
 		if t.Amount == dayMax[t.Day] {
 			result = append(result, t.ID)
 		}
 	}
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(result)
 	return result
 }

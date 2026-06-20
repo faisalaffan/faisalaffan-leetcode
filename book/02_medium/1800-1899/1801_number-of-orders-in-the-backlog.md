@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func getNumberOfBacklogOrders(orders [][]int) int
-```
+**Fungsi Solusi:** `func getNumberOfBacklogOrders(orders [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap
 
-**Kompleksitas Waktu:** O(n log n), Space: O(n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n), Space: O(n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -90,12 +84,12 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 					amount = 0
 				} else {
 					amount -= top.amount
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 					heap.Pop(sells)
 				}
 			}
 			if amount > 0 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(buys, Order{price, amount})
 			}
 		} else { // sell
@@ -106,12 +100,12 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 					amount = 0
 				} else {
 					amount -= top.amount
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 					heap.Pop(buys)
 				}
 			}
 			if amount > 0 {
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(sells, Order{price, amount})
 			}
 		}
@@ -119,11 +113,11 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 
 	total := 0
 	for buys.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		total = (total + heap.Pop(buys).(Order).amount) % mod
 	}
 	for sells.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		total = (total + heap.Pop(sells).(Order).amount) % mod
 	}
 	return total

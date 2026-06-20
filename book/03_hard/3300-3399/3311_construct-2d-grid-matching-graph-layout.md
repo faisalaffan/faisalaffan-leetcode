@@ -4,27 +4,16 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func constructGridLayout(n int, edges [][]int) [][]int
-```
-
-> **💡 Hint:** Use degree analysis to identify corners (deg=2), edges (deg=3),
+**Fungsi Solusi:** `func constructGridLayout(n int, edges [][]int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** —  |  **Ruang:** —
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -57,7 +46,7 @@ func main() {
 
 func constructGridLayout(n int, edges [][]int) [][]int {
 	// Build adjacency list
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	g := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -66,9 +55,9 @@ func constructGridLayout(n int, edges [][]int) [][]int {
 	}
 
 	// Find node by degree
-  // Alokasi slice integer
+  // Alokasi slice
 	degNode := make([]int, 5)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range degNode {
 		degNode[i] = -1
 	}
@@ -77,7 +66,7 @@ func constructGridLayout(n int, edges [][]int) [][]int {
 	}
 
 	// Build first row
-  // Alokasi slice integer
+  // Alokasi slice
 	firstRow := make([]int, 0)
 
 	if degNode[1] != -1 {
@@ -113,7 +102,7 @@ func constructGridLayout(n int, edges [][]int) [][]int {
 
 	cols := len(firstRow)
 	rows := n / cols
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	grid := make([][]int, rows)
 	visited := make([]bool, n)
 

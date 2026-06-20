@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func scheduleCourse(courses [][]int) int
-```
+**Fungsi Solusi:** `func scheduleCourse(courses [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Heap / Priority Queue, Stack
+**Teknik:** Heap, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Heap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -86,7 +80,7 @@ func (h *maxHeap) Pop() interface{} {
 
 func scheduleCourse(courses [][]int) int {
 	// Sort by lastDay (ascending)
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(courses, func(i, j int) bool {
 		return courses[i][1] < courses[j][1]
 	})
@@ -97,13 +91,13 @@ func scheduleCourse(courses [][]int) int {
 
 	for _, course := range courses {
 		duration, lastDay := course[0], course[1]
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, duration)
 		totalDuration += duration
 
 		// If we exceed lastDay, drop the longest course taken
 		if totalDuration > lastDay {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			maxDuration := heap.Pop(h).(int)
 			totalDuration -= maxDuration
 		}

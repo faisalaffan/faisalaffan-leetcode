@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func maxTaskAssign(tasks []int, workers []int, pills int, strength int) int
-```
-
-> **💡 Hint:** Binary Search + Multiset (simulated with sort + two-pointer)
+**Fungsi Solusi:** `func maxTaskAssign(tasks []int, workers []int, pills int, strength int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Sliding Window, Binary Search
+**Teknik:** Two Pointer, Sliding Window, Binary Search, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -42,9 +34,9 @@ import (
 )
 
 func maxTaskAssign(tasks []int, workers []int, pills int, strength int) int {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(tasks)
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 	sort.Ints(workers)
 
 	// Binary search on how many tasks we can complete
@@ -53,7 +45,7 @@ func maxTaskAssign(tasks []int, workers []int, pills int, strength int) int {
 		right = len(workers)
 	}
 
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 	for left < right {
 		mid := left + (right-left+1)/2 // try to do mid tasks (hardest mid tasks)
 		if canAssign(tasks, workers, pills, strength, mid) {
@@ -81,7 +73,7 @@ func canAssign(tasks, workers []int, pills, strength, count int) bool {
 	// We'll track workers that are available for the current task
 
 	// Simpler approach: use a multiset implemented as a slice
-  // Alokasi slice integer
+  // Alokasi slice
 	avail := make([]int, n)
 	copy(avail, workers)
 	// We'll pop from avail when a worker is used

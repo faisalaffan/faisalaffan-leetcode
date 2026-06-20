@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan graf. Tugasmu menjelajahi atau menganalisis konektivitas graf.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** Adjacency list `map[int][]int`. Gunakan BFS (queue) atau DFS (rekursif) dengan visited set untuk hindari siklus.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minThresholdPath(n int, edges [][]int, threshold int) int
-```
-
-> **💡 Hint:** Dijkstra-like with state (node, heavyCount, totalWeight).
+**Fungsi Solusi:** `func minThresholdPath(n int, edges [][]int, threshold int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
+**Teknik:** BFS, Heap, Dijkstra
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **BFS** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -99,7 +91,7 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 		return 0
 	}
 
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -108,9 +100,9 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 	}
 
 	// dist[node][heavy] = min total distance
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	dist := make([][]int, n)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dist {
 		dist[i] = make([]int, n+1)
 		for j := range dist[i] {
@@ -120,12 +112,12 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 
 	pq := &priorityQueue{}
 	heap.Init(pq)
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 	heap.Push(pq, &state{node: 0, heavyCount: 0, totalDist: 0})
 	dist[0][0] = 0
 
 	for pq.Len() > 0 {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 		s := heap.Pop(pq).(*state)
 		if s.node == n-1 {
 			return s.totalDist
@@ -142,7 +134,7 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 			nd := s.totalDist + w
 			if nh <= n && nd < dist[v][nh] {
 				dist[v][nh] = nd
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 				heap.Push(pq, &state{node: v, heavyCount: nh, totalDist: nd})
 			}
 		}

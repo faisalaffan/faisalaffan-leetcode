@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func mostFrequentIDs(nums []int, freq []int) []int64
-```
+**Fungsi Solusi:** `func mostFrequentIDs(nums []int, freq []int) []int64`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
+**Teknik:** HashMap, Heap
 
-**Kompleksitas Waktu:** O(n log n)  
-**Kompleksitas Ruang:** O(n)
+**Waktu:** O(n log n)  |  **Ruang:** O(n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -72,9 +66,9 @@ func (h *MaxHeap) Pop() any {
 
 func mostFrequentIDs(nums []int, freq []int) []int64 {
 	n := len(nums)
-  // Alokasi slice integer
+  // Alokasi slice
 	ans := make([]int64, n)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	counts := make(map[int]int64)
 	h := &MaxHeap{}
 	heap.Init(h)
@@ -82,10 +76,10 @@ func mostFrequentIDs(nums []int, freq []int) []int64 {
 	for i := 0; i < n; i++ {
 		id := nums[i]
 		counts[id] += int64(freq[i])
-  // Masukkan elemen ke priority queue
+  // Push ke priority queue
 		heap.Push(h, &Item{id: id, count: counts[id]})
 		for h.Len() > 0 && (*h)[0].count != counts[(*h)[0].id] {
-  // Ambil elemen terkecil/terbesar dari heap
+  // Pop dari priority queue
 			heap.Pop(h)
 		}
 		if h.Len() > 0 {

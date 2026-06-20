@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumTeachings(n int, languages [][]int, friendships [][]int) int
-```
+**Fungsi Solusi:** `func minimumTeachings(n int, languages [][]int, friendships [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap
 
-**Kompleksitas Waktu:** O(n * m + f) where n = user count, m = avg languages per user, f = friend pairs  
-**Kompleksitas Ruang:** —
+**Waktu:** O(n * m + f) where n = user count, m = avg languages per user, f = friend pairs  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -37,7 +31,7 @@ package main
 import "fmt"
 
 func minimumTeachings(n int, languages [][]int, friendships [][]int) int {
-  // Alokasi slice integer
+  // Alokasi slice
 	langSet := make([]map[int]bool, len(languages))
 	for i, langs := range languages {
 		langSet[i] = make(map[int]bool)
@@ -64,7 +58,7 @@ func minimumTeachings(n int, languages [][]int, friendships [][]int) int {
 	}
 
 	// Find the most common language among users who cannot communicate
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	langCount := make(map[int]int)
 	for i, cn := range cannotCommunicate {
 		if cn {

@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+Kamu diberikan pohon (tree). Tugasmu menjelajahi atau memanipulasi struktur pohon.
 
-Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+**Cara berpikir:** TreeNode punya Val, Left, Right. Gunakan DFS rekursif (pre/in/post-order).
 
-**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func printTree(root *TreeNode) [][]string
-```
+**Fungsi Solusi:** `func printTree(root *TreeNode) [][]string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(n * h) where h is height  |  **Ruang:** O(n * h)
 
-**Kompleksitas Waktu:** O(n * h) where h is height  
-**Kompleksitas Ruang:** O(n * h)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -58,9 +49,9 @@ type TreeNode struct {
 func printTree(root *TreeNode) [][]string {
 	height := getHeight(root)
 	width := (1 << height) - 1
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	result := make([][]string, height)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range result {
 		result[i] = make([]string, width)
 	}

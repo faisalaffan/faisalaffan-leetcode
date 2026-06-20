@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int
-```
+**Fungsi Solusi:** `func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, DFS
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -62,9 +56,9 @@ func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
 
 	// Assign IDs to cells with value 1
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	id := make([][]int, m)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range id {
 		id[i] = make([]int, n)
 		for j := range id[i] {
@@ -93,7 +87,7 @@ func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int {
 	}
 
 	// Build adjacency from left to right
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	adj := make([][]int, leftCount)
 	for i := 0; i < leftCount; i++ {
 		adj[i] = []int{}
@@ -116,9 +110,9 @@ func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int {
 	}
 
 	// Maximum bipartite matching using DFS (Kuhn's algorithm)
-  // Alokasi slice integer
+  // Alokasi slice
 	matchR := make([]int, rightCount)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range matchR {
 		matchR[i] = -1
 	}

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func countBlocks(arr *BigArray) int
-```
+**Fungsi Solusi:** `func countBlocks(arr *BigArray) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer, Binary Search
+**Teknik:** Two Pointer, Binary Search
 
-**Kompleksitas Waktu:** O(k log n)  
-**Kompleksitas Ruang:** O(1) where k = number of blocks
+**Waktu:** O(k log n)  |  **Ruang:** O(1) where k = number of blocks
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -49,7 +43,7 @@ func (b *BigArray) size() int {
 
 func countBlocks(arr *BigArray) int {
 	n := arr.size()
-  // Edge case: input kosong — langsung return
+  // Edge case: input kosong
 	if n == 0 {
 		return 0
 	}
@@ -63,7 +57,7 @@ func countBlocks(arr *BigArray) int {
 
 		// Binary search to find the rightmost position where arr.at(pos) == val
 		left, right := i, n-1
-  // Two-pointer: gerakkan kiri atau kanan
+  // Two-pointer loop
 		for left < right {
 			mid := (left + right + 1) / 2
 			if arr.at(mid) == val {

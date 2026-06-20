@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func NumSubseq(nums []int, target int) int
-```
+**Fungsi Solusi:** `func NumSubseq(nums []int, target int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Two Pointer
+**Teknik:** Two Pointer
 
-**Kompleksitas Waktu:** O(N log N), Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N), Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Two Pointer** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -46,13 +40,13 @@ func NumSubseq(nums []int, target int) int {
 	const mod = 1_000_000_007
 
 	// Sort nums
-  // Alokasi slice integer
+  // Alokasi slice
 	sorted := make([]int, len(nums))
 	copy(sorted, nums)
 	quickSort(sorted, 0, len(sorted)-1)
 
 	// Precompute powers of 2
-  // Alokasi slice integer
+  // Alokasi slice
 	pow := make([]int, len(sorted))
 	pow[0] = 1
 	for i := 1; i < len(sorted); i++ {
@@ -62,6 +56,7 @@ func NumSubseq(nums []int, target int) int {
 	count := 0
 	left, right := 0, len(sorted)-1
 
+  // Binary search loop
 	for left <= right {
 		if sorted[left]+sorted[right] <= target {
 			// All subsequences with sorted[left] as min and any subset of elements between left+1..right

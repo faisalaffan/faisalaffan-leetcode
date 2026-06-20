@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func filterRestaurants(restaurants [][]int, veganFriendly int, maxPrice int, maxDistance int) []int
-```
+**Fungsi Solusi:** `func filterRestaurants(restaurants [][]int, veganFriendly int, maxPrice int, maxDistance int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** Sorting
 
-**Kompleksitas Waktu:** O(n log n) for sorting  
-**Kompleksitas Ruang:** O(n) for storing filtered results
+**Waktu:** O(n log n) for sorting  |  **Ruang:** O(n) for storing filtered results
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **Sorting** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -85,7 +79,7 @@ func filterRestaurants(restaurants [][]int, veganFriendly int, maxPrice int, max
 		filtered = append(filtered, restaurant{r[0], r[1], r[2], r[3], r[4]})
 	}
 
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(filtered, func(i, j int) bool {
 		if filtered[i].rating != filtered[j].rating {
 			return filtered[i].rating > filtered[j].rating
@@ -93,7 +87,7 @@ func filterRestaurants(restaurants [][]int, veganFriendly int, maxPrice int, max
 		return filtered[i].id > filtered[j].id
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(filtered))
 	for i, r := range filtered {
 		result[i] = r.id

@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+Kamu diberikan array. Tugasmu mencari, menghitung, atau memanipulasi elemen.
 
-Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+**Cara berpikir:** Struktur data paling dasar. Akses O(1). Gunakan HashMap untuk lookup cepat, Two Pointer untuk pencarian pasangan.
 
-**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func topCandidates(candidates []Candidate, projects []Project) []ProjectResult
-```
+**Fungsi Solusi:** `func topCandidates(candidates []Candidate, projects []Project) []ProjectResult`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(c * p) Space: O(c * p)  
-**Kompleksitas Ruang:** O(c * p)
+**Waktu:** O(c * p) Space: O(c * p)  |  **Ruang:** O(c * p)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -73,7 +67,7 @@ type ProjectResult struct {
 
 func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 	// Build candidate skill map: candidateID -> skill -> proficiency
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	candSkills := make(map[int]map[string]int)
 	for _, c := range candidates {
 		if candSkills[c.ID] == nil {
@@ -83,12 +77,12 @@ func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 	}
 
 	// Build project skill map: projectID -> []{skill, importance}
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	projSkills := make(map[int][]struct {
 		skill      string
 		importance int
 	})
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	projReqCount := make(map[int]int)
 	for _, p := range projects {
 		projSkills[p.ID] = append(projSkills[p.ID], struct {
@@ -130,7 +124,7 @@ func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 	}
 
 	// Sort by project, then by score desc, then candidate id asc
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(allResults, func(i, j int) bool {
 		if allResults[i].projectID != allResults[j].projectID {
 			return allResults[i].projectID < allResults[j].projectID
@@ -143,7 +137,7 @@ func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 
 	// Pick top candidate per project
 	var out []ProjectResult
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	seen := make(map[int]bool)
 	for _, r := range allResults {
 		if !seen[r.projectID] {

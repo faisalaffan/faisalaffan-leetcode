@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan string. Tugasmu memanipulasi atau mencari pola dalam teks.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** String immutable di Go — konversi ke `[]byte` untuk modifikasi. Operasi: iterasi karakter, substring `s[i:j]`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func AlertNames(keyName []string, keyTime []string) []string
-```
+**Fungsi Solusi:** `func AlertNames(keyName []string, keyTime []string) []string`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Teknik:** HashMap, Sorting
 
-**Kompleksitas Waktu:** O(N log N), Space: O(N)  
-**Kompleksitas Ruang:** O(N)
+**Waktu:** O(N log N), Space: O(N)  |  **Ruang:** O(N)
 
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -50,7 +44,7 @@ func main() {
 func AlertNames(keyName []string, keyTime []string) []string {
 	// Time: O(N log N), Space: O(N)
 	n := len(keyName)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	records := make(map[string][]int)
 
 	for i := 0; i < n; i++ {
@@ -61,7 +55,7 @@ func AlertNames(keyName []string, keyTime []string) []string {
 	alerted := make([]string, 0)
 
 	for name, times := range records {
-  // Urutkan secara ascending — O(n log n)
+  // Sort O(n log n)
 		sort.Ints(times)
 		for i := 2; i < len(times); i++ {
 			if times[i]-times[i-2] <= 60 {

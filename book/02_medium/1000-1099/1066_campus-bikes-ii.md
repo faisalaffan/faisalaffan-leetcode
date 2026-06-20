@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func assignBikesII(workers [][]int, bikes [][]int) int
-```
-
-> **💡 Hint:** DP with bitmask (minimum assignment cost)
+**Fungsi Solusi:** `func assignBikesII(workers [][]int, bikes [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** DFS, Dynamic Programming, Bitmask
+**Teknik:** DP, Bitmask
 
-**Kompleksitas Waktu:** O(W * 2^B) where W = workers, B = bikes  
-**Kompleksitas Ruang:** O(2^B)
+**Waktu:** O(W * 2^B) where W = workers, B = bikes  |  **Ruang:** O(2^B)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **DP** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,9 +40,9 @@ func main() {
 
 func assignBikesII(workers [][]int, bikes [][]int) int {
 	w, b := len(workers), len(bikes)
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, 1<<b)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range dp {
 		dp[i] = -1
 	}

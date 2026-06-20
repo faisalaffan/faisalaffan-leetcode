@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sedang
 
-Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func findShortestPath(master GridMaster) int
-```
+**Fungsi Solusi:** `func findShortestPath(master GridMaster) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** HashMap, DFS, Dijkstra
+**Teknik:** HashMap, DFS, Dijkstra
 
-**Kompleksitas Waktu:** O(m * n log(m*n)), Space: O(m * n)  
-**Kompleksitas Ruang:** O(m * n)
+**Waktu:** O(m * n log(m*n)), Space: O(m * n)  |  **Ruang:** O(m * n)
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **HashMap** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,9 +42,9 @@ type GridMaster interface {
 
 func findShortestPath(master GridMaster) int {
 	// Discover grid: visited[r][c] = true means the cell was reached
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	visited := make(map[[2]int]bool)
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	costs := make(map[[2]int]int)
 	targetPos := [2]int{-1, -1}
 
@@ -87,7 +81,7 @@ func findShortestPath(master GridMaster) int {
 	}
 
 	// Dijkstra for shortest weighted path
-  // Membuat map (HashMap) — pencarian O(1)
+  // HashMap: O(1) lookup
 	dist := make(map[[2]int]int)
 	dist[[2]int{0, 0}] = 0
 	pq := [][3]int{{0, 0, 0}} // dist, r, c

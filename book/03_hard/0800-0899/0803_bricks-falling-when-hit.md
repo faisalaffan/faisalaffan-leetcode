@@ -4,27 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func hitBricks(grid [][]int, hits [][]int) []int
-```
-
-> **💡 Hint:** Reverse Union-Find
+**Fungsi Solusi:** `func hitBricks(grid [][]int, hits [][]int) []int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Union-Find (DSU)
+**Teknik:** Union-Find
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Union-Find** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -89,11 +81,11 @@ func hitBricks(grid [][]int, hits [][]int) []int {
 	}
 
 	// Union-Find with extra sentinel index for "top" (row 0)
-  // Alokasi slice integer
+  // Alokasi slice
 	parent := make([]int, m*n+1)
-  // Alokasi slice integer
+  // Alokasi slice
 	size := make([]int, m*n+1)
-  // Range loop: iterasi dengan indeks + nilai
+  // Range loop
 	for i := range parent {
 		parent[i] = i
 		if i < m*n {
@@ -143,7 +135,7 @@ func hitBricks(grid [][]int, hits [][]int) []int {
 	}
 
 	// Process hits in reverse
-  // Alokasi slice integer
+  // Alokasi slice
 	result := make([]int, len(hits))
 	for k := len(hits) - 1; k >= 0; k-- {
 		i, j := hits[k][0], hits[k][1]

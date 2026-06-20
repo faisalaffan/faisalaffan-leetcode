@@ -4,25 +4,19 @@
 
 **Tingkat Kesulitan:** Sulit
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan matriks 2D (grid). Tugasmu menjelajahi atau memanipulasi grid.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** `grid[row][col]`. 4 arah: atas/bawah/kiri/kanan. Selalu cek boundary.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func MaximumScoreOfNonOverlappingIntervals(intervals [][]int) int
-```
+**Fungsi Solusi:** `func MaximumScoreOfNonOverlappingIntervals(intervals [][]int) int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** Binary Search, Dynamic Programming
+**Teknik:** Binary Search, DP, Sorting
 
-**Kompleksitas Waktu:** —  
-**Kompleksitas Ruang:** —
+**Waktu:** —  |  **Ruang:** —
 
-> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
+> 🎓 **Fresh Grad Tips:** Kuasai **Binary Search** — sering muncul di interview!
 
 ## 💻 Solusi Go
 
@@ -48,23 +42,23 @@ func main() {
 func MaximumScoreOfNonOverlappingIntervals(intervals [][]int) int {
 	n := len(intervals)
 	type interval struct{ start, end, score int }
-  // Alokasi slice integer
+  // Alokasi slice
 	ivs := make([]interval, n)
 	for i, v := range intervals {
 		ivs[i] = interval{v[0], v[1], v[2]}
 	}
-  // Custom sort dengan comparator
+  // Custom sort
 	sort.Slice(ivs, func(i, j int) bool {
 		return ivs[i].end < ivs[j].end
 	})
 
-  // Alokasi slice integer
+  // Alokasi slice
 	ends := make([]int, n)
 	for i, v := range ivs {
 		ends[i] = v.end
 	}
 
-  // Alokasi slice integer
+  // Alokasi slice
 	dp := make([]int, n)
 	dp[0] = ivs[0].score
 	for i := 1; i < n; i++ {

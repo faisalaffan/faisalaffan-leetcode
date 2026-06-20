@@ -4,25 +4,16 @@
 
 **Tingkat Kesulitan:** Mudah
 
-Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+Kamu diberikan bilangan bulat. Tugasmu menghitung atau menganalisis properti bilangan.
 
-Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+**Cara berpikir:** Modulo `%` ambil digit terakhir. Pembagian `/` buang digit. Untuk reverse: `rev = rev*10 + digit`.
 
-**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
-
-**Fungsi yang perlu kamu implementasikan:**
-```go
-func Generate(numRows int) [][]int
-```
+**Fungsi Solusi:** `func Generate(numRows int) [][]int`
 
 ## 🔍 Petunjuk Penyelesaian
 
-**Teknik yang digunakan:** — (analisis sendiri ☕)
+**Waktu:** O(numRows^2)  |  **Ruang:** O(numRows^2)
 
-**Kompleksitas Waktu:** O(numRows^2)  
-**Kompleksitas Ruang:** O(numRows^2)
-
-> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
 ## 💻 Solusi Go
 
@@ -37,7 +28,7 @@ import "fmt"
 
 // Time: O(numRows^2) | Space: O(numRows^2)
 func Generate(numRows int) [][]int {
-  // Membuat matriks/slice 2D untuk DP
+  // Matriks 2D
 	res := make([][]int, numRows)
 	for i := 0; i < numRows; i++ {
 		res[i] = make([]int, i+1)
