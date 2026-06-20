@@ -11,7 +11,7 @@ package main
 // Approach: Binary lifting (LCA) to find ancestor at certain distance.
 
 import "fmt"
-import func main() {
+func main() {
 	// Example 1
 	fmt.Println(findMedian(4, [][]int{{0, 1, 2}, {1, 2, 3}, {2, 3, 1}}, [][]int{{0, 3}, {1, 3}}))
 	// Example 2: single edge
