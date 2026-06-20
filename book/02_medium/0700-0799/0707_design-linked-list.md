@@ -1,0 +1,112 @@
+# 0707 — Design Linked List
+
+## Deskripsi
+
+**Soal:** [0707. Design Linked List](https://leetcode.com/problems/design-linked-list/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(n) for get/addAtIndex/deleteAtIndex, O(1) for addAtHead/addAtTail  
+**Kompleksitas Ruang:** O(n)
+
+**Algoritma:** LIS (Longest Increasing Subsequence)
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #707: Design Linked List
+// https://leetcode.com/problems/design-linked-list/
+// Difficulty: Medium
+// Time: O(n) for get/addAtIndex/deleteAtIndex, O(1) for addAtHead/addAtTail
+// Space: O(n)
+
+import "fmt"
+
+func main() {
+	l := Constructor()
+	l.AddAtHead(1)
+	l.AddAtTail(3)
+	l.AddAtIndex(1, 2)
+	fmt.Println(l.Get(1))
+	l.DeleteAtIndex(1)
+	fmt.Println(l.Get(1))
+}
+
+type MyLinkedList struct {
+	head *LinkNode
+	size int
+}
+
+type LinkNode struct {
+	val  int
+	next *LinkNode
+}
+
+func Constructor() MyLinkedList {
+	return MyLinkedList{}
+}
+
+func (l *MyLinkedList) Get(index int) int {
+	if index < 0 || index >= l.size {
+		return -1
+	}
+	curr := l.head
+	for i := 0; i < index; i++ {
+		curr = curr.next
+	}
+	return curr.val
+}
+
+func (l *MyLinkedList) AddAtHead(val int) {
+	l.head = &LinkNode{val, l.head}
+	l.size++
+}
+
+func (l *MyLinkedList) AddAtTail(val int) {
+	if l.head == nil {
+		l.AddAtHead(val)
+		return
+	}
+	curr := l.head
+	for curr.next != nil {
+		curr = curr.next
+	}
+	curr.next = &LinkNode{val: val}
+	l.size++
+}
+
+func (l *MyLinkedList) AddAtIndex(index int, val int) {
+	if index > l.size {
+		return
+	}
+	if index == 0 {
+		l.AddAtHead(val)
+		return
+	}
+	curr := l.head
+	for i := 0; i < index-1; i++ {
+		curr = curr.next
+	}
+	curr.next = &LinkNode{val, curr.next}
+	l.size++
+}
+
+func (l *MyLinkedList) DeleteAtIndex(index int) {
+	if index < 0 || index >= l.size {
+		return
+	}
+	if index == 0 {
+		l.head = l.head.next
+		l.size--
+		return
+	}
+	curr := l.head
+	for i := 0; i < index-1; i++ {
+		curr = curr.next
+	}
+	curr.next = curr.next.next
+	l.size--
+}
+```

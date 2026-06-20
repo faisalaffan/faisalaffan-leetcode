@@ -1,0 +1,86 @@
+# 3780 — Maximum Sum Of Three Numbers Divisible By Three
+
+## Deskripsi
+
+**Soal:** [3780. Maximum Sum Of Three Numbers Divisible By Three](https://leetcode.com/problems/maximum-sum-of-three-numbers-divisible-by-three/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(n)  
+**Kompleksitas Ruang:** O(1)
+
+**Algoritma:** —
+
+**Fungsi Solusi:** `func maximumSumOfThreeNumbersDivisibleByThree(nums []int) int`
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #3780: Maximum Sum of Three Numbers Divisible by Three
+// https://leetcode.com/problems/maximum-sum-of-three-numbers-divisible-by-three/
+// Difficulty: Medium
+// Time: O(n) | Space: O(1)
+
+import (
+	"fmt"
+	"sort"
+)
+
+func maximumSumOfThreeNumbersDivisibleByThree(nums []int) int {
+	groups := [3][]int{}
+	for _, v := range nums {
+		r := v % 3
+		groups[r] = append(groups[r], v)
+	}
+
+	for r := 0; r < 3; r++ {
+		sort.Slice(groups[r], func(i, j int) bool {
+			return groups[r][i] > groups[r][j]
+		})
+	}
+
+	ans := 0
+
+	// (0,0,0)
+	if len(groups[0]) >= 3 {
+		sum := groups[0][0] + groups[0][1] + groups[0][2]
+		if sum > ans {
+			ans = sum
+		}
+	}
+
+	// (1,1,1)
+	if len(groups[1]) >= 3 {
+		sum := groups[1][0] + groups[1][1] + groups[1][2]
+		if sum > ans {
+			ans = sum
+		}
+	}
+
+	// (2,2,2)
+	if len(groups[2]) >= 3 {
+		sum := groups[2][0] + groups[2][1] + groups[2][2]
+		if sum > ans {
+			ans = sum
+		}
+	}
+
+	// (0,1,2)
+	if len(groups[0]) >= 1 && len(groups[1]) >= 1 && len(groups[2]) >= 1 {
+		sum := groups[0][0] + groups[1][0] + groups[2][0]
+		if sum > ans {
+			ans = sum
+		}
+	}
+
+	return ans
+}
+
+func main() {
+	fmt.Println(maximumSumOfThreeNumbersDivisibleByThree([]int{4, 2, 3, 1}))
+	fmt.Println(maximumSumOfThreeNumbersDivisibleByThree([]int{1, 2, 3, 4, 5}))
+	fmt.Println(maximumSumOfThreeNumbersDivisibleByThree([]int{1, 1, 1}))
+}
+```

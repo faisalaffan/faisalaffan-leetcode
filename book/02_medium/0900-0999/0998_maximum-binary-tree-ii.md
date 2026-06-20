@@ -1,0 +1,96 @@
+# 0998 — Maximum Binary Tree Ii
+
+## Deskripsi
+
+**Soal:** [0998. Maximum Binary Tree Ii](https://leetcode.com/problems/maximum-binary-tree-ii/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(h) where h is tree height  
+**Kompleksitas Ruang:** O(h)
+
+**Algoritma:** —
+
+> **Ide Kunci:** Since val is appended to the end of the original array,
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #998: Maximum Binary Tree II
+// https://leetcode.com/problems/maximum-binary-tree-ii/
+// Difficulty: Medium
+//
+// Approach: Since val is appended to the end of the original array,
+//           if val > root.Val, it becomes the new root (with old root as left child).
+//           Otherwise, recurse into the right subtree.
+// Time: O(h) where h is tree height
+// Space: O(h)
+
+import "fmt"
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func main() {
+	// Example: root = [4,1,3,null,null,2], val = 5
+	root := &TreeNode{
+		Val: 4,
+		Left: &TreeNode{Val: 1, Left: nil, Right: nil},
+		Right: &TreeNode{
+			Val:   3,
+			Left:  &TreeNode{Val: 2, Left: nil, Right: nil},
+			Right: nil,
+		},
+	}
+	result := insertIntoMaxTree(root, 5)
+	printTree(result)
+	fmt.Println()
+
+	// val < root: root = [5,2,4,null,1], val = 3
+	root2 := &TreeNode{
+		Val: 5,
+		Left: &TreeNode{
+			Val:  2,
+			Left: nil,
+			Right: &TreeNode{Val: 1, Left: nil, Right: nil},
+		},
+		Right: &TreeNode{Val: 4, Left: nil, Right: nil},
+	}
+	result2 := insertIntoMaxTree(root2, 3)
+	printTree(result2)
+	fmt.Println()
+}
+
+func insertIntoMaxTree(root *TreeNode, val int) *TreeNode {
+	if root == nil {
+		return &TreeNode{Val: val}
+	}
+	if val > root.Val {
+		return &TreeNode{Val: val, Left: root}
+	}
+	root.Right = insertIntoMaxTree(root.Right, val)
+	return root
+}
+
+func printTree(root *TreeNode) {
+	if root == nil {
+		return
+	}
+	queue := []*TreeNode{root}
+	for len(queue) > 0 {
+		node := queue[0]
+		queue = queue[1:]
+		if node == nil {
+			fmt.Print("null ")
+			continue
+		}
+		fmt.Printf("%d ", node.Val)
+		queue = append(queue, node.Left, node.Right)
+	}
+}
+```

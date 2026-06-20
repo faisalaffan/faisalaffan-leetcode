@@ -1,0 +1,44 @@
+# 3221 — Maximum Array Hopping Score Ii
+
+## Deskripsi
+
+**Soal:** [3221. Maximum Array Hopping Score Ii](https://leetcode.com/problems/maximum-array-hopping-score-ii/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(n)  
+**Kompleksitas Ruang:** O(1)
+
+**Algoritma:** —
+
+**Fungsi Solusi:** `func maxScore(nums []int) int64`
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #3221: Maximum Array Hopping Score II
+// https://leetcode.com/problems/maximum-array-hopping-score-ii/
+// Difficulty: Medium [Paid]
+// Time: O(n) | Space: O(1)
+
+import "fmt"
+
+func maxScore(nums []int) int64 {
+	ans := int64(0)
+	mx := 0
+	for i := len(nums) - 1; i > 0; i-- {
+		if nums[i] > mx {
+			mx = nums[i]
+		}
+		ans += int64(mx)
+	}
+	return ans
+}
+
+func main() {
+	fmt.Println(maxScore([]int{1, 2, 3, 4, 5})) // Expected: 14
+	fmt.Println(maxScore([]int{5, 4, 3, 2, 1})) // Expected: 4
+}
+```

@@ -1,0 +1,61 @@
+# 0621 — Task Scheduler
+
+## Deskripsi
+
+**Soal:** [0621. Task Scheduler](https://leetcode.com/problems/task-scheduler/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(n)  
+**Kompleksitas Ruang:** O(1) (26 letters)
+
+**Algoritma:** —
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #621: Task Scheduler
+// https://leetcode.com/problems/task-scheduler/
+// Difficulty: Medium
+// Time: O(n)
+// Space: O(1) (26 letters)
+
+import "fmt"
+
+func main() {
+	fmt.Println(LeastInterval([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 2))
+	fmt.Println(LeastInterval([]byte{'A', 'C', 'A', 'B', 'D', 'B'}, 1))
+	fmt.Println(LeastInterval([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 3))
+}
+
+func LeastInterval(tasks []byte, n int) int {
+  // Membuat slice untuk menyimpan hasil
+	counts := make([]int, 26)
+	maxFreq := 0
+	for _, t := range tasks {
+		counts[t-'A']++
+		if counts[t-'A'] > maxFreq {
+			maxFreq = counts[t-'A']
+		}
+	}
+
+	maxCount := 0
+	for _, c := range counts {
+		if c == maxFreq {
+			maxCount++
+		}
+	}
+
+	partLen := maxFreq - 1
+	emptySlots := partLen * (n - (maxCount - 1))
+	availableTasks := len(tasks) - maxFreq*maxCount
+	idles := 0
+	if emptySlots > availableTasks {
+		idles = emptySlots - availableTasks
+	}
+
+	return len(tasks) + idles
+}
+```

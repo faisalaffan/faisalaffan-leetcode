@@ -1,0 +1,38 @@
+# 2619 — Array Prototype Last
+
+## Deskripsi
+
+**Soal:** [2619. Array Prototype Last](https://leetcode.com/problems/array-prototype-last/)
+
+**Tingkat Kesulitan:** Mudah
+
+**Kompleksitas Waktu:** O(1)  
+**Kompleksitas Ruang:** O(1)
+
+**Algoritma:** —
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #2619: Array Prototype Last
+// https://leetcode.com/problems/array-prototype-last/
+// Difficulty: Easy
+// Time: O(1) | Space: O(1)
+// Note: JavaScript problem, adapted to Go. Returns last element of a slice.
+
+import "fmt"
+
+func main() {
+	fmt.Println(arrayPrototypeLast([]int{1, 2, 3}))
+	fmt.Println(arrayPrototypeLast([]int{}))
+}
+
+func arrayPrototypeLast(arr []int) int {
+	if len(arr) == 0 {
+		return -1
+	}
+	return arr[len(arr)-1]
+}
+```

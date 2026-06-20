@@ -1,0 +1,80 @@
+# 3888 — Minimum Operations To Make All Grid Elements Equal
+
+## Deskripsi
+
+**Soal:** [3888. Minimum Operations To Make All Grid Elements Equal](https://leetcode.com/problems/minimum-operations-to-make-all-grid-elements-equal/)
+
+**Tingkat Kesulitan:** Sulit
+
+**Kompleksitas Waktu:** —  
+**Kompleksitas Ruang:** —
+
+**Algoritma:** —
+
+> **Ide Kunci:** Flatten grid, sort. All elements can be made equal to
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #3888: Minimum Operations to Make All Grid Elements Equal
+// https://leetcode.com/problems/minimum-operations-to-make-all-grid-elements-equal/
+// Difficulty: Hard [Paid]
+//
+// In one operation, you can add or subtract k from any element.
+// Find minimum operations to make all grid elements equal.
+//
+// Approach: Flatten grid, sort. All elements can be made equal to
+// any element (the median minimizes total operations). Since all
+// elements must be congruent modulo k, check that first. Then
+// compute min operations as sum of |val - target| / k.
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	// Example 1
+	fmt.Println(minOperations([][]int{{1, 3}, {5, 7}}, 2))
+	// Example 2
+	fmt.Println(minOperations([][]int{{2, 4}, {6, 8}}, 2))
+	// Edge: single element
+	fmt.Println(minOperations([][]int{{5}}, 3))
+	// Edge: impossible
+	fmt.Println(minOperations([][]int{{1, 2}, {3, 4}}, 2))
+}
+
+func minOperations(grid [][]int, k int) int64 {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return 0
+	}
+
+	m, n := len(grid), len(grid[0])
+  // Membuat slice untuk menyimpan hasil
+	flat := make([]int, 0, m*n)
+	rem := grid[0][0] % k
+	for _, row := range grid {
+		for _, val := range row {
+			if val%k != rem {
+				return -1
+			}
+			flat = append(flat, val)
+		}
+	}
+
+	sort.Ints(flat)
+	target := flat[len(flat)/2]
+
+	var ops int64
+	for _, val := range flat {
+		diff := val - target
+		if diff < 0 {
+			diff = -diff
+		}
+		ops += int64(diff / k)
+	}
+	return ops
+}
+```

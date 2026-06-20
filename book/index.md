@@ -1,6 +1,6 @@
 # LeetCode Go Solutions
 
-Kumpulan solusi **3963 LeetCode problems** diimplementasikan dalam **Go (Golang)**.
+Kumpulan **3963 solusi LeetCode** diimplementasikan dalam **Go (Golang)** dengan penjelasan Bahasa Indonesia.
 
 ## Statistik
 
@@ -11,38 +11,20 @@ Kumpulan solusi **3963 LeetCode problems** diimplementasikan dalam **Go (Golang)
 | Hard (Sulit) | 944 | ✅ Complete |
 | **Total** | **3963** | ✅ **All Build Passing** |
 
-## Struktur
+## Setiap Halaman Berisi
+
+- **Deskripsi** — Apa yang diminta soal (dalam Bahasa Indonesia)
+- **Algoritma** — Teknik yang digunakan (HashMap, DP, Two Pointer, dll)
+- **Kompleksitas** — Waktu (Time) dan Ruang (Space)
+- **Solusi Go** — Kode lengkap dengan komentar penjelas
+
+## Struktur Repo
 
 ```
-.
-├── 01_easy/    # 950 solusi LeetCode Easy
-├── 02_medium/  # 2069 solusi LeetCode Medium
-├── 03_hard/    # 944 solusi LeetCode Hard
-└── book/       # Dokumentasi (halaman ini)
-```
-
-## Pola Solusi
-
-Setiap solusi mengikuti pola:
-
-```go
-package main
-
-// LeetCode #X: Problem Name
-// https://leetcode.com/problems/problem-name/
-// Difficulty: Easy/Medium/Hard
-
-import "fmt"
-
-func main() {
-    // Test cases dari LeetCode
-    fmt.Println(solutionFunction(input))
-}
-
-// Time: O(...) | Space: O(...)
-func solutionFunction(params) returnType {
-    // Implementasi algoritma
-}
+├── 01_easy/     # 950 solusi LeetCode Easy
+├── 02_medium/   # 2069 solusi LeetCode Medium
+├── 03_hard/     # 944 solusi LeetCode Hard
+└── book/        # Dokumentasi (halaman ini)
 ```
 
 ## Cara Menjalankan
@@ -54,8 +36,8 @@ go build ./...
 # Jalankan satu problem
 go run ./01_easy/0001_two-sum/
 
-# Jalankan semua problem di satu tingkat
-go run ./01_easy/...
+# Cari problem tertentu
+rg "Two Sum" 01_easy/
 ```
 
 ## Kontributor

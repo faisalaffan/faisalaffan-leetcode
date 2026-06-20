@@ -1,0 +1,60 @@
+# 1328 — Break A Palindrome
+
+## Deskripsi
+
+**Soal:** [1328. Break A Palindrome](https://leetcode.com/problems/break-a-palindrome/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(n) where n = length of palindrome string  
+**Kompleksitas Ruang:** O(n) for the byte array
+
+**Algoritma:** —
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #1328: Break a Palindrome
+// https://leetcode.com/problems/break-a-palindrome/
+// Difficulty: Medium
+
+import "fmt"
+
+func main() {
+	// Test case 1
+	fmt.Println(breakPalindrome("abccba")) // "aaccba"
+
+	// Test case 2
+	fmt.Println(breakPalindrome("a")) // ""
+
+	// Test case 3
+	fmt.Println(breakPalindrome("aa")) // "ab"
+
+	// Test case 4 - all 'a's
+	fmt.Println(breakPalindrome("aaa")) // "aab"
+}
+
+// Time: O(n) where n = length of palindrome string
+// Space: O(n) for the byte array
+func breakPalindrome(palindrome string) string {
+	n := len(palindrome)
+	if n <= 1 {
+		return ""
+	}
+
+	bytes := []byte(palindrome)
+	// Try to change first non-'a' to 'a' (only in first half to maintain smallest lexicographically)
+	for i := 0; i < n/2; i++ {
+		if bytes[i] != 'a' {
+			bytes[i] = 'a'
+			return string(bytes)
+		}
+	}
+
+	// All characters in first half are 'a', change last character to 'b'
+	bytes[n-1] = 'b'
+	return string(bytes)
+}
+```

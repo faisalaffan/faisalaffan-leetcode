@@ -1,0 +1,75 @@
+# 2566 — Maximum Difference By Remapping A Digit
+
+## Deskripsi
+
+**Soal:** [2566. Maximum Difference By Remapping A Digit](https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/)
+
+**Tingkat Kesulitan:** Mudah
+
+**Kompleksitas Waktu:** —  
+**Kompleksitas Ruang:** —
+
+**Algoritma:** —
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #2566: Maximum Difference by Remapping a Digit
+// https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/
+// Difficulty: Easy
+// Time O(log n) | Space O(log n)
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	fmt.Println(MaximumDifferenceByRemappingADigit(11891)) // 99009
+	fmt.Println(MaximumDifferenceByRemappingADigit(90))    // 99
+}
+
+func MaximumDifferenceByRemappingADigit(num int) int {
+	s := strconv.Itoa(num)
+
+	// Find max: replace first non-9 digit with 9
+	maxStr := []byte(s)
+  // Loop standar: indeks 0 sampai n-1
+	for i := 0; i < len(maxStr); i++ {
+		if maxStr[i] != '9' {
+			replaceWith := maxStr[i]
+			for j := i; j < len(maxStr); j++ {
+				if maxStr[j] == replaceWith {
+					maxStr[j] = '9'
+				}
+			}
+			break
+		}
+	}
+	maxVal, _ := strconv.Atoi(string(maxStr))
+
+	// Find min: replace first non-0 digit (or non-1) with 0
+	minStr := []byte(s)
+  // Loop standar: indeks 0 sampai n-1
+	for i := 0; i < len(minStr); i++ {
+		if minStr[i] != '0' && minStr[i] != '1' {
+			replaceWith := minStr[i]
+			for j := i; j < len(minStr); j++ {
+				if minStr[j] == replaceWith {
+					if i == 0 {
+						minStr[j] = '1'
+					} else {
+						minStr[j] = '0'
+					}
+				}
+			}
+			break
+		}
+	}
+	minVal, _ := strconv.Atoi(string(minStr))
+
+	return maxVal - minVal
+}
+```

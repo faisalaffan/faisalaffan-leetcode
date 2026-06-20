@@ -1,0 +1,49 @@
+# 3746 — Minimum String Length After Balanced Removals
+
+## Deskripsi
+
+**Soal:** [3746. Minimum String Length After Balanced Removals](https://leetcode.com/problems/minimum-string-length-after-balanced-removals/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(n)  
+**Kompleksitas Ruang:** O(1)
+
+**Algoritma:** —
+
+**Fungsi Solusi:** `func minimumStringLengthAfterBalancedRemovals(s string) int`
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #3746: Minimum String Length After Balanced Removals
+// https://leetcode.com/problems/minimum-string-length-after-balanced-removals/
+// Difficulty: Medium
+// Time: O(n) | Space: O(1)
+
+import "fmt"
+
+func minimumStringLengthAfterBalancedRemovals(s string) int {
+	a, b := 0, 0
+  // Loop standar: indeks 0 sampai n-1
+	for i := 0; i < len(s); i++ {
+		if s[i] == 'a' {
+			a++
+		} else {
+			b++
+		}
+	}
+	if a > b {
+		return a - b
+	}
+	return b - a
+}
+
+func main() {
+	fmt.Println(minimumStringLengthAfterBalancedRemovals("aabbab"))
+	fmt.Println(minimumStringLengthAfterBalancedRemovals("aaaa"))
+	fmt.Println(minimumStringLengthAfterBalancedRemovals("aaabb"))
+}
+```

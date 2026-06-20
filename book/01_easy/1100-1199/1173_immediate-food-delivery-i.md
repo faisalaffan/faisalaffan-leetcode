@@ -1,0 +1,31 @@
+# 1173 — Immediate Food Delivery I
+
+## Deskripsi
+
+**Soal:** [1173. Immediate Food Delivery I](https://leetcode.com/problems/immediate-food-delivery-i/)
+
+**Tingkat Kesulitan:** Mudah
+
+**Kompleksitas Waktu:** O(n)  
+**Kompleksitas Ruang:** O(n)
+
+**Algoritma:** —
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #1173: Immediate Food Delivery I
+// https://leetcode.com/problems/immediate-food-delivery-i/
+// Difficulty: Easy [Paid] (SQL)
+// Time: O(n) | Space: O(n)
+
+import "fmt"
+
+func main() {
+	fmt.Println("SQL: SELECT ROUND(100.0 * SUM(CASE WHEN order_date = customer_pref_delivery_date THEN 1 ELSE 0 END) / COUNT(*), 2) AS immediate_percentage FROM Delivery")
+}
+
+// This is a SQL problem. The answer is the SQL query above.
+```

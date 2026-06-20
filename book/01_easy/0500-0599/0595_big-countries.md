@@ -1,0 +1,34 @@
+# 0595 — Big Countries
+
+## Deskripsi
+
+**Soal:** [0595. Big Countries](https://leetcode.com/problems/big-countries/)
+
+**Tingkat Kesulitan:** Mudah
+
+**Kompleksitas Waktu:** —  
+**Kompleksitas Ruang:** —
+
+**Algoritma:** Trie (pohon awalan)
+
+**Fungsi Solusi:** `func BigCountries() string`
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #595: Big Countries
+// https://leetcode.com/problems/big-countries/
+// Difficulty: Easy
+
+import "fmt"
+
+func BigCountries() string {
+	return "SELECT name, population, area FROM World WHERE area >= 3000000 OR population >= 25000000"
+}
+
+func main() {
+	fmt.Println(BigCountries())
+}
+```

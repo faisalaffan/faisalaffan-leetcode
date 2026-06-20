@@ -1,0 +1,59 @@
+# 1872 — Stone Game Viii
+
+## Deskripsi
+
+**Soal:** [1872. Stone Game Viii](https://leetcode.com/problems/stone-game-viii/)
+
+**Tingkat Kesulitan:** Sulit
+
+**Kompleksitas Waktu:** —  
+**Kompleksitas Ruang:** —
+
+**Algoritma:** Dynamic Programming (DP)
+
+**Fungsi Solusi:** `func stoneGameViii(stones []int) int`
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #1872: Stone Game VIII
+// https://leetcode.com/problems/stone-game-viii/
+// Difficulty: Hard
+
+import "fmt"
+
+func stoneGameViii(stones []int) int {
+	n := len(stones)
+  // Membuat slice untuk menyimpan hasil
+	prefix := make([]int, n)
+	prefix[0] = stones[0]
+	for i := 1; i < n; i++ {
+		prefix[i] = prefix[i-1] + stones[i]
+	}
+
+	// dp[i] = max score difference (current player - opponent) starting from
+	// position i. The player may choose any j >= i, j < n-1, take the prefix
+	// from position i to j (scoring prefix[j] - base), and leave position j+1
+	// for the opponent.
+	//
+	// Recurrence: dp[i] = max over j >= i of (prefix[j] - base - dp[j+1])
+	// where base = 0 (when i=0) or prefix[i-1].
+	// This simplifies to: dp[i] = max(prefix[i] - dp[i+1], dp[i+1]).
+	//
+	// dp[n-1] = 0 (cannot take when only 1 stone remains).
+
+	dp := 0
+	for i := n - 2; i >= 0; i-- {
+		dp = max(prefix[i]-dp, dp)
+	}
+	return dp
+}
+
+func main() {
+	// Test cases
+	fmt.Println(stoneGameViii([]int{-1, 2, -3, 4, -5}))
+	fmt.Println(stoneGameViii([]int{1, 2, 3, 4, 5}))
+}
+```

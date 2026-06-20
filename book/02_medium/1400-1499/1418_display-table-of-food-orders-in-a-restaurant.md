@@ -1,0 +1,104 @@
+# 1418 — Display Table Of Food Orders In A Restaurant
+
+## Deskripsi
+
+**Soal:** [1418. Display Table Of Food Orders In A Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/)
+
+**Tingkat Kesulitan:** Sedang
+
+**Kompleksitas Waktu:** O(n log n) where n = number of orders  
+**Kompleksitas Ruang:** O(n) for maps
+
+**Algoritma:** —
+
+## Solusi Go
+
+```go
+package main
+
+// LeetCode #1418: Display Table of Food Orders in a Restaurant
+// https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/
+// Difficulty: Medium
+
+import "fmt"
+import "sort"
+import "strconv"
+
+func main() {
+	// Test case 1
+	fmt.Println(displayTable([][]string{
+		{"David", "3", "Ceviche"},
+		{"Corina", "10", "Beef Burrito"},
+		{"David", "3", "Fried Chicken"},
+		{"Carla", "5", "Water"},
+		{"Carla", "5", "Ceviche"},
+		{"Rous", "3", "Ceviche"},
+	}))
+
+	// Test case 2
+	fmt.Println(displayTable([][]string{
+		{"James", "12", "Fried Chicken"},
+		{"Ratesh", "12", "Fried Chicken"},
+		{"Amadeus", "12", "Fried Chicken"},
+		{"Adam", "1", "Canadian Waffles"},
+		{"Brianna", "1", "Canadian Waffles"},
+	}))
+}
+
+// Time: O(n log n) where n = number of orders
+// Space: O(n) for maps
+func displayTable(orders [][]string) [][]string {
+  // Membuat map untuk pencarian O(1): key → value
+	foodItems := make(map[string]bool)
+  // Membuat map untuk pencarian O(1): key → value
+	tableOrders := make(map[int]map[string]int)
+
+	for _, o := range orders {
+		table, _ := strconv.Atoi(o[1])
+		food := o[2]
+
+		foodItems[food] = true
+		if tableOrders[table] == nil {
+			tableOrders[table] = make(map[string]int)
+		}
+		tableOrders[table][food]++
+	}
+
+	// Sort food items (excluding "Table" header)
+  // Membuat slice untuk menyimpan hasil
+	foods := make([]string, 0, len(foodItems))
+	for f := range foodItems {
+		foods = append(foods, f)
+	}
+	sort.Strings(foods)
+
+	// Sort table numbers
+  // Membuat slice untuk menyimpan hasil
+	tables := make([]int, 0, len(tableOrders))
+	for t := range tableOrders {
+		tables = append(tables, t)
+	}
+	sort.Ints(tables)
+
+	// Build result
+  // Membuat slice 2D untuk DP/tabel
+	result := make([][]string, 0, len(tables)+1)
+  // Membuat slice untuk menyimpan hasil
+	header := make([]string, 0, len(foods)+1)
+	header = append(header, "Table")
+	header = append(header, foods...)
+	result = append(result, header)
+
+	for _, t := range tables {
+  // Membuat slice untuk menyimpan hasil
+		row := make([]string, 0, len(foods)+1)
+		row = append(row, strconv.Itoa(t))
+		for _, f := range foods {
+			row = append(row, strconv.Itoa(tableOrders[t][f]))
+		}
+		result = append(result, row)
+	}
+
+	return result
+}
+```
