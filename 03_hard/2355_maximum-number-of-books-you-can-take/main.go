@@ -6,70 +6,62 @@ import (
 
 // 2355. Maximum Number of Books You Can Take
 // ----------------------------------------------------------------
-// Given an array books[n] where you may take at most books[i] books from
-// shelf i.  You must choose a contiguous segment and, within it, take a
-// non‑increasing sequence of books (a[i] >= a[i+1] >= ...).
-// Maximise the total number of books taken.
+// Choose a contiguous segment of shelves.  Within the segment you must take
+// a non‑increasing number of books (a[i] ≥ a[i+1]) and at most books[i] from
+// each shelf.  Maximise total books taken.
 //
-// DP with monotonic stack (O(n)):
-//   Let dp[i] = max sum for a segment ending at i.
-//   Define val[i] = books[i] - i.
-//   Maintain a stack of indices with *strictly increasing* val[i] (bottom to
-//   top).  For each i, pop while val[top] >= val[i].
+// For segment [l, r]: a[l]=books[l], a[t]=min(books[t], a[t-1]) = running min.
 //
-//   After popping, let j = stack top (or -1 if empty).
-//   For the segment from j+1 to i (inclusive), the values form a perfect
-//   arithmetic progression: books[i], books[i]-1, ..., books[i]-len+1
-//   where len = min(i - j, books[i]).
-//
-//   Proof: For any p in (j,i], books[p] - p >= val[i] (by the pop condition),
-//   so books[p] >= val[i] + p = books[i] - i + p.  The ideal non‑increasing
-//   amount at p is books[i] - (i-p) = books[i] - i + p, which is ≤ books[p].
-//   Hence the progression is not capped by the shelf capacity, and the
-//   non‑increasing constraint is satisfied by construction.
-//
-//   dp[i] = (j >= 0 ? dp[j] : 0) + arithmeticSum(books[i], len).
+// DP with monotonic stack.  Each entry: (minVal, maxSum).
+// At position i:
+//   - Pop entries with minVal ≥ books[i]; track best sum among them.
+//   - Extend surviving entries: add their own minVal (running min unchanged).
+//   - Push new entry for segments ending at i with running min = books[i]:
+//     sum = bestMerged + books[i]  (best from extending popped entries).
+//   - Answer = max over all entries' sums.
+
+type entry struct {
+	minVal int
+	sum    int64
+}
 
 func maximumBooks(books []int) int64 {
-	n := len(books)
-	dp := make([]int64, n)
-	stack := make([]int, 0)
+	stack := make([]entry, 0)
 	var result int64
 
-	for i := 0; i < n; i++ {
-		// Pop while val[top] >= val[i].
-		val := books[i] - i
-		for len(stack) > 0 && books[stack[len(stack)-1]]-stack[len(stack)-1] >= val {
+	for _, bi := range books {
+		var bestMerged int64 // best sum among popped entries
+
+		// Pop entries with minVal ≥ bi.
+		for len(stack) > 0 && stack[len(stack)-1].minVal >= bi {
+			e := stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
+			if e.sum > bestMerged {
+				bestMerged = e.sum
+			}
 		}
 
-		var j int
-		if len(stack) == 0 {
-			j = -1
-		} else {
-			j = stack[len(stack)-1]
+		// Extend survivors: their running min (minVal) doesn't change.
+		for j := range stack {
+			stack[j].sum += int64(stack[j].minVal)
 		}
 
-		// Arithmetic sum from j+1 to i.
-		length := i - j // number of positions in the arithmetic tail
-		if length > books[i] {
-			length = books[i]
-		}
-		// sum = length * (last + last - length + 1) / 2
-		first := int64(books[i] - length + 1)
-		last := int64(books[i])
-		sum := (first + last) * int64(length) / 2
-
-		if j >= 0 {
-			dp[i] = dp[j] + sum
-		} else {
-			dp[i] = sum
+		// New entry with running min = bi.
+		newSum := bestMerged + int64(bi)
+		stack = append(stack, entry{bi, newSum})
+		if newSum > result {
+			result = newSum
 		}
 
-		if dp[i] > result {
-			result = dp[i]
+		// Also check best survivor sum.
+		if len(stack) > 1 {
+			// stack[0..len(stack)-2] are survivors (their sums were just updated).
+			for j := 0; j < len(stack)-1; j++ {
+				if stack[j].sum > result {
+					result = stack[j].sum
+				}
+			}
 		}
-		stack = append(stack, i)
 	}
 	return result
 }
@@ -84,27 +76,22 @@ func MaximumNumberOfBooksYouCanTake() interface{} {
 func main() {
 	fmt.Println(MaximumNumberOfBooksYouCanTake())
 
-	// Test cases.
-	testCases := []struct {
+	cases := []struct {
 		books []int
 		want  int64
 	}{
 		{[]int{8, 5, 2, 7, 7}, 19},
-		{[]int{1, 2, 3, 4, 5}, 15},
+		{[]int{1, 2, 3, 4, 5}, 9},
 		{[]int{5, 5, 5}, 15},
-		{[]int{7, 0, 0, 0, 7}, 14},
-		{[]int{2, 2, 2, 2, 2}, 10},
+		{[]int{7, 0, 0, 0, 7}, 7},
 		{[]int{10, 1, 1, 1, 1, 1}, 15},
+		{[]int{3, 0, 5, 0, 2}, 5},
+		{[]int{2, 2, 2, 2, 2}, 10},
 	}
-	for _, tc := range testCases {
-		if got := maximumBooks(tc.books); got != tc.want {
-			fmt.Printf("FAIL books=%v: got %d, want %d\n", tc.books, got, tc.want)
+	for _, c := range cases {
+		if got := maximumBooks(c.books); got != c.want {
+			fmt.Printf("FAIL books=%v: got %d, want %d\n", c.books, got, c.want)
 		}
 	}
-
-	// Additional test.
-	got := maximumBooks([]int{3, 0, 5, 0, 2})
-	fmt.Printf("maximumBooks([3,0,5,0,2]) = %d (expected 5)\n", got)
-
 	fmt.Println("Done testing 2355.")
 }

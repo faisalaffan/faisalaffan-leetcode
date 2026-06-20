@@ -11,11 +11,10 @@ package main
 // Approach: Binary search on answer D. Check if we can select k points with
 // minimum distance >= D using greedy placement on the square perimeter.
 
-import (
-	"fmt"
-	"math"
+import "fmt"
+	
 	"sort"
-)
+
 
 func main() {
 	// Example 1

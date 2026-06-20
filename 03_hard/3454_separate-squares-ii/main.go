@@ -11,11 +11,10 @@ package main
 // Approach: Binary search on y. Use union of intervals at each y level
 // to compute total area below the line. Use line sweep for area computation.
 
-import (
-	"fmt"
+import "fmt"
 	"math"
-	"sort"
-)
+	
+
 
 func main() {
 	// Example 1

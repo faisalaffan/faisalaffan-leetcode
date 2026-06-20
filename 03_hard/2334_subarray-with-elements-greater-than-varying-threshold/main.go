@@ -62,16 +62,17 @@ func validSubarraySize(nums []int, threshold int) int {
 		stack = append(stack, i)
 	}
 
+	best := -1
 	for i := 0; i < n; i++ {
 		left := prevSmaller[i] + 1
 		right := nextSmaller[i] - 1
 		maxLen := right - left + 1
 		// Use int64 to avoid overflow.
-		if int64(nums[i])*int64(maxLen) > int64(threshold) {
-			return maxLen
+		if int64(nums[i])*int64(maxLen) > int64(threshold) && maxLen > best {
+			best = maxLen
 		}
 	}
-	return -1
+	return best
 }
 
 // ---------------------------------------------------------------------------
@@ -93,7 +94,7 @@ func main() {
 		{[]int{6, 5, 6, 5, 8}, 7, 5},
 		{[]int{1, 2, 3, 4, 5}, 100, -1},
 		{[]int{5, 5, 5, 5}, 10, 4},
-		{[]int{2, 1, 2}, 1, 2},
+		{[]int{2, 1, 2}, 1, 3},
 	}
 	for _, tc := range tests {
 		got := validSubarraySize(tc.nums, tc.threshold)

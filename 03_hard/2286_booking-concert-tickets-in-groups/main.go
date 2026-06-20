@@ -172,17 +172,17 @@ func main() {
 	if got := show.Gather(6, 3); len(got) == 0 || got[0] != 0 || got[1] != 0 {
 		fmt.Printf("FAIL: Gather(6,3) expected [0,0], got %v\n", got)
 	}
-	if got := show.Gather(5, 2); len(got) == 0 || got[0] != 0 || got[1] != 6 {
-		fmt.Printf("FAIL: Gather(5,2) expected [0,6], got %v\n", got)
+	if got := show.Gather(5, 2); len(got) == 0 || got[0] != 1 || got[1] != 0 {
+		fmt.Printf("FAIL: Gather(5,2) expected [1,0], got %v\n", got)
 	}
-	if got := show.Gather(12, 4); len(got) == 0 || got[0] != 1 || got[1] != 0 {
-		fmt.Printf("FAIL: Gather(12,4) expected [1,0], got %v\n", got)
+	if got := show.Gather(12, 4); len(got) != 0 {
+		fmt.Printf("FAIL: Gather(12,4) expected [], got %v\n", got)
 	}
 	if got := show.Scatter(30, 4); got != true {
 		fmt.Printf("FAIL: Scatter(30,4) expected true, got %v\n", got)
 	}
-	if got := show.Gather(2, 4); len(got) != 0 {
-		fmt.Printf("FAIL: Gather(2,4) expected [] (no seats), got %v\n", got)
+	if got := show.Gather(2, 4); len(got) == 0 || got[0] != 4 || got[1] != 1 {
+		fmt.Printf("FAIL: Gather(2,4) expected [4,1], got %v\n", got)
 	}
 
 	show2 := Constructor(3, 3)

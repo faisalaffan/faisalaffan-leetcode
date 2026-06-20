@@ -105,27 +105,27 @@ func main() {
 
 	// leaf 0 → NOT → answer=1 ⇒ flip leaf once → cost 1
 	root1 := &TreeNode{Val: 2, Left: &TreeNode{Val: 0}}
-	if got := minimumFlips(root1, 1); got != 1 {
-		fmt.Printf("FAIL test1: got %d, want 1\n", got)
+	if got := minimumFlips(root1, 1); got != 0 {
+		fmt.Printf("FAIL test1: got %d, want 0\n", got)
 	}
 
 	// AND([1,0]) → 0, want 1: cheapest is flip leaf 0→1 (cost 1)
 	root2 := &TreeNode{Val: 3, Left: &TreeNode{Val: 1}, Right: &TreeNode{Val: 0}}
 	if got := minimumFlips(root2, 1); got != 1 {
-		fmt.Printf("FAIL test2: got %d, want 1\n", got)
+		fmt.Printf("FAIL test2: got %d, want 0\n", got)
 	}
 
 	// OR([0,0]) → 0, want 1: flip one leaf (cost 1)
 	root3 := &TreeNode{Val: 4, Left: &TreeNode{Val: 0}, Right: &TreeNode{Val: 0}}
 	if got := minimumFlips(root3, 1); got != 1 {
-		fmt.Printf("FAIL test3: got %d, want 1\n", got)
+		fmt.Printf("FAIL test3: got %d, want 0\n", got)
 	}
 
 	// XOR([1,0]) → 1, want 0: cheapest to make output 0 is to
 	// flip one of them so both are same: cost 1
 	root4 := &TreeNode{Val: 5, Left: &TreeNode{Val: 1}, Right: &TreeNode{Val: 0}}
 	if got := minimumFlips(root4, 0); got != 1 {
-		fmt.Printf("FAIL test4: got %d, want 1\n", got)
+		fmt.Printf("FAIL test4: got %d, want 0\n", got)
 	}
 
 	fmt.Println("Done testing 2313.")

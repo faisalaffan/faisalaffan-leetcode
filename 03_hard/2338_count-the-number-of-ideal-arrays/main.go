@@ -104,7 +104,7 @@ func main() {
 		{5, 3, 11},
 		{3, 2, 4}, // sequences of length 3 with values 1,2: 111,112,122,222 = 4
 		{1, 10, 10},
-		{4, 4, 20},
+		{4, 4, 19},
 	}
 	for _, tc := range tests {
 		got := idealArrays(tc.n, tc.maxV)

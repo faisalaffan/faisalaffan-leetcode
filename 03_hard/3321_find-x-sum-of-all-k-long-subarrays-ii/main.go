@@ -11,10 +11,9 @@ package main
 // Approach: Sliding window with two balanced sets (top and rest) to maintain
 // the top x elements by (frequency, value). O(n log k) time.
 
-import (
-	"container/heap"
+import "fmt"
 	"fmt"
-)
+
 
 func main() {
 	// Example 1

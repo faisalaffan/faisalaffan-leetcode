@@ -12,7 +12,6 @@ package main
 // Approach: Group sessions by student, check for cyclic patterns.
 
 import "fmt"
-import "sort"
 
 func main() {
 	// Example 1
