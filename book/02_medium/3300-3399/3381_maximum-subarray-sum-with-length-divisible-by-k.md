@@ -1,17 +1,30 @@
 # 3381 — Maximum Subarray Sum With Length Divisible By K
 
-## Deskripsi
-
-**Soal:** [3381. Maximum Subarray Sum With Length Divisible By K](https://leetcode.com/problems/maximum-subarray-sum-with-length-divisible-by-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSubarraySum(nums []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n) Space: O(k)  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,15 +46,15 @@ func main() {
 
 func maxSubarraySum(nums []int, k int) int64 {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int64, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + int64(nums[i])
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	minPref := make([]int64, k)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range minPref {
 		minPref[i] = math.MaxInt64
 	}

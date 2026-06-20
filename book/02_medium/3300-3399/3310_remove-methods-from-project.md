@@ -1,17 +1,30 @@
 # 3310 — Remove Methods From Project
 
-## Deskripsi
-
-**Soal:** [3310. Remove Methods From Project](https://leetcode.com/problems/remove-methods-from-project/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func remainingMethods(n int, k int, invocations [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n + m) Space: O(n + m)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +43,7 @@ func main() {
 }
 
 func remainingMethods(n int, k int, invocations [][]int) []int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, inv := range invocations {
 		a, b := inv[0], inv[1]
@@ -38,7 +51,6 @@ func remainingMethods(n int, k int, invocations [][]int) []int {
 	}
 
 	// DFS to find all suspicious methods
-  // Membuat slice untuk menyimpan hasil
 	suspicious := make([]bool, n)
 	var dfs func(u int)
 	dfs = func(u int) {
@@ -57,7 +69,7 @@ func remainingMethods(n int, k int, invocations [][]int) []int {
 		a, b := inv[0], inv[1]
 		if !suspicious[a] && suspicious[b] {
 			// Cannot remove - return all methods
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			res := make([]int, n)
 			for i := 0; i < n; i++ {
 				res[i] = i

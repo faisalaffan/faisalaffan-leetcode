@@ -1,19 +1,30 @@
 # 2252 — Dynamic Pivoting Of A Table
 
-## Deskripsi
-
-**Soal:** [2252. Dynamic Pivoting Of A Table](https://leetcode.com/problems/dynamic-pivoting-of-a-table/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewPivotTable() *PivotTable
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewPivotTable() *PivotTable`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,7 +64,7 @@ func (pt *PivotTable) AddRow(productID int, store string, price int) {
 // rows = product_ids, columns = stores (sorted), values = prices.
 func (pt *PivotTable) Pivot() ([]string, map[int]map[string]int) {
 	// collect all stores
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	storeSet := make(map[string]bool)
 	for _, stores := range pt.Data {
 		for s := range stores {
@@ -61,13 +72,12 @@ func (pt *PivotTable) Pivot() ([]string, map[int]map[string]int) {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	stores := make([]string, 0, len(storeSet))
 	for s := range storeSet {
 		stores = append(stores, s)
 	}
 	// sort stores alphabetically (simple bubble for small set)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(stores); i++ {
 		for j := i + 1; j < len(stores); j++ {
 			if stores[j] < stores[i] {

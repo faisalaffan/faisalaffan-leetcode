@@ -1,19 +1,30 @@
 # 2607 — Make K Subarray Sums Equal
 
-## Deskripsi
-
-**Soal:** [2607. Make K Subarray Sums Equal](https://leetcode.com/problems/make-k-subarray-sums-equal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func makeSubKSumEqual(arr []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func makeSubKSumEqual(arr []int, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,6 +49,7 @@ func makeSubKSumEqual(arr []int, k int) int64 {
 		for j := i; j < n; j += g {
 			group = append(group, arr[j])
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(group)
 		median := group[len(group)/2]
 		for _, v := range group {

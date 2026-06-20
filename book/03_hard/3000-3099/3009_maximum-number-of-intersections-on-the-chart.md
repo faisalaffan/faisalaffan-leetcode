@@ -1,21 +1,32 @@
 # 3009 — Maximum Number Of Intersections On The Chart
 
-## Deskripsi
-
-**Soal:** [3009. Maximum Number Of Intersections On The Chart](https://leetcode.com/problems/maximum-number-of-intersections-on-the-chart/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxIntersectionCount(y []int) int
+```
+
+> **💡 Hint:** Sweep line
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxIntersectionCount(y []int) int`
-
-> **Ide Kunci:** Sweep line
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +57,6 @@ func maxIntersectionCount(y []int) int {
 		x     int
 		delta int
 	}
-  // Membuat slice untuk menyimpan hasil
 	events := make([]event, 0, 2*n)
 
 	for i := 1; i < n; i++ {
@@ -69,6 +79,7 @@ func maxIntersectionCount(y []int) int {
 		events = append(events, event{s, 1}, event{e + 1, -1})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(events, func(i, j int) bool {
 		if events[i].x != events[j].x {
 			return events[i].x < events[j].x

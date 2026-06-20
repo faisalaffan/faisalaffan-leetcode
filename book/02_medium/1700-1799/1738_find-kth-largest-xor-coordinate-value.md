@@ -1,19 +1,30 @@
 # 1738 — Find Kth Largest Xor Coordinate Value
 
-## Deskripsi
-
-**Soal:** [1738. Find Kth Largest Xor Coordinate Value](https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kthLargestValue(matrix [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(m * n * log(m*n)), Space: O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func kthLargestValue(matrix [][]int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,13 +41,13 @@ import (
 
 func kthLargestValue(matrix [][]int, k int) int {
 	m, n := len(matrix), len(matrix[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	prefix := make([][]int, m)
 	for i := 0; i < m; i++ {
 		prefix[i] = make([]int, n)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	values := make([]int, 0, m*n)
 
 	for i := 0; i < m; i++ {
@@ -56,6 +67,7 @@ func kthLargestValue(matrix [][]int, k int) int {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(values, func(i, j int) bool {
 		return values[i] > values[j]
 	})

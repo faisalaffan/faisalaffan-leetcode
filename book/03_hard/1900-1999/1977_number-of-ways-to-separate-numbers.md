@@ -1,21 +1,32 @@
 # 1977 — Number Of Ways To Separate Numbers
 
-## Deskripsi
-
-**Soal:** [1977. Number Of Ways To Separate Numbers](https://leetcode.com/problems/number-of-ways-to-separate-numbers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfWaysToSeparateNumbers(s string) int
+```
+
+> **💡 Hint:** DP + LCP (Longest Common Prefix)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfWaysToSeparateNumbers(s string) int`
-
-> **Ide Kunci:** DP + LCP (Longest Common Prefix)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,9 +49,9 @@ func numberOfWaysToSeparateNumbers(s string) int {
 	n := len(s)
 
 	// LCP[i][j] = longest common prefix of s[i:] and s[j:]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	lcp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range lcp {
 		lcp[i] = make([]int, n+1)
 	}
@@ -52,9 +63,9 @@ func numberOfWaysToSeparateNumbers(s string) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+2)  // dp[n] = 1 (empty suffix)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n+2) // pref[i] = sum_{k >= i} dp[k]
 	dp[n] = 1
 	pref[n] = 1

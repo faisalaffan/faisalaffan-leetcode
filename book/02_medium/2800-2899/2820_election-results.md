@@ -1,19 +1,30 @@
 # 2820 — Election Results
 
-## Deskripsi
-
-**Soal:** [2820. Election Results](https://leetcode.com/problems/election-results/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ElectionResults(votes []Vote) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func ElectionResults(votes []Vote) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ type Vote struct {
 }
 
 func ElectionResults(votes []Vote) string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counts := make(map[string]int)
 	for _, v := range votes {
 		counts[v.Candidate]++
@@ -44,11 +55,11 @@ func ElectionResults(votes []Vote) string {
 		Candidate string
 		Count     int
 	}
-  // Membuat slice untuk menyimpan hasil
 	sorted := make([]kv, 0, len(counts))
 	for k, v := range counts {
 		sorted = append(sorted, kv{k, v})
 	}
+  // Custom sort dengan comparator
 	sort.Slice(sorted, func(i, j int) bool {
 		if sorted[i].Count != sorted[j].Count {
 			return sorted[i].Count > sorted[j].Count

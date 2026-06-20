@@ -1,17 +1,30 @@
 # 1289 — Minimum Falling Path Sum Ii
 
-## Deskripsi
-
-**Soal:** [1289. Minimum Falling Path Sum Ii](https://leetcode.com/problems/minimum-falling-path-sum-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minFallingPathSum(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +47,7 @@ func main() {
 
 func minFallingPathSum(grid [][]int) int {
 	n := len(grid)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}

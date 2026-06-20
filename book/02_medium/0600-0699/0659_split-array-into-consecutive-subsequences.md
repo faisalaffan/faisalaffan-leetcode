@@ -1,17 +1,30 @@
 # 0659 — Split Array Into Consecutive Subsequences
 
-## Deskripsi
-
-**Soal:** [0659. Split Array Into Consecutive Subsequences](https://leetcode.com/problems/split-array-into-consecutive-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isPossible(nums []int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +44,9 @@ func main() {
 }
 
 func isPossible(nums []int) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	tail := make(map[int]int)
 
 	for _, num := range nums {

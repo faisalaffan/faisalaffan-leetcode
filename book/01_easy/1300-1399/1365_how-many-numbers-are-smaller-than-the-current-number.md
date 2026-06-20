@@ -1,19 +1,34 @@
 # 1365 — How Many Numbers Are Smaller Than The Current Number
 
-## Deskripsi
-
-**Soal:** [1365. How Many Numbers Are Smaller Than The Current Number](https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func smallerNumbersThanCurrent(nums []int) []int
+
+import "fmt"
+
+func main()
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(1) — since count array is fixed size 101  
 **Kompleksitas Ruang:** O(1) — since count array is fixed size 101
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func smallerNumbersThanCurrent(nums []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +49,7 @@ func main() {
 
 // Time: O(n), Space: O(1) — since count array is fixed size 101
 func HowManyNumbersAreSmallerThanTheCurrentNumber(nums []int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([]int, 101)
 	for _, v := range nums {
 		count[v]++
@@ -42,7 +57,7 @@ func HowManyNumbersAreSmallerThanTheCurrentNumber(nums []int) []int {
 	for i := 1; i < 101; i++ {
 		count[i] += count[i-1]
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	res := make([]int, len(nums))
 	for i, v := range nums {
 		if v > 0 {

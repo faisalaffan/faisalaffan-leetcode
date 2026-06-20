@@ -1,17 +1,30 @@
 # 1452 — People Whose List Of Favorite Companies Is Not A Subset Of Another List
 
-## Deskripsi
-
-**Soal:** [1452. People Whose List Of Favorite Companies Is Not A Subset Of Another List](https://leetcode.com/problems/people-whose-list-of-favorite-companies-is-not-a-subset-of-another-list/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func peopleIndexes(favoriteCompanies [][]string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n^2 * m) where n = number of people, m = avg companies per person  
 **Kompleksitas Ruang:** O(n * m) for storing company sets
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,7 +70,6 @@ func main() {
 // Space: O(n * m) for storing company sets
 func peopleIndexes(favoriteCompanies [][]string) []int {
 	// Convert each person's companies to a set
-  // Membuat slice untuk menyimpan hasil
 	sets := make([]map[string]bool, len(favoriteCompanies))
 	for i, companies := range favoriteCompanies {
 		sets[i] = make(map[string]bool)
@@ -67,12 +79,13 @@ func peopleIndexes(favoriteCompanies [][]string) []int {
 	}
 
 	// Sort by company list size descending to check larger lists first
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indices := make([]int, len(favoriteCompanies))
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range indices {
 		indices[i] = i
 	}
+  // Custom sort dengan comparator
 	sort.Slice(indices, func(i, j int) bool {
 		return len(favoriteCompanies[indices[i]]) > len(favoriteCompanies[indices[j]])
 	})
@@ -94,6 +107,7 @@ func peopleIndexes(favoriteCompanies [][]string) []int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

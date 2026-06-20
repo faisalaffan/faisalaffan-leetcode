@@ -1,19 +1,30 @@
 # 2812 — Find The Safest Path In A Grid
 
-## Deskripsi
-
-**Soal:** [2812. Find The Safest Path In A Grid](https://leetcode.com/problems/find-the-safest-path-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindTheSafestPathInAGrid(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, BFS
 
 **Kompleksitas Waktu:** O(n^2 log n)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** Binary Search (pencarian biner), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func FindTheSafestPathInAGrid(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,9 +43,9 @@ func FindTheSafestPathInAGrid(grid [][]int) int {
 	n := len(grid)
 
 	// Multi-source BFS to compute distance to nearest thief (1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -43,7 +54,6 @@ func FindTheSafestPathInAGrid(grid [][]int) int {
 	}
 
 	type cell struct{ r, c int }
-  // Membuat slice untuk menyimpan hasil
 	queue := make([]cell, 0)
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
@@ -72,9 +82,9 @@ func FindTheSafestPathInAGrid(grid [][]int) int {
 		if dist[0][0] < minDist {
 			return false
 		}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		visited := make([][]bool, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range visited {
 			visited[i] = make([]bool, n)
 		}

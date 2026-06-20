@@ -1,19 +1,30 @@
 # 2628 — Json Deep Equal
 
-## Deskripsi
-
-**Soal:** [2628. Json Deep Equal](https://leetcode.com/problems/json-deep-equal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func jsonDeepEqual(o1, o2 any) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func jsonDeepEqual(o1, o2 any) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

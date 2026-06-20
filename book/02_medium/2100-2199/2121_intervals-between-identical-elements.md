@@ -1,19 +1,30 @@
 # 2121 — Intervals Between Identical Elements
 
-## Deskripsi
-
-**Soal:** [2121. Intervals Between Identical Elements](https://leetcode.com/problems/intervals-between-identical-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getDistances(arr []int) []int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getDistances(arr []int) []int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,13 +39,13 @@ import "fmt"
 func getDistances(arr []int) []int64 {
 	n := len(arr)
 	// Group indices by value
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[int][]int)
 	for i, v := range arr {
 		groups[v] = append(groups[v], i)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int64, n)
 	for _, indices := range groups {
 		m := len(indices)
@@ -42,7 +53,7 @@ func getDistances(arr []int) []int64 {
 			continue
 		}
 		// Prefix sum of distances
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		prefix := make([]int64, m+1)
 		for i := 0; i < m; i++ {
 			prefix[i+1] = prefix[i] + int64(indices[i])

@@ -1,19 +1,32 @@
 # 1039 — Minimum Score Triangulation Of Polygon
 
-## Deskripsi
-
-**Soal:** [1039. Minimum Score Triangulation Of Polygon](https://leetcode.com/problems/minimum-score-triangulation-of-polygon/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minScoreTriangulation(values []int) int
+```
+
+> **💡 Hint:** Interval DP. dp[i][j] = min score triangulating polygon from i to j.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** O(n^3)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Interval DP. dp[i][j] = min score triangulating polygon from i to j.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,9 +48,9 @@ func main() {
 
 func minScoreTriangulation(values []int) int {
 	n := len(values)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}

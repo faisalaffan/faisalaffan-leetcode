@@ -1,19 +1,30 @@
 # 1242 — Web Crawler Multithreaded
 
-## Deskripsi
-
-**Soal:** [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func crawlParallel(startUrl string, parser HtmlParser) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(V + E)  
 **Kompleksitas Ruang:** O(V)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func crawlParallel(startUrl string, parser HtmlParser) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +59,7 @@ func (m *mockParser) GetUrls(url string) []string {
 func crawlParallel(startUrl string, parser HtmlParser) []string {
 	getHost := func(url string) string {
 		host := ""
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(url)-7; i++ {
 			if url[i:i+7] == "http://" {
 				url = url[7:]
@@ -65,7 +76,7 @@ func crawlParallel(startUrl string, parser HtmlParser) []string {
 	}
 
 	hostname := getHost(startUrl)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[string]bool)
 	var mu sync.Mutex
 	var wg sync.WaitGroup
@@ -93,7 +104,6 @@ func crawlParallel(startUrl string, parser HtmlParser) []string {
 	go crawl(startUrl)
 	wg.Wait()
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0, len(visited))
 	for url := range visited {
 		result = append(result, url)

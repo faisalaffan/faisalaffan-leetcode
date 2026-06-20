@@ -1,19 +1,32 @@
 # 3911 — K Th Smallest Remaining Even Integer In Subarray Queries
 
-## Deskripsi
-
-**Soal:** [3911. K Th Smallest Remaining Even Integer In Subarray Queries](https://leetcode.com/problems/k-th-smallest-remaining-even-integer-in-subarray-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kthSmallestRemainingEvenInteger(nums []int, queries [][]int) []int
+```
+
+> **💡 Hint:** Precompute prefix counts of even numbers. For each
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Precompute prefix counts of even numbers. For each
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,7 +69,7 @@ func kthSmallestRemainingEvenInteger(nums []int, queries [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for idx, q := range queries {
 		l, r, k := q[0], q[1], q[2]

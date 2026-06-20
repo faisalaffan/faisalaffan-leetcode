@@ -1,21 +1,32 @@
 # 2076 — Process Restricted Friend Requests
 
-## Deskripsi
-
-**Soal:** [2076. Process Restricted Friend Requests](https://leetcode.com/problems/process-restricted-friend-requests/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newUnionFind(n int) *unionFind
+```
+
+> **💡 Hint:** Union-Find + Restriction Check
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newUnionFind(n int) *unionFind`
-
-> **Ide Kunci:** Union-Find + Restriction Check
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,9 +44,9 @@ type unionFind struct {
 }
 
 func newUnionFind(n int) *unionFind {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rank := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -66,7 +77,6 @@ func (uf *unionFind) union(x, y int) {
 
 func friendRequests(n int, restrictions [][]int, requests [][]int) []bool {
 	uf := newUnionFind(n)
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, len(requests))
 
 	for i, req := range requests {

@@ -1,17 +1,30 @@
 # 0914 — X Of A Kind In A Deck Of Cards
 
-## Deskripsi
-
-**Soal:** [0914. X Of A Kind In A Deck Of Cards](https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func hasGroupsSizeX(deck []int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, GCD / Matematika
 
 **Kompleksitas Waktu:** O(n log m) where m is max count. Space: O(n).  
 **Kompleksitas Ruang:** O(n).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,7 @@ func main() {
 // hasGroupsSizeX checks if the deck can be split into groups of equal size with same values.
 // Time: O(n log m) where m is max count. Space: O(n).
 func hasGroupsSizeX(deck []int) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counts := make(map[int]int)
 	for _, v := range deck {
 		counts[v]++

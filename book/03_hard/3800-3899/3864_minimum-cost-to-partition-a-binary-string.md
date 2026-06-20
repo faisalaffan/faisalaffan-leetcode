@@ -1,19 +1,32 @@
 # 3864 — Minimum Cost To Partition A Binary String
 
-## Deskripsi
-
-**Soal:** [3864. Minimum Cost To Partition A Binary String](https://leetcode.com/problems/minimum-cost-to-partition-a-binary-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minCost(s string, encCost int, flatCost int) int64
+```
+
+> **💡 Hint:** DP[i] = min cost to partition prefix of length i. For
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP[i] = min cost to partition prefix of length i. For
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,7 @@ func main() {
 
 func minCost(s string, encCost int, flatCost int) int64 {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int64, n+1)
 	for i := 1; i <= n; i++ {
 		dp[i] = math.MaxInt64

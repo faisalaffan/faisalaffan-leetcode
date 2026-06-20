@@ -1,19 +1,30 @@
 # 3728 — Stable Subarrays With Equal Boundary And Interior Sum
 
-## Deskripsi
-
-**Soal:** [3728. Stable Subarrays With Equal Boundary And Interior Sum](https://leetcode.com/problems/stable-subarrays-with-equal-boundary-and-interior-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func stableSubarraysWithEqualBoundaryAndInteriorSum(capacity []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func stableSubarraysWithEqualBoundaryAndInteriorSum(capacity []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func stableSubarraysWithEqualBoundaryAndInteriorSum(capacity []int) int64 {
 	n := len(capacity)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	s := make([]int64, n+1)
 	for i := 0; i < n; i++ {
 		s[i+1] = s[i] + int64(capacity[i])
@@ -37,7 +48,7 @@ func stableSubarraysWithEqualBoundaryAndInteriorSum(capacity []int) int64 {
 		val int
 		sum int64
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cnt := make(map[pair]int)
 	var ans int64
 

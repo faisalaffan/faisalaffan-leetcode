@@ -1,19 +1,32 @@
 # 3624 — Number Of Integers With Popcount Depth Equal To K Ii
 
-## Deskripsi
-
-**Soal:** [3624. Number Of Integers With Popcount Depth Equal To K Ii](https://leetcode.com/problems/number-of-integers-with-popcount-depth-equal-to-k-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func popcountDepthII(nums []int64, queries [][]int64) []int
+```
+
+> **💡 Hint:** Precompute depth for all numbers, use Fenwick tree per depth level.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Precompute depth for all numbers, use Fenwick tree per depth level.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 	n := len(nums)
 	// Precompute depth for numbers up to 60 (max bits for 10^15)
 	// Depth = number of popcount steps until reaching 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	depth := make([]int, 61)
 	depth[0] = 0
 	depth[1] = 1
@@ -58,7 +71,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 	}
 
 	// Current depths for each element
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	curDepth := make([]int, n)
 	for i := 0; i < n; i++ {
 		pop := bits.OnesCount64(uint64(nums[i]))
@@ -69,7 +82,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 
 	// Fenwick trees for each depth (0..5, since max depth is ~5 for 10^15)
 	const MAX_DEPTH = 6
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	fenwick := make([][]int, MAX_DEPTH)
 	for d := 0; d < MAX_DEPTH; d++ {
 		fenwick[d] = make([]int, n+1)
@@ -97,7 +110,7 @@ func popcountDepthII(nums []int64, queries [][]int64) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0)
 	for _, q := range queries {
 		if q[0] == 1 {

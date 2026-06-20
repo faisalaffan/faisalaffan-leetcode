@@ -1,21 +1,32 @@
 # 3037 — Find Pattern In Infinite Stream Ii
 
-## Deskripsi
-
-**Soal:** [3037. Find Pattern In Infinite Stream Ii](https://leetcode.com/problems/find-pattern-in-infinite-stream-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewInfiniteStream(bits []int) *InfiniteStream
+```
+
+> **💡 Hint:** KMP algorithm on an infinite stream
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** KMP (Knuth-Morris-Pratt, pencocokan string)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewInfiniteStream(bits []int) *InfiniteStream`
-
-> **Ide Kunci:** KMP algorithm on an infinite stream
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,7 +67,7 @@ func findPattern(stream *InfiniteStream, pattern []int) int {
 	m := len(pattern)
 
 	// Build LPS array for the pattern
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lps := make([]int, m)
 	j := 0
 	for i := 1; i < m; i++ {

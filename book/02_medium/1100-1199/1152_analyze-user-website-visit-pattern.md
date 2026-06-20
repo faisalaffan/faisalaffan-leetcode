@@ -1,19 +1,30 @@
 # 1152 — Analyze User Website Visit Pattern
 
-## Deskripsi
-
-**Soal:** [1152. Analyze User Website Visit Pattern](https://leetcode.com/problems/analyze-user-website-visit-pattern/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func mostVisitedPattern(username []string, timestamp []int, website []string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n^3) worst, but constrained by problem input size  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func mostVisitedPattern(username []string, timestamp []int, website []string) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,7 @@ func mostVisitedPattern(username []string, timestamp []int, website []string) []
 	n := len(username)
 
 	// Group visits by user
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userVisits := make(map[string][]visit)
 	for i := 0; i < n; i++ {
 		userVisits[username[i]] = append(userVisits[username[i]], visit{timestamp[i], website[i]})
@@ -46,23 +57,24 @@ func mostVisitedPattern(username []string, timestamp []int, website []string) []
 
 	// Sort each user's visits by timestamp
 	for user := range userVisits {
+  // Custom sort dengan comparator
 		sort.Slice(userVisits[user], func(i, j int) bool {
 			return userVisits[user][i].time < userVisits[user][j].time
 		})
 	}
 
 	// Count patterns across users
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	patternCount := make(map[string]int)
 
 	for _, visits := range userVisits {
 		if len(visits) < 3 {
 			continue
 		}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		userPatterns := make(map[string]bool)
 		// Generate all 3-sequences for this user
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(visits); i++ {
 			for j := i + 1; j < len(visits); j++ {
 				for k := j + 1; k < len(visits); k++ {

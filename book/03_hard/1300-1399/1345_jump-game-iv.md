@@ -1,19 +1,30 @@
 # 1345 — Jump Game Iv
 
-## Deskripsi
-
-**Soal:** [1345. Jump Game Iv](https://leetcode.com/problems/jump-game-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minJumps(arr []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minJumps(arr []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,13 +42,12 @@ func minJumps(arr []int) int {
 	}
 
 	// Build value -> indices map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	valMap := make(map[int][]int)
 	for i, v := range arr {
 		valMap[v] = append(valMap[v], i)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	queue := []int{0}
 	visited[0] = true

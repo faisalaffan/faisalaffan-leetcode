@@ -1,19 +1,30 @@
 # 1249 — Minimum Remove To Make Valid Parentheses
 
-## Deskripsi
-
-**Soal:** [1249. Minimum Remove To Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minRemoveToMakeValid(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minRemoveToMakeValid(s string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,9 +44,8 @@ import (
 
 func minRemoveToMakeValid(s string) string {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0)
-  // Membuat slice untuk menyimpan hasil
 	remove := make([]bool, n)
 
 	for i := 0; i < n; i++ {
@@ -54,7 +64,6 @@ func minRemoveToMakeValid(s string) string {
 		remove[idx] = true
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, n)
 	for i := 0; i < n; i++ {
 		if !remove[i] {

@@ -1,17 +1,30 @@
 # 1371 — Find The Longest Substring Containing Vowels In Even Counts
 
-## Deskripsi
-
-**Soal:** [1371. Find The Longest Substring Containing Vowels In Even Counts](https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findTheLongestSubstring(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Bitmask
 
 **Kompleksitas Waktu:** O(n) where n = length of string  
 **Kompleksitas Ruang:** O(1) - fixed array of 32 states (2^5)
 
-**Algoritma:** Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,9 +51,9 @@ func main() {
 func findTheLongestSubstring(s string) int {
 	// Map bitmask (5 bits for a,e,i,o,u) to first occurrence index
 	// State 0 (all vowels even) at position 0
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	firstSeen := make([]int, 32)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range firstSeen {
 		firstSeen[i] = -1
 	}
@@ -49,7 +62,7 @@ func findTheLongestSubstring(s string) int {
 	mask := 0
 	maxLen := 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		switch s[i] {
 		case 'a':

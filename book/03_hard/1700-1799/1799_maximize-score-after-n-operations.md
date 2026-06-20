@@ -1,19 +1,32 @@
 # 1799 — Maximize Score After N Operations
 
-## Deskripsi
-
-**Soal:** [1799. Maximize Score After N Operations](https://leetcode.com/problems/maximize-score-after-n-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxScore(nums []int) int
+```
+
+> **💡 Hint:** DP with Bitmask.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming, GCD / Matematika, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with Bitmask.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,9 +58,9 @@ func main() {
 
 func maxScore(nums []int) int {
 	m := 1 << len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	memo := make([]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = -1
 	}
@@ -63,7 +76,7 @@ func maxScore(nums []int) int {
 		bits := popcount(mask)
 		op := bits/2 + 1
 		best := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(nums); i++ {
 			if mask&(1<<i) != 0 {
 				continue

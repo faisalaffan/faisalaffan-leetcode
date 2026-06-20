@@ -1,19 +1,32 @@
 # 3256 — Maximum Value Sum By Placing Three Rooks I
 
-## Deskripsi
-
-**Soal:** [3256. Maximum Value Sum By Placing Three Rooks I](https://leetcode.com/problems/maximum-value-sum-by-placing-three-rooks-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumValueSum(board [][]int) int64
+```
+
+> **💡 Hint:** For each row, keep only the top 3 (value, column) pairs.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m^3 * 27) = O(m^3), but m ≤ 100 so acceptable for Part I.  
 **Kompleksitas Ruang:** O(m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** For each row, keep only the top 3 (value, column) pairs.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -75,14 +88,14 @@ func maximumValueSum(board [][]int) int64 {
 	}
 
 	// For each row, find top 3 (value, column) pairs
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rowTop := make([][]cell, m)
 	for i := 0; i < m; i++ {
-  // Membuat slice untuk menyimpan hasil
 		row := make([]cell, n)
 		for j := 0; j < n; j++ {
 			row[j] = cell{board[i][j], j}
 		}
+  // Custom sort dengan comparator
 		sort.Slice(row, func(a, b int) bool {
 			return row[a].val > row[b].val
 		})

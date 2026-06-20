@@ -1,19 +1,30 @@
 # 2234 — Maximum Total Beauty Of The Gardens
 
-## Deskripsi
-
-**Soal:** [2234. Maximum Total Beauty Of The Gardens](https://leetcode.com/problems/maximum-total-beauty-of-the-gardens/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumBeauty(flowers []int, newFlowers int64, target int, full int, partial int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumBeauty(flowers []int, newFlowers int64, target int, full int, partial int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,9 +52,10 @@ func maximumBeauty(flowers []int, newFlowers int64, target int, full int, partia
 	newF := int(newFlowers)
 
 	// sort initially
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, flowers)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
 
 	// clip at target (excess flowers don't help completeness)
@@ -52,10 +64,11 @@ func maximumBeauty(flowers []int, newFlowers int64, target int, full int, partia
 			sorted[i] = target
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
 
 	// prefix sums for efficient gap calculation
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + sorted[i]

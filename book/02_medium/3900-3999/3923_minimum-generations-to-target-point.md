@@ -1,21 +1,32 @@
 # 3923 — Minimum Generations To Target Point
 
-## Deskripsi
-
-**Soal:** [3923. Minimum Generations To Target Point](https://leetcode.com/problems/minimum-generations-to-target-point/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumGenerationsToTargetPoint(points [][]int, target []int) int
+```
+
+> **💡 Hint:** BFS simulation. Generate new points by pairing all distinct seen points,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(K * N^2)  
 **Kompleksitas Ruang:** O(7^3) where N = seen points ≤ 343, K = max generations
 
-**Algoritma:** Dynamic Programming (DP), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MinimumGenerationsToTargetPoint(points [][]int, target []int) int`
-
-> **Ide Kunci:** BFS simulation. Generate new points by pairing all distinct seen points,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +63,7 @@ func MinimumGenerationsToTargetPoint(points [][]int, target []int) int {
 	// BFS generation by generation
 	for gen := 1; gen <= 7; gen++ {
 		// Collect all points seen so far
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		allPoints := make([][3]int, 0, 343)
 		for x := 0; x <= 6; x++ {
 			for y := 0; y <= 6; y++ {
@@ -69,7 +80,7 @@ func MinimumGenerationsToTargetPoint(points [][]int, target []int) int {
 		}
 
 		var nextGen [][3]int
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(allPoints); i++ {
 			for j := i + 1; j < len(allPoints); j++ {
 				// Compute floor midpoint

@@ -1,19 +1,32 @@
 # 3949 — Subtree Inversion Sum Ii
 
-## Deskripsi
-
-**Soal:** [3949. Subtree Inversion Sum Ii](https://leetcode.com/problems/subtree-inversion-sum-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewBIT(size int) *BIT
+```
+
+> **💡 Hint:** DFS with Fenwick tree for inversion counting. For
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS with Fenwick tree for inversion counting. For
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -78,7 +91,7 @@ func (b *BIT) Range(l, r int) int {
 
 func maxSum(edges [][]int, nums []int, k int) int {
 	n := len(nums)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]

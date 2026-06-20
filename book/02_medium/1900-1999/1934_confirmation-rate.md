@@ -1,17 +1,30 @@
 # 1934 — Confirmation Rate
 
-## Deskripsi
-
-**Soal:** [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ConfirmationRate(signups [][]int, confirmations [][]int) []float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n + m), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +45,7 @@ func main() {
 
 // Time: O(n + m), Space: O(n)
 func ConfirmationRate(signups [][]int, confirmations [][]int) []float64 {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userMap := make(map[int][]int) // user_id -> [confirmed, total]
 	for _, s := range signups {
 		userMap[s[0]] = []int{0, 0}
@@ -47,7 +60,6 @@ func ConfirmationRate(signups [][]int, confirmations [][]int) []float64 {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]float64, 0, len(signups))
 	for _, s := range signups {
 		uid := s[0]

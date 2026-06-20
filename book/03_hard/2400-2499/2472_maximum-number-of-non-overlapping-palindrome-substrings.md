@@ -1,17 +1,30 @@
 # 2472 — Maximum Number Of Non Overlapping Palindrome Substrings
 
-## Deskripsi
-
-**Soal:** [2472. Maximum Number Of Non Overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPalindromes(s string, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -69,6 +82,7 @@ func maxPalindromes(s string, k int) int {
 }
 
 func isPalindrome(s string, l, r int) bool {
+  // Two-pointer: gerakkan kiri atau kanan
 	for l < r {
 		if s[l] != s[r] {
 			return false

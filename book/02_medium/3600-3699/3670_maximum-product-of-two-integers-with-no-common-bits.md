@@ -1,19 +1,30 @@
 # 3670 — Maximum Product Of Two Integers With No Common Bits
 
-## Deskripsi
-
-**Soal:** [3670. Maximum Product Of Two Integers With No Common Bits](https://leetcode.com/problems/maximum-product-of-two-integers-with-no-common-bits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumProductOfTwoIntegersWithNoCommonBits(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n + B*2^B)  
 **Kompleksitas Ruang:** O(2^B)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumProductOfTwoIntegersWithNoCommonBits(nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ func maximumProductOfTwoIntegersWithNoCommonBits(nums []int) int64 {
 	}
 	size := 1 << maxBits
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, size)
 	for _, x := range nums {
 		if dp[x] < x {

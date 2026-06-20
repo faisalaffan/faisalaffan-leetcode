@@ -1,17 +1,30 @@
 # 2123 — Minimum Operations To Remove Adjacent Ones In Matrix
 
-## Deskripsi
-
-**Soal:** [2123. Minimum Operations To Remove Adjacent Ones In Matrix](https://leetcode.com/problems/minimum-operations-to-remove-adjacent-ones-in-matrix/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,9 +62,9 @@ func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
 
 	// Assign IDs to cells with value 1
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	id := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range id {
 		id[i] = make([]int, n)
 		for j := range id[i] {
@@ -80,7 +93,7 @@ func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int {
 	}
 
 	// Build adjacency from left to right
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, leftCount)
 	for i := 0; i < leftCount; i++ {
 		adj[i] = []int{}
@@ -103,9 +116,9 @@ func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int {
 	}
 
 	// Maximum bipartite matching using DFS (Kuhn's algorithm)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	matchR := make([]int, rightCount)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range matchR {
 		matchR[i] = -1
 	}
@@ -127,7 +140,6 @@ func minimumOperationsToRemoveAdjacentOnes(grid [][]int) int {
 
 	result := 0
 	for u := 0; u < leftCount; u++ {
-  // Membuat slice untuk menyimpan hasil
 		seen := make([]bool, rightCount)
 		if dfs(u, seen) {
 			result++

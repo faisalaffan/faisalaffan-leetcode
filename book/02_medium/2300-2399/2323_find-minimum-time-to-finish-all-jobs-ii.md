@@ -1,19 +1,30 @@
 # 2323 — Find Minimum Time To Finish All Jobs Ii
 
-## Deskripsi
-
-**Soal:** [2323. Find Minimum Time To Finish All Jobs Ii](https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTime(jobs []int, workers []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func minimumTime(jobs []int, workers []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,11 +40,13 @@ import (
 )
 
 func minimumTime(jobs []int, workers []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(jobs)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(workers)
 	maxDays := 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(jobs); i++ {
 		days := (jobs[i] + workers[i] - 1) / workers[i] // ceil division
 		if days > maxDays {

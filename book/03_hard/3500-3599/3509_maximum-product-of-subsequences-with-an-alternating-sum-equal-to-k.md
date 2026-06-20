@@ -1,19 +1,32 @@
 # 3509 — Maximum Product Of Subsequences With An Alternating Sum Equal To K
 
-## Deskripsi
-
-**Soal:** [3509. Maximum Product Of Subsequences With An Alternating Sum Equal To K](https://leetcode.com/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxProduct(nums []int, k int, limit int) int
+```
+
+> **💡 Hint:** DP with maps. Track (sum, parity) -> max product, with products
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with maps. Track (sum, parity) -> max product, with products
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,9 +60,9 @@ func main() {
 func maxProduct(nums []int, k int, limit int) int {
 	// even[sum] = set of possible products for subsequences with even length (next sign is +)
 	// odd[sum] = set of possible products for subsequences with odd length (next sign is -)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	even := make(map[int]map[int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	odd := make(map[int]map[int]bool)
 
 	ans := -1
@@ -119,7 +132,7 @@ func maxProduct(nums []int, k int, limit int) int {
 }
 
 func copyMap(src map[int]map[int]bool) map[int]map[int]bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dst := make(map[int]map[int]bool)
 	for k, v := range src {
 		dst[k] = make(map[int]bool)

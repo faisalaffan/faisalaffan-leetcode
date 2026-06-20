@@ -1,19 +1,32 @@
 # 3816 — Lexicographically Smallest String After Deleting Duplicate Characters
 
-## Deskripsi
-
-**Soal:** [3816. Lexicographically Smallest String After Deleting Duplicate Characters](https://leetcode.com/problems/lexicographically-smallest-string-after-deleting-duplicate-characters/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lexSmallestAfterDeletion(s string) string
+```
+
+> **💡 Hint:** Monotonic stack. Track last occurrence of each char.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Monotonic stack. Track last occurrence of each char.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +57,9 @@ func main() {
 }
 
 func lexSmallestAfterDeletion(s string) string {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lastPos := make([]int, 26)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range lastPos {
 		lastPos[i] = -1
 	}
@@ -54,12 +67,10 @@ func lexSmallestAfterDeletion(s string) string {
 		lastPos[ch-'a'] = i
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, 26)
-  // Membuat slice untuk menyimpan hasil
 	stack := make([]byte, 0, len(s))
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		c := s[i] - 'a'
 		if used[c] {
@@ -73,7 +84,6 @@ func lexSmallestAfterDeletion(s string) string {
 		used[c] = true
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	res := make([]byte, len(stack))
 	for i, v := range stack {
 		res[i] = v + 'a'

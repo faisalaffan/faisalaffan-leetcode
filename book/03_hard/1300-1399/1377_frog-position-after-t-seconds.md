@@ -1,21 +1,32 @@
 # 1377 — Frog Position After T Seconds
 
-## Deskripsi
-
-**Soal:** [1377. Frog Position After T Seconds](https://leetcode.com/problems/frog-position-after-t-seconds/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func frogPosition(n int, edges [][]int, t int, target int) float64
+```
+
+> **💡 Hint:** DFS on tree with probability propagation.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func frogPosition(n int, edges [][]int, t int, target int) float64`
-
-> **Ide Kunci:** DFS on tree with probability propagation.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ package main
 import "fmt"
 
 func frogPosition(n int, edges [][]int, t int, target int) float64 {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n+1)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -42,7 +53,6 @@ func frogPosition(n int, edges [][]int, t int, target int) float64 {
 		adj[v] = append(adj[v], u)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n+1)
 
 	var dfs func(node, time int, prob float64) float64

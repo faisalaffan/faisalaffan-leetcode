@@ -1,17 +1,30 @@
 # 1915 — Number Of Wonderful Substrings
 
-## Deskripsi
-
-**Soal:** [1915. Number Of Wonderful Substrings](https://leetcode.com/problems/number-of-wonderful-substrings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func WonderfulSubstrings(word string) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Bitmask
 
 **Kompleksitas Waktu:** O(n * 10) = O(n), Space: O(2^10) = O(1)  
 **Kompleksitas Ruang:** O(2^10) = O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,7 @@ func main() {
 // Time: O(n * 10) = O(n), Space: O(2^10) = O(1)
 func WonderfulSubstrings(word string) int64 {
 	// mask represents parity of each of 10 letters
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([]int64, 1024) // 2^10 possible masks
 	count[0] = 1
 	mask := 0

@@ -1,19 +1,32 @@
 # 1061 — Lexicographically Smallest Equivalent String
 
-## Deskripsi
-
-**Soal:** [1061. Lexicographically Smallest Equivalent String](https://leetcode.com/problems/lexicographically-smallest-equivalent-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func smallestEquivalentString(s1 string, s2 string, baseStr string) string
+```
+
+> **💡 Hint:** DSU (Union-Find) to group equivalent characters,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** O((m + n) * alpha(26)) where m = len(s1), n = len(baseStr)  
 **Kompleksitas Ruang:** O(26) = O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DSU (Union-Find) to group equivalent characters,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +48,7 @@ func main() {
 }
 
 func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, 26)
 	for i := 0; i < 26; i++ {
 		parent[i] = i
@@ -58,14 +71,13 @@ func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
 		}
 	}
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s1); i++ {
 		union(int(s1[i]-'a'), int(s2[i]-'a'))
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, len(baseStr))
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(baseStr); i++ {
 		result[i] = byte('a' + find(int(baseStr[i]-'a')))
 	}

@@ -1,17 +1,30 @@
 # 2381 — Shifting Letters Ii
 
-## Deskripsi
-
-**Soal:** [2381. Shifting Letters Ii](https://leetcode.com/problems/shifting-letters-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shiftingLetters(s string, shifts [][]int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + m)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,7 @@ func main() {
 
 func shiftingLetters(s string, shifts [][]int) string {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	diff := make([]int, n+1)
 	for _, sh := range shifts {
 		start, end, dir := sh[0], sh[1], sh[2]
@@ -45,7 +58,6 @@ func shiftingLetters(s string, shifts [][]int) string {
 	}
 
 	cur := 0
-  // Membuat slice untuk menyimpan hasil
 	res := make([]byte, n)
 	for i, ch := range s {
 		cur += diff[i]

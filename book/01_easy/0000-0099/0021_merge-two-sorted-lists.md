@@ -1,19 +1,30 @@
 # 0021 — Merge Two Sorted Lists
 
-## Deskripsi
-
-**Soal:** [0021. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Merge Sort
 
 **Kompleksitas Waktu:** O(n+m)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

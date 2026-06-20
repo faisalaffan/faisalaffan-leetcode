@@ -1,19 +1,30 @@
 # 1912 — Design Movie Rental System
 
-## Deskripsi
-
-**Soal:** [1912. Design Movie Rental System](https://leetcode.com/problems/design-movie-rental-system/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+
+Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+
+**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(entries [][]int) MovieRentalSystem
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack, Trie
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor(entries [][]int) MovieRentalSystem`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -78,7 +89,7 @@ func Constructor(entries [][]int) MovieRentalSystem {
 		rentedData: make(map[Entry]bool),
 		priceOf:    make(map[[2]int]int),
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byMovie := make(map[int][]Entry)
 	for _, e := range entries {
 		shop, movie, price := e[0], e[1], e[2]
@@ -86,6 +97,7 @@ func Constructor(entries [][]int) MovieRentalSystem {
 		mrs.priceOf[[2]int{shop, movie}] = price
 	}
 	for movie, list := range byMovie {
+  // Custom sort dengan comparator
 		sort.Slice(list, func(i, j int) bool {
 			if list[i].price != list[j].price {
 				return list[i].price < list[j].price
@@ -95,6 +107,7 @@ func Constructor(entries [][]int) MovieRentalSystem {
 		h := &SearchHeap{}
 		heap.Init(h)
 		for _, e := range list {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, e)
 		}
 		mrs.avail[movie] = h
@@ -110,6 +123,7 @@ func (mrs *MovieRentalSystem) Search(movie int) [][]int {
 	var result []Entry
 	var temp []Entry
 	for h.Len() > 0 && len(result) < 5 {
+  // Ambil elemen terkecil/terbesar dari heap
 		e := heap.Pop(h).(Entry)
 		if !mrs.rentedData[e] {
 			result = append(result, e)
@@ -117,9 +131,10 @@ func (mrs *MovieRentalSystem) Search(movie int) [][]int {
 		}
 	}
 	for _, e := range temp {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, e)
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	res := make([][]int, len(result))
 	for i, e := range result {
 		res[i] = []int{e.shop, e.movie, e.price}
@@ -131,6 +146,7 @@ func (mrs *MovieRentalSystem) Rent(shop int, movie int) {
 	price := mrs.priceOf[[2]int{shop, movie}]
 	e := Entry{shop, movie, price}
 	mrs.rentedData[e] = true
+  // Masukkan elemen ke priority queue
 	heap.Push(mrs.rented, e)
 }
 
@@ -144,6 +160,7 @@ func (mrs *MovieRentalSystem) Report() [][]int {
 	var temp []Entry
 	var result []Entry
 	for mrs.rented.Len() > 0 && len(result) < 5 {
+  // Ambil elemen terkecil/terbesar dari heap
 		e := heap.Pop(mrs.rented).(Entry)
 		if mrs.rentedData[e] {
 			result = append(result, e)
@@ -151,12 +168,13 @@ func (mrs *MovieRentalSystem) Report() [][]int {
 		}
 	}
 	for _, e := range temp {
+  // Masukkan elemen ke priority queue
 		heap.Push(mrs.rented, e)
 	}
 	if len(result) > 5 {
 		result = result[:5]
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	res := make([][]int, len(result))
 	for i, e := range result {
 		res[i] = []int{e.shop, e.movie, e.price}

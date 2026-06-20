@@ -1,17 +1,30 @@
 # 2493 — Divide Nodes Into The Maximum Number Of Groups
 
-## Deskripsi
-
-**Soal:** [2493. Divide Nodes Into The Maximum Number Of Groups](https://leetcode.com/problems/divide-nodes-into-the-maximum-number-of-groups/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func magnificentSets(n int, edges [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +55,7 @@ func main() {
 
 func magnificentSets(n int, edges [][]int) int {
 	// Build adjacency list (1-indexed)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n+1)
 	for i := 1; i <= n; i++ {
 		adj[i] = []int{}
@@ -53,7 +66,6 @@ func magnificentSets(n int, edges [][]int) int {
 		adj[b] = append(adj[b], a)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n+1)
 	total := 0
 
@@ -63,7 +75,7 @@ func magnificentSets(n int, edges [][]int) int {
 			component := bfsCollect(i, adj, visited)
 
 			// Check bipartite
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 			color := make(map[int]int)
 			if !isBipartite(component[0], adj, color) {
 				return -1
@@ -125,7 +137,7 @@ func isBipartite(start int, adj [][]int, color map[int]int) bool {
 }
 
 func bfsDepth(start int, adj [][]int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dist := make(map[int]int)
 	queue := []int{start}
 	dist[start] = 1

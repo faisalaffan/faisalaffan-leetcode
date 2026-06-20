@@ -1,19 +1,32 @@
 # 0994 — Rotting Oranges
 
-## Deskripsi
-
-**Soal:** [0994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func orangesRotting(grid [][]int) int
+```
+
+> **💡 Hint:** BFS from all rotten oranges simultaneously
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** BFS from all rotten oranges simultaneously
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,7 @@ func main() {
 func orangesRotting(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
 	dirs := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([][2]int, 0)
 	fresh := 0
 

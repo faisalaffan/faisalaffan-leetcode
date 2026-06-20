@@ -1,19 +1,30 @@
 # 1682 — Longest Palindromic Subsequence Ii
 
-## Deskripsi
-
-**Soal:** [1682. Longest Palindromic Subsequence Ii](https://leetcode.com/problems/longest-palindromic-subsequence-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestPalindromeSubseq(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n^2), Space: O(n^2)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func longestPalindromeSubseq(s string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,15 +38,15 @@ import "fmt"
 
 func longestPalindromeSubseq(s string) int {
 	n := len(s)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// dp[i][j] = longest LPS length in s[i..j] with no equal adjacent chars
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 		dp[i][i] = 1

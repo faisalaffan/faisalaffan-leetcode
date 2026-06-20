@@ -1,19 +1,32 @@
 # 1026 — Maximum Difference Between Node And Ancestor
 
-## Deskripsi
-
-**Soal:** [1026. Maximum Difference Between Node And Ancestor](https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxAncestorDiff(root *TreeNode) int
+```
+
+> **💡 Hint:** DFS tracking min and max values on path from root to leaf
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(h) where h is tree height
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS tracking min and max values on path from root to leaf
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

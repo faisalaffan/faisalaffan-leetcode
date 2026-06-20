@@ -1,19 +1,32 @@
 # 3821 — Find Nth Smallest Integer With K One Bits
 
-## Deskripsi
-
-**Soal:** [3821. Find Nth Smallest Integer With K One Bits](https://leetcode.com/problems/find-nth-smallest-integer-with-k-one-bits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func nthSmallest(n int64, k int) int64
+```
+
+> **💡 Hint:** Use combinatorial ranking. Generate numbers with k bits
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Use combinatorial ranking. Generate numbers with k bits
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

@@ -1,19 +1,32 @@
 # 2699 — Modify Graph Edge Weights
 
-## Deskripsi
-
-**Soal:** [2699. Modify Graph Edge Weights](https://leetcode.com/problems/modify-graph-edge-weights/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func dijkstra(n int, adj [][]edge, source, dest int) int
+```
+
+> **💡 Hint:** // 1. Set all -1 edges to INF, run Dijkstra. If dist[dest] < target -> impossible.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** // 1. Set all -1 edges to INF, run Dijkstra. If dist[dest] < target -> impossible.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -77,9 +90,9 @@ func (p *pq) Push(x any)          { *p = append(*p, x.(item)) }
 func (p *pq) Pop() any            { old := *p; n := len(old); x := old[n-1]; *p = old[:n-1]; return x }
 
 func dijkstra(n int, adj [][]edge, source, dest int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = INF
 	}
@@ -88,6 +101,7 @@ func dijkstra(n int, adj [][]edge, source, dest int) int {
 	heap.Init(pq)
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(item)
 		if cur.dist > dist[cur.node] {
 			continue
@@ -99,6 +113,7 @@ func dijkstra(n int, adj [][]edge, source, dest int) int {
 			nd := cur.dist + e.weight
 			if nd < dist[e.to] {
 				dist[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, item{nd, e.to})
 			}
 		}
@@ -108,7 +123,7 @@ func dijkstra(n int, adj [][]edge, source, dest int) int {
 
 // buildAdj creates adjacency from edges; negative edges get the specified default.
 func buildAdj(n int, edges [][]int, def int) [][]edge {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]edge, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -140,7 +155,7 @@ func modifyGraphEdgeWeights(n int, edges [][]int, source int, destination int, t
 
 	if maxDist == target && minDist == target {
 		// Already works with all -1 as 1
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		result := make([][]int, len(edges))
 		for i, e := range edges {
 			w := e[2]
@@ -155,7 +170,7 @@ func modifyGraphEdgeWeights(n int, edges [][]int, source int, destination int, t
 
 	// Phase 3: adjust -1 edges iteratively
 	// First pass: set all -1 edges to INF and record their indices
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, len(edges))
 	for i, e := range edges {
 		result[i] = []int{e[0], e[1], e[2]}
@@ -242,7 +257,7 @@ func modifyGraphEdgeWeights(n int, edges [][]int, source int, destination int, t
 }
 
 func buildAdjFromResult(n int, result [][]int) [][]edge {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]edge, n)
 	for _, e := range result {
 		u, v, w := e[0], e[1], e[2]

@@ -1,19 +1,32 @@
 # 1548 — The Most Similar Path In A Graph
 
-## Deskripsi
-
-**Soal:** [1548. The Most Similar Path In A Graph](https://leetcode.com/problems/the-most-similar-path-in-a-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func mostSimilar(n int, roads [][]int, names []string, targetPath []string) []int
+```
+
+> **💡 Hint:** DP[i][v] = min edit distance for first i steps ending at city v.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Backtracking
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP[i][v] = min edit distance for first i steps ending at city v.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +61,7 @@ func main() {
 
 func mostSimilar(n int, roads [][]int, names []string, targetPath []string) []int {
 	m := len(targetPath)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, r := range roads {
 		u, v := r[0], r[1]
@@ -58,9 +71,9 @@ func mostSimilar(n int, roads [][]int, names []string, targetPath []string) []in
 
 	// If no edges, handle separately
 	if n == 1 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		path := make([]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range path {
 			path[i] = 0
 		}
@@ -68,9 +81,9 @@ func mostSimilar(n int, roads [][]int, names []string, targetPath []string) []in
 	}
 
 	// dp[i][v] = min edit distance for first i steps (0-indexed) ending at v
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, m)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	prev := make([][]int, m)
 	for i := 0; i < m; i++ {
 		dp[i] = make([]int, n)
@@ -109,7 +122,7 @@ func mostSimilar(n int, roads [][]int, names []string, targetPath []string) []in
 	}
 
 	// Reconstruct path
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	path := make([]int, m)
 	path[m-1] = end
 	for i := m - 1; i > 0; i-- {

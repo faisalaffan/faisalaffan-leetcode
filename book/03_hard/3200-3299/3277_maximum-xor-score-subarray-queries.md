@@ -1,19 +1,32 @@
 # 3277 — Maximum Xor Score Subarray Queries
 
-## Deskripsi
-
-**Soal:** [3277. Maximum Xor Score Subarray Queries](https://leetcode.com/problems/maximum-xor-score-subarray-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func insertXorTrie(root *xorTrieNode, val int) 
+```
+
+> **💡 Hint:** //  1. Compute prefix XOR array pref where pref[i] = XOR of nums[0..i-1].
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** //  1. Compute prefix XOR array pref where pref[i] = XOR of nums[0..i-1].
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -90,16 +103,16 @@ func maximumXORScoreSubarrayQueries(nums []int, queries [][]int) []int {
 	n := len(nums)
 
 	// Prefix XOR: pref[0] = 0, pref[i] = nums[0] ^ ... ^ nums[i-1].
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n+1)
 	for i, v := range nums {
 		pref[i+1] = pref[i] ^ v
 	}
 
 	// dp[l][r] = max XOR of any subarray within [l, r].
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}
@@ -129,7 +142,7 @@ func maximumXORScoreSubarrayQueries(nums []int, queries [][]int) []int {
 	}
 
 	// Answer each query.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for i, q := range queries {
 		ans[i] = dp[q[0]][q[1]]

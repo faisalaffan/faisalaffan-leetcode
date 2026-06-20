@@ -1,17 +1,30 @@
 # 1375 — Number Of Times Binary String Is Prefix Aligned
 
-## Deskripsi
-
-**Soal:** [1375. Number Of Times Binary String Is Prefix Aligned](https://leetcode.com/problems/number-of-times-binary-string-is-prefix-aligned/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numTimesAllBlue(flips []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n) where n = length of flips  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

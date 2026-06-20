@@ -1,17 +1,30 @@
 # 0465 — Optimal Account Balancing
 
-## Deskripsi
-
-**Soal:** [0465. Optimal Account Balancing](https://leetcode.com/problems/optimal-account-balancing/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minTransfers(transactions [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, Backtracking, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Backtracking (pelacakan mundur), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +53,7 @@ func main() {
 }
 
 func minTransfers(transactions [][]int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	balance := make(map[int]int)
 	for _, t := range transactions {
 		balance[t[0]] -= t[2]

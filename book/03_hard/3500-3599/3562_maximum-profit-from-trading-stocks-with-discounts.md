@@ -1,19 +1,32 @@
 # 3562 — Maximum Profit From Trading Stocks With Discounts
 
-## Deskripsi
-
-**Soal:** [3562. Maximum Profit From Trading Stocks With Discounts](https://leetcode.com/problems/maximum-profit-from-trading-stocks-with-discounts/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxProfitWithDiscount(prices []int, discounted []int) int64
+```
+
+> **💡 Hint:** Track minimum price with and without discount.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Track minimum price with and without discount.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

@@ -1,19 +1,32 @@
 # 2646 — Minimize The Total Price Of The Trips
 
-## Deskripsi
-
-**Soal:** [2646. Minimize The Total Price Of The Trips](https://leetcode.com/problems/minimize-the-total-price-of-the-trips/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTotalPrice(n int, edges [][]int, price []int, trips [][]int) int
+```
+
+> **💡 Hint:** Tree DP.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman), Tree DP (DP pada pohon)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Tree DP.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +52,7 @@ func main() {
 }
 
 func minimumTotalPrice(n int, edges [][]int, price []int, trips [][]int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -48,7 +61,7 @@ func minimumTotalPrice(n int, edges [][]int, price []int, trips [][]int) int {
 	}
 
 	// Count visits per node
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, n)
 
 	for _, trip := range trips {

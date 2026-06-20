@@ -1,19 +1,30 @@
 # 1649 — Create Sorted Array Through Instructions
 
-## Deskripsi
-
-**Soal:** [1649. Create Sorted Array Through Instructions](https://leetcode.com/problems/create-sorted-array-through-instructions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewBIT(n int) *BIT
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewBIT(n int) *BIT`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

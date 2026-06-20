@@ -1,21 +1,32 @@
 # 3952 — Maximum Total Value Of Covered Indices
 
-## Deskripsi
-
-**Soal:** [3952. Maximum Total Value Of Covered Indices](https://leetcode.com/problems/maximum-total-value-of-covered-indices/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumTotalValueOfCoveredIndices(nums []int, s string) int64
+```
+
+> **💡 Hint:** DP over positions. Token at i can stay (cover i) or move left
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MaximumTotalValueOfCoveredIndices(nums []int, s string) int64`
-
-> **Ide Kunci:** DP over positions. Token at i can stay (cover i) or move left
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

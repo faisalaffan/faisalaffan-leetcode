@@ -1,17 +1,30 @@
 # 3015 — Count The Number Of Houses At A Certain Distance I
 
-## Deskripsi
-
-**Soal:** [3015. Count The Number Of Houses At A Certain Distance I](https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countOfPairs(n int, x int, y int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +43,7 @@ func main() {
 }
 
 func countOfPairs(n int, x int, y int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
 	if x > y {
 		x, y = y, x

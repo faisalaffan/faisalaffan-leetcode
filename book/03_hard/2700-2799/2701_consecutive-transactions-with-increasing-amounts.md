@@ -1,17 +1,30 @@
 # 2701 — Consecutive Transactions With Increasing Amounts
 
-## Deskripsi
-
-**Soal:** [2701. Consecutive Transactions With Increasing Amounts](https://leetcode.com/problems/consecutive-transactions-with-increasing-amounts/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func consecutiveIncreasingTransactions(txns []Transaction) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -87,7 +100,7 @@ func consecutiveIncreasingTransactions(txns []Transaction) [][]int {
 	}
 
 	// Group by customer
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byCustomer := make(map[int][]Transaction)
 	for _, t := range txns {
 		byCustomer[t.CustomerID] = append(byCustomer[t.CustomerID], t)
@@ -101,6 +114,7 @@ func consecutiveIncreasingTransactions(txns []Transaction) [][]int {
 
 	for cid, txns := range byCustomer {
 		// Sort by date for each customer
+  // Custom sort dengan comparator
 		sort.Slice(txns, func(i, j int) bool {
 			return txns[i].Date < txns[j].Date
 		})
@@ -132,11 +146,12 @@ func consecutiveIncreasingTransactions(txns []Transaction) [][]int {
 	}
 
 	// Sort results by customer ID
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].customerID < results[j].customerID
 	})
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	out := make([][]int, len(results))
 	for i, r := range results {
 		out[i] = []int{r.customerID, r.count}

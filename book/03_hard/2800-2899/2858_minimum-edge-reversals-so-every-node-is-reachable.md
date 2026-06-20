@@ -1,19 +1,30 @@
 # 2858 — Minimum Edge Reversals So Every Node Is Reachable
 
-## Deskripsi
-
-**Soal:** [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minEdgeReversals(n int, edges [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minEdgeReversals(n int, edges [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ package main
 import "fmt"
 
 func minEdgeReversals(n int, edges [][]int) []int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -43,7 +54,7 @@ func minEdgeReversals(n int, edges [][]int) []int {
 		adj[v] = append(adj[v], [2]int{u, 1}) // backward: reversal needed
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
 
 	// First DFS: compute reversals needed if starting from node 0

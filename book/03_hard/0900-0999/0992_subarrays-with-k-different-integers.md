@@ -1,19 +1,32 @@
 # 0992 — Subarrays With K Different Integers
 
-## Deskripsi
-
-**Soal:** [0992. Subarrays With K Different Integers](https://leetcode.com/problems/subarrays-with-k-different-integers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func subarraysWithKDistinct(nums []int, k int) int
+```
+
+> **💡 Hint:** atMostK trick.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** atMostK trick.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +54,7 @@ func atMostK(nums []int, k int) int {
 	if k == 0 {
 		return 0
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	count := make(map[int]int)
 	left, result := 0, 0
 	for right := 0; right < len(nums); right++ {

@@ -1,19 +1,32 @@
 # 0818 — Race Car
 
-## Deskripsi
-
-**Soal:** [0818. Race Car](https://leetcode.com/problems/race-car/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func racecar(target int) int
+```
+
+> **💡 Hint:** DP
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,7 +73,7 @@ func racecar(target int) int {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, target+3)
 	for t := 1; t <= target; t++ {
 		// Find smallest k where (1<<k)-1 >= t

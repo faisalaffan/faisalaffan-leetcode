@@ -1,19 +1,32 @@
 # 1110 — Delete Nodes And Return Forest
 
-## Deskripsi
-
-**Soal:** [1110. Delete Nodes And Return Forest](https://leetcode.com/problems/delete-nodes-and-return-forest/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func delNodes(root *TreeNode, toDelete []int) []*TreeNode
+```
+
+> **💡 Hint:** DFS post-order. If node should be deleted, add children to forest.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n + h) where h is tree height
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS post-order. If node should be deleted, add children to forest.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,13 +71,12 @@ func main() {
 }
 
 func delNodes(root *TreeNode, toDelete []int) []*TreeNode {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	deleteSet := make(map[int]bool)
 	for _, v := range toDelete {
 		deleteSet[v] = true
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]*TreeNode, 0)
 	if !deleteSet[root.Val] {
 		result = append(result, root)

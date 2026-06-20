@@ -1,21 +1,32 @@
 # 3814 — Maximum Capacity Within Budget
 
-## Deskripsi
-
-**Soal:** [3814. Maximum Capacity Within Budget](https://leetcode.com/problems/maximum-capacity-within-budget/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumCapacityWithinBudget(costs []int, capacity []int, budget int) int
+```
+
+> **💡 Hint:** Sort by cost, use two pointers to find best pair with cost < budget.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Binary Search
 
 **Kompleksitas Waktu:** O(N log N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Two Pointer (penunjuk kiri & kanan), Two Pointer (penunjuk kiri & kanan), Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MaximumCapacityWithinBudget(costs []int, capacity []int, budget int) int`
-
-> **Ide Kunci:** Sort by cost, use two pointers to find best pair with cost < budget.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,13 +48,13 @@ func MaximumCapacityWithinBudget(costs []int, capacity []int, budget int) int {
 		cost int
 		cap  int
 	}
-  // Membuat slice untuk menyimpan hasil
 	machines := make([]machine, n)
 	for i := 0; i < n; i++ {
 		machines[i] = machine{costs[i], capacity[i]}
 	}
 
 	// Sort by cost
+  // Custom sort dengan comparator
 	sort.Slice(machines, func(i, j int) bool {
 		if machines[i].cost != machines[j].cost {
 			return machines[i].cost < machines[j].cost
@@ -63,7 +74,7 @@ func MaximumCapacityWithinBudget(costs []int, capacity []int, budget int) int {
 	// Try two machines using two pointers
 	// For each machine, find best capacity at index < j with costs[i] + costs[j] < budget
 	// Track max capacity seen so far for each cost
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	maxCapAtCost := make(map[int]int)
 	for _, m := range machines {
 		prevMax := 0
@@ -75,7 +86,7 @@ func MaximumCapacityWithinBudget(costs []int, capacity []int, budget int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bestCap := make([]int, n)
 	bestCap[0] = machines[0].cap
 	for i := 1; i < n; i++ {

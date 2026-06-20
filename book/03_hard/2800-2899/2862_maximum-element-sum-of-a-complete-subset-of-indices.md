@@ -1,19 +1,30 @@
 # 2862 — Maximum Element Sum Of A Complete Subset Of Indices
 
-## Deskripsi
-
-**Soal:** [2862. Maximum Element Sum Of A Complete Subset Of Indices](https://leetcode.com/problems/maximum-element-sum-of-a-complete-subset-of-indices/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumElementSumOfCompleteSubsetOfIndices(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumElementSumOfCompleteSubsetOfIndices(nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ func maximumElementSumOfCompleteSubsetOfIndices(nums []int) int64 {
 	n := len(nums)
 
 	// Compute smallest prime factor (spf) for numbers up to n
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	spf := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		if spf[i] == 0 {
@@ -49,7 +60,7 @@ func maximumElementSumOfCompleteSubsetOfIndices(nums []int) int64 {
 	}
 
 	// Compute squarefree kernel for each index
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sf := make([]int, n+1)
 	sf[1] = 1
 	for i := 2; i <= n; i++ {
@@ -75,7 +86,7 @@ func maximumElementSumOfCompleteSubsetOfIndices(nums []int) int64 {
 	}
 
 	// Group sums by squarefree kernel
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	sumByCore := make(map[int]int64)
 	var ans int64 = 0
 	for i := 1; i <= n; i++ {

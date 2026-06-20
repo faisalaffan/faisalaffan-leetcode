@@ -1,19 +1,30 @@
 # 1192 — Critical Connections In A Network
 
-## Deskripsi
-
-**Soal:** [1192. Critical Connections In A Network](https://leetcode.com/problems/critical-connections-in-a-network/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func criticalConnections(n int, connections [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func criticalConnections(n int, connections [][]int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ import "fmt"
 
 func criticalConnections(n int, connections [][]int) [][]int {
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n)
 	for _, e := range connections {
 		u, v := e[0], e[1]
@@ -34,11 +45,11 @@ func criticalConnections(n int, connections [][]int) [][]int {
 		graph[v] = append(graph[v], u)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	disc := make([]int, n) // discovery time
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	low := make([]int, n)  // low-link value
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range disc {
 		disc[i] = -1
 	}

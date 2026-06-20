@@ -1,21 +1,32 @@
 # 3820 — Pythagorean Distance Nodes In A Tree
 
-## Deskripsi
-
-**Soal:** [3820. Pythagorean Distance Nodes In A Tree](https://leetcode.com/problems/pythagorean-distance-nodes-in-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) int
+```
+
+> **💡 Hint:** BFS from each target node x, y, z to compute distances,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) int`
-
-> **Ide Kunci:** BFS from each target node x, y, z to compute distances,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ import (
 
 func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) int {
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -44,9 +55,9 @@ func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) 
 
 	// BFS to compute distances from a source
 	bfs := func(src int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range dist {
 			dist[i] = -1
 		}
@@ -72,6 +83,7 @@ func PythagoreanDistanceNodesInATree(n int, edges [][]int, x int, y int, z int) 
 	ans := 0
 	for i := 0; i < n; i++ {
 		d := []int{distX[i], distY[i], distZ[i]}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(d)
 		a, b, c := d[0], d[1], d[2]
 		if a*a+b*b == c*c {

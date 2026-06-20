@@ -1,17 +1,30 @@
 # 1405 — Longest Happy String
 
-## Deskripsi
-
-**Soal:** [1405. Longest Happy String](https://leetcode.com/problems/longest-happy-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestDiverseString(a int, b int, c int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(a+b+c) - building the result string  
 **Kompleksitas Ruang:** O(1) - constant extra space
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,11 +56,11 @@ type charCount struct {
 // Space: O(1) - constant extra space
 func longestDiverseString(a int, b int, c int) string {
 	pairs := []charCount{{a, 'a'}, {b, 'b'}, {c, 'c'}}
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, a+b+c)
 
 	for {
 		// Sort by remaining count descending
+  // Custom sort dengan comparator
 		sort.Slice(pairs, func(i, j int) bool {
 			return pairs[i].count > pairs[j].count
 		})

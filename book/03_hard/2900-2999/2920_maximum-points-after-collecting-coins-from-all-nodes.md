@@ -1,19 +1,30 @@
 # 2920 — Maximum Points After Collecting Coins From All Nodes
 
-## Deskripsi
-
-**Soal:** [2920. Maximum Points After Collecting Coins From All Nodes](https://leetcode.com/problems/maximum-points-after-collecting-coins-from-all-nodes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumPoints(edges [][]int, coins []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Tree DP (DP pada pohon)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumPoints(edges [][]int, coins []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ import "fmt"
 
 func maximumPoints(edges [][]int, coins []int, k int) int {
 	n := len(coins)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -44,9 +55,9 @@ func maximumPoints(edges [][]int, coins []int, k int) int {
 	}
 
 	const maxShifts = 16 // enough for coins up to 10^4 (log2(10000) ≈ 14)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, maxShifts)
 		for j := range dp[i] {

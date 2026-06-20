@@ -1,19 +1,30 @@
 # 1335 — Minimum Difficulty Of A Job Schedule
 
-## Deskripsi
-
-**Soal:** [1335. Minimum Difficulty Of A Job Schedule](https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDifficulty(jobDifficulty []int, d int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minDifficulty(jobDifficulty []int, d int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +42,9 @@ func minDifficulty(jobDifficulty []int, d int) int {
 	}
 
 	// dp[i][j] = min difficulty to schedule first j jobs in i days
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, d+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n+1)
 		for j := range dp[i] {

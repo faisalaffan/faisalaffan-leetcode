@@ -1,19 +1,30 @@
 # 1158 — Market Analysis I
 
-## Deskripsi
-
-**Soal:** [1158. Market Analysis I](https://leetcode.com/problems/market-analysis-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func marketAnalysisI(users []user, orders []order) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func marketAnalysisI(users []user, orders []order) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +58,7 @@ type user struct {
 }
 
 func marketAnalysisI(users []user, orders []order) [][]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	orderCount := make(map[int]int)
 	for _, o := range orders {
 		if len(o.orderDate) >= 4 && o.orderDate[:4] == "2019" {
@@ -55,13 +66,14 @@ func marketAnalysisI(users []user, orders []order) [][]int {
 		}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0, len(users))
 	for _, u := range users {
 		count := orderCount[u.userID]
 		result = append(result, []int{u.userID, count})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i][0] < result[j][0]
 	})

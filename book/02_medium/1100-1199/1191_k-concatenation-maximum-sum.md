@@ -1,19 +1,30 @@
 # 1191 — K Concatenation Maximum Sum
 
-## Deskripsi
-
-**Soal:** [1191. K Concatenation Maximum Sum](https://leetcode.com/problems/k-concatenation-maximum-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kConcatenationMaxSum(arr []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func kConcatenationMaxSum(arr []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ const mod = 1_000_000_007
 
 func kConcatenationMaxSum(arr []int, k int) int {
 	n := len(arr)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}

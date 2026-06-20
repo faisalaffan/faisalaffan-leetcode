@@ -1,17 +1,30 @@
 # 2491 — Divide Players Into Teams Of Equal Skill
 
-## Deskripsi
-
-**Soal:** [2491. Divide Players Into Teams Of Equal Skill](https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func dividePlayers(skill []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,6 +46,7 @@ func main() {
 }
 
 func dividePlayers(skill []int) int64 {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(skill)
 	n := len(skill)
 	target := skill[0] + skill[n-1]

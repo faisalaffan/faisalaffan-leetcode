@@ -1,17 +1,30 @@
 # 1063 — Number Of Valid Subarrays
 
-## Deskripsi
-
-**Soal:** [1063. Number Of Valid Subarrays](https://leetcode.com/problems/number-of-valid-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func validSubarrays(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func main() {
 
 func validSubarrays(nums []int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0)
 	count := 0
 

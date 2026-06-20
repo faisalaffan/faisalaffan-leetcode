@@ -1,19 +1,30 @@
 # 0601 — Human Traffic Of Stadium
 
-## Deskripsi
-
-**Soal:** [0601. Human Traffic Of Stadium](https://leetcode.com/problems/human-traffic-of-stadium/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func humanTrafficOfStadium(records []StadiumRecord) []StadiumRecord
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log N) for sorting, Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func humanTrafficOfStadium(records []StadiumRecord) []StadiumRecord`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,20 +57,19 @@ func humanTrafficOfStadium(records []StadiumRecord) []StadiumRecord {
 	}
 
 	// Sort by ID (which correlates with visit_date).
+  // Custom sort dengan comparator
 	sort.Slice(records, func(i, j int) bool {
 		return records[i].ID < records[j].ID
 	})
 
 	// Mark qualifying rows (people >= 100).
 	n := len(records)
-  // Membuat slice untuk menyimpan hasil
 	qualifies := make([]bool, n)
 	for i, r := range records {
 		qualifies[i] = r.People >= 100
 	}
 
 	// Find runs of length >= 3.
-  // Membuat slice untuk menyimpan hasil
 	canInclude := make([]bool, n)
 	i := 0
 	for i < n {

@@ -1,19 +1,32 @@
 # 1058 — Minimize Rounding Error To Meet Target
 
-## Deskripsi
-
-**Soal:** [1058. Minimize Rounding Error To Meet Target](https://leetcode.com/problems/minimize-rounding-error-to-meet-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimizeRoundingErrorToMeetTarget(prices []string, target int) string
+```
+
+> **💡 Hint:** For each price, floor and ceil. Compute min total error via DP.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * target) effectively O(n) after sorting diffs  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each price, floor and ceil. Compute min total error via DP.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,9 +53,8 @@ func main() {
 
 func minimizeRoundingErrorToMeetTarget(prices []string, target int) string {
 	n := len(prices)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	floors := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
 	diffs := make([]float64, n)
 	floorSum := 0
 
@@ -61,6 +73,7 @@ func minimizeRoundingErrorToMeetTarget(prices []string, target int) string {
 	}
 
 	// Sort diffs descending to ceil those with smallest rounding error
+  // Custom sort dengan comparator
 	sort.Slice(diffs, func(i, j int) bool {
 		return diffs[i] > diffs[j]
 	})

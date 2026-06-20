@@ -1,21 +1,32 @@
 # 2977 — Minimum Cost To Convert String Ii
 
-## Deskripsi
-
-**Soal:** [2977. Minimum Cost To Convert String Ii](https://leetcode.com/problems/minimum-cost-to-convert-string-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumCost(source string, target string, original []string, changed []string, cost []int) int64
+```
+
+> **💡 Hint:** // 1. Trie to assign integer IDs to all substrings in the dictionary.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Trie, Floyd-Warshall
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Trie (pohon awalan), Floyd-Warshall (lintasan semua pasangan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumCost(source string, target string, original []string, changed []string, cost []int) int64`
-
-> **Ide Kunci:** // 1. Trie to assign integer IDs to all substrings in the dictionary.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -69,9 +80,9 @@ func minimumCost(source string, target string, original []string, changed []stri
 	}
 
 	m := len(original)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	origIDs := make([]int, m)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	changedIDs := make([]int, m)
 	for i := 0; i < m; i++ {
 		origIDs[i] = insert(original[i])
@@ -80,9 +91,9 @@ func minimumCost(source string, target string, original []string, changed []stri
 
 	// Step 2: Floyd-Warshall for shortest conversion paths
 	const big = math.MaxInt64 / 2
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int64, id)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int64, id)
 		for j := range dist[i] {
@@ -110,9 +121,9 @@ func minimumCost(source string, target string, original []string, changed []stri
 	}
 
 	// Step 3: DP from right to left
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int64, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = big
 	}

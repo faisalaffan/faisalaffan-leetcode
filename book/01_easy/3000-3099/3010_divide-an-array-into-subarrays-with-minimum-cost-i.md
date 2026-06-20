@@ -1,17 +1,30 @@
 # 3010 — Divide An Array Into Subarrays With Minimum Cost I
 
-## Deskripsi
-
-**Soal:** [3010. Divide An Array Into Subarrays With Minimum Cost I](https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func DivideAnArrayIntoSubarraysWithMinimumCostI(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,6 +51,7 @@ func DivideAnArrayIntoSubarraysWithMinimumCostI(nums []int) int {
 	// First subarray starts at nums[0], so nums[0] is always included.
 	// For remaining subarrays, we pick the two smallest elements.
 	rest := nums[1:]
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(rest)
 	return nums[0] + rest[0] + rest[1]
 }

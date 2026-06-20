@@ -1,19 +1,30 @@
 # 3145 — Find Products Of Elements Of Big Array
 
-## Deskripsi
-
-**Soal:** [3145. Find Products Of Elements Of Big Array](https://leetcode.com/problems/find-products-of-elements-of-big-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func cnt1(num int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Prefix Sum, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func cnt1(num int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -92,7 +103,7 @@ func prefixExpSum(bound int) int {
 }
 
 func findProductsOfElementsOfBigArray(queries [][]int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for idx, q := range queries {
 		from, to, mod := q[0], q[1], q[2]

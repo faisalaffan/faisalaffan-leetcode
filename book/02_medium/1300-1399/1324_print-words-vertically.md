@@ -1,17 +1,30 @@
 # 1324 — Print Words Vertically
 
-## Deskripsi
-
-**Soal:** [1324. Print Words Vertically](https://leetcode.com/problems/print-words-vertically/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func printVertically(s string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m*n) where m = max word length, n = number of words  
 **Kompleksitas Ruang:** O(m*n) for the result
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +61,6 @@ func printVertically(s string) []string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, maxLen)
 	for i := 0; i < maxLen; i++ {
 		var sb strings.Builder

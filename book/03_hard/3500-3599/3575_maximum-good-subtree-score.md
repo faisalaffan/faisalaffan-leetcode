@@ -1,19 +1,32 @@
 # 3575 — Maximum Good Subtree Score
 
-## Deskripsi
-
-**Soal:** [3575. Maximum Good Subtree Score](https://leetcode.com/problems/maximum-good-subtree-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func goodSubtreeSum(vals []int, par []int) int
+```
+
+> **💡 Hint:** DFS from root. For each node, check if all nodes in its subtree
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS from root. For each node, check if all nodes in its subtree
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,12 +56,12 @@ func main() {
 
 func goodSubtreeSum(vals []int, par []int) int {
 	n := len(vals)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	children := make([][]int, n)
 	root := -1
 	for i := 0; i < n; i++ {

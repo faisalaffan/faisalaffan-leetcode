@@ -1,19 +1,32 @@
 # 1520 — Maximum Number Of Non Overlapping Substrings
 
-## Deskripsi
-
-**Soal:** [1520. Maximum Number Of Non Overlapping Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-substrings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxNumOfSubstrings(s string) []string
+```
+
+> **💡 Hint:** Greedy Interval
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Greedy Interval
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,9 +62,9 @@ func maxNumOfSubstrings(s string) []string {
 	n := len(s)
 
 	// First and last occurrence of each char
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	first := make([]int, 26)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	last := make([]int, 26)
 	for i := 0; i < 26; i++ {
 		first[i] = n
@@ -68,7 +81,6 @@ func maxNumOfSubstrings(s string) []string {
 	}
 
 	// Compute minimal interval for each character that appears
-  // Membuat slice untuk menyimpan hasil
 	minIntervals := make([]iv, 0)
 	for c := 0; c < 26; c++ {
 		if first[c] == n {
@@ -94,9 +106,8 @@ func maxNumOfSubstrings(s string) []string {
 	}
 
 	// Dedup by (l,r)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]map[int]bool)
-  // Membuat slice untuk menyimpan hasil
 	unique := make([]iv, 0)
 	for _, inv := range minIntervals {
 		if seen[inv.l] == nil {
@@ -109,12 +120,12 @@ func maxNumOfSubstrings(s string) []string {
 	}
 
 	// Sort by end ascending
+  // Custom sort dengan comparator
 	sort.Slice(unique, func(i, j int) bool {
 		return unique[i].r < unique[j].r
 	})
 
 	// Greedy pick non-overlapping substrings
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 	end := -1
 	for _, inv := range unique {

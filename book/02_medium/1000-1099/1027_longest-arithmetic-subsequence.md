@@ -1,19 +1,32 @@
 # 1027 — Longest Arithmetic Subsequence
 
-## Deskripsi
-
-**Soal:** [1027. Longest Arithmetic Subsequence](https://leetcode.com/problems/longest-arithmetic-subsequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestArithSeqLength(nums []int) int
+```
+
+> **💡 Hint:** DP with hash map per index tracking difference -> length
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with hash map per index tracking difference -> length
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +53,7 @@ func longestArithSeqLength(nums []int) int {
 		return n
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]map[int]int, n)
 	result := 2
 

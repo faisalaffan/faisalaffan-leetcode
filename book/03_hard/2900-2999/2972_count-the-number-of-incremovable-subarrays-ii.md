@@ -1,21 +1,32 @@
 # 2972 — Count The Number Of Incremovable Subarrays Ii
 
-## Deskripsi
-
-**Soal:** [2972. Count The Number Of Incremovable Subarrays Ii](https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func incremovableSubarrayCount(nums []int) int64
+```
+
+> **💡 Hint:** // 1. Find the longest strictly increasing suffix starting at position j.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func incremovableSubarrayCount(nums []int) int64`
-
-> **Ide Kunci:** // 1. Find the longest strictly increasing suffix starting at position j.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

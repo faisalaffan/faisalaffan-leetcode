@@ -1,17 +1,30 @@
 # 1311 — Get Watched Videos By Your Friends
 
-## Deskripsi
-
-**Soal:** [1311. Get Watched Videos By Your Friends](https://leetcode.com/problems/get-watched-videos-by-your-friends/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func watchedVideosByFriends(watchedVideos [][]string, friends [][]int, id int, level int) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(V + E + F log F) where V = friends count, F = videos count  
 **Kompleksitas Ruang:** O(V + F)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,7 +66,6 @@ func main() {
 // Space: O(V + F)
 func watchedVideosByFriends(watchedVideos [][]string, friends [][]int, id int, level int) []string {
 	n := len(friends)
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	queue := []int{id}
 	visited[id] = true
@@ -78,7 +90,7 @@ func watchedVideosByFriends(watchedVideos [][]string, friends [][]int, id int, l
 		return []string{}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[string]int)
 	for _, person := range queue {
 		for _, video := range watchedVideos[person] {
@@ -86,12 +98,12 @@ func watchedVideosByFriends(watchedVideos [][]string, friends [][]int, id int, l
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	videos := make([]string, 0, len(freq))
 	for v := range freq {
 		videos = append(videos, v)
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(videos, func(i, j int) bool {
 		if freq[videos[i]] != freq[videos[j]] {
 			return freq[videos[i]] < freq[videos[j]]

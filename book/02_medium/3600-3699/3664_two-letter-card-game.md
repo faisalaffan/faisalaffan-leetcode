@@ -1,19 +1,30 @@
 # 3664 — Two Letter Card Game
 
-## Deskripsi
-
-**Soal:** [3664. Two Letter Card Game](https://leetcode.com/problems/two-letter-card-game/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func twoLetterCardGame(cards []string, x byte) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func twoLetterCardGame(cards []string, x byte) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

@@ -1,17 +1,30 @@
 # 3292 — Minimum Number Of Valid Strings To Form Target Ii
 
-## Deskripsi
-
-**Soal:** [3292. Minimum Number Of Valid Strings To Form Target Ii](https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minValidStrings(words []string, target string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -74,7 +87,7 @@ func minValidStrings(words []string, target string) int {
 	}
 
 	n := len(target)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		dp[i] = math.MaxInt32

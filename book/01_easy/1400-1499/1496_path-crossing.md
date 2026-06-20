@@ -1,19 +1,34 @@
 # 1496 — Path Crossing
 
-## Deskripsi
-
-**Soal:** [1496. Path Crossing](https://leetcode.com/problems/path-crossing/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isPathCrossing(path string) bool
+
+import "fmt"
+
+func main()
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func isPathCrossing(path string) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +48,7 @@ func main() {
 
 // Time: O(n), Space: O(n)
 func PathCrossing(path string) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[[2]int]bool)
 	x, y := 0, 0
 	visited[[2]int{0, 0}] = true

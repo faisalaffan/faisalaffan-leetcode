@@ -1,21 +1,32 @@
 # 3027 — Find The Number Of Ways To Place People Ii
 
-## Deskripsi
-
-**Soal:** [3027. Find The Number Of Ways To Place People Ii](https://leetcode.com/problems/find-the-number-of-ways-to-place-people-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfPairs(points [][]int) int
+```
+
+> **💡 Hint:** Sort + geometry
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfPairs(points [][]int) int`
-
-> **Ide Kunci:** Sort + geometry
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,6 +59,7 @@ import (
 func numberOfPairs(points [][]int) int {
 	ans := 0
 	// Sort by x ascending, then y descending
+  // Custom sort dengan comparator
 	sort.Slice(points, func(i, j int) bool {
 		if points[i][0] == points[j][0] {
 			return points[i][1] > points[j][1]
@@ -55,7 +67,7 @@ func numberOfPairs(points [][]int) int {
 		return points[i][0] < points[j][0]
 	})
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(points)-1; i++ {
 		xMax := math.MaxInt32
 		yMin := math.MinInt32

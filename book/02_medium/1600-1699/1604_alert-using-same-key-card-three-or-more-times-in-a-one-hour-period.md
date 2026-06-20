@@ -1,17 +1,30 @@
 # 1604 — Alert Using Same Key Card Three Or More Times In A One Hour Period
 
-## Deskripsi
-
-**Soal:** [1604. Alert Using Same Key Card Three Or More Times In A One Hour Period](https://leetcode.com/problems/alert-using-same-key-card-three-or-more-times-in-a-one-hour-period/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func AlertNames(keyName []string, keyTime []string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log N), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,7 @@ func main() {
 func AlertNames(keyName []string, keyTime []string) []string {
 	// Time: O(N log N), Space: O(N)
 	n := len(keyName)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	records := make(map[string][]int)
 
 	for i := 0; i < n; i++ {
@@ -45,10 +58,10 @@ func AlertNames(keyName []string, keyTime []string) []string {
 		records[keyName[i]] = append(records[keyName[i]], minutes)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	alerted := make([]string, 0)
 
 	for name, times := range records {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(times)
 		for i := 2; i < len(times); i++ {
 			if times[i]-times[i-2] <= 60 {

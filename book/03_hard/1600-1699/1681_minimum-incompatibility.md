@@ -1,19 +1,30 @@
 # 1681 — Minimum Incompatibility
 
-## Deskripsi
-
-**Soal:** [1681. Minimum Incompatibility](https://leetcode.com/problems/minimum-incompatibility/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumIncompatibility(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumIncompatibility(nums []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ func minimumIncompatibility(nums []int, k int) int {
 	}
 
 	// Precompute incompatibility for each valid subset of size subsetSize
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	incomp := make([]int, 1<<n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range incomp {
 		incomp[i] = -1
 	}
@@ -47,7 +58,7 @@ func minimumIncompatibility(nums []int, k int) int {
 			continue
 		}
 		// Check for duplicates and find min/max
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		seen := make(map[int]bool)
 		minVal, maxVal := math.MaxInt32, math.MinInt32
 		valid := true
@@ -72,9 +83,9 @@ func minimumIncompatibility(nums []int, k int) int {
 	}
 
 	// DP: dp[mask] = min incompatibility for chosen elements in mask
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, 1<<n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = -1
 	}

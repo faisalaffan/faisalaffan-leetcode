@@ -1,19 +1,32 @@
 # 3600 — Maximize Spanning Tree Stability With Upgrades
 
-## Deskripsi
-
-**Soal:** [3600. Maximize Spanning Tree Stability With Upgrades](https://leetcode.com/problems/maximize-spanning-tree-stability-with-upgrades/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxStability(n int, edges [][]int, k int) int
+```
+
+> **💡 Hint:** Binary search on answer. For a given x, check if we can build a
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on answer. For a given x, check if we can build a
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,11 +62,12 @@ func maxStability(n int, edges [][]int, k int) int {
 	}
 
 	// Extract unique strengths for binary search range
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	strengths := make([]int, 0)
 	for _, e := range edges {
 		strengths = append(strengths, e[2])
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(strengths)
 
 	// Binary search
@@ -75,9 +89,9 @@ func maxStability(n int, edges [][]int, k int) int {
 
 func canBuild(n int, edges [][]int, k int, minStrength int) bool {
 	// DSU
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	size := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i

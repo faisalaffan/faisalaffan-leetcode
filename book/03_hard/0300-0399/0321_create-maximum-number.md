@@ -1,19 +1,30 @@
 # 0321 — Create Maximum Number
 
-## Deskripsi
-
-**Soal:** [0321. Create Maximum Number](https://leetcode.com/problems/create-maximum-number/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxNumber(nums1 []int, nums2 []int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxNumber(nums1 []int, nums2 []int, k int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ func maxNumber(nums1 []int, nums2 []int, k int) []int {
 		if length == 0 {
 			return []int{}
 		}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		stack := make([]int, 0, length)
 		drop := len(nums) - length
 		for _, v := range nums {
@@ -58,7 +69,7 @@ func maxNumber(nums1 []int, nums2 []int, k int) []int {
 	}
 
 	merge := func(a, b []int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		res := make([]int, 0, len(a)+len(b))
 		i, j := 0, 0
 		for i < len(a) || j < len(b) {

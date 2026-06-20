@@ -1,19 +1,30 @@
 # 2850 — Minimum Moves To Spread Stones Over Grid
 
-## Deskripsi
-
-**Soal:** [2850. Minimum Moves To Spread Stones Over Grid](https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumMovesToSpreadStonesOverGrid(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MinimumMovesToSpreadStonesOverGrid(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +42,9 @@ import (
 func MinimumMovesToSpreadStonesOverGrid(grid [][]int) int {
 	// Grid is always 3x3
 	// Collect positions of empty cells (0) and cells with extra stones (>1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	zeros := make([][2]int, 0)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	extras := make([][2]int, 0)
 
 	for i := 0; i < 3; i++ {
@@ -53,9 +64,9 @@ func MinimumMovesToSpreadStonesOverGrid(grid [][]int) int {
 
 	// Use permutation to find minimum total moves
 	n := len(zeros)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	perm := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range perm {
 		perm[i] = i
 	}

@@ -1,19 +1,30 @@
 # 1454 — Active Users
 
-## Deskripsi
-
-**Soal:** [1454. Active Users](https://leetcode.com/problems/active-users/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findActiveUsers(logins []Login) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findActiveUsers(logins []Login) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,7 @@ type Login struct {
 // findActiveUsers returns user IDs with 5+ consecutive login days.
 func findActiveUsers(logins []Login) []int {
 	// Group logins by user, deduplicate dates
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userDates := make(map[int]map[string]bool)
 	for _, l := range logins {
 		if userDates[l.UserID] == nil {
@@ -54,6 +65,7 @@ func findActiveUsers(logins []Login) []int {
 		for d := range dates {
 			dayNums = append(dayNums, dateToDays(d))
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(dayNums)
 
 		// Check for 5 consecutive days
@@ -71,6 +83,7 @@ func findActiveUsers(logins []Login) []int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(activeUsers)
 	return activeUsers
 }

@@ -1,19 +1,30 @@
 # 3439 — Reschedule Meetings For Maximum Free Time I
 
-## Deskripsi
-
-**Soal:** [3439. Reschedule Meetings For Maximum Free Time I](https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window
 
 **Kompleksitas Waktu:** O(n) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int {
 	n := len(startTime)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	gaps := make([]int, 0, n+1)
 	gaps = append(gaps, startTime[0])
 	for i := 1; i < n; i++ {

@@ -1,21 +1,32 @@
 # 2868 — The Wording Game
 
-## Deskripsi
-
-**Soal:** [2868. The Wording Game](https://leetcode.com/problems/the-wording-game/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canAliceWin(aliceWords, bobWords []string) bool
+```
+
+> **💡 Hint:** Process words grouped by length (descending). Maintain 26-bit bitmasks
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canAliceWin(aliceWords, bobWords []string) bool`
-
-> **Ide Kunci:** Process words grouped by length (descending). Maintain 26-bit bitmasks
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +57,7 @@ import (
 func canAliceWin(aliceWords, bobWords []string) bool {
 	// Collect word lengths and group by letter for each player
 	// map[length] -> 26-bit mask for each player
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	wordsByLen := make(map[int][2]int) // [aliceMask, bobMask]
 
 	for _, w := range aliceWords {
@@ -63,11 +74,12 @@ func canAliceWin(aliceWords, bobWords []string) bool {
 	}
 
 	// Collect and sort unique lengths
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lengths := make([]int, 0, len(wordsByLen))
 	for l := range wordsByLen {
 		lengths = append(lengths, l)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(lengths)
 
 	// dp[c][p] = can player p force a win when it's their turn and

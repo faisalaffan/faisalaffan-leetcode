@@ -1,21 +1,32 @@
 # 2009 — Minimum Number Of Operations To Make Array Continuous
 
-## Deskripsi
-
-**Soal:** [2009. Minimum Number Of Operations To Make Array Continuous](https://leetcode.com/problems/minimum-number-of-operations-to-make-array-continuous/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(nums []int) int
+```
+
+> **💡 Hint:** Sort + sliding window on unique elements.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minOperations(nums []int) int`
-
-> **Ide Kunci:** Sort + sliding window on unique elements.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,8 +51,9 @@ func minOperations(nums []int) int {
 	}
 
 	// Sort and deduplicate
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	uniq := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		if i > 0 && nums[i] == nums[i-1] {

@@ -1,19 +1,30 @@
 # 0300 — Longest Increasing Subsequence
 
-## Deskripsi
-
-**Soal:** [0300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lengthOfLIS(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func lengthOfLIS(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ func lengthOfLIS(nums []int) int {
 
 	for _, num := range nums {
 		left, right := 0, len(tails)
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 		for left < right {
 			mid := left + (right-left)/2
 			if tails[mid] < num {

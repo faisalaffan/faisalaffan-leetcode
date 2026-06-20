@@ -1,19 +1,30 @@
 # 0294 — Flip Game Ii
 
-## Deskripsi
-
-**Soal:** [0294. Flip Game Ii](https://leetcode.com/problems/flip-game-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canWin(currentState string) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n!!) worst case with memo, Space: O(n!)  
 **Kompleksitas Ruang:** O(n!)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canWin(currentState string) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ package main
 import "fmt"
 
 func canWin(currentState string) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[string]bool)
 	return canWinHelper(currentState, memo)
 }
@@ -37,7 +48,7 @@ func canWinHelper(state string, memo map[string]bool) bool {
 	}
 
 	bytes := []byte(state)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(state)-1; i++ {
 		if bytes[i] == '+' && bytes[i+1] == '+' {
 			bytes[i], bytes[i+1] = '-', '-'

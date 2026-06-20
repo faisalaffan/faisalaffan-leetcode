@@ -1,19 +1,30 @@
 # 0249 — Group Shifted Strings
 
-## Deskripsi
-
-**Soal:** [0249. Group Shifted Strings](https://leetcode.com/problems/group-shifted-strings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func groupStrings(strs []string) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * m), Space: O(n * m)  
 **Kompleksitas Ruang:** O(n * m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func groupStrings(strs []string) [][]string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ import (
 )
 
 func groupStrings(strs []string) [][]string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[string][]string)
 
 	for _, s := range strs {
@@ -37,7 +48,7 @@ func groupStrings(strs []string) [][]string {
 		groups[key] = append(groups[key], s)
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]string, 0, len(groups))
 	for _, group := range groups {
 		result = append(result, group)
@@ -53,7 +64,7 @@ func getKey(s string) string {
 	shift := s[0] - 'a'
 	var sb strings.Builder
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		diff := (int(s[i]-'a') - int(shift) + 26) % 26
 		sb.WriteByte(byte(diff + 'a'))

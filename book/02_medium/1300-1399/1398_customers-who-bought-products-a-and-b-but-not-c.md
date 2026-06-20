@@ -1,17 +1,37 @@
 # 1398 — Customers Who Bought Products A And B But Not C
 
-## Deskripsi
-
-**Soal:** [1398. Customers Who Bought Products A And B But Not C](https://leetcode.com/problems/customers-who-bought-products-a-and-b-but-not-c/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func customersABnotC(customers []struct {
+	customerID   int
+	customerName string
+}, orders []struct {
+	orderID     int
+	customerID  int
+	productName string
+}) []customerResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n) where n = number of orders  
 **Kompleksitas Ruang:** O(k) where k = number of customers
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -71,9 +91,9 @@ func customersABnotC(customers []struct {
 	customerID  int
 	productName string
 }) []customerResult {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	bought := make(map[int]map[string]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	customerNames := make(map[int]string)
 
 	for _, c := range customers {
@@ -95,6 +115,7 @@ func customersABnotC(customers []struct {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].id < result[j].id
 	})

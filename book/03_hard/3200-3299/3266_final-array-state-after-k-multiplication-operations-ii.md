@@ -1,19 +1,32 @@
 # 3266 — Final Array State After K Multiplication Operations Ii
 
-## Deskripsi
-
-**Soal:** [3266. Final Array State After K Multiplication Operations Ii](https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func powMod(x int64, n int64) int64
+```
+
+> **💡 Hint:** //   1. Phase 1: Simulate with a min-heap until min*nums >= max (or k exhausted).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n * log_k), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** //   1. Phase 1: Simulate with a min-heap until min*nums >= max (or k exhausted).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -89,7 +102,7 @@ func powMod(x int64, n int64) int64 {
 func getFinalState(nums []int, k int, multiplier int) []int64 {
 	n := len(nums)
 	if multiplier == 1 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		res := make([]int64, n)
 		for i, v := range nums {
 			res[i] = int64(v) % MOD3266
@@ -107,24 +120,27 @@ func getFinalState(nums []int, k int, multiplier int) []int64 {
 		if val > maxVal {
 			maxVal = val
 		}
+  // Masukkan elemen ke priority queue
 		heap.Push(h, pair{val, i})
 	}
 
 	for k > 0 && (*h)[0].val < maxVal {
+  // Ambil elemen terkecil/terbesar dari heap
 		p := heap.Pop(h).(pair)
 		p.val *= int64(multiplier)
 		if p.val > maxVal {
 			maxVal = p.val
 		}
+  // Masukkan elemen ke priority queue
 		heap.Push(h, p)
 		k--
 	}
 
 	// Phase 2: distribute remaining operations
 	// Sort by (value, index)
-  // Membuat slice untuk menyimpan hasil
 	arr := make([]pair, n)
 	for i := 0; i < n; i++ {
+  // Ambil elemen terkecil/terbesar dari heap
 		arr[i] = heap.Pop(h).(pair)
 	}
 
@@ -132,7 +148,7 @@ func getFinalState(nums []int, k int, multiplier int) []int64 {
 	// Actually, heap.Pop gives sorted order by value, then index
 	// Let's just collect from heap which is already ordered
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	res := make([]int64, n)
 	base := int64(k) / int64(n)
 	extra := int64(k) % int64(n)

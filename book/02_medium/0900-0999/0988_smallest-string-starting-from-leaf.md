@@ -1,19 +1,32 @@
 # 0988 — Smallest String Starting From Leaf
 
-## Deskripsi
-
-**Soal:** [0988. Smallest String Starting From Leaf](https://leetcode.com/problems/smallest-string-starting-from-leaf/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func smallestFromLeaf(root *TreeNode) string
+```
+
+> **💡 Hint:** DFS backtracking from root to leaf, compare strings lexicographically
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Backtracking
 
 **Kompleksitas Waktu:** O(n * h) worst-case where h is tree height  
 **Kompleksitas Ruang:** O(h)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS backtracking from root to leaf, compare strings lexicographically
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

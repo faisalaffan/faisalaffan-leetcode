@@ -1,19 +1,30 @@
 # 1292 — Maximum Side Length Of A Square With Sum Less Than Or Equal To Threshold
 
-## Deskripsi
-
-**Soal:** [1292. Maximum Side Length Of A Square With Sum Less Than Or Equal To Threshold](https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSideLength(mat [][]int, threshold int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** O(m * n * log(min(m,n)))  
 **Kompleksitas Ruang:** O(m*n)
 
-**Algoritma:** Binary Search (pencarian biner), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxSideLength(mat [][]int, threshold int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +45,9 @@ import (
 
 func maxSideLength(mat [][]int, threshold int) int {
 	m, n := len(mat), len(mat[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	prefix := make([][]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range prefix {
 		prefix[i] = make([]int, n+1)
 	}

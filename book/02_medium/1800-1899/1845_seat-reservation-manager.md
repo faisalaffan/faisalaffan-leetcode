@@ -1,19 +1,30 @@
 # 1845 — Seat Reservation Manager
 
-## Deskripsi
-
-**Soal:** [1845. Seat Reservation Manager](https://leetcode.com/problems/seat-reservation-manager/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(n int) SeatManager
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(log n) per operation, Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor(n int) SeatManager`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,6 +69,7 @@ func Constructor(n int) SeatManager {
 
 func (sm *SeatManager) Reserve() int {
 	if sm.h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		return heap.Pop(sm.h).(int)
 	}
 	seat := sm.nextSeat
@@ -66,6 +78,7 @@ func (sm *SeatManager) Reserve() int {
 }
 
 func (sm *SeatManager) Unreserve(seatNumber int) {
+  // Masukkan elemen ke priority queue
 	heap.Push(sm.h, seatNumber)
 }
 

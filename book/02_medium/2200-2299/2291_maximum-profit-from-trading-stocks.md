@@ -1,19 +1,30 @@
 # 2291 — Maximum Profit From Trading Stocks
 
-## Deskripsi
-
-**Soal:** [2291. Maximum Profit From Trading Stocks](https://leetcode.com/problems/maximum-profit-from-trading-stocks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumProfit(presentValues []int, futureValues []int, budget int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * budget)  
 **Kompleksitas Ruang:** O(budget)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumProfit(presentValues []int, futureValues []int, budget int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,7 @@ import "fmt"
 func maximumProfit(presentValues []int, futureValues []int, budget int) int {
 	n := len(presentValues)
 	// dp[b] = max profit with budget b
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, budget+1)
 
 	for i := 0; i < n; i++ {

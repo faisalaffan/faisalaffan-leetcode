@@ -1,19 +1,30 @@
 # 1168 — Optimize Water Distribution In A Village
 
-## Deskripsi
-
-**Soal:** [1168. Optimize Water Distribution In A Village](https://leetcode.com/problems/optimize-water-distribution-in-a-village/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewUnionFind(n int) *UnionFind
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewUnionFind(n int) *UnionFind`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +45,9 @@ type UnionFind struct {
 }
 
 func NewUnionFind(n int) *UnionFind {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rank := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -73,7 +84,6 @@ type Edge struct {
 // minCostToSupplyWater uses a virtual node 0 connected to each house via well cost.
 // Runs Kruskal's MST on n+1 nodes.
 func minCostToSupplyWater(n int, wells []int, pipes [][]int) int {
-  // Membuat slice untuk menyimpan hasil
 	edges := make([]Edge, 0, n+len(pipes))
 
 	// Virtual node 0 to each house (1-indexed) = well cost
@@ -86,6 +96,7 @@ func minCostToSupplyWater(n int, wells []int, pipes [][]int) int {
 		edges = append(edges, Edge{p[0], p[1], p[2]})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(edges, func(i, j int) bool { return edges[i].w < edges[j].w })
 
 	uf := NewUnionFind(n + 1)

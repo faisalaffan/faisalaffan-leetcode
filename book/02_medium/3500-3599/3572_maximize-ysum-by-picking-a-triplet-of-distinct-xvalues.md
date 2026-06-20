@@ -1,17 +1,30 @@
 # 3572 — Maximize Ysum By Picking A Triplet Of Distinct Xvalues
 
-## Deskripsi
-
-**Soal:** [3572. Maximize Ysum By Picking A Triplet Of Distinct Xvalues](https://leetcode.com/problems/maximize-ysum-by-picking-a-triplet-of-distinct-xvalues/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximizeYsumByPickingATripletOfDistinctXvalues(points [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,11 +56,12 @@ func MaximizeYsumByPickingATripletOfDistinctXvalues(points [][]int) int {
 		return 0
 	}
 	// Sort by y descending
+  // Custom sort dengan comparator
 	sort.Slice(points, func(i, j int) bool {
 		return points[i][1] > points[j][1]
 	})
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	used := make(map[int]bool)
 	sum := 0
 	count := 0

@@ -1,19 +1,30 @@
 # 1171 — Remove Zero Sum Consecutive Nodes From Linked List
 
-## Deskripsi
-
-**Soal:** [1171. Remove Zero Sum Consecutive Nodes From Linked List](https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func removeZeroSumSublists(head *ListNode) *ListNode
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Prefix Sum
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Prefix Sum (jumlah kumulatif), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func removeZeroSumSublists(head *ListNode) *ListNode`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +51,7 @@ type ListNode struct {
 func removeZeroSumSublists(head *ListNode) *ListNode {
 	dummy := &ListNode{0, head}
 	prefix := 0
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]*ListNode)
 	seen[0] = dummy
 
@@ -59,7 +70,7 @@ func removeZeroSumSublists(head *ListNode) *ListNode {
 }
 
 func listToSlice(head *ListNode) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0)
 	for head != nil {
 		result = append(result, head.Val)
@@ -69,7 +80,7 @@ func listToSlice(head *ListNode) []int {
 }
 
 func sliceToList(nums []int) *ListNode {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return nil
 	}

@@ -1,19 +1,30 @@
 # 1719 — Number Of Ways To Reconstruct A Tree
 
-## Deskripsi
-
-**Soal:** [1719. Number Of Ways To Reconstruct A Tree](https://leetcode.com/problems/number-of-ways-to-reconstruct-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func checkWays(pairs [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func checkWays(pairs [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,11 +42,11 @@ import (
 
 func checkWays(pairs [][]int) int {
 	// Build adjacency and degrees
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	adj := make(map[int]map[int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	deg := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	nodeSet := make(map[int]bool)
 
 	for _, p := range pairs {
@@ -57,11 +68,12 @@ func checkWays(pairs [][]int) int {
 	n := len(nodeSet)
 
 	// Build sorted node list
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nodes := make([]int, 0, n)
 	for node := range nodeSet {
 		nodes = append(nodes, node)
 	}
+  // Custom sort dengan comparator
 	sort.Slice(nodes, func(i, j int) bool {
 		if deg[nodes[i]] != deg[nodes[j]] {
 			return deg[nodes[i]] > deg[nodes[j]]
@@ -93,12 +105,12 @@ func checkWays(pairs [][]int) int {
 	}
 
 	// Root = first node (highest degree). No deg=n-1 requirement.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	parent := make(map[int]int)
 	parent[nodes[0]] = -1
 
 	// Processing order for tiebreaking
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	order := make(map[int]int)
 	for i, v := range nodes {
 		order[v] = i

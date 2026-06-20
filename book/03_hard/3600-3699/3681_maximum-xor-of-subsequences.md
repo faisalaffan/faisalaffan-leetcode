@@ -1,19 +1,32 @@
 # 3681 — Maximum Xor Of Subsequences
 
-## Deskripsi
-
-**Soal:** [3681. Maximum Xor Of Subsequences](https://leetcode.com/problems/maximum-xor-of-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxXorSubsequences(nums []int) int
+```
+
+> **💡 Hint:** Build linear basis of all numbers. Max XOR of two subsequences
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Build linear basis of all numbers. Max XOR of two subsequences
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 
 func maxXorSubsequences(nums []int) int {
 	// Build linear basis
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	basis := make([]int, 0, 31)
 	for _, v := range nums {
 		x := v

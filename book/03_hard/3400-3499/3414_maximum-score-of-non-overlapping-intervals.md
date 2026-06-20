@@ -1,17 +1,30 @@
 # 3414 — Maximum Score Of Non Overlapping Intervals
 
-## Deskripsi
-
-**Soal:** [3414. Maximum Score Of Non Overlapping Intervals](https://leetcode.com/problems/maximum-score-of-non-overlapping-intervals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumScoreOfNonOverlappingIntervals(intervals [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,22 +48,23 @@ func main() {
 func MaximumScoreOfNonOverlappingIntervals(intervals [][]int) int {
 	n := len(intervals)
 	type interval struct{ start, end, score int }
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ivs := make([]interval, n)
 	for i, v := range intervals {
 		ivs[i] = interval{v[0], v[1], v[2]}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(ivs, func(i, j int) bool {
 		return ivs[i].end < ivs[j].end
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ends := make([]int, n)
 	for i, v := range ivs {
 		ends[i] = v.end
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n)
 	dp[0] = ivs[0].score
 	for i := 1; i < n; i++ {

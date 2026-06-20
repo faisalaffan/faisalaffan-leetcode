@@ -1,17 +1,30 @@
 # 3030 — Find The Grid Of Region Average
 
-## Deskripsi
-
-**Soal:** [3030. Find The Grid Of Region Average](https://leetcode.com/problems/find-the-grid-of-region-average/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func resultGrid(image [][]int, threshold int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m*n)  
 **Kompleksitas Ruang:** O(m*n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,11 +44,11 @@ func main() {
 
 func resultGrid(image [][]int, threshold int) [][]int {
 	m, n := len(image), len(image[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	sum := make([][]int, m)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	cnt := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range sum {
 		sum[i] = make([]int, n)
 		cnt[i] = make([]int, n)
@@ -72,9 +85,9 @@ func resultGrid(image [][]int, threshold int) [][]int {
 		}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	ans := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		ans[i] = make([]int, n)
 		for j := range ans[i] {

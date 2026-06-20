@@ -1,21 +1,32 @@
 # 2790 — Maximum Number Of Groups With Increasing Length
 
-## Deskripsi
-
-**Soal:** [2790. Maximum Number Of Groups With Increasing Length](https://leetcode.com/problems/maximum-number-of-groups-with-increasing-length/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxIncreasingGroups(usageLimit []int) int
+```
+
+> **💡 Hint:** Sort usageLimit ascending. Maintain a running total of available
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxIncreasingGroups(usageLimit []int) int`
-
-> **Ide Kunci:** Sort usageLimit ascending. Maintain a running total of available
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,6 +46,7 @@ import (
 )
 
 func maxIncreasingGroups(usageLimit []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(usageLimit)
 	total := 0
 	groups := 0

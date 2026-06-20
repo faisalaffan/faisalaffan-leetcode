@@ -1,19 +1,30 @@
 # 0416 — Partition Equal Subset Sum
 
-## Deskripsi
-
-**Soal:** [0416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canPartition(nums []int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * sum)  
 **Kompleksitas Ruang:** O(sum)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canPartition(nums []int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,6 @@ func canPartition(nums []int) bool {
 	}
 
 	target := sum / 2
-  // Membuat slice untuk menyimpan hasil
 	dp := make([]bool, target+1)
 	dp[0] = true
 

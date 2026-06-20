@@ -1,19 +1,30 @@
 # 2747 — Count Zero Request Servers
 
-## Deskripsi
-
-**Soal:** [2747. Count Zero Request Servers](https://leetcode.com/problems/count-zero-request-servers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CountZeroRequestServers(n int, logs [][]int, x int, queries []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func CountZeroRequestServers(n int, logs [][]int, x int, queries []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,11 +46,11 @@ type Log struct {
 
 func CountZeroRequestServers(n int, logs [][]int, x int, queries []int) []int {
 	// Process logs
-  // Membuat slice untuk menyimpan hasil
 	logList := make([]Log, len(logs))
 	for i, l := range logs {
 		logList[i] = Log{serverID: l[0], time: l[1]}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(logList, func(i, j int) bool {
 		return logList[i].time < logList[j].time
 	})
@@ -49,18 +60,18 @@ func CountZeroRequestServers(n int, logs [][]int, x int, queries []int) []int {
 		time int
 		idx  int
 	}
-  // Membuat slice untuk menyimpan hasil
 	qList := make([]qItem, len(queries))
 	for i, q := range queries {
 		qList[i] = qItem{time: q, idx: i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(qList, func(i, j int) bool {
 		return qList[i].time < qList[j].time
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	active := make(map[int]int)
 	left := 0
 

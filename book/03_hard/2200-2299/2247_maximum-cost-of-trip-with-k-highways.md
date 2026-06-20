@@ -1,19 +1,30 @@
 # 2247 — Maximum Cost Of Trip With K Highways
 
-## Deskripsi
-
-**Soal:** [2247. Maximum Cost Of Trip With K Highways](https://leetcode.com/problems/maximum-cost-of-trip-with-k-highways/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumCost(n int, highways [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumCost(n int, highways [][]int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ func maximumCost(n int, highways [][]int, k int) int {
 	}
 
 	// build adjacency matrix (costs)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n) // [neighbor, cost]
 	for _, h := range highways {
 		u, v, cost := h[0], h[1], h[2]
@@ -52,9 +63,9 @@ func maximumCost(n int, highways [][]int, k int) int {
 
 	// DP[mask][last] = max cost to reach 'last' city using mask of visited cities
 	// mask has k+1 bits set (we visit k+1 cities for k highways)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, 1<<n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 		for j := range dp[i] {

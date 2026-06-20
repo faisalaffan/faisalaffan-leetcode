@@ -1,19 +1,30 @@
 # 0512 — Game Play Analysis Ii
 
-## Deskripsi
-
-**Soal:** [0512. Game Play Analysis Ii](https://leetcode.com/problems/game-play-analysis-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func GamePlayAnalysisIi() string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func GamePlayAnalysisIi() string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

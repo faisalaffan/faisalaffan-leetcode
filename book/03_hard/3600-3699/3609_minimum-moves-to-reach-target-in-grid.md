@@ -1,19 +1,32 @@
 # 3609 — Minimum Moves To Reach Target In Grid
 
-## Deskripsi
-
-**Soal:** [3609. Minimum Moves To Reach Target In Grid](https://leetcode.com/problems/minimum-moves-to-reach-target-in-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minMoves(sx, sy, tx, ty int) int
+```
+
+> **💡 Hint:** Work backwards from (tx, ty) to (sx, sy) using reverse operations.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Work backwards from (tx, ty) to (sx, sy) using reverse operations.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

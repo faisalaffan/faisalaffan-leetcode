@@ -1,17 +1,30 @@
 # 0052 — N Queens Ii
 
-## Deskripsi
-
-**Soal:** [0052. N Queens Ii](https://leetcode.com/problems/n-queens-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func totalNQueens(n int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,11 +43,8 @@ func main() {
 }
 
 func totalNQueens(n int) int {
-  // Membuat slice untuk menyimpan hasil
 	cols := make([]bool, n)
-  // Membuat slice untuk menyimpan hasil
 	diag1 := make([]bool, 2*n-1) // r+c
-  // Membuat slice untuk menyimpan hasil
 	diag2 := make([]bool, 2*n-1) // r-c+n-1
 	count := 0
 	backtrack(n, 0, cols, diag1, diag2, &count)

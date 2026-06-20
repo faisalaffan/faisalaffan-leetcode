@@ -1,19 +1,32 @@
 # 3841 — Palindromic Path Queries In A Tree
 
-## Deskripsi
-
-**Soal:** [3841. Palindromic Path Queries In A Tree](https://leetcode.com/problems/palindromic-path-queries-in-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func palindromicPathQueries(n int, edges [][]int, s string, queries []string) []bool
+```
+
+> **💡 Hint:** Assign each char a 26-bit mask. Compute prefix XOR from
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Prefix Sum, Binary Lifting
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Lifting (lompatan biner untuk LCA)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Assign each char a 26-bit mask. Compute prefix XOR from
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +72,7 @@ func main() {
 }
 
 func palindromicPathQueries(n int, edges [][]int, s string, queries []string) []bool {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -71,18 +84,18 @@ func palindromicPathQueries(n int, edges [][]int, s string, queries []string) []
 	for (1 << LOG) <= n {
 		LOG++
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	up := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range up {
 		up[i] = make([]int, LOG)
 		for j := range up[i] {
 			up[i][j] = -1
 		}
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	depth := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n)
 
 	var dfs func(u, p int)
@@ -126,7 +139,6 @@ func palindromicPathQueries(n int, edges [][]int, s string, queries []string) []
 		return up[u][0]
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, len(queries))
 	for idx, q := range queries {
 		var u, v int

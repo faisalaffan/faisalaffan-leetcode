@@ -1,21 +1,32 @@
 # 2402 — Meeting Rooms Iii
 
-## Deskripsi
-
-**Soal:** [2402. Meeting Rooms Iii](https://leetcode.com/problems/meeting-rooms-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func mostBooked(n int, meetings [][]int) int
+```
+
+> **💡 Hint:** Use two min-heaps:
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func mostBooked(n int, meetings [][]int) int`
-
-> **Ide Kunci:** Use two min-heaps:
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -85,17 +96,19 @@ func (h *BusyHeap) Pop() interface{} {
 
 func mostBooked(n int, meetings [][]int) int {
 	// Sort meetings by start time
+  // Custom sort dengan comparator
 	sort.Slice(meetings, func(i, j int) bool {
 		return meetings[i][0] < meetings[j][0]
 	})
 
 	avail := &IntHeap{}
 	for i := 0; i < n; i++ {
+  // Masukkan elemen ke priority queue
 		heap.Push(avail, i)
 	}
 
 	busy := &BusyHeap{}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([]int, n)
 
 	for _, m := range meetings {
@@ -104,16 +117,20 @@ func mostBooked(n int, meetings [][]int) int {
 
 		// Release rooms that have finished by now
 		for busy.Len() > 0 && (*busy)[0].endTime <= start {
+  // Ambil elemen terkecil/terbesar dari heap
 			b := heap.Pop(busy).(Busy)
+  // Masukkan elemen ke priority queue
 			heap.Push(avail, b.room)
 		}
 
 		var room int
 		if avail.Len() > 0 {
 			// Room available, use smallest-numbered
+  // Ambil elemen terkecil/terbesar dari heap
 			room = heap.Pop(avail).(int)
 		} else {
 			// No room available, pick the soonest free room and delay
+  // Ambil elemen terkecil/terbesar dari heap
 			b := heap.Pop(busy).(Busy)
 			room = b.room
 			// Meeting is delayed; duration stays same
@@ -121,6 +138,7 @@ func mostBooked(n int, meetings [][]int) int {
 		}
 
 		count[room]++
+  // Masukkan elemen ke priority queue
 		heap.Push(busy, Busy{endTime: start + duration, room: room})
 	}
 

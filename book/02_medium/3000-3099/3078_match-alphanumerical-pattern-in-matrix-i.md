@@ -1,17 +1,30 @@
 # 3078 — Match Alphanumerical Pattern In Matrix I
 
-## Deskripsi
-
-**Soal:** [3078. Match Alphanumerical Pattern In Matrix I](https://leetcode.com/problems/match-alphanumerical-pattern-in-matrix-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func matchAlphanumericalPattern(board [][]int, pattern [][]byte) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(R*C*P*Q)  
 **Kompleksitas Ruang:** O(min(26, 10))
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -70,12 +83,12 @@ func matchAlphanumericalPattern(board [][]int, pattern [][]byte) []int {
 }
 
 func matches(board [][]int, pattern [][]byte, r, c int) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	charToDigit := make(map[byte]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	digitToChar := make(map[int]byte)
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(pattern); i++ {
 		for j := 0; j < len(pattern[0]); j++ {
 			ch := pattern[i][j]

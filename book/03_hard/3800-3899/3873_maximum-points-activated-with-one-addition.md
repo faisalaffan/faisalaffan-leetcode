@@ -1,19 +1,32 @@
 # 3873 — Maximum Points Activated With One Addition
 
-## Deskripsi
-
-**Soal:** [3873. Maximum Points Activated With One Addition](https://leetcode.com/problems/maximum-points-activated-with-one-addition/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxActivated(points [][]int) int
+```
+
+> **💡 Hint:** Count already-activated points (have a neighbor). For
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Count already-activated points (have a neighbor). For
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,14 +65,14 @@ func maxActivated(points [][]int) int {
 		return 0
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pointSet := make(map[[2]int]bool)
 	for _, p := range points {
 		pointSet[[2]int{p[0], p[1]}] = true
 	}
 
 	// Count already activated points (have a neighbor)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	isActivated := make([]bool, len(points))
 	activatedCnt := 0
 	for i, p := range points {
@@ -76,7 +89,7 @@ func maxActivated(points [][]int) int {
 	}
 
 	// For each candidate adjacent to each point, compute score
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	candidateScore := make(map[[2]int]int)
 	dirs := [][2]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}
 

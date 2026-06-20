@@ -1,17 +1,30 @@
 # 0698 — Partition To K Equal Sum Subsets
 
-## Deskripsi
-
-**Soal:** [0698. Partition To K Equal Sum Subsets](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canPartitionKSubsets(nums []int, k int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(k^(n-k) * n!) roughly  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,6 @@ func canPartitionKSubsets(nums []int, k int) bool {
 	target := sum / k
 	sort.Sort(sort.Reverse(sort.IntSlice(nums)))
 
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, len(nums))
 
 	var backtrack func(start int, currentSum int, subsetsFormed int) bool

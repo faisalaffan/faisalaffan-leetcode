@@ -1,19 +1,30 @@
 # 1801 — Number Of Orders In The Backlog
 
-## Deskripsi
-
-**Soal:** [1801. Number Of Orders In The Backlog](https://leetcode.com/problems/number-of-orders-in-the-backlog/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getNumberOfBacklogOrders(orders [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getNumberOfBacklogOrders(orders [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -79,10 +90,12 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 					amount = 0
 				} else {
 					amount -= top.amount
+  // Ambil elemen terkecil/terbesar dari heap
 					heap.Pop(sells)
 				}
 			}
 			if amount > 0 {
+  // Masukkan elemen ke priority queue
 				heap.Push(buys, Order{price, amount})
 			}
 		} else { // sell
@@ -93,10 +106,12 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 					amount = 0
 				} else {
 					amount -= top.amount
+  // Ambil elemen terkecil/terbesar dari heap
 					heap.Pop(buys)
 				}
 			}
 			if amount > 0 {
+  // Masukkan elemen ke priority queue
 				heap.Push(sells, Order{price, amount})
 			}
 		}
@@ -104,9 +119,11 @@ func getNumberOfBacklogOrders(orders [][]int) int {
 
 	total := 0
 	for buys.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		total = (total + heap.Pop(buys).(Order).amount) % mod
 	}
 	for sells.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		total = (total + heap.Pop(sells).(Order).amount) % mod
 	}
 	return total

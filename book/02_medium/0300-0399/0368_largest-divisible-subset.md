@@ -1,19 +1,30 @@
 # 0368 — Largest Divisible Subset
 
-## Deskripsi
-
-**Soal:** [0368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestDivisibleSubset(nums []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func largestDivisibleSubset(nums []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,16 +40,17 @@ import (
 )
 
 func largestDivisibleSubset(nums []int) []int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return []int{}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n) // size of largest subset ending at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prev := make([]int, n)
 	maxIdx := 0
 
@@ -57,7 +69,7 @@ func largestDivisibleSubset(nums []int) []int {
 	}
 
 	// Reconstruct
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0, dp[maxIdx])
 	for i := maxIdx; i >= 0; i = prev[i] {
 		result = append(result, nums[i])

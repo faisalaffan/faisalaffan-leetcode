@@ -1,19 +1,30 @@
 # 2250 — Count Number Of Rectangles Containing Each Point
 
-## Deskripsi
-
-**Soal:** [2250. Count Number Of Rectangles Containing Each Point](https://leetcode.com/problems/count-number-of-rectangles-containing-each-point/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countRectangles(rectangles [][]int, points [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O((n + m) log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countRectangles(rectangles [][]int, points [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,17 +41,18 @@ import (
 
 func countRectangles(rectangles [][]int, points [][]int) []int {
 	// Group rectangles by height
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	byHeight := make([][]int, 101)
 	for _, r := range rectangles {
 		h := r[1]
 		byHeight[h] = append(byHeight[h], r[0])
 	}
 	for h := 0; h <= 100; h++ {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(byHeight[h])
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(points))
 	for i, p := range points {
 		x, y := p[0], p[1]

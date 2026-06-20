@@ -1,19 +1,30 @@
 # 3771 — Total Score Of Dungeon Runs
 
-## Deskripsi
-
-**Soal:** [3771. Total Score Of Dungeon Runs](https://leetcode.com/problems/total-score-of-dungeon-runs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func totalScoreOfDungeonRuns(hp int, damage []int, requirement []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func totalScoreOfDungeonRuns(hp int, damage []int, requirement []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ import (
 func totalScoreOfDungeonRuns(hp int, damage []int, requirement []int) int64 {
 	n := len(damage)
 	// suffix cumulative damage
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suf := make([]int, n+1)
 	for i := n - 1; i >= 0; i-- {
 		suf[i] = suf[i+1] + damage[i]

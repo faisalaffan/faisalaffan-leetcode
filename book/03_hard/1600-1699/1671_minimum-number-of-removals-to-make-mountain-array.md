@@ -1,17 +1,30 @@
 # 1671 — Minimum Number Of Removals To Make Mountain Array
 
-## Deskripsi
-
-**Soal:** [1671. Minimum Number Of Removals To Make Mountain Array](https://leetcode.com/problems/minimum-number-of-removals-to-make-mountain-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumMountainRemovals(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,9 +48,9 @@ func main() {
 
 func minimumMountainRemovals(nums []int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lis := make([]int, n) // longest increasing subsequence ending at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lds := make([]int, n) // longest decreasing subsequence starting at i
 
 	// Compute LIS from left

@@ -1,19 +1,30 @@
 # 2102 — Sequentially Ordinal Rank Tracker
 
-## Deskripsi
-
-**Soal:** [2102. Sequentially Ordinal Rank Tracker](https://leetcode.com/problems/sequentially-ordinal-rank-tracker/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() SORTracker
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor() SORTracker`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -85,8 +96,10 @@ func Constructor() SORTracker {
 }
 
 func (t *SORTracker) Add(name string, score int) {
+  // Masukkan elemen ke priority queue
 	heap.Push(&t.low, location{name, score})
 	if len(t.low) > t.queries {
+  // Masukkan elemen ke priority queue
 		heap.Push(&t.high, heap.Pop(&t.low))
 	}
 }
@@ -94,6 +107,7 @@ func (t *SORTracker) Add(name string, score int) {
 func (t *SORTracker) Get() string {
 	t.queries++
 	for len(t.low) < t.queries {
+  // Masukkan elemen ke priority queue
 		heap.Push(&t.low, heap.Pop(&t.high))
 	}
 	return t.low[0].name

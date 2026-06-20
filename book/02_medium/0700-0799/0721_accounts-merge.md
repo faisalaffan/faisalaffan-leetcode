@@ -1,17 +1,30 @@
 # 0721 — Accounts Merge
 
-## Deskripsi
-
-**Soal:** [0721. Accounts Merge](https://leetcode.com/problems/accounts-merge/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func accountsMerge(accounts [][]string) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU), Merge Sort
 
 **Kompleksitas Waktu:** O(nk * alpha(nk))  
 **Kompleksitas Ruang:** O(nk)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,9 +51,9 @@ func main() {
 }
 
 func accountsMerge(accounts [][]string) [][]string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	parent := make(map[string]string)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	owner := make(map[string]string)
 
 	var find func(x string) string
@@ -68,14 +81,14 @@ func accountsMerge(accounts [][]string) [][]string {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[string][]string)
 	for email := range parent {
 		root := find(email)
 		groups[root] = append(groups[root], email)
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]string, 0, len(groups))
 	for root, emails := range groups {
 		sort.Strings(emails)

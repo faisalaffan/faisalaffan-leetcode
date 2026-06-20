@@ -1,19 +1,30 @@
 # 0906 — Super Palindromes
 
-## Deskripsi
-
-**Soal:** [0906. Super Palindromes](https://leetcode.com/problems/super-palindromes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isPalindrome(s string) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func isPalindrome(s string) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +62,6 @@ func superpalindromesInRange(left string, right string) int {
 		// odd length: seed + reverse(seed[:len-1])
 		runes := []rune(s)
 		n := len(runes)
-  // Membuat slice untuk menyimpan hasil
 		palRunes := make([]rune, 2*n-1)
 		for i := 0; i < n; i++ {
 			palRunes[i] = runes[i]
@@ -76,7 +86,6 @@ func superpalindromesInRange(left string, right string) int {
 		// even length: seed + reverse(seed)
 		runes := []rune(s)
 		n := len(runes)
-  // Membuat slice untuk menyimpan hasil
 		palRunes := make([]rune, 2*n)
 		for i := 0; i < n; i++ {
 			palRunes[i] = runes[i]

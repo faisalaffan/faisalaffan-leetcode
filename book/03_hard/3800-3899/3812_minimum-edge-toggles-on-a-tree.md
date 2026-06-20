@@ -1,19 +1,32 @@
 # 3812 — Minimum Edge Toggles On A Tree
 
-## Deskripsi
-
-**Soal:** [3812. Minimum Edge Toggles On A Tree](https://leetcode.com/problems/minimum-edge-toggles-on-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumFlips(n int, edges [][]int, start string, target string) []int
+```
+
+> **💡 Hint:** Root the tree. For each node, precompute toggles needed
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Root the tree. For each node, precompute toggles needed
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func minimumFlips(n int, edges [][]int, start string, target string) []int {
 		dir int
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]edge, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -61,9 +74,9 @@ func minimumFlips(n int, edges [][]int, start string, target string) []int {
 
 	// BFS to compute min toggles from start to all nodes
 	const INF = 1 << 30
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = INF
 	}
@@ -104,9 +117,9 @@ func minimumFlips(n int, edges [][]int, start string, target string) []int {
 	// Min toggles from s to t = dist[s] + dist[t] - 2*dist[lca(s,t)]
 	// but we need a simple BFS from s for each query.
 	// For a single query, BFS from s.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bfsDist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range bfsDist {
 		bfsDist[i] = INF
 	}

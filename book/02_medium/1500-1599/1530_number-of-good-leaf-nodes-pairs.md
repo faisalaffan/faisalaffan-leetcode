@@ -1,17 +1,30 @@
 # 1530 — Number Of Good Leaf Nodes Pairs
 
-## Deskripsi
-
-**Soal:** [1530. Number Of Good Leaf Nodes Pairs](https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CountPairs(root *TreeNode, distance int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, DFS
 
 **Kompleksitas Waktu:** O(N * distance^2), Space: O(N * distance)  
 **Kompleksitas Ruang:** O(N * distance)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -78,7 +91,7 @@ func CountPairs(root *TreeNode, distance int) int {
 		}
 
 		// Merge distances, incrementing by 1 (edge to parent)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		result := make([]int, 0)
 		if left != nil {
 			for _, d := range left {

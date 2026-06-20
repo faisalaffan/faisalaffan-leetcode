@@ -1,19 +1,30 @@
 # 3645 — Maximum Total From Optimal Activation Order
 
-## Deskripsi
-
-**Soal:** [3645. Maximum Total From Optimal Activation Order](https://leetcode.com/problems/maximum-total-from-optimal-activation-order/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ import (
 
 func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64 {
 	n := len(value)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	groups := make([][]int, n+1)
 	for i := 0; i < n; i++ {
 		l := limit[i]
@@ -42,6 +53,7 @@ func maximumTotalFromOptimalActivationOrder(value []int, limit []int) int64 {
 		if len(groups[l]) == 0 {
 			continue
 		}
+  // Custom sort dengan comparator
 		sort.Slice(groups[l], func(i, j int) bool {
 			return groups[l][i] > groups[l][j]
 		})

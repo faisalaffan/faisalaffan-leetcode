@@ -1,21 +1,32 @@
 # 2050 — Parallel Courses Iii
 
-## Deskripsi
-
-**Soal:** [2050. Parallel Courses Iii](https://leetcode.com/problems/parallel-courses-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTime(n int, relations [][]int, time []int) int
+```
+
+> **💡 Hint:** Topological Sort + DP
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Dynamic Programming, Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Topological Sort (pengurutan topologi)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumTime(n int, relations [][]int, time []int) int`
-
-> **Ide Kunci:** Topological Sort + DP
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,9 +40,9 @@ import "fmt"
 
 func minimumTime(n int, relations [][]int, time []int) int {
 	// Build graph and indegree
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indeg := make([]int, n+1)
 	for _, r := range relations {
 		prev, next := r[0], r[1]
@@ -40,9 +51,9 @@ func minimumTime(n int, relations [][]int, time []int) int {
 	}
 
 	// dp[i] = earliest completion time for course i (1-indexed)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([]int, 0)
 
 	for i := 1; i <= n; i++ {

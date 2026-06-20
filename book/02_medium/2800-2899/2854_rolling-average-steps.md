@@ -1,19 +1,30 @@
 # 2854 — Rolling Average Steps
 
-## Deskripsi
-
-**Soal:** [2854. Rolling Average Steps](https://leetcode.com/problems/rolling-average-steps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func RollingAverageSteps(steps []int, k int) []float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func RollingAverageSteps(steps []int, k int) []float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,6 @@ func RollingAverageSteps(steps []int, k int) []float64 {
 		return []float64{}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]float64, n-k+1)
 	var sum int
 	for i := 0; i < k; i++ {

@@ -1,19 +1,30 @@
 # 2624 — Snail Traversal
 
-## Deskripsi
-
-**Soal:** [2624. Snail Traversal](https://leetcode.com/problems/snail-traversal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func snailTraversal(arr []int, rowsCount int, colsCount int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n*m)  
 **Kompleksitas Ruang:** O(n*m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func snailTraversal(arr []int, rowsCount int, colsCount int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +42,9 @@ func snailTraversal(arr []int, rowsCount int, colsCount int) [][]int {
 		return [][]int{}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, rowsCount)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range result {
 		result[i] = make([]int, colsCount)
 	}

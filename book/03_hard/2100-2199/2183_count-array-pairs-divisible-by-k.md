@@ -1,17 +1,30 @@
 # 2183 — Count Array Pairs Divisible By K
 
-## Deskripsi
-
-**Soal:** [2183. Count Array Pairs Divisible By K](https://leetcode.com/problems/count-array-pairs-divisible-by-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countPairs(nums []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +55,7 @@ func main() {
 
 func countPairs(nums []int, k int) int64 {
 	// Count frequency of each gcd value
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	for _, num := range nums {
 		g := gcd(num, k)
@@ -52,13 +65,13 @@ func countPairs(nums []int, k int) int64 {
 	var ans int64
 
 	// Iterate over unique gcd values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	gcdVals := make([]int, 0, len(freq))
 	for g := range freq {
 		gcdVals = append(gcdVals, g)
 	}
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(gcdVals); i++ {
 		for j := i; j < len(gcdVals); j++ {
 			g1, g2 := gcdVals[i], gcdVals[j]

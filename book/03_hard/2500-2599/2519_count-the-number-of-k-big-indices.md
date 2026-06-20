@@ -1,21 +1,32 @@
 # 2519 — Count The Number Of K Big Indices
 
-## Deskripsi
-
-**Soal:** [2519. Count The Number Of K Big Indices](https://leetcode.com/problems/count-the-number-of-k-big-indices/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countKBigIndices(nums []int, k int) int
+```
+
+> **💡 Hint:** Coordinate compression + Fenwick Tree (BIT).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countKBigIndices(nums []int, k int) int`
-
-> **Ide Kunci:** Coordinate compression + Fenwick Tree (BIT).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,11 +53,12 @@ func countKBigIndices(nums []int, k int) int {
 	n := len(nums)
 
 	// Coordinate compression
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, nums)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rank := make(map[int]int)
 	for _, v := range sorted {
 		if _, ok := rank[v]; !ok {
@@ -56,9 +68,9 @@ func countKBigIndices(nums []int, k int) int {
 	m := len(rank)
 
 	// leftLess[i] = count of elements before i with value < nums[i]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bit := make([]int, m+2)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftLess := make([]int, n)
 	for i := 0; i < n; i++ {
 		r := rank[nums[i]]
@@ -68,7 +80,7 @@ func countKBigIndices(nums []int, k int) int {
 
 	// rightLess[i] = count of elements after i with value < nums[i]
 	bit = make([]int, m+2)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rightLess := make([]int, n)
 	for i := n - 1; i >= 0; i-- {
 		r := rank[nums[i]]

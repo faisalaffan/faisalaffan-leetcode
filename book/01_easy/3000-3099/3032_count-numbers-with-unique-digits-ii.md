@@ -1,17 +1,30 @@
 # 3032 — Count Numbers With Unique Digits Ii
 
-## Deskripsi
-
-**Soal:** [3032. Count Numbers With Unique Digits Ii](https://leetcode.com/problems/count-numbers-with-unique-digits-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CountNumbersWithUniqueDigitsIi(a int, b int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O((b-a) * log(b))  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func CountNumbersWithUniqueDigitsIi(a int, b int) int {
 }
 
 func hasUniqueDigits(n int) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]bool)
 	for n > 0 {
 		digit := n % 10

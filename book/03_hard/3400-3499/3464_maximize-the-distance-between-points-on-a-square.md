@@ -1,19 +1,32 @@
 # 3464 — Maximize The Distance Between Points On A Square
 
-## Deskripsi
-
-**Soal:** [3464. Maximize The Distance Between Points On A Square](https://leetcode.com/problems/maximize-the-distance-between-points-on-a-square/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxDistance(side int, points [][]int, k int) int
+```
+
+> **💡 Hint:** Binary search on minimum distance. For a given min
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on minimum distance. For a given min
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 func maxDistance(side int, points [][]int, k int) int {
 	// Map each point to its position along the perimeter (clockwise)
 	// Start from (0,0), go right, then up, then left, then down
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pos := make([]int, len(points))
 	for i, p := range points {
 		x, y := p[0], p[1]

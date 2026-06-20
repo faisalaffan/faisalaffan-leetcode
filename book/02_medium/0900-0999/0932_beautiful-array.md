@@ -1,19 +1,30 @@
 # 0932 — Beautiful Array
 
-## Deskripsi
-
-**Soal:** [0932. Beautiful Array](https://leetcode.com/problems/beautiful-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func beautifulArray(n int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func beautifulArray(n int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,14 +37,14 @@ import "fmt"
 
 // Time: O(n log n) | Space: O(n)
 func beautifulArray(n int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[int][]int)
 	var dfs func(int) []int
 	dfs = func(n int) []int {
 		if v, ok := memo[n]; ok {
 			return v
 		}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		res := make([]int, n)
 		if n == 1 {
 			res[0] = 1

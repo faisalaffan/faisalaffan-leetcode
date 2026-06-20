@@ -1,19 +1,30 @@
 # 1639 — Number Of Ways To Form A Target String Given A Dictionary
 
-## Deskripsi
-
-**Soal:** [1639. Number Of Ways To Form A Target String Given A Dictionary](https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numWays(words []string, target string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numWays(words []string, target string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ func numWays(words []string, target string) int {
 	n := len(target)   // target length
 
 	// count[c][ch] = number of words with character ch at column c
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([][26]int, m)
 	for _, w := range words {
 		for c, ch := range w {
@@ -40,7 +51,7 @@ func numWays(words []string, target string) int {
 	}
 
 	// dp[j] = number of ways to form first j characters of target
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
 	dp[0] = 1
 

@@ -1,19 +1,30 @@
 # 1178 — Number Of Valid Words For Each Puzzle
 
-## Deskripsi
-
-**Soal:** [1178. Number Of Valid Words For Each Puzzle](https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func wordMask(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Bitmask, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func wordMask(s string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 // wordMask converts a word to a bitmask of its letters (26 bits).
 func wordMask(s string) int {
 	mask := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		mask |= 1 << (s[i] - 'a')
 	}
@@ -36,7 +47,7 @@ func wordMask(s string) int {
 
 func findNumOfValidWords(words []string, puzzles []string) []int {
 	// Count words by mask
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	for _, w := range words {
 		m := wordMask(w)
@@ -45,7 +56,7 @@ func findNumOfValidWords(words []string, puzzles []string) []int {
 		freq[m]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(puzzles))
 	for i, p := range puzzles {
 		pmask := wordMask(p)

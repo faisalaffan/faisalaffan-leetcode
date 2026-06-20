@@ -1,21 +1,32 @@
 # 2014 — Longest Subsequence Repeated K Times
 
-## Deskripsi
-
-**Soal:** [2014. Longest Subsequence Repeated K Times](https://leetcode.com/problems/longest-subsequence-repeated-k-times/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestSubsequenceRepeatedK(s string, k int) string
+```
+
+> **💡 Hint:** BFS generate candidate strings in order of length.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func longestSubsequenceRepeatedK(s string, k int) string`
-
-> **Ide Kunci:** BFS generate candidate strings in order of length.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,14 +44,14 @@ import "fmt"
 
 func longestSubsequenceRepeatedK(s string, k int) string {
 	// Count frequencies
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, 26)
 	for _, ch := range s {
 		freq[ch-'a']++
 	}
 
 	// Max uses for each character
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	maxUses := make([]int, 26)
 	for i := 0; i < 26; i++ {
 		maxUses[i] = freq[i] / k
@@ -49,7 +60,7 @@ func longestSubsequenceRepeatedK(s string, k int) string {
 	// Check if str is a subsequence of s
 	isSubseq := func(str string) bool {
 		j := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(s) && j < len(str); i++ {
 			if s[i] == str[j] {
 				j++

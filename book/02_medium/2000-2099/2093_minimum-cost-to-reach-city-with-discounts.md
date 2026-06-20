@@ -1,19 +1,30 @@
 # 2093 — Minimum Cost To Reach City With Discounts
 
-## Deskripsi
-
-**Soal:** [2093. Minimum Cost To Reach City With Discounts](https://leetcode.com/problems/minimum-cost-to-reach-city-with-discounts/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumCost(n int, highways [][]int, discounts int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O((n+m) * discounts * log(n*discounts))  
 **Kompleksitas Ruang:** O(n * discounts)
 
-**Algoritma:** Queue (antrian FIFO), Heap (priority queue), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumCost(n int, highways [][]int, discounts int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,7 +66,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 
 func minimumCost(n int, highways [][]int, discounts int) int {
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]Edge, n)
 	for _, h := range highways {
 		u, v, c := h[0], h[1], h[2]
@@ -64,9 +75,9 @@ func minimumCost(n int, highways [][]int, discounts int) int {
 	}
 
 	// dist[city][discountsUsed] = min cost
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, discounts+1)
 		for j := range dist[i] {
@@ -76,9 +87,11 @@ func minimumCost(n int, highways [][]int, discounts int) int {
 	dist[0][0] = 0
 
 	pq := &PriorityQueue{}
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, State{0, 0, 0})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(State)
 		if cur.cost > dist[cur.city][cur.discounts] {
 			continue
@@ -89,6 +102,7 @@ func minimumCost(n int, highways [][]int, discounts int) int {
 			nc := cur.cost + e.cost
 			if nc < dist[e.to][cur.discounts] {
 				dist[e.to][cur.discounts] = nc
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, State{e.to, cur.discounts, nc})
 			}
 			// With discount
@@ -96,6 +110,7 @@ func minimumCost(n int, highways [][]int, discounts int) int {
 				nc2 := cur.cost + e.cost/2
 				if nc2 < dist[e.to][cur.discounts+1] {
 					dist[e.to][cur.discounts+1] = nc2
+  // Masukkan elemen ke priority queue
 					heap.Push(pq, State{e.to, cur.discounts + 1, nc2})
 				}
 			}

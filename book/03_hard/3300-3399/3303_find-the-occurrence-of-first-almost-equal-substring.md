@@ -1,17 +1,30 @@
 # 3303 — Find The Occurrence Of First Almost Equal Substring
 
-## Deskripsi
-
-**Soal:** [3303. Find The Occurrence Of First Almost Equal Substring](https://leetcode.com/problems/find-the-occurrence-of-first-almost-equal-substring/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func firstAlmostEqualSubstring(s string, p string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LCS (Longest Common Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,7 +79,7 @@ func firstAlmostEqualSubstring(s string, p string) int {
 	z := zAlgo(combined)
 
 	// LCP[i] = longest common prefix of s[i:] and p.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lcp := make([]int, n)
 	for i := 0; i < n; i++ {
 		lcp[i] = z[m+1+i]
@@ -81,7 +94,7 @@ func firstAlmostEqualSubstring(s string, p string) int {
 	// LCS[i] = longest common suffix of s[:i+m] and p.
 	// For position i, the suffix starts at i+m-1 in s, which corresponds
 	// to position (n-1)-(i+m-1) = n-i-m in the reversed string.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lcs := make([]int, n)
 	for i := 0; i <= n-m; i++ {
 		revIdx := n - i - m // position in revS
@@ -106,7 +119,7 @@ func firstAlmostEqualSubstring(s string, p string) int {
 
 func zAlgo(s string) []int {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	z := make([]int, n)
 	l, r := 0, 0
 	for i := 1; i < n; i++ {

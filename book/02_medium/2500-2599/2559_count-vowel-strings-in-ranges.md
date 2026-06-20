@@ -1,19 +1,30 @@
 # 2559 — Count Vowel Strings In Ranges
 
-## Deskripsi
-
-**Soal:** [2559. Count Vowel Strings In Ranges](https://leetcode.com/problems/count-vowel-strings-in-ranges/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func vowelStrings(words []string, queries [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + q)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func vowelStrings(words []string, queries [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ func vowelStrings(words []string, queries [][]int) []int {
 	}
 
 	n := len(words)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n+1)
 	for i, w := range words {
 		prefix[i+1] = prefix[i]
@@ -40,7 +51,7 @@ func vowelStrings(words []string, queries [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for i, q := range queries {
 		ans[i] = prefix[q[1]+1] - prefix[q[0]]

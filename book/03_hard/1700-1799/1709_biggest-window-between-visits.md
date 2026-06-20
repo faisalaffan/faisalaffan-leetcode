@@ -1,17 +1,30 @@
 # 1709 — Biggest Window Between Visits
 
-## Deskripsi
-
-**Soal:** [1709. Biggest Window Between Visits](https://leetcode.com/problems/biggest-window-between-visits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func parseDate(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -71,9 +84,9 @@ func parseDate(s string) int {
 }
 
 func biggestWindow(visits []Visit) []UserWindow {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userVisits := make(map[int][]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userSet := make(map[int]bool)
 
 	for _, v := range visits {
@@ -81,10 +94,10 @@ func biggestWindow(visits []Visit) []UserWindow {
 		userSet[v.UserId] = true
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]UserWindow, 0)
 	for uid := range userSet {
 		dates := userVisits[uid]
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(dates)
 
 		maxGap := 0

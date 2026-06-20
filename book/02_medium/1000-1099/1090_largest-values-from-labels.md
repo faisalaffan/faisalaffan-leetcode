@@ -1,19 +1,32 @@
 # 1090 — Largest Values From Labels
 
-## Deskripsi
-
-**Soal:** [1090. Largest Values From Labels](https://leetcode.com/problems/largest-values-from-labels/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestValsFromLabels(values []int, labels []int, numWanted int, useLimit int) int
+```
+
+> **💡 Hint:** Sort by value descending, pick items with label limits
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sort by value descending, pick items with label limits
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,17 +55,17 @@ func largestValsFromLabels(values []int, labels []int, numWanted int, useLimit i
 		val   int
 		label int
 	}
-  // Membuat slice untuk menyimpan hasil
 	items := make([]pair, n)
 	for i := 0; i < n; i++ {
 		items[i] = pair{values[i], labels[i]}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(items, func(i, j int) bool {
 		return items[i].val > items[j].val
 	})
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	labelCount := make(map[int]int)
 	result := 0
 	selected := 0

@@ -1,19 +1,30 @@
 # 1233 — Remove Sub Folders From The Filesystem
 
-## Deskripsi
-
-**Soal:** [1233. Remove Sub Folders From The Filesystem](https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func removeSubfolders(folder []string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n log n * L) where L = average path length  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func removeSubfolders(folder []string) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,6 @@ import (
 
 func removeSubfolders(folder []string) []string {
 	sort.Strings(folder)
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 	result = append(result, folder[0])
 

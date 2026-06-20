@@ -1,19 +1,30 @@
 # 2941 — Maximum Gcd Sum Of A Subarray
 
-## Deskripsi
-
-**Soal:** [2941. Maximum Gcd Sum Of A Subarray](https://leetcode.com/problems/maximum-gcd-sum-of-a-subarray/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxGcdSumOfSubarray(nums []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum, GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func gcd(a, b int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,12 +54,12 @@ func maxGcdSumOfSubarray(nums []int, k int) int64 {
 	// but the core algorithm works on the main array regardless.
 	// We'll handle the general formulation.
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int64, n+1)
 	for i, v := range nums {
 		pref[i+1] = pref[i] + int64(v)
@@ -60,12 +71,10 @@ func maxGcdSumOfSubarray(nums []int, k int) int64 {
 		g int
 		l int
 	}
-  // Membuat slice untuk menyimpan hasil
 	cur := make([]pair, 0)
 
 	for i := 0; i < n; i++ {
 		// Build new list for subarrays ending at i
-  // Membuat slice untuk menyimpan hasil
 		nxt := make([]pair, 0)
 
 		// Extend previous subarrays

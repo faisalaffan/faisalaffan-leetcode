@@ -1,19 +1,30 @@
 # 3023 — Find Pattern In Infinite Stream I
 
-## Deskripsi
-
-**Soal:** [3023. Find Pattern In Infinite Stream I](https://leetcode.com/problems/find-pattern-in-infinite-stream-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewInfiniteStream(data []int) *InfiniteStream
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, Bitmask, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(m) where m = len(pattern) ≤ 100
 
-**Algoritma:** Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewInfiniteStream(data []int) *InfiniteStream`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

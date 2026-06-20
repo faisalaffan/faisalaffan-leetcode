@@ -1,19 +1,30 @@
 # 3169 — Count Days Without Meetings
 
-## Deskripsi
-
-**Soal:** [3169. Count Days Without Meetings](https://leetcode.com/problems/count-days-without-meetings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countDays(days int, meetings [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Merge Sort
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(log n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countDays(days int, meetings [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,11 +40,12 @@ import (
 )
 
 func countDays(days int, meetings [][]int) int {
+  // Custom sort dengan comparator
 	sort.Slice(meetings, func(i, j int) bool {
 		return meetings[i][0] < meetings[j][0]
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	merged := make([][2]int, 0)
 	for _, m := range meetings {
 		if len(merged) > 0 && m[0] <= merged[len(merged)-1][1]+1 {

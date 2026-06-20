@@ -1,19 +1,30 @@
 # 3117 — Minimum Sum Of Values By Dividing Array
 
-## Deskripsi
-
-**Soal:** [3117. Minimum Sum Of Values By Dividing Array](https://leetcode.com/problems/minimum-sum-of-values-by-dividing-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ const ALL_ONES = (1 << 20) - 1
 
 func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int {
 	m := len(andValues)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]map[int]int, m+1)
 	for j := 0; j <= m; j++ {
 		dp[j] = make(map[int]int)
@@ -42,7 +53,7 @@ func minimumSumOfValuesByDividingArray(nums []int, andValues []int) int {
 	dp[0][ALL_ONES] = 0
 
 	for _, x := range nums {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]map[int]int, m+1)
 		for j := 0; j <= m; j++ {
 			ndp[j] = make(map[int]int)

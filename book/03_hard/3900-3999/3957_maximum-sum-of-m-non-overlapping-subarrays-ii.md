@@ -1,19 +1,32 @@
 # 3957 — Maximum Sum Of M Non Overlapping Subarrays Ii
 
-## Deskripsi
-
-**Soal:** [3957. Maximum Sum Of M Non Overlapping Subarrays Ii](https://leetcode.com/problems/maximum-sum-of-m-non-overlapping-subarrays-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSum(nums []int, m int, l int, r int) int
+```
+
+> **💡 Hint:** DP with prefix sums and gap constraint. dp[i][j] =
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with prefix sums and gap constraint. dp[i][j] =
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,16 +60,16 @@ func main() {
 
 func maxSum(nums []int, m int, l int, r int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		pref[i+1] = pref[i] + nums[i]
 	}
 
 	// dp[i][j] = max sum using first i elements, j subarrays
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, m+1)
 		for j := range dp[i] {

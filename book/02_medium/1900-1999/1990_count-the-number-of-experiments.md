@@ -1,19 +1,30 @@
 # 1990 — Count The Number Of Experiments
 
-## Deskripsi
-
-**Soal:** [1990. Count The Number Of Experiments](https://leetcode.com/problems/count-the-number-of-experiments/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countExperiments(experiments []Experiment) []ExperimentResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + 9) = O(n)  
 **Kompleksitas Ruang:** O(p * n) where p = platforms, n = names
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func countExperiments(experiments []Experiment) []ExperimentResult`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +63,7 @@ func countExperiments(experiments []Experiment) []ExperimentResult {
 	names := []string{"Reading", "Sports", "Programming"}
 
 	// Count existing experiments.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counts := make(map[string]map[string]int)
 	for _, e := range experiments {
 		if counts[e.Platform] == nil {

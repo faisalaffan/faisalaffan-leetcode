@@ -1,21 +1,32 @@
 # 2030 — Smallest K Length Subsequence With Occurrences Of A Letter
 
-## Deskripsi
-
-**Soal:** [2030. Smallest K Length Subsequence With Occurrences Of A Letter](https://leetcode.com/problems/smallest-k-length-subsequence-with-occurrences-of-a-letter/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func smallestKLengthSubsequence(s string, k int, letter byte, rep int) string
+```
+
+> **💡 Hint:** Monotonic Stack
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func smallestKLengthSubsequence(s string, k int, letter byte, rep int) string`
-
-> **Ide Kunci:** Monotonic Stack
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,6 @@ func smallestKLengthSubsequence(s string, k int, letter byte, rep int) string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	stack := make([]byte, 0, k)
 	usedLetter := 0
 
@@ -82,10 +92,9 @@ func smallestKLengthSubsequence(s string, k int, letter byte, rep int) string {
 	// If we have more than k characters, trim from end, but keep enough letters
 	if len(stack) > k {
 		extra := len(stack) - k
-  // Membuat slice untuk menyimpan hasil
 		newStack := make([]byte, 0, k)
 		keptLetter := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(stack)-extra; i++ {
 			newStack = append(newStack, stack[i])
 			if stack[i] == letter {

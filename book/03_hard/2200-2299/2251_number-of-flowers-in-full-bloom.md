@@ -1,19 +1,30 @@
 # 2251 — Number Of Flowers In Full Bloom
 
-## Deskripsi
-
-**Soal:** [2251. Number Of Flowers In Full Bloom](https://leetcode.com/problems/number-of-flowers-in-full-bloom/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func fullBloomFlowers(flowers [][]int, people []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func fullBloomFlowers(flowers [][]int, people []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,19 +48,21 @@ func fullBloomFlowers(flowers [][]int, people []int) []int {
 	n := len(flowers)
 	m := len(people)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	starts := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ends := make([]int, n)
 	for i, f := range flowers {
 		starts[i] = f[0]
 		ends[i] = f[1]
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(starts)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(ends)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, m)
 	for i, p := range people {
 		// number of flowers that started blooming <= p

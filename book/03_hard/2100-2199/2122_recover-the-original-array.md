@@ -1,19 +1,32 @@
 # 2122 — Recover The Original Array
 
-## Deskripsi
-
-**Soal:** [2122. Recover The Original Array](https://leetcode.com/problems/recover-the-original-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func recoverArray(nums []int) []int
+```
+
+> **💡 Hint:** Sort + frequency map.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sort + frequency map.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,6 +60,7 @@ func main() {
 }
 
 func recoverArray(nums []int) []int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	n := len(nums)
 
@@ -59,13 +73,13 @@ func recoverArray(nums []int) []int {
 		}
 
 		// Try to reconstruct with this 2k value
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		freq := make(map[int]int)
 		for _, v := range nums {
 			freq[v]++
 		}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		result := make([]int, 0, n/2)
 		valid := true
 

@@ -1,17 +1,30 @@
 # 0743 — Network Delay Time
 
-## Deskripsi
-
-**Soal:** [0743. Network Delay Time](https://leetcode.com/problems/network-delay-time/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func networkDelayTime(times [][]int, n int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n + E log V)  
 **Kompleksitas Ruang:** O(n + E)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,15 +66,15 @@ func (h *MinHeap2) Pop() interface{} {
 }
 
 func networkDelayTime(times [][]int, n int, k int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]Edge, n+1)
 	for _, t := range times {
 		graph[t[0]] = append(graph[t[0]], Edge{t[1], t[2]})
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = math.MaxInt32
 	}
@@ -69,9 +82,11 @@ func networkDelayTime(times [][]int, n int, k int) int {
 
 	h := &MinHeap2{}
 	heap.Init(h)
+  // Masukkan elemen ke priority queue
 	heap.Push(h, Edge{k, 0})
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(h).(Edge)
 		if cur.time > dist[cur.node] {
 			continue
@@ -79,6 +94,7 @@ func networkDelayTime(times [][]int, n int, k int) int {
 		for _, e := range graph[cur.node] {
 			if nd := cur.time + e.time; nd < dist[e.node] {
 				dist[e.node] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(h, Edge{e.node, nd})
 			}
 		}

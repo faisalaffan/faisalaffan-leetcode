@@ -1,19 +1,30 @@
 # 0406 — Queue Reconstruction By Height
 
-## Deskripsi
-
-**Soal:** [0406. Queue Reconstruction By Height](https://leetcode.com/problems/queue-reconstruction-by-height/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func reconstructQueue(people [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func reconstructQueue(people [][]int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,6 +41,7 @@ import (
 
 func reconstructQueue(people [][]int) [][]int {
 	// Sort by height descending, then by k ascending
+  // Custom sort dengan comparator
 	sort.Slice(people, func(i, j int) bool {
 		if people[i][0] != people[j][0] {
 			return people[i][0] > people[j][0]
@@ -37,7 +49,7 @@ func reconstructQueue(people [][]int) [][]int {
 		return people[i][1] < people[j][1]
 	})
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0, len(people))
 	for _, p := range people {
 		// Insert at index k

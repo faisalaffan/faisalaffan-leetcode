@@ -1,19 +1,32 @@
 # 0282 — Expression Add Operators
 
-## Deskripsi
-
-**Soal:** [0282. Expression Add Operators](https://leetcode.com/problems/expression-add-operators/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func addOperators(num string, target int) []string
+```
+
+> **💡 Hint:** Backtracking.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Backtracking.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

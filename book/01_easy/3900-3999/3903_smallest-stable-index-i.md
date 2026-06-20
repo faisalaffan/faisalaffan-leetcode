@@ -1,17 +1,30 @@
 # 3903 — Smallest Stable Index I
 
-## Deskripsi
-
-**Soal:** [3903. Smallest Stable Index I](https://leetcode.com/problems/smallest-stable-index-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SmallestStableIndexI(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func main() {
 func SmallestStableIndexI(nums []int, k int) int {
 	n := len(nums)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixMax := make([]int, n)
 	prefixMax[0] = nums[0]
 	for i := 1; i < n; i++ {
@@ -44,7 +57,7 @@ func SmallestStableIndexI(nums []int, k int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suffixMin := make([]int, n)
 	suffixMin[n-1] = nums[n-1]
 	for i := n - 2; i >= 0; i-- {

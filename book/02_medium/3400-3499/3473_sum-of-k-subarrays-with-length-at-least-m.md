@@ -1,17 +1,30 @@
 # 3473 — Sum Of K Subarrays With Length At Least M
 
-## Deskripsi
-
-**Soal:** [3473. Sum Of K Subarrays With Length At Least M](https://leetcode.com/problems/sum-of-k-subarrays-with-length-at-least-m/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SumOfKSubarraysWithLengthAtLeastM(nums []int, k int, m int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,16 +47,16 @@ func main() {
 
 func SumOfKSubarraysWithLengthAtLeastM(nums []int, k int, m int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + nums[i]
 	}
 
 	// dp[i][j] = max sum using exactly j subarrays considering first i elements
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, k+1)
 		for j := 0; j <= k; j++ {

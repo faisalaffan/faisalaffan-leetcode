@@ -1,19 +1,30 @@
 # 3447 — Assign Elements To Groups With Constraints
 
-## Deskripsi
-
-**Soal:** [3447. Assign Elements To Groups With Constraints](https://leetcode.com/problems/assign-elements-to-groups-with-constraints/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func assignElements(groups []int, elements []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(mx log mx + n + m) Space: O(mx)  
 **Kompleksitas Ruang:** O(mx)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func assignElements(groups []int, elements []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,9 +41,9 @@ import (
 
 func assignElements(groups []int, elements []int) []int {
 	mx := slices.Max(groups)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	target := make([]int, mx+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range target {
 		target[i] = -1
 	}

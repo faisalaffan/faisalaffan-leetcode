@@ -1,17 +1,41 @@
 # 1341 — Movie Rating
 
-## Deskripsi
-
-**Soal:** [1341. Movie Rating](https://leetcode.com/problems/movie-rating/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func movieRating(ratings []struct {
+	userID    int
+	movieID   int
+	rating    int
+	createdAt string
+}, users []struct {
+	id   int
+	name string
+}, movies []struct {
+	id    int
+	title string
+}) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n) for counting  
 **Kompleksitas Ruang:** O(n) for maps
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -74,7 +98,7 @@ func movieRating(ratings []struct {
 	title string
 }) string {
 	// Count ratings per user
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userRatings := make(map[int]int)
 	for _, r := range ratings {
 		userRatings[r.userID]++
@@ -91,7 +115,7 @@ func movieRating(ratings []struct {
 	}
 
 	// Average rating in Feb 2020
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	movieScores := make(map[int]struct{ sum, count int })
 	for _, r := range ratings {
 		if r.createdAt >= "2020-02-01" && r.createdAt <= "2020-02-29" {

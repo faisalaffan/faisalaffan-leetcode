@@ -1,19 +1,32 @@
 # 3802 — Number Of Ways To Paint Sheets
 
-## Deskripsi
-
-**Soal:** [3802. Number Of Ways To Paint Sheets](https://leetcode.com/problems/number-of-ways-to-paint-sheets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfWays(n int, limit []int) int
+```
+
+> **💡 Hint:** Combinatorial DP. dp[i][c] = ways to paint i sheets
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Combinatorial DP. dp[i][c] = ways to paint i sheets
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,9 +58,9 @@ func numberOfWays(n int, limit []int) int {
 	m := len(limit)
 
 	// dp[i][j] = ways to paint i sheets using first j colors
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, m+1)
 	}

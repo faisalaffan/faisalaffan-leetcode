@@ -1,17 +1,30 @@
 # 1569 — Number Of Ways To Reorder Array To Get Same Bst
 
-## Deskripsi
-
-**Soal:** [1569. Number Of Ways To Reorder Array To Get Same Bst](https://leetcode.com/problems/number-of-ways-to-reorder-array-to-get-same-bst/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numOfWays(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,9 +62,9 @@ const MOD = 1_000_000_007
 func numOfWays(nums []int) int {
 	n := len(nums)
 	// Precompute nCr using Pascal's triangle
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	comb := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range comb {
 		comb[i] = make([]int, n+1)
 		comb[i][0] = 1
@@ -71,9 +84,9 @@ func countWays(nums []int, comb [][]int) int {
 	}
 
 	root := nums[0]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	left := make([]int, 0)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	right := make([]int, 0)
 
 	for i := 1; i < len(nums); i++ {

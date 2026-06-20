@@ -1,19 +1,30 @@
 # 1702 — Maximum Binary String After Change
 
-## Deskripsi
-
-**Soal:** [1702. Maximum Binary String After Change](https://leetcode.com/problems/maximum-binary-string-after-change/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumBinaryString(binary string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximumBinaryString(binary string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +55,8 @@ func maximumBinaryString(binary string) string {
 	}
 
 	// Result: all 1s except position (firstZero + zeros - 1)
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range result {
 		if i == firstZero+zeros-1 {
 			result[i] = '0'

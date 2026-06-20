@@ -1,19 +1,30 @@
 # 1479 — Sales By Day Of The Week
 
-## Deskripsi
-
-**Soal:** [1479. Sales By Day Of The Week](https://leetcode.com/problems/sales-by-day-of-the-week/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calculateDaySales(sales []Sale) []DaySales
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func calculateDaySales(sales []Sale) []DaySales`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +63,7 @@ func calculateDaySales(sales []Sale) []DaySales {
 		itemID int
 		day    string
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	aggregate := make(map[key]float64)
 
 	daysOrder := []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
@@ -75,7 +86,7 @@ func calculateDaySales(sales []Sale) []DaySales {
 	}
 
 	// Sort: by ItemID ASC, then by day of week order
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dayRank := make(map[string]int)
 	for i, d := range daysOrder {
 		dayRank[d] = i
@@ -93,7 +104,7 @@ func calculateDaySales(sales []Sale) []DaySales {
 
 	_ = dayRank // keep for reference
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(results); i++ {
 		for j := i + 1; j < len(results); j++ {
 			swap := false

@@ -1,19 +1,32 @@
 # 1449 — Form Largest Integer With Digits That Add Up To Target
 
-## Deskripsi
-
-**Soal:** [1449. Form Largest Integer With Digits That Add Up To Target](https://leetcode.com/problems/form-largest-integer-with-digits-that-add-up-to-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestNumber(cost []int, target int) string
+```
+
+> **💡 Hint:** DP to find maximum length for each cost, then reconstruct
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP to find maximum length for each cost, then reconstruct
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,11 +57,11 @@ func main() {
 
 func largestNumber(cost []int, target int) string {
 	const inf = 1 << 30
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	f := make([][]int, 10)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][]int, 10)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range f {
 		f[i] = make([]int, target+1)
 		g[i] = make([]int, target+1)

@@ -1,19 +1,30 @@
 # 1988 — Find Cutoff Score For Each School
 
-## Deskripsi
-
-**Soal:** [1988. Find Cutoff Score For Each School](https://leetcode.com/problems/find-cutoff-score-for-each-school/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findCutoffScore(schools []School, exams []Exam) []SchoolResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(s * e)  
 **Kompleksitas Ruang:** O(s)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findCutoffScore(schools []School, exams []Exam) []SchoolResult`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -74,6 +85,7 @@ func findCutoffScore(schools []School, exams []Exam) []SchoolResult {
 	}
 
 	// Order by school_id.
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].SchoolID < results[j].SchoolID
 	})

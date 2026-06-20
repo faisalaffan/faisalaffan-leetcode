@@ -1,19 +1,32 @@
 # 0827 — Making A Large Island
 
-## Deskripsi
-
-**Soal:** [0827. Making A Large Island](https://leetcode.com/problems/making-a-large-island/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestIsland(grid [][]int) int
+```
+
+> **💡 Hint:** DFS labeling with Union-Find
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS labeling with Union-Find
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -76,7 +89,7 @@ func largestIsland(grid [][]int) int {
 
 	// Label each island with a unique ID (2, 3, 4, ...)
 	id := 2
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	size := make(map[int]int)
 
 	var dfs func(i, j, id int) int
@@ -120,7 +133,7 @@ func largestIsland(grid [][]int) int {
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
 			if grid[i][j] == 0 {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 				seen := make(map[int]bool)
 				total := 1 // the flipped cell
 				for _, d := range dirs {

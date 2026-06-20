@@ -1,19 +1,30 @@
 # 0030 — Substring With Concatenation Of All Words
 
-## Deskripsi
-
-**Soal:** [0030. Substring With Concatenation Of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findSubstring(s string, words []string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findSubstring(s string, words []string) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +52,7 @@ func findSubstring(s string, words []string) []int {
 	}
 
 	// Build frequency map for words
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	wordFreq := make(map[string]int)
 	for _, w := range words {
 		wordFreq[w]++
@@ -53,7 +64,7 @@ func findSubstring(s string, words []string) []int {
 	for i := 0; i < wordLen; i++ {
 		left := i
 		right := i
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		windowFreq := make(map[string]int)
 		count := 0
 

@@ -1,17 +1,30 @@
 # 1983 — Widest Pair Of Indices With Equal Range Sum
 
-## Deskripsi
-
-**Soal:** [1983. Widest Pair Of Indices With Equal Range Sum](https://leetcode.com/problems/widest-pair-of-indices-with-equal-range-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func WidestPairOfIndicesWithEqualRangeSum(nums1 []int, nums2 []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Prefix Sum
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,13 +43,13 @@ func main() {
 
 // Time: O(n), Space: O(n)
 func WidestPairOfIndicesWithEqualRangeSum(nums1 []int, nums2 []int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	first := make(map[int]int)
 	first[0] = -1
 	maxWidth := 0
 	prefix1, prefix2 := 0, 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums1); i++ {
 		prefix1 += nums1[i]
 		prefix2 += nums2[i]

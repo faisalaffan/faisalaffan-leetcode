@@ -1,17 +1,30 @@
 # 1562 — Find Latest Group Of Size M
 
-## Deskripsi
-
-**Soal:** [1562. Find Latest Group Of Size M](https://leetcode.com/problems/find-latest-group-of-size-m/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindLatestStep(arr []int, m int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Union-Find (DSU)
 
 **Kompleksitas Waktu:** O(N), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +49,9 @@ func FindLatestStep(arr []int, m int) int {
 		return n
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	length := make([]int, n+2) // length of group at position i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([]int, n+2)  // count of groups of length i
 	result := -1
 

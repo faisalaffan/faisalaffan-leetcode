@@ -1,19 +1,30 @@
 # 2115 — Find All Possible Recipes From Given Supplies
 
-## Deskripsi
-
-**Soal:** [2115. Find All Possible Recipes From Given Supplies](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findAllRecipes(recipes []string, ingredients [][]string, supplies []string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n + m + s)  
 **Kompleksitas Ruang:** O(n + m + s)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findAllRecipes(recipes []string, ingredients [][]string, supplies []string) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,23 +37,23 @@ package main
 import "fmt"
 
 func findAllRecipes(recipes []string, ingredients [][]string, supplies []string) []string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	supplySet := make(map[string]bool)
 	for _, s := range supplies {
 		supplySet[s] = true
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	recipeIdx := make(map[string]int)
 	for i, r := range recipes {
 		recipeIdx[r] = i
 	}
 
 	// indegree for recipes (how many ingredients still needed)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indegree := make([]int, len(recipes))
 	// For each recipe ingredient, which recipes need it
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	graph := make(map[string][]int)
 	for i, ing := range ingredients {
 		for _, ig := range ing {

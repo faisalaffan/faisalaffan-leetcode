@@ -1,19 +1,30 @@
 # 3419 — Minimize The Maximum Edge Weight Of Graph
 
-## Deskripsi
-
-**Soal:** [3419. Minimize The Maximum Edge Weight Of Graph](https://leetcode.com/problems/minimize-the-maximum-edge-weight-of-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minMaxWeight(n int, edges [][]int, _ int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O((n+m) log n) Space: O(n+m)  
 **Kompleksitas Ruang:** O(n+m)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minMaxWeight(n int, edges [][]int, _ int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,22 +56,23 @@ func minMaxWeight(n int, edges [][]int, _ int) int {
 		return -1
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][]edge, n)
 	for _, e := range edges {
 		x, y, w := e[0], e[1], e[2]
 		g[y] = append(g[y], edge{x, w}) // reverse graph
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dis := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dis {
 		dis[i] = math.MaxInt
 	}
 	dis[0] = 0
 	h := &hp{{}}
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		p := heap.Pop(h).(pair)
 		x := p.x
 		d := p.dis
@@ -71,6 +83,7 @@ func minMaxWeight(n int, edges [][]int, _ int) int {
 			nd := max(d, e.w)
 			if nd < dis[e.to] {
 				dis[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(h, pair{nd, e.to})
 			}
 		}

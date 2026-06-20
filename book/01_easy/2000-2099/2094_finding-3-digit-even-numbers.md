@@ -1,17 +1,30 @@
 # 2094 — Finding 3 Digit Even Numbers
 
-## Deskripsi
-
-**Soal:** [2094. Finding 3 Digit Even Numbers](https://leetcode.com/problems/finding-3-digit-even-numbers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindingThreeDigitEvenNumbers(digits []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n^3), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func main() {
 
 // Time: O(n^3), Space: O(1)
 func FindingThreeDigitEvenNumbers(digits []int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	set := make(map[int]bool)
 	n := len(digits)
 
@@ -57,11 +70,12 @@ func FindingThreeDigitEvenNumbers(digits []int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0, len(set))
 	for v := range set {
 		result = append(result, v)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

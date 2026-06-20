@@ -1,17 +1,30 @@
 # 1240 — Tiling A Rectangle With The Fewest Squares
 
-## Deskripsi
-
-**Soal:** [1240. Tiling A Rectangle With The Fewest Squares](https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func tilingRectangle(n int, m int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +52,7 @@ func tilingRectangle(n int, m int) int {
 	}
 
 	ans := n * m // worst case: all 1x1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	height := make([]int, m)
 
 	var dfs func(used int)

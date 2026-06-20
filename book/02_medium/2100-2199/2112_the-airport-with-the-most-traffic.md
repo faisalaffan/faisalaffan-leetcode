@@ -1,19 +1,30 @@
 # 2112 — The Airport With The Most Traffic
 
-## Deskripsi
-
-**Soal:** [2112. The Airport With The Most Traffic](https://leetcode.com/problems/the-airport-with-the-most-traffic/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func airportWithMostTraffic(flights [][]string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func airportWithMostTraffic(flights [][]string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ package main
 import "fmt"
 
 func airportWithMostTraffic(flights [][]string) string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	traffic := make(map[string]int)
 	for _, f := range flights {
 		departure, arrival := f[0], f[1]

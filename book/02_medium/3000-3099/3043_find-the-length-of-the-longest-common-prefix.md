@@ -1,17 +1,30 @@
 # 3043 — Find The Length Of The Longest Common Prefix
 
-## Deskripsi
-
-**Soal:** [3043. Find The Length Of The Longest Common Prefix](https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestCommonPrefix(arr1 []int, arr2 []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Prefix Sum
 
 **Kompleksitas Waktu:** O(n*logM + m*logM)  
 **Kompleksitas Ruang:** O(n*logM)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

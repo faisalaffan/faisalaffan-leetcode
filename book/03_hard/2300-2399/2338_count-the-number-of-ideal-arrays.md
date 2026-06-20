@@ -1,19 +1,30 @@
 # 2338 — Count The Number Of Ideal Arrays
 
-## Deskripsi
-
-**Soal:** [2338. Count The Number Of Ideal Arrays](https://leetcode.com/problems/count-the-number-of-ideal-arrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func idealArrays(n int, maxValue int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func idealArrays(n int, maxValue int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,9 +68,9 @@ func idealArrays(n int, maxValue int) int {
 	if maxK > n {
 		maxK = n
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	C := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range C {
 		C[i] = make([]int, maxK+1)
 		C[i][0] = 1
@@ -69,18 +80,18 @@ func idealArrays(n int, maxValue int) int {
 	}
 
 	// dp[k][v] — we only need two layers at a time.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, maxValue+1)
 	for v := 1; v <= maxValue; v++ {
 		dp[v] = 1 // k = 1
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	f := make([]int, maxK+1)
 	f[1] = maxValue
 
 	for k := 2; k <= maxK; k++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, maxValue+1)
 		total := 0
 		// For each d, add dp[d] to its multiples.

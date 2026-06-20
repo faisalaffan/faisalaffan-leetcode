@@ -1,17 +1,30 @@
 # 0629 — K Inverse Pairs Array
 
-## Deskripsi
-
-**Soal:** [0629. K Inverse Pairs Array](https://leetcode.com/problems/k-inverse-pairs-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kInversePairs(n int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,13 +71,13 @@ func main() {
 
 func kInversePairs(n int, k int) int {
 	// dp[j] = number of arrays of current size with exactly j inverse pairs
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, k+1)
 	dp[0] = 1
 
 	for i := 1; i <= n; i++ {
 		// prefix sum helper
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		next := make([]int, k+1)
 		prefix := 0
 		for j := 0; j <= k; j++ {

@@ -1,19 +1,30 @@
 # 3112 — Minimum Time To Visit Disappearing Nodes
 
-## Deskripsi
-
-**Soal:** [3112. Minimum Time To Visit Disappearing Nodes](https://leetcode.com/problems/minimum-time-to-visit-disappearing-nodes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTime(n int, edges [][]int, disappear []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O((n + m) log n)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumTime(n int, edges [][]int, disappear []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,7 +69,7 @@ func (pq *PQ) Pop() any {
 }
 
 func minimumTime(n int, edges [][]int, disappear []int) []int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]Edge, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -66,9 +77,9 @@ func minimumTime(n int, edges [][]int, disappear []int) []int {
 		graph[v] = append(graph[v], Edge{u, w})
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = math.MaxInt32
 	}
@@ -76,9 +87,11 @@ func minimumTime(n int, edges [][]int, disappear []int) []int {
 
 	pq := &PQ{}
 	heap.Init(pq)
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &Item{node: 0, dist: 0})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(*Item)
 		if cur.dist > dist[cur.node] {
 			continue
@@ -88,14 +101,15 @@ func minimumTime(n int, edges [][]int, disappear []int) []int {
 			nd := cur.dist + e.w
 			if nd < disappear[e.to] && nd < dist[e.to] {
 				dist[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &Item{node: e.to, dist: nd})
 			}
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		if dist[i] == math.MaxInt32 {
 			ans[i] = -1

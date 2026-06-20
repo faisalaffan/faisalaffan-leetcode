@@ -1,19 +1,30 @@
 # 3716 — Find Churn Risk Customers
 
-## Deskripsi
-
-**Soal:** [3716. Find Churn Risk Customers](https://leetcode.com/problems/find-churn-risk-customers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findChurnRiskCustomers(events []subEvent) []churnResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findChurnRiskCustomers(events []subEvent) []churnResult`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,7 +65,7 @@ func findChurnRiskCustomers(events []subEvent) []churnResult {
 		downgradeCount int
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userMap := make(map[int]*userData)
 	for _, e := range events {
 		if _, ok := userMap[e.userID]; !ok {
@@ -79,6 +90,7 @@ func findChurnRiskCustomers(events []subEvent) []churnResult {
 	var results []churnResult
 	for uid, u := range userMap {
 		// Sort events by date
+  // Custom sort dengan comparator
 		sort.Slice(u.events, func(i, j int) bool {
 			return u.events[i].eventDate < u.events[j].eventDate
 		})
@@ -107,6 +119,7 @@ func findChurnRiskCustomers(events []subEvent) []churnResult {
 		})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].daysAsSubscriber != results[j].daysAsSubscriber {
 			return results[i].daysAsSubscriber > results[j].daysAsSubscriber

@@ -1,19 +1,30 @@
 # 2198 — Number Of Single Divisor Triplets
 
-## Deskripsi
-
-**Soal:** [2198. Number Of Single Divisor Triplets](https://leetcode.com/problems/number-of-single-divisor-triplets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func singleDivisorTriplet(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + m^3)  
 **Kompleksitas Ruang:** O(m) where m = max value
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func singleDivisorTriplet(nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ package main
 import "fmt"
 
 func singleDivisorTriplet(nums []int) int64 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([]int, 101)
 	for _, v := range nums {
 		count[v]++

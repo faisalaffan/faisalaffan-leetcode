@@ -1,17 +1,30 @@
 # 3380 — Maximum Area Rectangle With Point Constraints I
 
-## Deskripsi
-
-**Soal:** [3380. Maximum Area Rectangle With Point Constraints I](https://leetcode.com/problems/maximum-area-rectangle-with-point-constraints-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxRectangleArea(points [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n^4) Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func main() {
 
 func maxRectangleArea(points [][]int) int {
 	n := len(points)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sp := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		sp[i] = [2]int{points[i][0], points[i][1]}
@@ -56,9 +69,9 @@ func maxRectangleArea(points [][]int) int {
 }
 
 func isRect3380(idx []int, pts [][2]int) (int, bool) {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	xSet := make(map[int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	ySet := make(map[int]bool)
 	for _, i := range idx {
 		xSet[pts[i][0]] = true
@@ -75,12 +88,14 @@ func isRect3380(idx []int, pts [][2]int) (int, bool) {
 	for y := range ySet {
 		ys = append(ys, y)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(xs)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(ys)
 	x1, x2 := xs[0], xs[1]
 	y1, y2 := ys[0], ys[1]
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cornerSet := make(map[[2]int]bool)
 	for _, i := range idx {
 		cornerSet[pts[i]] = true

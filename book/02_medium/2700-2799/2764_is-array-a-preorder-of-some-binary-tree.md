@@ -1,19 +1,30 @@
 # 2764 — Is Array A Preorder Of Some Binary Tree
 
-## Deskripsi
-
-**Soal:** [2764. Is Array A Preorder Of Some Binary Tree](https://leetcode.com/problems/is-array-a-preorder-of-some-binary-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func IsArrayAPreorderOfSomeBinaryTree(nodes [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func IsArrayAPreorderOfSomeBinaryTree(nodes [][]int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ type Node struct {
 
 func IsArrayAPreorderOfSomeBinaryTree(nodes [][]int) bool {
 	// nodes[i] = [id, parentId]
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	children := make(map[int][]int)
 	for _, node := range nodes {
 		id, parent := node[0], node[1]

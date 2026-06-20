@@ -1,19 +1,32 @@
 # 3661 — Maximum Walls Destroyed By Robots
 
-## Deskripsi
-
-**Soal:** [3661. Maximum Walls Destroyed By Robots](https://leetcode.com/problems/maximum-walls-destroyed-by-robots/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxWalls(robots []int, distance []int, walls []int) int
+```
+
+> **💡 Hint:** Sort robots and walls. For each robot, count walls within
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Sort robots and walls. For each robot, count walls within
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,6 +56,7 @@ func main() {
 }
 
 func maxWalls(robots []int, distance []int, walls []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(walls)
 	result := 0
 

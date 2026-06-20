@@ -1,19 +1,30 @@
 # 1772 — Sort Features By Popularity
 
-## Deskripsi
-
-**Soal:** [1772. Sort Features By Popularity](https://leetcode.com/problems/sort-features-by-popularity/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sortFeatures(features []string, responses []string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(f * r), Space: O(f)  
 **Kompleksitas Ruang:** O(f)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func sortFeatures(features []string, responses []string) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,16 +40,16 @@ import (
 )
 
 func sortFeatures(features []string, responses []string) []string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	featureRank := make(map[string]int)
 	for i, f := range features {
 		featureRank[f] = i
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[string]int)
 	for _, resp := range responses {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		seen := make(map[string]bool)
 		word := ""
 		for _, ch := range resp + " " {
@@ -54,7 +65,6 @@ func sortFeatures(features []string, responses []string) []string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	sorted := make([]string, len(features))
 	copy(sorted, features)
 	sort.SliceStable(sorted, func(i, j int) bool {

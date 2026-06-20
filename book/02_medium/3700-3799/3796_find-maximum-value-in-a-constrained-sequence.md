@@ -1,21 +1,32 @@
 # 3796 — Find Maximum Value In A Constrained Sequence
 
-## Deskripsi
-
-**Soal:** [3796. Find Maximum Value In A Constrained Sequence](https://leetcode.com/problems/find-maximum-value-in-a-constrained-sequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindMaximumValueInAConstrainedSequence(n int, restrictions [][]int, diff []int) int
+```
+
+> **💡 Hint:** Two-pass greedy constraint propagation. Forward pass applies
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func FindMaximumValueInAConstrainedSequence(n int, restrictions [][]int, diff []int) int`
-
-> **Ide Kunci:** Two-pass greedy constraint propagation. Forward pass applies
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +42,9 @@ import "fmt"
 
 func FindMaximumValueInAConstrainedSequence(n int, restrictions [][]int, diff []int) int {
 	const INF = 1 << 60
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	a := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range a {
 		a[i] = INF
 	}

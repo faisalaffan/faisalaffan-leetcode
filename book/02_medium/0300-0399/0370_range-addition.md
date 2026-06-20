@@ -1,19 +1,30 @@
 # 0370 — Range Addition
 
-## Deskripsi
-
-**Soal:** [0370. Range Addition](https://leetcode.com/problems/range-addition/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getModifiedArray(length int, updates [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + k)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getModifiedArray(length int, updates [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ package main
 import "fmt"
 
 func getModifiedArray(length int, updates [][]int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	arr := make([]int, length+1)
 
 	for _, upd := range updates {
@@ -36,7 +47,7 @@ func getModifiedArray(length int, updates [][]int) []int {
 	}
 
 	// Prefix sum
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, length)
 	sum := 0
 	for i := 0; i < length; i++ {

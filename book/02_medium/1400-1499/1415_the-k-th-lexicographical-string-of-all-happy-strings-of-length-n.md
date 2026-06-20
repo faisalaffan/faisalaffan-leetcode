@@ -1,17 +1,30 @@
 # 1415 — The K Th Lexicographical String Of All Happy Strings Of Length N
 
-## Deskripsi
-
-**Soal:** [1415. The K Th Lexicographical String Of All Happy Strings Of Length N](https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getHappyString(n int, k int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n) where n = length of string  
 **Kompleksitas Ruang:** O(n) for recursion
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,6 @@ func getHappyString(n int, k int) string {
 		return ""
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, n)
 	choices := []byte{'a', 'b', 'c'}
 

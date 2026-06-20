@@ -1,19 +1,32 @@
 # 3534 — Path Existence Queries In A Graph Ii
 
-## Deskripsi
-
-**Soal:** [3534. Path Existence Queries In A Graph Ii](https://leetcode.com/problems/path-existence-queries-in-a-graph-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int
+```
+
+> **💡 Hint:** Process queries offline. Sort edges by weight, sort queries by
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Process queries offline. Sort edges by weight, sort queries by
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,6 @@ func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int
 	type edge struct {
 		u, v, w int
 	}
-  // Membuat slice untuk menyimpan hasil
 	edges := make([]edge, 0)
 	for i := 0; i < n-1; i++ {
 		diff := nums[i+1] - nums[i]
@@ -58,6 +70,7 @@ func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int
 	}
 
 	// Sort edges by weight
+  // Custom sort dengan comparator
 	sort.Slice(edges, func(i, j int) bool {
 		return edges[i].w < edges[j].w
 	})
@@ -67,19 +80,18 @@ func pathExistenceQueries(n int, nums []int, maxDiff int, queries [][]int) []int
 		idx int
 		u, v int
 	}
-  // Membuat slice untuk menyimpan hasil
 	qList := make([]query, len(queries))
 	for i, q := range queries {
 		qList[i] = query{i, q[0], q[1]}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 
 	// Union-Find
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 	}

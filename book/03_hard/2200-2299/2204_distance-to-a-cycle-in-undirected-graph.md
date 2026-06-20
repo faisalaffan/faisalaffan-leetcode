@@ -1,17 +1,30 @@
 # 2204 — Distance To A Cycle In Undirected Graph
 
-## Deskripsi
-
-**Soal:** [2204. Distance To A Cycle In Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func distanceToCycle(n int, edges [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,9 +61,9 @@ func main() {
 }
 
 func distanceToCycle(n int, edges [][]int) []int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	deg := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -61,7 +74,7 @@ func distanceToCycle(n int, edges [][]int) []int {
 	}
 
 	// Remove leaves: set deg = 0 to mark removed.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	q := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		if deg[i] == 1 {
@@ -85,11 +98,10 @@ func distanceToCycle(n int, edges [][]int) []int {
 	}
 
 	// BFS from all cycle nodes (deg > 0).
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([]int, 0, n)
-  // Membuat slice untuk menyimpan hasil
 	inQueue := make([]bool, n)
 	for i := 0; i < n; i++ {
 		if deg[i] > 0 {

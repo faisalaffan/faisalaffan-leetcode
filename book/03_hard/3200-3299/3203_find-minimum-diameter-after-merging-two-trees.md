@@ -1,21 +1,32 @@
 # 3203 — Find Minimum Diameter After Merging Two Trees
 
-## Deskripsi
-
-**Soal:** [3203. Find Minimum Diameter After Merging Two Trees](https://leetcode.com/problems/find-minimum-diameter-after-merging-two-trees/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumDiameterAfterMergingTwoTrees(edges1, edges2 [][]int) int
+```
+
+> **💡 Hint:** compute diameter via double-BFS (or DFS) for each tree.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumDiameterAfterMergingTwoTrees(edges1, edges2 [][]int) int`
-
-> **Ide Kunci:** compute diameter via double-BFS (or DFS) for each tree.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,7 +64,7 @@ func treeDiameter(edges [][]int) int {
 	if n <= 1 {
 		return 0
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -70,9 +81,9 @@ func treeDiameter(edges [][]int) int {
 
 func bfs(adj [][]int, start int) (farthest, maxDist int) {
 	n := len(adj)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = -1
 	}

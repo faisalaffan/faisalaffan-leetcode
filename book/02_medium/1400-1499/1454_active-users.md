@@ -1,17 +1,36 @@
 # 1454 — Active Users
 
-## Deskripsi
-
-**Soal:** [1454. Active Users](https://leetcode.com/problems/active-users/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func activeUsers(accounts []struct {
+	id   int
+	name string
+}, logins []struct {
+	userID    int
+	loginDate string
+}) []activeResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n) for sorting logins  
 **Kompleksitas Ruang:** O(n) for maps
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -67,22 +86,21 @@ func activeUsers(accounts []struct {
 	loginDate string
 }) []activeResult {
 	// Group logins by user
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userLogins := make(map[int][]string)
 	for _, l := range logins {
 		userLogins[l.userID] = append(userLogins[l.userID], l.loginDate)
 	}
 
 	// Sort logins for each user and check for 5+ consecutive days
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	activeIDs := make(map[int]bool)
 	for userID, dates := range userLogins {
 		sort.Strings(dates)
 
 		// Remove duplicates
-  // Membuat slice untuk menyimpan hasil
 		unique := make([]string, 0, len(dates))
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		seen := make(map[string]bool)
 		for _, d := range dates {
 			if !seen[d] {

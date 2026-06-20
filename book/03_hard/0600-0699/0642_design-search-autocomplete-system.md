@@ -1,19 +1,30 @@
 # 0642 — Design Search Autocomplete System
 
-## Deskripsi
-
-**Soal:** [0642. Design Search Autocomplete System](https://leetcode.com/problems/design-search-autocomplete-system/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func charIdx(c byte) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie, Prefix Sum
 
 **Kompleksitas Waktu:** O(N * L) where N=#sentences, L=avg length  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func charIdx(c byte) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -72,7 +83,7 @@ func NewAutocompleteSystem(sentences []string, times []int) *AutocompleteSystem 
 // insert adds a sentence into the trie with the given frequency.
 func (as *AutocompleteSystem) insert(sentence string, times int) {
 	node := as.root
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(sentence); i++ {
 		idx := charIdx(sentence[i])
 		if node.children[idx] == nil {
@@ -140,6 +151,7 @@ func (as *AutocompleteSystem) Input(c byte) []string {
 	as.traverseAndCollect(as.currNode, as.prefix.String(), &candidates)
 
 	// Sort by frequency desc, then lexicographically asc.
+  // Custom sort dengan comparator
 	sort.Slice(candidates, func(i, j int) bool {
 		if candidates[i].times != candidates[j].times {
 			return candidates[i].times > candidates[j].times
@@ -148,9 +160,8 @@ func (as *AutocompleteSystem) Input(c byte) []string {
 	})
 
 	// Return top 3.
-  // Membuat slice untuk menyimpan hasil
 	top := make([]string, 0, 3)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(candidates) && i < 3; i++ {
 		top = append(top, candidates[i].sentence)
 	}

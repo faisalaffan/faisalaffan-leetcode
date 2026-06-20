@@ -1,17 +1,30 @@
 # 1361 — Validate Binary Tree Nodes
 
-## Deskripsi
-
-**Soal:** [1361. Validate Binary Tree Nodes](https://leetcode.com/problems/validate-binary-tree-nodes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, DFS
 
 **Kompleksitas Waktu:** O(n) where n = number of nodes  
 **Kompleksitas Ruang:** O(n) for in-degree and visited arrays
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +53,7 @@ func main() {
 // Space: O(n) for in-degree and visited arrays
 func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool {
 	// Track in-degree of each node (how many parents)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	inDegree := make([]int, n)
 	for i := 0; i < n; i++ {
 		if leftChild[i] != -1 {
@@ -72,7 +85,6 @@ func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool {
 	}
 
 	// BFS/DFS from root to verify all nodes reachable
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	var dfs func(int)
 	dfs = func(node int) {

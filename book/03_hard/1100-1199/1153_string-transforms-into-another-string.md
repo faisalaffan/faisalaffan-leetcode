@@ -1,17 +1,30 @@
 # 1153 — String Transforms Into Another String
 
-## Deskripsi
-
-**Soal:** [1153. String Transforms Into Another String](https://leetcode.com/problems/string-transforms-into-another-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canTransform(str1 string, str2 string) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -71,12 +84,12 @@ func canTransform(str1 string, str2 string) bool {
 		return false
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	mapping := make(map[byte]byte) // str1[i] -> str2[i]
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	usedInStr2 := make(map[byte]bool)
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(str1); i++ {
 		c1 := str1[i]
 		c2 := str2[i]
@@ -96,7 +109,7 @@ func canTransform(str1 string, str2 string) bool {
 	// str2 (mapping is identity).
 	if len(usedInStr2) == 26 {
 		// Check if str1 == str2
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(str1); i++ {
 			if str1[i] != str2[i] {
 				return false

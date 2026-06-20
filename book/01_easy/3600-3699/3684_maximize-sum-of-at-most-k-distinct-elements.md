@@ -1,17 +1,30 @@
 # 3684 — Maximize Sum Of At Most K Distinct Elements
 
-## Deskripsi
-
-**Soal:** [3684. Maximize Sum Of At Most K Distinct Elements](https://leetcode.com/problems/maximize-sum-of-at-most-k-distinct-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximizeSumOfAtMostKDistinctElements(nums []int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +47,9 @@ func main() {
 // Time: O(n log n)
 // Space: O(n)
 func MaximizeSumOfAtMostKDistinctElements(nums []int, k int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]bool)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	unique := make([]int, 0)
 	for _, v := range nums {
 		if !seen[v] {
@@ -45,6 +58,7 @@ func MaximizeSumOfAtMostKDistinctElements(nums []int, k int) []int {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(unique, func(i, j int) bool {
 		return unique[i] > unique[j]
 	})

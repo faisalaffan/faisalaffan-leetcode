@@ -1,19 +1,32 @@
 # 3569 — Maximize Count Of Distinct Primes After Split
 
-## Deskripsi
-
-**Soal:** [3569. Maximize Count Of Distinct Primes After Split](https://leetcode.com/problems/maximize-count-of-distinct-primes-after-split/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumCount(nums []int, queries [][]int) []int
+```
+
+> **💡 Hint:** Precompute prime factors for each possible value, use a segment tree
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Prefix Sum, Segment Tree
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Precompute prime factors for each possible value, use a segment tree
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 
 func maximumCount(nums []int, queries [][]int) []int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return []int{}
 	}
@@ -64,14 +77,14 @@ func maximumCount(nums []int, queries [][]int) []int {
 	spf := sieve(maxVal)
 
 	// Precompute distinct prime factors for each number
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	primeFactors := make([][]int, maxVal+1)
 	for i := 2; i <= maxVal; i++ {
 		primeFactors[i] = getDistinctPrimes(i, spf)
 	}
 
 	// Current values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cur := make([]int, n)
 	copy(cur, nums)
 
@@ -82,7 +95,7 @@ func maximumCount(nums []int, queries [][]int) []int {
 
 	// Since n is small enough, we can just recompute per query
 	// by scanning all splits
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 
 	for qi, q := range queries {
@@ -91,14 +104,14 @@ func maximumCount(nums []int, queries [][]int) []int {
 
 		best := 0
 		// Prefix distinct prime sets
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		prefixSet := make(map[int]bool)
 		for k := 0; k < n-1; k++ {
 			for _, p := range primeFactors[cur[k]] {
 				prefixSet[p] = true
 			}
 			// Suffix distinct prime set
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 			suffixSet := make(map[int]bool)
 			for r := k + 1; r < n; r++ {
 				for _, p := range primeFactors[cur[r]] {
@@ -117,7 +130,7 @@ func maximumCount(nums []int, queries [][]int) []int {
 }
 
 func sieve(n int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	spf := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		if spf[i] == 0 {

@@ -1,17 +1,30 @@
 # 0484 — Find Permutation
 
-## Deskripsi
-
-**Soal:** [0484. Find Permutation](https://leetcode.com/problems/find-permutation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindPermutation(s string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,14 +44,14 @@ func main() {
 
 func FindPermutation(s string) []int {
 	n := len(s) + 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 	for i := 0; i < n; i++ {
 		result[i] = i + 1
 	}
 
 	// Reverse contiguous segments for each 'D'
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		if s[i] == 'D' {
 			j := i
@@ -47,7 +60,7 @@ func FindPermutation(s string) []int {
 			}
 			// Reverse segment from i to j
 			left, right := i, j
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 			for left < right {
 				result[left], result[right] = result[right], result[left]
 				left++

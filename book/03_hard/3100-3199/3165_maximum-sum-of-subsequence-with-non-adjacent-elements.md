@@ -1,21 +1,32 @@
 # 3165 — Maximum Sum Of Subsequence With Non Adjacent Elements
 
-## Deskripsi
-
-**Soal:** [3165. Maximum Sum Of Subsequence With Non Adjacent Elements](https://leetcode.com/problems/maximum-sum-of-subsequence-with-non-adjacent-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func merge(a, b Node) Node
+```
+
+> **💡 Hint:** segment tree with 4-state nodes (s00, s01, s10, s11) for O(log n)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Segment Tree
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Segment Tree** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func max(a, b int) int`
-
-> **Ide Kunci:** segment tree with 4-state nodes (s00, s01, s10, s11) for O(log n)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -62,7 +73,6 @@ type SegTree struct {
 
 func NewSegTree(arr []int) *SegTree {
 	n := len(arr)
-  // Membuat slice untuk menyimpan hasil
 	tree := make([]Node, 4*n)
 	st := &SegTree{tree: tree, n: n}
 	st.build(arr, 1, 0, n-1)
@@ -99,12 +109,12 @@ func (st *SegTree) Query() int {
 }
 
 func maximumSumSubsequence(nums []int, queries [][]int) []int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return make([]int, len(queries))
 	}
 	st := NewSegTree(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for i, q := range queries {
 		pos, val := q[0], q[1]

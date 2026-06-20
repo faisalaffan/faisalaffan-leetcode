@@ -1,19 +1,30 @@
 # 2321 — Maximum Score Of Spliced Array
 
-## Deskripsi
-
-**Soal:** [2321. Maximum Score Of Spliced Array](https://leetcode.com/problems/maximum-score-of-spliced-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumsSplicedArray(nums1, nums2 []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximumsSplicedArray(nums1, nums2 []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,7 @@ import (
 func maximumsSplicedArray(nums1, nums2 []int) int {
 	n := len(nums1)
 	sum1, sum2 := 0, 0
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	diff := make([]int, n)
 	for i := 0; i < n; i++ {
 		sum1 += nums1[i]

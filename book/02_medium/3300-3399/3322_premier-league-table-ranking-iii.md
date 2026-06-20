@@ -1,17 +1,30 @@
 # 3322 — Premier League Table Ranking Iii
 
-## Deskripsi
-
-**Soal:** [3322. Premier League Table Ranking Iii](https://leetcode.com/problems/premier-league-table-ranking-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func premierLeagueRanking(stats []SeasonStats) []TeamRank
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(t log t) Space: O(t)  
 **Kompleksitas Ruang:** O(t)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -72,7 +85,7 @@ func premierLeagueRanking(stats []SeasonStats) []TeamRank {
 	}
 
 	// Group by season and rank
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seasonTeams := make(map[int][]teamData)
 	for _, d := range data {
 		seasonTeams[d.SeasonID] = append(seasonTeams[d.SeasonID], d)
@@ -80,6 +93,7 @@ func premierLeagueRanking(stats []SeasonStats) []TeamRank {
 
 	var result []TeamRank
 	for _, teams := range seasonTeams {
+  // Custom sort dengan comparator
 		sort.Slice(teams, func(i, j int) bool {
 			if teams[i].Points != teams[j].Points {
 				return teams[i].Points > teams[j].Points
@@ -97,6 +111,7 @@ func premierLeagueRanking(stats []SeasonStats) []TeamRank {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].SeasonID != result[j].SeasonID {
 			return result[i].SeasonID < result[j].SeasonID

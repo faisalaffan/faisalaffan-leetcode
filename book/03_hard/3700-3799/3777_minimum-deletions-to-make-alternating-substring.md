@@ -1,19 +1,32 @@
 # 3777 — Minimum Deletions To Make Alternating Substring
 
-## Deskripsi
-
-**Soal:** [3777. Minimum Deletions To Make Alternating Substring](https://leetcode.com/problems/minimum-deletions-to-make-alternating-substring/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDeletions(s string, queries [][]int) []int64
+```
+
+> **💡 Hint:** For each query, compute longest alternating subsequence
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each query, compute longest alternating subsequence
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 
 func minDeletions(s string, queries [][]int) []int64 {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, len(queries))
 
 	for qi, q := range queries {
@@ -60,7 +73,7 @@ func minDeletions(s string, queries [][]int) []int64 {
 		}
 
 		// DP for longest alternating subsequence
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dp := make([]int, 26)
 		for i := l; i <= r; i++ {
 			c := int(s[i] - 'a')

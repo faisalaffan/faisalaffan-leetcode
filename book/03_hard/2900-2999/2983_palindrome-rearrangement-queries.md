@@ -1,19 +1,30 @@
 # 2983 — Palindrome Rearrangement Queries
 
-## Deskripsi
-
-**Soal:** [2983. Palindrome Rearrangement Queries](https://leetcode.com/problems/palindrome-rearrangement-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canMakePalindromeQueries(s string, queries [][]int) []bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canMakePalindromeQueries(s string, queries [][]int) []bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +55,9 @@ func canMakePalindromeQueries(s string, queries [][]int) []bool {
 	b := reverseStr(s[mid:])
 
 	// Prefix sums for character counts
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefA := make([][26]int, mid+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefB := make([][26]int, mid+1)
 	for i := 0; i < mid; i++ {
 		prefA[i+1] = prefA[i]
@@ -56,7 +67,7 @@ func canMakePalindromeQueries(s string, queries [][]int) []bool {
 	}
 
 	// diff[i] = number of mismatched positions in prefix [0, i-1]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	diff := make([]int, mid+1)
 	for i := 0; i < mid; i++ {
 		diff[i+1] = diff[i]
@@ -77,7 +88,6 @@ func canMakePalindromeQueries(s string, queries [][]int) []bool {
 		return res
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, len(queries))
 	for qi, q := range queries {
 		qa, qb, qc, qd := q[0], q[1], q[2], q[3]

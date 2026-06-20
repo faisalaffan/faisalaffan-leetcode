@@ -1,21 +1,32 @@
 # 2025 — Maximum Number Of Ways To Partition An Array
 
-## Deskripsi
-
-**Soal:** [2025. Maximum Number Of Ways To Partition An Array](https://leetcode.com/problems/maximum-number-of-ways-to-partition-an-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxNumberOfWaysToPartition(nums []int, k int) int
+```
+
+> **💡 Hint:** Prefix sum + hash maps.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxNumberOfWaysToPartition(nums []int, k int) int`
-
-> **Ide Kunci:** Prefix sum + hash maps.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,7 @@ func maxNumberOfWaysToPartition(nums []int, k int) int {
 	}
 
 	// Compute prefix sums
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n)
 	prefix[0] = nums[0]
 	for i := 1; i < n; i++ {
@@ -62,9 +73,9 @@ func maxNumberOfWaysToPartition(nums []int, k int) int {
 	// With changes: try changing each nums[i] to k
 	// leftFreq: prefix values for partition positions j < i
 	// rightFreq: prefix values for partition positions j >= i
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	leftFreq := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rightFreq := make(map[int]int)
 	for j := 0; j < n-1; j++ {
 		rightFreq[prefix[j]]++

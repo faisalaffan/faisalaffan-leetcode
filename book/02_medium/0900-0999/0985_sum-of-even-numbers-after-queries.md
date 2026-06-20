@@ -1,19 +1,32 @@
 # 0985 — Sum Of Even Numbers After Queries
 
-## Deskripsi
-
-**Soal:** [0985. Sum Of Even Numbers After Queries](https://leetcode.com/problems/sum-of-even-numbers-after-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumEvenAfterQueries(nums []int, queries [][]int) []int
+```
+
+> **💡 Hint:** Maintain running sum of even numbers, update incrementally
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + q) where n = len(nums), q = len(queries)  
 **Kompleksitas Ruang:** O(1) excluding output
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Maintain running sum of even numbers, update incrementally
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +47,7 @@ func main() {
 }
 
 func sumEvenAfterQueries(nums []int, queries [][]int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 	sum := 0
 

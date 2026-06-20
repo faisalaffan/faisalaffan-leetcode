@@ -1,19 +1,30 @@
 # 3155 — Maximum Number Of Upgradable Servers
 
-## Deskripsi
-
-**Soal:** [3155. Maximum Number Of Upgradable Servers](https://leetcode.com/problems/maximum-number-of-upgradable-servers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxUpgrades(count []int, upgrade []int, sell []int, money []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxUpgrades(count []int, upgrade []int, sell []int, money []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func maxUpgrades(count []int, upgrade []int, sell []int, money []int) []int {
 	n := len(count)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
 
 	for i := 0; i < n; i++ {

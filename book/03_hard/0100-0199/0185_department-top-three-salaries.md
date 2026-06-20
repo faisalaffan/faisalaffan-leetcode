@@ -1,19 +1,30 @@
 # 0185 — Department Top Three Salaries
 
-## Deskripsi
-
-**Soal:** [0185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func departmentTopThreeSalaries(employees []Employee, departments []Department) []Result
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(E log E + D log D) for sorting, Space: O(E + D)  
 **Kompleksitas Ruang:** O(E + D)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func departmentTopThreeSalaries(employees []Employee, departments []Department) []Result`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,14 +66,14 @@ type Result struct {
 // Time: O(E log E + D log D) for sorting, Space: O(E + D)
 func departmentTopThreeSalaries(employees []Employee, departments []Department) []Result {
 	// Build department name lookup.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	deptName := make(map[int]string)
 	for _, d := range departments {
 		deptName[d.ID] = d.Name
 	}
 
 	// Group employees by department.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byDept := make(map[int][]Employee)
 	for _, e := range employees {
 		byDept[e.DepartmentID] = append(byDept[e.DepartmentID], e)
@@ -72,12 +83,13 @@ func departmentTopThreeSalaries(employees []Employee, departments []Department) 
 
 	for deptID, emps := range byDept {
 		// Sort descending by salary.
+  // Custom sort dengan comparator
 		sort.Slice(emps, func(i, j int) bool {
 			return emps[i].Salary > emps[j].Salary
 		})
 
 		// Collect top 3 distinct salaries.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		distinctSalaries := make([]int, 0)
 		for _, e := range emps {
 			if len(distinctSalaries) == 0 || e.Salary != distinctSalaries[len(distinctSalaries)-1] {
@@ -89,7 +101,7 @@ func departmentTopThreeSalaries(employees []Employee, departments []Department) 
 		}
 
 		// Build a set of qualifying salaries.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		qualifying := make(map[int]bool)
 		for _, s := range distinctSalaries {
 			qualifying[s] = true
@@ -103,6 +115,7 @@ func departmentTopThreeSalaries(employees []Employee, departments []Department) 
 				matched = append(matched, e)
 			}
 		}
+  // Custom sort dengan comparator
 		sort.Slice(matched, func(i, j int) bool {
 			if matched[i].Salary != matched[j].Salary {
 				return matched[i].Salary > matched[j].Salary
@@ -120,6 +133,7 @@ func departmentTopThreeSalaries(employees []Employee, departments []Department) 
 	}
 
 	// Sort by department name for deterministic output.
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].Department != results[j].Department {
 			return results[i].Department < results[j].Department

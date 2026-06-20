@@ -1,19 +1,30 @@
 # 1932 — Merge Bsts To Create Single Bst
 
-## Deskripsi
-
-**Soal:** [1932. Merge Bsts To Create Single Bst](https://leetcode.com/problems/merge-bsts-to-create-single-bst/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canMerge(trees []*TreeNode) *TreeNode
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canMerge(trees []*TreeNode) *TreeNode`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,14 +47,14 @@ type TreeNode struct {
 
 func canMerge(trees []*TreeNode) *TreeNode {
 	// Map root values to nodes
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rootMap := make(map[int]*TreeNode)
 	for _, t := range trees {
 		rootMap[t.Val] = t
 	}
 
 	// Count how many times each value appears as a leaf (incoming count)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	incoming := make(map[int]int)
 	for _, t := range trees {
 		if t.Left != nil {

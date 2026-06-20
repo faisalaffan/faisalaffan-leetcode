@@ -1,19 +1,32 @@
 # 3574 — Maximize Subarray Gcd Score
 
-## Deskripsi
-
-**Soal:** [3574. Maximize Subarray Gcd Score](https://leetcode.com/problems/maximize-subarray-gcd-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxGCDScore(nums []int, k int) int64
+```
+
+> **💡 Hint:** For each subarray, compute GCD and count of elements with minimum
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each subarray, compute GCD and count of elements with minimum
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,7 @@ func maxGCDScore(nums []int, k int) int64 {
 	var result int64
 
 	// Precompute v2 count (trailing zeros / power of 2 factor)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	v2 := make([]int, n)
 	for i, v := range nums {
 		v2[i] = trailingZeros(v)

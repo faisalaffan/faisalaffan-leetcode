@@ -1,19 +1,30 @@
 # 2353 — Design A Food Rating System
 
-## Deskripsi
-
-**Soal:** [2353. Design A Food Rating System](https://leetcode.com/problems/design-a-food-rating-system/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+
+Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+
+**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor3(foods []string, cuisines []string, ratings []int) FoodRatings
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(log n) per operation  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor3(foods []string, cuisines []string, ratings []int) FoodRatings`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -70,6 +81,7 @@ func Constructor3(foods []string, cuisines []string, ratings []int) FoodRatings 
 		if fr.cuisineToHeap[cuisines[i]] == nil {
 			fr.cuisineToHeap[cuisines[i]] = &foodHeap{}
 		}
+  // Masukkan elemen ke priority queue
 		heap.Push(fr.cuisineToHeap[cuisines[i]], foodItem{f, ratings[i]})
 	}
 	return fr
@@ -78,6 +90,7 @@ func Constructor3(foods []string, cuisines []string, ratings []int) FoodRatings 
 func (this *FoodRatings) ChangeRating(food string, newRating int) {
 	this.foodToRating[food] = newRating
 	cuisine := this.foodToCuisine[food]
+  // Masukkan elemen ke priority queue
 	heap.Push(this.cuisineToHeap[cuisine], foodItem{food, newRating})
 }
 
@@ -87,6 +100,7 @@ func (this *FoodRatings) HighestRated(cuisine string) string {
 		if this.foodToRating[top.name] == top.rating {
 			return top.name
 		}
+  // Ambil elemen terkecil/terbesar dari heap
 		heap.Pop(this.cuisineToHeap[cuisine])
 	}
 	return ""

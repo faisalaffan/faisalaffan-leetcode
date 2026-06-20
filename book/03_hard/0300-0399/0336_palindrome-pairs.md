@@ -1,19 +1,30 @@
 # 0336 — Palindrome Pairs
 
-## Deskripsi
-
-**Soal:** [0336. Palindrome Pairs](https://leetcode.com/problems/palindrome-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func palindromePairs(words []string) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func palindromePairs(words []string) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,6 +58,7 @@ func palindromePairs(words []string) [][]int {
 	}
 
 	isPalindrome := func(s string, l, r int) bool {
+  // Two-pointer: gerakkan kiri atau kanan
 		for l < r {
 			if s[l] != s[r] {
 				return false

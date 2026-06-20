@@ -1,17 +1,30 @@
 # 2452 — Words Within Two Edits Of Dictionary
 
-## Deskripsi
-
-**Soal:** [2452. Words Within Two Edits Of Dictionary](https://leetcode.com/problems/words-within-two-edits-of-dictionary/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func twoEditWords(queries []string, dictionary []string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * m * L)  
 **Kompleksitas Ruang:** O(1) where L = word length
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +43,6 @@ func main() {
 }
 
 func twoEditWords(queries []string, dictionary []string) []string {
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]string, 0)
 	for _, q := range queries {
 		for _, d := range dictionary {
@@ -45,7 +57,7 @@ func twoEditWords(queries []string, dictionary []string) []string {
 
 func hammingDist(a, b string) int {
 	dist := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(a); i++ {
 		if a[i] != b[i] {
 			dist++

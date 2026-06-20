@@ -1,19 +1,30 @@
 # 2835 — Minimum Operations To Form Subsequence With Target Sum
 
-## Deskripsi
-
-**Soal:** [2835. Minimum Operations To Form Subsequence With Target Sum](https://leetcode.com/problems/minimum-operations-to-form-subsequence-with-target-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(nums []int, target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minOperations(nums []int, target int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ func minOperations(nums []int, target int) int {
 	}
 
 	// Count occurrences of each power of 2
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, 31)
 	for _, v := range nums {
 		bit := 0

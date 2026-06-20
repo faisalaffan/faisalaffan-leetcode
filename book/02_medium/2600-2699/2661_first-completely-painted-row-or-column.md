@@ -1,19 +1,30 @@
 # 2661 — First Completely Painted Row Or Column
 
-## Deskripsi
-
-**Soal:** [2661. First Completely Painted Row Or Column](https://leetcode.com/problems/first-completely-painted-row-or-column/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func firstCompleteIndex(arr []int, mat [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m*n)  
 **Kompleksitas Ruang:** O(m*n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func firstCompleteIndex(arr []int, mat [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func firstCompleteIndex(arr []int, mat [][]int) int {
 	m, n := len(mat), len(mat[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pos := make([][2]int, m*n+1)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -35,9 +46,9 @@ func firstCompleteIndex(arr []int, mat [][]int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rowCount := make([]int, m)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	colCount := make([]int, n)
 
 	for idx, v := range arr {

@@ -1,19 +1,32 @@
 # 1044 — Longest Duplicate Substring
 
-## Deskripsi
-
-**Soal:** [1044. Longest Duplicate Substring](https://leetcode.com/problems/longest-duplicate-substring/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestDupSubstring(s string) string
+```
+
+> **💡 Hint:** Binary search on length + Rabin-Karp rolling hash.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on length + Rabin-Karp rolling hash.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +49,7 @@ func main() {
 
 func longestDupSubstring(s string) string {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nums := make([]int, n)
 	for i := 0; i < n; i++ {
 		nums[i] = int(s[i] - 'a')
@@ -75,7 +88,7 @@ func longestDupSubstring(s string) string {
 			hash2 = (hash2*base + int64(nums[i])) % mod2
 		}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		seen := make(map[[2]int64]int)
 		seen[[2]int64{hash1, hash2}] = 0
 

@@ -1,19 +1,30 @@
 # 1699 — Number Of Calls Between Two Persons
 
-## Deskripsi
-
-**Soal:** [1699. Number Of Calls Between Two Persons](https://leetcode.com/problems/number-of-calls-between-two-persons/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfCalls(records []CallRecord) [][3]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfCalls(records []CallRecord) [][3]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ type CallRecord struct {
 }
 
 func numberOfCalls(records []CallRecord) [][3]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	callMap := make(map[[2]int]int) // [min,max] -> total duration
 
 	for _, r := range records {
@@ -45,7 +56,7 @@ func numberOfCalls(records []CallRecord) [][3]int {
 		callMap[key] += r.Dur
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([][3]int, 0, len(callMap))
 	for key, dur := range callMap {
 		result = append(result, [3]int{key[0], key[1], dur})

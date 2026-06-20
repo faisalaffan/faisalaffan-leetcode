@@ -1,17 +1,30 @@
 # 1580 — Put Boxes Into The Warehouse Ii
 
-## Deskripsi
-
-**Soal:** [1580. Put Boxes Into The Warehouse Ii](https://leetcode.com/problems/put-boxes-into-the-warehouse-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaxBoxesInWarehouseII(boxes []int, warehouse []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(N log N + M), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,13 +49,14 @@ func MaxBoxesInWarehouseII(boxes []int, warehouse []int) int {
 	// In warehouse II, boxes can enter from either left or right side.
 	// We can think of it as: each position's max height is the min of
 	// the prefix max from left and prefix max from right.
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(boxes)
 
 	n := len(warehouse)
 	// Preprocess: effective height at each position
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftMax := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rightMax := make([]int, n)
 
 	leftMax[0] = warehouse[0]
@@ -64,7 +78,7 @@ func MaxBoxesInWarehouseII(boxes []int, warehouse []int) int {
 	}
 
 	// Effective height = max(leftMax, rightMax) since we can enter from either side
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	effective := make([]int, n)
 	for i := 0; i < n; i++ {
 		if leftMax[i] > rightMax[i] {

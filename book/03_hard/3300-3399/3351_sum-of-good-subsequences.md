@@ -1,19 +1,32 @@
 # 3351 — Sum Of Good Subsequences
 
-## Deskripsi
-
-**Soal:** [3351. Sum Of Good Subsequences](https://leetcode.com/problems/sum-of-good-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumOfGoodSubsequences(nums []int) int
+```
+
+> **💡 Hint:** DP with hash map. For each value x, track:
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with hash map. For each value x, track:
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,9 +62,9 @@ func main() {
 const mod = 1000000007
 
 func sumOfGoodSubsequences(nums []int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cnt := make(map[int]int64)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	sum := make(map[int]int64)
 	var ans int64
 

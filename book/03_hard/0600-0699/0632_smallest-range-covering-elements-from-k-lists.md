@@ -1,17 +1,30 @@
 # 0632 — Smallest Range Covering Elements From K Lists
 
-## Deskripsi
-
-**Soal:** [0632. Smallest Range Covering Elements From K Lists](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func smallestRange(nums [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -82,6 +95,7 @@ func smallestRange(nums [][]int) []int {
 
 	maxVal := math.MinInt32
 	for i := 0; i < k; i++ {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, element{val: nums[i][0], list: i, index: 0})
 		if nums[i][0] > maxVal {
 			maxVal = nums[i][0]
@@ -91,6 +105,7 @@ func smallestRange(nums [][]int) []int {
 	start, end := 0, math.MaxInt32
 
 	for {
+  // Ambil elemen terkecil/terbesar dari heap
 		minElem := heap.Pop(h).(element)
 		curStart := minElem.val
 		curEnd := maxVal
@@ -108,6 +123,7 @@ func smallestRange(nums [][]int) []int {
 
 		// Push next element from the same list
 		nextVal := nums[minElem.list][minElem.index+1]
+  // Masukkan elemen ke priority queue
 		heap.Push(h, element{val: nextVal, list: minElem.list, index: minElem.index + 1})
 		if nextVal > maxVal {
 			maxVal = nextVal

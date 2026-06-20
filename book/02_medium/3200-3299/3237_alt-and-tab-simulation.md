@@ -1,19 +1,30 @@
 # 3237 — Alt And Tab Simulation
 
-## Deskripsi
-
-**Soal:** [3237. Alt And Tab Simulation](https://leetcode.com/problems/alt-and-tab-simulation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func simulationResult(windows []int, queries []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window
 
 **Kompleksitas Waktu:** O(n + q)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func simulationResult(windows []int, queries []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ import (
 
 func simulationResult(windows []int, queries []int) []int {
 	order := list.New()
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[int]*list.Element)
 	for _, w := range windows {
 		e := order.PushBack(w)
@@ -43,7 +54,7 @@ func simulationResult(windows []int, queries []int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, 0, order.Len())
 	for e := order.Front(); e != nil; e = e.Next() {
 		ans = append(ans, e.Value.(int))

@@ -1,19 +1,32 @@
 # 3850 — Count Sequences To K
 
-## Deskripsi
-
-**Soal:** [3850. Count Sequences To K](https://leetcode.com/problems/count-sequences-to-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countSequences(nums []int, k int64) int
+```
+
+> **💡 Hint:** 0/1 knapsack DP. dp[s] = number of ways to achieve sum
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** 0/1 knapsack DP. dp[s] = number of ways to achieve sum
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,7 @@ func countSequences(nums []int, k int64) int {
 	if k == 0 {
 		return 1
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, k+1)
 	dp[0] = 1
 	for _, num := range nums {

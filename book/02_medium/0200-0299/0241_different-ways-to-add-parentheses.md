@@ -1,19 +1,30 @@
 # 0241 — Different Ways To Add Parentheses
 
-## Deskripsi
-
-**Soal:** [0241. Different Ways To Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func diffWaysToCompute(expression string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(2^n), Space: O(2^n) for result storage  
 **Kompleksitas Ruang:** O(2^n) for result storage
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func diffWaysToCompute(expression string) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +70,7 @@ func diffWaysToCompute(expression string) []int {
 }
 
 func isNumber(s string) bool {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		if s[i] < '0' || s[i] > '9' {
 			return false

@@ -1,19 +1,32 @@
 # 3710 — Maximum Partition Factor
 
-## Deskripsi
-
-**Soal:** [3710. Maximum Partition Factor](https://leetcode.com/problems/maximum-partition-factor/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPartitionFactor(points [][]int) int
+```
+
+> **💡 Hint:** Sort all pairwise Manhattan distances. Binary search + bipartite
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sort all pairwise Manhattan distances. Binary search + bipartite
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,7 +67,6 @@ func maxPartitionFactor(points [][]int) int {
 	type edge struct {
 		u, v, d int
 	}
-  // Membuat slice untuk menyimpan hasil
 	distances := make([]edge, 0, n*(n-1)/2)
 	for i := 0; i < n; i++ {
 		for j := i + 1; j < n; j++ {
@@ -63,6 +75,7 @@ func maxPartitionFactor(points [][]int) int {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(distances, func(i, j int) bool {
 		return distances[i].d < distances[j].d
 	})
@@ -70,7 +83,7 @@ func maxPartitionFactor(points [][]int) int {
 	// Check if we can achieve partition factor >= x
 	// Two points with distance < x must be in different groups (bipartite)
 	check := func(x int) bool {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		adj := make([][]int, n)
 		for _, e := range distances {
 			if e.d >= x {
@@ -79,9 +92,9 @@ func maxPartitionFactor(points [][]int) int {
 			adj[e.u] = append(adj[e.u], e.v)
 			adj[e.v] = append(adj[e.v], e.u)
 		}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		color := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range color {
 			color[i] = -1
 		}

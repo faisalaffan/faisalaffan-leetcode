@@ -1,19 +1,30 @@
 # 1392 — Longest Happy Prefix
 
-## Deskripsi
-
-**Soal:** [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestPrefix(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** KMP (Knuth-Morris-Pratt, pencocokan string)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func longestPrefix(s string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ func longestPrefix(s string) string {
 	}
 
 	// Build KMP LPS (Longest Proper Prefix which is also Suffix) array
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lps := make([]int, n)
 	for i := 1; i < n; i++ {
 		j := lps[i-1]

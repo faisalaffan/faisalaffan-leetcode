@@ -1,19 +1,32 @@
 # 3826 — Minimum Partition Score
 
-## Deskripsi
-
-**Soal:** [3826. Minimum Partition Score](https://leetcode.com/problems/minimum-partition-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumPartitionScore(nums []int, k int) int64
+```
+
+> **💡 Hint:** DP with range queries using sparse table.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with range queries using sparse table.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,17 +79,17 @@ func minimumPartitionScore(nums []int, k int) int64 {
 	}
 
 	// Build sparse table for range min/max
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	log := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		log[i] = log[i/2] + 1
 	}
 	K := log[n] + 1
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	stMax := make([][]int, K)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	stMin := make([][]int, K)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range stMax {
 		stMax[i] = make([]int, n)
 		stMin[i] = make([]int, n)
@@ -103,9 +116,9 @@ func minimumPartitionScore(nums []int, k int) int64 {
 	}
 
 	// DP[i][j] = min score for first i elements, j partitions
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int64, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int64, k+1)
 		for j := range dp[i] {

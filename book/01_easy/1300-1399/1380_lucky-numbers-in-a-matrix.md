@@ -1,19 +1,34 @@
 # 1380 — Lucky Numbers In A Matrix
 
-## Deskripsi
-
-**Soal:** [1380. Lucky Numbers In A Matrix](https://leetcode.com/problems/lucky-numbers-in-a-matrix/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func luckyNumbers(matrix [][]int) []int
+
+import "fmt"
+
+func main()
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Bitmask
 
 **Kompleksitas Waktu:** O(m * n), Space: O(m + n)  
 **Kompleksitas Ruang:** O(m + n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func luckyNumbers(matrix [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,13 +60,13 @@ func main() {
 // Time: O(m * n), Space: O(m + n)
 func LuckyNumbersInAMatrix(matrix [][]int) []int {
 	m, n := len(matrix), len(matrix[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rowMin := make([]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range rowMin {
 		rowMin[i] = 1<<31 - 1
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	colMax := make([]int, n)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -64,7 +79,7 @@ func LuckyNumbersInAMatrix(matrix [][]int) []int {
 			}
 		}
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	res := make([]int, 0)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {

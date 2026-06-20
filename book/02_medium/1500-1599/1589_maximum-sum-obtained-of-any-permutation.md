@@ -1,17 +1,30 @@
 # 1589 — Maximum Sum Obtained Of Any Permutation
 
-## Deskripsi
-
-**Soal:** [1589. Maximum Sum Obtained Of Any Permutation](https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaxSumRangeQuery(nums []int, requests [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log N + M), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,7 @@ func MaxSumRangeQuery(nums []int, requests [][]int) int {
 
 	n := len(nums)
 	// Difference array to count frequency of each index
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, n+1)
 	for _, req := range requests {
 		freq[req[0]]++
@@ -50,8 +63,10 @@ func MaxSumRangeQuery(nums []int, requests [][]int) int {
 	}
 
 	// Sort both nums and frequencies
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	freqCounts := freq[:n]
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(freqCounts)
 
 	// Assign largest numbers to most frequent positions

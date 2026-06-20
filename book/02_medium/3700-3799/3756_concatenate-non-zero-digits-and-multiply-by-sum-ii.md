@@ -1,19 +1,30 @@
 # 3756 — Concatenate Non Zero Digits And Multiply By Sum Ii
 
-## Deskripsi
-
-**Soal:** [3756. Concatenate Non Zero Digits And Multiply By Sum Ii](https://leetcode.com/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + q)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,11 +40,11 @@ const mod3756 = 1000000007
 
 func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixCnt := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixSum := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixNum := make([]int64, n+1)
 
 	for i, ch := range s {
@@ -48,7 +59,7 @@ func concatenateNonZeroDigitsAndMultiplyBySumIi(s string, queries [][]int) []int
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]

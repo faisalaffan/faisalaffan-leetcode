@@ -1,17 +1,30 @@
 # 2163 — Minimum Difference In Sums After Removal Of Elements
 
-## Deskripsi
-
-**Soal:** [2163. Minimum Difference In Sums After Removal Of Elements](https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumDifference(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,15 +79,17 @@ func minimumDifference(nums []int) int64 {
 	m := len(nums)
 	n := m / 3
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, m)
 	h := &MaxHeap{}
 	heap.Init(h)
 	sum := 0
 	for i := 0; i < m; i++ {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, nums[i])
 		sum += nums[i]
 		if h.Len() > n {
+  // Ambil elemen terkecil/terbesar dari heap
 			sum -= heap.Pop(h).(int)
 		}
 		if i >= n-1 {
@@ -82,15 +97,17 @@ func minimumDifference(nums []int) int64 {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suf := make([]int, m)
 	h2 := &MinHeap{}
 	heap.Init(h2)
 	sum = 0
 	for i := m - 1; i >= 0; i-- {
+  // Masukkan elemen ke priority queue
 		heap.Push(h2, nums[i])
 		sum += nums[i]
 		if h2.Len() > n {
+  // Ambil elemen terkecil/terbesar dari heap
 			sum -= heap.Pop(h2).(int)
 		}
 		if i <= 2*n {

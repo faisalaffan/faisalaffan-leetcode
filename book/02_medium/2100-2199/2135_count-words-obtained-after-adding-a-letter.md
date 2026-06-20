@@ -1,19 +1,30 @@
 # 2135 — Count Words Obtained After Adding A Letter
 
-## Deskripsi
-
-**Soal:** [2135. Count Words Obtained After Adding A Letter](https://leetcode.com/problems/count-words-obtained-after-adding-a-letter/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func wordCount(startWords []string, targetWords []string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Bitmask
 
 **Kompleksitas Waktu:** O(n * L)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func wordCount(startWords []string, targetWords []string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func wordCount(startWords []string, targetWords []string) int {
 	// Convert start words to bitmasks
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	startSet := make(map[int]bool)
 	for _, w := range startWords {
 		mask := 0

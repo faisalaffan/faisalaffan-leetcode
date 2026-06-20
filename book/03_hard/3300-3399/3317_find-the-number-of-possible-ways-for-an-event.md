@@ -1,19 +1,32 @@
 # 3317 — Find The Number Of Possible Ways For An Event
 
-## Deskripsi
-
-**Soal:** [3317. Find The Number Of Possible Ways For An Event](https://leetcode.com/problems/find-the-number-of-possible-ways-for-an-event/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfWays(n int, x int, y int) int
+```
+
+> **💡 Hint:** Use Stirling numbers of the second kind S(n,k) for partitioning
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Use Stirling numbers of the second kind S(n,k) for partitioning
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ const mod = 1000000007
 
 func numberOfWays(n int, x int, y int) int {
 	// Precompute factorials
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	fact := make([]int64, x+1)
 	fact[0] = 1
 	for i := 1; i <= x; i++ {
@@ -58,7 +71,7 @@ func numberOfWays(n int, x int, y int) int {
 	}
 
 	// Precompute inverse factorials
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	invFact := make([]int64, x+1)
 	invFact[x] = powMod(fact[x], mod-2)
 	for i := x - 1; i >= 0; i-- {
@@ -66,7 +79,7 @@ func numberOfWays(n int, x int, y int) int {
 	}
 
 	// Precompute powers of y
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	powY := make([]int64, x+1)
 	powY[0] = 1
 	for k := 1; k <= x; k++ {
@@ -74,7 +87,7 @@ func numberOfWays(n int, x int, y int) int {
 	}
 
 	// Stirling numbers of the second kind S(n, k) using DP
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stirling := make([]int64, x+1)
 	stirling[0] = 1
 	for i := 1; i <= n; i++ {

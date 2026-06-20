@@ -1,17 +1,30 @@
 # 2729 — Check If The Number Is Fascinating
 
-## Deskripsi
-
-**Soal:** [2729. Check If The Number Is Fascinating](https://leetcode.com/problems/check-if-the-number-is-fascinating/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CheckIfTheNumberIsFascinating(n int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,6 +52,7 @@ func CheckIfTheNumberIsFascinating(n int) bool {
 	}
 
 	digits := []byte(concat)
+  // Custom sort dengan comparator
 	sort.Slice(digits, func(i, j int) bool { return digits[i] < digits[j] })
 	return string(digits) == "123456789"
 }

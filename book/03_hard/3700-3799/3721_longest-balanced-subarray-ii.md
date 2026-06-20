@@ -1,19 +1,32 @@
 # 3721 — Longest Balanced Subarray Ii
 
-## Deskripsi
-
-**Soal:** [3721. Longest Balanced Subarray Ii](https://leetcode.com/problems/longest-balanced-subarray-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestBalanced(nums []int) int
+```
+
+> **💡 Hint:** Sliding window with frequency maps. For each window,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sliding window with frequency maps. For each window,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,9 +60,9 @@ func longestBalanced(nums []int) int {
 
 	// For each starting position, expand window
 	for i := 0; i < n; i++ {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		evenSet := make(map[int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		oddSet := make(map[int]bool)
 		evenCount := 0
 		oddCount := 0

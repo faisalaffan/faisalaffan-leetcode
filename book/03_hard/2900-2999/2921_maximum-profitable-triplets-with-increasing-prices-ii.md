@@ -1,21 +1,32 @@
 # 2921 — Maximum Profitable Triplets With Increasing Prices Ii
 
-## Deskripsi
-
-**Soal:** [2921. Maximum Profitable Triplets With Increasing Prices Ii](https://leetcode.com/problems/maximum-profitable-triplets-with-increasing-prices-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newSegTree2921(n int) *segTree2921
+```
+
+> **💡 Hint:** For each j as the middle element, find the best i (left of j with
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Segment Tree
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newSegTree2921(n int) *segTree2921`
-
-> **Ide Kunci:** For each j as the middle element, find the best i (left of j with
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,9 +61,8 @@ type segTree2921 struct {
 }
 
 func newSegTree2921(n int) *segTree2921 {
-  // Membuat slice untuk menyimpan hasil
 	tree := make([]segTreeNode, 4*n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range tree {
 		tree[i].maxVal = minInt
 	}
@@ -98,9 +108,10 @@ func (st *segTree2921) query(idx, l, r, ql, qr int) int {
 func maxProfitableTriplet(prices []int, profits []int) int {
 	n := len(prices)
 	// Coordinate compress prices
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, prices)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
 	m := 1
 	for i := 1; i < n; i++ {
@@ -116,7 +127,7 @@ func maxProfitableTriplet(prices []int, profits []int) int {
 	}
 
 	// Left pass: best profit for i < j with price[i] < price[j]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftBest := make([]int, n)
 	segLeft := newSegTree2921(m)
 	for j := 0; j < n; j++ {
@@ -131,7 +142,7 @@ func maxProfitableTriplet(prices []int, profits []int) int {
 	}
 
 	// Right pass: best profit for k > j with price[k] > price[j]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rightBest := make([]int, n)
 	segRight := newSegTree2921(m)
 	for j := n - 1; j >= 0; j-- {

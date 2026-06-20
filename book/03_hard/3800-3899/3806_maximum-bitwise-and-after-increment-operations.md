@@ -1,19 +1,32 @@
 # 3806 — Maximum Bitwise And After Increment Operations
 
-## Deskripsi
-
-**Soal:** [3806. Maximum Bitwise And After Increment Operations](https://leetcode.com/problems/maximum-bitwise-and-after-increment-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumAND(nums []int, k int, m int) int
+```
+
+> **💡 Hint:** For each bit position from high to low, check if we can
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each bit position from high to low, check if we can
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

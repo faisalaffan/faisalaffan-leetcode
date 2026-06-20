@@ -1,19 +1,30 @@
 # 1778 — Shortest Path In A Hidden Grid
 
-## Deskripsi
-
-**Soal:** [1778. Shortest Path In A Hidden Grid](https://leetcode.com/problems/shortest-path-in-a-hidden-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findShortestPath(master GridMaster) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, BFS
 
 **Kompleksitas Waktu:** O(m * n), Space: O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findShortestPath(master GridMaster) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ type GridMaster interface {
 
 func findShortestPath(master GridMaster) int {
 	// Discover the grid via DFS
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	grid := make(map[[2]int]int) // 0=unvisited, 1=empty, 2=target, -1=blocked
 	targetPos := [2]int{-1, -1}
 
@@ -75,7 +86,7 @@ func findShortestPath(master GridMaster) int {
 
 	// BFS for shortest path
 	queue := [][2]int{{0, 0}}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[[2]int]bool)
 	visited[[2]int{0, 0}] = true
 	steps := 0

@@ -1,21 +1,32 @@
 # 3177 — Find The Maximum Length Of A Good Subsequence Ii
 
-## Deskripsi
-
-**Soal:** [3177. Find The Maximum Length Of A Good Subsequence Ii](https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumLength(nums []int, k int) int
+```
+
+> **💡 Hint:** DP tracking best[val][k] and overall best[k].
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func max(a, b int) int`
-
-> **Ide Kunci:** DP tracking best[val][k] and overall best[k].
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,15 +56,15 @@ func max(a, b int) int {
 }
 
 func maximumLength(nums []int, k int) int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return 0
 	}
 	// bestSame[val][kk] = max length ending with val using at most kk diffs.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	bestSame := make(map[int][]int)
 	// global[kk] = overall max length using at most kk diffs.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	global := make([]int, k+1)
 
 	for _, v := range nums {
@@ -63,7 +74,7 @@ func maximumLength(nums []int, k int) int {
 		row := bestSame[v]
 		// Use temporary slice to avoid using updated values within the same
 		// iteration (we need the state before processing this element).
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		newBest := make([]int, k+1)
 		copy(newBest, row)
 

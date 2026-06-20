@@ -1,19 +1,32 @@
 # 3563 — Lexicographically Smallest String After Adjacent Removals
 
-## Deskripsi
-
-**Soal:** [3563. Lexicographically Smallest String After Adjacent Removals](https://leetcode.com/problems/lexicographically-smallest-string-after-adjacent-removals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lexicographicallySmallestString(s string) string
+```
+
+> **💡 Hint:** Interval DP to compute which substrings can be fully removed,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Interval DP to compute which substrings can be fully removed,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,9 +64,9 @@ func lexicographicallySmallestString(s string) string {
 	}
 
 	// removable[i][j] = can substring s[i..j] be completely removed
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	removable := make([][]bool, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range removable {
 		removable[i] = make([]bool, n)
 	}
@@ -85,7 +98,6 @@ func lexicographicallySmallestString(s string) string {
 	}
 
 	// dp[i] = lexicographically smallest string from suffix i
-  // Membuat slice untuk menyimpan hasil
 	dp := make([]string, n+1)
 	dp[n] = ""
 	for i := n - 1; i >= 0; i-- {

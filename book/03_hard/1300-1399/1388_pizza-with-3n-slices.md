@@ -1,21 +1,32 @@
 # 1388 — Pizza With 3N Slices
 
-## Deskripsi
-
-**Soal:** [1388. Pizza With 3N Slices](https://leetcode.com/problems/pizza-with-3n-slices/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSizeSlices(slices []int) int
+```
+
+> **💡 Hint:** DP for circular "House Robber" variant.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxSizeSlices(slices []int) int`
-
-> **Ide Kunci:** DP for circular "House Robber" variant.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,7 @@ func maxSizeSlices(slices []int) int {
 
 	maxPick := func(arr []int) int {
 		m := len(arr)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		dp := make([][]int, m+1)
 		for i := 0; i <= m; i++ {
 			dp[i] = make([]int, k+1)

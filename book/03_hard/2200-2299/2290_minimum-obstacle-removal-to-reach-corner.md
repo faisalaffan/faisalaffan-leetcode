@@ -1,19 +1,32 @@
 # 2290 — Minimum Obstacle Removal To Reach Corner
 
-## Deskripsi
-
-**Soal:** [2290. Minimum Obstacle Removal To Reach Corner](https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumObstacles(grid [][]int) int
+```
+
+> **💡 Hint:** 0-1 BFS (Dijkstra with deque since edge weights are 0 or 1).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Dijkstra (lintasan terpendek), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dijkstra** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** 0-1 BFS (Dijkstra with deque since edge weights are 0 or 1).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,9 +59,9 @@ func main() {
 
 func minimumObstacles(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {

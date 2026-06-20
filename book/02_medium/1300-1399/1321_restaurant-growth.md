@@ -1,17 +1,33 @@
 # 1321 — Restaurant Growth
 
-## Deskripsi
-
-**Soal:** [1321. Restaurant Growth](https://leetcode.com/problems/restaurant-growth/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func restaurantGrowth(customers []struct {
+	visitedOn string
+	amount    int
+}) []avgResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window
 
 **Kompleksitas Waktu:** O(n log n) due to sorting  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -64,7 +80,7 @@ func restaurantGrowth(customers []struct {
 		count int
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dateMap := make(map[string]*daySum)
 	for _, c := range customers {
 		if _, ok := dateMap[c.visitedOn]; !ok {
@@ -74,7 +90,6 @@ func restaurantGrowth(customers []struct {
 		dateMap[c.visitedOn].count++
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	dates := make([]string, 0, len(dateMap))
 	for d := range dateMap {
 		dates = append(dates, d)
@@ -83,7 +98,7 @@ func restaurantGrowth(customers []struct {
 
 	// Sliding window of 7 days
 	var result []avgResult
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	window := make([]int, 0, 7)
 
 	for _, d := range dates {

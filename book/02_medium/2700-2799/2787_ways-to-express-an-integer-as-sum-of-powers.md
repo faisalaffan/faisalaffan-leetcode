@@ -1,19 +1,30 @@
 # 2787 — Ways To Express An Integer As Sum Of Powers
 
-## Deskripsi
-
-**Soal:** [2787. Ways To Express An Integer As Sum Of Powers](https://leetcode.com/problems/ways-to-express-an-integer-as-sum-of-powers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int {
 	const mod = 1_000_000_007
 
 	// Generate powers
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	powers := make([]int, 0)
 	for i := 1; ; i++ {
 		p := 1
@@ -42,7 +53,7 @@ func WaysToExpressAnIntegerAsSumOfPowers(n int, x int) int {
 		powers = append(powers, p)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
 	dp[0] = 1
 

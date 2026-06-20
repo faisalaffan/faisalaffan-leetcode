@@ -1,19 +1,32 @@
 # 2301 — Match Substring After Replacement
 
-## Deskripsi
-
-**Soal:** [2301. Match Substring After Replacement](https://leetcode.com/problems/match-substring-after-replacement/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func matchReplacement(s string, sub string, mappings [][]byte) bool
+```
+
+> **💡 Hint:** Build a directed graph from mappings, compute transitive closure
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Floyd-Warshall
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Floyd-Warshall (lintasan semua pasangan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Floyd-Warshall** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Build a directed graph from mappings, compute transitive closure
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +57,9 @@ func main() {
 
 func matchReplacement(s string, sub string, mappings [][]byte) bool {
 	// Build transitive closure: can[a][b] means a can be replaced by b
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	can := make([][]bool, 256)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range can {
 		can[i] = make([]bool, 256)
 		can[i][i] = true
@@ -72,7 +85,7 @@ func matchReplacement(s string, sub string, mappings [][]byte) bool {
 	// Slide sub through s
 	for start := 0; start <= len(s)-len(sub); start++ {
 		match := true
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(sub); i++ {
 			if !can[sub[i]][s[start+i]] {
 				match = false

@@ -1,17 +1,30 @@
 # 1532 — The Most Recent Three Orders
 
-## Deskripsi
-
-**Soal:** [1532. The Most Recent Three Orders](https://leetcode.com/problems/the-most-recent-three-orders/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func RecentThreeOrders(orders []struct{ id, customerID int; date string; cost float64 }) []orderRec
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,16 +69,16 @@ type orderRec struct {
 
 func RecentThreeOrders(orders []struct{ id, customerID int; date string; cost float64 }) []orderRec {
 	// Group orders by customer
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	customerOrders := make(map[int][]struct{ id int; date string; cost float64 })
 	for _, o := range orders {
 		customerOrders[o.customerID] = append(customerOrders[o.customerID], struct{ id int; date string; cost float64 }{o.id, o.date, o.cost})
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]orderRec, 0)
 	for cid, ords := range customerOrders {
 		// Sort by date descending
+  // Custom sort dengan comparator
 		sort.Slice(ords, func(i, j int) bool {
 			return ords[i].date > ords[j].date
 		})

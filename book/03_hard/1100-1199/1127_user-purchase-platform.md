@@ -1,17 +1,30 @@
 # 1127 — User Purchase Platform
 
-## Deskripsi
-
-**Soal:** [1127. User Purchase Platform](https://leetcode.com/problems/user-purchase-platform/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getUserPurchasePlatform(spending []UserSpend) []PlatformStats
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -82,7 +95,7 @@ func getUserPurchasePlatform(spending []UserSpend) []PlatformStats {
 	}
 
 	// userPlatformSet[date][userID][platform] = amount
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dateUserPlatform := make(map[string]map[int]map[string]float64)
 
 	for _, s := range spending {
@@ -95,7 +108,6 @@ func getUserPurchasePlatform(spending []UserSpend) []PlatformStats {
 		dateUserPlatform[s.Date][s.UserID][s.Platform] += s.Amount
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	dates := make([]string, 0, len(dateUserPlatform))
 	for d := range dateUserPlatform {
 		dates = append(dates, d)

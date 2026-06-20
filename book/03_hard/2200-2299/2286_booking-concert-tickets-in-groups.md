@@ -1,19 +1,30 @@
 # 2286 — Booking Concert Tickets In Groups
 
-## Deskripsi
-
-**Soal:** [2286. Booking Concert Tickets In Groups](https://leetcode.com/problems/booking-concert-tickets-in-groups/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(n, m int) BookMyShow
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Segment Tree
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor(n, m int) BookMyShow`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,13 +64,12 @@ type BookMyShow struct {
 
 func Constructor(n, m int) BookMyShow {
 	size := 4 * n
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	free := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range free {
 		free[i] = m
 	}
-  // Membuat slice untuk menyimpan hasil
 	seg := make([]segNode, size)
 	b := BookMyShow{m: m, n: n, free: free, seg: seg}
 	b.build(1, 0, n-1)
@@ -178,7 +188,7 @@ func (b *BookMyShow) update(idx, l, r, pos, val int) {
 
 func BookingConcertTicketsInGroups() interface{} {
 	show := Constructor(2, 5)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	out := make([]interface{}, 0)
 	out = append(out, show.Scatter(4, 0)) // true
 	out = append(out, show.Scatter(2, 0)) // true

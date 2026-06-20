@@ -1,19 +1,32 @@
 # 0488 — Zuma Game
 
-## Deskripsi
-
-**Soal:** [0488. Zuma Game](https://leetcode.com/problems/zuma-game/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMinStep(board string, hand string) int
+```
+
+> **💡 Hint:** DFS + memoization. Try each hand ball at each position in the board.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS + memoization. Try each hand ball at each position in the board.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +61,7 @@ func main() {
 
 func findMinStep(board string, hand string) int {
 	// Count hand balls
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	handCount := make([]int, 26)
 	for _, ch := range hand {
 		handCount[ch-'A']++
@@ -72,7 +85,7 @@ func dfs(board string, handCount []int) int {
 	// Try every possible placement
 	minUsed := len(handCount)*5 + 1 // larger than any possible answer
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(board); i++ {
 		// Try to insert a ball from hand
 		for color := 0; color < 26; color++ {
@@ -131,7 +144,6 @@ func removeOnce(s string) string {
 	}
 
 	// Find groups of 3+ consecutive same characters
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, len(s))
 	i := 0
 	for i < len(s) {

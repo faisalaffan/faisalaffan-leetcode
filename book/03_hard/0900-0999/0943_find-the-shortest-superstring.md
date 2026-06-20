@@ -1,19 +1,30 @@
 # 0943 — Find The Shortest Superstring
 
-## Deskripsi
-
-**Soal:** [0943. Find The Shortest Superstring](https://leetcode.com/problems/find-the-shortest-superstring/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestSuperstring(words []string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func shortestSuperstring(words []string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ func shortestSuperstring(words []string) string {
 	n := len(words)
 
 	// Precompute overlap
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	overlap := make([][]int, n)
 	for i := 0; i < n; i++ {
 		overlap[i] = make([]int, n)
@@ -52,9 +63,9 @@ func shortestSuperstring(words []string) string {
 	}
 
 	// dp[mask][last] = length of shortest superstring
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, 1<<n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	parent := make([][]int, 1<<n)
 	for mask := 0; mask < (1 << n); mask++ {
 		dp[mask] = make([]int, n)
@@ -104,7 +115,7 @@ func shortestSuperstring(words []string) string {
 	// Reconstruct
 	mask := fullMask
 	last := bestLast
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	order := make([]int, 0, n)
 	for last != -1 {
 		order = append(order, last)

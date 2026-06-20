@@ -1,19 +1,30 @@
 # 1627 — Graph Connectivity With Threshold
 
-## Deskripsi
-
-**Soal:** [1627. Graph Connectivity With Threshold](https://leetcode.com/problems/graph-connectivity-with-threshold/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewUnionFind(n int) *UnionFind
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewUnionFind(n int) *UnionFind`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,9 +41,9 @@ type UnionFind struct {
 }
 
 func NewUnionFind(n int) *UnionFind {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rank := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -76,7 +87,6 @@ func areConnected(n int, threshold int, queries [][]int) []bool {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]bool, len(queries))
 	for i, q := range queries {
 		result[i] = uf.Connected(q[0], q[1])

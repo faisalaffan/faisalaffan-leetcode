@@ -1,19 +1,30 @@
 # 2623 — Memoize
 
-## Deskripsi
-
-**Soal:** [2623. Memoize](https://leetcode.com/problems/memoize/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func memoize(fn func(...int) int) MemoizedFn
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(1) amortized per call  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func memoize(fn func(...int) int) MemoizedFn`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ type MemoizedFn func(args ...int) int
 
 func memoize(fn func(...int) int) MemoizedFn {
 	var mu sync.Mutex
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cache := make(map[string]int)
 
 	return func(args ...int) int {

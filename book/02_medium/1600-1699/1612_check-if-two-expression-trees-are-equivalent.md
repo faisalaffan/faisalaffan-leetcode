@@ -1,17 +1,30 @@
 # 1612 — Check If Two Expression Trees Are Equivalent
 
-## Deskripsi
-
-**Soal:** [1612. Check If Two Expression Trees Are Equivalent](https://leetcode.com/problems/check-if-two-expression-trees-are-equivalent/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CheckEquivalence(root1 *Node, root2 *Node) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(N), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,9 +68,9 @@ func main() {
 func CheckEquivalence(root1 *Node, root2 *Node) bool {
 	// Time: O(N), Space: O(1)
 	// Expression trees only contain '+', so equivalence = same multiset of leaf values
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	count1 := make(map[byte]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	count2 := make(map[byte]int)
 
 	countLeaves(root1, count1)

@@ -1,19 +1,30 @@
 # 0732 — My Calendar Iii
 
-## Deskripsi
-
-**Soal:** [0732. My Calendar Iii](https://leetcode.com/problems/my-calendar-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() MyCalendarThree
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor() MyCalendarThree`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,11 +56,12 @@ func (this *MyCalendarThree) Book(startTime int, endTime int) int {
 	this.events[endTime]--
 
 	// Sweep line: collect all times
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	times := make([]int, 0, len(this.events))
 	for t := range this.events {
 		times = append(times, t)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(times)
 
 	active := 0

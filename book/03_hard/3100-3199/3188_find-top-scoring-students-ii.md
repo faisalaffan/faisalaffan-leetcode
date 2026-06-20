@@ -1,19 +1,30 @@
 # 3188 — Find Top Scoring Students Ii
 
-## Deskripsi
-
-**Soal:** [3188. Find Top Scoring Students Ii](https://leetcode.com/problems/find-top-scoring-students-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +54,7 @@ func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int {
 		best  int // best score for this course
 		valid bool
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	studentCourses := make(map[int]map[int]*courseScore)
 
 	for _, e := range enrollments {
@@ -63,7 +74,7 @@ func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, 0)
 	for sid, courses := range studentCourses {
 		allValid := true
@@ -77,6 +88,7 @@ func findTopScoringStudentsIi(enrollments [][]int, threshold int) []int {
 			ans = append(ans, sid)
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(ans)
 	return ans
 }

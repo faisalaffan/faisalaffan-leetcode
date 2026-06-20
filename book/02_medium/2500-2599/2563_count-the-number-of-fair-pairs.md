@@ -1,19 +1,30 @@
 # 2563 — Count The Number Of Fair Pairs
 
-## Deskripsi
-
-**Soal:** [2563. Count The Number Of Fair Pairs](https://leetcode.com/problems/count-the-number-of-fair-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countFairPairs(nums []int, lower int, upper int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countFairPairs(nums []int, lower int, upper int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,6 +40,7 @@ import (
 )
 
 func countFairPairs(nums []int, lower int, upper int) int64 {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	var ans int64
 	n := len(nums)

@@ -1,19 +1,32 @@
 # 3594 — Minimum Time To Transport All Individuals
 
-## Deskripsi
-
-**Soal:** [3594. Minimum Time To Transport All Individuals](https://leetcode.com/problems/minimum-time-to-transport-all-individuals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minTime(n int, k int, m int, time []int, mul []float64) float64
+```
+
+> **💡 Hint:** Bitmask DP. State = (mask of people on left, current stage).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Bitmask DP. State = (mask of people on left, current stage).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,15 +57,15 @@ func main() {
 }
 
 func minTime(n int, k int, m int, time []int, mul []float64) float64 {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// memo[mask][stage]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	memo := make([][]float64, 1<<n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = make([]float64, m)
 		for j := range memo[i] {

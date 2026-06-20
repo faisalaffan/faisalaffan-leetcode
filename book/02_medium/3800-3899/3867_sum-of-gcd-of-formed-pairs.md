@@ -1,21 +1,32 @@
 # 3867 — Sum Of Gcd Of Formed Pairs
 
-## Deskripsi
-
-**Soal:** [3867. Sum Of Gcd Of Formed Pairs](https://leetcode.com/problems/sum-of-gcd-of-formed-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SumOfGcdOfFormedPairs(nums []int) int
+```
+
+> **💡 Hint:** Build prefixGcd array where prefixGcd[i] = gcd(nums[i], max(nums[0..i])).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum, GCD / Matematika
 
 **Kompleksitas Waktu:** O(N log M)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func gcd(a, b int) int`
-
-> **Ide Kunci:** Build prefixGcd array where prefixGcd[i] = gcd(nums[i], max(nums[0..i])).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +52,7 @@ func gcd(a, b int) int {
 
 func SumOfGcdOfFormedPairs(nums []int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixGcd := make([]int, n)
 	mx := 0
 	for i, v := range nums {
@@ -51,6 +62,7 @@ func SumOfGcdOfFormedPairs(nums []int) int {
 		prefixGcd[i] = gcd(v, mx)
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(prefixGcd)
 
 	ans := 0

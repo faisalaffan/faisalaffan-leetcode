@@ -1,19 +1,32 @@
 # 3525 — Find X Value Of Array Ii
 
-## Deskripsi
-
-**Soal:** [3525. Find X Value Of Array Ii](https://leetcode.com/problems/find-x-value-of-array-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func resultArray(nums []int, k int, queries [][]int) []int
+```
+
+> **💡 Hint:** Process queries using prefix XOR and segment tree / BIT.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum, Segment Tree, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Process queries using prefix XOR and segment tree / BIT.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,13 +55,13 @@ func main() {
 func resultArray(nums []int, k int, queries [][]int) []int {
 	n := len(nums)
 	// Precompute prefix XOR
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefXor := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefXor[i+1] = prefXor[i] ^ nums[i]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]

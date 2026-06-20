@@ -1,19 +1,32 @@
 # 3734 — Lexicographically Smallest Palindromic Permutation Greater Than Target
 
-## Deskripsi
-
-**Soal:** [3734. Lexicographically Smallest Palindromic Permutation Greater Than Target](https://leetcode.com/problems/lexicographically-smallest-palindromic-permutation-greater-than-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func smallestPalindrome(s string, target string) string
+```
+
+> **💡 Hint:** Generate palindrome permutations by permuting the left
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Generate palindrome permutations by permuting the left
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ func smallestPalindrome(s string, target string) string {
 	n := len(s)
 
 	// Count character frequencies
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, 26)
 	for _, ch := range s {
 		freq[ch-'a']++
@@ -68,7 +81,6 @@ func smallestPalindrome(s string, target string) string {
 	}
 
 	// Build the left half multiset
-  // Membuat slice untuk menyimpan hasil
 	leftHalf := make([]byte, 0, n/2)
 	mid := byte(0)
 	hasMid := n%2 == 1
@@ -84,7 +96,6 @@ func smallestPalindrome(s string, target string) string {
 
 	// Generate palindrome from a given left half
 	makePalindrome := func(left []byte) string {
-  // Membuat slice untuk menyimpan hasil
 		buf := make([]byte, n)
 		l := len(left)
 		for i := 0; i < l; i++ {
@@ -102,9 +113,9 @@ func smallestPalindrome(s string, target string) string {
 	// Start from the smallest permutation (already sorted leftHalf).
 	// Use iterative next-permutation to find the first one > target.
 
-  // Membuat slice untuk menyimpan hasil
 	sortedLeft := make([]byte, len(leftHalf))
 	copy(sortedLeft, leftHalf)
+  // Custom sort dengan comparator
 	sort.Slice(sortedLeft, func(i, j int) bool {
 		return sortedLeft[i] < sortedLeft[j]
 	})
@@ -118,7 +129,6 @@ func smallestPalindrome(s string, target string) string {
 	// Generate next permutations and check
 	for {
 		// Find next permutation of leftHalf
-  // Membuat slice untuk menyimpan hasil
 		nextLeft := make([]byte, len(sortedLeft))
 		copy(nextLeft, sortedLeft)
 		if !nextPermutation(nextLeft) {

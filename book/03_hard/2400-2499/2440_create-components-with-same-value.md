@@ -1,17 +1,30 @@
 # 2440 — Create Components With Same Value
 
-## Deskripsi
-
-**Soal:** [2440. Create Components With Same Value](https://leetcode.com/problems/create-components-with-same-value/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func componentValue(nums []int, edges [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func componentValue(nums []int, edges [][]int) int {
 		total += v
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		a, b := e[0], e[1]
@@ -79,7 +92,6 @@ func componentValue(nums []int, edges [][]int) int {
 
 func canSplit(nums []int, adj [][]int, target int) bool {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	var dfs func(u int) int
 	dfs = func(u int) int {

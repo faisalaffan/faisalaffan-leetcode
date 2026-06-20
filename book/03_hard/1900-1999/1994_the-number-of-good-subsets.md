@@ -1,21 +1,32 @@
 # 1994 — The Number Of Good Subsets
 
-## Deskripsi
-
-**Soal:** [1994. The Number Of Good Subsets](https://leetcode.com/problems/the-number-of-good-subsets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func primeMask(num int) int
+```
+
+> **💡 Hint:** DP bitmask over the 10 primes up to 30.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func primeMask(num int) int`
-
-> **Ide Kunci:** DP bitmask over the 10 primes up to 30.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,13 +77,13 @@ func powMod(a, e, mod int) int {
 }
 
 func numberOfGoodSubsets(nums []int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	for _, v := range nums {
 		freq[v]++
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	masks := make(map[int]int) // num -> mask (-1 if invalid)
 	for k := range freq {
 		if k == 1 {
@@ -81,7 +92,7 @@ func numberOfGoodSubsets(nums []int) int {
 		masks[k] = primeMask(k)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, 1<<10)
 	dp[0] = 1
 

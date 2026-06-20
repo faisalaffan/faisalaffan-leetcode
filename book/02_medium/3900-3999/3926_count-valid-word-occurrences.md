@@ -1,21 +1,32 @@
 # 3926 — Count Valid Word Occurrences
 
-## Deskripsi
-
-**Soal:** [3926. Count Valid Word Occurrences](https://leetcode.com/problems/count-valid-word-occurrences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CountValidWordOccurrences(chunks []string, queries []string) []int
+```
+
+> **💡 Hint:** Concatenate chunks, extract words (lowercase letters +
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N + Q)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** HashMap (tabel pencarian O(1))
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func CountValidWordOccurrences(chunks []string, queries []string) []int`
-
-> **Ide Kunci:** Concatenate chunks, extract words (lowercase letters +
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ import (
 func CountValidWordOccurrences(chunks []string, queries []string) []int {
 	s := strings.Join(chunks, "")
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	wordCount := make(map[string]int)
 	n := len(s)
 	i := 0
@@ -72,7 +83,7 @@ func CountValidWordOccurrences(chunks []string, queries []string) []int {
 		i = j
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for idx, q := range queries {
 		ans[idx] = wordCount[q]

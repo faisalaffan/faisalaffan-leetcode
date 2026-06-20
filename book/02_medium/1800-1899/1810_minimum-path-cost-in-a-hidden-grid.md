@@ -1,19 +1,30 @@
 # 1810 — Minimum Path Cost In A Hidden Grid
 
-## Deskripsi
-
-**Soal:** [1810. Minimum Path Cost In A Hidden Grid](https://leetcode.com/problems/minimum-path-cost-in-a-hidden-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findShortestPath(master GridMaster) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Dijkstra
 
 **Kompleksitas Waktu:** O(m * n log(m*n)), Space: O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findShortestPath(master GridMaster) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,9 +48,9 @@ type GridMaster interface {
 
 func findShortestPath(master GridMaster) int {
 	// Discover grid: visited[r][c] = true means the cell was reached
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[[2]int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	costs := make(map[[2]int]int)
 	targetPos := [2]int{-1, -1}
 
@@ -76,7 +87,7 @@ func findShortestPath(master GridMaster) int {
 	}
 
 	// Dijkstra for shortest weighted path
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dist := make(map[[2]int]int)
 	dist[[2]int{0, 0}] = 0
 	pq := [][3]int{{0, 0, 0}} // dist, r, c

@@ -1,17 +1,30 @@
 # 3608 — Minimum Time For K Connected Components
 
-## Deskripsi
-
-**Soal:** [3608. Minimum Time For K Connected Components](https://leetcode.com/problems/minimum-time-for-k-connected-components/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumTimeForKConnectedComponents(n int, edges [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,13 +56,12 @@ func main() {
 
 func MinimumTimeForKConnectedComponents(n int, edges [][]int, k int) int {
 	// Find connected components count
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		adj[e[0]] = append(adj[e[0]], e[1])
 		adj[e[1]] = append(adj[e[1]], e[0])
 	}
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	components := 0
 	var dfs func(u int)

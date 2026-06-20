@@ -1,21 +1,32 @@
 # 2081 — Sum Of K Mirror Numbers
 
-## Deskripsi
-
-**Soal:** [2081. Sum Of K Mirror Numbers](https://leetcode.com/problems/sum-of-k-mirror-numbers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kMirror(k int, n int) int64
+```
+
+> **💡 Hint:** Generate palindromes in base k, check decimal palindrome
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func kMirror(k int, n int) int64`
-
-> **Ide Kunci:** Generate palindromes in base k, check decimal palindrome
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -86,7 +97,7 @@ func buildPalindrome(half int, oddLen bool, k int) int {
 	}
 	// Extract digits of half in base k (least significant first)
 	tmp := half
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digits := make([]int, 0)
 	for tmp > 0 {
 		digits = append(digits, tmp%k)

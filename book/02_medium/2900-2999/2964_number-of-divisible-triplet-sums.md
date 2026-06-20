@@ -1,19 +1,30 @@
 # 2964 — Number Of Divisible Triplet Sums
 
-## Deskripsi
-
-**Soal:** [2964. Number Of Divisible Triplet Sums](https://leetcode.com/problems/number-of-divisible-triplet-sums/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfDivisibleTripletSums(nums []int, d int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(d)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfDivisibleTripletSums(nums []int, d int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ func numberOfDivisibleTripletSums(nums []int, d int) int {
 	count := 0
 
 	// pre[rem] = count of elements before current j with remainder rem
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pre := make(map[int]int)
 
 	for j := 0; j < n; j++ {

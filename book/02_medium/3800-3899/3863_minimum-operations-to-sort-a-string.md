@@ -1,21 +1,32 @@
 # 3863 — Minimum Operations To Sort A String
 
-## Deskripsi
-
-**Soal:** [3863. Minimum Operations To Sort A String](https://leetcode.com/problems/minimum-operations-to-sort-a-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumOperationsToSortAString(s string) int
+```
+
+> **💡 Hint:** Count characters and determine min swaps to sort.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MinimumOperationsToSortAString(s string) int`
-
-> **Ide Kunci:** Count characters and determine min swaps to sort.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,14 +41,13 @@ import "fmt"
 
 func MinimumOperationsToSortAString(s string) int {
 	// Count character frequencies
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, 26)
 	for _, ch := range s {
 		cnt[ch-'a']++
 	}
 
 	// Build sorted string
-  // Membuat slice untuk menyimpan hasil
 	sorted := make([]byte, len(s))
 	idx := 0
 	for c := 0; c < 26; c++ {
@@ -49,7 +59,7 @@ func MinimumOperationsToSortAString(s string) int {
 
 	// Count mismatching positions (where s[i] != sorted[i])
 	mismatch := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		if s[i] != sorted[i] {
 			mismatch++

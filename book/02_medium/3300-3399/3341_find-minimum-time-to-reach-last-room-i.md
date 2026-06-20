@@ -1,17 +1,30 @@
 # 3341 — Find Minimum Time To Reach Last Room I
 
-## Deskripsi
-
-**Soal:** [3341. Find Minimum Time To Reach Last Room I](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minTimeToReach(moveTime [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(m * n * log(m * n)) Space: O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,9 +66,9 @@ func (h *MinHeap) Pop() interface{} {
 
 func minTimeToReach(moveTime [][]int) int {
 	m, n := len(moveTime), len(moveTime[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -66,10 +79,12 @@ func minTimeToReach(moveTime [][]int) int {
 
 	h := &MinHeap{}
 	heap.Init(h)
+  // Masukkan elemen ke priority queue
 	heap.Push(h, State{0, 0, 0})
 	dirs := [][2]int{{0, 1}, {0, -1}, {1, 0}, {-1, 0}}
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(h).(State)
 		if cur.time > dist[cur.r][cur.c] {
 			continue
@@ -87,6 +102,7 @@ func minTimeToReach(moveTime [][]int) int {
 				nt := cur.time + 1 + wait
 				if nt < dist[nr][nc] {
 					dist[nr][nc] = nt
+  // Masukkan elemen ke priority queue
 					heap.Push(h, State{nt, nr, nc})
 				}
 			}

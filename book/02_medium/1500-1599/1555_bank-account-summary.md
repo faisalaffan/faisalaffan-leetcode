@@ -1,17 +1,30 @@
 # 1555 — Bank Account Summary
 
-## Deskripsi
-
-**Soal:** [1555. Bank Account Summary](https://leetcode.com/problems/bank-account-summary/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func AccountSummary(users map[int]string, credits map[int]int, txns []struct{ userID, amount int }) []accountInfo
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +61,7 @@ type accountInfo struct {
 }
 
 func AccountSummary(users map[int]string, credits map[int]int, txns []struct{ userID, amount int }) []accountInfo {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	balance := make(map[int]int)
 	for uid, credit := range credits {
 		balance[uid] = credit
@@ -57,7 +70,6 @@ func AccountSummary(users map[int]string, credits map[int]int, txns []struct{ us
 		balance[t.userID] += t.amount
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]accountInfo, 0)
 	for uid, name := range users {
 		b := balance[uid]

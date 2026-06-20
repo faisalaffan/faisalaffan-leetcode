@@ -1,17 +1,30 @@
 # 3278 — Find Candidates For Data Scientist Position Ii
 
-## Deskripsi
-
-**Soal:** [3278. Find Candidates For Data Scientist Position Ii](https://leetcode.com/problems/find-candidates-for-data-scientist-position-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func topCandidates(candidates []Candidate, projects []Project) []ProjectResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(c * p) Space: O(c * p)  
 **Kompleksitas Ruang:** O(c * p)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,7 +73,7 @@ type ProjectResult struct {
 
 func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 	// Build candidate skill map: candidateID -> skill -> proficiency
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	candSkills := make(map[int]map[string]int)
 	for _, c := range candidates {
 		if candSkills[c.ID] == nil {
@@ -70,12 +83,12 @@ func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 	}
 
 	// Build project skill map: projectID -> []{skill, importance}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	projSkills := make(map[int][]struct {
 		skill      string
 		importance int
 	})
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	projReqCount := make(map[int]int)
 	for _, p := range projects {
 		projSkills[p.ID] = append(projSkills[p.ID], struct {
@@ -117,6 +130,7 @@ func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 	}
 
 	// Sort by project, then by score desc, then candidate id asc
+  // Custom sort dengan comparator
 	sort.Slice(allResults, func(i, j int) bool {
 		if allResults[i].projectID != allResults[j].projectID {
 			return allResults[i].projectID < allResults[j].projectID
@@ -129,7 +143,7 @@ func topCandidates(candidates []Candidate, projects []Project) []ProjectResult {
 
 	// Pick top candidate per project
 	var out []ProjectResult
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]bool)
 	for _, r := range allResults {
 		if !seen[r.projectID] {

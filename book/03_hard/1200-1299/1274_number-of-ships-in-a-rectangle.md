@@ -1,21 +1,32 @@
 # 1274 — Number Of Ships In A Rectangle
 
-## Deskripsi
-
-**Soal:** [1274. Number Of Ships In A Rectangle](https://leetcode.com/problems/number-of-ships-in-a-rectangle/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countShips(sea *Sea, topRight, bottomLeft []int) int
+```
+
+> **💡 Hint:** Divide-and-conquer (quadtree).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func countShips(sea *Sea, topRight, bottomLeft []int) int`
-
-> **Ide Kunci:** Divide-and-conquer (quadtree).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

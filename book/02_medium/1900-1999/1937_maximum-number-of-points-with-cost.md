@@ -1,17 +1,30 @@
 # 1937 — Maximum Number Of Points With Cost
 
-## Deskripsi
-
-**Soal:** [1937. Maximum Number Of Points With Cost](https://leetcode.com/problems/maximum-number-of-points-with-cost/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaxPoints(points [][]int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** O(m*n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,16 +43,16 @@ func main() {
 // Time: O(m*n), Space: O(n)
 func MaxPoints(points [][]int) int64 {
 	m, n := len(points), len(points[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int64, n)
 	for j := 0; j < n; j++ {
 		dp[j] = int64(points[0][j])
 	}
 
 	for i := 1; i < m; i++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		left := make([]int64, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		right := make([]int64, n)
 
 		// Left to right: max of dp[k] + k for k <= j
@@ -62,7 +75,7 @@ func MaxPoints(points [][]int) int64 {
 			}
 		}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		newDp := make([]int64, n)
 		for j := 0; j < n; j++ {
 			newDp[j] = int64(points[i][j]) + max64(left[j]-int64(j), right[j]+int64(j))

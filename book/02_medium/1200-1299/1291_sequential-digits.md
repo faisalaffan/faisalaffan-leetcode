@@ -1,19 +1,30 @@
 # 1291 — Sequential Digits
 
-## Deskripsi
-
-**Soal:** [1291. Sequential Digits](https://leetcode.com/problems/sequential-digits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sequentialDigits(low int, high int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(1) — bounded by number of possible sequential digits  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func sequentialDigits(low int, high int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ import (
 // Space: O(1)
 
 func sequentialDigits(low int, high int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0)
 	digits := "123456789"
 
@@ -50,6 +61,7 @@ func sequentialDigits(low int, high int) []int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

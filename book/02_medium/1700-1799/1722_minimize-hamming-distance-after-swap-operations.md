@@ -1,19 +1,30 @@
 # 1722 — Minimize Hamming Distance After Swap Operations
 
-## Deskripsi
-
-**Soal:** [1722. Minimize Hamming Distance After Swap Operations](https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewUnionFind(n int) *UnionFind
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** O(n + swaps), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewUnionFind(n int) *UnionFind`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ type UnionFind struct {
 }
 
 func NewUnionFind(n int) *UnionFind {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -61,7 +72,7 @@ func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) in
 	}
 
 	// Group indices by component
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[int][]int)
 	for i := 0; i < n; i++ {
 		root := uf.Find(i)
@@ -70,7 +81,7 @@ func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) in
 
 	hamming := 0
 	for _, indices := range groups {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		counts := make(map[int]int)
 		for _, idx := range indices {
 			counts[source[idx]]++

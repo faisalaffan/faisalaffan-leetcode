@@ -1,21 +1,32 @@
 # 1751 — Maximum Number Of Events That Can Be Attended Ii
 
-## Deskripsi
-
-**Soal:** [1751. Maximum Number Of Events That Can Be Attended Ii](https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxValue(events [][]int, k int) int
+```
+
+> **💡 Hint:** Sort by end time + DP + Binary Search.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxValue(events [][]int, k int) int`
-
-> **Ide Kunci:** Sort by end time + DP + Binary Search.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,13 +48,14 @@ import (
 
 func maxValue(events [][]int, k int) int {
 	// Sort by end time
+  // Custom sort dengan comparator
 	sort.Slice(events, func(i, j int) bool {
 		return events[i][1] < events[j][1]
 	})
 
 	n := len(events)
 	// prev[i] = index of last event that ends before events[i] starts
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prev := make([]int, n)
 	for i := 0; i < n; i++ {
 		start := events[i][0]
@@ -62,9 +74,9 @@ func maxValue(events [][]int, k int) int {
 	}
 
 	// dp[i][j] = max value using first i events (0-indexed), at most j events
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, k+1)
 	}

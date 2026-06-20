@@ -1,19 +1,30 @@
 # 1783 — Grand Slam Titles
 
-## Deskripsi
-
-**Soal:** [1783. Grand Slam Titles](https://leetcode.com/problems/grand-slam-titles/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countTitles(players []Player, championships []Championship) map[string]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func countTitles(players []Player, championships []Championship) map[string]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,7 @@ type Championship struct {
 }
 
 func countTitles(players []Player, championships []Championship) map[string]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	titles := make(map[string]int)
 	for _, c := range championships {
 		for _, p := range players {

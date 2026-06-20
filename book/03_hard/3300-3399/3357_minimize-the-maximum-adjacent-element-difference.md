@@ -1,19 +1,32 @@
 # 3357 — Minimize The Maximum Adjacent Element Difference
 
-## Deskripsi
-
-**Soal:** [3357. Minimize The Maximum Adjacent Element Difference](https://leetcode.com/problems/minimize-the-maximum-adjacent-element-difference/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDifference(nums []int) int
+```
+
+> **💡 Hint:** Analyze known-adjacent gaps and ranges for missing segments.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Analyze known-adjacent gaps and ranges for missing segments.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -68,7 +81,7 @@ func minDifference(nums []int) int {
 	}
 
 	// Find ranges of known neighbors adjacent to -1 segments
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	neighbors := make([]int, 0)
 	for i := 0; i < n; i++ {
 		if nums[i] > 0 {
@@ -100,7 +113,7 @@ func minDifference(nums []int) int {
 
 	// Binary search on answer
 	left, right := maxAdj, maxVal-minVal+maxAdj
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := (left + right) / 2
 		if canAchieve(nums, mid) {
@@ -122,7 +135,6 @@ func canAchieve(nums []int, d int) bool {
 		length        int
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	segments := make([]seg, 0)
 	i := 0
 	for i < n {
@@ -151,7 +163,7 @@ func canAchieve(nums []int, d int) bool {
 
 	// Check if we can choose x and y to satisfy all segments
 	// Strategy: try all possible x values from neighbor values
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	neighborSet := make(map[int]bool)
 	for _, v := range nums {
 		if v > 0 {
@@ -160,7 +172,7 @@ func canAchieve(nums []int, d int) bool {
 	}
 
 	// Try all pairs from neighbor values (limited set)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	candidates := make([]int, 0, len(neighborSet))
 	for v := range neighborSet {
 		candidates = append(candidates, v)

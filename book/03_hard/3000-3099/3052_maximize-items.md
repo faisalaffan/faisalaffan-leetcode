@@ -1,21 +1,32 @@
 # 3052 — Maximize Items
 
-## Deskripsi
-
-**Soal:** [3052. Maximize Items](https://leetcode.com/problems/maximize-items/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximizeItems(inventory []InventoryItem) []itemCountResult
+```
+
+> **💡 Hint:** Given warehouse space (500,000 sq ft) and inventory items grouped
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximizeItems(inventory []InventoryItem) []itemCountResult`
-
-> **Ide Kunci:** Given warehouse space (500,000 sq ft) and inventory items grouped
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +59,7 @@ func maximizeItems(inventory []InventoryItem) []itemCountResult {
 		totalSqFt float64
 		count     int64
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[string]*typeInfo)
 	for _, item := range inventory {
 		if groups[item.ItemType] == nil {

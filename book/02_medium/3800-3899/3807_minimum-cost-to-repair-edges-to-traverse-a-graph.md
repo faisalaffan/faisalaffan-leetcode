@@ -1,21 +1,32 @@
 # 3807 — Minimum Cost To Repair Edges To Traverse A Graph
 
-## Deskripsi
-
-**Soal:** [3807. Minimum Cost To Repair Edges To Traverse A Graph](https://leetcode.com/problems/minimum-cost-to-repair-edges-to-traverse-a-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumCostToRepairEdgesToTraverseAGraph(n int, edges [][]int, k int) int
+```
+
+> **💡 Hint:** Binary search on cost + BFS to check reachability within k edges.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O((N+M) * log M)  
 **Kompleksitas Ruang:** O(N+M)
 
-**Algoritma:** Binary Search (pencarian biner), BFS (Breadth-First Search / pencarian lebar), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumCostToRepairEdgesToTraverseAGraph(n int, edges [][]int, k int) int`
-
-> **Ide Kunci:** Binary search on cost + BFS to check reachability within k edges.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,6 +45,7 @@ import (
 
 func MinimumCostToRepairEdgesToTraverseAGraph(n int, edges [][]int, k int) int {
 	// Sort edges by repair cost
+  // Custom sort dengan comparator
 	sort.Slice(edges, func(i, j int) bool {
 		return edges[i][2] < edges[j][2]
 	})
@@ -52,7 +64,7 @@ func MinimumCostToRepairEdgesToTraverseAGraph(n int, edges [][]int, k int) int {
 		costLimit := edges[mid][2]
 
 		// Build graph with edges <= costLimit
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		adj := make([][]int, n)
 		for _, e := range edges {
 			if e[2] <= costLimit {
@@ -63,9 +75,9 @@ func MinimumCostToRepairEdgesToTraverseAGraph(n int, edges [][]int, k int) int {
 		}
 
 		// BFS to find shortest path from 0 to n-1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range dist {
 			dist[i] = -1
 		}

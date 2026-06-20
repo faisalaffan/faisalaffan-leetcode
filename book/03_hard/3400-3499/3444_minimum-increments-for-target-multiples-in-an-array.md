@@ -1,19 +1,30 @@
 # 3444 — Minimum Increments For Target Multiples In An Array
 
-## Deskripsi
-
-**Soal:** [3444. Minimum Increments For Target Multiples In An Array](https://leetcode.com/problems/minimum-increments-for-target-multiples-in-an-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lcm(a, b int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, GCD / Matematika, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func min(a, b int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,7 +65,7 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 	M := 1 << m
 
 	// Precompute LCM for each subset mask
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lcmMask := make([]int, M)
 	lcmMask[0] = 1
 	for mask := 1; mask < M; mask++ {
@@ -77,7 +88,7 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 
 	// For each element, min increment to cover each mask
 	// cost[i][mask] = min increment to make nums[i] divisible by lcmMask[mask]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	elemCost := make([][]int, n)
 	for i, x := range nums {
 		elemCost[i] = make([]int, M)
@@ -98,14 +109,14 @@ func minIncrementsForTargetMultiples(nums []int, target []int) int {
 	}
 
 	// 0/1 knapSack DP over elements
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, M)
 	for mask := 1; mask < M; mask++ {
 		dp[mask] = INF
 	}
 
 	for _, cost := range elemCost {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, M)
 		copy(ndp, dp)
 		for oldMask := 0; oldMask < M; oldMask++ {

@@ -1,19 +1,30 @@
 # 2601 — Prime Subtraction Operation
 
-## Deskripsi
-
-**Soal:** [2601. Prime Subtraction Operation](https://leetcode.com/problems/prime-subtraction-operation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func primeSubOperation(nums []int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * maxVal)  
 **Kompleksitas Ruang:** O(maxVal)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func primeSubOperation(nums []int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,6 @@ import "fmt"
 func primeSubOperation(nums []int) bool {
 	// Sieve: find all primes up to 1000
 	maxN := 1000
-  // Membuat slice untuk menyimpan hasil
 	isPrime := make([]bool, maxN+1)
 	for i := 2; i <= maxN; i++ {
 		isPrime[i] = true

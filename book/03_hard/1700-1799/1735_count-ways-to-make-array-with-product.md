@@ -1,21 +1,32 @@
 # 1735 — Count Ways To Make Array With Product
 
-## Deskripsi
-
-**Soal:** [1735. Count Ways To Make Array With Product](https://leetcode.com/problems/count-ways-to-make-array-with-product/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func powMod(a, e int) int
+```
+
+> **💡 Hint:** Prime factorization + combinatorics (stars and bars).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func powMod(a, e int) int`
-
-> **Ide Kunci:** Prime factorization + combinatorics (stars and bars).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -65,7 +76,7 @@ func nCr(n, r int) int {
 }
 
 func factorize(n int) map[int]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	factors := make(map[int]int)
 	for p := 2; p*p <= n; p++ {
 		for n%p == 0 {
@@ -80,7 +91,7 @@ func factorize(n int) map[int]int {
 }
 
 func waysToFillArray(queries [][]int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for idx, q := range queries {
 		k, n := q[0], q[1]

@@ -1,17 +1,30 @@
 # 0675 — Cut Off Trees For Golf Event
 
-## Deskripsi
-
-**Soal:** [0675. Cut Off Trees For Golf Event](https://leetcode.com/problems/cut-off-trees-for-golf-event/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func cutOffTree(forest [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -75,6 +88,7 @@ func cutOffTree(forest [][]int) int {
 			}
 		}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(trees, func(i, j int) bool { return trees[i].h < trees[j].h })
 
 	dirs := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
@@ -96,7 +110,7 @@ func bfsShortest(forest [][]int, sr, sc, tr, tc, m, n int, dirs [][2]int) int {
 	if sr == tr && sc == tc {
 		return 0
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, m)
 	for i := 0; i < m; i++ {
 		dist[i] = make([]int, n)
@@ -109,6 +123,7 @@ func bfsShortest(forest [][]int, sr, sc, tr, tc, m, n int, dirs [][2]int) int {
 	heap.Init(h)
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(h).(pqItem)
 		if cur.r == tr && cur.c == tc {
 			return cur.dist
@@ -124,6 +139,7 @@ func bfsShortest(forest [][]int, sr, sc, tr, tc, m, n int, dirs [][2]int) int {
 			nd := cur.dist + 1
 			if nd < dist[nr][nc] {
 				dist[nr][nc] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(h, pqItem{nr, nc, nd})
 			}
 		}

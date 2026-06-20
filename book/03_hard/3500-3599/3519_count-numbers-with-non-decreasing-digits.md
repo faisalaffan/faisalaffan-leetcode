@@ -1,19 +1,32 @@
 # 3519 — Count Numbers With Non Decreasing Digits
 
-## Deskripsi
-
-**Soal:** [3519. Count Numbers With Non Decreasing Digits](https://leetcode.com/problems/count-numbers-with-non-decreasing-digits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countNumbers(l string, r string, b int) int
+```
+
+> **💡 Hint:** Digit DP. For each position, track the last digit used to ensure
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Digit DP. For each position, track the last digit used to ensure
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,7 +79,7 @@ func countUpTo(s string, b int) int {
 
 	// DP[pos][tight][lastDigit][started]
 	var memo [101][2][17][2]int
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		for j := range memo[i] {
 			for k := range memo[i][j] {
@@ -153,7 +166,7 @@ func toDigits(s string, b int) []int {
 }
 
 func toDigitsDecimal(s string) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(s))
 	for i, ch := range s {
 		result[i] = int(ch - '0')

@@ -1,19 +1,30 @@
 # 2551 — Put Marbles In Bags
 
-## Deskripsi
-
-**Soal:** [2551. Put Marbles In Bags](https://leetcode.com/problems/put-marbles-in-bags/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func putMarbles(weights []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func putMarbles(weights []int, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,11 +50,12 @@ func putMarbles(weights []int, k int) int64 {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sums := make([]int, n-1)
 	for i := 0; i < n-1; i++ {
 		sums[i] = weights[i] + weights[i+1]
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sums)
 
 	var minScore, maxScore int64

@@ -1,19 +1,32 @@
 # 1478 — Allocate Mailboxes
 
-## Deskripsi
-
-**Soal:** [1478. Allocate Mailboxes](https://leetcode.com/problems/allocate-mailboxes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDistance(houses []int, k int) int
+```
+
+> **💡 Hint:** DP + Median Cost
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP + Median Cost
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,6 +60,7 @@ func main() {
 }
 
 func minDistance(houses []int, k int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(houses)
 	n := len(houses)
 
@@ -55,9 +69,9 @@ func minDistance(houses []int, k int) int {
 	}
 
 	// precompute cost[i][j] = min dist for 1 mailbox serving houses[i..j]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	cost := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range cost {
 		cost[i] = make([]int, n)
 	}
@@ -75,9 +89,9 @@ func minDistance(houses []int, k int) int {
 	}
 
 	// dp[i][j] = min distance for first i+1 houses with j+1 mailboxes
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, k)
 		for j := range dp[i] {

@@ -1,19 +1,32 @@
 # 3901 — Good Subsequence Queries
 
-## Deskripsi
-
-**Soal:** [3901. Good Subsequence Queries](https://leetcode.com/problems/good-subsequence-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countGoodSubseq(nums []int, p int, queries [][]int) int
+```
+
+> **💡 Hint:** DP. For each position i, track count of subsequences
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP. For each position i, track count of subsequences
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,12 +68,12 @@ func countGoodSubseq(nums []int, p int, queries [][]int) int {
 		}
 
 		// DP on subarray nums[l:r+1]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		local := make([]int, p)
 		local[0] = 1
 		for i := l; i <= r; i++ {
 			val := nums[i] % p
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			ndp := make([]int, p)
 			copy(ndp, local)
 			for m := 0; m < p; m++ {

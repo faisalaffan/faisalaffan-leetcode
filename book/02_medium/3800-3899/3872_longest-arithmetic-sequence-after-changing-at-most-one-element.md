@@ -1,21 +1,32 @@
 # 3872 — Longest Arithmetic Sequence After Changing At Most One Element
 
-## Deskripsi
-
-**Soal:** [3872. Longest Arithmetic Sequence After Changing At Most One Element](https://leetcode.com/problems/longest-arithmetic-sequence-after-changing-at-most-one-element/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LongestArithmeticSequenceAfterChangingAtMostOneElement(nums []int) int
+```
+
+> **💡 Hint:** Compute prefix (arithmetic ending at i) and suffix (arithmetic starting at i).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func LongestArithmeticSequenceAfterChangingAtMostOneElement(nums []int) int`
-
-> **Ide Kunci:** Compute prefix (arithmetic ending at i) and suffix (arithmetic starting at i).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ func LongestArithmeticSequenceAfterChangingAtMostOneElement(nums []int) int {
 		return n
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n)
 	pref[0] = 1
 	pref[1] = 2
@@ -47,7 +58,7 @@ func LongestArithmeticSequenceAfterChangingAtMostOneElement(nums []int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suff := make([]int, n)
 	suff[n-1] = 1
 	suff[n-2] = 2

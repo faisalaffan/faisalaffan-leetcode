@@ -1,19 +1,32 @@
 # 3943 — Number Of Pairs After Increment
 
-## Deskripsi
-
-**Soal:** [3943. Number Of Pairs After Increment](https://leetcode.com/problems/number-of-pairs-after-increment/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfPairs(nums1 []int, nums2 []int, queries [][]int) []int
+```
+
+> **💡 Hint:** Maintain sorted nums2. Binary search to count how
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Maintain sorted nums2. Binary search to count how
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,8 +57,9 @@ func main() {
 }
 
 func numberOfPairs(nums1 []int, nums2 []int, queries [][]int) []int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums2)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 
 	for idx, q := range queries {
@@ -60,6 +74,7 @@ func numberOfPairs(nums1 []int, nums2 []int, queries [][]int) []int {
 		}
 
 		if false {
+  // Urutkan secara ascending — O(n log n)
 			sort.Ints([]int{}) // keep sort import
 		}
 	}

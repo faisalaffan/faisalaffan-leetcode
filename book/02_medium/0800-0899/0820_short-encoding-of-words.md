@@ -1,17 +1,30 @@
 # 0820 — Short Encoding Of Words
 
-## Deskripsi
-
-**Soal:** [0820. Short Encoding Of Words](https://leetcode.com/problems/short-encoding-of-words/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ShortEncodingOfWords(words []string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * L^2)  
 **Kompleksitas Ruang:** O(n * L) where L is average word length
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +43,7 @@ func main() {
 
 // Time: O(n * L^2) | Space: O(n * L) where L is average word length
 func ShortEncodingOfWords(words []string) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	set := make(map[string]bool)
 	for _, word := range words {
 		set[word] = true

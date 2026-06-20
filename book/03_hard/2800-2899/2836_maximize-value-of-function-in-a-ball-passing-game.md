@@ -1,19 +1,30 @@
 # 2836 — Maximize Value Of Function In A Ball Passing Game
 
-## Deskripsi
-
-**Soal:** [2836. Maximize Value Of Function In A Ball Passing Game](https://leetcode.com/problems/maximize-value-of-function-in-a-ball-passing-game/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getMaxFunctionValue(receiver []int, k int64) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Binary Lifting
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Binary Lifting (lompatan biner untuk LCA)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getMaxFunctionValue(receiver []int, k int64) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ func getMaxFunctionValue(receiver []int, k int64) int64 {
 		logK++
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	sum := make([][]int64, n)
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, logK)

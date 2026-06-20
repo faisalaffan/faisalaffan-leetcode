@@ -1,19 +1,30 @@
 # 3233 — Find The Count Of Numbers Which Are Not Special
 
-## Deskripsi
-
-**Soal:** [3233. Find The Count Of Numbers Which Are Not Special](https://leetcode.com/problems/find-the-count-of-numbers-which-are-not-special/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func nonSpecialCount(l int, r int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(sqrt(r) log log r)  
 **Kompleksitas Ruang:** O(sqrt(r))
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func nonSpecialCount(l int, r int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,6 @@ import "fmt"
 func nonSpecialCount(l int, r int) int {
 	limit := 31623 // sqrt(10^9) approx
 
-  // Membuat slice untuk menyimpan hasil
 	isPrime := make([]bool, limit+1)
 	for i := 2; i <= limit; i++ {
 		isPrime[i] = true

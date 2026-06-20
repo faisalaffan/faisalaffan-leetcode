@@ -1,17 +1,30 @@
 # 3543 — Maximum Weighted K Edge Path
 
-## Deskripsi
-
-**Soal:** [3543. Maximum Weighted K Edge Path](https://leetcode.com/problems/maximum-weighted-k-edge-path/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumWeightedKEdgePath(n int, edges [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func main() {
 
 func MaximumWeightedKEdgePath(n int, edges [][]int, k int) int {
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -52,9 +65,9 @@ func MaximumWeightedKEdgePath(n int, edges [][]int, k int) int {
 	}
 
 	// dp[step][node] = max weight to reach node with exactly 'step' edges
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, k+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 		for j := range dp[i] {

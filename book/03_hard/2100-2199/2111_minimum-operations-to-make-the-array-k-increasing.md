@@ -1,19 +1,32 @@
 # 2111 — Minimum Operations To Make The Array K Increasing
 
-## Deskripsi
-
-**Soal:** [2111. Minimum Operations To Make The Array K Increasing](https://leetcode.com/problems/minimum-operations-to-make-the-array-k-increasing/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(arr []int, k int) int
+```
+
+> **💡 Hint:** LIS per mod-k subsequence.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** LIS per mod-k subsequence.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

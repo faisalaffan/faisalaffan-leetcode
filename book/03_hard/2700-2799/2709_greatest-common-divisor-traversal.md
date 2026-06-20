@@ -1,19 +1,32 @@
 # 2709 — Greatest Common Divisor Traversal
 
-## Deskripsi
-
-**Soal:** [2709. Greatest Common Divisor Traversal](https://leetcode.com/problems/greatest-common-divisor-traversal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canTraverseAllPairs(nums []int) bool
+```
+
+> **💡 Hint:** Union-Find with prime factorization via smallest prime factor (SPF) sieve.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Union-Find with prime factorization via smallest prime factor (SPF) sieve.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,7 +69,7 @@ func canTraverseAllPairs(nums []int) bool {
 	}
 
 	// Smallest Prime Factor sieve
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	spf := make([]int, maxVal+1)
 	for i := 2; i <= maxVal; i++ {
 		if spf[i] == 0 {
@@ -71,11 +84,11 @@ func canTraverseAllPairs(nums []int) bool {
 	// Union-Find: indices 0..n-1 for array elements, n..n+maxPrimes for prime nodes
 	// Instead of mapping primes, we use offset: prime p maps to n+p
 	total := n + maxVal + 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, total)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	size := make([]int, total)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 		size[i] = 1

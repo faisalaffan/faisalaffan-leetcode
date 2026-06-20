@@ -1,19 +1,30 @@
 # 2342 — Max Sum Of A Pair With Equal Sum Of Digits
 
-## Deskripsi
-
-**Soal:** [2342. Max Sum Of A Pair With Equal Sum Of Digits](https://leetcode.com/problems/max-sum-of-a-pair-with-equal-sum-of-digits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumSum(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n * d)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumSum(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ package main
 import "fmt"
 
 func maximumSum(nums []int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digitSums := make([]int, len(nums))
 	for i, v := range nums {
 		sum := 0
@@ -37,7 +48,7 @@ func maximumSum(nums []int) int {
 		digitSums[i] = sum
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	maxVal := make(map[int][2]int) // top 2 for each digit sum
 	for i, ds := range digitSums {
 		a, b := maxVal[ds][0], maxVal[ds][1]

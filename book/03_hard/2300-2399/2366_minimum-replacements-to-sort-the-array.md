@@ -1,21 +1,32 @@
 # 2366 — Minimum Replacements To Sort The Array
 
-## Deskripsi
-
-**Soal:** [2366. Minimum Replacements To Sort The Array](https://leetcode.com/problems/minimum-replacements-to-sort-the-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumReplacements(nums []int) int64
+```
+
+> **💡 Hint:** Greedy from right to left. Maintain a bound = last element.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumReplacements(nums []int) int64`
-
-> **Ide Kunci:** Greedy from right to left. Maintain a bound = last element.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

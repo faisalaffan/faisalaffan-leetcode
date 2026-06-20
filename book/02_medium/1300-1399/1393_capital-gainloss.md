@@ -1,17 +1,35 @@
 # 1393 — Capital Gainloss
 
-## Deskripsi
-
-**Soal:** [1393. Capital Gainloss](https://leetcode.com/problems/capital-gainloss/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func capitalGainLoss(stocks []struct {
+	stockName    string
+	operation    string
+	operationDay int
+	price        int
+}) []gainLoss
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n) where n = number of transactions  
 **Kompleksitas Ruang:** O(k) where k = number of unique stock names
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,7 +78,7 @@ func capitalGainLoss(stocks []struct {
 	operationDay int
 	price        int
 }) []gainLoss {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	holdings := make(map[string]int) // net cost of buys
 	for _, s := range stocks {
 		if s.operation == "Buy" {

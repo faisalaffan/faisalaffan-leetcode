@@ -1,17 +1,30 @@
 # 2675 — Array Of Objects To Matrix
 
-## Deskripsi
-
-**Soal:** [2675. Array Of Objects To Matrix](https://leetcode.com/problems/array-of-objects-to-matrix/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func arrayOfObjectsToMatrix(arr []map[string]any) [][]any
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -64,13 +77,12 @@ func arrayOfObjectsToMatrix(arr []map[string]any) [][]any {
 	}
 
 	// Collect all unique flattened keys
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	keySet := make(map[string]bool)
-  // Membuat slice untuk menyimpan hasil
 	flattened := make([]map[string]any, len(arr))
 
 	for i, obj := range arr {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		flat := make(map[string]any)
 		flattenObj("", obj, flat)
 		flattened[i] = flat
@@ -80,7 +92,6 @@ func arrayOfObjectsToMatrix(arr []map[string]any) [][]any {
 	}
 
 	// Sort keys
-  // Membuat slice untuk menyimpan hasil
 	keys := make([]string, 0, len(keySet))
 	for k := range keySet {
 		keys = append(keys, k)
@@ -88,11 +99,10 @@ func arrayOfObjectsToMatrix(arr []map[string]any) [][]any {
 	sort.Strings(keys)
 
 	// Build matrix
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]any, len(arr)+1)
 
 	// Header row
-  // Membuat slice untuk menyimpan hasil
 	header := make([]any, len(keys))
 	for i, k := range keys {
 		header[i] = k
@@ -101,7 +111,6 @@ func arrayOfObjectsToMatrix(arr []map[string]any) [][]any {
 
 	// Data rows
 	for i, flat := range flattened {
-  // Membuat slice untuk menyimpan hasil
 		row := make([]any, len(keys))
 		for j, k := range keys {
 			if v, ok := flat[k]; ok {

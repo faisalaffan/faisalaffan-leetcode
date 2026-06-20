@@ -1,21 +1,32 @@
 # 3889 — Mirror Frequency Distance
 
-## Deskripsi
-
-**Soal:** [3889. Mirror Frequency Distance](https://leetcode.com/problems/mirror-frequency-distance/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MirrorFrequencyDistance(s string) int
+```
+
+> **💡 Hint:** Count character frequencies. For each unique char, compute mirror
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MirrorFrequencyDistance(s string) int`
-
-> **Ide Kunci:** Count character frequencies. For each unique char, compute mirror
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ package main
 import "fmt"
 
 func MirrorFrequencyDistance(s string) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, 36) // 0-25: letters, 26-35: digits
 	for _, ch := range s {
 		if ch >= 'a' && ch <= 'z' {
@@ -40,7 +51,6 @@ func MirrorFrequencyDistance(s string) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, 36)
 	ans := 0
 	for i := 0; i < 36; i++ {

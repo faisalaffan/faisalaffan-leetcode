@@ -1,19 +1,30 @@
 # 1916 — Count Ways To Build Rooms In An Ant Colony
 
-## Deskripsi
-
-**Soal:** [1916. Count Ways To Build Rooms In An Ant Colony](https://leetcode.com/problems/count-ways-to-build-rooms-in-an-ant-colony/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func waysToBuildRooms(prevRoom []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func waysToBuildRooms(prevRoom []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,7 @@ const mod = 1_000_000_007
 
 func waysToBuildRooms(prevRoom []int) int {
 	n := len(prevRoom)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	children := make([][]int, n)
 	for i := 1; i < n; i++ {
 		p := prevRoom[i]
@@ -36,9 +47,9 @@ func waysToBuildRooms(prevRoom []int) int {
 	}
 
 	// Precompute factorials and inverse factorials
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	fact := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	invFact := make([]int, n+1)
 	fact[0] = 1
 	for i := 1; i <= n; i++ {

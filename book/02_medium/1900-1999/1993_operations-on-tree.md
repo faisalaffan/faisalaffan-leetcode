@@ -1,17 +1,30 @@
 # 1993 — Operations On Tree
 
-## Deskripsi
-
-**Soal:** [1993. Operations On Tree](https://leetcode.com/problems/operations-on-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor1993(parent []int) LockingTree
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,13 +55,13 @@ type LockingTree struct {
 // Constructor1993 initializes the LockingTree
 func Constructor1993(parent []int) LockingTree {
 	n := len(parent)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	locked := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range locked {
 		locked[i] = -1
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	children := make([][]int, n)
 	for i := 1; i < n; i++ {
 		children[parent[i]] = append(children[parent[i]], i)

@@ -1,21 +1,32 @@
 # 2376 — Count Special Integers
 
-## Deskripsi
-
-**Soal:** [2376. Count Special Integers](https://leetcode.com/problems/count-special-integers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countSpecialNumbers(n int) int
+```
+
+> **💡 Hint:** Digit DP with bitmask of used digits.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countSpecialNumbers(n int) int`
-
-> **Ide Kunci:** Digit DP with bitmask of used digits.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,16 +54,16 @@ func countSpecialNumbers(n int) int {
 	s := strconv.Itoa(n)
 	m := len(s)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digits := make([]int, m)
 	for i, ch := range s {
 		digits[i] = int(ch - '0')
 	}
 
 	// memo[pos][mask][tight][started]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	memo := make([][][2][2]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = make([][2][2]int, 1<<10)
 		for mask := 0; mask < (1 << 10); mask++ {

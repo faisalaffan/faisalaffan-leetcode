@@ -1,19 +1,30 @@
 # 0569 — Median Employee Salary
 
-## Deskripsi
-
-**Soal:** [0569. Median Employee Salary](https://leetcode.com/problems/median-employee-salary/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func medianEmployeeSalary(employees []Employee) []MedianResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(E log E) for sorting, Space: O(E)  
 **Kompleksitas Ruang:** O(E)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func medianEmployeeSalary(employees []Employee) []MedianResult`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +59,7 @@ type MedianResult struct {
 // Time: O(E log E) for sorting, Space: O(E)
 func medianEmployeeSalary(employees []Employee) []MedianResult {
 	// Group by company.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byCompany := make(map[string][]int)
 	for _, e := range employees {
 		byCompany[e.Company] = append(byCompany[e.Company], e.Salary)
@@ -58,10 +69,11 @@ func medianEmployeeSalary(employees []Employee) []MedianResult {
 
 	// Process each company.
 	for company, salaries := range byCompany {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(salaries)
 		n := len(salaries)
 
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 		if n == 0 {
 			continue
 		}
@@ -77,6 +89,7 @@ func medianEmployeeSalary(employees []Employee) []MedianResult {
 	}
 
 	// Sort by company name, then salary for deterministic output.
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].Company != results[j].Company {
 			return results[i].Company < results[j].Company

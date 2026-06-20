@@ -1,17 +1,30 @@
 # 2975 — Maximum Square Area By Removing Fences From A Field
 
-## Deskripsi
-
-**Soal:** [2975. Maximum Square Area By Removing Fences From A Field](https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximizeSquareAreaField(m int, n int, hFences []int, vFences []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(h^2 + v^2)  
 **Kompleksitas Ruang:** O(h^2 + v^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +49,10 @@ func maximizeSquareAreaField(m int, n int, hFences []int, vFences []int) int {
 
 	getGaps := func(fences []int, limit int) map[int]bool {
 		arr := append(fences, 1, limit)
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(arr)
 		gaps := map[int]bool{}
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(arr); i++ {
 			for j := i + 1; j < len(arr); j++ {
 				gaps[arr[j]-arr[i]] = true

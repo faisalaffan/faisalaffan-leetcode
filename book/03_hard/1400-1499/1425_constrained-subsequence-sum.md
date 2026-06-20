@@ -1,19 +1,30 @@
 # 1425 — Constrained Subsequence Sum
 
-## Deskripsi
-
-**Soal:** [1425. Constrained Subsequence Sum](https://leetcode.com/problems/constrained-subsequence-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func constrainedSubsetSum(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, Dynamic Programming, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func constrainedSubsetSum(nums []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,10 +37,10 @@ import "fmt"
 
 func constrainedSubsetSum(nums []int, k int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n)
 	// Monotonic deque storing indices, decreasing dp values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	deque := make([]int, 0, n)
 	ans := nums[0]
 

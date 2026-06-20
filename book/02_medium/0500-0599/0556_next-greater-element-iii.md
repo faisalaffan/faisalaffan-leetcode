@@ -1,17 +1,30 @@
 # 0556 — Next Greater Element Iii
 
-## Deskripsi
-
-**Soal:** [0556. Next Greater Element Iii](https://leetcode.com/problems/next-greater-element-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NextGreaterElementIii(n int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(log n) = O(number of digits)  
 **Kompleksitas Ruang:** O(log n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,7 +69,7 @@ func NextGreaterElementIii(n int) int {
 
 	// Reverse suffix
 	left, right := i+1, len(s)-1
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		s[left], s[right] = s[right], s[left]
 		left++

@@ -1,17 +1,30 @@
 # 2213 — Longest Substring Of One Repeating Character
 
-## Deskripsi
-
-**Soal:** [2213. Longest Substring Of One Repeating Character](https://leetcode.com/problems/longest-substring-of-one-repeating-character/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func merge(left, right SegNode) SegNode
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum, Segment Tree
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -94,7 +107,6 @@ func max(a, b int) int {
 
 func NewSegTree(s string) *SegTree {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
 	tree := make([]SegNode, 4*n)
 	st := &SegTree{tree: tree, n: n}
 	st.build(1, 1, n, s)
@@ -140,7 +152,7 @@ func (st *SegTree) update(idx, l, r, pos int, c byte) {
 
 func longestRepeating(s string, queryCharacters string, queryIndices []int) []int {
 	st := NewSegTree(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queryCharacters))
 	for i, c := range queryCharacters {
 		st.Update(queryIndices[i]+1, byte(c))

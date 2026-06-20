@@ -1,19 +1,30 @@
 # 3787 — Find Diameter Endpoints Of A Tree
 
-## Deskripsi
-
-**Soal:** [3787. Find Diameter Endpoints Of A Tree](https://leetcode.com/problems/find-diameter-endpoints-of-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findDiameterEndpointsOfATree(n int, edges [][]int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findDiameterEndpointsOfATree(n int, edges [][]int) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ package main
 import "fmt"
 
 func findDiameterEndpointsOfATree(n int, edges [][]int) string {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -35,7 +46,7 @@ func findDiameterEndpointsOfATree(n int, edges [][]int) string {
 	}
 
 	bfs := func(start int) (int, []int) {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dist := make([]int, n)
 		for i := 0; i < n; i++ {
 			dist[i] = -1
@@ -64,7 +75,6 @@ func findDiameterEndpointsOfATree(n int, edges [][]int) string {
 	_, distB := bfs(b)
 	diameter := distA[b]
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]byte, n)
 	for i := 0; i < n; i++ {
 		if distA[i] == diameter || distB[i] == diameter {

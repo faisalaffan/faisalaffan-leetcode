@@ -1,21 +1,32 @@
 # 3809 — Best Reachable Tower
 
-## Deskripsi
-
-**Soal:** [3809. Best Reachable Tower](https://leetcode.com/problems/best-reachable-tower/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func BestReachableTower(towers [][]int, center []int, radius int) []int
+```
+
+> **💡 Hint:** One-pass scan checking Manhattan distance and comparing quality.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func BestReachableTower(towers [][]int, center []int, radius int) []int`
-
-> **Ide Kunci:** One-pass scan checking Manhattan distance and comparing quality.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

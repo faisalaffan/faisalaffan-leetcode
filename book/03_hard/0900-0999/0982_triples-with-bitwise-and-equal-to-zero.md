@@ -1,19 +1,30 @@
 # 0982 — Triples With Bitwise And Equal To Zero
 
-## Deskripsi
-
-**Soal:** [0982. Triples With Bitwise And Equal To Zero](https://leetcode.com/problems/triples-with-bitwise-and-equal-to-zero/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countTriplets(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countTriplets(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,7 @@ func countTriplets(nums []int) int {
 	// Count pairs (i, j) for each possible AND value
 	// Since nums[i] <= 2^16, we can use an array of size 2^16
 	maxVal := 1 << 16
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pairCount := make([]int, maxVal)
 
 	for _, a := range nums {
@@ -71,7 +82,7 @@ func countTriplets(nums []int) int {
 
 	// Let me rewrite more cleanly
 	// Precompute frequency of each value in nums
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, maxVal)
 	for _, v := range nums {
 		if v < maxVal {

@@ -1,19 +1,30 @@
 # 1886 — Determine Whether Matrix Can Be Obtained By Rotation
 
-## Deskripsi
-
-**Soal:** [1886. Determine Whether Matrix Can Be Obtained By Rotation](https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindRotation(mat [][]int, target [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n^2), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func FindRotation(mat [][]int, target [][]int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,7 @@ func FindRotation(mat [][]int, target [][]int) bool {
 
 func rotate(mat [][]int) [][]int {
 	n := len(mat)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rotated := make([][]int, n)
 	for i := 0; i < n; i++ {
 		rotated[i] = make([]int, n)

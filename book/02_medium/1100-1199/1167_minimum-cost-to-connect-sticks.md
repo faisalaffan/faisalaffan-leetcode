@@ -1,19 +1,30 @@
 # 1167 — Minimum Cost To Connect Sticks
 
-## Deskripsi
-
-**Soal:** [1167. Minimum Cost To Connect Sticks](https://leetcode.com/problems/minimum-cost-to-connect-sticks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func connectSticks(sticks []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Greedy (pemilihan optimal lokal), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func connectSticks(sticks []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,15 +70,19 @@ func connectSticks(sticks []int) int {
 	h := &MinHeap{}
 	heap.Init(h)
 	for _, s := range sticks {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, s)
 	}
 
 	total := 0
 	for h.Len() > 1 {
+  // Ambil elemen terkecil/terbesar dari heap
 		a := heap.Pop(h).(int)
+  // Ambil elemen terkecil/terbesar dari heap
 		b := heap.Pop(h).(int)
 		cost := a + b
 		total += cost
+  // Masukkan elemen ke priority queue
 		heap.Push(h, cost)
 	}
 

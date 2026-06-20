@@ -1,19 +1,30 @@
 # 0316 — Remove Duplicate Letters
 
-## Deskripsi
-
-**Soal:** [0316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func removeDuplicateLetters(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func removeDuplicateLetters(s string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,16 +39,15 @@ import "fmt"
 func removeDuplicateLetters(s string) string {
 	// Count last occurrence of each character
 	lastOccur := [26]int{}
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range s {
 		lastOccur[s[i]-'a'] = i
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	stack := make([]byte, 0, len(s))
 	seen := [26]bool{}
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		ch := s[i]
 		if seen[ch-'a'] {

@@ -1,19 +1,30 @@
 # 2973 — Find Number Of Coins To Place In Tree Nodes
 
-## Deskripsi
-
-**Soal:** [2973. Find Number Of Coins To Place In Tree Nodes](https://leetcode.com/problems/find-number-of-coins-to-place-in-tree-nodes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func placedCoins(edges [][]int, cost []int) []int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func placedCoins(edges [][]int, cost []int) []int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,7 @@ import (
 
 func placedCoins(edges [][]int, cost []int) []int64 {
 	n := len(cost)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][]int, n)
 	for _, e := range edges {
 		a, b := e[0], e[1]
@@ -45,9 +56,9 @@ func placedCoins(edges [][]int, cost []int) []int64 {
 		g[b] = append(g[b], a)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		ans[i] = 1
 	}
@@ -60,6 +71,7 @@ func placedCoins(edges [][]int, cost []int) []int64 {
 				res = append(res, dfs(b, a)...)
 			}
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(res)
 		m := len(res)
 

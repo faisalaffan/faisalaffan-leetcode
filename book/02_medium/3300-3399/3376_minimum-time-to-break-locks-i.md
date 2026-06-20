@@ -1,17 +1,30 @@
 # 3376 — Minimum Time To Break Locks I
 
-## Deskripsi
-
-**Soal:** [3376. Minimum Time To Break Locks I](https://leetcode.com/problems/minimum-time-to-break-locks-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMinimumTime(strength []int, K int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n! * n) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,6 @@ func main() {
 
 func findMinimumTime(strength []int, K int) int {
 	n := len(strength)
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, n)
 	ans := math.MaxInt32
 

@@ -1,21 +1,32 @@
 # 2720 — Popularity Percentage
 
-## Deskripsi
-
-**Soal:** [2720. Popularity Percentage](https://leetcode.com/problems/popularity-percentage/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func popularityPercentage(friendships [][]int) [][]int
+```
+
+> **💡 Hint:** For each user, count total friends (friendships are bidirectional).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func popularityPercentage(friendships [][]int) [][]int`
-
-> **Ide Kunci:** For each user, count total friends (friendships are bidirectional).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +45,9 @@ import (
 )
 
 func popularityPercentage(friendships [][]int) [][]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	adj := make(map[int]map[int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	users := make(map[int]bool)
 
 	for _, f := range friendships {
@@ -74,11 +85,12 @@ func popularityPercentage(friendships [][]int) [][]int {
 		results = append(results, result{u, pct})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].userID < results[j].userID
 	})
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	out := make([][]int, len(results))
 	for i, r := range results {
 		out[i] = []int{r.userID, r.percentage}

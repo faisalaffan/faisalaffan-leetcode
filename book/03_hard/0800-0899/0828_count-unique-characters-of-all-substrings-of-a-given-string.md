@@ -1,21 +1,32 @@
 # 0828 — Count Unique Characters Of All Substrings Of A Given String
 
-## Deskripsi
-
-**Soal:** [0828. Count Unique Characters Of All Substrings Of A Given String](https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func uniqueLetterString(s string) int
+```
+
+> **💡 Hint:** Contribution per character. For each s[i], count substrings where s[i] is the
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func uniqueLetterString(s string) int`
-
-> **Ide Kunci:** Contribution per character. For each s[i], count substrings where s[i] is the
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,14 +41,14 @@ import "fmt"
 
 func uniqueLetterString(s string) int {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prev := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	next := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	last := make([]int, 26)
 
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range last {
 		last[i] = -1
 	}
@@ -46,7 +57,7 @@ func uniqueLetterString(s string) int {
 		prev[i] = last[c]
 		last[c] = i
 	}
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range last {
 		last[i] = n
 	}

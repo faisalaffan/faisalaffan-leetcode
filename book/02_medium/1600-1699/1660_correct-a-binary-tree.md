@@ -1,17 +1,30 @@
 # 1660 — Correct A Binary Tree
 
-## Deskripsi
-
-**Soal:** [1660. Correct A Binary Tree](https://leetcode.com/problems/correct-a-binary-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CorrectBinaryTree(root *TreeNode) *TreeNode
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(N), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,9 +68,9 @@ func main() {
 func CorrectBinaryTree(root *TreeNode) *TreeNode {
 	// Time: O(N), Space: O(N)
 	// BFS to find the invalid node, remove it
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[*TreeNode]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	parent := make(map[*TreeNode]*TreeNode)
 	queue := []*TreeNode{root}
 	visited[root] = true

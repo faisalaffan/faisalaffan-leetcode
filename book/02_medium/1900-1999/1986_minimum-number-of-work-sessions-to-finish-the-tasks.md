@@ -1,17 +1,30 @@
 # 1986 — Minimum Number Of Work Sessions To Finish The Tasks
 
-## Deskripsi
-
-**Soal:** [1986. Minimum Number Of Work Sessions To Finish The Tasks](https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumNumberOfWorkSessionsToFinishTheTasks(tasks []int, sessionTime int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** O(2^n * n), Space: O(2^n)  
 **Kompleksitas Ruang:** O(2^n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,12 +45,12 @@ func main() {
 func MinimumNumberOfWorkSessionsToFinishTheTasks(tasks []int, sessionTime int) int {
 	n := len(tasks)
 	m := 1 << n
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, m)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sessions := make([]int, m)
 
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = n + 1
 		sessions[i] = sessionTime + 1

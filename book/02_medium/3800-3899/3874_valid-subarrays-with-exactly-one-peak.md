@@ -1,21 +1,32 @@
 # 3874 — Valid Subarrays With Exactly One Peak
 
-## Deskripsi
-
-**Soal:** [3874. Valid Subarrays With Exactly One Peak](https://leetcode.com/problems/valid-subarrays-with-exactly-one-peak/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ValidSubarraysWithExactlyOnePeak(nums []int, k int) int
+```
+
+> **💡 Hint:** Find all peaks. For each peak, count valid subarrays that contain
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func ValidSubarraysWithExactlyOnePeak(nums []int, k int) int`
-
-> **Ide Kunci:** Find all peaks. For each peak, count valid subarrays that contain
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

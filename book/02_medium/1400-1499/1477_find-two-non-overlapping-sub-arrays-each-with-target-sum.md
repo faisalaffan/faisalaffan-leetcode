@@ -1,17 +1,30 @@
 # 1477 — Find Two Non Overlapping Sub Arrays Each With Target Sum
 
-## Deskripsi
-
-**Soal:** [1477. Find Two Non Overlapping Sub Arrays Each With Target Sum](https://leetcode.com/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minSumOfLengths(arr []int, target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(n) where n = len(arr)  
 **Kompleksitas Ruang:** O(n) for prefix minimum array
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,15 +55,15 @@ func main() {
 func minSumOfLengths(arr []int, target int) int {
 	n := len(arr)
 	// left[i] = minimum length of subarray with sum = target ending at or before i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	left := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range left {
 		left[i] = math.MaxInt32
 	}
 
 	prefixSum := 0
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	sumMap := make(map[int]int)
 	sumMap[0] = -1
 	bestLeft := math.MaxInt32
@@ -71,9 +84,9 @@ func minSumOfLengths(arr []int, target int) int {
 	}
 
 	// right[i] = minimum length of subarray with sum = target starting at or after i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	right := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range right {
 		right[i] = math.MaxInt32
 	}

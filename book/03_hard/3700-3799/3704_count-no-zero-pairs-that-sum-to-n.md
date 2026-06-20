@@ -1,19 +1,32 @@
 # 3704 — Count No Zero Pairs That Sum To N
 
-## Deskripsi
-
-**Soal:** [3704. Count No Zero Pairs That Sum To N](https://leetcode.com/problems/count-no-zero-pairs-that-sum-to-n/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countNoZeroPairs(n int64) int64
+```
+
+> **💡 Hint:** Digit DP. Process n digit by digit. At each position,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Digit DP. Process n digit by digit. At each position,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,9 +61,9 @@ func countNoZeroPairs(n int64) int64 {
 	s := strconv.FormatInt(n, 10)
 	m := len(s)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	memo := make([][2][2]int64, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		for j := range memo[i] {
 			for k := range memo[i][j] {
@@ -59,7 +72,7 @@ func countNoZeroPairs(n int64) int64 {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digits := make([]int, m)
 	for i, ch := range s {
 		digits[i] = int(ch - '0')

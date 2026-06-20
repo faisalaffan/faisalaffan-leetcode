@@ -1,19 +1,32 @@
 # 1077 — Project Employees Iii
 
-## Deskripsi
-
-**Soal:** [1077. Project Employees Iii](https://leetcode.com/problems/project-employees-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func projectEmployeesIII(project [][]int, employee [][]int) [][]int
+```
+
+> **💡 Hint:** Group employee experience by project, find max per project
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n) where n = len(project)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Group employee experience by project, find max per project
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +49,7 @@ func main() {
 }
 
 func projectEmployeesIII(project [][]int, employee [][]int) [][]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	expMap := make(map[int]int)
 	for _, e := range employee {
 		expMap[e[0]] = e[1]
@@ -47,7 +60,7 @@ func projectEmployeesIII(project [][]int, employee [][]int) [][]int {
 		maxExp int
 		empID  int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	projMax := make(map[int]projInfo)
 
 	for _, p := range project {
@@ -59,7 +72,7 @@ func projectEmployeesIII(project [][]int, employee [][]int) [][]int {
 		}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0)
 	for _, p := range project {
 		projID, empID := p[0], p[1]

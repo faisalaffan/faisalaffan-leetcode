@@ -1,17 +1,30 @@
 # 3613 — Minimize Maximum Component Cost
 
-## Deskripsi
-
-**Soal:** [3613. Minimize Maximum Component Cost](https://leetcode.com/problems/minimize-maximum-component-cost/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimizeMaximumComponentCost(costs []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,6 +58,7 @@ func MinimizeMaximumComponentCost(costs []int, k int) int {
 	if len(costs) == 0 {
 		return 0
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(costs)
 	// Binary search for minimal possible maximum component cost
 	sum := 0
@@ -52,7 +66,7 @@ func MinimizeMaximumComponentCost(costs []int, k int) int {
 		sum += c
 	}
 	left, right := costs[len(costs)-1], sum
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := left + (right-left)/2
 		if canPartition(costs, k, mid) {

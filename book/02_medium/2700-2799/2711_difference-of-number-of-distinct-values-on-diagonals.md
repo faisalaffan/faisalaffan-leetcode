@@ -1,19 +1,30 @@
 # 2711 — Difference Of Number Of Distinct Values On Diagonals
 
-## Deskripsi
-
-**Soal:** [2711. Difference Of Number Of Distinct Values On Diagonals](https://leetcode.com/problems/difference-of-number-of-distinct-values-on-diagonals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func differenceOfDistinctValues(grid [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer
 
 **Kompleksitas Waktu:** O(m*n*(m+n))  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func differenceOfDistinctValues(grid [][]int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,9 +38,9 @@ import "fmt"
 
 func differenceOfDistinctValues(grid [][]int) [][]int {
 	m, n := len(grid), len(grid[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	ans := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		ans[i] = make([]int, n)
 	}
@@ -37,7 +48,7 @@ func differenceOfDistinctValues(grid [][]int) [][]int {
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
 			// Count distinct values above-left diagonal
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 			aboveLeft := make(map[int]bool)
 			r, c := i-1, j-1
 			for r >= 0 && c >= 0 {
@@ -47,7 +58,7 @@ func differenceOfDistinctValues(grid [][]int) [][]int {
 			}
 
 			// Count distinct values below-right diagonal
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 			belowRight := make(map[int]bool)
 			r, c = i+1, j+1
 			for r < m && c < n {

@@ -1,17 +1,30 @@
 # 1600 — Throne Inheritance
 
-## Deskripsi
-
-**Soal:** [1600. Throne Inheritance](https://leetcode.com/problems/throne-inheritance/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ConstructorThrone(kingName string) ThroneInheritance
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,7 +76,6 @@ func (t *ThroneInheritance) Death(name string) {
 
 func (t *ThroneInheritance) GetInheritanceOrder() []string {
 	// Preorder traversal of the family tree
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 	t.dfs(t.king, &result)
 	return result

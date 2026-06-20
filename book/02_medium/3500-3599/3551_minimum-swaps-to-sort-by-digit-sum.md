@@ -1,19 +1,30 @@
 # 3551 — Minimum Swaps To Sort By Digit Sum
 
-## Deskripsi
-
-**Soal:** [3551. Minimum Swaps To Sort By Digit Sum](https://leetcode.com/problems/minimum-swaps-to-sort-by-digit-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func digitSum(x int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func digitSum(x int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,11 +67,11 @@ func MinimumSwapsToSortByDigitSum(nums []int) int {
 		sum  int
 		idx  int
 	}
-  // Membuat slice untuk menyimpan hasil
 	arr := make([]pair, n)
 	for i, v := range nums {
 		arr[i] = pair{v, digitSum(v), i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(arr, func(i, j int) bool {
 		if arr[i].sum != arr[j].sum {
 			return arr[i].sum < arr[j].sum
@@ -68,7 +79,6 @@ func MinimumSwapsToSortByDigitSum(nums []int) int {
 		return arr[i].val < arr[j].val
 	})
 	// Count swaps needed using cycle detection
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	swaps := 0
 	for i := 0; i < n; i++ {

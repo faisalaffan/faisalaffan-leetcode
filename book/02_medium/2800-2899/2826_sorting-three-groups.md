@@ -1,19 +1,30 @@
 # 2826 — Sorting Three Groups
 
-## Deskripsi
-
-**Soal:** [2826. Sorting Three Groups](https://leetcode.com/problems/sorting-three-groups/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SortingThreeGroups(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func SortingThreeGroups(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,7 @@ import "fmt"
 func SortingThreeGroups(nums []int) int {
 	n := len(nums)
 	// dp[i][j] = min operations to make first i+1 elements sorted with last element == j+1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([][3]int, n+1)
 
 	for i := 1; i <= n; i++ {

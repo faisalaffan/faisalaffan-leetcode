@@ -1,19 +1,32 @@
 # 1505 — Minimum Possible Integer After At Most K Adjacent Swaps On Digits
 
-## Deskripsi
-
-**Soal:** [1505. Minimum Possible Integer After At Most K Adjacent Swaps On Digits](https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newFenwick(n int) *fenwick
+```
+
+> **💡 Hint:** Fenwick Tree (BIT) + Greedy
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, BFS, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal), Queue (antrian FIFO), Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Fenwick Tree (BIT) + Greedy
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -88,19 +101,18 @@ func (f *fenwick) rangeSum(l, r int) int {
 
 func minInteger(num string, k int) string {
 	// queues of positions for each digit
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	queues := make([][]int, 10)
 	for i, ch := range num {
 		d := int(ch - '0')
 		queues[d] = append(queues[d], i)
 	}
 	// pointers for each queue
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ptr := make([]int, 10)
 
 	n := len(num)
 	bit := newFenwick(n)
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, n)
 
 	var sb strings.Builder

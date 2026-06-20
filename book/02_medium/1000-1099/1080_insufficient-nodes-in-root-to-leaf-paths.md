@@ -1,19 +1,32 @@
 # 1080 — Insufficient Nodes In Root To Leaf Paths
 
-## Deskripsi
-
-**Soal:** [1080. Insufficient Nodes In Root To Leaf Paths](https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sufficientSubset(root *TreeNode, limit int) *TreeNode
+```
+
+> **💡 Hint:** DFS post-order. Delete node if sum from root to leaf < limit.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(h) where h is tree height
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS post-order. Delete node if sum from root to leaf < limit.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

@@ -1,19 +1,32 @@
 # 3559 — Number Of Ways To Assign Edge Weights Ii
 
-## Deskripsi
-
-**Soal:** [3559. Number Of Ways To Assign Edge Weights Ii](https://leetcode.com/problems/number-of-ways-to-assign-edge-weights-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func waysToAssignEdgeWeights(n int, edges [][]int, m int) int
+```
+
+> **💡 Hint:** Tree DP. For each node, compute ways to assign weights to
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman), Tree DP (DP pada pohon)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Tree DP. For each node, compute ways to assign weights to
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +59,7 @@ func waysToAssignEdgeWeights(n int, edges [][]int, m int) int {
 		return 1
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]

@@ -1,17 +1,30 @@
 # 3225 — Maximum Score From Grid Operations
 
-## Deskripsi
-
-**Soal:** [3225. Maximum Score From Grid Operations](https://leetcode.com/problems/maximum-score-from-grid-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumScore(grid [][]int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** O(n^3), Space: O(n^2)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 
 func maximumScore(grid [][]int) int64 {
 	n := len(grid)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
@@ -53,7 +66,7 @@ func maximumScore(grid [][]int) int64 {
 	}
 
 	// prefix[col][row] = sum of grid[0..row-1][col]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	prefix := make([][]int64, n)
 	for c := 0; c < n; c++ {
 		prefix[c] = make([]int64, n+1)
@@ -62,15 +75,15 @@ func maximumScore(grid [][]int) int64 {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pick := make([]int64, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	skip := make([]int64, n+1)
 
 	for col := 1; col < n; col++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		currPick := make([]int64, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		currSkip := make([]int64, n+1)
 
 		for hCurr := 0; hCurr <= n; hCurr++ {

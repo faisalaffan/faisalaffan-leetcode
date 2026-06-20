@@ -1,19 +1,32 @@
 # 3768 — Minimum Inversion Count In Subarrays Of Fixed Length
 
-## Deskripsi
-
-**Soal:** [3768. Minimum Inversion Count In Subarrays Of Fixed Length](https://leetcode.com/problems/minimum-inversion-count-in-subarrays-of-fixed-length/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minInversionCount(nums []int, k int) int64
+```
+
+> **💡 Hint:** Sliding window with Fenwick tree. Maintain inversion
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Sliding Window, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sliding window with Fenwick tree. Maintain inversion
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,11 +61,11 @@ func minInversionCount(nums []int, k int) int64 {
 	}
 
 	// Coordinate compress
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, nums)
 	sortInts(sorted)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	comp := make(map[int]int)
 	for i, v := range sorted {
 		if i == 0 || v != sorted[i-1] {
@@ -61,7 +74,7 @@ func minInversionCount(nums []int, k int) int64 {
 	}
 
 	size := len(comp) + 2
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bit := make([]int, size)
 
 	add := func(idx, val int) {

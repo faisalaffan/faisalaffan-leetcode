@@ -1,19 +1,30 @@
 # 2984 — Find Peak Calling Hours For Each City
 
-## Deskripsi
-
-**Soal:** [2984. Find Peak Calling Hours For Each City](https://leetcode.com/problems/find-peak-calling-hours-for-each-city/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func extractHour(datetime string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func extractHour(datetime string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,7 +65,7 @@ func extractHour(datetime string) int {
 
 func findPeakCallingHours(calls []Call) []PeakHour {
 	// Count calls per city per hour: map[city]map[hour]count
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cityHourCounts := make(map[string]map[int]int)
 	for _, c := range calls {
 		hour := extractHour(c.CallTime)
@@ -88,6 +99,7 @@ func findPeakCallingHours(calls []Call) []PeakHour {
 	}
 
 	// Order by peak_hour DESC, city DESC
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].PeakHour != results[j].PeakHour {
 			return results[i].PeakHour > results[j].PeakHour // DESC

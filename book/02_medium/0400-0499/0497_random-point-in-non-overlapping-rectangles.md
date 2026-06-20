@@ -1,17 +1,30 @@
 # 0497 — Random Point In Non Overlapping Rectangles
 
-## Deskripsi
-
-**Soal:** [0497. Random Point In Non Overlapping Rectangles](https://leetcode.com/problems/random-point-in-non-overlapping-rectangles/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(rects [][]int) Solution
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** O(n) for init, O(log n) per pick  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +55,7 @@ type Solution struct {
 }
 
 func Constructor(rects [][]int) Solution {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixSum := make([]int, len(rects))
 	total := 0
 	for i, r := range rects {

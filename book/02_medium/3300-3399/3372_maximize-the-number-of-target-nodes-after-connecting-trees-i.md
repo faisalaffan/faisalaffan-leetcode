@@ -1,17 +1,30 @@
 # 3372 — Maximize The Number Of Target Nodes After Connecting Trees I
 
-## Deskripsi
-
-**Soal:** [3372. Maximize The Number Of Target Nodes After Connecting Trees I](https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxTargetNodes(edges1 [][]int, edges2 [][]int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n^2 + m^2) Space: O(n + m)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func maxTargetNodes(edges1 [][]int, edges2 [][]int, k int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
 	for i := 0; i < n; i++ {
 		ans[i] = countWithinDist3372(g1, i, k, n) + maxFrom2
@@ -52,7 +65,7 @@ func maxTargetNodes(edges1 [][]int, edges2 [][]int, k int) []int {
 }
 
 func buildGraph3372(edges [][]int, n int) [][]int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -66,7 +79,6 @@ func countWithinDist3372(g [][]int, start int, maxDist int, n int) int {
 	if maxDist < 0 {
 		return 0
 	}
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	queue := []int{start}
 	visited[start] = true

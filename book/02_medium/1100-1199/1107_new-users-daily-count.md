@@ -1,19 +1,32 @@
 # 1107 — New Users Daily Count
 
-## Deskripsi
-
-**Soal:** [1107. New Users Daily Count](https://leetcode.com/problems/new-users-daily-count/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newUsersDailyCount(traffic [][3]int) map[int]int
+```
+
+> **💡 Hint:** Track first login date per user, count by date
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n) where n = len(traffic)  
 **Kompleksitas Ruang:** O(m) where m = unique users
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Track first login date per user, count by date
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +55,7 @@ func main() {
 }
 
 func newUsersDailyCount(traffic [][3]int) map[int]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	firstLogin := make(map[int]int) // userID -> first login date
 	for _, t := range traffic {
 		userID, date, isLogin := t[0], t[1], t[2]
@@ -53,7 +66,7 @@ func newUsersDailyCount(traffic [][3]int) map[int]int {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	result := make(map[int]int)
 	for _, date := range firstLogin {
 		result[date]++

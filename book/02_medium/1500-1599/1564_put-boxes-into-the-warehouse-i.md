@@ -1,17 +1,30 @@
 # 1564 — Put Boxes Into The Warehouse I
 
-## Deskripsi
-
-**Soal:** [1564. Put Boxes Into The Warehouse I](https://leetcode.com/problems/put-boxes-into-the-warehouse-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaxBoxesInWarehouse(boxes []int, warehouse []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log N + M), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,6 +46,7 @@ func main() {
 
 func MaxBoxesInWarehouse(boxes []int, warehouse []int) int {
 	// Time: O(N log N + M), Space: O(1)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(boxes)
 
 	// Preprocess warehouse: each position's max usable height

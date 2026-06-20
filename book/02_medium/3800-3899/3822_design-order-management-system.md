@@ -1,19 +1,30 @@
 # 3822 — Design Order Management System
 
-## Deskripsi
-
-**Soal:** [3822. Design Order Management System](https://leetcode.com/problems/design-order-management-system/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+
+Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+
+**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() OrderManagementSystem
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor() OrderManagementSystem`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -97,11 +108,12 @@ func (o *OrderManagementSystem) GetOrdersAtPrice(orderType string, price int) []
 	if o.priceLookup[price] == nil || o.priceLookup[price][orderType] == nil {
 		return []int{}
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0, len(o.priceLookup[price][orderType]))
 	for id := range o.priceLookup[price][orderType] {
 		result = append(result, id)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

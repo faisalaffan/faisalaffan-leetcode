@@ -1,21 +1,32 @@
 # 2759 — Convert Json String To Object
 
-## Deskripsi
-
-**Soal:** [2759. Convert Json String To Object](https://leetcode.com/problems/convert-json-string-to-object/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func parseJSON(s string) (jsonValue, int)
+```
+
+> **💡 Hint:** Recursive descent parser. Supports objects, arrays,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func parseJSON(s string) (jsonValue, int)`
-
-> **Ide Kunci:** Recursive descent parser. Supports objects, arrays,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +70,7 @@ func parseJSON(s string) (jsonValue, int) {
 }
 
 func parseObject(s string) (map[string]jsonValue, int) {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	obj := make(map[string]jsonValue)
 	pos := 1 // skip '{'
 	if pos < len(s) && s[pos] == '}' {
@@ -89,7 +100,6 @@ func parseObject(s string) (map[string]jsonValue, int) {
 }
 
 func parseArray(s string) ([]jsonValue, int) {
-  // Membuat slice untuk menyimpan hasil
 	arr := make([]jsonValue, 0)
 	pos := 1 // skip '['
 	if pos < len(s) && s[pos] == ']' {
@@ -182,14 +192,12 @@ func jsonStringify(v jsonValue) string {
 	case string:
 		return `"` + val + `"`
 	case []jsonValue:
-  // Membuat slice untuk menyimpan hasil
 		parts := make([]string, len(val))
 		for i, item := range val {
 			parts[i] = jsonStringify(item)
 		}
 		return "[" + strings.Join(parts, ",") + "]"
 	case map[string]jsonValue:
-  // Membuat slice untuk menyimpan hasil
 		parts := make([]string, 0, len(val))
 		for k, item := range val {
 			parts = append(parts, `"`+k+`":`+jsonStringify(item))

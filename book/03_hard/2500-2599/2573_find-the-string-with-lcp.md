@@ -1,21 +1,32 @@
 # 2573 — Find The String With Lcp
 
-## Deskripsi
-
-**Soal:** [2573. Find The String With Lcp](https://leetcode.com/problems/find-the-string-with-lcp/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findTheString(lcp [][]int) string
+```
+
+> **💡 Hint:** // 1. Validate matrix (diagonal must be n-i, symmetric, values within bounds).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU), Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findTheString(lcp [][]int) string`
-
-> **Ide Kunci:** // 1. Validate matrix (diagonal must be n-i, symmetric, values within bounds).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -74,9 +85,9 @@ func findTheString(lcp [][]int) string {
 	}
 
 	// DSU to union positions that must have the same character
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 	}
@@ -105,7 +116,6 @@ func findTheString(lcp [][]int) string {
 	}
 
 	// Assign characters: each equivalence class gets the smallest unused char
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]byte, n)
 	nextChar := byte('a')
 
@@ -126,9 +136,9 @@ func findTheString(lcp [][]int) string {
 	}
 
 	// Verify by recomputing LCP from the constructed string
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	computed := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range computed {
 		computed[i] = make([]int, n)
 	}

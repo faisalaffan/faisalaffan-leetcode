@@ -1,21 +1,32 @@
 # 3799 — Word Squares Ii
 
-## Deskripsi
-
-**Soal:** [3799. Word Squares Ii](https://leetcode.com/problems/word-squares-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func WordSquaresIi(words []string) [][]string
+```
+
+> **💡 Hint:** Generate all valid 4-word squares [top, left, right, bottom]
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(N^4 * L)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func WordSquaresIi(words []string) [][]string`
-
-> **Ide Kunci:** Generate all valid 4-word squares [top, left, right, bottom]
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -71,6 +82,7 @@ func WordSquaresIi(words []string) [][]string {
 	}
 
 	// Sort by (top, left, right, bottom) lexicographically
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		for k := 0; k < 4; k++ {
 			if result[i][k] != result[j][k] {

@@ -1,19 +1,30 @@
 # 1162 — As Far From Land As Possible
 
-## Deskripsi
-
-**Soal:** [1162. As Far From Land As Possible](https://leetcode.com/problems/as-far-from-land-as-possible/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxDistance(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(m*n)  
 **Kompleksitas Ruang:** O(m*n)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxDistance(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,13 +45,13 @@ import (
 
 func maxDistance(grid [][]int) int {
 	n := len(grid)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return -1
 	}
 
 	dirs := [][]int{{0, 1}, {0, -1}, {1, 0}, {-1, 0}}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([][2]int, 0)
 
 	// Add all land cells to queue

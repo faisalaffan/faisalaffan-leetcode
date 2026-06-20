@@ -1,19 +1,32 @@
 # 0759 — Employee Free Time
 
-## Deskripsi
-
-**Soal:** [0759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func employeeFreeTime(schedule [][]Interval) []Interval
+```
+
+> **💡 Hint:** Sweep Line
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sweep Line
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -67,6 +80,7 @@ func employeeFreeTime(schedule [][]Interval) []Interval {
 	}
 
 	// Sort by start time, then by end time
+  // Custom sort dengan comparator
 	sort.Slice(all, func(i, j int) bool {
 		if all[i].Start != all[j].Start {
 			return all[i].Start < all[j].Start

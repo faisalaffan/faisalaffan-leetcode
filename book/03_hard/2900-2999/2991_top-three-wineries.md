@@ -1,19 +1,30 @@
 # 2991 — Top Three Wineries
 
-## Deskripsi
-
-**Soal:** [2991. Top Three Wineries](https://leetcode.com/problems/top-three-wineries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func topThreeWineries(data []Winery) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func topThreeWineries(data []Winery) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,7 @@ type Winery struct {
 
 func topThreeWineries(data []Winery) []string {
 	type key struct{ country, winery string }
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	totals := make(map[key]int)
 	for _, w := range data {
 		k := key{w.Country, w.Winery}
@@ -50,13 +61,12 @@ func topThreeWineries(data []Winery) []string {
 		name   string
 		points int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byCountry := make(map[string][]wineryScore)
 	for k, pts := range totals {
 		byCountry[k.country] = append(byCountry[k.country], wineryScore{k.winery, pts})
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	countries := make([]string, 0, len(byCountry))
 	for c := range byCountry {
 		countries = append(countries, c)
@@ -66,6 +76,7 @@ func topThreeWineries(data []Winery) []string {
 	var result []string
 	for _, c := range countries {
 		list := byCountry[c]
+  // Custom sort dengan comparator
 		sort.Slice(list, func(i, j int) bool {
 			if list[i].points != list[j].points {
 				return list[i].points > list[j].points

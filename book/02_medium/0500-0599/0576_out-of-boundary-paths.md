@@ -1,17 +1,30 @@
 # 0576 — Out Of Boundary Paths
 
-## Deskripsi
-
-**Soal:** [0576. Out Of Boundary Paths](https://leetcode.com/problems/out-of-boundary-paths/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindPaths(m int, n int, maxMove int, startRow int, startColumn int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(m * n * maxMove)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +44,9 @@ func main() {
 
 func FindPaths(m int, n int, maxMove int, startRow int, startColumn int) int {
 	const mod = 1_000_000_007
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}
@@ -42,9 +55,9 @@ func FindPaths(m int, n int, maxMove int, startRow int, startColumn int) int {
 	dirs := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
 
 	for move := 1; move <= maxMove; move++ {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		next := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range next {
 			next[i] = make([]int, n)
 		}

@@ -1,19 +1,30 @@
 # 0496 — Next Greater Element I
 
-## Deskripsi
-
-**Soal:** [0496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NextGreaterElementI(nums1, nums2 []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Stack
 
 **Kompleksitas Waktu:** O(n+m), Space: O(m)  
 **Kompleksitas Ruang:** O(m)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NextGreaterElementI(nums1, nums2 []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ import "fmt"
 
 // Time: O(n+m), Space: O(m)
 func NextGreaterElementI(nums1, nums2 []int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	nextGreater := make(map[int]int)
 	var stack []int
 	for _, v := range nums2 {
@@ -36,7 +47,7 @@ func NextGreaterElementI(nums1, nums2 []int) []int {
 		}
 		stack = append(stack, v)
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(nums1))
 	for i, v := range nums1 {
 		if val, ok := nextGreater[v]; ok {

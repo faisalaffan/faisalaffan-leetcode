@@ -1,19 +1,30 @@
 # 3752 — Lexicographically Smallest Negated Permutation That Sums To Target
 
-## Deskripsi
-
-**Soal:** [3752. Lexicographically Smallest Negated Permutation That Sums To Target](https://leetcode.com/problems/lexicographically-smallest-negated-permutation-that-sums-to-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lexicographicallySmallestNegatedPermutationThatSumsToTarget(n int, target int64) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func lexicographicallySmallestNegatedPermutationThatSumsToTarget(n int, target int64) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,6 @@ func lexicographicallySmallestNegatedPermutationThatSumsToTarget(n int, target i
 	}
 
 	delta := drop / 2
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, n+1)
 	negatedSum := int64(0)
 
@@ -49,7 +59,7 @@ func lexicographicallySmallestNegatedPermutationThatSumsToTarget(n int, target i
 		return []int{}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, 0, n)
 	// Negated numbers first (from largest to smallest = lexicographically smallest)
 	for i := n; i > 0; i-- {

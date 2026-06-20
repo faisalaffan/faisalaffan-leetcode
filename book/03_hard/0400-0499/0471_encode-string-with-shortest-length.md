@@ -1,19 +1,32 @@
 # 0471 — Encode String With Shortest Length
 
-## Deskripsi
-
-**Soal:** [0471. Encode String With Shortest Length](https://leetcode.com/problems/encode-string-with-shortest-length/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func encode(s string) string
+```
+
+> **💡 Hint:** DP interval encoding. dp[i][j] = shortest encoded form of s[i:j+1].
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), KMP (Knuth-Morris-Pratt, pencocokan string)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP interval encoding. dp[i][j] = shortest encoded form of s[i:j+1].
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,9 +66,9 @@ func encode(s string) string {
 	}
 
 	// dp[i][j] = shortest encoded form of s[i:j+1]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]string, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]string, n)
 		dp[i][i] = string(s[i])

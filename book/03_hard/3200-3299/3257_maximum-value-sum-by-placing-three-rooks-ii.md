@@ -1,19 +1,32 @@
 # 3257 — Maximum Value Sum By Placing Three Rooks Ii
 
-## Deskripsi
-
-**Soal:** [3257. Maximum Value Sum By Placing Three Rooks Ii](https://leetcode.com/problems/maximum-value-sum-by-placing-three-rooks-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumValueSumII(board [][]int) int64
+```
+
+> **💡 Hint:** Fix the middle row r2, then use prefix/suffix decomposition.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(m * n), Space: O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Fix the middle row r2, then use prefix/suffix decomposition.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -110,9 +123,8 @@ func maximumValueSumII(board [][]int) int64 {
 	init3 := []cand{{ng, -1}, {ng, -1}, {ng, -1}}
 
 	// pref[i] = top 3 cells in rows [0..i]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pref := make([][]cand, m)
-  // Membuat slice untuk menyimpan hasil
 	top := make([]cand, 3)
 	copy(top, init3)
 	for i := 0; i < m; i++ {
@@ -124,7 +136,7 @@ func maximumValueSumII(board [][]int) int64 {
 	}
 
 	// suff[i] = top 3 cells in rows [i..m-1]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	suff := make([][]cand, m)
 	top = make([]cand, 3)
 	copy(top, init3)

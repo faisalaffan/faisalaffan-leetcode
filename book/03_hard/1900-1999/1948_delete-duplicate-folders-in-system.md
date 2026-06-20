@@ -1,19 +1,30 @@
 # 1948 — Delete Duplicate Folders In System
 
-## Deskripsi
-
-**Soal:** [1948. Delete Duplicate Folders In System](https://leetcode.com/problems/delete-duplicate-folders-in-system/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newFolder(name string) *Folder
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Trie
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Trie (pohon awalan), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newFolder(name string) *Folder`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,7 +67,7 @@ func deleteDuplicateFolder(paths [][]string) [][]string {
 	}
 
 	// Map serialisation -> list of nodes with that serialisation
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	hashNodes := make(map[string][]*Folder)
 
 	var dfs func(node *Folder) string

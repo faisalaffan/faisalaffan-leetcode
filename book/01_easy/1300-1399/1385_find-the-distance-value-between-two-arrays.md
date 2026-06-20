@@ -1,19 +1,37 @@
 # 1385 — Find The Distance Value Between Two Arrays
 
-## Deskripsi
-
-**Soal:** [1385. Find The Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findTheDistanceValue(arr1 []int, arr2 []int, d int) int
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main()
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log m + m log m), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findTheDistanceValue(arr1 []int, arr2 []int, d int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,6 +54,7 @@ func main() {
 
 // Time: O(n log m + m log m), Space: O(1)
 func FindTheDistanceValueBetweenTwoArrays(arr1 []int, arr2 []int, d int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(arr2)
 	count := 0
 	for _, v := range arr1 {

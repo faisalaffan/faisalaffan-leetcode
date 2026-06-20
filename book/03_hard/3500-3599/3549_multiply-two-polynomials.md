@@ -1,19 +1,32 @@
 # 3549 — Multiply Two Polynomials
 
-## Deskripsi
-
-**Soal:** [3549. Multiply Two Polynomials](https://leetcode.com/problems/multiply-two-polynomials/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func multiply(poly1 []int, poly2 []int) []int
+```
+
+> **💡 Hint:** Standard polynomial multiplication O(n*m).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Standard polynomial multiplication O(n*m).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,7 @@ func multiply(poly1 []int, poly2 []int) []int {
 		return []int{}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(poly1)+len(poly2)-1)
 	for i, c1 := range poly1 {
 		for j, c2 := range poly2 {

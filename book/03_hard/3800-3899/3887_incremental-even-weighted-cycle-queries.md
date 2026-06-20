@@ -1,19 +1,32 @@
 # 3887 — Incremental Even Weighted Cycle Queries
 
-## Deskripsi
-
-**Soal:** [3887. Incremental Even Weighted Cycle Queries](https://leetcode.com/problems/incremental-even-weighted-cycle-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func incrementalEvenWeightedCycleQueries(n int, edges [][]int) int
+```
+
+> **💡 Hint:** Maintain a DSU with parity tracking. When adding an
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Maintain a DSU with parity tracking. When adding an
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,11 +56,11 @@ func main() {
 }
 
 func incrementalEvenWeightedCycleQueries(n int, edges [][]int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rank := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	xorToRoot := make([]int, n) // parity of path weight to root
 
 	for i := 0; i < n; i++ {

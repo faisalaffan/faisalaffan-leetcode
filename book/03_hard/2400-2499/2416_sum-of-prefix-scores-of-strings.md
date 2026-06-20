@@ -1,17 +1,30 @@
 # 2416 — Sum Of Prefix Scores Of Strings
 
-## Deskripsi
-
-**Soal:** [2416. Sum Of Prefix Scores Of Strings](https://leetcode.com/problems/sum-of-prefix-scores-of-strings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumPrefixScores(words []string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +59,7 @@ func sumPrefixScores(words []string) []int {
 	// Insert all words into trie, incrementing count at each node
 	for _, w := range words {
 		cur := root
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(w); i++ {
 			idx := w[i] - 'a'
 			if cur.children[idx] == nil {
@@ -57,12 +70,12 @@ func sumPrefixScores(words []string) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(words))
 	for wi, w := range words {
 		cur := root
 		total := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(w); i++ {
 			idx := w[i] - 'a'
 			cur = cur.children[idx]

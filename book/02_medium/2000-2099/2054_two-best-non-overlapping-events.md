@@ -1,19 +1,30 @@
 # 2054 — Two Best Non Overlapping Events
 
-## Deskripsi
-
-**Soal:** [2054. Two Best Non Overlapping Events](https://leetcode.com/problems/two-best-non-overlapping-events/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxTwoEvents(events [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxTwoEvents(events [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,13 +41,14 @@ import (
 
 func maxTwoEvents(events [][]int) int {
 	// Sort by end time
+  // Custom sort dengan comparator
 	sort.Slice(events, func(i, j int) bool {
 		return events[i][1] < events[j][1]
 	})
 
 	n := len(events)
 	// bestUpTo[i] = max value using events[0..i] (single event, non-overlapping)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bestUpTo := make([]int, n)
 	bestUpTo[0] = events[0][2]
 	for i := 1; i < n; i++ {

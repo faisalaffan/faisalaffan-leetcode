@@ -1,17 +1,30 @@
 # 0694 — Number Of Distinct Islands
 
-## Deskripsi
-
-**Soal:** [0694. Number Of Distinct Islands](https://leetcode.com/problems/number-of-distinct-islands/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numDistinctIslands(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(R * C)  
 **Kompleksitas Ruang:** O(R * C)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func numDistinctIslands(grid [][]int) int {
 	}
 
 	rows, cols := len(grid), len(grid[0])
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	shapes := make(map[string]bool)
 
 	var dfs func(r, c int, dir byte, sb *strings.Builder)

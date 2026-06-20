@@ -1,21 +1,32 @@
 # 1998 — Gcd Sort Of An Array
 
-## Deskripsi
-
-**Soal:** [1998. Gcd Sort Of An Array](https://leetcode.com/problems/gcd-sort-of-an-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewDSU1998(n int) *DSU1998
+```
+
+> **💡 Hint:** Union-Find over numbers and their prime factors.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU), GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewDSU1998(n int) *DSU1998`
-
-> **Ide Kunci:** Union-Find over numbers and their prime factors.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,9 +50,9 @@ type DSU1998 struct {
 }
 
 func NewDSU1998(n int) *DSU1998 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -72,7 +83,7 @@ func (d *DSU1998) Union(x, y int) {
 
 // smallestPrimeFactor using sieve
 func spfSieve(limit int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	spf := make([]int, limit+1)
 	for i := 2; i <= limit; i++ {
 		if spf[i] == 0 {
@@ -119,12 +130,13 @@ func gcdSort(nums []int) bool {
 	}
 
 	// Sort a copy and check
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, len(nums))
 	copy(sorted, nums)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		if dsu.Find(nums[i]) != dsu.Find(sorted[i]) {
 			return false

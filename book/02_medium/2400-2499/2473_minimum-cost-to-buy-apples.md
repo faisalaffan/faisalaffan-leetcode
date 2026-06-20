@@ -1,17 +1,30 @@
 # 2473 — Minimum Cost To Buy Apples
 
-## Deskripsi
-
-**Soal:** [2473. Minimum Cost To Buy Apples](https://leetcode.com/problems/minimum-cost-to-buy-apples/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minCost(n int, roads [][]int, appleCost []int, k int, start int) []int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** O(n * (n + m) log n)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** Queue (antrian FIFO), Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +65,7 @@ func main() {
 }
 
 func minCost(n int, roads [][]int, appleCost []int, k int, start int) []int64 {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]Edge, n)
 	for _, r := range roads {
 		u, v, c := r[0]-1, r[1]-1, r[2]
@@ -60,7 +73,7 @@ func minCost(n int, roads [][]int, appleCost []int, k int, start int) []int64 {
 		graph[v] = append(graph[v], Edge{u, c})
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, n)
 	for s := 0; s < n; s++ {
 		dist := dijkstra(graph, s, n)
@@ -80,9 +93,9 @@ func minCost(n int, roads [][]int, appleCost []int, k int, start int) []int64 {
 }
 
 func dijkstra(graph [][]Edge, src, n int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = math.MaxInt64
 	}
@@ -91,6 +104,7 @@ func dijkstra(graph [][]Edge, src, n int) []int {
 	heap.Init(pq)
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(Item)
 		if cur.dist > dist[cur.node] {
 			continue
@@ -98,6 +112,7 @@ func dijkstra(graph [][]Edge, src, n int) []int {
 		for _, e := range graph[cur.node] {
 			if nd := cur.dist + e.cost; nd < dist[e.to] {
 				dist[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, Item{e.to, nd})
 			}
 		}

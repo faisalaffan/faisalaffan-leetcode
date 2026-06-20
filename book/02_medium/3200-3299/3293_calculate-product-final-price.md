@@ -1,17 +1,30 @@
 # 3293 — Calculate Product Final Price
 
-## Deskripsi
-
-**Soal:** [3293. Calculate Product Final Price](https://leetcode.com/problems/calculate-product-final-price/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calculateFinalPrice(products []Product, discounts []Discount) []ProductResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(p + d) Space: O(p)  
 **Kompleksitas Ruang:** O(p)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,13 +79,12 @@ type ProductResult struct {
 }
 
 func calculateFinalPrice(products []Product, discounts []Discount) []ProductResult {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	discMap := make(map[string]int)
 	for _, d := range discounts {
 		discMap[d.Category] = d.Percent
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	res := make([]ProductResult, len(products))
 	for i, p := range products {
 		fp := p.Price
@@ -82,6 +94,7 @@ func calculateFinalPrice(products []Product, discounts []Discount) []ProductResu
 		res[i] = ProductResult{p.ID, fp, p.Category}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(res, func(i, j int) bool {
 		return res[i].ID < res[j].ID
 	})

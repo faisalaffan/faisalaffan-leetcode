@@ -1,19 +1,32 @@
 # 3320 — Count The Number Of Winning Sequences
 
-## Deskripsi
-
-**Soal:** [3320. Count The Number Of Winning Sequences](https://leetcode.com/problems/count-the-number-of-winning-sequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countWinningSequences(s string) int
+```
+
+> **💡 Hint:** DP with memoization. State: (index, scoreDiff, lastMove).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with memoization. State: (index, scoreDiff, lastMove).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,9 +65,9 @@ func countWinningSequences(s string) int {
 	n := len(s)
 	// dp[i][diff][last] where diff is offset by n
 	offset := n
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([][]int, 2*n+1)
 		for j := range dp[i] {

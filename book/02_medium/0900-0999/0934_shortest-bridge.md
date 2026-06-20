@@ -1,19 +1,30 @@
 # 0934 — Shortest Bridge
 
-## Deskripsi
-
-**Soal:** [0934. Shortest Bridge](https://leetcode.com/problems/shortest-bridge/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestBridge(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func shortestBridge(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,7 @@ import "fmt"
 func shortestBridge(grid [][]int) int {
 	n := len(grid)
 	dirs := []int{1, 0, -1, 0, 1}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	q := make([][3]int, 0)
 
 	var dfs func(x, y int)

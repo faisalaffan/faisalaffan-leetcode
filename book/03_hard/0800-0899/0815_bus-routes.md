@@ -1,19 +1,32 @@
 # 0815 — Bus Routes
 
-## Deskripsi
-
-**Soal:** [0815. Bus Routes](https://leetcode.com/problems/bus-routes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numBusesToDestination(routes [][]int, source int, target int) int
+```
+
+> **💡 Hint:** BFS at the bus level.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** BFS at the bus level.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -61,7 +74,7 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 	}
 
 	// Map: stop → list of bus indices
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	stopToBuses := make(map[int][]int)
 	for busIdx, stops := range routes {
 		for _, stop := range stops {
@@ -69,9 +82,8 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visitedBus := make([]bool, len(routes))
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visitedStop := make(map[int]bool)
 	queue := []int{source}
 	visitedStop[source] = true

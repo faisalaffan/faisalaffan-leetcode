@@ -1,19 +1,32 @@
 # 3530 — Maximum Profit From Valid Topological Order In Dag
 
-## Deskripsi
-
-**Soal:** [3530. Maximum Profit From Valid Topological Order In Dag](https://leetcode.com/problems/maximum-profit-from-valid-topological-order-in-dag/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxProfit(n int, edges [][]int, score []int) int
+```
+
+> **💡 Hint:** DP over subsets (bitmask DP). For each mask, try adding any
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Topological Sort, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP over subsets (bitmask DP). For each mask, try adding any
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +57,9 @@ func main() {
 
 func maxProfit(n int, edges [][]int, score []int) int {
 	// Build adjacency and indegree
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	inDegree := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -56,9 +69,9 @@ func maxProfit(n int, edges [][]int, score []int) int {
 
 	// DP over masks
 	totalMasks := 1 << n
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, totalMasks)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = -1 << 30
 	}
@@ -78,7 +91,7 @@ func maxProfit(n int, edges [][]int, score []int) int {
 		}
 
 		// Track current indegree state
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		curDegree := make([]int, n)
 		copy(curDegree, inDegree)
 

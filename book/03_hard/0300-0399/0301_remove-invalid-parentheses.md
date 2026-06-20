@@ -1,19 +1,32 @@
 # 0301 — Remove Invalid Parentheses
 
-## Deskripsi
-
-**Soal:** [0301. Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func removeInvalidParentheses(s string) []string
+```
+
+> **💡 Hint:** BFS.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** BFS.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,7 +73,7 @@ func removeInvalidParentheses(s string) []string {
 		return result
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[string]bool)
 	queue := []string{s}
 	visited[s] = true
@@ -108,7 +121,7 @@ func removeInvalidParentheses(s string) []string {
 // isValid checks if a string has balanced parentheses (ignoring non-parenthesis chars).
 func isValid(s string) bool {
 	count := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		if s[i] == '(' {
 			count++

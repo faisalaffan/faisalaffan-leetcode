@@ -1,17 +1,30 @@
 # 1418 — Display Table Of Food Orders In A Restaurant
 
-## Deskripsi
-
-**Soal:** [1418. Display Table Of Food Orders In A Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func displayTable(orders [][]string) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n) where n = number of orders  
 **Kompleksitas Ruang:** O(n) for maps
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,9 +61,9 @@ func main() {
 // Time: O(n log n) where n = number of orders
 // Space: O(n) for maps
 func displayTable(orders [][]string) [][]string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	foodItems := make(map[string]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	tableOrders := make(map[int]map[string]int)
 
 	for _, o := range orders {
@@ -65,7 +78,6 @@ func displayTable(orders [][]string) [][]string {
 	}
 
 	// Sort food items (excluding "Table" header)
-  // Membuat slice untuk menyimpan hasil
 	foods := make([]string, 0, len(foodItems))
 	for f := range foodItems {
 		foods = append(foods, f)
@@ -73,24 +85,23 @@ func displayTable(orders [][]string) [][]string {
 	sort.Strings(foods)
 
 	// Sort table numbers
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tables := make([]int, 0, len(tableOrders))
 	for t := range tableOrders {
 		tables = append(tables, t)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(tables)
 
 	// Build result
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]string, 0, len(tables)+1)
-  // Membuat slice untuk menyimpan hasil
 	header := make([]string, 0, len(foods)+1)
 	header = append(header, "Table")
 	header = append(header, foods...)
 	result = append(result, header)
 
 	for _, t := range tables {
-  // Membuat slice untuk menyimpan hasil
 		row := make([]string, 0, len(foods)+1)
 		row = append(row, strconv.Itoa(t))
 		for _, f := range foods {

@@ -1,19 +1,30 @@
 # 0194 — Transpose File
 
-## Deskripsi
-
-**Soal:** [0194. Transpose File](https://leetcode.com/problems/transpose-file/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func transposeFile(content string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m*n), Space: O(m*n)  
 **Kompleksitas Ruang:** O(m*n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func transposeFile(content string) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ func transposeFile(content string) []string {
 		return nil
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	matrix := make([][]string, len(lines))
 	for i, line := range lines {
 		matrix[i] = strings.Fields(line)
@@ -51,7 +62,6 @@ func transposeFile(content string) []string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, cols)
 	for c := 0; c < cols; c++ {
 		var row []string

@@ -1,19 +1,32 @@
 # 3299 — Sum Of Consecutive Subsequences
 
-## Deskripsi
-
-**Soal:** [3299. Sum Of Consecutive Subsequences](https://leetcode.com/problems/sum-of-consecutive-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumOfConsecutiveSubsequences(nums []int) int
+```
+
+> **💡 Hint:** //   For each element nums[i], maintain DP for subsequences ending at this
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** //   For each element nums[i], maintain DP for subsequences ending at this
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,7 +79,7 @@ type pair struct {
 
 func sumOfConsecutiveSubsequences(nums []int) int {
 	// dp maps value -> (count, sum) for subsequences ending with that value.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dp := make(map[int]*pair)
 
 	var total int64

@@ -1,19 +1,32 @@
 # 1840 — Maximum Building Height
 
-## Deskripsi
-
-**Soal:** [1840. Maximum Building Height](https://leetcode.com/problems/maximum-building-height/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxBuilding(n int, restrictions [][]int) int
+```
+
+> **💡 Hint:** Two-Pass Constraint Propagation.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Two-Pass Constraint Propagation.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -68,7 +81,6 @@ func maxBuilding(n int, restrictions [][]int) int {
 	type res struct {
 		id, h int
 	}
-  // Membuat slice untuk menyimpan hasil
 	list := make([]res, 0, len(restrictions)+1)
 	list = append(list, res{1, 0})
 	for _, r := range restrictions {
@@ -83,6 +95,7 @@ func maxBuilding(n int, restrictions [][]int) int {
 	}
 
 	// Sort by id
+  // Custom sort dengan comparator
 	sort.Slice(list, func(i, j int) bool {
 		return list[i].id < list[j].id
 	})
@@ -101,7 +114,7 @@ func maxBuilding(n int, restrictions [][]int) int {
 
 	// Compute max building height between pairs of restrictions
 	ans := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(list); i++ {
 		if list[i].h > ans {
 			ans = list[i].h

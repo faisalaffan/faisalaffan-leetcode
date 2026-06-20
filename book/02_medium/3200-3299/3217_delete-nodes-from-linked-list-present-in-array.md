@@ -1,19 +1,30 @@
 # 3217 — Delete Nodes From Linked List Present In Array
 
-## Deskripsi
-
-**Soal:** [3217. Delete Nodes From Linked List Present In Array](https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func modifiedList(nums []int, head *ListNode) *ListNode
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(m)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func modifiedList(nums []int, head *ListNode) *ListNode`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ type ListNode struct {
 }
 
 func modifiedList(nums []int, head *ListNode) *ListNode {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	del := make(map[int]bool)
 	for _, v := range nums {
 		del[v] = true

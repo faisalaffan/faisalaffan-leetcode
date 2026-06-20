@@ -1,19 +1,30 @@
 # 2818 — Apply Operations To Maximize Score
 
-## Deskripsi
-
-**Soal:** [2818. Apply Operations To Maximize Score](https://leetcode.com/problems/apply-operations-to-maximize-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func primeScore(n int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal), Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func primeScore(n int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,14 +77,14 @@ func powMod(a, e int64) int64 {
 
 func maximumScore(nums []int, k int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	scores := make([]int, n)
 	for i, v := range nums {
 		scores[i] = primeScore(v)
 	}
 
 	// Previous greater (or equal) element index
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prev := make([]int, n)
 	stack := []int{}
 	for i := 0; i < n; i++ {
@@ -89,7 +100,7 @@ func maximumScore(nums []int, k int) int {
 	}
 
 	// Next greater (strictly greater) element index
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	next := make([]int, n)
 	stack = []int{}
 	for i := n - 1; i >= 0; i-- {
@@ -105,11 +116,12 @@ func maximumScore(nums []int, k int) int {
 	}
 
 	// Sort indices by value descending (if tie, by index ascending)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indices := make([]int, n)
 	for i := 0; i < n; i++ {
 		indices[i] = i
 	}
+  // Custom sort dengan comparator
 	sort.Slice(indices, func(i, j int) bool {
 		if nums[indices[i]] != nums[indices[j]] {
 			return nums[indices[i]] > nums[indices[j]]

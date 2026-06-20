@@ -1,19 +1,32 @@
 # 3906 — Count Good Integers On A Grid Path
 
-## Deskripsi
-
-**Soal:** [3906. Count Good Integers On A Grid Path](https://leetcode.com/problems/count-good-integers-on-a-grid-path/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countGoodIntegersOnPath(l int64, r int64, directions string) int64
+```
+
+> **💡 Hint:** Generate all possible numbers along the path. For each
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Generate all possible numbers along the path. For each
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,7 +71,7 @@ func countGoodIntegersOnPath(l int64, r int64, directions string) int64 {
 	// Collect all numbers formed at each position
 	// A number is formed by concatenating row and column (e.g., (2,3) -> 23)
 	var count int64
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int64]bool)
 	for _, c := range coords {
 		num := int64(c[0]*10 + c[1]) // 2-digit number from coordinates

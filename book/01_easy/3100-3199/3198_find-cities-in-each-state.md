@@ -1,17 +1,30 @@
 # 3198 — Find Cities In Each State
 
-## Deskripsi
-
-**Soal:** [3198. Find Cities In Each State](https://leetcode.com/problems/find-cities-in-each-state/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindCitiesInEachState(data [][]string) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n). Space: O(n).  
 **Kompleksitas Ruang:** O(n).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,21 +56,20 @@ func main() {
 // FindCitiesInEachState groups cities by state and returns them as comma-separated strings.
 // Time: O(n log n). Space: O(n).
 func FindCitiesInEachState(data [][]string) [][]string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	stateCities := make(map[string][]string)
 	for _, row := range data {
 		state, city := row[0], row[1]
 		stateCities[state] = append(stateCities[state], city)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	states := make([]string, 0, len(stateCities))
 	for s := range stateCities {
 		states = append(states, s)
 	}
 	sort.Strings(states)
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]string, len(states))
 	for i, s := range states {
 		cities := stateCities[s]

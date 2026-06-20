@@ -1,19 +1,32 @@
 # 1023 — Camelcase Matching
 
-## Deskripsi
-
-**Soal:** [1023. Camelcase Matching](https://leetcode.com/problems/camelcase-matching/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func camelMatch(queries []string, pattern string) []bool
+```
+
+> **💡 Hint:** For each query, use two pointers to match pattern characters
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * (len(query) + len(pattern)))  
 **Kompleksitas Ruang:** O(n) for output
 
-**Algoritma:** Two Pointer (penunjuk kiri & kanan), Two Pointer (penunjuk kiri & kanan)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** For each query, use two pointers to match pattern characters
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +49,6 @@ func main() {
 }
 
 func camelMatch(queries []string, pattern string) []bool {
-  // Membuat slice untuk menyimpan hasil
 	result := make([]bool, len(queries))
 
 	for i, q := range queries {
@@ -48,7 +60,7 @@ func camelMatch(queries []string, pattern string) []bool {
 
 func matches(query, pattern string) bool {
 	j := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(query); i++ {
 		if j < len(pattern) && query[i] == pattern[j] {
 			j++

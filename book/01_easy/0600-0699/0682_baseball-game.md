@@ -1,17 +1,30 @@
 # 0682 — Baseball Game
 
-## Deskripsi
-
-**Soal:** [0682. Baseball Game](https://leetcode.com/problems/baseball-game/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calPoints(operations []string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n). Space: O(n).  
 **Kompleksitas Ruang:** O(n).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +47,7 @@ func main() {
 // calPoints calculates the total score for a baseball game based on operations.
 // Time: O(n). Space: O(n).
 func calPoints(operations []string) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0, len(operations))
 	for _, op := range operations {
 		switch op {

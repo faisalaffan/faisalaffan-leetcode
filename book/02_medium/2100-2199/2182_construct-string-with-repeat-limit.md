@@ -1,19 +1,30 @@
 # 2182 — Construct String With Repeat Limit
 
-## Deskripsi
-
-**Soal:** [2182. Construct String With Repeat Limit](https://leetcode.com/problems/construct-string-with-repeat-limit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func repeatLimitedString(s string, repeatLimit int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func repeatLimitedString(s string, repeatLimit int) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,13 +37,12 @@ package main
 import "fmt"
 
 func repeatLimitedString(s string, repeatLimit int) string {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([]int, 26)
 	for _, ch := range s {
 		count[ch-'a']++
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, len(s))
 	for i := 25; i >= 0; {
 		if count[i] == 0 {

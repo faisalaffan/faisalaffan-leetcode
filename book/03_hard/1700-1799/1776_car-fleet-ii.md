@@ -1,21 +1,32 @@
 # 1776 — Car Fleet Ii
 
-## Deskripsi
-
-**Soal:** [1776. Car Fleet Ii](https://leetcode.com/problems/car-fleet-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getCollisionTimes(cars [][]int) []float64
+```
+
+> **💡 Hint:** Monotonic stack (processing from right to left).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getCollisionTimes(cars [][]int) []float64`
-
-> **Ide Kunci:** Monotonic stack (processing from right to left).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,10 +56,9 @@ type Car struct {
 
 func getCollisionTimes(cars [][]int) []float64 {
 	n := len(cars)
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]float64, n)
 	// Stack holds indices of cars that form collision chains (from right)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0, n)
 
 	for i := n - 1; i >= 0; i-- {

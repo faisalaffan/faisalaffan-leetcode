@@ -1,17 +1,30 @@
 # 3363 — Find The Maximum Number Of Fruits Collected
 
-## Deskripsi
-
-**Soal:** [3363. Find The Maximum Number Of Fruits Collected](https://leetcode.com/problems/find-the-maximum-number-of-fruits-collected/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxCollectedFruits(fruits [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,7 +79,7 @@ func maxCollectedFruits(fruits [][]int) int {
 	// Child 2: DP from (0, n-1) in upper triangle (i < j)
 	// dp2[i][j] = max fruits collected from (i,j) to destination
 	// Moving: (i+1, j-1), (i+1, j), (i+1, j+1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp2 := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dp2[i] = make([]int, n)
@@ -106,7 +119,7 @@ func maxCollectedFruits(fruits [][]int) int {
 
 	// Child 3: DP from (n-1, 0) in lower triangle (i > j)
 	// Moving: (i-1, j+1), (i, j+1), (i+1, j+1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp3 := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dp3[i] = make([]int, n)

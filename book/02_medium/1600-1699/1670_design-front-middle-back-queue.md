@@ -1,19 +1,30 @@
 # 1670 — Design Front Middle Back Queue
 
-## Deskripsi
-
-**Soal:** [1670. Design Front Middle Back Queue](https://leetcode.com/problems/design-front-middle-back-queue/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+
+Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+
+**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() FrontMiddleBackQueue
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(1) per operation (amortized), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor() FrontMiddleBackQueue`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

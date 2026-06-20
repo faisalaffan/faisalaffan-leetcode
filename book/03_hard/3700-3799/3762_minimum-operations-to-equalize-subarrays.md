@@ -1,19 +1,32 @@
 # 3762 — Minimum Operations To Equalize Subarrays
 
-## Deskripsi
-
-**Soal:** [3762. Minimum Operations To Equalize Subarrays](https://leetcode.com/problems/minimum-operations-to-equalize-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumOperations(nums []int, k int, queries [][]int) []int64
+```
+
+> **💡 Hint:** Merge sort tree for kth order statistic (median).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Prefix Sum (jumlah kumulatif), Merge Sort (pengurutan gabung)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Merge sort tree for kth order statistic (median).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,7 @@ func minimumOperations(nums []int, k int, queries [][]int) []int64 {
 	n := len(nums)
 
 	// Build merge sort tree
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	tree := make([][]int, 4*n)
 	var build func(node, l, r int)
 	build = func(node, l, r int) {
@@ -101,13 +114,13 @@ func minimumOperations(nums []int, k int, queries [][]int) []int64 {
 	}
 
 	// Prefix sums for fast range sum
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int64, n+1)
 	for i, v := range nums {
 		pref[i+1] = pref[i] + int64(v)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]
@@ -164,7 +177,7 @@ func minimumOperations(nums []int, k int, queries [][]int) []int64 {
 }
 
 func merge(a, b []int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	res := make([]int, len(a)+len(b))
 	i, j, k := 0, 0, 0
 	for i < len(a) && j < len(b) {

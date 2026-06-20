@@ -1,19 +1,32 @@
 # 1635 — Hopper Company Queries I
 
-## Deskripsi
-
-**Soal:** [1635. Hopper Company Queries I](https://leetcode.com/problems/hopper-company-queries-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func parseDate(s string) time.Time
+```
+
+> **💡 Hint:** Process drivers and rides data in Go to simulate the
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Process drivers and rides data in Go to simulate the
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -104,13 +117,13 @@ func parseDate(s string) time.Time {
 
 func hopperQueriesI(drivers []Driver, rides []Ride, accepted []AcceptedRide) [][3]int {
 	// Count drivers active by end of each month in 2020
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	acceptedRideSet := make(map[int]bool)
 	for _, ar := range accepted {
 		acceptedRideSet[ar.RideID] = true
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rideMonth := make(map[int]int) // rideID -> month
 	for _, r := range rides {
 		if r.RequestedAt.Year() == 2020 {
@@ -118,7 +131,7 @@ func hopperQueriesI(drivers []Driver, rides []Ride, accepted []AcceptedRide) [][
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	activeDrivers := make([]int, 13)
 	for _, d := range drivers {
 		joinYear, joinMonth := d.JoinDate.Year(), d.JoinDate.Month()
@@ -133,7 +146,7 @@ func hopperQueriesI(drivers []Driver, rides []Ride, accepted []AcceptedRide) [][
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	acceptedRides := make([]int, 13)
 	for rideID, month := range rideMonth {
 		if acceptedRideSet[rideID] {
@@ -141,7 +154,7 @@ func hopperQueriesI(drivers []Driver, rides []Ride, accepted []AcceptedRide) [][
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([][3]int, 12)
 	for m := 1; m <= 12; m++ {
 		result[m-1] = [3]int{m, activeDrivers[m], acceptedRides[m]}

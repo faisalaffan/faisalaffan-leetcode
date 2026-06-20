@@ -1,19 +1,30 @@
 # 0040 — Combination Sum Ii
 
-## Deskripsi
-
-**Soal:** [0040. Combination Sum Ii](https://leetcode.com/problems/combination-sum-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func combinationSum2(candidates []int, target int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(2^n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func combinationSum2(candidates []int, target int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,12 +39,13 @@ import (
 )
 
 func combinationSum2(candidates []int, target int) [][]int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(candidates)
 	result := [][]int{}
 	var backtrack func(start int, target int, path []int)
 	backtrack = func(start int, target int, path []int) {
 		if target == 0 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			comb := make([]int, len(path))
 			copy(comb, path)
 			result = append(result, comb)

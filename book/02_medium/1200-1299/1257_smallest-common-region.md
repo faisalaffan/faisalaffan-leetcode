@@ -1,19 +1,30 @@
 # 1257 — Smallest Common Region
 
-## Deskripsi
-
-**Soal:** [1257. Smallest Common Region](https://leetcode.com/problems/smallest-common-region/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findSmallestRegion(regions [][]string, region1 string, region2 string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n) where n = total regions  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findSmallestRegion(regions [][]string, region1 string, region2 string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ import (
 // Space: O(n)
 
 func findSmallestRegion(regions [][]string, region1 string, region2 string) string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	parent := make(map[string]string)
 
 	for _, list := range regions {
@@ -43,7 +54,7 @@ func findSmallestRegion(regions [][]string, region1 string, region2 string) stri
 	}
 
 	// Find path from region1 to root
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	path := make(map[string]bool)
 	r := region1
 	path[r] = true

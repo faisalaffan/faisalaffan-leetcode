@@ -1,19 +1,32 @@
 # 1923 — Longest Common Subpath
 
-## Deskripsi
-
-**Soal:** [1923. Longest Common Subpath](https://leetcode.com/problems/longest-common-subpath/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestCommonSubpath(n int, paths [][]int) int
+```
+
+> **💡 Hint:** binary search on length + rolling hash (Rabin-Karp).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** binary search on length + rolling hash (Rabin-Karp).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -103,7 +116,7 @@ func hasCommonSubpath(paths [][]int, length int) bool {
 	}
 
 	// Get all subarray hashes from first path
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	common := make(map[[2]int]bool)
 	var h1, h2 int
 
@@ -129,7 +142,7 @@ func hasCommonSubpath(paths [][]int, length int) bool {
 
 	// Check each remaining path
 	for _, path := range paths[1:] {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		current := make(map[[2]int]bool)
 		h1, h2 = 0, 0
 

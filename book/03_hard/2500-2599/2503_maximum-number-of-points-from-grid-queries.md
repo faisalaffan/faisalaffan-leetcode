@@ -1,17 +1,30 @@
 # 2503 — Maximum Number Of Points From Grid Queries
 
-## Deskripsi
-
-**Soal:** [2503. Maximum Number Of Points From Grid Queries](https://leetcode.com/problems/maximum-number-of-points-from-grid-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPoints(grid [][]int, queries []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -67,22 +80,23 @@ func maxPoints(grid [][]int, queries []int) []int {
 	type Query struct {
 		val, idx int
 	}
-  // Membuat slice untuk menyimpan hasil
 	sorted := make([]Query, k)
 	for i, v := range queries {
 		sorted[i] = Query{v, i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(sorted, func(i, j int) bool {
 		return sorted[i].val < sorted[j].val
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, k)
 	h := &MinHeap{}
 	heap.Init(h)
+  // Masukkan elemen ke priority queue
 	heap.Push(h, Cell{grid[0][0], 0, 0})
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, m)
 	for i := 0; i < m; i++ {
 		visited[i] = make([]bool, n)
@@ -95,12 +109,14 @@ func maxPoints(grid [][]int, queries []int) []int {
 	for _, q := range sorted {
 		// Pop all cells with value < query value
 		for h.Len() > 0 && (*h)[0].val < q.val {
+  // Ambil elemen terkecil/terbesar dari heap
 			cell := heap.Pop(h).(Cell)
 			count++
 			for _, d := range dirs {
 				nr, nc := cell.r+d[0], cell.c+d[1]
 				if nr >= 0 && nr < m && nc >= 0 && nc < n && !visited[nr][nc] {
 					visited[nr][nc] = true
+  // Masukkan elemen ke priority queue
 					heap.Push(h, Cell{grid[nr][nc], nr, nc})
 				}
 			}

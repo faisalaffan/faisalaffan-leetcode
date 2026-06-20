@@ -1,19 +1,30 @@
 # 2731 — Movement Of Robots
 
-## Deskripsi
-
-**Soal:** [2731. Movement Of Robots](https://leetcode.com/problems/movement-of-robots/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MovementOfRobots(nums []int, s string, d int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MovementOfRobots(nums []int, s string, d int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ import (
 
 func MovementOfRobots(nums []int, s string, d int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pos := make([]int, n)
 	for i, num := range nums {
 		pos[i] = num
@@ -41,6 +52,7 @@ func MovementOfRobots(nums []int, s string, d int) int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(pos)
 
 	const mod = 1_000_000_007

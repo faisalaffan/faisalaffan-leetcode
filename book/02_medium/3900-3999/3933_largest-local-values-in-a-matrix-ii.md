@@ -1,21 +1,32 @@
 # 3933 — Largest Local Values In A Matrix Ii
 
-## Deskripsi
-
-**Soal:** [3933. Largest Local Values In A Matrix Ii](https://leetcode.com/problems/largest-local-values-in-a-matrix-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LargestLocalValuesInAMatrixIi(grid [][]int) int
+```
+
+> **💡 Hint:** Precompute 2D prefix sums for each value threshold.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(N*M*V)  
 **Kompleksitas Ruang:** O(N*M*V) where V = max value <= 200
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func LargestLocalValuesInAMatrixIi(grid [][]int) int`
-
-> **Ide Kunci:** Precompute 2D prefix sums for each value threshold.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,10 +60,10 @@ func LargestLocalValuesInAMatrixIi(grid [][]int) int {
 
 	// Precompute 2D prefix sums for each threshold t: count of cells >= t
 	// pref[t][i+1][j+1] = count of cells with value >= t in rectangle [0..i]x[0..j]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pref := make([][][]int, maxVal+2)
 	for t := 1; t <= maxVal+1; t++ {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		p := make([][]int, m+1)
 		for i := 0; i <= m; i++ {
 			p[i] = make([]int, n+1)
@@ -128,7 +139,7 @@ func min(a, b int) int {
 
 func main() {
 	// Example 1
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	grid1 := make([][]int, 7)
 	for i := 0; i < 7; i++ {
 		grid1[i] = make([]int, 7)

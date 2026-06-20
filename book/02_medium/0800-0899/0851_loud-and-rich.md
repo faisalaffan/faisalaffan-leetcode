@@ -1,17 +1,30 @@
 # 0851 — Loud And Rich
 
-## Deskripsi
-
-**Soal:** [0851. Loud And Rich](https://leetcode.com/problems/loud-and-rich/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LoudAndRich(richer [][]int, quiet []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n + m)  
 **Kompleksitas Ruang:** O(n + m) where m = len(richer)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +44,9 @@ func main() {
 // Time: O(n + m) | Space: O(n + m) where m = len(richer)
 func LoudAndRich(richer [][]int, quiet []int) []int {
 	n := len(quiet)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indeg := make([]int, n)
 
 	for _, r := range richer {
@@ -42,9 +55,9 @@ func LoudAndRich(richer [][]int, quiet []int) []int {
 		indeg[b]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		ans[i] = i
 	}

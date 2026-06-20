@@ -1,17 +1,30 @@
 # 1852 — Distinct Numbers In Each Subarray
 
-## Deskripsi
-
-**Soal:** [1852. Distinct Numbers In Each Subarray](https://leetcode.com/problems/distinct-numbers-in-each-subarray/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func DistinctNumbers(nums []int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Sliding Window
 
 **Kompleksitas Waktu:** O(n), Space: O(k) where k = distinct elements in window  
 **Kompleksitas Ruang:** O(k) where k = distinct elements in window
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +47,9 @@ func DistinctNumbers(nums []int, k int) []int {
 	if k > n {
 		return nil
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n-k+1)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	distinct := 0
 

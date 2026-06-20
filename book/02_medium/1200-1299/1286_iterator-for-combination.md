@@ -1,19 +1,30 @@
 # 1286 — Iterator For Combination
 
-## Deskripsi
-
-**Soal:** [1286. Iterator For Combination](https://leetcode.com/problems/iterator-for-combination/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(characters string, combinationLength int) CombinationIterator
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(C(n,k)) init, O(1) next/hasNext  
 **Kompleksitas Ruang:** O(C(n,k))
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor(characters string, combinationLength int) CombinationIterator`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,6 @@ type CombinationIterator struct {
 }
 
 func Constructor(characters string, combinationLength int) CombinationIterator {
-  // Membuat slice untuk menyimpan hasil
 	combs := make([]string, 0)
 	n := len(characters)
 

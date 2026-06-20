@@ -1,21 +1,32 @@
 # 1349 — Maximum Students Taking Exam
 
-## Deskripsi
-
-**Soal:** [1349. Maximum Students Taking Exam](https://leetcode.com/problems/maximum-students-taking-exam/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxStudents(seats [][]byte) int
+```
+
+> **💡 Hint:** Bitmask DP.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxStudents(seats [][]byte) int`
-
-> **Ide Kunci:** Bitmask DP.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,7 @@ func maxStudents(seats [][]byte) int {
 	m, n := len(seats), len(seats[0])
 
 	// Row broken-seat masks (1 = broken, cannot sit there)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	broken := make([]int, m)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -48,7 +59,7 @@ func maxStudents(seats [][]byte) int {
 	}
 
 	// Precompute all valid row masks (no adjacent 1s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	valid := make([]int, 0, 1<<n)
 	for mask := 0; mask < (1 << n); mask++ {
 		if mask&(mask<<1) == 0 {
@@ -65,7 +76,7 @@ func maxStudents(seats [][]byte) int {
 		return c
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, m)
 	for i := 0; i < m; i++ {
 		dp[i] = make([]int, 1<<n)

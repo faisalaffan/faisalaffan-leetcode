@@ -1,17 +1,30 @@
 # 1914 — Cyclically Rotating A Grid
 
-## Deskripsi
-
-**Soal:** [1914. Cyclically Rotating A Grid](https://leetcode.com/problems/cyclically-rotating-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func RotateGrid(grid [][]int, k int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(m*n), Space: O(m+n)  
 **Kompleksitas Ruang:** O(m+n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +54,7 @@ func RotateGrid(grid [][]int, k int) [][]int {
 		kMod := k % layerLen
 
 		// Extract layer
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		arr := make([]int, layerLen)
 		idx := 0
 		for j := left; j <= right; j++ {

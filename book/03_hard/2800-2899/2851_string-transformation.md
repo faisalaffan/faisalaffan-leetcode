@@ -1,19 +1,30 @@
 # 2851 — String Transformation
 
-## Deskripsi
-
-**Soal:** [2851. String Transformation](https://leetcode.com/problems/string-transformation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfWays(s, t string, k int64) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), KMP (Knuth-Morris-Pratt, pencocokan string)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfWays(s, t string, k int64) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +54,7 @@ func numberOfWays(s, t string, k int64) int {
 	text := s + s[:n-1]
 
 	// Build LPS array for pattern
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lps := make([]int, n)
 	for i := 1; i < n; i++ {
 		j := lps[i-1]
@@ -58,7 +69,7 @@ func numberOfWays(s, t string, k int64) int {
 
 	g := 0
 	j := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(text); i++ {
 		for j > 0 && text[i] != pattern[j] {
 			j = lps[j-1]

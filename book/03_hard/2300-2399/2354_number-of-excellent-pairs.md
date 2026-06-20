@@ -1,19 +1,30 @@
 # 2354 — Number Of Excellent Pairs
 
-## Deskripsi
-
-**Soal:** [2354. Number Of Excellent Pairs](https://leetcode.com/problems/number-of-excellent-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countExcellentPairs(nums []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countExcellentPairs(nums []int, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,9 +63,9 @@ import "fmt"
 
 func countExcellentPairs(nums []int, k int) int64 {
 	// Deduplicate values.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]bool)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	unique := make([]int, 0)
 	for _, v := range nums {
 		if !seen[v] {
@@ -64,7 +75,7 @@ func countExcellentPairs(nums []int, k int) int64 {
 	}
 
 	// Count by set‑bit count.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, 61) // bits up to 60 (nums[i] ≤ 10^9, but use 60 for safety)
 	for _, v := range unique {
 		cnt[popcount(v)]++

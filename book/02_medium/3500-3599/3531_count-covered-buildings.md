@@ -1,17 +1,30 @@
 # 3531 — Count Covered Buildings
 
-## Deskripsi
-
-**Soal:** [3531. Count Covered Buildings](https://leetcode.com/problems/count-covered-buildings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CountCoveredBuildings(buildings [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,6 +56,7 @@ func CountCoveredBuildings(buildings [][]int) int {
 		return 0
 	}
 	// Sort by start, then by end descending
+  // Custom sort dengan comparator
 	sort.Slice(buildings, func(i, j int) bool {
 		if buildings[i][0] != buildings[j][0] {
 			return buildings[i][0] < buildings[j][0]

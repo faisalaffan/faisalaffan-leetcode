@@ -1,19 +1,30 @@
 # 3653 — Xor After Range Multiplication Queries I
 
-## Deskripsi
-
-**Soal:** [3653. Xor After Range Multiplication Queries I](https://leetcode.com/problems/xor-after-range-multiplication-queries-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func xorAfterRangeMultiplicationQueriesI(arr []int, queries [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + q)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func xorAfterRangeMultiplicationQueriesI(arr []int, queries [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,13 +38,13 @@ import "fmt"
 
 func xorAfterRangeMultiplicationQueriesI(arr []int, queries [][]int) []int {
 	n := len(arr)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n+1)
 	for i, v := range arr {
 		pref[i+1] = pref[i] ^ v
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r, mul := q[0], q[1], q[2]

@@ -1,17 +1,30 @@
 # 2421 — Number Of Good Paths
 
-## Deskripsi
-
-**Soal:** [2421. Number Of Good Paths](https://leetcode.com/problems/number-of-good-paths/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newUF(n int) *uf
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,9 +61,9 @@ type uf struct {
 }
 
 func newUF(n int) *uf {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -87,7 +100,7 @@ func numberOfGoodPaths(vals []int, edges [][]int) int {
 	}
 
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		a, b := e[0], e[1]
@@ -96,11 +109,12 @@ func numberOfGoodPaths(vals []int, edges [][]int) int {
 	}
 
 	// Sort nodes by value
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nodes := make([]int, n)
 	for i := 0; i < n; i++ {
 		nodes[i] = i
 	}
+  // Custom sort dengan comparator
 	sort.Slice(nodes, func(i, j int) bool {
 		return vals[nodes[i]] < vals[nodes[j]]
 	})
@@ -125,7 +139,7 @@ func numberOfGoodPaths(vals []int, edges [][]int) int {
 			}
 		}
 		// Count nodes in each component for this value
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		compCount := make(map[int]int)
 		for k := i; k < j; k++ {
 			root := u.find(nodes[k])

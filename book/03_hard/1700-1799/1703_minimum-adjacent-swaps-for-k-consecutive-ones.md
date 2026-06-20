@@ -1,19 +1,30 @@
 # 1703 — Minimum Adjacent Swaps For K Consecutive Ones
 
-## Deskripsi
-
-**Soal:** [1703. Minimum Adjacent Swaps For K Consecutive Ones](https://leetcode.com/problems/minimum-adjacent-swaps-for-k-consecutive-ones/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minMoves(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minMoves(nums []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ import (
 
 func minMoves(nums []int, k int) int {
 	// Collect indices of 1s
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pos := make([]int, 0)
 	for i, v := range nums {
 		if v == 1 {
@@ -45,7 +56,7 @@ func minMoves(nums []int, k int) int {
 	}
 
 	// prefix sum of positions
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		pref[i+1] = pref[i] + pos[i]

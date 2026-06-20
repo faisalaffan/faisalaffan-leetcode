@@ -1,17 +1,30 @@
 # 1997 — First Day Where You Have Been In All The Rooms
 
-## Deskripsi
-
-**Soal:** [1997. First Day Where You Have Been In All The Rooms](https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FirstDayWhereYouHaveBeenInAllTheRooms(nextVisit []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +45,7 @@ func main() {
 func FirstDayWhereYouHaveBeenInAllTheRooms(nextVisit []int) int {
 	const mod = 1_000_000_007
 	n := len(nextVisit)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	s := make([]int, n)
 
 	for i := 0; i < n-1; i++ {

@@ -1,19 +1,30 @@
 # 1730 — Shortest Path To Get Food
 
-## Deskripsi
-
-**Soal:** [1730. Shortest Path To Get Food](https://leetcode.com/problems/shortest-path-to-get-food/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getFood(grid [][]byte) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(m * n), Space: O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getFood(grid [][]byte) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,7 @@ func getFood(grid [][]byte) int {
 	}
 
 	dirs := [][2]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, m)
 	for i := 0; i < m; i++ {
 		visited[i] = make([]bool, n)

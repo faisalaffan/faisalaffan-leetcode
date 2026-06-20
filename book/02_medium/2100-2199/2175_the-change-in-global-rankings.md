@@ -1,19 +1,30 @@
 # 2175 — The Change In Global Rankings
 
-## Deskripsi
-
-**Soal:** [2175. The Change In Global Rankings](https://leetcode.com/problems/the-change-in-global-rankings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func globalRankings(pointsBefore []int, pointsAfter []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func globalRankings(pointsBefore []int, pointsAfter []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,11 +47,11 @@ func globalRankings(pointsBefore []int, pointsAfter []int) []int {
 		points int
 		idx    int
 	}
-  // Membuat slice untuk menyimpan hasil
 	before := make([]pair, n)
 	for i := 0; i < n; i++ {
 		before[i] = pair{pointsBefore[i], i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(before, func(i, j int) bool {
 		if before[i].points != before[j].points {
 			return before[i].points > before[j].points
@@ -49,18 +60,18 @@ func globalRankings(pointsBefore []int, pointsAfter []int) []int {
 	})
 
 	// Compute rank before: rank = position (1-indexed) when sorted descending
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rankBefore := make([]int, n)
 	for pos, p := range before {
 		rankBefore[p.idx] = pos + 1
 	}
 
 	// Create sorted list for after
-  // Membuat slice untuk menyimpan hasil
 	after := make([]pair, n)
 	for i := 0; i < n; i++ {
 		after[i] = pair{pointsAfter[i], i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(after, func(i, j int) bool {
 		if after[i].points != after[j].points {
 			return after[i].points > after[j].points
@@ -69,14 +80,14 @@ func globalRankings(pointsBefore []int, pointsAfter []int) []int {
 	})
 
 	// Compute rank after
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rankAfter := make([]int, n)
 	for pos, p := range after {
 		rankAfter[p.idx] = pos + 1
 	}
 
 	// Difference
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 	for i := 0; i < n; i++ {
 		result[i] = rankBefore[i] - rankAfter[i]

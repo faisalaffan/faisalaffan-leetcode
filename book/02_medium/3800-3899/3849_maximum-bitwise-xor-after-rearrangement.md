@@ -1,21 +1,32 @@
 # 3849 — Maximum Bitwise Xor After Rearrangement
 
-## Deskripsi
-
-**Soal:** [3849. Maximum Bitwise Xor After Rearrangement](https://leetcode.com/problems/maximum-bitwise-xor-after-rearrangement/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumBitwiseXorAfterRearrangement(s string, t string) string
+```
+
+> **💡 Hint:** Count 0s and 1s in t. Greedily match opposite bits for max XOR.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MaximumBitwiseXorAfterRearrangement(s string, t string) string`
-
-> **Ide Kunci:** Count 0s and 1s in t. Greedily match opposite bits for max XOR.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,6 @@ func MaximumBitwiseXorAfterRearrangement(s string, t string) string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]byte, len(s))
 	for i, ch := range s {
 		if ch == '1' {

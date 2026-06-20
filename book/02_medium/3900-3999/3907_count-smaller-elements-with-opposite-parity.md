@@ -1,21 +1,32 @@
 # 3907 — Count Smaller Elements With Opposite Parity
 
-## Deskripsi
-
-**Soal:** [3907. Count Smaller Elements With Opposite Parity](https://leetcode.com/problems/count-smaller-elements-with-opposite-parity/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewBIT(size int) *BIT
+```
+
+> **💡 Hint:** Process right to left. Use two BITs (even, odd) to count smaller
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** O(N log M)  
 **Kompleksitas Ruang:** O(M) where M = max value
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewBIT(size int) *BIT`
-
-> **Ide Kunci:** Process right to left. Use two BITs (even, odd) to count smaller
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,15 +71,16 @@ func (b *BIT) Query(idx int) int {
 
 func CountSmallerElementsWithOppositeParity(nums []int) []int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
 
 	// Coordinate compress
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, nums)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rank := make(map[int]int)
 	for i, v := range sorted {
 		rank[v] = i

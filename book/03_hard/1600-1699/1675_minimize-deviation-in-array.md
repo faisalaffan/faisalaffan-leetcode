@@ -1,19 +1,30 @@
 # 1675 — Minimize Deviation In Array
 
-## Deskripsi
-
-**Soal:** [1675. Minimize Deviation In Array](https://leetcode.com/problems/minimize-deviation-in-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumDeviation(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumDeviation(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -61,11 +72,13 @@ func minimumDeviation(nums []int) int {
 		if num < minVal {
 			minVal = num
 		}
+  // Masukkan elemen ke priority queue
 		heap.Push(h, num)
 	}
 
 	ans := int(1 << 60)
 	for {
+  // Ambil elemen terkecil/terbesar dari heap
 		maxVal := heap.Pop(h).(int)
 		ans = min(ans, maxVal-minVal)
 		if maxVal%2 == 1 {
@@ -76,6 +89,7 @@ func minimumDeviation(nums []int) int {
 		if maxVal < minVal {
 			minVal = maxVal
 		}
+  // Masukkan elemen ke priority queue
 		heap.Push(h, maxVal)
 	}
 	return ans

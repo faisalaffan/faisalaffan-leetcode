@@ -1,21 +1,32 @@
 # 2714 — Find Shortest Path With K Hops
 
-## Deskripsi
-
-**Soal:** [2714. Find Shortest Path With K Hops](https://leetcode.com/problems/find-shortest-path-with-k-hops/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestPathWithKHops(n int, edges [][]int, s int, d int, k int) int
+```
+
+> **💡 Hint:** Dijkstra with state (node, hopsUsed). We can either pay the edge
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func shortestPathWithKHops(n int, edges [][]int, s int, d int, k int) int`
-
-> **Ide Kunci:** Dijkstra with state (node, hopsUsed). We can either pay the edge
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +63,7 @@ func (h *minHeap) Pop() any {
 }
 
 func shortestPathWithKHops(n int, edges [][]int, s int, d int, k int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -60,9 +71,9 @@ func shortestPathWithKHops(n int, edges [][]int, s int, d int, k int) int {
 		adj[v] = append(adj[v], [2]int{u, w})
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, k+1)
 		for j := range dist[i] {
@@ -72,9 +83,11 @@ func shortestPathWithKHops(n int, edges [][]int, s int, d int, k int) int {
 	dist[s][0] = 0
 
 	h := &minHeap{}
+  // Masukkan elemen ke priority queue
 	heap.Push(h, state{s, 0, 0})
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(h).(state)
 		u, du, hops := cur.node, cur.dist, cur.hops
 		if du > dist[u][hops] {
@@ -88,11 +101,13 @@ func shortestPathWithKHops(n int, edges [][]int, s int, d int, k int) int {
 			// Pay cost
 			if du+w < dist[v][hops] {
 				dist[v][hops] = du + w
+  // Masukkan elemen ke priority queue
 				heap.Push(h, state{v, du + w, hops})
 			}
 			// Use free hop
 			if hops < k && du < dist[v][hops+1] {
 				dist[v][hops+1] = du
+  // Masukkan elemen ke priority queue
 				heap.Push(h, state{v, du, hops + 1})
 			}
 		}

@@ -1,17 +1,30 @@
 # 3611 — Find Overbooked Employees
 
-## Deskripsi
-
-**Soal:** [3611. Find Overbooked Employees](https://leetcode.com/problems/find-overbooked-employees/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindOverbookedEmployees(shifts [][]int, limit int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,6 +63,7 @@ func FindOverbookedEmployees(shifts [][]int, limit int) int {
 	for _, s := range shifts {
 		events = append(events, event{s[0], 1}, event{s[1], -1})
 	}
+  // Custom sort dengan comparator
 	sort.Slice(events, func(i, j int) bool {
 		if events[i].time != events[j].time {
 			return events[i].time < events[j].time

@@ -1,21 +1,32 @@
 # 0862 — Shortest Subarray With Sum At Least K
 
-## Deskripsi
-
-**Soal:** [0862. Shortest Subarray With Sum At Least K](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestSubarray(nums []int, k int) int
+```
+
+> **💡 Hint:** Monotonic increasing deque of prefix sums. For each prefix sum, maintain
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie, Prefix Sum, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func shortestSubarray(nums []int, k int) int`
-
-> **Ide Kunci:** Monotonic increasing deque of prefix sums. For each prefix sum, maintain
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ import "fmt"
 
 func shortestSubarray(nums []int, k int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + nums[i]
@@ -40,7 +51,7 @@ func shortestSubarray(nums []int, k int) int {
 
 	ans := n + 1
 	// deque stores indices with increasing prefix sums
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	deque := make([]int, 0)
 
 	for i := 0; i <= n; i++ {

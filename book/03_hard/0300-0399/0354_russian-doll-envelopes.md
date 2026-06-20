@@ -1,17 +1,30 @@
 # 0354 — Russian Doll Envelopes
 
-## Deskripsi
-
-**Soal:** [0354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxEnvelopes(envelopes [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,6 +57,7 @@ func main() {
 
 func maxEnvelopes(envelopes [][]int) int {
 	// Sort by width ascending; if width ties, height descending
+  // Custom sort dengan comparator
 	sort.Slice(envelopes, func(i, j int) bool {
 		if envelopes[i][0] != envelopes[j][0] {
 			return envelopes[i][0] < envelopes[j][0]
@@ -52,7 +66,7 @@ func maxEnvelopes(envelopes [][]int) int {
 	})
 
 	// LIS on heights using patience sorting (binary search)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tails := make([]int, 0, len(envelopes))
 	for _, e := range envelopes {
 		h := e[1]

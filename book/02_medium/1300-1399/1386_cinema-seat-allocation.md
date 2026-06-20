@@ -1,17 +1,30 @@
 # 1386 — Cinema Seat Allocation
 
-## Deskripsi
-
-**Soal:** [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxNumberOfFamilies(n int, reservedSeats [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Bitmask
 
 **Kompleksitas Waktu:** O(n) where n = number of reserved seats  
 **Kompleksitas Ruang:** O(k) where k = number of rows with reserved seats
 
-**Algoritma:** Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,7 @@ func main() {
 // Space: O(k) where k = number of rows with reserved seats
 func maxNumberOfFamilies(n int, reservedSeats [][]int) int {
 	// Map row to bitmask of reserved seats (columns 2-9, bits 0-7)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rowMap := make(map[int]int)
 	for _, seat := range reservedSeats {
 		col := seat[1]

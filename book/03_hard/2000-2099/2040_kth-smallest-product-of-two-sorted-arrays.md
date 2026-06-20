@@ -1,19 +1,32 @@
 # 2040 — Kth Smallest Product Of Two Sorted Arrays
 
-## Deskripsi
-
-**Soal:** [2040. Kth Smallest Product Of Two Sorted Arrays](https://leetcode.com/problems/kth-smallest-product-of-two-sorted-arrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kthSmallestProduct(nums1 []int, nums2 []int, k int) int64
+```
+
+> **💡 Hint:** Binary search on the answer value. Count how many pairs have
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on the answer value. Count how many pairs have
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 func kthSmallestProduct(nums1 []int, nums2 []int, k int) int64 {
 	left, right := int64(-1_000_000_000_000_000_000), int64(1_000_000_000_000_000_000)
 
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := left + (right-left)/2
 		if countLessOrEqual(nums1, nums2, mid) >= int64(k) {

@@ -1,21 +1,32 @@
 # 2719 — Count Of Integers
 
-## Deskripsi
-
-**Soal:** [2719. Count Of Integers](https://leetcode.com/problems/count-of-integers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countOfIntegers(num1 string, num2 string, minSum int, maxSum int) int
+```
+
+> **💡 Hint:** Digit DP. Count integers in [num1, num2] with digit sum in [minSum, maxSum].
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countOfIntegers(num1 string, num2 string, minSum int, maxSum int) int`
-
-> **Ide Kunci:** Digit DP. Count integers in [num1, num2] with digit sum in [minSum, maxSum].
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,9 +46,9 @@ func countOfIntegers(num1 string, num2 string, minSum int, maxSum int) int {
 	var count func(num string) int
 	count = func(num string) int {
 		n := len(num)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		memo := make([][][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range memo {
 			memo[i] = make([][]int, maxSum+1)
 			for j := range memo[i] {

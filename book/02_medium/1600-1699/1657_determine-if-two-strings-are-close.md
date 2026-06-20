@@ -1,17 +1,30 @@
 # 1657 — Determine If Two Strings Are Close
 
-## Deskripsi
-
-**Soal:** [1657. Determine If Two Strings Are Close](https://leetcode.com/problems/determine-if-two-strings-are-close/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CloseStrings(word1 string, word2 string) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N + M + 26 log 26), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,13 +50,11 @@ func CloseStrings(word1 string, word2 string) bool {
 		return false
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq1 := make([]int, 26)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq2 := make([]int, 26)
-  // Membuat slice untuk menyimpan hasil
 	set1 := make([]bool, 26)
-  // Membuat slice untuk menyimpan hasil
 	set2 := make([]bool, 26)
 
 	for _, ch := range word1 {
@@ -63,7 +74,9 @@ func CloseStrings(word1 string, word2 string) bool {
 	}
 
 	// Check same frequency multiset
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(freq1)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(freq2)
 	for i := 0; i < 26; i++ {
 		if freq1[i] != freq2[i] {

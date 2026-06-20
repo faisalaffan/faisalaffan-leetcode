@@ -1,19 +1,30 @@
 # 2557 — Maximum Number Of Integers To Choose From A Range Ii
 
-## Deskripsi
-
-**Soal:** [2557. Maximum Number Of Integers To Choose From A Range Ii](https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxCount(banned []int, n int, maxSum int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxCount(banned []int, n int, maxSum int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,8 +40,9 @@ import (
 )
 
 func maxCount(banned []int, n int, maxSum int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(banned)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	bannedSet := make(map[int]bool)
 	for _, b := range banned {
 		bannedSet[b] = true

@@ -1,19 +1,30 @@
 # 3116 — Kth Smallest Amount With Single Denomination Combination
 
-## Deskripsi
-
-**Soal:** [3116. Kth Smallest Amount With Single Denomination Combination](https://leetcode.com/problems/kth-smallest-amount-with-single-denomination-combination/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lcmSafe(a, b, limit int64) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, DFS, GCD / Matematika
 
 **Kompleksitas Waktu:** O(2^m * log(k * min_coin)) where m = filtered coin count  
 **Kompleksitas Ruang:** O(m)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func gcd(a, b int64) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,8 +60,9 @@ func lcmSafe(a, b, limit int64) int64 {
 }
 
 func kthSmallestAmount(coins []int, k int) int64 {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(coins)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	filtered := make([]int, 0)
 	for _, c := range coins {
 		redundant := false
@@ -66,7 +78,7 @@ func kthSmallestAmount(coins []int, k int) int64 {
 	}
 
 	m := len(filtered)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	coinI64 := make([]int64, m)
 	for i, c := range filtered {
 		coinI64[i] = int64(c)

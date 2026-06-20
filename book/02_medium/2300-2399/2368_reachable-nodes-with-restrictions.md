@@ -1,17 +1,30 @@
 # 2368 — Reachable Nodes With Restrictions
 
-## Deskripsi
-
-**Soal:** [2368. Reachable Nodes With Restrictions](https://leetcode.com/problems/reachable-nodes-with-restrictions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func reachableNodes(n int, edges [][]int, restricted []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,13 +43,13 @@ func main() {
 }
 
 func reachableNodes(n int, edges [][]int, restricted []int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	restrictedSet := make(map[int]bool, len(restricted))
 	for _, r := range restricted {
 		restrictedSet[r] = true
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n)
 	for _, e := range edges {
 		a, b := e[0], e[1]
@@ -44,7 +57,6 @@ func reachableNodes(n int, edges [][]int, restricted []int) int {
 		graph[b] = append(graph[b], a)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	var dfs func(u int) int
 	dfs = func(u int) int {

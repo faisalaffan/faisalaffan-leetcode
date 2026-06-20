@@ -1,17 +1,30 @@
 # 0644 — Maximum Average Subarray Ii
 
-## Deskripsi
-
-**Soal:** [0644. Maximum Average Subarray Ii](https://leetcode.com/problems/maximum-average-subarray-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMaxAverage(nums []int, k int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -73,7 +86,6 @@ func findMaxAverage(nums []int, k int) float64 {
 func canAchieve(nums []int, k int, target float64) bool {
 	n := len(nums)
 	// prefix[i] = sum (nums[j] - target) for j = 0..i-1
-  // Membuat slice untuk menyimpan hasil
 	prefix := make([]float64, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + float64(nums[i]) - target

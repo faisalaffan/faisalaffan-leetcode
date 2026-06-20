@@ -1,19 +1,32 @@
 # 3715 — Sum Of Perfect Square Ancestors
 
-## Deskripsi
-
-**Soal:** [3715. Sum Of Perfect Square Ancestors](https://leetcode.com/problems/sum-of-perfect-square-ancestors/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumOfAncestors(n int, edges [][]int, nums []int) int64
+```
+
+> **💡 Hint:** Compute square-free kernel for each value.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Compute square-free kernel for each value.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +59,7 @@ func sumOfAncestors(n int, edges [][]int, nums []int) int64 {
 	}
 
 	// Build tree
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -55,14 +68,14 @@ func sumOfAncestors(n int, edges [][]int, nums []int) int64 {
 	}
 
 	// Compute square-free kernel for each value
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	kernel := make([]int, n)
 	for i, v := range nums {
 		kernel[i] = squareFree(v)
 	}
 
 	var result int64
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 
 	var dfs func(u, parent int)

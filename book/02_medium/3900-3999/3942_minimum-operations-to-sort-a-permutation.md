@@ -1,21 +1,32 @@
 # 3942 — Minimum Operations To Sort A Permutation
 
-## Deskripsi
-
-**Soal:** [3942. Minimum Operations To Sort A Permutation](https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumOperationsToSortAPermutation(nums []int) int
+```
+
+> **💡 Hint:** Available ops are reverse and rotate left. Sorted array must be
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MinimumOperationsToSortAPermutation(nums []int) int`
-
-> **Ide Kunci:** Available ops are reverse and rotate left. Sorted array must be
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,7 @@ func MinimumOperationsToSortAPermutation(nums []int) int {
 	}
 
 	// Expected sorted array
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	for i := 0; i < n; i++ {
 		sorted[i] = i
@@ -85,7 +96,7 @@ func MinimumOperationsToSortAPermutation(nums []int) int {
 
 	// Try: reverse then rotate to match sorted
 	// Reverse: [nums[n-1], nums[n-2], ..., nums[0]]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	reversed := make([]int, n)
 	for i := 0; i < n; i++ {
 		reversed[i] = nums[n-1-i]

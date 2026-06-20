@@ -1,19 +1,32 @@
 # 3482 — Analyze Organization Hierarchy
 
-## Deskripsi
-
-**Soal:** [3482. Analyze Organization Hierarchy](https://leetcode.com/problems/analyze-organization-hierarchy/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func analyzeOrg(org [][]string) []Employee
+```
+
+> **💡 Hint:** Build the org tree from edges and compute depth/level
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Build the org tree from edges and compute depth/level
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,11 +62,11 @@ type Employee struct {
 
 func analyzeOrg(org [][]string) []Employee {
 	// Build parent -> children map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	children := make(map[string][]string)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	parent := make(map[string]string)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	allEmps := make(map[string]bool)
 
 	for _, rel := range org {
@@ -96,6 +109,7 @@ func analyzeOrg(org [][]string) []Employee {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].Depth != result[j].Depth {
 			return result[i].Depth < result[j].Depth

@@ -1,21 +1,32 @@
 # 0843 — Guess The Word
 
-## Deskripsi
-
-**Soal:** [0843. Guess The Word](https://leetcode.com/problems/guess-the-word/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findSecretWord(words []string, master *Master) 
+```
+
+> **💡 Hint:** Minimax + filtering. For each candidate, compute match counts against other
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findSecretWord(words []string, master *Master) `
-
-> **Ide Kunci:** Minimax + filtering. For each candidate, compute match counts against other
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ type Master struct {
 
 func (m *Master) guess(word string) int {
 	matches := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(word); i++ {
 		if word[i] == m.secret[i] {
 			matches++
@@ -57,9 +68,9 @@ func findSecretWord(words []string, master *Master) {
 		return cnt
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	candidates := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range candidates {
 		candidates[i] = i
 	}
@@ -69,7 +80,7 @@ func findSecretWord(words []string, master *Master) {
 		bestIdx := 0
 		bestScore := n + 1
 		for _, idx := range candidates {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			groups := make([]int, 7)
 			for _, other := range candidates {
 				m := match(words[idx], words[other])

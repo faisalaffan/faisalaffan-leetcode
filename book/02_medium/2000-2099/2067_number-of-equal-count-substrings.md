@@ -1,19 +1,30 @@
 # 2067 — Number Of Equal Count Substrings
 
-## Deskripsi
-
-**Soal:** [2067. Number Of Equal Count Substrings](https://leetcode.com/problems/number-of-equal-count-substrings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func equalCountSubstrings(s string, count int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window
 
 **Kompleksitas Waktu:** O(n * alphabet)  
 **Kompleksitas Ruang:** O(alphabet)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func equalCountSubstrings(s string, count int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,12 +40,12 @@ func equalCountSubstrings(s string, count int) int {
 	result := 0
 	// Try different numbers of distinct characters
 	for distinct := 1; distinct <= 26 && distinct*count <= len(s); distinct++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		freq := make([]int, 26)
 		unique := 0
 		exactCount := 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(s); i++ {
 			idx := int(s[i] - 'a')
 			if freq[idx] == 0 {

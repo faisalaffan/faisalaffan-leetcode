@@ -1,19 +1,32 @@
 # 3924 — Minimum Threshold Path With Limited Heavy Edges
 
-## Deskripsi
-
-**Soal:** [3924. Minimum Threshold Path With Limited Heavy Edges](https://leetcode.com/problems/minimum-threshold-path-with-limited-heavy-edges/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minThresholdPath(n int, edges [][]int, threshold int) int
+```
+
+> **💡 Hint:** Dijkstra-like with state (node, heavyCount, totalWeight).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Dijkstra-like with state (node, heavyCount, totalWeight).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -86,7 +99,7 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 		return 0
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -95,9 +108,9 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 	}
 
 	// dist[node][heavy] = min total distance
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, n+1)
 		for j := range dist[i] {
@@ -107,10 +120,12 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 
 	pq := &priorityQueue{}
 	heap.Init(pq)
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &state{node: 0, heavyCount: 0, totalDist: 0})
 	dist[0][0] = 0
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		s := heap.Pop(pq).(*state)
 		if s.node == n-1 {
 			return s.totalDist
@@ -127,6 +142,7 @@ func minThresholdPath(n int, edges [][]int, threshold int) int {
 			nd := s.totalDist + w
 			if nh <= n && nd < dist[v][nh] {
 				dist[v][nh] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &state{node: v, heavyCount: nh, totalDist: nd})
 			}
 		}

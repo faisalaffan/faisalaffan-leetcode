@@ -1,19 +1,30 @@
 # 0882 — Reachable Nodes In Subdivided Graph
 
-## Deskripsi
-
-**Soal:** [0882. Reachable Nodes In Subdivided Graph](https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func reachableNodes(edges [][]int, maxMoves int, n int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dijkstra (lintasan terpendek), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func reachableNodes(edges [][]int, maxMoves int, n int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +70,7 @@ func (h *MinHeap) Pop() any {
 
 func reachableNodes(edges [][]int, maxMoves int, n int) int {
 	// Build adjacency list: edge weight = cnt + 1 (to traverse the full edge)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, cnt := e[0], e[1], e[2]
@@ -69,9 +80,9 @@ func reachableNodes(edges [][]int, maxMoves int, n int) int {
 	}
 
 	// Dijkstra
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = math.MaxInt32
 	}
@@ -80,6 +91,7 @@ func reachableNodes(edges [][]int, maxMoves int, n int) int {
 	heap.Init(pq)
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(Item)
 		d, u := cur.dist, cur.node
 		if d > dist[u] {
@@ -90,6 +102,7 @@ func reachableNodes(edges [][]int, maxMoves int, n int) int {
 			nd := d + w
 			if nd < dist[v] {
 				dist[v] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, Item{nd, v})
 			}
 		}

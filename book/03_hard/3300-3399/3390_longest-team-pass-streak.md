@@ -1,17 +1,30 @@
 # 3390 — Longest Team Pass Streak
 
-## Deskripsi
-
-**Soal:** [3390. Longest Team Pass Streak](https://leetcode.com/problems/longest-team-pass-streak/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LongestTeamPassStreak(passes [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,12 +45,13 @@ func main() {
 }
 
 func LongestTeamPassStreak(passes [][]int) int {
+  // Custom sort dengan comparator
 	sort.Slice(passes, func(i, j int) bool {
 		return passes[i][0] < passes[j][0]
 	})
 
 	type streak struct{ cur, best int }
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	teams := make(map[int]*streak)
 	maxStreak := 1
 

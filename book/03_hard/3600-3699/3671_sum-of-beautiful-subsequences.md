@@ -1,19 +1,32 @@
 # 3671 — Sum Of Beautiful Subsequences
 
-## Deskripsi
-
-**Soal:** [3671. Sum Of Beautiful Subsequences](https://leetcode.com/problems/sum-of-beautiful-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumOfBeautifulSubsequences(nums []int) int
+```
+
+> **💡 Hint:** For each element as the minimum, count subsequences
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each element as the minimum, count subsequences
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,7 @@ const B_MOD = 1000000007
 
 func sumOfBeautifulSubsequences(nums []int) int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}

@@ -1,19 +1,32 @@
 # 3261 — Count Substrings That Satisfy K Constraint Ii
 
-## Deskripsi
-
-**Soal:** [3261. Count Substrings That Satisfy K Constraint Ii](https://leetcode.com/problems/count-substrings-that-satisfy-k-constraint-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countKConstraintSubstrings(s string, k int, queries [][]int) []int64
+```
+
+> **💡 Hint:** //   1. Precompute right[l] = first index where substring s[l..right[l]] becomes
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + q), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** //   1. Precompute right[l] = first index where substring s[l..right[l]] becomes
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,9 +68,9 @@ func countKConstraintSubstrings(s string, k int, queries [][]int) []int64 {
 	n := len(s)
 
 	// right[l] = first index where s[l..right[l]] is invalid (or n if always valid)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	right := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range right {
 		right[i] = n
 	}
@@ -76,7 +89,7 @@ func countKConstraintSubstrings(s string, k int, queries [][]int) []int64 {
 	// For remaining starts, all substrings to end are valid (right[i] stays n)
 
 	// prefix[i] = total valid substrings in s[0..i-1]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int64, n+1)
 	l = 0
 	for r := 0; r < n; r++ {
@@ -100,7 +113,7 @@ func countKConstraintSubstrings(s string, k int, queries [][]int) []int64 {
 		prefix[i+1] = prefix[i] + int64(validEnd)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, len(queries))
 
 	for qi, q := range queries {

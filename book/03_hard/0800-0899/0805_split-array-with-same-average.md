@@ -1,19 +1,32 @@
 # 0805 — Split Array With Same Average
 
-## Deskripsi
-
-**Soal:** [0805. Split Array With Same Average](https://leetcode.com/problems/split-array-with-same-average/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func splitArraySameAverage(nums []int) bool
+```
+
+> **💡 Hint:** Meet-in-the-Middle
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Meet-in-the-Middle
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -77,9 +90,9 @@ func splitArraySameAverage(nums []int) bool {
 	// Meet-in-the-middle
 	n1 := n / 2
 	// leftSums[size] = set of achievable sums with given subset size
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftSums := make([]map[int]bool, n1+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range leftSums {
 		leftSums[i] = make(map[int]bool)
 	}

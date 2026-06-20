@@ -1,19 +1,32 @@
 # 1847 — Closest Room
 
-## Deskripsi
-
-**Soal:** [1847. Closest Room](https://leetcode.com/problems/closest-room/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func closestRoom(rooms [][]int, queries [][]int) []int
+```
+
+> **💡 Hint:** sort rooms by size descending, sort queries by minSize descending.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** sort rooms by size descending, sort queries by minSize descending.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,6 +76,7 @@ func main() {
 
 func closestRoom(rooms [][]int, queries [][]int) []int {
 	// Sort rooms by size descending
+  // Custom sort dengan comparator
 	sort.Slice(rooms, func(i, j int) bool {
 		return rooms[i][1] > rooms[j][1]
 	})
@@ -73,16 +87,16 @@ func closestRoom(rooms [][]int, queries [][]int) []int {
 		minSize   int
 		idx       int
 	}
-  // Membuat slice untuk menyimpan hasil
 	sortedQueries := make([]query, len(queries))
 	for i, q := range queries {
 		sortedQueries[i] = query{preferred: q[0], minSize: q[1], idx: i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(sortedQueries, func(i, j int) bool {
 		return sortedQueries[i].minSize > sortedQueries[j].minSize
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	avail := []int{} // sorted room IDs
 	roomIdx := 0

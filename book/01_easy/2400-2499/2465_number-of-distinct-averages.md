@@ -1,17 +1,30 @@
 # 2465 — Number Of Distinct Averages
 
-## Deskripsi
-
-**Soal:** [2465. Number Of Distinct Averages](https://leetcode.com/problems/number-of-distinct-averages/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NumberOfDistinctAverages(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,6 +45,7 @@ func main() {
 }
 
 func NumberOfDistinctAverages(nums []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	seen := map[int]bool{}
 	for i, j := 0, len(nums)-1; i < j; i, j = i+1, j-1 {

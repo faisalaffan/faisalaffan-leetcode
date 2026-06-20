@@ -1,17 +1,30 @@
 # 0473 — Matchsticks To Square
 
-## Deskripsi
-
-**Soal:** [0473. Matchsticks To Square](https://leetcode.com/problems/matchsticks-to-square/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MatchsticksToSquare(matchsticks []int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(4^n) worst case, but pruning makes it much faster  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,7 @@ func MatchsticksToSquare(matchsticks []int) bool {
 	// Sort descending for better pruning
 	sort.Sort(sort.Reverse(sort.IntSlice(matchsticks)))
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sides := make([]int, 4)
 	var dfs func(idx int) bool
 	dfs = func(idx int) bool {

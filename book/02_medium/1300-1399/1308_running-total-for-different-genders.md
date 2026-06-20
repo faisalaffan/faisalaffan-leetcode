@@ -1,17 +1,35 @@
 # 1308 — Running Total For Different Genders
 
-## Deskripsi
-
-**Soal:** [1308. Running Total For Different Genders](https://leetcode.com/problems/running-total-for-different-genders/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func runningTotal(scores []struct {
+	playerName string
+	gender     string
+	day        string
+	scorePoints int
+}) []result
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n) due to sorting  
 **Kompleksitas Ruang:** O(n) for storing results
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -68,7 +86,7 @@ func runningTotal(scores []struct {
 		score       int
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[string][]playerScore)
 	for _, s := range scores {
 		groups[s.gender] = append(groups[s.gender], playerScore{s.playerName, s.day, s.scorePoints})
@@ -78,7 +96,7 @@ func runningTotal(scores []struct {
 	for gender := range groups {
 		// Bubble sort for simplicity - in real SQL this is ORDER BY
 		group := groups[gender]
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(group); i++ {
 			for j := i + 1; j < len(group); j++ {
 				if group[j].day < group[i].day ||

@@ -1,19 +1,30 @@
 # 1264 — Page Recommendations
 
-## Deskripsi
-
-**Soal:** [1264. Page Recommendations](https://leetcode.com/problems/page-recommendations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func pageRecommendations(userID int, likes []like, friendships []friend) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func pageRecommendations(userID int, likes []like, friendships []friend) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +54,7 @@ type friend struct {
 }
 
 func pageRecommendations(userID int, likes []like, friendships []friend) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	likedByUser := make(map[int]bool)
 	for _, l := range likes {
 		if l.userID == userID {
@@ -51,7 +62,7 @@ func pageRecommendations(userID int, likes []like, friendships []friend) []int {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	friends := make(map[int]bool)
 	for _, f := range friendships {
 		if f.user1 == userID {
@@ -62,7 +73,7 @@ func pageRecommendations(userID int, likes []like, friendships []friend) []int {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	recommend := make(map[int]bool)
 	for _, l := range likes {
 		if friends[l.userID] && !likedByUser[l.pageID] {
@@ -70,11 +81,12 @@ func pageRecommendations(userID int, likes []like, friendships []friend) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0, len(recommend))
 	for p := range recommend {
 		result = append(result, p)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

@@ -1,17 +1,30 @@
 # 1858 — Longest Word With All Prefixes
 
-## Deskripsi
-
-**Soal:** [1858. Longest Word With All Prefixes](https://leetcode.com/problems/longest-word-with-all-prefixes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LongestWord(words []string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n log n + total chars), Space: O(total unique prefixes)  
 **Kompleksitas Ruang:** O(total unique prefixes)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,12 +46,13 @@ func main() {
 
 // Time: O(n log n + total chars), Space: O(total unique prefixes)
 func LongestWord(words []string) string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	prefixSet := make(map[string]bool)
 	for _, w := range words {
 		prefixSet[w] = true
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(words, func(i, j int) bool {
 		if len(words[i]) != len(words[j]) {
 			return len(words[i]) > len(words[j])

@@ -1,19 +1,32 @@
 # 3640 — Trionic Array Ii
 
-## Deskripsi
-
-**Soal:** [3640. Trionic Array Ii](https://leetcode.com/problems/trionic-array-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSumTrionic(nums []int) int
+```
+
+> **💡 Hint:** DP tracking states for each phase: increasing, decreasing, increasing.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP tracking states for each phase: increasing, decreasing, increasing.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 
 func maxSumTrionic(nums []int) int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
@@ -55,9 +68,9 @@ func maxSumTrionic(nums []int) int {
 	// state 2: in increasing (phase 3)
 	// We need at least 3 elements to form a trionic subarray
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([][3]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		for j := range dp[i] {
 			dp[i][j] = math.MinInt32

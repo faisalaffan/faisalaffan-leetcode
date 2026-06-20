@@ -1,21 +1,32 @@
 # 3846 — Total Distance To Type A String Using One Finger
 
-## Deskripsi
-
-**Soal:** [3846. Total Distance To Type A String Using One Finger](https://leetcode.com/problems/total-distance-to-type-a-string-using-one-finger/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func TotalDistanceToTypeAStringUsingOneFinger(s string) int
+```
+
+> **💡 Hint:** Precompute keyboard positions, simulate typing from 'a'.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func TotalDistanceToTypeAStringUsingOneFinger(s string) int`
-
-> **Ide Kunci:** Precompute keyboard positions, simulate typing from 'a'.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ func TotalDistanceToTypeAStringUsingOneFinger(s string) int {
 		"zxcvbnm",
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[byte][2]int)
 	for r, row := range keyboard {
 		for c, ch := range row {
@@ -46,7 +57,7 @@ func TotalDistanceToTypeAStringUsingOneFinger(s string) int {
 
 	total := 0
 	cur := pos['a']
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		next := pos[s[i]]
 		dist := abs(cur[0]-next[0]) + abs(cur[1]-next[1])

@@ -1,19 +1,30 @@
 # 1468 — Calculate Salaries
 
-## Deskripsi
-
-**Soal:** [1468. Calculate Salaries](https://leetcode.com/problems/calculate-salaries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calculateSalaries(employees []Employee) map[int]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func calculateSalaries(employees []Employee) map[int]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +51,7 @@ type Employee struct {
 // calculateSalaries computes post-tax salaries for all employees.
 func calculateSalaries(employees []Employee) map[int]int {
 	// Find max salary per department
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	deptMax := make(map[string]int)
 	for _, e := range employees {
 		if e.Salary > deptMax[e.Department] {
@@ -49,7 +60,7 @@ func calculateSalaries(employees []Employee) map[int]int {
 	}
 
 	// Calculate tax rate per department and apply to each employee
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	result := make(map[int]int)
 	for _, e := range employees {
 		maxSal := deptMax[e.Department]

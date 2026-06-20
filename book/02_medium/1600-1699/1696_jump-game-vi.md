@@ -1,19 +1,30 @@
 # 1696 — Jump Game Vi
 
-## Deskripsi
-
-**Soal:** [1696. Jump Game Vi](https://leetcode.com/problems/jump-game-vi/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxResult(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O(n), Space: O(k)  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxResult(nums []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,12 +38,12 @@ import "fmt"
 
 func maxResult(nums []int, k int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n)
 	dp[0] = nums[0]
 
 	// Monotonic deque storing indices with decreasing dp values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	deque := make([]int, 0, n)
 	deque = append(deque, 0)
 

@@ -1,19 +1,30 @@
 # 2233 — Maximum Product After K Increments
 
-## Deskripsi
-
-**Soal:** [2233. Maximum Product After K Increments](https://leetcode.com/problems/maximum-product-after-k-increments/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumProduct(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n + k log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumProduct(nums []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,14 +58,18 @@ func maximumProduct(nums []int, k int) int {
 	h := &minHeap{}
 	heap.Init(h)
 	for _, v := range nums {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, v)
 	}
 	for i := 0; i < k; i++ {
+  // Ambil elemen terkecil/terbesar dari heap
 		v := heap.Pop(h).(int)
+  // Masukkan elemen ke priority queue
 		heap.Push(h, v+1)
 	}
 	prod := 1
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		prod = (prod * heap.Pop(h).(int)) % mod
 	}
 	return prod

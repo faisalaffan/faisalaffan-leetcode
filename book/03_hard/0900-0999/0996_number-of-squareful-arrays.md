@@ -1,19 +1,32 @@
 # 0996 — Number Of Squareful Arrays
 
-## Deskripsi
-
-**Soal:** [0996. Number Of Squareful Arrays](https://leetcode.com/problems/number-of-squareful-arrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numSquarefulPerms(nums []int) int
+```
+
+> **💡 Hint:** DFS + backtracking + bitmask.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming, Backtracking, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Backtracking (pelacakan mundur), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS + backtracking + bitmask.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,10 +52,11 @@ func main() {
 }
 
 func numSquarefulPerms(nums []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	n := len(nums)
 	mask := 1<<n - 1
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[int]int)
 	return dfs(nums, 0, mask, -1, memo)
 }
@@ -56,7 +70,7 @@ func dfs(nums []int, used int, all int, last int, memo map[int]int) int {
 		return val
 	}
 	total := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		if used&(1<<i) != 0 {
 			continue

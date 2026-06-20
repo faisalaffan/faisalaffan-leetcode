@@ -1,17 +1,30 @@
 # 1068 — Product Sales Analysis I
 
-## Deskripsi
-
-**Soal:** [1068. Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func productSalesAnalysisI(sales []Sale, products []Product) []map[string]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,7 +68,7 @@ func main() {
 
 // LeetCode submission: productSalesAnalysisI (SQL equivalent)
 func productSalesAnalysisI(sales []Sale, products []Product) []map[string]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	prodMap := make(map[int]string)
 	for _, p := range products {
 		prodMap[p.productID] = p.productName

@@ -1,19 +1,30 @@
 # 0615 — Average Salary Departments Vs Company
 
-## Deskripsi
-
-**Soal:** [0615. Average Salary Departments Vs Company](https://leetcode.com/problems/average-salary-departments-vs-company/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calcAvg(vals []int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(S + E + M*D) where S=salaries, E=employees, M=months, D=depts  
 **Kompleksitas Ruang:** O(S + E)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func calcAvg(vals []int) float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -68,17 +79,17 @@ func calcAvg(vals []int) float64 {
 // Space: O(S + E)
 func averageSalaryDepartmentsVsCompany(employees []Employee, salaries []SalaryRecord) []DeptComparison {
 	// Map employee ID to department ID.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	empDept := make(map[int]int)
 	for _, e := range employees {
 		empDept[e.ID] = e.DepartmentID
 	}
 
 	// Group salaries by month (company-wide).
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	monthSalaries := make(map[string][]int)
 	// Group salaries by month then department.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	deptMonthSalaries := make(map[string]map[int][]int) // month -> deptID -> []amount
 
 	for _, s := range salaries {
@@ -123,6 +134,7 @@ func averageSalaryDepartmentsVsCompany(employees []Employee, salaries []SalaryRe
 	}
 
 	// Sort for deterministic output.
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].PayMonth != result[j].PayMonth {
 			return result[i].PayMonth < result[j].PayMonth

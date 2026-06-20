@@ -1,19 +1,30 @@
 # 2589 — Minimum Time To Complete All Tasks
 
-## Deskripsi
-
-**Soal:** [2589. Minimum Time To Complete All Tasks](https://leetcode.com/problems/minimum-time-to-complete-all-tasks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMinimumTime(tasks [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findMinimumTime(tasks [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,6 +45,7 @@ import (
 // Complexity: O(n * maxEnd) time, O(maxEnd) space
 func findMinimumTime(tasks [][]int) int {
 	// Sort by end time
+  // Custom sort dengan comparator
 	sort.Slice(tasks, func(i, j int) bool {
 		return tasks[i][1] < tasks[j][1]
 	})
@@ -45,7 +57,6 @@ func findMinimumTime(tasks [][]int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, maxEnd+1)
 
 	for _, task := range tasks {

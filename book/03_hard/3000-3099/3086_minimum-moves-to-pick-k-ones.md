@@ -1,21 +1,32 @@
 # 3086 — Minimum Moves To Pick K Ones
 
-## Deskripsi
-
-**Soal:** [3086. Minimum Moves To Pick K Ones](https://leetcode.com/problems/minimum-moves-to-pick-k-ones/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumMoves(nums []int, k int) int64
+```
+
+> **💡 Hint:** Collect positions of 1s, use sliding window + prefix sum.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Prefix Sum
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Sliding Window (jendela geser), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumMoves(nums []int, k int) int64`
-
-> **Ide Kunci:** Collect positions of 1s, use sliding window + prefix sum.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ import (
 )
 
 func minimumMoves(nums []int, k int) int64 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pos := make([]int, 0)
 	for i, v := range nums {
 		if v == 1 {
@@ -48,7 +59,7 @@ func minimumMoves(nums []int, k int) int64 {
 		return -1
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int64, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + int64(pos[i])

@@ -1,19 +1,30 @@
 # 3153 — Sum Of Digit Differences Of All Pairs
 
-## Deskripsi
-
-**Soal:** [3153. Sum Of Digit Differences Of All Pairs](https://leetcode.com/problems/sum-of-digit-differences-of-all-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumDigitDifferences(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * d)  
 **Kompleksitas Ruang:** O(d * 10)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func sumDigitDifferences(nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ func sumDigitDifferences(nums []int) int64 {
 	var ans int64
 	pow := 1
 	for d := 0; d < digits; d++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		count := make([]int, 10)
 		for _, num := range nums {
 			count[(num/pow)%10]++

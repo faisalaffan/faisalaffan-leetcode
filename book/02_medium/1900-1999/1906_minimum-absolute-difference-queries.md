@@ -1,17 +1,30 @@
 # 1906 — Minimum Absolute Difference Queries
 
-## Deskripsi
-
-**Soal:** [1906. Minimum Absolute Difference Queries](https://leetcode.com/problems/minimum-absolute-difference-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinDifference(nums []int, queries [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O((n+q)*maxVal), Space: O(n*maxVal)  
 **Kompleksitas Ruang:** O(n*maxVal)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,14 +46,14 @@ const maxVal = 100
 func MinDifference(nums []int, queries [][]int) []int {
 	n := len(nums)
 	// prefixCount[i][v] = count of value v in nums[0..i-1]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixCount := make([][maxVal + 1]int, n+1)
 	for i := 0; i < n; i++ {
 		prefixCount[i+1] = prefixCount[i]
 		prefixCount[i+1][nums[i]]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 	for qIdx, q := range queries {
 		l, r := q[0], q[1]

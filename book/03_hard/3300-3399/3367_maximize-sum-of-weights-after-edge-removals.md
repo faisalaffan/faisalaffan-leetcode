@@ -1,19 +1,32 @@
 # 3367 — Maximize Sum Of Weights After Edge Removals
 
-## Deskripsi
-
-**Soal:** [3367. Maximize Sum Of Weights After Edge Removals](https://leetcode.com/problems/maximize-sum-of-weights-after-edge-removals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximizeSumOfWeights(edges [][]int, k int) int64
+```
+
+> **💡 Hint:** Tree DP. For each node, compute dp[node][0] = max sum in subtree
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Tree DP (DP pada pohon)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Tree DP. For each node, compute dp[node][0] = max sum in subtree
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ func main() {
 
 func maximizeSumOfWeights(edges [][]int, k int) int64 {
 	n := len(edges) + 1
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -76,6 +89,7 @@ func maximizeSumOfWeights(edges [][]int, k int) int64 {
 			}
 		}
 
+  // Custom sort dengan comparator
 		sort.Slice(gains, func(i, j int) bool {
 			return gains[i] > gains[j]
 		})

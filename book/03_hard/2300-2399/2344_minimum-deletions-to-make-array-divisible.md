@@ -1,19 +1,30 @@
 # 2344 — Minimum Deletions To Make Array Divisible
 
-## Deskripsi
-
-**Soal:** [2344. Minimum Deletions To Make Array Divisible](https://leetcode.com/problems/minimum-deletions-to-make-array-divisible/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDeletions(nums []int, numsDivide []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minDeletions(nums []int, numsDivide []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,6 +53,7 @@ func minDeletions(nums []int, numsDivide []int) int {
 		g = gcd(g, v)
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	for i, v := range nums {
 		if g%v == 0 {

@@ -1,17 +1,30 @@
 # 2523 — Closest Prime Numbers In Range
 
-## Deskripsi
-
-**Soal:** [2523. Closest Prime Numbers In Range](https://leetcode.com/problems/closest-prime-numbers-in-range/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func closestPrimes(left int, right int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(right log log right)  
 **Kompleksitas Ruang:** O(right)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +47,6 @@ func closestPrimes(left int, right int) []int {
 		return []int{-1, -1}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	isPrime := make([]bool, right+1)
 	for i := 2; i <= right; i++ {
 		isPrime[i] = true

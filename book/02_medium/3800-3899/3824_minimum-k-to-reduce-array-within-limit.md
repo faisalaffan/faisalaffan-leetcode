@@ -1,21 +1,32 @@
 # 3824 — Minimum K To Reduce Array Within Limit
 
-## Deskripsi
-
-**Soal:** [3824. Minimum K To Reduce Array Within Limit](https://leetcode.com/problems/minimum-k-to-reduce-array-within-limit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumKToReduceArrayWithinLimit(nums []int) int
+```
+
+> **💡 Hint:** Binary search on k. Check if total operations <= k^2.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(N log M) where M = max(nums)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumKToReduceArrayWithinLimit(nums []int) int`
-
-> **Ide Kunci:** Binary search on k. Check if total operations <= k^2.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

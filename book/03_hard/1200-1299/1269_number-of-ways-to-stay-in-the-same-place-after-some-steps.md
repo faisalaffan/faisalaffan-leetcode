@@ -1,17 +1,30 @@
 # 1269 — Number Of Ways To Stay In The Same Place After Some Steps
 
-## Deskripsi
-
-**Soal:** [1269. Number Of Ways To Stay In The Same Place After Some Steps](https://leetcode.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numWays(steps int, arrLen int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,12 +51,12 @@ func numWays(steps int, arrLen int) int {
 		maxPos = arrLen - 1
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, maxPos+1)
 	dp[0] = 1
 
 	for s := 1; s <= steps; s++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, maxPos+1)
 		for pos := 0; pos <= maxPos; pos++ {
 			ways := dp[pos] // stay

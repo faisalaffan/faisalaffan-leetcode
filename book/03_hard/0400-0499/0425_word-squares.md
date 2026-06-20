@@ -1,17 +1,30 @@
 # 0425 — Word Squares
 
-## Deskripsi
-
-**Soal:** [0425. Word Squares](https://leetcode.com/problems/word-squares/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func wordSquares(words []string) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking, Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Backtracking (pelacakan mundur), Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func wordSquares(words []string) [][]string {
 		return nil
 	}
 	n := len(words[0])
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return nil
 	}
@@ -60,7 +73,7 @@ func wordSquares(words []string) [][]string {
 	for _, w := range words {
 		node := root
 		root.words = append(root.words, w)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(w); i++ {
 			idx := w[i] - 'a'
 			if node.children[idx] == nil {
@@ -77,14 +90,12 @@ func wordSquares(words []string) [][]string {
 	var backtrack func(step int)
 	backtrack = func(step int) {
 		if step == n {
-  // Membuat slice untuk menyimpan hasil
 			square := make([]string, n)
 			copy(square, current)
 			result = append(result, square)
 			return
 		}
 
-  // Membuat slice untuk menyimpan hasil
 		prefix := make([]byte, step)
 		for i := 0; i < step; i++ {
 			prefix[i] = current[i][step]

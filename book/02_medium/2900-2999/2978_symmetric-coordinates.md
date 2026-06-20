@@ -1,19 +1,30 @@
 # 2978 — Symmetric Coordinates
 
-## Deskripsi
-
-**Soal:** [2978. Symmetric Coordinates](https://leetcode.com/problems/symmetric-coordinates/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func symmetricCoordinates(coords []Coordinate) []Coordinate
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func symmetricCoordinates(coords []Coordinate) []Coordinate`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,13 +46,13 @@ type Coordinate struct {
 
 func symmetricCoordinates(coords []Coordinate) []Coordinate {
 	// Build set of all coordinates
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	coordSet := make(map[[2]int]bool)
 	for _, c := range coords {
 		coordSet[[2]int{c.X, c.Y}] = true
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[[2]int]bool)
 	var results []Coordinate
 
@@ -63,6 +74,7 @@ func symmetricCoordinates(coords []Coordinate) []Coordinate {
 	}
 
 	// Order by X ASC, Y ASC
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].X != results[j].X {
 			return results[i].X < results[j].X

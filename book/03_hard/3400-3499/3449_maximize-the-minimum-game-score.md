@@ -1,19 +1,32 @@
 # 3449 — Maximize The Minimum Game Score
 
-## Deskripsi
-
-**Soal:** [3449. Maximize The Minimum Game Score](https://leetcode.com/problems/maximize-the-minimum-game-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxScore(points []int, m int) int64
+```
+
+> **💡 Hint:** Binary search on the minimum score. For a candidate
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on the minimum score. For a candidate
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ func maxScore(points []int, m int) int64 {
 
 	// Check if we can achieve at least target score at each position
 	can := func(target int64) bool {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		needed := make([]int64, n)
 		for i, p := range points {
 			// Moves needed at position i to reach target

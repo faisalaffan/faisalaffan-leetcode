@@ -1,19 +1,30 @@
 # 1506 — Find Root Of N Ary Tree
 
-## Deskripsi
-
-**Soal:** [1506. Find Root Of N Ary Tree](https://leetcode.com/problems/find-root-of-n-ary-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findRoot(tree []*Node) *Node
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findRoot(tree []*Node) *Node`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +62,7 @@ func findRoot(tree []*Node) *Node {
 	}
 
 	// Count indegree: how many times each node appears as a child
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	indegree := make(map[*Node]int)
 	for _, node := range tree {
 		for _, child := range node.Children {
@@ -80,7 +91,7 @@ func findRootByXOR(tree []*Node) *Node {
 	}
 
 	var xorSum int
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	valueToNode := make(map[int]*Node)
 
 	for _, node := range tree {

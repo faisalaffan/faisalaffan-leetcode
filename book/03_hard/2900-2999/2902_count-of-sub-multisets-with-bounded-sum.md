@@ -1,19 +1,30 @@
 # 2902 — Count Of Sub Multisets With Bounded Sum
 
-## Deskripsi
-
-**Soal:** [2902. Count Of Sub Multisets With Bounded Sum](https://leetcode.com/problems/count-of-sub-multisets-with-bounded-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countSubMultisetsWithBoundedSum(nums []int, l, r int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countSubMultisetsWithBoundedSum(nums []int, l, r int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ import "fmt"
 const mod2902 = 1000000007
 
 func countSubMultisetsWithBoundedSum(nums []int, l, r int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	totalSum := 0
 	for _, v := range nums {
@@ -51,12 +62,12 @@ func countSubMultisetsWithBoundedSum(nums []int, l, r int) int {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, maxSum+1)
 	dp[0] = 1
 
 	for v, f := range freq {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		newdp := make([]int, maxSum+1)
 		copy(newdp, dp)
 

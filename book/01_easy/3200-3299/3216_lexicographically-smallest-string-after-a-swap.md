@@ -1,17 +1,30 @@
 # 3216 — Lexicographically Smallest String After A Swap
 
-## Deskripsi
-
-**Soal:** [3216. Lexicographically Smallest String After A Swap](https://leetcode.com/problems/lexicographically-smallest-string-after-a-swap/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LexicographicallySmallestStringAfterASwap(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n). Space: O(n).  
 **Kompleksitas Ruang:** O(n).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,7 @@ func main() {
 // Time: O(n). Space: O(n).
 func LexicographicallySmallestStringAfterASwap(s string) string {
 	b := []byte(s)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(b)-1; i++ {
 		if b[i] > b[i+1] && (b[i]%2 == b[i+1]%2) {
 			b[i], b[i+1] = b[i+1], b[i]

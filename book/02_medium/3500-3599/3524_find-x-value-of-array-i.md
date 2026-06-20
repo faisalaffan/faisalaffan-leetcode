@@ -1,17 +1,30 @@
 # 3524 — Find X Value Of Array I
 
-## Deskripsi
-
-**Soal:** [3524. Find X Value Of Array I](https://leetcode.com/problems/find-x-value-of-array-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindXValueOfArrayI(nums []int, target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,19 +49,20 @@ func main() {
 }
 
 func FindXValueOfArrayI(nums []int, target int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	// Find x such that sum of (nums[i] > x ? x : nums[i]) equals target
 	// Using prefix sums and binary search
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, len(nums)+1)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		prefix[i+1] = prefix[i] + nums[i]
 	}
 
 	// Binary search on x
 	left, right := 0, nums[len(nums)-1]
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := left + (right-left)/2
 		// Find first index > mid

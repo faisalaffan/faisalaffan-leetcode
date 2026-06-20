@@ -1,19 +1,30 @@
 # 0131 — Palindrome Partitioning
 
-## Deskripsi
-
-**Soal:** [0131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func partition(s string) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(n * 2^n)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func partition(s string) [][]string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,9 +40,9 @@ func partition(s string) [][]string {
 	n := len(s)
 
 	// Precompute palindrome table
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pal := make([][]bool, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range pal {
 		pal[i] = make([]bool, n)
 	}
@@ -46,7 +57,6 @@ func partition(s string) [][]string {
 	var backtrack func(start int, path []string)
 	backtrack = func(start int, path []string) {
 		if start == n {
-  // Membuat slice untuk menyimpan hasil
 			part := make([]string, len(path))
 			copy(part, path)
 			result = append(result, part)

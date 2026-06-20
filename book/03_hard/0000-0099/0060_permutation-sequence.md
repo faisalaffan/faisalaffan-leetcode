@@ -1,17 +1,30 @@
 # 0060 — Permutation Sequence
 
-## Deskripsi
-
-**Soal:** [0060. Permutation Sequence](https://leetcode.com/problems/permutation-sequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getPermutation(n int, k int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,6 @@ func main() {
 
 func getPermutation(n int, k int) string {
 	fact := 1
-  // Membuat slice untuk menyimpan hasil
 	nums := make([]byte, 0, n)
 	for i := 1; i <= n; i++ {
 		fact *= i
@@ -39,7 +51,6 @@ func getPermutation(n int, k int) string {
 	}
 
 	k-- // convert to 0-indexed
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, n)
 
 	for i := 0; i < n; i++ {

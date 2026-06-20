@@ -1,19 +1,30 @@
 # 2593 — Find Score Of An Array After Marking All Elements
 
-## Deskripsi
-
-**Soal:** [2593. Find Score Of An Array After Marking All Elements](https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findScore(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findScore(nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,17 +60,18 @@ func (h *MinHeap) Pop() any {
 
 func findScore(nums []int) int64 {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
 	marked := make([]bool, n)
 	h := &MinHeap{}
 	heap.Init(h)
 
 	for i, v := range nums {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, Item{v, i})
 	}
 
 	var score int64
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		item := heap.Pop(h).(Item)
 		val, idx := item.val, item.idx
 		if marked[idx] {

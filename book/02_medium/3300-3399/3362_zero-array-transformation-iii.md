@@ -1,17 +1,30 @@
 # 3362 — Zero Array Transformation Iii
 
-## Deskripsi
-
-**Soal:** [3362. Zero Array Transformation Iii](https://leetcode.com/problems/zero-array-transformation-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxRemoval(nums []int, queries [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,6 +63,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 	m := len(queries)
 
 	// Sort queries by left endpoint
+  // Custom sort dengan comparator
 	sort.Slice(queries, func(i, j int) bool {
 		return queries[i][0] < queries[j][0]
 	})
@@ -59,7 +73,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 	h := &MaxHeap{}
 	heap.Init(h)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	diff := make([]int, n+1)
 	qi := 0
 	cur := 0
@@ -67,6 +81,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 	for i := 0; i < n; i++ {
 		// Add all queries that start at i
 		for qi < m && queries[qi][0] == i {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, queries[qi][1])
 			qi++
 		}
@@ -75,6 +90,7 @@ func maxRemoval(nums []int, queries [][]int) int {
 		need := nums[i] - cur
 
 		for need > 0 && h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 			r := heap.Pop(h).(int)
 			cur++
 			diff[r+1]++

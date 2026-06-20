@@ -1,19 +1,30 @@
 # 3705 — Find Golden Hour Customers
 
-## Deskripsi
-
-**Soal:** [3705. Find Golden Hour Customers](https://leetcode.com/problems/find-golden-hour-customers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findGoldenHourCustomers(orders []order) []customerResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findGoldenHourCustomers(orders []order) []customerResult`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +61,7 @@ func findGoldenHourCustomers(orders []order) []customerResult {
 		rated     int
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	custStats := make(map[int]*stats)
 	for _, o := range orders {
 		if _, ok := custStats[o.customerID]; !ok {
@@ -92,6 +103,7 @@ func findGoldenHourCustomers(orders []order) []customerResult {
 		})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].averageRating != results[j].averageRating {
 			return results[i].averageRating > results[j].averageRating

@@ -1,19 +1,30 @@
 # 1149 — Article Views Ii
 
-## Deskripsi
-
-**Soal:** [1149. Article Views Ii](https://leetcode.com/problems/article-views-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func articleViewsII(views [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func articleViewsII(views [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +58,7 @@ func articleViewsII(views [][]int) []int {
 		date     int
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[key]map[int]bool)
 
 	for _, v := range views {
@@ -58,7 +69,7 @@ func articleViewsII(views [][]int) []int {
 		seen[k][v[1]] = true
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	resultSet := make(map[int]bool)
 	for k, articles := range seen {
 		if len(articles) >= 2 {
@@ -66,11 +77,12 @@ func articleViewsII(views [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0, len(resultSet))
 	for id := range resultSet {
 		result = append(result, id)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

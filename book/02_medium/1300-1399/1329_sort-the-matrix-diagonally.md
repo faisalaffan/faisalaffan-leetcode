@@ -1,17 +1,30 @@
 # 1329 — Sort The Matrix Diagonally
 
-## Deskripsi
-
-**Soal:** [1329. Sort The Matrix Diagonally](https://leetcode.com/problems/sort-the-matrix-diagonally/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func diagonalSort(mat [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(m*n*log(min(m,n))) - sorting each diagonal  
 **Kompleksitas Ruang:** O(m*n) for storing diagonal elements
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,7 @@ func diagonalSort(mat [][]int) [][]int {
 	// Key insight: elements on same diagonal have same (i-j)
 
 	// Group diagonals by (row - col) offset
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	diagonals := make(map[int][]int)
 
 	for i := 0; i < m; i++ {
@@ -56,12 +69,13 @@ func diagonalSort(mat [][]int) [][]int {
 
 	// Sort each diagonal
 	for _, d := range diagonals {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(d)
 	}
 
 	// Place sorted values back
 	// We need to track where we are in each diagonal
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counters := make(map[int]int)
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {

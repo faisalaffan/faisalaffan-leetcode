@@ -1,19 +1,30 @@
 # 0913 — Cat And Mouse
 
-## Deskripsi
-
-**Soal:** [0913. Cat And Mouse](https://leetcode.com/problems/cat-and-mouse/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func catMouseGame(graph [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func catMouseGame(graph [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,9 +49,9 @@ type state struct{ m, c, t int }
 func catMouseGame(graph [][]int) int {
 	n := len(graph)
 	// dp[m][c][turn]: result for mouse=m, cat=c, turn=0(mouse)/1(cat)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][][]int, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	degree := make([][][]int, n)
 	for m := 0; m < n; m++ {
 		dp[m] = make([][]int, n)
@@ -61,7 +72,6 @@ func catMouseGame(graph [][]int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	q := make([]state, 0)
 
 	// Initialize terminal states

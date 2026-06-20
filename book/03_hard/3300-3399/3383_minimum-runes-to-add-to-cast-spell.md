@@ -1,17 +1,30 @@
 # 3383 — Minimum Runes To Add To Cast Spell
 
-## Deskripsi
-
-**Soal:** [3383. Minimum Runes To Add To Cast Spell](https://leetcode.com/problems/minimum-runes-to-add-to-cast-spell/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumRunesToAddToCastSpell(n int, edges [][]int, crystals []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,9 +43,9 @@ func main() {
 }
 
 func MinimumRunesToAddToCastSpell(n int, edges [][]int, crystals []int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rev := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -40,9 +53,8 @@ func MinimumRunesToAddToCastSpell(n int, edges [][]int, crystals []int) int {
 		rev[v] = append(rev[v], u)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	reachable := make([]bool, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	q := make([]int, 0, n)
 	for _, c := range crystals {
 		reachable[c] = true
@@ -59,7 +71,6 @@ func MinimumRunesToAddToCastSpell(n int, edges [][]int, crystals []int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	vis := make([]bool, n)
 	var dfs func(u int)
 	dfs = func(u int) {
@@ -76,7 +87,6 @@ func MinimumRunesToAddToCastSpell(n int, edges [][]int, crystals []int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	need := make([]bool, n)
 	for u := 0; u < n; u++ {
 		if !reachable[u] && len(adj[u]) == 0 {

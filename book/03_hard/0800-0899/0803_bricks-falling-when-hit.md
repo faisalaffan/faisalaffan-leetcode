@@ -1,19 +1,32 @@
 # 0803 — Bricks Falling When Hit
 
-## Deskripsi
-
-**Soal:** [0803. Bricks Falling When Hit](https://leetcode.com/problems/bricks-falling-when-hit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func hitBricks(grid [][]int, hits [][]int) []int
+```
+
+> **💡 Hint:** Reverse Union-Find
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Reverse Union-Find
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -76,11 +89,11 @@ func hitBricks(grid [][]int, hits [][]int) []int {
 	}
 
 	// Union-Find with extra sentinel index for "top" (row 0)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, m*n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	size := make([]int, m*n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 		if i < m*n {
@@ -130,7 +143,7 @@ func hitBricks(grid [][]int, hits [][]int) []int {
 	}
 
 	// Process hits in reverse
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(hits))
 	for k := len(hits) - 1; k >= 0; k-- {
 		i, j := hits[k][0], hits[k][1]

@@ -1,17 +1,30 @@
 # 2173 — Longest Winning Streak
 
-## Deskripsi
-
-**Soal:** [2173. Longest Winning Streak](https://leetcode.com/problems/longest-winning-streak/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestWinningStreak(matches []match) []playerStreak
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -81,6 +94,7 @@ func longestWinningStreak(matches []match) []playerStreak {
 	}
 
 	// Sort by playerID, then by date
+  // Custom sort dengan comparator
 	sort.Slice(matches, func(i, j int) bool {
 		if matches[i].playerID != matches[j].playerID {
 			return matches[i].playerID < matches[j].playerID

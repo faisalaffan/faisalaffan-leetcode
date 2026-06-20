@@ -1,21 +1,32 @@
 # 3960 — Frequency Balance Subarray
 
-## Deskripsi
-
-**Soal:** [3960. Frequency Balance Subarray](https://leetcode.com/problems/frequency-balance-subarray/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FrequencyBalanceSubarray(nums []int) int
+```
+
+> **💡 Hint:** Enumerate all subarrays. Track element frequencies and
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(N^2)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func FrequencyBalanceSubarray(nums []int) int`
-
-> **Ide Kunci:** Enumerate all subarrays. Track element frequencies and
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,9 +46,9 @@ func FrequencyBalanceSubarray(nums []int) int {
 	ans := 0
 
 	for l := 0; l < n; l++ {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		cnt := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		freq := make(map[int]int) // frequency-of-frequencies
 
 		for r := l; r < n; r++ {
@@ -59,7 +70,7 @@ func FrequencyBalanceSubarray(nums []int) int {
 				valid = true
 			} else if len(freq) == 2 {
 				// Exactly two distinct frequency values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 				vals := make([]int, 0, 2)
 				for f := range freq {
 					vals = append(vals, f)

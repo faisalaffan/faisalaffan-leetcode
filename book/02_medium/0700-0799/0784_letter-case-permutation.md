@@ -1,17 +1,30 @@
 # 0784 — Letter Case Permutation
 
-## Deskripsi
-
-**Soal:** [0784. Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func letterCasePermutation(s string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(2^n * n)  
 **Kompleksitas Ruang:** O(2^n * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,9 +46,7 @@ func main() {
 }
 
 func letterCasePermutation(s string) []string {
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
-  // Membuat slice untuk menyimpan hasil
 	curr := make([]byte, len(s))
 
 	var backtrack func(idx int)

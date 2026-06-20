@@ -1,19 +1,30 @@
 # 3170 — Lexicographically Minimum String After Removing Stars
 
-## Deskripsi
-
-**Soal:** [3170. Lexicographically Minimum String After Removing Stars](https://leetcode.com/problems/lexicographically-minimum-string-after-removing-stars/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func clearStars(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n * 26)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func clearStars(s string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,9 +39,9 @@ import "fmt"
 func clearStars(s string) string {
 	n := len(s)
 	bytes := []byte(s)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	queues := make([][]int, 26)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range queues {
 		queues[i] = make([]int, 0)
 	}
@@ -51,7 +62,6 @@ func clearStars(s string) string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]byte, 0, n)
 	for _, ch := range bytes {
 		if ch != '*' {

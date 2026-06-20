@@ -1,17 +1,30 @@
 # 2478 — Number Of Beautiful Partitions
 
-## Deskripsi
-
-**Soal:** [2478. Number Of Beautiful Partitions](https://leetcode.com/problems/number-of-beautiful-partitions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isPrimeDigit(c byte) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -65,7 +78,6 @@ func beautifulPartitions(s string, k int, minLength int) int {
 
 	// validSplit[i] = true if we can split after position i
 	// meaning s[i-1] is non-prime and s[i] is prime
-  // Membuat slice untuk menyimpan hasil
 	validSplit := make([]bool, n+1)
 	validSplit[0] = true
 	for p := 1; p < n; p++ {
@@ -76,7 +88,7 @@ func beautifulPartitions(s string, k int, minLength int) int {
 	validSplit[n] = !isPrimeDigit(s[n-1])
 
 	// dp[i][j] = ways using first i chars, j partitions
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int64, n+1)
 	for i := 0; i <= n; i++ {
 		dp[i] = make([]int64, k+1)

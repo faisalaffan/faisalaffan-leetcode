@@ -1,19 +1,32 @@
 # 1048 — Longest String Chain
 
-## Deskripsi
-
-**Soal:** [1048. Longest String Chain](https://leetcode.com/problems/longest-string-chain/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestStrChain(words []string) int
+```
+
+> **💡 Hint:** Sort by length, DP with hash map.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * L^2) where L is max word length  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sort by length, DP with hash map.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,17 +51,18 @@ func main() {
 }
 
 func longestStrChain(words []string) int {
+  // Custom sort dengan comparator
 	sort.Slice(words, func(i, j int) bool {
 		return len(words[i]) < len(words[j])
 	})
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dp := make(map[string]int)
 	result := 1
 
 	for _, w := range words {
 		best := 1
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(w); i++ {
 			pred := w[:i] + w[i+1:]
 			if val, ok := dp[pred]; ok {

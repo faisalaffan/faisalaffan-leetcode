@@ -1,17 +1,30 @@
 # 0767 — Reorganize String
 
-## Deskripsi
-
-**Soal:** [0767. Reorganize String](https://leetcode.com/problems/reorganize-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func reorganizeString(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log k) where k is alphabet size  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,9 +65,9 @@ func (h *CharHeap) Pop() interface{} {
 }
 
 func reorganizeString(s string) string {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, 26)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		freq[s[i]-'a']++
 	}
@@ -63,15 +76,17 @@ func reorganizeString(s string) string {
 	heap.Init(h)
 	for i := 0; i < 26; i++ {
 		if freq[i] > 0 {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, CharCount{byte(i + 'a'), freq[i]})
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, len(s))
 
 	for h.Len() >= 2 {
+  // Ambil elemen terkecil/terbesar dari heap
 		c1 := heap.Pop(h).(CharCount)
+  // Ambil elemen terkecil/terbesar dari heap
 		c2 := heap.Pop(h).(CharCount)
 
 		result = append(result, c1.char, c2.char)
@@ -79,14 +94,17 @@ func reorganizeString(s string) string {
 		c1.cnt--
 		c2.cnt--
 		if c1.cnt > 0 {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, c1)
 		}
 		if c2.cnt > 0 {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, c2)
 		}
 	}
 
 	if h.Len() == 1 {
+  // Ambil elemen terkecil/terbesar dari heap
 		c := heap.Pop(h).(CharCount)
 		if c.cnt > 1 {
 			return ""

@@ -1,17 +1,30 @@
 # 1767 — Find The Subtasks That Did Not Execute
 
-## Deskripsi
-
-**Soal:** [1767. Find The Subtasks That Did Not Execute](https://leetcode.com/problems/find-the-subtasks-that-did-not-execute/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findSubtasksThatDidNotExecute(tasks []Task, executed []ExecutedSubtask) []ExecutedSubtask
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -70,13 +83,12 @@ func main() {
 }
 
 func findSubtasksThatDidNotExecute(tasks []Task, executed []ExecutedSubtask) []ExecutedSubtask {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	executedSet := make(map[[2]int]bool)
 	for _, e := range executed {
 		executedSet[[2]int{e.TaskId, e.SubtaskId}] = true
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	notExecuted := make([]ExecutedSubtask, 0)
 	for _, t := range tasks {
 		for sub := 1; sub <= t.SubtasksCount; sub++ {
@@ -86,6 +98,7 @@ func findSubtasksThatDidNotExecute(tasks []Task, executed []ExecutedSubtask) []E
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(notExecuted, func(i, j int) bool {
 		if notExecuted[i].TaskId != notExecuted[j].TaskId {
 			return notExecuted[i].TaskId < notExecuted[j].TaskId

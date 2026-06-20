@@ -1,17 +1,30 @@
 # 3308 — Find Top Performing Driver
 
-## Deskripsi
-
-**Soal:** [3308. Find Top Performing Driver](https://leetcode.com/problems/find-top-performing-driver/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func topPerformingDriver(drivers []Driver, vehicles []Vehicle, trips []Trip) []FuelRank
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(d + v + t) Space: O(d + v)  
 **Kompleksitas Ruang:** O(d + v)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -65,16 +78,16 @@ type FuelRank struct {
 
 func topPerformingDriver(drivers []Driver, vehicles []Vehicle, trips []Trip) []FuelRank {
 	// Build driver -> fuel type map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	driverFuel := make(map[int]string)
 	for _, d := range drivers {
 		driverFuel[d.ID] = d.FuelType
 	}
 
 	// Build vehicle -> driver map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	vehicleDriver := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	driverVehicles := make(map[int][]int)
 	for _, v := range vehicles {
 		vehicleDriver[v.ID] = v.DriverID
@@ -87,7 +100,7 @@ func topPerformingDriver(drivers []Driver, vehicles []Vehicle, trips []Trip) []F
 		count     int
 		distance  int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	driverStats := make(map[int]*stats)
 	for _, t := range trips {
 		dID := vehicleDriver[t.VehicleID]
@@ -107,7 +120,7 @@ func topPerformingDriver(drivers []Driver, vehicles []Vehicle, trips []Trip) []F
 		accidents int
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	fuelCands := make(map[string][]candidate)
 	for dID, s := range driverStats {
 		avgRating := s.sumRating / float64(s.count)
@@ -121,6 +134,7 @@ func topPerformingDriver(drivers []Driver, vehicles []Vehicle, trips []Trip) []F
 
 	var result []FuelRank
 	for ft, cands := range fuelCands {
+  // Custom sort dengan comparator
 		sort.Slice(cands, func(i, j int) bool {
 			if cands[i].rating != cands[j].rating {
 				return cands[i].rating > cands[j].rating
@@ -137,6 +151,7 @@ func topPerformingDriver(drivers []Driver, vehicles []Vehicle, trips []Trip) []F
 		})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].FuelType < result[j].FuelType
 	})

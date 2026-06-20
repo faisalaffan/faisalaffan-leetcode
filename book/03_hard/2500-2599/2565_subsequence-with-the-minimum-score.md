@@ -1,19 +1,30 @@
 # 2565 — Subsequence With The Minimum Score
 
-## Deskripsi
-
-**Soal:** [2565. Subsequence With The Minimum Score](https://leetcode.com/problems/subsequence-with-the-minimum-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumScore(s string, t string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumScore(s string, t string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ func minimumScore(s string, t string) int {
 	n, m := len(s), len(t)
 
 	// prefixPos[i] = position in s where first i chars of t are matched (0-indexed)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixPos := make([]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range prefixPos {
 		prefixPos[i] = n
 	}
@@ -52,9 +63,9 @@ func minimumScore(s string, t string) int {
 	}
 
 	// suffixPos[i] = position in s where last i chars of t are matched
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suffixPos := make([]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range suffixPos {
 		suffixPos[i] = -1
 	}

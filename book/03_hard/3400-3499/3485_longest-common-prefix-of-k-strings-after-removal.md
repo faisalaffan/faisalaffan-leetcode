@@ -1,19 +1,32 @@
 # 3485 — Longest Common Prefix Of K Strings After Removal
 
-## Deskripsi
-
-**Soal:** [3485. Longest Common Prefix Of K Strings After Removal](https://leetcode.com/problems/longest-common-prefix-of-k-strings-after-removal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestCommonPrefix(words []string, k int) []int
+```
+
+> **💡 Hint:** Use a Trie to track frequencies. For each word, temporarily
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Use a Trie to track frequencies. For each word, temporarily
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ type TrieNode struct {
 func longestCommonPrefix(words []string, k int) []int {
 	n := len(words)
 	if k > n {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ans := make([]int, n)
 		return ans
 	}
@@ -62,7 +75,7 @@ func longestCommonPrefix(words []string, k int) []int {
 		insert(root, w)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
 	for i, w := range words {
 		// Remove current word

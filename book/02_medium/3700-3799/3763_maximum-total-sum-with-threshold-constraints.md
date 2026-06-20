@@ -1,19 +1,30 @@
 # 3763 — Maximum Total Sum With Threshold Constraints
 
-## Deskripsi
-
-**Soal:** [3763. Maximum Total Sum With Threshold Constraints](https://leetcode.com/problems/maximum-total-sum-with-threshold-constraints/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,11 +60,12 @@ func (h *maxHeap) Pop() any {
 
 func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	items := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		items[i] = [2]int{threshold[i], nums[i]}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(items, func(i, j int) bool {
 		return items[i][0] < items[j][0]
 	})
@@ -65,12 +77,14 @@ func maximumTotalSumWithThresholdConstraints(nums []int, threshold []int) int {
 
 	for step := 1; step <= n; step++ {
 		for idx < n && items[idx][0] <= step {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, items[idx][1])
 			idx++
 		}
 		if h.Len() == 0 {
 			break
 		}
+  // Ambil elemen terkecil/terbesar dari heap
 		total += heap.Pop(h).(int)
 	}
 	return total

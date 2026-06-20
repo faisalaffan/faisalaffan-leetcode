@@ -1,19 +1,30 @@
 # 1204 — Last Person To Fit In The Bus
 
-## Deskripsi
-
-**Soal:** [1204. Last Person To Fit In The Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lastToFit(people []person) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func lastToFit(people []person) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,6 +51,7 @@ type person struct {
 }
 
 func lastToFit(people []person) string {
+  // Custom sort dengan comparator
 	sort.Slice(people, func(i, j int) bool {
 		return people[i].turn < people[j].turn
 	})

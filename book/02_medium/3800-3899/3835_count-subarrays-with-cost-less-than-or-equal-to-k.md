@@ -1,21 +1,32 @@
 # 3835 — Count Subarrays With Cost Less Than Or Equal To K
 
-## Deskripsi
-
-**Soal:** [3835. Count Subarrays With Cost Less Than Or Equal To K](https://leetcode.com/problems/count-subarrays-with-cost-less-than-or-equal-to-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CountSubarraysWithCostLessThanOrEqualToK(nums []int, k int) int
+```
+
+> **💡 Hint:** Sliding window with two monotonic deques for max and min.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func CountSubarraysWithCostLessThanOrEqualToK(nums []int, k int) int`
-
-> **Ide Kunci:** Sliding window with two monotonic deques for max and min.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,9 +46,9 @@ func CountSubarraysWithCostLessThanOrEqualToK(nums []int, k int) int {
 	left := 0
 
 	// Monotonic deques for max (decreasing) and min (increasing)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	maxQ := make([]int, 0) // indices, values decreasing
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	minQ := make([]int, 0) // indices, values increasing
 
 	for right := 0; right < n; right++ {

@@ -1,19 +1,30 @@
 # 2722 — Join Two Arrays By Id
 
-## Deskripsi
-
-**Soal:** [2722. Join Two Arrays By Id](https://leetcode.com/problems/join-two-arrays-by-id/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Merge Sort
 
 **Kompleksitas Waktu:** O(n + m)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ type MapItem struct {
 }
 
 func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	merged := make(map[int]map[string]int)
 
 	for _, item := range arr1 {
@@ -54,11 +65,11 @@ func JoinTwoArraysById(arr1, arr2 []MapItem) []MapItem {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]MapItem, 0, len(merged))
 	for id, vals := range merged {
 		result = append(result, MapItem{ID: id, Values: vals})
 	}
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].ID < result[j].ID
 	})

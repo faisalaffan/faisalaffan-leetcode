@@ -1,19 +1,30 @@
 # 0269 — Alien Dictionary
 
-## Deskripsi
-
-**Soal:** [0269. Alien Dictionary](https://leetcode.com/problems/alien-dictionary/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func alienOrder(words []string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Prefix Sum, Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Topological Sort (pengurutan topologi)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func alienOrder(words []string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,14 +38,14 @@ import (
 )
 
 func alienOrder(words []string) string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	graph := make(map[byte][]byte)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	inDegree := make(map[byte]int)
 
 	// Initialize all characters
 	for _, w := range words {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(w); i++ {
 			ch := w[i]
 			if _, exists := graph[ch]; !exists {
@@ -45,7 +56,7 @@ func alienOrder(words []string) string {
 	}
 
 	// Build graph
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(words)-1; i++ {
 		w1, w2 := words[i], words[i+1]
 		minLen := len(w1)
@@ -69,7 +80,6 @@ func alienOrder(words []string) string {
 	}
 
 	// Topological sort (BFS / Kahn's algorithm)
-  // Membuat slice untuk menyimpan hasil
 	queue := make([]byte, 0)
 	for ch := range graph {
 		if inDegree[ch] == 0 {
@@ -77,7 +87,6 @@ func alienOrder(words []string) string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, len(graph))
 	for len(queue) > 0 {
 		ch := queue[0]

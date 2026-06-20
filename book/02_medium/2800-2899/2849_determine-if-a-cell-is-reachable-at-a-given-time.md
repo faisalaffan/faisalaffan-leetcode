@@ -1,19 +1,30 @@
 # 2849 — Determine If A Cell Is Reachable At A Given Time
 
-## Deskripsi
-
-**Soal:** [2849. Determine If A Cell Is Reachable At A Given Time](https://leetcode.com/problems/determine-if-a-cell-is-reachable-at-a-given-time/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func DetermineIfACellIsReachableAtAGivenTime(sx int, sy int, fx int, fy int, t int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func DetermineIfACellIsReachableAtAGivenTime(sx int, sy int, fx int, fy int, t int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

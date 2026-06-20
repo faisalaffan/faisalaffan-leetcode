@@ -1,17 +1,30 @@
 # 1255 — Maximum Score Words Formed By Letters
 
-## Deskripsi
-
-**Soal:** [1255. Maximum Score Words Formed By Letters](https://leetcode.com/problems/maximum-score-words-formed-by-letters/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxScoreWords(words []string, letters []byte, score []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,9 +55,9 @@ func maxScoreWords(words []string, letters []byte, score []int) int {
 	}
 
 	n := len(words)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	wordCount := make([][26]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	wordScore := make([]int, n)
 	for i, word := range words {
 		for _, ch := range word {

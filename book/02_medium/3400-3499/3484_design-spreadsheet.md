@@ -1,19 +1,30 @@
 # 3484 — Design Spreadsheet
 
-## Deskripsi
-
-**Soal:** [3484. Design Spreadsheet](https://leetcode.com/problems/design-spreadsheet/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+
+Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+
+**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewSpreadsheet(rows, cols int) *Spreadsheet
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func NewSpreadsheet(rows, cols int) *Spreadsheet`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ type Spreadsheet struct {
 func NewSpreadsheet(rows, cols int) *Spreadsheet {
 	s := &Spreadsheet{}
 	s.data = make([][]int, rows)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range s.data {
 		s.data[i] = make([]int, cols)
 	}

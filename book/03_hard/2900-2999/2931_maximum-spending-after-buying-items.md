@@ -1,19 +1,30 @@
 # 2931 — Maximum Spending After Buying Items
 
-## Deskripsi
-
-**Soal:** [2931. Maximum Spending After Buying Items](https://leetcode.com/problems/maximum-spending-after-buying-items/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSpending(values [][]int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxSpending(values [][]int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,11 +55,12 @@ func maxSpending(values [][]int) int64 {
 	n := len(values[0])
 
 	// Flatten all values into one slice
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	flat := make([]int, 0, m*n)
 	for _, row := range values {
 		flat = append(flat, row...)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(flat)
 
 	var ans int64

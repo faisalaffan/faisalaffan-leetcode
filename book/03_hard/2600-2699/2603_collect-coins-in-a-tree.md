@@ -1,21 +1,32 @@
 # 2603 — Collect Coins In A Tree
 
-## Deskripsi
-
-**Soal:** [2603. Collect Coins In A Tree](https://leetcode.com/problems/collect-coins-in-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func collectCoins(coins []int, edges [][]int) int
+```
+
+> **💡 Hint:** Two-phase topological pruning.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Topological Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func collectCoins(coins []int, edges [][]int) int`
-
-> **Ide Kunci:** Two-phase topological pruning.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +55,9 @@ func collectCoins(coins []int, edges [][]int) int {
 		return 0
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	degree := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -56,11 +67,10 @@ func collectCoins(coins []int, edges [][]int) int {
 		degree[v]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	removed := make([]bool, n)
 
 	// Phase 1: Remove leaf nodes with no coins (topological pruning)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	q := make([]int, 0)
 	for i := 0; i < n; i++ {
 		if degree[i] == 1 && coins[i] == 0 {

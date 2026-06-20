@@ -1,17 +1,30 @@
 # 3361 — Shift Distance Between Two Strings
 
-## Deskripsi
-
-**Soal:** [3361. Shift Distance Between Two Strings](https://leetcode.com/problems/shift-distance-between-two-strings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shiftDistance(s string, t string, nextCost []int, previousCost []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + 26) Space: O(26)  
 **Kompleksitas Ruang:** O(26)
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +47,9 @@ func shiftDistance(s string, t string, nextCost []int, previousCost []int) int64
 	// backward[i][j] = cost to go from i to j going backward
 
 	// Prefix sums for cyclic shifts
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nextPref := make([]int, 53) // double for wrap-around
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prevPref := make([]int, 53)
 	for i := 0; i < 52; i++ {
 		nextPref[i+1] = nextPref[i] + nextCost[i%26]
@@ -44,7 +57,7 @@ func shiftDistance(s string, t string, nextCost []int, previousCost []int) int64
 	}
 
 	var ans int64
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		a := int(s[i] - 'a')
 		b := int(t[i] - 'a')

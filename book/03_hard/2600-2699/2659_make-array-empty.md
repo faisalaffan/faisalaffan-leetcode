@@ -1,19 +1,32 @@
 # 2659 — Make Array Empty
 
-## Deskripsi
-
-**Soal:** [2659. Make Array Empty](https://leetcode.com/problems/make-array-empty/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countOperationsToMakeArrayEmpty(nums []int) int64
+```
+
+> **💡 Hint:** BIT (Fenwick Tree) + sorted order.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** BIT (Fenwick Tree) + sorted order.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,11 +61,11 @@ func countOperationsToMakeArrayEmpty(nums []int) int64 {
 	type pair struct {
 		val, idx int
 	}
-  // Membuat slice untuk menyimpan hasil
 	sorted := make([]pair, n)
 	for i, v := range nums {
 		sorted[i] = pair{v, i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(sorted, func(i, j int) bool {
 		if sorted[i].val != sorted[j].val {
 			return sorted[i].val < sorted[j].val
@@ -61,7 +74,7 @@ func countOperationsToMakeArrayEmpty(nums []int) int64 {
 	})
 
 	// BIT: 1 = element present, 0 = removed
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bit := make([]int, n+1)
 	add := func(idx int, v int) {
 		for idx++; idx <= n; idx += idx & -idx {

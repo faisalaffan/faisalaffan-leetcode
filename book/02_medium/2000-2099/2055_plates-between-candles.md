@@ -1,19 +1,30 @@
 # 2055 — Plates Between Candles
 
-## Deskripsi
-
-**Soal:** [2055. Plates Between Candles](https://leetcode.com/problems/plates-between-candles/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func platesBetweenCandles(s string, queries [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(n + q)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func platesBetweenCandles(s string, queries [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,7 @@ import "fmt"
 func platesBetweenCandles(s string, queries [][]int) []int {
 	n := len(s)
 	// Prefix sum of plates
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i]
@@ -38,7 +49,7 @@ func platesBetweenCandles(s string, queries [][]int) []int {
 	}
 
 	// Nearest candle to the left
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftCandle := make([]int, n)
 	last := -1
 	for i := 0; i < n; i++ {
@@ -49,7 +60,7 @@ func platesBetweenCandles(s string, queries [][]int) []int {
 	}
 
 	// Nearest candle to the right
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rightCandle := make([]int, n)
 	last = -1
 	for i := n - 1; i >= 0; i-- {
@@ -59,7 +70,7 @@ func platesBetweenCandles(s string, queries [][]int) []int {
 		rightCandle[i] = last
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 	for i, q := range queries {
 		left, right := q[0], q[1]

@@ -1,17 +1,30 @@
 # 2218 — Maximum Value Of K Coins From Piles
 
-## Deskripsi
-
-**Soal:** [2218. Maximum Value Of K Coins From Piles](https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxValueOfCoins(piles [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,7 +68,7 @@ func max(a, b int) int {
 
 func maxValueOfCoins(piles [][]int, k int) int {
 	// Prefix sums for each pile.
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pref := make([][]int, len(piles))
 	for i, pile := range piles {
 		pref[i] = make([]int, len(pile)+1)
@@ -66,16 +79,16 @@ func maxValueOfCoins(piles [][]int, k int) int {
 
 	// dp[x] = max value using x coins from processed piles.
 	// Use -1 as unreachable sentinel.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, k+1)
 	for i := 1; i <= k; i++ {
 		dp[i] = -1
 	}
 	dp[0] = 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(piles); i++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, k+1)
 		copy(ndp, dp)
 		maxTake := len(piles[i])

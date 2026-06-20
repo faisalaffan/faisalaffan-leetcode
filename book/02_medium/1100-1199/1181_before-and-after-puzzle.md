@@ -1,19 +1,30 @@
 # 1181 — Before And After Puzzle
 
-## Deskripsi
-
-**Soal:** [1181. Before And After Puzzle](https://leetcode.com/problems/before-and-after-puzzle/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func beforeAndAfterPuzzles(phrases []string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Merge Sort
 
 **Kompleksitas Waktu:** O(n^2 * L)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func beforeAndAfterPuzzles(phrases []string) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,11 +48,9 @@ import (
 
 func beforeAndAfterPuzzles(phrases []string) []string {
 	n := len(phrases)
-  // Membuat slice untuk menyimpan hasil
 	firstWords := make([]string, n)
-  // Membuat slice untuk menyimpan hasil
 	lastWords := make([]string, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	words := make([][]string, n)
 
 	for i, p := range phrases {
@@ -50,9 +59,8 @@ func beforeAndAfterPuzzles(phrases []string) []string {
 		lastWords[i] = words[i][len(words[i])-1]
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[string]bool)
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 
 	for i := 0; i < n; i++ {

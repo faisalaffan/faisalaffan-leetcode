@@ -1,17 +1,30 @@
 # 1972 — First And Last Call On The Same Day
 
-## Deskripsi
-
-**Soal:** [1972. First And Last Call On The Same Day](https://leetcode.com/problems/first-and-last-call-on-the-same-day/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -81,7 +94,7 @@ func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface{} {
 		other int
 		time  string
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userDayCalls := make(map[[2]string][]callInfo) // (user_id, date) -> calls
 
 	for _, c := range calls {
@@ -103,6 +116,7 @@ func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface{} {
 
 	for key, calls := range userDayCalls {
 		// Sort calls by time
+  // Custom sort dengan comparator
 		sort.Slice(calls, func(i, j int) bool {
 			return calls[i].time < calls[j].time
 		})
@@ -118,6 +132,7 @@ func firstAndLastCallOnTheSameDay(calls [][]interface{}) [][]interface{} {
 	}
 
 	// Sort result by user_id, then date
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		ui := result[i][0].(int)
 		uj := result[j][0].(int)

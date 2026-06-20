@@ -1,19 +1,32 @@
 # 3630 — Partition Array For Maximum Xor And And
 
-## Deskripsi
-
-**Soal:** [3630. Partition Array For Maximum Xor And And](https://leetcode.com/problems/partition-array-for-maximum-xor-and-and/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximizeXorAndXor(nums []int) int64
+```
+
+> **💡 Hint:** Bitmask DP over subsets. n <= 19, so 3^n is too large but we can
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Bitmask DP over subsets. n <= 19, so 3^n is too large but we can
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,9 +60,9 @@ func maximizeXorAndXor(nums []int) int64 {
 	total := 1 << uint(n)
 
 	// Precompute XOR for all subsets
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	xor := make([]int64, total)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	and := make([]int64, total)
 	for mask := 1; mask < total; mask++ {
 		lsb := mask & -mask

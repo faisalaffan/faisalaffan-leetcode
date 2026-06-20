@@ -1,17 +1,30 @@
 # 2400 — Number Of Ways To Reach A Position After Exactly K Steps
 
-## Deskripsi
-
-**Soal:** [2400. Number Of Ways To Reach A Position After Exactly K Steps](https://leetcode.com/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfWays(startPos int, endPos int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** O(k^2)  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,12 +54,12 @@ func numberOfWays(startPos int, endPos int, k int) int {
 	// DP with offset to handle negative positions
 	offset := k
 	size := 2*k + 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, size)
 	dp[0+offset] = 1
 
 	for step := 0; step < k; step++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		next := make([]int, size)
 		for pos := -k; pos <= k; pos++ {
 			idx := pos + offset

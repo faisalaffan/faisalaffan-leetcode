@@ -1,21 +1,32 @@
 # 1982 — Find Array Given Subset Sums
 
-## Deskripsi
-
-**Soal:** [1982. Find Array Given Subset Sums](https://leetcode.com/problems/find-array-given-subset-sums/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func recoverArray(n int, sums []int) []int
+```
+
+> **💡 Hint:** Sort + recursive extraction.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func recoverArray(n int, sums []int) []int`
-
-> **Ide Kunci:** Sort + recursive extraction.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,8 +44,9 @@ import (
 )
 
 func recoverArray(n int, sums []int) []int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, 0, n)
 
 	for len(sums) > 1 {
@@ -42,15 +54,15 @@ func recoverArray(n int, sums []int) []int {
 		diff := sums[1] - sums[0]
 
 		// Partition sums into left (without diff) and right (with diff)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		freq := make(map[int]int)
 		for _, v := range sums {
 			freq[v]++
 		}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		left := make([]int, 0, len(sums)/2)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		right := make([]int, 0, len(sums)/2)
 		for _, v := range sums {
 			if freq[v] == 0 {

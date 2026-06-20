@@ -1,19 +1,32 @@
 # 2751 — Robot Collisions
 
-## Deskripsi
-
-**Soal:** [2751. Robot Collisions](https://leetcode.com/problems/robot-collisions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func survivedRobotsHealths(positions []int, healths []int, direction string) []int
+```
+
+> **💡 Hint:** Stack simulation.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Stack simulation.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,17 +63,17 @@ func survivedRobotsHealths(positions []int, healths []int, direction string) []i
 		dir              byte
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	robots := make([]robot, n)
 	for i := 0; i < n; i++ {
 		robots[i] = robot{positions[i], healths[i], i, direction[i]}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(robots, func(i, j int) bool {
 		return robots[i].pos < robots[j].pos
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0, n) // indices into robots (surviving, sorted by pos)
 
 	for i := 0; i < n; i++ {
@@ -97,13 +110,13 @@ func survivedRobotsHealths(positions []int, healths []int, direction string) []i
 	}
 
 	// Collect survivors by original index
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	survivorByIndex := make(map[int]int)
 	for _, idx := range stack {
 		survivorByIndex[robots[idx].idx] = robots[idx].health
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0, len(stack))
 	for i := 0; i < n; i++ {
 		if h, ok := survivorByIndex[i]; ok {

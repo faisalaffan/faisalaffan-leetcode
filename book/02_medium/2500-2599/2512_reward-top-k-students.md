@@ -1,17 +1,30 @@
 # 2512 — Reward Top K Students
 
-## Deskripsi
-
-**Soal:** [2512. Reward Top K Students](https://leetcode.com/problems/reward-top-k-students/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func topStudents(positiveFeedback []string, negativeFeedback []string, report [][]string, studentID []int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * L + n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,9 +56,9 @@ func main() {
 }
 
 func topStudents(positiveFeedback []string, negativeFeedback []string, report [][]string, studentID []int, k int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[string]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	neg := make(map[string]bool)
 	for _, w := range positiveFeedback {
 		pos[w] = true
@@ -57,7 +70,6 @@ func topStudents(positiveFeedback []string, negativeFeedback []string, report []
 	type student struct {
 		id, score int
 	}
-  // Membuat slice untuk menyimpan hasil
 	students := make([]student, len(studentID))
 
 	for i, id := range studentID {
@@ -73,6 +85,7 @@ func topStudents(positiveFeedback []string, negativeFeedback []string, report []
 		students[i] = student{id, score}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(students, func(i, j int) bool {
 		if students[i].score != students[j].score {
 			return students[i].score > students[j].score
@@ -80,7 +93,7 @@ func topStudents(positiveFeedback []string, negativeFeedback []string, report []
 		return students[i].id < students[j].id
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, k)
 	for i := 0; i < k; i++ {
 		ans[i] = students[i].id

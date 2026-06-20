@@ -1,19 +1,32 @@
 # 3486 — Longest Special Path Ii
 
-## Deskripsi
-
-**Soal:** [3486. Longest Special Path Ii](https://leetcode.com/problems/longest-special-path-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestSpecialPath(edges [][]int, nums []int) []int
+```
+
+> **💡 Hint:** DFS with hash set tracking edge weights used along the path.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Backtracking
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS with hash set tracking edge weights used along the path.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,12 +56,12 @@ func main() {
 
 func longestSpecialPath(edges [][]int, nums []int) []int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return []int{0, 0}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -81,7 +94,7 @@ func longestSpecialPath(edges [][]int, nums []int) []int {
 
 	// For each starting node, do DFS
 	for start := 0; start < n; start++ {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		used := make(map[int]bool)
 		dfs(start, -1, used, 0, 1)
 	}

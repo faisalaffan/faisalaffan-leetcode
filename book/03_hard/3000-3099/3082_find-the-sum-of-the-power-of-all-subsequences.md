@@ -1,21 +1,32 @@
 # 3082 — Find The Sum Of The Power Of All Subsequences
 
-## Deskripsi
-
-**Soal:** [3082. Find The Sum Of The Power Of All Subsequences](https://leetcode.com/problems/find-the-sum-of-the-power-of-all-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumOfPower(nums []int, k int) int
+```
+
+> **💡 Hint:** DP knapsack counting
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * sum(nums))  
 **Kompleksitas Ruang:** O(sum(nums))
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func sumOfPower(nums []int, k int) int`
-
-> **Ide Kunci:** DP knapsack counting
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +54,7 @@ func sumOfPower(nums []int, k int) int {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, totalSum+1)
 	dp[0] = 1
 

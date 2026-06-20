@@ -1,19 +1,30 @@
 # 0952 — Largest Component Size By Common Factor
 
-## Deskripsi
-
-**Soal:** [0952. Largest Component Size By Common Factor](https://leetcode.com/problems/largest-component-size-by-common-factor/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestComponentSize(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func largestComponentSize(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -25,7 +36,7 @@ package main
 import "fmt"
 
 func largestComponentSize(nums []int) int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return 0
 	}
@@ -37,11 +48,11 @@ func largestComponentSize(nums []int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, maxVal+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	size := make([]int, maxVal+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 		size[i] = 1
@@ -84,7 +95,7 @@ func largestComponentSize(nums []int) int {
 	}
 
 	// Count component sizes among the given numbers
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	compCount := make(map[int]int)
 	ans := 0
 	for _, num := range nums {

@@ -1,19 +1,32 @@
 # 3836 — Maximum Score Using Exactly K Pairs
 
-## Deskripsi
-
-**Soal:** [3836. Maximum Score Using Exactly K Pairs](https://leetcode.com/problems/maximum-score-using-exactly-k-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxScore(nums1 []int, nums2 []int, K int) int64
+```
+
+> **💡 Hint:** Sort both arrays. The optimal strategy pairs the largest
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Sort both arrays. The optimal strategy pairs the largest
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +62,9 @@ func maxScore(nums1 []int, nums2 []int, K int) int64 {
 		return 0
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(nums1, func(i, j int) bool { return nums1[i] > nums1[j] })
+  // Custom sort dengan comparator
 	sort.Slice(nums2, func(i, j int) bool { return nums2[i] > nums2[j] })
 
 	var total int64

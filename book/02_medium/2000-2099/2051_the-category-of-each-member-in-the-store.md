@@ -1,19 +1,30 @@
 # 2051 — The Category Of Each Member In The Store
 
-## Deskripsi
-
-**Soal:** [2051. The Category Of Each Member In The Store](https://leetcode.com/problems/the-category-of-each-member-in-the-store/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func categorizeMembers(members []Member) map[int]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func categorizeMembers(members []Member) map[int]string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,6 +46,7 @@ type Member struct {
 }
 
 func categorizeMembers(members []Member) map[int]string {
+  // Custom sort dengan comparator
 	sort.Slice(members, func(i, j int) bool {
 		return members[i].ID < members[j].ID
 	})
@@ -51,7 +63,7 @@ func categorizeMembers(members []Member) map[int]string {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	result := make(map[int]string)
 	for _, m := range members {
 		// Determine category: premium, gold, silver, bronze, basic

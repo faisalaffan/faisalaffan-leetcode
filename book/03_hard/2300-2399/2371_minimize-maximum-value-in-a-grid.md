@@ -1,21 +1,32 @@
 # 2371 — Minimize Maximum Value In A Grid
 
-## Deskripsi
-
-**Soal:** [2371. Minimize Maximum Value In A Grid](https://leetcode.com/problems/minimize-maximum-value-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minMaxValue(grid [][]int) [][]int
+```
+
+> **💡 Hint:** Sort cells by value. Process equal-value groups. For each cell,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func minMaxValue(grid [][]int) [][]int`
-
-> **Ide Kunci:** Sort cells by value. Process equal-value groups. For each cell,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +59,6 @@ func minMaxValue(grid [][]int) [][]int {
 	type cell struct {
 		val, r, c int
 	}
-  // Membuat slice untuk menyimpan hasil
 	cells := make([]cell, 0, rows*cols)
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
@@ -56,20 +66,21 @@ func minMaxValue(grid [][]int) [][]int {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(cells, func(i, j int) bool {
 		return cells[i].val < cells[j].val
 	})
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, rows)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range result {
 		result[i] = make([]int, cols)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rowMax := make([]int, rows)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	colMax := make([]int, cols)
 
 	i := 0
@@ -82,7 +93,6 @@ func minMaxValue(grid [][]int) [][]int {
 		// For each cell in the equal-value group, compute assigned value
 		// but don't update rowMax/colMax until the entire group is done.
 		type assign struct{ r, c, v int }
-  // Membuat slice untuk menyimpan hasil
 		assignments := make([]assign, 0, j-i)
 		for k := i; k < j; k++ {
 			r, c := cells[k].r, cells[k].c

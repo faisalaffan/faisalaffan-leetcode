@@ -1,17 +1,30 @@
 # 3377 — Digit Operations To Make Two Integers Equal
 
-## Deskripsi
-
-**Soal:** [3377. Digit Operations To Make Two Integers Equal](https://leetcode.com/problems/digit-operations-to-make-two-integers-equal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func init() 
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(N log N) Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -75,9 +88,9 @@ func minOperations(n int, m int) int {
 		return -1
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, MAX+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = 1 << 60
 	}
@@ -85,9 +98,11 @@ func minOperations(n int, m int) int {
 
 	h := &ItemHeap{}
 	heap.Init(h)
+  // Masukkan elemen ke priority queue
 	heap.Push(h, Item{n, n})
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		item := heap.Pop(h).(Item)
 		if item.cost > dist[item.num] {
 			continue
@@ -109,6 +124,7 @@ func minOperations(n int, m int) int {
 					nc := item.cost + next
 					if nc < dist[next] {
 						dist[next] = nc
+  // Masukkan elemen ke priority queue
 						heap.Push(h, Item{nc, next})
 					}
 				}
@@ -124,6 +140,7 @@ func minOperations(n int, m int) int {
 						nc := item.cost + next
 						if nc < dist[next] {
 							dist[next] = nc
+  // Masukkan elemen ke priority queue
 							heap.Push(h, Item{nc, next})
 						}
 					}

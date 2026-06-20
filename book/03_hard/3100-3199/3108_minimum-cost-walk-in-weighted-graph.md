@@ -1,19 +1,30 @@
 # 3108 — Minimum Cost Walk In Weighted Graph
 
-## Deskripsi
-
-**Soal:** [3108. Minimum Cost Walk In Weighted Graph](https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewDSU(n int) *DSU
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** O(n + m + q * alpha(n))  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewDSU(n int) *DSU`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,9 +48,9 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	and := make([]int, n)
 	mask := (1 << 30) - 1 // all 1s in lower 30 bits (max weight < 2^30)
 	for i := 0; i < n; i++ {
@@ -78,7 +89,7 @@ func minimumCostWalk(n int, edges [][]int, query [][]int) []int {
 		dsu.Union(u, v, w)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(query))
 	for i, q := range query {
 		u, v := q[0], q[1]

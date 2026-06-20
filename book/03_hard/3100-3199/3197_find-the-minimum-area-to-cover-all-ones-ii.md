@@ -1,21 +1,32 @@
 # 3197 — Find The Minimum Area To Cover All Ones Ii
 
-## Deskripsi
-
-**Soal:** [3197. Find The Minimum Area To Cover All Ones Ii](https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minAreaRect(grid [][]int, top, bottom, left, right int) (int, bool)
+```
+
+> **💡 Hint:** try all horizontal and vertical splits. For each side compute the
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minAreaRect(grid [][]int, top, bottom, left, right int) (int, bool)`
-
-> **Ide Kunci:** try all horizontal and vertical splits. For each side compute the
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

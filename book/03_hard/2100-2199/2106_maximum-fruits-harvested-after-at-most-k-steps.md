@@ -1,19 +1,32 @@
 # 2106 — Maximum Fruits Harvested After At Most K Steps
 
-## Deskripsi
-
-**Soal:** [2106. Maximum Fruits Harvested After At Most K Steps](https://leetcode.com/problems/maximum-fruits-harvested-after-at-most-k-steps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxTotalFruits(fruits [][]int, startPos int, k int) int
+```
+
+> **💡 Hint:** Prefix sum + sliding window.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Prefix sum + sliding window.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,13 +67,13 @@ func main() {
 
 func maxTotalFruits(fruits [][]int, startPos int, k int) int {
 	const maxPos = 200000
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	amount := make([]int, maxPos+1)
 	for _, f := range fruits {
 		amount[f[0]] = f[1]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, maxPos+2)
 	for i := 0; i <= maxPos; i++ {
 		prefix[i+1] = prefix[i] + amount[i]

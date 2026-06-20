@@ -1,19 +1,30 @@
 # 3130 — Find All Possible Stable Binary Arrays Ii
 
-## Deskripsi
-
-**Soal:** [3130. Find All Possible Stable Binary Arrays Ii](https://leetcode.com/problems/find-all-possible-stable-binary-arrays-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfStableArrays(zero, one, limit int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfStableArrays(zero, one, limit int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,15 +50,15 @@ import (
 const MOD = 1000000007
 
 func numberOfStableArrays(zero, one, limit int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp0 := make([][]int, zero+1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp1 := make([][]int, zero+1)
 	// Prefix sums for sliding window optimization: pref0[i][j] = sum_{a<=i} dp0[a][j]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pref0 := make([][]int, zero+1)
 	// We need row-wise prefix for dp1: pref1Row[i][j] = sum_{b<=j} dp1[i][b]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pref1Row := make([][]int, zero+1)
 
 	for i := 0; i <= zero; i++ {

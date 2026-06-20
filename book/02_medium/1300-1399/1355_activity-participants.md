@@ -1,17 +1,37 @@
 # 1355 — Activity Participants
 
-## Deskripsi
-
-**Soal:** [1355. Activity Participants](https://leetcode.com/problems/activity-participants/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func activityParticipants(activities []struct {
+	id   int
+	name string
+}, friends []struct {
+	id         int
+	name       string
+	activityID int
+}) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n) where n = number of friends  
 **Kompleksitas Ruang:** O(m) where m = number of activities
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,7 +78,7 @@ func activityParticipants(activities []struct {
 	name       string
 	activityID int
 }) []string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counts := make(map[int]int)
 	for _, f := range friends {
 		counts[f.activityID]++

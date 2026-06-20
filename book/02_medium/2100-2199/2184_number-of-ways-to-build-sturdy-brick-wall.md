@@ -1,19 +1,30 @@
 # 2184 — Number Of Ways To Build Sturdy Brick Wall
 
-## Deskripsi
-
-**Soal:** [2184. Number Of Ways To Build Sturdy Brick Wall](https://leetcode.com/problems/number-of-ways-to-build-sturdy-brick-wall/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func buildWall(height int, width int, bricks []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * m)  
 **Kompleksitas Ruang:** O(w) where w = max width
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func buildWall(height int, width int, bricks []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ func buildWall(height int, width int, bricks []int) int {
 	var dfs func(curr []int, w int)
 	dfs = func(curr []int, w int) {
 		if w == width {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			row := make([]int, len(curr))
 			copy(row, curr)
 			rows = append(rows, row)
@@ -49,7 +60,7 @@ func buildWall(height int, width int, bricks []int) int {
 
 	// Precompute which rows are compatible (no shared seam)
 	n := len(rows)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	compat := make([][]bool, n)
 	for i := 0; i < n; i++ {
 		compat[i] = make([]bool, n)
@@ -80,7 +91,7 @@ func buildWall(height int, width int, bricks []int) int {
 	}
 
 	// DP: ways[h][r] = ways to build up to height h ending with row r
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, height)
 	for h := 0; h < height; h++ {
 		dp[h] = make([]int, n)

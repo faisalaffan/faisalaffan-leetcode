@@ -1,17 +1,30 @@
 # 0886 — Possible Bipartition
 
-## Deskripsi
-
-**Soal:** [0886. Possible Bipartition](https://leetcode.com/problems/possible-bipartition/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func PossibleBipartition(n int, dislikes [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n + d) where d = len(dislikes)  
 **Kompleksitas Ruang:** O(n + d)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +43,7 @@ func main() {
 
 // Time: O(n + d) where d = len(dislikes) | Space: O(n + d)
 func PossibleBipartition(n int, dislikes [][]int) bool {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n+1)
 	for _, d := range dislikes {
 		a, b := d[0], d[1]
@@ -38,7 +51,7 @@ func PossibleBipartition(n int, dislikes [][]int) bool {
 		graph[b] = append(graph[b], a)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	color := make([]int, n+1) // 0 = uncolored, 1 = group A, -1 = group B
 
 	var dfs func(node, c int) bool

@@ -1,17 +1,30 @@
 # 2158 — Amount Of New Area Painted Each Day
 
-## Deskripsi
-
-**Soal:** [2158. Amount Of New Area Painted Each Day](https://leetcode.com/problems/amount-of-new-area-painted-each-day/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func amountPainted(paint [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,9 +62,9 @@ func amountPainted(paint [][]int) []int {
 	}
 
 	// DSU: next[x] = next unpainted point >= x
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	next := make([]int, maxEnd+2)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range next {
 		next[i] = i
 	}
@@ -64,7 +77,7 @@ func amountPainted(paint [][]int) []int {
 		return next[x]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(paint))
 	for day, p := range paint {
 		start, end := p[0], p[1]

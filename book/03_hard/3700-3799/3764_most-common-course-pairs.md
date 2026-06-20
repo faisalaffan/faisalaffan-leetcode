@@ -1,17 +1,30 @@
 # 3764 — Most Common Course Pairs
 
-## Deskripsi
-
-**Soal:** [3764. Most Common Course Pairs](https://leetcode.com/problems/most-common-course-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePair
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +72,7 @@ func main() {
 func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePair {
 	// Filter to high achievers (grade >= minGrade)
 	// Group by user, order by term, find consecutive pairs
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userCourses := make(map[int][]int)
 
 	for _, c := range completions {
@@ -70,12 +83,13 @@ func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePa
 
 	// Sort each user's courses by term (assumes input order is term order)
 	// Count pairs
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pairCount := make(map[[2]int]int)
 
 	for _, courses := range userCourses {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(courses) // sort by course ID to establish canonical order
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(courses)-1; i++ {
 			a, b := courses[i], courses[i+1]
 			if a > b {
@@ -97,6 +111,7 @@ func findCommonPairs(completions []CourseCompletion, minGrade string) []CoursePa
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].CourseA != result[j].CourseA {
 			return result[i].CourseA < result[j].CourseA

@@ -1,17 +1,30 @@
 # 0689 — Maximum Sum Of 3 Non Overlapping Subarrays
 
-## Deskripsi
-
-**Soal:** [0689. Maximum Sum Of 3 Non Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSumOfThreeSubarrays(nums []int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +55,7 @@ func main() {
 
 func maxSumOfThreeSubarrays(nums []int, k int) []int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	w := make([]int, n-k+1)
 	sum := 0
 	for i := 0; i < n; i++ {
@@ -55,10 +68,10 @@ func maxSumOfThreeSubarrays(nums []int, k int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	left := make([]int, len(w))
 	best := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(w); i++ {
 		if w[i] > w[best] {
 			best = i
@@ -66,7 +79,7 @@ func maxSumOfThreeSubarrays(nums []int, k int) []int {
 		left[i] = best
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	right := make([]int, len(w))
 	best = len(w) - 1
 	for i := len(w) - 1; i >= 0; i-- {

@@ -1,19 +1,32 @@
 # 0480 — Sliding Window Median
 
-## Deskripsi
-
-**Soal:** [0480. Sliding Window Median](https://leetcode.com/problems/sliding-window-median/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newLazyHeap(isMax bool) *lazyHeap
+```
+
+> **💡 Hint:** Two heaps with lazy deletion (max-heap for left, min-heap for right).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Two heaps with lazy deletion (max-heap for left, min-heap for right).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -103,6 +116,7 @@ func newLazyHeap(isMax bool) *lazyHeap {
 }
 
 func (lh *lazyHeap) push(val int64) {
+  // Masukkan elemen ke priority queue
 	heap.Push(lh.h, val)
 	lh.size++
 }
@@ -110,6 +124,7 @@ func (lh *lazyHeap) push(val int64) {
 func (lh *lazyHeap) pop() int64 {
 	lh.clean()
 	lh.size--
+  // Ambil elemen terkecil/terbesar dari heap
 	return heap.Pop(lh.h).(int64)
 }
 
@@ -152,6 +167,7 @@ func (lh *lazyHeap) clean() {
 			} else {
 				lh.lazy[top] = count - 1
 			}
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(lh.h)
 		} else {
 			break
@@ -169,7 +185,6 @@ func medianSlidingWindow(nums []int, k int) []float64 {
 		return nil
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]float64, 0, n-k+1)
 
 	left := newLazyHeap(true)  // max-heap (smaller half)

@@ -1,19 +1,32 @@
 # 3830 — Longest Alternating Subarray After Removing At Most One Element
 
-## Deskripsi
-
-**Soal:** [3830. Longest Alternating Subarray After Removing At Most One Element](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestAlternating(nums []int) int
+```
+
+> **💡 Hint:** Precompute longest alternating ending and starting at
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Precompute longest alternating ending and starting at
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ func longestAlternating(nums []int) int {
 	}
 
 	// pref[i] = longest alternating subarray ending at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n)
 	pref[0] = 1
 	for i := 1; i < n; i++ {
@@ -62,7 +75,7 @@ func longestAlternating(nums []int) int {
 	}
 
 	// suff[i] = longest alternating subarray starting at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suff := make([]int, n)
 	suff[n-1] = 1
 	for i := n - 2; i >= 0; i-- {

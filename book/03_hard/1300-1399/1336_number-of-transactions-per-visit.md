@@ -1,21 +1,32 @@
 # 1336 — Number Of Transactions Per Visit
 
-## Deskripsi
-
-**Soal:** [1336. Number Of Transactions Per Visit](https://leetcode.com/problems/number-of-transactions-per-visit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countTransactionsPerVisit(visits []visit, transactions []transaction) []rowCount
+```
+
+> **💡 Hint:** Simulate SQL aggregation in Go.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countTransactionsPerVisit(visits []visit, transactions []transaction) []rowCount`
-
-> **Ide Kunci:** Simulate SQL aggregation in Go.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,7 +66,7 @@ type rowCount struct {
 
 func countTransactionsPerVisit(visits []visit, transactions []transaction) []rowCount {
 	// Count transactions per visit
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	txPerVisit := make(map[[2]string]int)
 	for _, t := range transactions {
 		key := [2]string{fmt.Sprintf("%d", t.userID), t.date}
@@ -63,7 +74,7 @@ func countTransactionsPerVisit(visits []visit, transactions []transaction) []row
 	}
 
 	// Count visits per transaction count
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visitDist := make(map[int]int)
 	for _, v := range visits {
 		key := [2]string{fmt.Sprintf("%d", v.userID), v.date}
@@ -79,7 +90,6 @@ func countTransactionsPerVisit(visits []visit, transactions []transaction) []row
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	res := make([]rowCount, 0, maxCnt+1)
 	for c := 0; c <= maxCnt; c++ {
 		if v, ok := visitDist[c]; ok {
@@ -89,6 +99,7 @@ func countTransactionsPerVisit(visits []visit, transactions []transaction) []row
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(res, func(i, j int) bool { return res[i].txCount < res[j].txCount })
 	return res
 }

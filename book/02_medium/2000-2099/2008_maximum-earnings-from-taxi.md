@@ -1,17 +1,30 @@
 # 2008 — Maximum Earnings From Taxi
 
-## Deskripsi
-
-**Soal:** [2008. Maximum Earnings From Taxi](https://leetcode.com/problems/maximum-earnings-from-taxi/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumEarningsFromTaxi(n int, rides [][]int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(m log m), Space: O(m)  
 **Kompleksitas Ruang:** O(m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,13 +46,14 @@ func main() {
 // Time: O(m log m), Space: O(m)
 func MaximumEarningsFromTaxi(n int, rides [][]int) int64 {
 	m := len(rides)
+  // Custom sort dengan comparator
 	sort.Slice(rides, func(i, j int) bool {
 		return rides[i][1] < rides[j][1]
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int64, m+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	endTimes := make([]int, m)
 	for i := 0; i < m; i++ {
 		endTimes[i] = rides[i][1]

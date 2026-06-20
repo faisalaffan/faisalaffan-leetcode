@@ -1,19 +1,32 @@
 # 3505 — Minimum Operations To Make Elements Within K Subarrays Equal
 
-## Deskripsi
-
-**Soal:** [3505. Minimum Operations To Make Elements Within K Subarrays Equal](https://leetcode.com/problems/minimum-operations-to-make-elements-within-k-subarrays-equal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(nums []int, x int, k int) int64
+```
+
+> **💡 Hint:** Compute cost for each size-x window (optimal = sum of absolute
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Compute cost for each size-x window (optimal = sum of absolute
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,13 +66,14 @@ func minOperations(nums []int, x int, k int) int64 {
 	}
 
 	// Compute cost for each sliding window of size x
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	costs := make([]int64, n-x+1)
 	for i := 0; i <= n-x; i++ {
 		// Extract window
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		window := make([]int, x)
 		copy(window, nums[i:i+x])
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(window)
 		median := window[x/2]
 		var total int64
@@ -74,7 +88,7 @@ func minOperations(nums []int, x int, k int) int64 {
 	}
 
 	// DP: dp[j][i] = min cost with j subarrays using first i elements
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int64, k+1)
 	for j := 0; j <= k; j++ {
 		dp[j] = make([]int64, n+1)

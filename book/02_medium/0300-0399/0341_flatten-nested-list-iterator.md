@@ -1,19 +1,30 @@
 # 0341 — Flatten Nested List Iterator
 
-## Deskripsi
-
-**Soal:** [0341. Flatten Nested List Iterator](https://leetcode.com/problems/flatten-nested-list-iterator/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewInt(val int) *NestedInteger
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n) initialization, O(1) next/hasNext  
 **Kompleksitas Ruang:** O(d)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewInt(val int) *NestedInteger`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +59,6 @@ type NestedIterator struct {
 }
 
 func Constructor(nestedList []*NestedInteger) *NestedIterator {
-  // Membuat slice untuk menyimpan hasil
 	stack := make([]*NestedInteger, 0)
 	// Push in reverse order
 	for i := len(nestedList) - 1; i >= 0; i-- {

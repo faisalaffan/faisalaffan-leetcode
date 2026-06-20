@@ -1,19 +1,32 @@
 # 2306 — Naming A Company
 
-## Deskripsi
-
-**Soal:** [2306. Naming A Company](https://leetcode.com/problems/naming-a-company/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func distinctNames(ideas []string) int64
+```
+
+> **💡 Hint:** Group ideas by their first character. For each group, store the
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Group ideas by their first character. For each group, store the
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,9 +60,8 @@ func main() {
 
 func distinctNames(ideas []string) int64 {
 	// group[first_letter] = set of suffixes
-  // Membuat slice untuk menyimpan hasil
 	groups := make([]map[string]bool, 26)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range groups {
 		groups[i] = make(map[string]bool)
 	}

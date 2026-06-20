@@ -1,17 +1,30 @@
 # 1498 — Number Of Subsequences That Satisfy The Given Sum Condition
 
-## Deskripsi
-
-**Soal:** [1498. Number Of Subsequences That Satisfy The Given Sum Condition](https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NumSubseq(nums []int, target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(N log N), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,13 +46,13 @@ func NumSubseq(nums []int, target int) int {
 	const mod = 1_000_000_007
 
 	// Sort nums
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, len(nums))
 	copy(sorted, nums)
 	quickSort(sorted, 0, len(sorted)-1)
 
 	// Precompute powers of 2
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pow := make([]int, len(sorted))
 	pow[0] = 1
 	for i := 1; i < len(sorted); i++ {

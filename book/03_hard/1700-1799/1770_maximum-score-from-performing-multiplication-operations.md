@@ -1,21 +1,32 @@
 # 1770 — Maximum Score From Performing Multiplication Operations
 
-## Deskripsi
-
-**Soal:** [1770. Maximum Score From Performing Multiplication Operations](https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumScore(nums []int, multipliers []int) int
+```
+
+> **💡 Hint:** DP[l][i] where l = number of operations done and i = left index used.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumScore(nums []int, multipliers []int) int`
-
-> **Ide Kunci:** DP[l][i] where l = number of operations done and i = left index used.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,9 +51,9 @@ func maximumScore(nums []int, multipliers []int) int {
 	n := len(nums)
 	m := len(multipliers)
 	// dp[l][left] = max score using l operations with 'left' left-end picks
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, m+1)
 	}

@@ -1,19 +1,30 @@
 # 3685 — Subsequence Sum After Capping Elements
 
-## Deskripsi
-
-**Soal:** [3685. Subsequence Sum After Capping Elements](https://leetcode.com/problems/subsequence-sum-after-capping-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func subsequenceSumAfterCappingElements(nums []int, k int) []bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n*k + n^2)  
 **Kompleksitas Ruang:** O(k + n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func subsequenceSumAfterCappingElements(nums []int, k int) []bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,15 +38,13 @@ import "fmt"
 
 func subsequenceSumAfterCappingElements(nums []int, k int) []bool {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, n)
 
-  // Membuat slice untuk menyimpan hasil
 	dp := make([]bool, k+1)
 	dp[0] = true
 
 	maxVal := n
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, maxVal+1)
 	for _, v := range nums {
 		if v <= maxVal {
@@ -45,7 +54,7 @@ func subsequenceSumAfterCappingElements(nums []int, k int) []bool {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cntGe := make([]int, maxVal+2)
 	for x := maxVal; x >= 1; x-- {
 		cntGe[x] = cntGe[x+1] + cnt[x]

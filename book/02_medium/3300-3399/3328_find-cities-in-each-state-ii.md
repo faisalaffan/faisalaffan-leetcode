@@ -1,17 +1,30 @@
 # 3328 — Find Cities In Each State Ii
 
-## Deskripsi
-
-**Soal:** [3328. Find Cities In Each State Ii](https://leetcode.com/problems/find-cities-in-each-state-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findCityRanking(cities []CityInfo) []CityRank
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(c log c) Space: O(c)  
 **Kompleksitas Ruang:** O(c)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +62,7 @@ type CityRank struct {
 }
 
 func findCityRanking(cities []CityInfo) []CityRank {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	stateCities := make(map[int][]CityInfo)
 	for _, c := range cities {
 		stateCities[c.StateID] = append(stateCities[c.StateID], c)
@@ -57,6 +70,7 @@ func findCityRanking(cities []CityInfo) []CityRank {
 
 	var result []CityRank
 	for sid, cs := range stateCities {
+  // Custom sort dengan comparator
 		sort.Slice(cs, func(i, j int) bool {
 			return cs[i].Population > cs[j].Population
 		})
@@ -65,6 +79,7 @@ func findCityRanking(cities []CityInfo) []CityRank {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].StateID != result[j].StateID {
 			return result[i].StateID < result[j].StateID

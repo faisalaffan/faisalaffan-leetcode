@@ -1,19 +1,32 @@
 # 1521 — Find A Value Of A Mysterious Function Closest To Target
 
-## Deskripsi
-
-**Soal:** [1521. Find A Value Of A Mysterious Function Closest To Target](https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func closestToTarget(arr []int, target int) int
+```
+
+> **💡 Hint:** Track all possible AND values of subarrays ending at each
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Track all possible AND values of subarrays ending at each
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

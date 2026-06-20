@@ -1,19 +1,30 @@
 # 1606 — Find Servers That Handled Most Number Of Requests
 
-## Deskripsi
-
-**Soal:** [1606. Find Servers That Handled Most Number Of Requests](https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newBIT(n int) *BIT
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Prefix Sum, Bitmask, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue), Prefix Sum (jumlah kumulatif), Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newBIT(n int) *BIT`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -124,7 +135,7 @@ func (h *busyHeap) Peek() *busyItem { return (*h)[0] }
 // --- Main solution ---
 
 func busiestServers(k int, arrival []int, load []int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	counts := make([]int, k)
 	available := newBIT(k)
 	busy := &busyHeap{}
@@ -132,12 +143,13 @@ func busiestServers(k int, arrival []int, load []int) []int {
 
 	maxCount := 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(arrival); i++ {
 		t := arrival[i]
 
 		// Free completed servers
 		for busy.Len() > 0 && busy.Peek().endTime <= t {
+  // Ambil elemen terkecil/terbesar dari heap
 			item := heap.Pop(busy).(*busyItem)
 			available.addServer(item.index)
 		}
@@ -149,6 +161,7 @@ func busiestServers(k int, arrival []int, load []int) []int {
 		}
 
 		available.remove(serverIdx)
+  // Masukkan elemen ke priority queue
 		heap.Push(busy, &busyItem{endTime: t + load[i], index: serverIdx})
 		counts[serverIdx]++
 		if counts[serverIdx] > maxCount {
@@ -162,6 +175,7 @@ func busiestServers(k int, arrival []int, load []int) []int {
 			result = append(result, i)
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

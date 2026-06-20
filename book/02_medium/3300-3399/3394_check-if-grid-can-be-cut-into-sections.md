@@ -1,19 +1,30 @@
 # 3394 — Check If Grid Can Be Cut Into Sections
 
-## Deskripsi
-
-**Soal:** [3394. Check If Grid Can Be Cut Into Sections](https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func check(intervals []pair) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func check(intervals []pair) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,9 +57,7 @@ func check(intervals []pair) bool {
 
 func checkValidCuts(_ int, rectangles [][]int) bool {
 	n := len(rectangles)
-  // Membuat slice untuk menyimpan hasil
 	a := make([]pair, n)
-  // Membuat slice untuk menyimpan hasil
 	b := make([]pair, n)
 	for i, rect := range rectangles {
 		a[i] = pair{rect[0], rect[2]}

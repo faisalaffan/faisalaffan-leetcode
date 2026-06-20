@@ -1,21 +1,32 @@
 # 2065 — Maximum Path Quality Of A Graph
 
-## Deskripsi
-
-**Soal:** [2065. Maximum Path Quality Of A Graph](https://leetcode.com/problems/maximum-path-quality-of-a-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximalPathQuality(values []int, edges [][]int, maxTime int) int
+```
+
+> **💡 Hint:** DFS + Backtracking
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Backtracking
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Backtracking (pelacakan mundur), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximalPathQuality(values []int, edges [][]int, maxTime int) int`
-
-> **Ide Kunci:** DFS + Backtracking
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ import "fmt"
 func maximalPathQuality(values []int, edges [][]int, maxTime int) int {
 	n := len(values)
 	// Build adjacency list: each entry is (neighbor, time)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, t := e[0], e[1], e[2]
@@ -38,7 +49,7 @@ func maximalPathQuality(values []int, edges [][]int, maxTime int) int {
 		adj[v] = append(adj[v], [2]int{u, t})
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	visited := make([]int, n) // count visits to detect re-visits
 	ans := 0
 

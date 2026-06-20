@@ -1,19 +1,30 @@
 # 0506 — Relative Ranks
 
-## Deskripsi
-
-**Soal:** [0506. Relative Ranks](https://leetcode.com/problems/relative-ranks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func RelativeRanks(score []int) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func RelativeRanks(score []int) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,11 +41,11 @@ import (
 
 // Time: O(n log n), Space: O(n)
 func RelativeRanks(score []int) []string {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, len(score))
 	copy(sorted, score)
 	sort.Sort(sort.Reverse(sort.IntSlice(sorted)))
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rank := make(map[int]string)
 	for i, s := range sorted {
 		switch i {
@@ -48,7 +59,6 @@ func RelativeRanks(score []int) []string {
 			rank[s] = strconv.Itoa(i + 1)
 		}
 	}
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, len(score))
 	for i, s := range score {
 		result[i] = rank[s]

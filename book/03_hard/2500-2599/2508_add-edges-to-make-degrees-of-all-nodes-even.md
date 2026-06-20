@@ -1,17 +1,30 @@
 # 2508 — Add Edges To Make Degrees Of All Nodes Even
 
-## Deskripsi
-
-**Soal:** [2508. Add Edges To Make Degrees Of All Nodes Even](https://leetcode.com/problems/add-edges-to-make-degrees-of-all-nodes-even/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isPossible(n int, edges [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 
 func isPossible(n int, edges [][]int) bool {
 	// Track which edges exist (dense graph, use adjacency matrix/set)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	adjSet := make(map[int]map[int]bool)
 	for i := 1; i <= n; i++ {
 		adjSet[i] = make(map[int]bool)
@@ -55,7 +68,7 @@ func isPossible(n int, edges [][]int) bool {
 		adjSet[b][a] = true
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	deg := make([]int, n+1)
 	for _, e := range edges {
 		deg[e[0]]++

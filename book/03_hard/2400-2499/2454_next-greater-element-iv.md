@@ -1,17 +1,30 @@
 # 2454 — Next Greater Element Iv
 
-## Deskripsi
-
-**Soal:** [2454. Next Greater Element Iv](https://leetcode.com/problems/next-greater-element-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func secondGreaterElement(nums []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,17 +52,17 @@ func main() {
 
 func secondGreaterElement(nums []int) []int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
 	for i := 0; i < n; i++ {
 		ans[i] = -1
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack1 := make([]int, 0, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack2 := make([]int, 0, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	buf := make([]int, 0, n)
 
 	for i := 0; i < n; i++ {

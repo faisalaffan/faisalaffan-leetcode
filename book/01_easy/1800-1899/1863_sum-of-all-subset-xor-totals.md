@@ -1,19 +1,30 @@
 # 1863 — Sum Of All Subset Xor Totals
 
-## Deskripsi
-
-**Soal:** [1863. Sum Of All Subset Xor Totals](https://leetcode.com/problems/sum-of-all-subset-xor-totals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SubsetXORSum(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Stack
 
 **Kompleksitas Waktu:** O(2^n), Space: O(n) (recursion stack)  
 **Kompleksitas Ruang:** O(n) (recursion stack)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func SubsetXORSum(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

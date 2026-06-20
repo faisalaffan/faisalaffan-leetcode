@@ -1,17 +1,30 @@
 # 2445 — Number Of Nodes With Value One
 
-## Deskripsi
-
-**Soal:** [2445. Number Of Nodes With Value One](https://leetcode.com/problems/number-of-nodes-with-value-one/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfNodes(n int, queries []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(sqrt(n) + q * log n)  
 **Kompleksitas Ruang:** O(log n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,7 @@ func numberOfNodes(n int, queries []int) int {
 	}
 
 	// Nodes at each depth (excluding last might be incomplete)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nodesAtDepth := make([]int, maxDepth+1)
 	remaining := n
 	for d := 1; d <= maxDepth; d++ {
@@ -60,7 +73,7 @@ func numberOfNodes(n int, queries []int) int {
 	}
 
 	// Toggle depths that are multiples of each query k
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	toggle := make([]int, maxDepth+1)
 	for _, k := range queries {
 		if k <= maxDepth {

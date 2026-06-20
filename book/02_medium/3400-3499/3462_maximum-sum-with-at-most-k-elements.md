@@ -1,19 +1,30 @@
 # 3462 — Maximum Sum With At Most K Elements
 
-## Deskripsi
-
-**Soal:** [3462. Maximum Sum With At Most K Elements](https://leetcode.com/problems/maximum-sum-with-at-most-k-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSum(grid [][]int, limits []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n*m*log(m) + total*log(k)) Space: O(total)  
 **Kompleksitas Ruang:** O(total)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxSum(grid [][]int, limits []int, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,6 +42,7 @@ import (
 func maxSum(grid [][]int, limits []int, k int) int64 {
 	var candidates []int
 	for i, row := range grid {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(row)
 		lim := limits[i]
 		m := len(row)
@@ -38,6 +50,7 @@ func maxSum(grid [][]int, limits []int, k int) int64 {
 			candidates = append(candidates, row[j])
 		}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(candidates, func(i, j int) bool {
 		return candidates[i] > candidates[j]
 	})

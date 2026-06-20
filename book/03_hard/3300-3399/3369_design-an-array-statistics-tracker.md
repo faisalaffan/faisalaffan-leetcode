@@ -1,19 +1,32 @@
 # 3369 — Design An Array Statistics Tracker
 
-## Deskripsi
-
-**Soal:** [3369. Design An Array Statistics Tracker](https://leetcode.com/problems/design-an-array-statistics-tracker/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() StatisticsTracker
+```
+
+> **💡 Hint:** Use heaps for median (two heaps), maps for frequency tracking.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Use heaps for median (two heaps), maps for frequency tracking.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -149,15 +162,19 @@ func (st *StatisticsTracker) AddElement(val int) {
 
 	// Add to heaps for median
 	if st.low.Len() == 0 || val <= (*st.low)[0] {
+  // Masukkan elemen ke priority queue
 		heap.Push(st.low, val)
 	} else {
+  // Masukkan elemen ke priority queue
 		heap.Push(st.high, val)
 	}
 
 	// Rebalance
 	if st.low.Len() > st.high.Len()+1 {
+  // Masukkan elemen ke priority queue
 		heap.Push(st.high, heap.Pop(st.low))
 	} else if st.high.Len() > st.low.Len() {
+  // Masukkan elemen ke priority queue
 		heap.Push(st.low, heap.Pop(st.high))
 	}
 }

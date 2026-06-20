@@ -1,19 +1,32 @@
 # 0312 — Burst Balloons
 
-## Deskripsi
-
-**Soal:** [0312. Burst Balloons](https://leetcode.com/problems/burst-balloons/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxCoins(nums []int) int
+```
+
+> **💡 Hint:** DP Interval (Divide and Conquer).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP Interval (Divide and Conquer).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,13 +70,13 @@ func main() {
 // maxCoins returns the maximum coins obtainable by bursting all balloons.
 func maxCoins(nums []int) int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Add sentinel balloons with value 1.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	arr := make([]int, n+2)
 	arr[0] = 1
 	arr[n+1] = 1
@@ -72,9 +85,9 @@ func maxCoins(nums []int) int {
 	}
 
 	// dp[i][j] = max coins from bursting all balloons strictly between i and j.
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+2)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n+2)
 	}

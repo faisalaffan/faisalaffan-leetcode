@@ -1,19 +1,32 @@
 # 3892 — Minimum Operations To Achieve At Least K Peaks
 
-## Deskripsi
-
-**Soal:** [3892. Minimum Operations To Achieve At Least K Peaks](https://leetcode.com/problems/minimum-operations-to-achieve-at-least-k-peaks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(nums []int, k int) int
+```
+
+> **💡 Hint:** For each position, compute the minimum increments
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each position, compute the minimum increments
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +65,7 @@ func minOperations(nums []int, k int) int {
 	}
 
 	// cost[i] = min increments to make position i a peak
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cost := make([]int, n)
 	for i := 0; i < n; i++ {
 		left := nums[(i-1+n)%n]
@@ -71,9 +84,9 @@ func minOperations(nums []int, k int) int {
 	}
 
 	// DP[i][j] = min cost for first i positions with j peaks (non-adjacent)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, k+1)
 		for j := range dp[i] {
@@ -101,9 +114,9 @@ func minOperations(nums []int, k int) int {
 	// Also consider circular wrap: position 0 and n-1 cannot both be peaks
 	if k >= 2 {
 		// Try excluding both ends from being peaks
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		dp2 := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range dp2 {
 			dp2[i] = make([]int, k+1)
 			for j := range dp2[i] {

@@ -1,19 +1,30 @@
 # 2096 — Step By Step Directions From A Binary Tree Node To Another
 
-## Deskripsi
-
-**Soal:** [2096. Step By Step Directions From A Binary Tree Node To Another](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getDirections(root *TreeNode, startValue int, destValue int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getDirections(root *TreeNode, startValue int, destValue int) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +70,6 @@ func getDirections(root *TreeNode, startValue int, destValue int) string {
 	}
 
 	// Go up from start to LCA (U for each remaining step)
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, len(pathToStart)-i)
 	for j := range result {
 		result[j] = 'U'

@@ -1,17 +1,30 @@
 # 3541 — Find Most Frequent Vowel And Consonant
 
-## Deskripsi
-
-**Soal:** [3541. Find Most Frequent Vowel And Consonant](https://leetcode.com/problems/find-most-frequent-vowel-and-consonant/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isVowel(b byte) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n). Space: O(1).  
 **Kompleksitas Ruang:** O(1).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,11 +48,11 @@ func isVowel(b byte) bool {
 // FindMostFrequentVowelAndConsonant returns the sum of max vowel frequency and max consonant frequency.
 // Time: O(n). Space: O(1).
 func FindMostFrequentVowelAndConsonant(s string) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	vowelFreq := make([]int, 26)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	consonantFreq := make([]int, 26)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		ch := s[i]
 		if ch >= 'a' && ch <= 'z' {

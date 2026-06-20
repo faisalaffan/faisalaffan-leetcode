@@ -1,19 +1,30 @@
 # 3122 — Minimum Number Of Operations To Satisfy Conditions
 
-## Deskripsi
-
-**Soal:** [3122. Minimum Number Of Operations To Satisfy Conditions](https://leetcode.com/problems/minimum-number-of-operations-to-satisfy-conditions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumOperations(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * m * 10)  
 **Kompleksitas Ruang:** O(m * 10)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumOperations(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ func minimumOperations(grid [][]int) int {
 	}
 	n := len(grid[0])
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cost := make([][10]int, n)
 	for j := 0; j < n; j++ {
 		for d := 0; d < 10; d++ {
@@ -49,7 +60,7 @@ func minimumOperations(grid [][]int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([][10]int, n)
 	for j := 0; j < n; j++ {
 		for d := 0; d < 10; d++ {

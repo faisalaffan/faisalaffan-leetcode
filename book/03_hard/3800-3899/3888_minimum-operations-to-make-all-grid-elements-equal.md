@@ -1,19 +1,32 @@
 # 3888 — Minimum Operations To Make All Grid Elements Equal
 
-## Deskripsi
-
-**Soal:** [3888. Minimum Operations To Make All Grid Elements Equal](https://leetcode.com/problems/minimum-operations-to-make-all-grid-elements-equal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(grid [][]int, k int) int64
+```
+
+> **💡 Hint:** Flatten grid, sort. All elements can be made equal to
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Flatten grid, sort. All elements can be made equal to
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +65,7 @@ func minOperations(grid [][]int, k int) int64 {
 	}
 
 	m, n := len(grid), len(grid[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	flat := make([]int, 0, m*n)
 	rem := grid[0][0] % k
 	for _, row := range grid {
@@ -64,6 +77,7 @@ func minOperations(grid [][]int, k int) int64 {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(flat)
 	target := flat[len(flat)/2]
 

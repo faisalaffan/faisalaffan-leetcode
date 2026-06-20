@@ -1,19 +1,30 @@
 # 0327 — Count Of Range Sum
 
-## Deskripsi
-
-**Soal:** [0327. Count Of Range Sum](https://leetcode.com/problems/count-of-range-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countRangeSum(nums []int, lower int, upper int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Merge Sort (pengurutan gabung)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countRangeSum(nums []int, lower int, upper int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ import "fmt"
 
 func countRangeSum(nums []int, lower int, upper int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int64, n+1)
 	for i, v := range nums {
 		prefix[i+1] = prefix[i] + int64(v)
@@ -34,7 +45,7 @@ func countRangeSum(nums []int, lower int, upper int) int {
 
 	count := 0
 	// Temporary buffer for merge sort
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	temp := make([]int64, n+1)
 
 	var mergeSort func(left, right int)

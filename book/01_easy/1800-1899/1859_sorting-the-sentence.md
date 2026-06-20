@@ -1,19 +1,30 @@
 # 1859 — Sorting The Sentence
 
-## Deskripsi
-
-**Soal:** [1859. Sorting The Sentence](https://leetcode.com/problems/sorting-the-sentence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SortSentence(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func SortSentence(s string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,6 @@ import (
 // Time: O(n), Space: O(n)
 func SortSentence(s string) string {
 	words := strings.Split(s, " ")
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, len(words))
 	for _, w := range words {
 		pos := int(w[len(w)-1] - '0') - 1

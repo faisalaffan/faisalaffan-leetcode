@@ -1,19 +1,32 @@
 # 3548 — Equal Sum Grid Partition Ii
 
-## Deskripsi
-
-**Soal:** [3548. Equal Sum Grid Partition Ii](https://leetcode.com/problems/equal-sum-grid-partition-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func equalSumGridPartition(grid [][]int) int
+```
+
+> **💡 Hint:** Compute prefix sums. Try different partition sizes and check
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Compute prefix sums. Try different partition sizes and check
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,15 +60,15 @@ func equalSumGridPartition(grid [][]int) int {
 		return 0
 	}
 	n := len(grid[0])
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Compute prefix sum
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pref := make([][]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range pref {
 		pref[i] = make([]int, n+1)
 	}
@@ -79,9 +92,9 @@ func equalSumGridPartition(grid [][]int) int {
 		}
 		// Check if grid can be partitioned into rectangles each summing to target
 		count := 0
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		visited := make([][]bool, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range visited {
 			visited[i] = make([]bool, n)
 		}

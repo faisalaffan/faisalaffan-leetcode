@@ -1,19 +1,30 @@
 # 2866 — Beautiful Towers Ii
 
-## Deskripsi
-
-**Soal:** [2866. Beautiful Towers Ii](https://leetcode.com/problems/beautiful-towers-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func BeautifulTowersIi(maxHeights []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func BeautifulTowersIi(maxHeights []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,9 +40,9 @@ func BeautifulTowersIi(maxHeights []int) int64 {
 	n := len(maxHeights)
 
 	// Left to right: sum of heights ending at i with non-decreasing left side
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	left := make([]int64, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0)
 	for i := 0; i < n; i++ {
 		for len(stack) > 0 && maxHeights[stack[len(stack)-1]] > maxHeights[i] {
@@ -47,7 +58,7 @@ func BeautifulTowersIi(maxHeights []int) int64 {
 	}
 
 	// Right to left
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	right := make([]int64, n)
 	stack = make([]int, 0)
 	for i := n - 1; i >= 0; i-- {

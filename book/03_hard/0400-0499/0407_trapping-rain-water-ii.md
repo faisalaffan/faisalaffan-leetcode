@@ -1,17 +1,30 @@
 # 0407 — Trapping Rain Water Ii
 
-## Deskripsi
-
-**Soal:** [0407. Trapping Rain Water Ii](https://leetcode.com/problems/trapping-rain-water-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func trapRainWater(heightMap [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Queue (antrian FIFO), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -75,7 +88,7 @@ func trapRainWater(heightMap [][]int) int {
 	}
 	rows, cols := len(heightMap), len(heightMap[0])
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, rows)
 	for r := range visited {
 		visited[r] = make([]bool, cols)
@@ -88,6 +101,7 @@ func trapRainWater(heightMap [][]int) int {
 	for r := 0; r < rows; r++ {
 		for c := 0; c < cols; c++ {
 			if r == 0 || r == rows-1 || c == 0 || c == cols-1 {
+  // Masukkan elemen ke priority queue
 				heap.Push(h, cell{heightMap[r][c], r, c})
 				visited[r][c] = true
 			}
@@ -98,6 +112,7 @@ func trapRainWater(heightMap [][]int) int {
 	total := 0
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(h).(cell)
 		for _, d := range dirs {
 			nr, nc := cur.r+d[0], cur.c+d[1]
@@ -105,8 +120,10 @@ func trapRainWater(heightMap [][]int) int {
 				visited[nr][nc] = true
 				if heightMap[nr][nc] < cur.h {
 					total += cur.h - heightMap[nr][nc]
+  // Masukkan elemen ke priority queue
 					heap.Push(h, cell{cur.h, nr, nc})
 				} else {
+  // Masukkan elemen ke priority queue
 					heap.Push(h, cell{heightMap[nr][nc], nr, nc})
 				}
 			}

@@ -1,19 +1,30 @@
 # 2599 — Make The Prefix Sum Non Negative
 
-## Deskripsi
-
-**Soal:** [2599. Make The Prefix Sum Non Negative](https://leetcode.com/problems/make-the-prefix-sum-non-negative/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func makePrefSumNonNegative(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Prefix Sum
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func makePrefSumNonNegative(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,10 +62,12 @@ func makePrefSumNonNegative(nums []int) int {
 	for _, v := range nums {
 		prefix += int64(v)
 		if v < 0 {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, v)
 		}
 		for prefix < 0 {
 			// Move the most negative seen to the end
+  // Ambil elemen terkecil/terbesar dari heap
 			smallest := heap.Pop(h).(int)
 			prefix -= int64(smallest)
 			moves++

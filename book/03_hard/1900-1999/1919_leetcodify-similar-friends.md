@@ -1,17 +1,30 @@
 # 1919 — Leetcodify Similar Friends
 
-## Deskripsi
-
-**Soal:** [1919. Leetcodify Similar Friends](https://leetcode.com/problems/leetcodify-similar-friends/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func leetcodifySimilarFriends(listens [][]int, friendships [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -74,9 +87,9 @@ func main() {
 // leetcodifySimilarFriends returns [][]int{{user1_id, user2_id}, ...}
 func leetcodifySimilarFriends(listens [][]int, friendships [][]int) [][]int {
 	// Build set of (user, song, day) - unique listens per user per song per day
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userSongDay := make(map[[3]int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userSongs := make(map[int]map[[2]int]bool) // user -> set of (song, day) pairs
 	for _, l := range listens {
 		u, s, d := l[0], l[1], l[2]
@@ -114,7 +127,7 @@ func leetcodifySimilarFriends(listens [][]int, friendships [][]int) [][]int {
 		}
 
 		// Count union
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		union := make(map[[2]int]bool)
 		for sd := range songs1 {
 			union[sd] = true
@@ -135,6 +148,7 @@ func leetcodifySimilarFriends(listens [][]int, friendships [][]int) [][]int {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i][0] != result[j][0] {
 			return result[i][0] < result[j][0]

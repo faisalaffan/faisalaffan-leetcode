@@ -1,17 +1,30 @@
 # 2566 — Maximum Difference By Remapping A Digit
 
-## Deskripsi
-
-**Soal:** [2566. Maximum Difference By Remapping A Digit](https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumDifferenceByRemappingADigit(num int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +49,7 @@ func MaximumDifferenceByRemappingADigit(num int) int {
 
 	// Find max: replace first non-9 digit with 9
 	maxStr := []byte(s)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(maxStr); i++ {
 		if maxStr[i] != '9' {
 			replaceWith := maxStr[i]
@@ -52,7 +65,7 @@ func MaximumDifferenceByRemappingADigit(num int) int {
 
 	// Find min: replace first non-0 digit (or non-1) with 0
 	minStr := []byte(s)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(minStr); i++ {
 		if minStr[i] != '0' && minStr[i] != '1' {
 			replaceWith := minStr[i]

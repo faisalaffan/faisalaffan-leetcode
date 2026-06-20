@@ -1,19 +1,32 @@
 # 3655 — Xor After Range Multiplication Queries Ii
 
-## Deskripsi
-
-**Soal:** [3655. Xor After Range Multiplication Queries Ii](https://leetcode.com/problems/xor-after-range-multiplication-queries-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func xorAfterQueries(nums []int, queries [][]int) int
+```
+
+> **💡 Hint:** Use difference array to track multiplier per position,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Use difference array to track multiplier per position,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +57,9 @@ const MOD = 1000000007
 func xorAfterQueries(nums []int, queries [][]int) int {
 	n := len(nums)
 	// Track multiplier per position
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	mult := make([]int64, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range mult {
 		mult[i] = 1
 	}

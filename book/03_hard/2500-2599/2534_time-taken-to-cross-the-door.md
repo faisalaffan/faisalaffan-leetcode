@@ -1,19 +1,30 @@
 # 2534 — Time Taken To Cross The Door
 
-## Deskripsi
-
-**Soal:** [2534. Time Taken To Cross The Door](https://leetcode.com/problems/time-taken-to-cross-the-door/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func timeTakenCrossDoor(arrival []int, state []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func timeTakenCrossDoor(arrival []int, state []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,12 +50,12 @@ import "fmt"
 // Complexity: O(T + n) where T = max(arrival) + n, O(n) space
 func timeTakenCrossDoor(arrival []int, state []int) []int {
 	n := len(arrival)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	enterQ := make([]int, 0) // indices of people waiting to enter
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leaveQ := make([]int, 0) // indices of people waiting to leave
 
 	nextIdx := 0 // next person index to consider

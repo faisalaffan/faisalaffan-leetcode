@@ -1,19 +1,30 @@
 # 0588 — Design In Memory File System
 
-## Deskripsi
-
-**Soal:** [0588. Design In Memory File System](https://leetcode.com/problems/design-in-memory-file-system/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+
+Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+
+**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewFileSystem() FileSystem
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewFileSystem() FileSystem`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

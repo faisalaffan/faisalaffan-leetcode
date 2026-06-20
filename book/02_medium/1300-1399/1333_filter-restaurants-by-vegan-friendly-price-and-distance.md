@@ -1,17 +1,30 @@
 # 1333 — Filter Restaurants By Vegan Friendly Price And Distance
 
-## Deskripsi
-
-**Soal:** [1333. Filter Restaurants By Vegan Friendly Price And Distance](https://leetcode.com/problems/filter-restaurants-by-vegan-friendly-price-and-distance/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func filterRestaurants(restaurants [][]int, veganFriendly int, maxPrice int, maxDistance int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n) for sorting  
 **Kompleksitas Ruang:** O(n) for storing filtered results
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -72,6 +85,7 @@ func filterRestaurants(restaurants [][]int, veganFriendly int, maxPrice int, max
 		filtered = append(filtered, restaurant{r[0], r[1], r[2], r[3], r[4]})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(filtered, func(i, j int) bool {
 		if filtered[i].rating != filtered[j].rating {
 			return filtered[i].rating > filtered[j].rating
@@ -79,7 +93,7 @@ func filterRestaurants(restaurants [][]int, veganFriendly int, maxPrice int, max
 		return filtered[i].id > filtered[j].id
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(filtered))
 	for i, r := range filtered {
 		result[i] = r.id

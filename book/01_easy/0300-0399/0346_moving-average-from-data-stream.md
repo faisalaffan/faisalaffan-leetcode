@@ -1,19 +1,30 @@
 # 0346 — Moving Average From Data Stream
 
-## Deskripsi
-
-**Soal:** [0346. Moving Average From Data Stream](https://leetcode.com/problems/moving-average-from-data-stream/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(size int) MovingAverage
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, BFS
 
 **Kompleksitas Waktu:** O(1), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Sliding Window (jendela geser), Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor(size int) MovingAverage`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

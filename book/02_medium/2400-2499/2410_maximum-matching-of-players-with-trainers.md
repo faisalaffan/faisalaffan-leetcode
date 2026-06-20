@@ -1,17 +1,30 @@
 # 2410 — Maximum Matching Of Players With Trainers
 
-## Deskripsi
-
-**Soal:** [2410. Maximum Matching Of Players With Trainers](https://leetcode.com/problems/maximum-matching-of-players-with-trainers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func matchPlayersAndTrainers(players []int, trainers []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n + m log m)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,9 @@ func main() {
 }
 
 func matchPlayersAndTrainers(players []int, trainers []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(players)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(trainers)
 	i, j := 0, 0
 	for i < len(players) && j < len(trainers) {

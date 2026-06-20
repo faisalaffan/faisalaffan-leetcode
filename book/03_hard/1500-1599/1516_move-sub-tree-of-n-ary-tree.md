@@ -1,19 +1,30 @@
 # 1516 — Move Sub Tree Of N Ary Tree
 
-## Deskripsi
-
-**Soal:** [1516. Move Sub Tree Of N Ary Tree](https://leetcode.com/problems/move-sub-tree-of-n-ary-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func moveSubTree(root, p, q *Node) *Node
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func moveSubTree(root, p, q *Node) *Node`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -95,9 +106,8 @@ func buildTree(adj [][]int) *Node {
 	if len(adj) == 0 {
 		return nil
 	}
-  // Membuat slice untuk menyimpan hasil
 	nodes := make([]*Node, len(adj))
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range adj {
 		nodes[i] = &Node{Val: i}
 	}

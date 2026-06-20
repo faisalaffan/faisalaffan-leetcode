@@ -1,17 +1,30 @@
 # 1514 — Path With Maximum Probability
 
-## Deskripsi
-
-**Soal:** [1514. Path With Maximum Probability](https://leetcode.com/problems/path-with-maximum-probability/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** O(E log V), Space: O(E + V)  
 **Kompleksitas Ruang:** O(E + V)
 
-**Algoritma:** Heap (priority queue), Dijkstra (lintasan terpendek), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -70,7 +83,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
 	// Time: O(E log V), Space: O(E + V)
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]Edge, n)
 	for i, e := range edges {
 		u, v := e[0], e[1]
@@ -80,14 +93,15 @@ func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int
 	}
 
 	// Dijkstra-like (max probability)
-  // Membuat slice untuk menyimpan hasil
 	prob := make([]float64, n)
 	prob[start] = 1.0
 
 	pq := &PriorityQueue{}
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &Item{node: start, prob: 1.0})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		item := heap.Pop(pq).(*Item)
 		node := item.node
 		curProb := item.prob
@@ -104,6 +118,7 @@ func MaxProbability(n int, edges [][]int, succProb []float64, start int, end int
 			newProb := curProb * edge.prob
 			if newProb > prob[edge.to] {
 				prob[edge.to] = newProb
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &Item{node: edge.to, prob: newProb})
 			}
 		}

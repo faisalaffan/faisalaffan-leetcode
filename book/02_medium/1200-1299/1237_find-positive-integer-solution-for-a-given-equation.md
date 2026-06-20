@@ -1,19 +1,30 @@
 # 1237 — Find Positive Integer Solution For A Given Equation
 
-## Deskripsi
-
-**Soal:** [1237. Find Positive Integer Solution For A Given Equation](https://leetcode.com/problems/find-positive-integer-solution-for-a-given-equation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findSolution(customfunction customFunction, z int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O(x + y) where x,y in [1, 1000]  
 **Kompleksitas Ruang:** O(n) for result
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Monotonic Stack/Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findSolution(customfunction customFunction, z int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ import (
 type customFunction func(int, int) int
 
 func findSolution(customfunction customFunction, z int) [][]int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0)
 	x, y := 1, 1000
 

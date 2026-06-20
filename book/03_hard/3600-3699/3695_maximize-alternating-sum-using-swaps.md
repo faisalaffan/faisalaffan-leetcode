@@ -1,19 +1,32 @@
 # 3695 — Maximize Alternating Sum Using Swaps
 
-## Deskripsi
-
-**Soal:** [3695. Maximize Alternating Sum Using Swaps](https://leetcode.com/problems/maximize-alternating-sum-using-swaps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxAlternatingSum(nums []int, swaps [][]int) int64
+```
+
+> **💡 Hint:** DSU to find connected components of swappable indices.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DSU to find connected components of swappable indices.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,9 +60,9 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 	n := len(nums)
 
 	// DSU
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 	}
@@ -72,7 +85,7 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 	}
 
 	// Group indices by component
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	compGroups := make(map[int][]int)
 	for i := 0; i < n; i++ {
 		r := find(i)
@@ -83,7 +96,7 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 
 	for _, indices := range compGroups {
 		// Extract values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		vals := make([]int, len(indices))
 		for i, idx := range indices {
 			vals[i] = nums[idx]
@@ -102,17 +115,17 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 
 		// Assign largest values to even positions (positive contribution)
 		// and smallest to odd positions (negative contribution)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		evenVals := make([]int, len(evens))
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		oddVals := make([]int, len(odds))
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range evenVals {
 			if i < len(vals) {
 				evenVals[i] = vals[i]
 			}
 		}
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range oddVals {
 			if len(vals)-1-i >= 0 {
 				oddVals[i] = vals[len(vals)-1-i]
@@ -120,12 +133,14 @@ func maxAlternatingSum(nums []int, swaps [][]int) int64 {
 		}
 
 		// Sort even indices and assign
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(evens)
 		for i, idx := range evens {
 			if i < len(evenVals) {
 				nums[idx] = evenVals[i]
 			}
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(odds)
 		for i, idx := range odds {
 			if i < len(oddVals) {

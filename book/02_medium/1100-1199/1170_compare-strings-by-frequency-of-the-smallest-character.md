@@ -1,19 +1,30 @@
 # 1170 — Compare Strings By Frequency Of The Smallest Character
 
-## Deskripsi
-
-**Soal:** [1170. Compare Strings By Frequency Of The Smallest Character](https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func f(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O((n + m) * L) where L = average string length  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func f(s string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ import (
 func f(s string) int {
 	minChar := s[0]
 	count := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		if s[i] < minChar {
 			minChar = s[i]
@@ -49,14 +60,15 @@ func f(s string) int {
 }
 
 func numSmallerByFrequency(queries []string, words []string) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	wordFreqs := make([]int, len(words))
 	for i, w := range words {
 		wordFreqs[i] = f(w)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(wordFreqs)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 	for i, q := range queries {
 		qf := f(q)

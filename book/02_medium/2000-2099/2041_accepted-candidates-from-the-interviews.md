@@ -1,19 +1,30 @@
 # 2041 — Accepted Candidates From The Interviews
 
-## Deskripsi
-
-**Soal:** [2041. Accepted Candidates From The Interviews](https://leetcode.com/problems/accepted-candidates-from-the-interviews/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func acceptedCandidates(candidates []Candidate, minScore int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func acceptedCandidates(candidates []Candidate, minScore int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,9 +57,10 @@ func acceptedCandidates(candidates []Candidate, minScore int) []int {
 		if count >= 2 {
 			// Calculate total
 			total := 0
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			sorted := make([]int, len(c.Scores))
 			copy(sorted, c.Scores)
+  // Urutkan secara ascending — O(n log n)
 			sort.Ints(sorted)
 			for _, s := range sorted[1:] {
 				total += s

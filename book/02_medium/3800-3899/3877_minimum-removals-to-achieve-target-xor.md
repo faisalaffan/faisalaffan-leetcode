@@ -1,21 +1,32 @@
 # 3877 — Minimum Removals To Achieve Target Xor
 
-## Deskripsi
-
-**Soal:** [3877. Minimum Removals To Achieve Target Xor](https://leetcode.com/problems/minimum-removals-to-achieve-target-xor/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumRemovalsToAchieveTargetXor(nums []int, target int) int
+```
+
+> **💡 Hint:** DP tracking max selectable elements to achieve each XOR value.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(N * 2^M)  
 **Kompleksitas Ruang:** O(2^M) where M = max bit length (14)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumRemovalsToAchieveTargetXor(nums []int, target int) int`
-
-> **Ide Kunci:** DP tracking max selectable elements to achieve each XOR value.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,16 +54,16 @@ func MinimumRemovalsToAchieveTargetXor(nums []int, target int) int {
 	}
 
 	// dp[x] = max elements selectable to achieve XOR x
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, maxXor)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = -1
 	}
 	dp[0] = 0
 
 	for _, v := range nums {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, maxXor)
 		copy(ndp, dp)
 		for x := 0; x < maxXor; x++ {

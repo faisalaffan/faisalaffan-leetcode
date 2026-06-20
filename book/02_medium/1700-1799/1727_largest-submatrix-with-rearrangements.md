@@ -1,19 +1,30 @@
 # 1727 — Largest Submatrix With Rearrangements
 
-## Deskripsi
-
-**Soal:** [1727. Largest Submatrix With Rearrangements](https://leetcode.com/problems/largest-submatrix-with-rearrangements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestSubmatrix(matrix [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m * n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func largestSubmatrix(matrix [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ func largestSubmatrix(matrix [][]int) int {
 	m, n := len(matrix), len(matrix[0])
 	maxArea := 0
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	heights := make([]int, n)
 
 	for r := 0; r < m; r++ {
@@ -47,9 +58,10 @@ func largestSubmatrix(matrix [][]int) int {
 
 		// Sort heights for this row (to find max rectangle that can be formed
 		// by rearranging columns)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		sorted := make([]int, n)
 		copy(sorted, heights)
+  // Custom sort dengan comparator
 		sort.Slice(sorted, func(i, j int) bool {
 			return sorted[i] > sorted[j]
 		})

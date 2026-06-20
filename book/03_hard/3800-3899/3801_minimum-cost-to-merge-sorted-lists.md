@@ -1,19 +1,32 @@
 # 3801 — Minimum Cost To Merge Sorted Lists
 
-## Deskripsi
-
-**Soal:** [3801. Minimum Cost To Merge Sorted Lists](https://leetcode.com/problems/minimum-cost-to-merge-sorted-lists/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minCost(lists [][]int) int
+```
+
+> **💡 Hint:** Always merge the two shortest lists (Huffman coding).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO), Heap (priority queue), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Always merge the two shortest lists (Huffman coding).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,15 +65,19 @@ func minCost(lists [][]int) int {
 	h := &IntHeap{}
 	heap.Init(h)
 	for _, lst := range lists {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, len(lst))
 	}
 
 	total := 0
 	for h.Len() > 1 {
+  // Ambil elemen terkecil/terbesar dari heap
 		a := heap.Pop(h).(int)
+  // Ambil elemen terkecil/terbesar dari heap
 		b := heap.Pop(h).(int)
 		cost := a + b
 		total += cost
+  // Masukkan elemen ke priority queue
 		heap.Push(h, cost)
 	}
 

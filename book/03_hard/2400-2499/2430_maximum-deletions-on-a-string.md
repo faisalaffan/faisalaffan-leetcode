@@ -1,21 +1,32 @@
 # 2430 — Maximum Deletions On A String
 
-## Deskripsi
-
-**Soal:** [2430. Maximum Deletions On A String](https://leetcode.com/problems/maximum-deletions-on-a-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxDeletions(s string) int
+```
+
+> **💡 Hint:** DP + LCP (Longest Common Prefix).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxDeletions(s string) int`
-
-> **Ide Kunci:** DP + LCP (Longest Common Prefix).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +55,9 @@ func maxDeletions(s string) int {
 	n := len(s)
 
 	// lcp[i][j] = longest common prefix of s[i:] and s[j:]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	lcp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range lcp {
 		lcp[i] = make([]int, n+1)
 	}
@@ -59,7 +70,7 @@ func maxDeletions(s string) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
 	// dp[n] = 0 by default
 

@@ -1,19 +1,30 @@
 # 0899 — Orderly Queue
 
-## Deskripsi
-
-**Soal:** [0899. Orderly Queue](https://leetcode.com/problems/orderly-queue/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func orderlyQueue(s string, k int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func orderlyQueue(s string, k int) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,6 +44,7 @@ import (
 func orderlyQueue(s string, k int) string {
 	if k > 1 {
 		b := []byte(s)
+  // Custom sort dengan comparator
 		sort.Slice(b, func(i, j int) bool { return b[i] < b[j] })
 		return string(b)
 	}

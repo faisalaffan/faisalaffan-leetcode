@@ -1,17 +1,30 @@
 # 3327 — Check If Dfs Strings Are Palindromes
 
-## Deskripsi
-
-**Soal:** [3327. Check If Dfs Strings Are Palindromes](https://leetcode.com/problems/check-if-dfs-strings-are-palindromes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func checkIfDfsStringsArePalindromes(parent []int, s string) []bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +61,7 @@ const BASE = 91138233
 
 func checkIfDfsStringsArePalindromes(parent []int, s string) []bool {
 	n := len(parent)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	children := make([][]int, n)
 	for i := 1; i < n; i++ {
 		p := parent[i]
@@ -56,11 +69,10 @@ func checkIfDfsStringsArePalindromes(parent []int, s string) []bool {
 	}
 
 	// Post-order traversal to build the global string and record [start, end) for each node
-  // Membuat slice untuk menyimpan hasil
 	order := make([]byte, 0, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	start := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	end := make([]int, n)
 
 	var dfs func(u int)
@@ -76,11 +88,11 @@ func checkIfDfsStringsArePalindromes(parent []int, s string) []bool {
 
 	// Rolling hash precomputation
 	m := len(order)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pow := make([]int64, m+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	fwd := make([]int64, m+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rev := make([]int64, m+1)
 	pow[0] = 1
 	for i := 0; i < m; i++ {
@@ -101,7 +113,6 @@ func checkIfDfsStringsArePalindromes(parent []int, s string) []bool {
 		return (rev[l] - rev[r]*pow[r-l]%MOD + MOD) % MOD
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, n)
 	for i := 0; i < n; i++ {
 		l, r := start[i], end[i]

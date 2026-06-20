@@ -1,19 +1,30 @@
 # 0051 — N Queens
 
-## Deskripsi
-
-**Soal:** [0051. N Queens](https://leetcode.com/problems/n-queens/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func solveNQueens(n int) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func solveNQueens(n int) [][]string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,10 +41,8 @@ import "fmt"
 // Complexity: O(n!) time, O(n) space for recursion/board (excluding output)
 func solveNQueens(n int) [][]string {
 	var result [][]string
-  // Membuat slice untuk menyimpan hasil
 	board := make([]string, n)
 	for i := 0; i < n; i++ {
-  // Membuat slice untuk menyimpan hasil
 		row := make([]byte, n)
 		for j := 0; j < n; j++ {
 			row[j] = '.'
@@ -41,17 +50,13 @@ func solveNQueens(n int) [][]string {
 		board[i] = string(row)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	cols := make([]bool, n)
-  // Membuat slice untuk menyimpan hasil
 	d1 := make([]bool, 2*n-1) // diagonal: row - col + n - 1
-  // Membuat slice untuk menyimpan hasil
 	d2 := make([]bool, 2*n-1) // anti-diagonal: row + col
 
 	var backtrack func(row int)
 	backtrack = func(row int) {
 		if row == n {
-  // Membuat slice untuk menyimpan hasil
 			solution := make([]string, n)
 			copy(solution, board)
 			result = append(result, solution)

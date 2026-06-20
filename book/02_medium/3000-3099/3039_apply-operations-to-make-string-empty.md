@@ -1,17 +1,30 @@
 # 3039 — Apply Operations To Make String Empty
 
-## Deskripsi
-
-**Soal:** [3039. Apply Operations To Make String Empty](https://leetcode.com/problems/apply-operations-to-make-string-empty/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lastNonEmptyString(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,7 +67,7 @@ func lastNonEmptyString(s string) string {
 		}
 	}
 	// Sort by last occurrence position
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(cands); i++ {
 		for j := i + 1; j < len(cands); j++ {
 			if cands[i].pos > cands[j].pos {
@@ -62,7 +75,6 @@ func lastNonEmptyString(s string) string {
 			}
 		}
 	}
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]byte, len(cands))
 	for i, c := range cands {
 		ans[i] = c.ch

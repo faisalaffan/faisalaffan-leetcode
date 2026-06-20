@@ -1,17 +1,30 @@
 # 2010 — The Number Of Seniors And Juniors To Join The Company Ii
 
-## Deskripsi
-
-**Soal:** [2010. The Number Of Seniors And Juniors To Join The Company Ii](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func theNumberOfSeniorsAndJuniorsToJoinTheCompanyIi(budget int, employees [][]interface{}) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -117,17 +130,19 @@ func theNumberOfSeniorsAndJuniorsToJoinTheCompanyIi(budget int, employees [][]in
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(seniorSalaries)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(juniorSalaries)
 
 	// Prefix sums for quick cost calculation
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	seniorPrefix := make([]int, len(seniorSalaries)+1)
 	for i, s := range seniorSalaries {
 		seniorPrefix[i+1] = seniorPrefix[i] + s
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	juniorPrefix := make([]int, len(juniorSalaries)+1)
 	for i, s := range juniorSalaries {
 		juniorPrefix[i+1] = juniorPrefix[i] + s

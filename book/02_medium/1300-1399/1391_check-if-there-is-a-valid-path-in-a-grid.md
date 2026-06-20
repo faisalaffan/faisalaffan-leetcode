@@ -1,17 +1,30 @@
 # 1391 — Check If There Is A Valid Path In A Grid
 
-## Deskripsi
-
-**Soal:** [1391. Check If There Is A Valid Path In A Grid](https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func hasValidPath(grid [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(m*n) where m,n = grid dimensions  
 **Kompleksitas Ruang:** O(m*n) for visited array
 
-**Algoritma:** Dynamic Programming (DP), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -62,9 +75,9 @@ var street = [7][][]int{
 // Space: O(m*n) for visited array
 func hasValidPath(grid [][]int) bool {
 	m, n := len(grid), len(grid[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range visited {
 		visited[i] = make([]bool, n)
 	}

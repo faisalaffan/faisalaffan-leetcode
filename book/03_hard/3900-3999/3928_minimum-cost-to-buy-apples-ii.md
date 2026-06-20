@@ -1,19 +1,32 @@
 # 3928 — Minimum Cost To Buy Apples Ii
 
-## Deskripsi
-
-**Soal:** [3928. Minimum Cost To Buy Apples Ii](https://leetcode.com/problems/minimum-cost-to-buy-apples-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minCost(n int, prices []int, roads [][]int) []int
+```
+
+> **💡 Hint:** Multi-source Dijkstra. Start from each store with
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Multi-source Dijkstra. Start from each store with
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -76,7 +89,7 @@ func (h *minHeap) Pop() interface{} {
 }
 
 func minCost(n int, prices []int, roads [][]int) []int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][3]int, n)
 	for _, r := range roads {
 		u, v, cost, tax := r[0], r[1], r[2], r[3]
@@ -84,9 +97,9 @@ func minCost(n int, prices []int, roads [][]int) []int {
 		adj[v] = append(adj[v], [3]int{u, cost, tax})
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = prices[i]
 	}
@@ -94,10 +107,12 @@ func minCost(n int, prices []int, roads [][]int) []int {
 	h := &minHeap{}
 	heap.Init(h)
 	for i := 0; i < n; i++ {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, &item{node: i, cost: prices[i]})
 	}
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(h).(*item)
 		u, cu := cur.node, cur.cost
 		if cu != dist[u] {
@@ -108,6 +123,7 @@ func minCost(n int, prices []int, roads [][]int) []int {
 			nd := cu + cost + tax
 			if nd < dist[v] {
 				dist[v] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(h, &item{node: v, cost: nd})
 			}
 		}

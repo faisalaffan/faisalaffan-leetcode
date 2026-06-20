@@ -1,19 +1,30 @@
 # 1713 — Minimum Operations To Make A Subsequence
 
-## Deskripsi
-
-**Soal:** [1713. Minimum Operations To Make A Subsequence](https://leetcode.com/problems/minimum-operations-to-make-a-subsequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(target []int, arr []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minOperations(target []int, arr []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ import (
 
 func minOperations(target []int, arr []int) int {
 	// Map target values to their indices
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[int]int)
 	for i, v := range target {
 		pos[v] = i
@@ -39,7 +50,7 @@ func minOperations(target []int, arr []int) int {
 
 	// Build list of indices in arr that also appear in target
 	// This becomes the LIS problem
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indices := make([]int, 0)
 	for _, v := range arr {
 		if idx, ok := pos[v]; ok {
@@ -48,7 +59,7 @@ func minOperations(target []int, arr []int) int {
 	}
 
 	// LIS on indices using patience sorting O(n log n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tails := make([]int, 0)
 	for _, idx := range indices {
 		// Find first element >= idx in tails

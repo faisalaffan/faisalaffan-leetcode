@@ -1,21 +1,32 @@
 # 3068 — Find The Maximum Sum Of Node Values
 
-## Deskripsi
-
-**Soal:** [3068. Find The Maximum Sum Of Node Values](https://leetcode.com/problems/find-the-maximum-sum-of-node-values/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumValueSum(nums []int, k int, edges [][]int) int64
+```
+
+> **💡 Hint:** Sort by gain
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximumValueSum(nums []int, k int, edges [][]int) int64`
-
-> **Ide Kunci:** Sort by gain
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,12 +49,13 @@ import (
 
 func maximumValueSum(nums []int, k int, edges [][]int) int64 {
 	total := int64(0)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	gains := make([]int, len(nums))
 	for i, v := range nums {
 		total += int64(v)
 		gains[i] = (v ^ k) - v
 	}
+  // Custom sort dengan comparator
 	sort.Slice(gains, func(i, j int) bool {
 		return gains[i] > gains[j]
 	})

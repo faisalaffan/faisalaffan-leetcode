@@ -1,17 +1,30 @@
 # 2391 — Minimum Amount Of Time To Collect Garbage
 
-## Deskripsi
-
-**Soal:** [2391. Minimum Amount Of Time To Collect Garbage](https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func garbageCollection(garbage []string, travel []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n * k)  
 **Kompleksitas Ruang:** O(1) where k = types (3)
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +43,7 @@ func main() {
 }
 
 func garbageCollection(garbage []string, travel []int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	last := make([]int, 3) // 0=G, 1=P, 2=M
 	total := 0
 	for i, g := range garbage {
@@ -48,7 +61,7 @@ func garbageCollection(garbage []string, travel []int) int {
 	}
 
 	// prefix sums for travel
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, len(travel)+1)
 	for i, t := range travel {
 		pref[i+1] = pref[i] + t

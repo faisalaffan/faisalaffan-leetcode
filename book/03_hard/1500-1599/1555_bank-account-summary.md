@@ -1,19 +1,30 @@
 # 1555 — Bank Account Summary
 
-## Deskripsi
-
-**Soal:** [1555. Bank Account Summary](https://leetcode.com/problems/bank-account-summary/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func accountSummary(users []User, transactions []Transaction) []resultRow1555
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func accountSummary(users []User, transactions []Transaction) []resultRow1555`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +70,7 @@ type resultRow1555 struct {
 
 // accountSummary computes each user's balance and salary classification.
 func accountSummary(users []User, transactions []Transaction) []resultRow1555 {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	balances := make(map[int]int) // userID -> net balance
 
 	// Initialize all users with 0
@@ -93,6 +104,7 @@ func accountSummary(users []User, transactions []Transaction) []resultRow1555 {
 	}
 
 	// Sort by name ascending
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].Name < results[j].Name
 	})

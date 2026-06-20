@@ -1,21 +1,32 @@
 # 2322 — Minimum Score After Removals On A Tree
 
-## Deskripsi
-
-**Soal:** [2322. Minimum Score After Removals On A Tree](https://leetcode.com/problems/minimum-score-after-removals-on-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumScore(nums []int, edges [][]int) int
+```
+
+> **💡 Hint:** //   1. Root the tree at 0.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumScore(nums []int, edges [][]int) int`
-
-> **Ide Kunci:** //   1. Root the tree at 0.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,7 +69,7 @@ import (
 
 func minimumScore(nums []int, edges [][]int) int {
 	n := len(nums)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -67,11 +78,11 @@ func minimumScore(nums []int, edges [][]int) int {
 	}
 
 	// Parent and subtree XOR via DFS.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	order := make([]int, 0, n) // DFS order
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	subXor := make([]int, n)
 
 	var dfs func(u, p int)
@@ -92,9 +103,9 @@ func minimumScore(nums []int, edges [][]int) int {
 
 	// Pre‑compute ancestors for O(1) descendant check.
 	// tin / tout using Euler tour.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tin := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tout := make([]int, n)
 	time := 0
 	var euler func(u int)

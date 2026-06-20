@@ -1,19 +1,30 @@
 # 2548 — Maximum Price To Fill A Bag
 
-## Deskripsi
-
-**Soal:** [2548. Maximum Price To Fill A Bag](https://leetcode.com/problems/maximum-price-to-fill-a-bag/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPrice(items [][]int, capacity int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxPrice(items [][]int, capacity int) float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,6 +42,7 @@ import (
 func maxPrice(items [][]int, capacity int) float64 {
 	// items[i] = [price, weight]
 	// Sort by price/weight ratio descending
+  // Custom sort dengan comparator
 	sort.Slice(items, func(i, j int) bool {
 		return float64(items[i][0])/float64(items[i][1]) > float64(items[j][0])/float64(items[j][1])
 	})

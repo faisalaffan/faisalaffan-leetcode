@@ -1,17 +1,30 @@
 # 1508 — Range Sum Of Sorted Subarray Sums
 
-## Deskripsi
-
-**Soal:** [1508. Range Sum Of Sorted Subarray Sums](https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func RangeSum(nums []int, n int, left int, right int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(N^2 log N), Space: O(N^2)  
 **Kompleksitas Ruang:** O(N^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +49,7 @@ func RangeSum(nums []int, n int, left int, right int) int {
 	const mod = 1_000_000_007
 
 	// Generate all subarray sums
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sums := make([]int, 0, n*(n+1)/2)
 	for i := 0; i < n; i++ {
 		sum := 0
@@ -47,6 +60,7 @@ func RangeSum(nums []int, n int, left int, right int) int {
 	}
 
 	// Sort
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sums)
 
 	// Sum from left-1 to right-1

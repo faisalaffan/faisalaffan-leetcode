@@ -1,19 +1,30 @@
 # 3143 — Maximum Points Inside The Square
 
-## Deskripsi
-
-**Soal:** [3143. Maximum Points Inside The Square](https://leetcode.com/problems/maximum-points-inside-the-square/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPointsInsideSquare(points [][]int, s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxPointsInsideSquare(points [][]int, s string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,18 +45,18 @@ func maxPointsInsideSquare(points [][]int, s string) int {
 		tag  byte
 	}
 	n := len(points)
-  // Membuat slice untuk menyimpan hasil
 	arr := make([]item, n)
 	for i, p := range points {
 		d := max(abs(p[0]), abs(p[1]))
 		arr[i] = item{d, s[i]}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(arr, func(i, j int) bool {
 		return arr[i].dist < arr[j].dist
 	})
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[byte]bool)
 	ans := 0
 	i := 0

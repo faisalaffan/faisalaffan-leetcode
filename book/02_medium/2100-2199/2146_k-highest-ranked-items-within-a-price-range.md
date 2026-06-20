@@ -1,19 +1,30 @@
 # 2146 — K Highest Ranked Items Within A Price Range
 
-## Deskripsi
-
-**Soal:** [2146. K Highest Ranked Items Within A Price Range](https://leetcode.com/problems/k-highest-ranked-items-within-a-price-range/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func highestRankedKItems(grid [][]int, pricing []int, start []int, k int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(m*n log(m*n))  
 **Kompleksitas Ruang:** O(m*n)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func highestRankedKItems(grid [][]int, pricing []int, start []int, k int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ func highestRankedKItems(grid [][]int, pricing []int, start []int, k int) [][]in
 	type Item struct {
 		dist, price, row, col int
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range visited {
 		visited[i] = make([]bool, n)
 	}
@@ -69,6 +80,7 @@ func highestRankedKItems(grid [][]int, pricing []int, start []int, k int) [][]in
 	}
 
 	// Sort by rank: distance, price, row, col
+  // Custom sort dengan comparator
 	sort.Slice(items, func(i, j int) bool {
 		if items[i].dist != items[j].dist {
 			return items[i].dist < items[j].dist
@@ -83,9 +95,9 @@ func highestRankedKItems(grid [][]int, pricing []int, start []int, k int) [][]in
 	})
 
 	// Take first k
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0, k)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(items) && i < k; i++ {
 		result = append(result, []int{items[i].row, items[i].col})
 	}

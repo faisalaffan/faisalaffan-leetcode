@@ -1,19 +1,30 @@
 # 1666 — Change The Root Of A Binary Tree
 
-## Deskripsi
-
-**Soal:** [1666. Change The Root Of A Binary Tree](https://leetcode.com/problems/change-the-root-of-a-binary-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func flipBinaryTree(root *Node, leaf *Node) *Node
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(1) where n = path length from leaf to root  
 **Kompleksitas Ruang:** O(1) where n = path length from leaf to root
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func flipBinaryTree(root *Node, leaf *Node) *Node`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

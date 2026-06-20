@@ -1,19 +1,30 @@
 # 1744 — Can You Eat Your Favorite Candy On Your Favorite Day
 
-## Deskripsi
-
-**Soal:** [1744. Can You Eat Your Favorite Candy On Your Favorite Day](https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canEat(candiesCount []int, queries [][]int) []bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + q), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canEat(candiesCount []int, queries [][]int) []bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,13 +38,12 @@ import "fmt"
 
 func canEat(candiesCount []int, queries [][]int) []bool {
 	n := len(candiesCount)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + candiesCount[i]
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]bool, len(queries))
 	for i, q := range queries {
 		favType, favDay, dailyCap := q[0], q[1], q[2]

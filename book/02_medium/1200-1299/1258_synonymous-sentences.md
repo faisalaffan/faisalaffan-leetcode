@@ -1,19 +1,30 @@
 # 1258 — Synonymous Sentences
 
-## Deskripsi
-
-**Soal:** [1258. Synonymous Sentences](https://leetcode.com/problems/synonymous-sentences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newUF() *uf
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking, Union-Find (DSU)
 
 **Kompleksitas Waktu:** O(2^k) where k = number of synonym groups per sentence  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newUF() *uf`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,7 +74,7 @@ func generateSentences(synonyms [][]string, text string) []string {
 	}
 
 	// Group words by root
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[string][]string)
 	for _, s := range synonyms {
 		for _, w := range s {
@@ -74,7 +85,7 @@ func generateSentences(synonyms [][]string, text string) []string {
 
 	// Sort and dedupe each group
 	for root := range groups {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		wordSet := make(map[string]bool)
 		for _, w := range groups[root] {
 			wordSet[w] = true
@@ -87,7 +98,7 @@ func generateSentences(synonyms [][]string, text string) []string {
 	}
 
 	// Map word -> group root
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	wordToRoot := make(map[string]string)
 	for root, words := range groups {
 		for _, w := range words {
@@ -96,7 +107,6 @@ func generateSentences(synonyms [][]string, text string) []string {
 	}
 
 	words := strings.Fields(text)
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 
 	var backtrack func(idx int, current []string)

@@ -1,17 +1,30 @@
 # 1200 — Minimum Absolute Difference
 
-## Deskripsi
-
-**Soal:** [1200. Minimum Absolute Difference](https://leetcode.com/problems/minimum-absolute-difference/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumAbsDifference(arr []int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,6 +46,7 @@ func main() {
 
 // LeetCode submission: minimumAbsDifference
 func minimumAbsDifference(arr []int) [][]int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(arr)
 	minDiff := 1 << 31
 	for i := 1; i < len(arr); i++ {

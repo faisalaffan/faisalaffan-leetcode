@@ -1,19 +1,30 @@
 # 3182 — Find Top Scoring Students
 
-## Deskripsi
-
-**Soal:** [3182. Find Top Scoring Students](https://leetcode.com/problems/find-top-scoring-students/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findTopScoringStudents(scores [][]int, threshold int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findTopScoringStudents(scores [][]int, threshold int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,6 +50,7 @@ func findTopScoringStudents(scores [][]int, threshold int) []int {
 		list = append(list, student{s[0], s[1]})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(list, func(i, j int) bool {
 		if list[i].total != list[j].total {
 			return list[i].total > list[j].total
@@ -46,7 +58,7 @@ func findTopScoringStudents(scores [][]int, threshold int) []int {
 		return list[i].id < list[j].id
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, 0)
 	for _, s := range list {
 		if s.total >= threshold {

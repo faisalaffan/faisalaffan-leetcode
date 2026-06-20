@@ -1,17 +1,30 @@
 # 0475 — Heaters
 
-## Deskripsi
-
-**Soal:** [0475. Heaters](https://leetcode.com/problems/heaters/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Heaters(houses []int, heaters []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(n log n + m log n) where n = len(heaters), m = len(houses)  
 **Kompleksitas Ruang:** O(log n) for sorting
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,6 +47,7 @@ func main() {
 }
 
 func Heaters(houses []int, heaters []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(heaters)
 	maxRadius := 0
 

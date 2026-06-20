@@ -1,19 +1,30 @@
 # 2561 — Rearranging Fruits
 
-## Deskripsi
-
-**Soal:** [2561. Rearranging Fruits](https://leetcode.com/problems/rearranging-fruits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minCost(basket1 []int, basket2 []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minCost(basket1 []int, basket2 []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +52,7 @@ import (
 //
 // Complexity: O(n log n) time, O(n) space
 func minCost(basket1 []int, basket2 []int) int64 {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	for _, v := range basket1 {
 		freq[v]++
@@ -75,11 +86,12 @@ func minCost(basket1 []int, basket2 []int) int64 {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(excess)
 
 	cost := int64(0)
 	// Pair smallest excess with largest excess
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(excess)/2; i++ {
 		a := excess[i]
 		b := excess[len(excess)-1-i]

@@ -1,17 +1,30 @@
 # 3251 — Find The Count Of Monotonic Pairs Ii
 
-## Deskripsi
-
-**Soal:** [3251. Find The Count Of Monotonic Pairs Ii](https://leetcode.com/problems/find-the-count-of-monotonic-pairs-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countOfPairsII(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O(n * maxVal), Space: O(maxVal)  
 **Kompleksitas Ruang:** O(maxVal)
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +62,7 @@ const MODII = 1_000_000_007
 
 func countOfPairsII(nums []int) int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
@@ -65,7 +78,7 @@ func countOfPairsII(nums []int) int {
 	}
 
 	// dp[j] = ways for current position where arr1[i] = j
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int64, maxVal+1)
 	for j := 0; j <= nums[0]; j++ {
 		dp[j] = 1
@@ -75,13 +88,13 @@ func countOfPairsII(nums []int) int {
 		a, b := nums[i-1], nums[i]
 
 		// prefix sums
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		prefix := make([]int64, maxVal+2)
 		for j := 0; j <= maxVal; j++ {
 			prefix[j+1] = (prefix[j] + dp[j]) % MODII
 		}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int64, maxVal+1)
 
 		// For each possible arr1[i] = j (0 <= j <= b):

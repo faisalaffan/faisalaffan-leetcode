@@ -1,19 +1,32 @@
 # 0472 — Concatenated Words
 
-## Deskripsi
-
-**Soal:** [0472. Concatenated Words](https://leetcode.com/problems/concatenated-words/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findAllConcatenatedWordsInADict(words []string) []string
+```
+
+> **💡 Hint:** DP word break. Sort words by length, for each word check if it
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP word break. Sort words by length, for each word check if it
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,11 +76,12 @@ func main() {
 
 func findAllConcatenatedWordsInADict(words []string) []string {
 	// Sort words by length
+  // Custom sort dengan comparator
 	sort.Slice(words, func(i, j int) bool {
 		return len(words[i]) < len(words[j])
 	})
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	wordSet := make(map[string]bool)
 	result := []string{}
 
@@ -91,7 +105,6 @@ func canForm(word string, wordSet map[string]bool) bool {
 	}
 
 	// dp[i] = can form word[0:i]
-  // Membuat slice untuk menyimpan hasil
 	dp := make([]bool, len(word)+1)
 	dp[0] = true
 

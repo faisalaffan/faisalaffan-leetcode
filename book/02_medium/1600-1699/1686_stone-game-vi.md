@@ -1,19 +1,30 @@
 # 1686 — Stone Game Vi
 
-## Deskripsi
-
-**Soal:** [1686. Stone Game Vi](https://leetcode.com/problems/stone-game-vi/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func stoneGameVI(aliceValues []int, bobValues []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func stoneGameVI(aliceValues []int, bobValues []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,13 +41,14 @@ import (
 
 func stoneGameVI(aliceValues []int, bobValues []int) int {
 	n := len(aliceValues)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pairs := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		pairs[i] = [2]int{aliceValues[i] + bobValues[i], i}
 	}
 
 	// Sort by sum descending
+  // Custom sort dengan comparator
 	sort.Slice(pairs, func(i, j int) bool {
 		return pairs[i][0] > pairs[j][0]
 	})

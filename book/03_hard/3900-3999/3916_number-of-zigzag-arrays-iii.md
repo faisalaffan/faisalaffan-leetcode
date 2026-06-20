@@ -1,19 +1,32 @@
 # 3916 — Number Of Zigzag Arrays Iii
 
-## Deskripsi
-
-**Soal:** [3916. Number Of Zigzag Arrays Iii](https://leetcode.com/problems/number-of-zigzag-arrays-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfZigzagArrays(n int, l int, r int) int
+```
+
+> **💡 Hint:** DP tracking last two values to enforce zigzag property.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP tracking last two values to enforce zigzag property.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,19 +69,19 @@ func numberOfZigzagArrays(n int, l int, r int) int {
 	m := r - l + 1
 	// DP based on last value
 	// For position i, track dp[val] = count ending with val
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, m+2)
 	for v := 1; v <= m; v++ {
 		dp[v] = 1
 	}
 
 	for pos := 2; pos <= n; pos++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		prefix := make([]int, m+2)
 		for v := 1; v <= m; v++ {
 			prefix[v] = (prefix[v-1] + dp[v]) % ZMOD
 		}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, m+2)
 
 		if pos == 2 {

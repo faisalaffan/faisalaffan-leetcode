@@ -1,19 +1,32 @@
 # 1029 — Two City Scheduling
 
-## Deskripsi
-
-**Soal:** [1029. Two City Scheduling](https://leetcode.com/problems/two-city-scheduling/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func twoCitySchedCost(costs [][]int) int
+```
+
+> **💡 Hint:** Sort by difference (costA - costB), send first half to A, rest to B
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Sort by difference (costA - costB), send first half to A, rest to B
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,6 +50,7 @@ func main() {
 }
 
 func twoCitySchedCost(costs [][]int) int {
+  // Custom sort dengan comparator
 	sort.Slice(costs, func(i, j int) bool {
 		return (costs[i][0] - costs[i][1]) < (costs[j][0] - costs[j][1])
 	})

@@ -1,19 +1,30 @@
 # 1510 — Stone Game Iv
 
-## Deskripsi
-
-**Soal:** [1510. Stone Game Iv](https://leetcode.com/problems/stone-game-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func winnerSquareGame(n int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func winnerSquareGame(n int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,6 @@ import (
 // winnerSquareGame returns true if Alice can win the stone game.
 func winnerSquareGame(n int) bool {
 	// dp[i] = true if the current player can win with i stones remaining
-  // Membuat slice untuk menyimpan hasil
 	dp := make([]bool, n+1)
 
 	for i := 1; i <= n; i++ {

@@ -1,21 +1,32 @@
 # 2382 — Maximum Segment Sum After Removals
 
-## Deskripsi
-
-**Soal:** [2382. Maximum Segment Sum After Removals](https://leetcode.com/problems/maximum-segment-sum-after-removals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumSegmentSum(nums []int, removeQueries []int) []int64
+```
+
+> **💡 Hint:** Process removals in reverse. Start with all elements removed and
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumSegmentSum(nums []int, removeQueries []int) []int64`
-
-> **Ide Kunci:** Process removals in reverse. Start with all elements removed and
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,11 +49,10 @@ import "fmt"
 func maximumSegmentSum(nums []int, removeQueries []int) []int64 {
 	n := len(nums)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	segSum := make([]int64, n)
-  // Membuat slice untuk menyimpan hasil
 	active := make([]bool, n)
 
 	for i := 0; i < n; i++ {
@@ -57,7 +67,7 @@ func maximumSegmentSum(nums []int, removeQueries []int) []int64 {
 		return parent[x]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, n)
 	var maxSum int64
 

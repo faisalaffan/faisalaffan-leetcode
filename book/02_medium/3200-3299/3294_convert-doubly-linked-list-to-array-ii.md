@@ -1,17 +1,30 @@
 # 3294 — Convert Doubly Linked List To Array Ii
 
-## Deskripsi
-
-**Soal:** [3294. Convert Doubly Linked List To Array Ii](https://leetcode.com/problems/convert-doubly-linked-list-to-array-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func toArray(node *DListNode) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n) Space: O(n) for output  
 **Kompleksitas Ruang:** O(n) for output
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -25,7 +38,6 @@ import "fmt"
 
 func main() {
 	// Build list: 1 <-> 2 <-> 3 <-> 4 <-> 5
-  // Membuat slice untuk menyimpan hasil
 	nodes := make([]*DListNode, 5)
 	for i := 0; i < 5; i++ {
 		nodes[i] = &DListNode{Val: i + 1}

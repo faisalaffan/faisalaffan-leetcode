@@ -1,21 +1,32 @@
 # 3848 — Check Digitorial Permutation
 
-## Deskripsi
-
-**Soal:** [3848. Check Digitorial Permutation](https://leetcode.com/problems/check-digitorial-permutation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CheckDigitorialPermutation(n int) bool
+```
+
+> **💡 Hint:** Compute sum of factorials of digits, check if any permutation
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(log N)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func CheckDigitorialPermutation(n int) bool`
-
-> **Ide Kunci:** Compute sum of factorials of digits, check if any permutation
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,9 +54,9 @@ func CheckDigitorialPermutation(n int) bool {
 
 	// Check if sum has same digits as n
 	// If they have the same digits, one is a permutation of the other
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digitsN := make([]int, 10)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digitsSum := make([]int, 10)
 
 	temp = n

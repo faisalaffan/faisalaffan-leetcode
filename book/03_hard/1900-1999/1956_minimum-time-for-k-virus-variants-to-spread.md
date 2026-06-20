@@ -1,17 +1,30 @@
 # 1956 — Minimum Time For K Virus Variants To Spread
 
-## Deskripsi
-
-**Soal:** [1956. Minimum Time For K Virus Variants To Spread](https://leetcode.com/problems/minimum-time-for-k-virus-variants-to-spread/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minTimeForKVirusVariantsToSpread(points [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -111,7 +124,7 @@ func canMeet(points [][]int, k, T int) bool {
 	}
 
 	var events []event
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	vSet := make(map[int]bool)
 
 	for _, p := range points {
@@ -129,22 +142,24 @@ func canMeet(points [][]int, k, T int) bool {
 	for v := range vSet {
 		vVals = append(vVals, v)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(vVals)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	vComp := make(map[int]int)
 	for i, v := range vVals {
 		vComp[v] = i
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(events, func(i, j int) bool {
 		return events[i].u < events[j].u
 	})
 
 	// Difference array over compressed v
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	diff := make([]int, len(vVals)+1)
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(events); {
 		curU := events[i].u
 		// Apply all events at this u

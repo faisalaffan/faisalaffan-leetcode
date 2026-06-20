@@ -1,21 +1,32 @@
 # 2876 — Count Visited Nodes In A Directed Graph
 
-## Deskripsi
-
-**Soal:** [2876. Count Visited Nodes In A Directed Graph](https://leetcode.com/problems/count-visited-nodes-in-a-directed-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countVisitedNodesInADirectedGraph(edges []int) []int
+```
+
+> **💡 Hint:** Use DFS with three states (0=unvisited, 1=in current path, 2=processed).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countVisitedNodesInADirectedGraph(edges []int) []int`
-
-> **Ide Kunci:** Use DFS with three states (0=unvisited, 1=in current path, 2=processed).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ import "fmt"
 
 func countVisitedNodesInADirectedGraph(edges []int) []int {
 	n := len(edges)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	res := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	state := make([]int, n) // 0=unvisited, 1=visiting, 2=done
 
 	var dfs func(u int)

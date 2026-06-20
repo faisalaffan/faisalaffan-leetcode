@@ -1,19 +1,30 @@
 # 3672 — Sum Of Weighted Modes In Subarrays
 
-## Deskripsi
-
-**Soal:** [3672. Sum Of Weighted Modes In Subarrays](https://leetcode.com/problems/sum-of-weighted-modes-in-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sumOfWeightedModesInSubarrays(nums []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log k)  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func sumOfWeightedModesInSubarrays(nums []int, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,13 +66,14 @@ func (h *maxHeap) Pop() interface{} {
 
 func sumOfWeightedModesInSubarrays(nums []int, k int) int64 {
 	n := len(nums)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cnt := make(map[int]int)
 	pq := &maxHeap{}
 	heap.Init(pq)
 
 	add := func(val int, idx int) {
 		cnt[val]++
+  // Masukkan elemen ke priority queue
 		heap.Push(pq, pair{freq: cnt[val], val: val, idx: idx})
 	}
 
@@ -75,6 +87,7 @@ func sumOfWeightedModesInSubarrays(nums []int, k int) int64 {
 			if cnt[p.val] == p.freq {
 				return p.val, p.freq
 			}
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(pq)
 		}
 		return 0, 0

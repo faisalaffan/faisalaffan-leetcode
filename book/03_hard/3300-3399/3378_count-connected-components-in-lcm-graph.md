@@ -1,19 +1,32 @@
 # 3378 — Count Connected Components In Lcm Graph
 
-## Deskripsi
-
-**Soal:** [3378. Count Connected Components In Lcm Graph](https://leetcode.com/problems/count-connected-components-in-lcm-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewDSU(n int) *DSU
+```
+
+> **💡 Hint:** Union-Find with multiples. For each num <= threshold, connect
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Union-Find with multiples. For each num <= threshold, connect
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,11 +63,11 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	r := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range p {
 		p[i] = i
 	}
@@ -84,13 +97,12 @@ func (d *DSU) Union(x, y int) {
 }
 
 func countComponents(nums []int, threshold int) int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return 0
 	}
 
 	dsu := NewDSU(threshold + 1)
-  // Membuat slice untuk menyimpan hasil
 	seen := make([]bool, threshold+1)
 	isolated := 0
 
@@ -107,7 +119,7 @@ func countComponents(nums []int, threshold int) int {
 	}
 
 	// Count unique roots among numbers <= threshold
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	roots := make(map[int]bool)
 	for _, num := range nums {
 		if num <= threshold {

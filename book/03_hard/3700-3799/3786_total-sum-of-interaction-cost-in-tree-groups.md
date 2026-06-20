@@ -1,19 +1,32 @@
 # 3786 — Total Sum Of Interaction Cost In Tree Groups
 
-## Deskripsi
-
-**Soal:** [3786. Total Sum Of Interaction Cost In Tree Groups](https://leetcode.com/problems/total-sum-of-interaction-cost-in-tree-groups/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func totalInteraction(n int, edges [][]int, group []int) int64
+```
+
+> **💡 Hint:** For each edge, count same-group pairs where one node
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each edge, count same-group pairs where one node
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func main() {
 
 func totalInteraction(n int, edges [][]int, group []int) int64 {
 	// Build adjacency
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -52,7 +65,7 @@ func totalInteraction(n int, edges [][]int, group []int) int64 {
 	}
 
 	// Total count of each group across entire tree
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	totalGroup := make(map[int]int)
 	for _, g := range group {
 		totalGroup[g]++
@@ -63,7 +76,7 @@ func totalInteraction(n int, edges [][]int, group []int) int64 {
 	// DFS: for each edge, count subtree nodes in each group
 	var dfs func(u, parent int) map[int]int
 	dfs = func(u, parent int) map[int]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		cnt := make(map[int]int)
 		cnt[group[u]] = 1
 

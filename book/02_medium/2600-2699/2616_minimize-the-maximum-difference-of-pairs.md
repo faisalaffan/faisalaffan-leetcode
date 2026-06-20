@@ -1,19 +1,30 @@
 # 2616 — Minimize The Maximum Difference Of Pairs
 
-## Deskripsi
-
-**Soal:** [2616. Minimize The Maximum Difference Of Pairs](https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimizeMax(nums []int, p int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n log n + n log maxDiff)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimizeMax(nums []int, p int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,6 +43,7 @@ func minimizeMax(nums []int, p int) int {
 	if p == 0 {
 		return 0
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	n := len(nums)
 
@@ -53,7 +65,7 @@ func minimizeMax(nums []int, p int) int {
 	}
 
 	left, right := 0, nums[n-1]-nums[0]
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := left + (right-left)/2
 		if canForm(mid) {

@@ -1,17 +1,30 @@
 # 1348 — Tweet Counts Per Frequency
 
-## Deskripsi
-
-**Soal:** [1348. Tweet Counts Per Frequency](https://leetcode.com/problems/tweet-counts-per-frequency/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() TweetCounts
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n + q) where n = tweets count, q = query interval count  
 **Kompleksitas Ruang:** O(n) for storing tweets
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -69,10 +82,11 @@ func (this *TweetCounts) GetTweetCountsPerFrequency(freq string, tweetName strin
 	}
 
 	times := this.tweets[tweetName]
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(times)
 
 	size := (endTime-startTime)/f + 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, size)
 
 	for _, t := range times {

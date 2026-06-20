@@ -1,19 +1,30 @@
 # 2359 — Find Closest Node To Given Two Nodes
 
-## Deskripsi
-
-**Soal:** [2359. Find Closest Node To Given Two Nodes](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func closestMeetingNode(edges []int, node1 int, node2 int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func closestMeetingNode(edges []int, node1 int, node2 int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,9 +38,9 @@ import "fmt"
 
 func closestMeetingNode(edges []int, node1 int, node2 int) int {
 	n := len(edges)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist1 := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist2 := make([]int, n)
 	for i := 0; i < n; i++ {
 		dist1[i] = -1

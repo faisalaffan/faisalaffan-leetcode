@@ -1,19 +1,30 @@
 # 0745 — Prefix And Suffix Search
 
-## Deskripsi
-
-**Soal:** [0745. Prefix And Suffix Search](https://leetcode.com/problems/prefix-and-suffix-search/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ConstructorWordFilter(words []string) WordFilter
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func ConstructorWordFilter(words []string) WordFilter`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

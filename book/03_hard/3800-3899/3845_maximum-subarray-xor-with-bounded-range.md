@@ -1,19 +1,32 @@
 # 3845 — Maximum Subarray Xor With Bounded Range
 
-## Deskripsi
-
-**Soal:** [3845. Maximum Subarray Xor With Bounded Range](https://leetcode.com/problems/maximum-subarray-xor-with-bounded-range/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newXorTrie() *xorTrie
+```
+
+> **💡 Hint:** Prefix XOR with sliding window + binary trie. Maintain
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Prefix XOR with sliding window + binary trie. Maintain
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -105,7 +118,7 @@ func maxXor(nums []int, limit int) int {
 	prefix := 0
 	best := 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		prefix ^= nums[i]
 		if i < limit {

@@ -1,17 +1,30 @@
 # 3426 — Manhattan Distances Of All Arrangements Of Pieces
 
-## Deskripsi
-
-**Soal:** [3426. Manhattan Distances Of All Arrangements Of Pieces](https://leetcode.com/problems/manhattan-distances-of-all-arrangements-of-pieces/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func powMod3426(a int64, b int64) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,13 +60,13 @@ func ManhattanDistancesOfAllArrangementsOfPieces(m, n, k int) int {
 	total := int64(m) * int64(n)
 
 	// Precompute factorials up to total
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	fact := make([]int64, total+1)
 	fact[0] = 1
 	for i := int64(1); i <= total; i++ {
 		fact[i] = fact[i-1] * i % MOD3426
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	invFact := make([]int64, total+1)
 	invFact[total] = powMod3426(fact[total], MOD3426-2)
 	for i := total - 1; i >= 0; i-- {

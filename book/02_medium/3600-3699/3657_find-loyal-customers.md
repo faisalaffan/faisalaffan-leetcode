@@ -1,19 +1,30 @@
 # 3657 — Find Loyal Customers
 
-## Deskripsi
-
-**Soal:** [3657. Find Loyal Customers](https://leetcode.com/problems/find-loyal-customers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findLoyalCustomers(purchases [][]int, minPurchases int, minAmount float64) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findLoyalCustomers(purchases [][]int, minPurchases int, minAmount float64) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,9 +40,9 @@ import (
 )
 
 func findLoyalCustomers(purchases [][]int, minPurchases int, minAmount float64) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	customerTotals := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	customerCounts := make(map[int]int)
 
 	for _, p := range purchases {
@@ -47,6 +58,7 @@ func findLoyalCustomers(purchases [][]int, minPurchases int, minAmount float64) 
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(loyal)
 	return loyal
 }

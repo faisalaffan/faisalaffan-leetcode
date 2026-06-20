@@ -1,19 +1,32 @@
 # 3915 — Maximum Sum Of Alternating Subsequence With Distance At Least K
 
-## Deskripsi
-
-**Soal:** [3915. Maximum Sum Of Alternating Subsequence With Distance At Least K](https://leetcode.com/problems/maximum-sum-of-alternating-subsequence-with-distance-at-least-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxAlternatingSum(nums []int, k int) int64
+```
+
+> **💡 Hint:** DP. For each position i, track max alternating sum
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP. For each position i, track max alternating sum
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,9 +58,9 @@ func maxAlternatingSum(nums []int, k int) int64 {
 	n := len(nums)
 	// dpEven[i] = max alternating sum ending at i with even length (positive)
 	// dpOdd[i] = max alternating sum ending at i with odd length (negative end)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dpEven := make([]int64, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dpOdd := make([]int64, n)
 
 	for i := 0; i < n; i++ {

@@ -1,19 +1,32 @@
 # 1808 — Maximize Number Of Nice Divisors
 
-## Deskripsi
-
-**Soal:** [1808. Maximize Number Of Nice Divisors](https://leetcode.com/problems/maximize-number-of-nice-divisors/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxNiceDivisors(primeFactors int) int
+```
+
+> **💡 Hint:** Split primeFactors into groups of 3's for maximum product.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Split primeFactors into groups of 3's for maximum product.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

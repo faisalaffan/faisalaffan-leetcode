@@ -1,21 +1,32 @@
 # 3057 — Employees Project Allocation
 
-## Deskripsi
-
-**Soal:** [3057. Employees Project Allocation](https://leetcode.com/problems/employees-project-allocation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func employeesProjectAllocation(projects []Project, employees []Employee) []allocResult
+```
+
+> **💡 Hint:** Find employees whose workload exceeds the average workload of their team.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func employeesProjectAllocation(projects []Project, employees []Employee) []allocResult`
-
-> **Ide Kunci:** Find employees whose workload exceeds the average workload of their team.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +63,7 @@ type allocResult struct {
 }
 
 func employeesProjectAllocation(projects []Project, employees []Employee) []allocResult {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	empMap := make(map[int]Employee)
 	for _, e := range employees {
 		empMap[e.EmployeeID] = e
@@ -61,7 +72,7 @@ func employeesProjectAllocation(projects []Project, employees []Employee) []allo
 		total int
 		count int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	teamStats := make(map[string]*teamSum)
 	for _, p := range projects {
 		emp, ok := empMap[p.EmployeeID]
@@ -86,6 +97,7 @@ func employeesProjectAllocation(projects []Project, employees []Employee) []allo
 			result = append(result, allocResult{p.EmployeeID, p.ProjectID, emp.Name, p.Workload})
 		}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].EmployeeID != result[j].EmployeeID {
 			return result[i].EmployeeID < result[j].EmployeeID

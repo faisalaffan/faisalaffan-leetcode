@@ -1,19 +1,32 @@
 # 1489 — Find Critical And Pseudo Critical Edges In Minimum Spanning Tree
 
-## Deskripsi
-
-**Soal:** [1489. Find Critical And Pseudo Critical Edges In Minimum Spanning Tree](https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newDSU(n int) *dSU
+```
+
+> **💡 Hint:** Kruskal per Edge
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Kruskal per Edge
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,9 +76,9 @@ type dSU struct {
 }
 
 func newDSU(n int) *dSU {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -97,11 +110,11 @@ func (d *dSU) union(x, y int) bool {
 
 func findCriticalAndPseudoCriticalEdges(n int, edges [][]int) [][]int {
 	m := len(edges)
-  // Membuat slice untuk menyimpan hasil
 	elist := make([]edge, m)
 	for i, e := range edges {
 		elist[i] = edge{u: e[0], v: e[1], w: e[2], idx: i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(elist, func(i, j int) bool {
 		return elist[i].w < elist[j].w
 	})
@@ -142,9 +155,9 @@ func findCriticalAndPseudoCriticalEdges(n int, edges [][]int) [][]int {
 
 	baseWeight := mstWeight(nil, -1)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	critical := make([]int, 0)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pseudo := make([]int, 0)
 
 	for _, e := range elist {

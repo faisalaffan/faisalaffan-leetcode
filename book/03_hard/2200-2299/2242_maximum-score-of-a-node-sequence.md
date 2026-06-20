@@ -1,19 +1,30 @@
 # 2242 — Maximum Score Of A Node Sequence
 
-## Deskripsi
-
-**Soal:** [2242. Maximum Score Of A Node Sequence](https://leetcode.com/problems/maximum-score-of-a-node-sequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumScore(scores []int, edges [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximumScore(scores []int, edges [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ func maximumScore(scores []int, edges [][]int) int {
 	n := len(scores)
 
 	// adjacency list of neighbors sorted by score descending (keep up to 3 best)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -45,10 +56,11 @@ func maximumScore(scores []int, edges [][]int) int {
 	}
 
 	// For each node, keep its top 3 neighbors by score (to limit search space)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	top3 := make([][]int, n)
 	for i := 0; i < n; i++ {
 		neighbors := adj[i]
+  // Custom sort dengan comparator
 		sort.Slice(neighbors, func(a, b int) bool {
 			return scores[neighbors[a]] > scores[neighbors[b]]
 		})

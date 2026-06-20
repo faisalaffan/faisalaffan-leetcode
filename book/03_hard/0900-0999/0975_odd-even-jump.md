@@ -1,19 +1,30 @@
 # 0975 — Odd Even Jump
 
-## Deskripsi
-
-**Soal:** [0975. Odd Even Jump](https://leetcode.com/problems/odd-even-jump/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func oddEvenJumps(A []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Dynamic Programming (DP), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func oddEvenJumps(A []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,16 +40,14 @@ import (
 
 func oddEvenJumps(A []int) int {
 	n := len(A)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// odd[i] = can reach end from i with odd-numbered jump
 	// even[i] = can reach end from i with even-numbered jump
-  // Membuat slice untuk menyimpan hasil
 	odd := make([]bool, n)
-  // Membuat slice untuk menyimpan hasil
 	even := make([]bool, n)
 	odd[n-1] = true
 	even[n-1] = true
@@ -49,11 +58,11 @@ func oddEvenJumps(A []int) int {
 		val int
 		idx int
 	}
-  // Membuat slice untuk menyimpan hasil
 	pairs := make([]pair, n)
 	for i, v := range A {
 		pairs[i] = pair{v, i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(pairs, func(i, j int) bool {
 		if pairs[i].val != pairs[j].val {
 			return pairs[i].val < pairs[j].val
@@ -63,11 +72,11 @@ func oddEvenJumps(A []int) int {
 
 	// For each index, find the next odd jump (smallest value >= current)
 	// and next even jump (largest value <= current)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nextOdd := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nextEven := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range nextOdd {
 		nextOdd[i] = -1
 		nextEven[i] = -1

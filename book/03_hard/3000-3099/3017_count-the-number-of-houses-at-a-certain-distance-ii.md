@@ -1,21 +1,32 @@
 # 3017 — Count The Number Of Houses At A Certain Distance Ii
 
-## Deskripsi
-
-**Soal:** [3017. Count The Number Of Houses At A Certain Distance Ii](https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countOfPairs(n int, x int, y int) []int64
+```
+
+> **💡 Hint:** Sweep using difference array
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countOfPairs(n int, x int, y int) []int64`
-
-> **Ide Kunci:** Sweep using difference array
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,7 @@ func countOfPairs(n int, x int, y int) []int64 {
 	if x > y {
 		x, y = y, x
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	diff := make([]int64, n+1)
 
 	add := func(l, r int, val int64) {
@@ -87,7 +98,7 @@ func countOfPairs(n int, x int, y int) []int64 {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, n)
 	cur := int64(0)
 	for i := 1; i <= n; i++ {

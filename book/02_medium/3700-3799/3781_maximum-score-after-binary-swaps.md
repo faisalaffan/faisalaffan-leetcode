@@ -1,19 +1,30 @@
 # 3781 — Maximum Score After Binary Swaps
 
-## Deskripsi
-
-**Soal:** [3781. Maximum Score After Binary Swaps](https://leetcode.com/problems/maximum-score-after-binary-swaps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumScoreAfterBinarySwaps(nums []int, s string) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumScoreAfterBinarySwaps(nums []int, s string) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,8 +59,10 @@ func maximumScoreAfterBinarySwaps(nums []int, s string) int64 {
 	var ans int64
 
 	for i, ch := range s {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, nums[i])
 		if ch == '1' {
+  // Ambil elemen terkecil/terbesar dari heap
 			ans += int64(heap.Pop(h).(int))
 		}
 	}

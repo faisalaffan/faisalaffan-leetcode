@@ -1,21 +1,32 @@
 # 0839 — Similar String Groups
 
-## Deskripsi
-
-**Soal:** [0839. Similar String Groups](https://leetcode.com/problems/similar-string-groups/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numSimilarGroups(strs []string) int
+```
+
+> **💡 Hint:** Union-Find. Two strings are similar if they differ by exactly 0 or 2 characters
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numSimilarGroups(strs []string) int`
-
-> **Ide Kunci:** Union-Find. Two strings are similar if they differ by exactly 0 or 2 characters
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,9 +41,9 @@ import "fmt"
 
 func numSimilarGroups(strs []string) int {
 	n := len(strs)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 	}
@@ -54,7 +65,7 @@ func numSimilarGroups(strs []string) int {
 
 	isSimilar := func(a, b string) bool {
 		diff := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(a); i++ {
 			if a[i] != b[i] {
 				diff++
@@ -74,7 +85,7 @@ func numSimilarGroups(strs []string) int {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[int]bool)
 	for i := 0; i < n; i++ {
 		groups[find(i)] = true

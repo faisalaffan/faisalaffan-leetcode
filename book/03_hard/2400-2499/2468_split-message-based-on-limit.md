@@ -1,21 +1,32 @@
 # 2468 — Split Message Based On Limit
 
-## Deskripsi
-
-**Soal:** [2468. Split Message Based On Limit](https://leetcode.com/problems/split-message-based-on-limit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func splitMessage(message string, limit int) []string
+```
+
+> **💡 Hint:** Binary search on the number of parts. For a given part count p,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func splitMessage(message string, limit int) []string`
-
-> **Ide Kunci:** Binary search on the number of parts. For a given part count p,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -75,7 +86,6 @@ func splitMessage(message string, limit int) []string {
 		}
 
 		// Construct the result
-  // Membuat slice untuk menyimpan hasil
 		result := make([]string, parts)
 		msgIdx = 0
 		for i := 1; i <= parts; i++ {

@@ -1,17 +1,30 @@
 # 1583 — Count Unhappy Friends
 
-## Deskripsi
-
-**Soal:** [1583. Count Unhappy Friends](https://leetcode.com/problems/count-unhappy-friends/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func UnhappyFriends(n int, preferences [][]int, pairs [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(N^2), Space: O(N^2)  
 **Kompleksitas Ruang:** O(N^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,7 @@ func main() {
 func UnhappyFriends(n int, preferences [][]int, pairs [][]int) int {
 	// Time: O(N^2), Space: O(N^2)
 	// Build preference rank matrix: rank[i][j] = how much i prefers j
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rank := make([][]int, n)
 	for i := 0; i < n; i++ {
 		rank[i] = make([]int, n)
@@ -41,7 +54,7 @@ func UnhappyFriends(n int, preferences [][]int, pairs [][]int) int {
 	}
 
 	// Map partner
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	partner := make(map[int]int)
 	for _, p := range pairs {
 		partner[p[0]] = p[1]

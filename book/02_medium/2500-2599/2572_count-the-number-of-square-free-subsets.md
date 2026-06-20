@@ -1,19 +1,30 @@
 # 2572 — Count The Number Of Square Free Subsets
 
-## Deskripsi
-
-**Soal:** [2572. Count The Number Of Square Free Subsets](https://leetcode.com/problems/count-the-number-of-square-free-subsets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func squareFreeSubsets(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** O(n * 2^p)  
 **Kompleksitas Ruang:** O(2^p)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func squareFreeSubsets(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ func squareFreeSubsets(nums []int) int {
 	p := len(primes)
 
 	// Map each number to its prime mask
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	primeMask := make([]int, 31)
 	for i := 1; i <= 30; i++ {
 		mask := 0
@@ -56,14 +67,14 @@ func squareFreeSubsets(nums []int) int {
 	}
 
 	// Count frequency of each number
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, 31)
 	for _, v := range nums {
 		freq[v]++
 	}
 
 	// DP: dp[mask] = number of ways to get this mask
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, 1<<p)
 	dp[0] = 1
 
@@ -86,7 +97,7 @@ func squareFreeSubsets(nums []int) int {
 		ways := (pow - 1 + mod) % mod
 
 		// Update DP (knapsack style)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		newDP := make([]int, 1<<p)
 		copy(newDP, dp)
 		for m := 0; m < (1 << p); m++ {

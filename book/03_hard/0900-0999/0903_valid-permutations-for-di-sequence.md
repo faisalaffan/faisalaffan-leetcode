@@ -1,19 +1,30 @@
 # 0903 — Valid Permutations For Di Sequence
 
-## Deskripsi
-
-**Soal:** [0903. Valid Permutations For Di Sequence](https://leetcode.com/problems/valid-permutations-for-di-sequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numPermsDISequence(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numPermsDISequence(s string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,9 +40,9 @@ import "fmt"
 func numPermsDISequence(s string) int {
 	n := len(s)
 	mod := int(1e9 + 7)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n+1)
 	}
@@ -40,7 +51,7 @@ func numPermsDISequence(s string) int {
 
 	for i := 1; i <= n; i++ {
 		// compute prefix sum of dp[i-1]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		prefix := make([]int, n+1)
 		prefix[0] = dp[i-1][0]
 		for k := 1; k <= n; k++ {

@@ -1,19 +1,32 @@
 # 0001 — Two Sum
 
-## Deskripsi
-
-**Soal:** [0001. Two Sum](https://leetcode.com/problems/two-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func twoSumHashMap(nums []int, target int) []int
+```
+
+> **💡 Hint:** Go runtime baseline ~2-3MB. Gak mungkin di bawah 2MB.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Go runtime baseline ~2-3MB. Gak mungkin di bawah 2MB.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +53,7 @@ func main() {
 
 // --- v1 HashMap: O(n) time, O(n) space ---
 func twoSumHashMap(nums []int, target int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]int, len(nums))
 	for i, n := range nums {
 		if j, ok := seen[target-n]; ok {
@@ -53,7 +66,7 @@ func twoSumHashMap(nums []int, target int) []int {
 
 // --- v2 Brute Force: O(n²) time, O(1) space ---
 func twoSumBruteForce(nums []int, target int) []int {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		for j := i + 1; j < len(nums); j++ {
 			if nums[i]+nums[j] == target {

@@ -1,19 +1,30 @@
 # 2994 — Friday Purchases Ii
 
-## Deskripsi
-
-**Soal:** [2994. Friday Purchases Ii](https://leetcode.com/problems/friday-purchases-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func fridayPurchasesII(purchases []Purchase) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func fridayPurchasesII(purchases []Purchase) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,9 +66,8 @@ func fridayPurchasesII(purchases []Purchase) []string {
 		total float64
 		users map[int]bool
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	weekly := make(map[string]*weeklyData)
-  // Membuat slice untuk menyimpan hasil
 	weekOrder := make([]string, 0)
 
 	for _, p := range fridayPurchases {

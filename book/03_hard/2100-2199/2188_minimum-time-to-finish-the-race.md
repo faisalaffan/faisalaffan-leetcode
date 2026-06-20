@@ -1,17 +1,30 @@
 # 2188 — Minimum Time To Finish The Race
 
-## Deskripsi
-
-**Soal:** [2188. Minimum Time To Finish The Race](https://leetcode.com/problems/minimum-time-to-finish-the-race/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +47,9 @@ func main() {
 func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {
 	const INF = 1 << 60
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	best := make([]int, numLaps+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range best {
 		best[i] = INF
 	}
@@ -60,9 +73,9 @@ func minimumFinishTime(tires [][]int, changeTime int, numLaps int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, numLaps+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = INF
 	}

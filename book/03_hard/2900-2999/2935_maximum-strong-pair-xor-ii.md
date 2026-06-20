@@ -1,19 +1,30 @@
 # 2935 — Maximum Strong Pair Xor Ii
 
-## Deskripsi
-
-**Soal:** [2935. Maximum Strong Pair Xor Ii](https://leetcode.com/problems/maximum-strong-pair-xor-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newBinaryTrie() *binaryTrie
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Trie
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newBinaryTrie() *binaryTrie`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -88,6 +99,7 @@ func (t *binaryTrie) maxXor(x int) int {
 }
 
 func maximumStrongPairXor(nums []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	trie := newBinaryTrie()
 	left := 0

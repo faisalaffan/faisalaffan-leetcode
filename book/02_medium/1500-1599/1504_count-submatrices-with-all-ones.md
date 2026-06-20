@@ -1,17 +1,30 @@
 # 1504 — Count Submatrices With All Ones
 
-## Deskripsi
-
-**Soal:** [1504. Count Submatrices With All Ones](https://leetcode.com/problems/count-submatrices-with-all-ones/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NumSubmat(mat [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O(R*C), Space: O(C)  
 **Kompleksitas Ruang:** O(C)
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +51,7 @@ func NumSubmat(mat [][]int) int {
 		return 0
 	}
 	rows, cols := len(mat), len(mat[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	height := make([]int, cols)
 	total := 0
 
@@ -53,9 +66,9 @@ func NumSubmat(mat [][]int) int {
 		}
 
 		// Count submatrices ending at row r using monotonic stack
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		stack := make([]int, 0)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		sum := make([]int, cols)
 
 		for c := 0; c < cols; c++ {

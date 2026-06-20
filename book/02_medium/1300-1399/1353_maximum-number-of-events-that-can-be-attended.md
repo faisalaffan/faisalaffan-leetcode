@@ -1,17 +1,30 @@
 # 1353 — Maximum Number Of Events That Can Be Attended
 
-## Deskripsi
-
-**Soal:** [1353. Maximum Number Of Events That Can Be Attended](https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxEvents(events [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n) for sorting and heap operations  
 **Kompleksitas Ruang:** O(n) for heap
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,6 +73,7 @@ func maxEvents(events [][]int) int {
 	}
 
 	// Sort by start day
+  // Custom sort dengan comparator
 	sort.Slice(events, func(i, j int) bool {
 		return events[i][0] < events[j][0]
 	})
@@ -75,17 +89,20 @@ func maxEvents(events [][]int) int {
 	for i < n || h.Len() > 0 {
 		// Add all events starting today
 		for i < n && events[i][0] == day {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, events[i][1])
 			i++
 		}
 
 		// Remove expired events (end day < today)
 		for h.Len() > 0 && (*h)[0] < day {
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(h)
 		}
 
 		// Attend one event today (earliest ending)
 		if h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(h)
 			count++
 			day++

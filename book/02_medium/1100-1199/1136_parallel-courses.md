@@ -1,19 +1,30 @@
 # 1136 — Parallel Courses
 
-## Deskripsi
-
-**Soal:** [1136. Parallel Courses](https://leetcode.com/problems/parallel-courses/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumSemesters(n int, relations [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Topological Sort
 
 **Kompleksitas Waktu:** O(n + len(relations))  
 **Kompleksitas Ruang:** O(n + len(relations))
 
-**Algoritma:** Queue (antrian FIFO), Topological Sort (pengurutan topologi)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumSemesters(n int, relations [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,9 +43,9 @@ import (
 // Space: O(n + len(relations))
 
 func minimumSemesters(n int, relations [][]int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indeg := make([]int, n+1)
 
 	for _, r := range relations {
@@ -42,7 +53,7 @@ func minimumSemesters(n int, relations [][]int) int {
 		indeg[r[1]]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([]int, 0)
 	for i := 1; i <= n; i++ {
 		if indeg[i] == 0 {

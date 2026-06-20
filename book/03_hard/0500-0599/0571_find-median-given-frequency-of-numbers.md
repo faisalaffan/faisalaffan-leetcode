@@ -1,19 +1,30 @@
 # 0571 — Find Median Given Frequency Of Numbers
 
-## Deskripsi
-
-**Soal:** [0571. Find Median Given Frequency Of Numbers](https://leetcode.com/problems/find-median-given-frequency-of-numbers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMedianGivenFrequencyOfNumbers(numbers []NumberFreq) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log N) where N = number of distinct num values (sorting)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findMedianGivenFrequencyOfNumbers(numbers []NumberFreq) float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,6 +57,7 @@ func findMedianGivenFrequencyOfNumbers(numbers []NumberFreq) float64 {
 	}
 
 	// Sort by Num.
+  // Custom sort dengan comparator
 	sort.Slice(numbers, func(i, j int) bool {
 		return numbers[i].Num < numbers[j].Num
 	})

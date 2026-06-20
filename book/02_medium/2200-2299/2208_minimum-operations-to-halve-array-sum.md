@@ -1,19 +1,30 @@
 # 2208 — Minimum Operations To Halve Array Sum
 
-## Deskripsi
-
-**Soal:** [2208. Minimum Operations To Halve Array Sum](https://leetcode.com/problems/minimum-operations-to-halve-array-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func halveArray(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func halveArray(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,15 +59,18 @@ func halveArray(nums []int) int {
 	total := 0.0
 	for _, v := range nums {
 		total += float64(v)
+  // Masukkan elemen ke priority queue
 		heap.Push(h, float64(v))
 	}
 
 	target := total / 2.0
 	ops := 0
 	for total > target {
+  // Ambil elemen terkecil/terbesar dari heap
 		largest := heap.Pop(h).(float64)
 		half := largest / 2.0
 		total -= half
+  // Masukkan elemen ke priority queue
 		heap.Push(h, half)
 		ops++
 	}

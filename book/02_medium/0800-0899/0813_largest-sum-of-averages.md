@@ -1,17 +1,30 @@
 # 0813 — Largest Sum Of Averages
 
-## Deskripsi
-
-**Soal:** [0813. Largest Sum Of Averages](https://leetcode.com/problems/largest-sum-of-averages/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LargestSumOfAverages(nums []int, k int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** O(k * n^2)  
 **Kompleksitas Ruang:** O(k * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,15 +44,14 @@ func main() {
 // Time: O(k * n^2) | Space: O(k * n)
 func LargestSumOfAverages(nums []int, k int) float64 {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
 	prefix := make([]float64, n+1)
 	for i := 0; i < n; i++ {
 		prefix[i+1] = prefix[i] + float64(nums[i])
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]float64, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]float64, k+1)
 	}

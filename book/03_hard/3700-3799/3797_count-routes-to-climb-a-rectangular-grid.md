@@ -1,19 +1,32 @@
 # 3797 — Count Routes To Climb A Rectangular Grid
 
-## Deskripsi
-
-**Soal:** [3797. Count Routes To Climb A Rectangular Grid](https://leetcode.com/problems/count-routes-to-climb-a-rectangular-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countRoutes(grid []string, d int) int
+```
+
+> **💡 Hint:** DP with prefix sums for efficient transitions.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with prefix sums for efficient transitions.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,9 +61,9 @@ func countRoutes(grid []string, d int) int {
 	m, n := len(grid), len(grid[0])
 
 	// Convert grid to ints
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	vals := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range vals {
 		vals[i] = make([]int, n)
 		for j, ch := range grid[i] {
@@ -58,9 +71,9 @@ func countRoutes(grid []string, d int) int {
 		}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}

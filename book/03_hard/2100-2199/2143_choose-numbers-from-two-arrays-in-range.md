@@ -1,17 +1,30 @@
 # 2143 — Choose Numbers From Two Arrays In Range
 
-## Deskripsi
-
-**Soal:** [2143. Choose Numbers From Two Arrays In Range](https://leetcode.com/problems/choose-numbers-from-two-arrays-in-range/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countSubarrays(nums1 []int, nums2 []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,10 +58,10 @@ func countSubarrays(nums1 []int, nums2 []int) int {
 	n := len(nums1)
 
 	// prefixDiff[i] = sum(nums1[0..i-1]) - sum(nums2[0..i-1])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixDiff := make([]int, n+1)
 	// prefixOdd[i] = count of odd values in nums1[0..i-1] + nums2[0..i-1]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixOdd := make([]int, n+1)
 
 	for i := 0; i < n; i++ {
@@ -65,7 +78,7 @@ func countSubarrays(nums1 []int, nums2 []int) int {
 
 	// Map: prefixDiff -> list of prefixOdd values at that diff
 	// We'll use a map from diff to a map of oddCount->frequency
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	diffMap := make(map[int]map[int]int)
 	ans := 0
 

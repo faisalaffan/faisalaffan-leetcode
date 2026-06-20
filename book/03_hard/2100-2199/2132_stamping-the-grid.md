@@ -1,17 +1,30 @@
 # 2132 — Stamping The Grid
 
-## Deskripsi
-
-**Soal:** [2132. Stamping The Grid](https://leetcode.com/problems/stamping-the-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,9 +65,9 @@ func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
 	m, n := len(grid), len(grid[0])
 
 	// 2D prefix sum (obstacles = 1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	prefix := make([][]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range prefix {
 		prefix[i] = make([]int, n+1)
 	}
@@ -69,9 +82,9 @@ func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
 	}
 
 	// 2D difference array
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	diff := make([][]int, m+2)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range diff {
 		diff[i] = make([]int, n+2)
 	}

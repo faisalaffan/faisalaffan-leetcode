@@ -1,21 +1,32 @@
 # 3918 — Sum Of Primes Between Number And Its Reverse
 
-## Deskripsi
-
-**Soal:** [3918. Sum Of Primes Between Number And Its Reverse](https://leetcode.com/problems/sum-of-primes-between-number-and-its-reverse/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SumOfPrimesBetweenNumberAndItsReverse(n int) int64
+```
+
+> **💡 Hint:** Sieve primes up to hi = max(n, rev(n)), sum primes in [lo, hi].
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log log N)  
 **Kompleksitas Ruang:** O(N) where N = max(n, rev(n)) <= 1000
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func SumOfPrimesBetweenNumberAndItsReverse(n int) int64`
-
-> **Ide Kunci:** Sieve primes up to hi = max(n, rev(n)), sum primes in [lo, hi].
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,6 @@ func SumOfPrimesBetweenNumberAndItsReverse(n int) int64 {
 		lo, hi = hi, lo
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	isPrime := make([]bool, hi+1)
 	for i := 2; i <= hi; i++ {
 		isPrime[i] = true

@@ -1,17 +1,30 @@
 # 1971 — Find If Path Exists In Graph
 
-## Deskripsi
-
-**Soal:** [1971. Find If Path Exists In Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindIfPathExistsInGraph(n int, edges [][]int, source int, destination int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(V + E), Space: O(V + E)  
 **Kompleksitas Ruang:** O(V + E)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func FindIfPathExistsInGraph(n int, edges [][]int, source int, destination int) 
 		return true
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -41,7 +54,6 @@ func FindIfPathExistsInGraph(n int, edges [][]int, source int, destination int) 
 		adj[v] = append(adj[v], u)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	queue := []int{source}
 	visited[source] = true

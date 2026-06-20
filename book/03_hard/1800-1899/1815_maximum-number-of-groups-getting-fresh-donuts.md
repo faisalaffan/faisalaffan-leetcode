@@ -1,19 +1,32 @@
 # 1815 — Maximum Number Of Groups Getting Fresh Donuts
 
-## Deskripsi
-
-**Soal:** [1815. Maximum Number Of Groups Getting Fresh Donuts](https://leetcode.com/problems/maximum-number-of-groups-getting-fresh-donuts/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxHappyGroups(batchSize int, groups []int) int
+```
+
+> **💡 Hint:** DP with Memoization (state compression via int64).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with Memoization (state compression via int64).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func main() {
 }
 
 func maxHappyGroups(batchSize int, groups []int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	counts := make([]int, batchSize)
 	zeroRem := 0
 	for _, g := range groups {
@@ -63,7 +76,7 @@ func maxHappyGroups(batchSize int, groups []int) int {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[int64]int)
 
 	var dfs func(state int64, left int) int

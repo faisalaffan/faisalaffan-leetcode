@@ -1,17 +1,30 @@
 # 0505 — The Maze Ii
 
-## Deskripsi
-
-**Soal:** [0505. The Maze Ii](https://leetcode.com/problems/the-maze-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func TheMazeIi(maze [][]int, start []int, destination []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** O(m * n * log(m*n)) with Dijkstra, or O(m * n * max(m,n)) with BFS-like  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -68,9 +81,9 @@ func (pq *PriorityQueue) Pop() interface{} {
 
 func TheMazeIi(maze [][]int, start []int, destination []int) int {
 	m, n := len(maze), len(maze[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -83,9 +96,11 @@ func TheMazeIi(maze [][]int, start []int, destination []int) int {
 
 	pq := &PriorityQueue{}
 	heap.Init(pq)
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &Item{r: start[0], c: start[1], dist: 0})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(*Item)
 		if cur.r == destination[0] && cur.c == destination[1] {
 			return cur.dist
@@ -104,6 +119,7 @@ func TheMazeIi(maze [][]int, start []int, destination []int) int {
 			newDist := cur.dist + steps
 			if newDist < dist[r][c] {
 				dist[r][c] = newDist
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &Item{r: r, c: c, dist: newDist})
 			}
 		}

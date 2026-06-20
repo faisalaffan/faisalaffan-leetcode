@@ -1,19 +1,30 @@
 # 2809 — Minimum Time To Make Array Sum At Most X
 
-## Deskripsi
-
-**Soal:** [2809. Minimum Time To Make Array Sum At Most X](https://leetcode.com/problems/minimum-time-to-make-array-sum-at-most-x/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTime(nums1, nums2 []int, x int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumTime(nums1, nums2 []int, x int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,15 +45,16 @@ import (
 
 func minimumTime(nums1, nums2 []int, x int) int {
 	n := len(nums1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pairs := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		pairs[i] = [2]int{nums1[i], nums2[i]}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(pairs, func(i, j int) bool { return pairs[i][1] < pairs[j][1] })
 
 	// dp[t] = max total reduction achievable with exactly t resets
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		a, b := pairs[i][0], pairs[i][1]

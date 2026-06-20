@@ -1,22 +1,33 @@
 # 1298 — Maximum Candies You Can Get From Boxes
 
-## Deskripsi
-
-**Soal:** [1298. Maximum Candies You Can Get From Boxes](https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxCandies(status []int, candies []int, keys [][]int,
+	containedBoxes [][]int, initialBoxes []int) int
+```
+
+> **💡 Hint:** Iterative box opening.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxCandies(status []int, candies []int, keys [][]int,
-	containedBoxes [][]int, initialBoxes []int) int`
-
-> **Ide Kunci:** Iterative box opening.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,7 @@ import "fmt"
 func maxCandies(status []int, candies []int, keys [][]int,
 	containedBoxes [][]int, initialBoxes []int) int {
 	n := len(status)
-  // Membuat slice untuk menyimpan hasil
 	hasBox := make([]bool, n)
-  // Membuat slice untuk menyimpan hasil
 	hasKey := make([]bool, n)
 	for _, b := range initialBoxes {
 		hasBox[b] = true
@@ -49,7 +58,6 @@ func maxCandies(status []int, candies []int, keys [][]int,
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	opened := make([]bool, n)
 	total := 0
 	for {

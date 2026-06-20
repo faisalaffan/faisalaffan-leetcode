@@ -1,19 +1,30 @@
 # 0864 — Shortest Path To Get All Keys
 
-## Deskripsi
-
-**Soal:** [0864. Shortest Path To Get All Keys](https://leetcode.com/problems/shortest-path-to-get-all-keys/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestPathAllKeys(grid []string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func shortestPathAllKeys(grid []string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +57,7 @@ func shortestPathAllKeys(grid []string) int {
 	allKeys := (1 << totalKeys) - 1
 
 	// visited[r][c][keyMask]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][][]bool, m)
 	for i := 0; i < m; i++ {
 		visited[i] = make([][]bool, n)

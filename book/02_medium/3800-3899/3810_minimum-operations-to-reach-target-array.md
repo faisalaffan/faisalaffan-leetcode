@@ -1,21 +1,32 @@
 # 3810 — Minimum Operations To Reach Target Array
 
-## Deskripsi
-
-**Soal:** [3810. Minimum Operations To Reach Target Array](https://leetcode.com/problems/minimum-operations-to-reach-target-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumOperationsToReachTargetArray(nums []int, target []int) int
+```
+
+> **💡 Hint:** Track which values need updating. Each operation picks a value x,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(max(nums[i]))
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumOperationsToReachTargetArray(nums []int, target []int) int`
-
-> **Ide Kunci:** Track which values need updating. Each operation picks a value x,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,14 +44,14 @@ import "fmt"
 func MinimumOperationsToReachTargetArray(nums []int, target []int) int {
 	n := len(nums)
 	// Map from value to list of positions
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	valToPos := make(map[int][]int)
 	for i, v := range nums {
 		valToPos[v] = append(valToPos[v], i)
 	}
 
 	// Track positions that still need changes
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	needChange := make(map[int]bool)
 	for i := 0; i < n; i++ {
 		if nums[i] != target[i] {
@@ -70,7 +81,7 @@ func MinimumOperationsToReachTargetArray(nums []int, target []int) int {
 		}
 
 		// Update all maximal contiguous segments of chosenVal
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		changed := make(map[int]bool)
 		for _, p := range valToPos[chosenVal] {
 			if needChange[p] {

@@ -1,19 +1,32 @@
 # 1057 — Campus Bikes
 
-## Deskripsi
-
-**Soal:** [1057. Campus Bikes](https://leetcode.com/problems/campus-bikes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func assignBikes(workers [][]int, bikes [][]int) []int
+```
+
+> **💡 Hint:** Bucket sort by Manhattan distance. Assign closest pairs.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(W * B) where W = workers, B = bikes  
 **Kompleksitas Ruang:** O(W * B)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Bucket sort by Manhattan distance. Assign closest pairs.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,7 @@ func assignBikes(workers [][]int, bikes [][]int) []int {
 	w, b := len(workers), len(bikes)
 	// Buckets of distances: max distance is 2000 (0-1000, 0-1000)
 	maxDist := 2000
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	buckets := make([][][2]int, maxDist+1)
 
 	for i := 0; i < w; i++ {
@@ -47,13 +60,12 @@ func assignBikes(workers [][]int, bikes [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, w)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range result {
 		result[i] = -1
 	}
-  // Membuat slice untuk menyimpan hasil
 	bikeUsed := make([]bool, b)
 
 	for d := 0; d <= maxDist; d++ {

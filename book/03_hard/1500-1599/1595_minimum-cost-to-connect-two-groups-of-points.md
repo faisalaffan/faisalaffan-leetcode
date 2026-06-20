@@ -1,19 +1,30 @@
 # 1595 — Minimum Cost To Connect Two Groups Of Points
 
-## Deskripsi
-
-**Soal:** [1595. Minimum Cost To Connect Two Groups Of Points](https://leetcode.com/problems/minimum-cost-to-connect-two-groups-of-points/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func connectTwoGroups(cost [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Heap (priority queue), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func connectTwoGroups(cost [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,16 +64,16 @@ func connectTwoGroups(cost [][]int) int {
 	INF := math.MaxInt32
 
 	// dp[mask] = min cost after processing current prefix of group 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, size)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = INF
 	}
 	dp[0] = 0
 
 	// Precompute minCostTo[j]: cheapest connection from ANY group-1 point to group-2 point j
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	minCostTo := make([]int, n)
 	for j := 0; j < n; j++ {
 		minVal := math.MaxInt32
@@ -76,7 +87,7 @@ func connectTwoGroups(cost [][]int) int {
 
 	// Process each point in group 1
 	for i := 0; i < m; i++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, size)
 		for mask := range ndp {
 			ndp[mask] = INF
@@ -106,7 +117,7 @@ func connectTwoGroups(cost [][]int) int {
 
 
 	// Precompute extra cost to cover missing group-2 points for each mask
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	extra := make([]int, size)
 	for mask := 0; mask < size; mask++ {
 		sum := 0

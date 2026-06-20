@@ -1,21 +1,32 @@
 # 3843 — First Element With Unique Frequency
 
-## Deskripsi
-
-**Soal:** [3843. First Element With Unique Frequency](https://leetcode.com/problems/first-element-with-unique-frequency/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FirstElementWithUniqueFrequency(nums []int) int
+```
+
+> **💡 Hint:** Count frequencies, then count frequency-of-frequency, find first with freq=1.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func FirstElementWithUniqueFrequency(nums []int) int`
-
-> **Ide Kunci:** Count frequencies, then count frequency-of-frequency, find first with freq=1.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,13 +40,13 @@ package main
 import "fmt"
 
 func FirstElementWithUniqueFrequency(nums []int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cnt := make(map[int]int)
 	for _, v := range nums {
 		cnt[v]++
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freqCnt := make(map[int]int)
 	for _, c := range cnt {
 		freqCnt[c]++

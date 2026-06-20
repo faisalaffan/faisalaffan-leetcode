@@ -1,19 +1,30 @@
 # 0579 — Find Cumulative Salary Of An Employee
 
-## Deskripsi
-
-**Soal:** [0579. Find Cumulative Salary Of An Employee](https://leetcode.com/problems/find-cumulative-salary-of-an-employee/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findCumulativeSalaryOfAnEmployee(records []EmployeeMonth) []CumulativeSalary
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(E log E) for sorting, Space: O(E)  
 **Kompleksitas Ruang:** O(E)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findCumulativeSalaryOfAnEmployee(records []EmployeeMonth) []CumulativeSalary`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +62,7 @@ type CumulativeSalary struct {
 // Time: O(E log E) for sorting, Space: O(E)
 func findCumulativeSalaryOfAnEmployee(records []EmployeeMonth) []CumulativeSalary {
 	// Group by employee ID.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byID := make(map[int][]EmployeeMonth)
 	for _, r := range records {
 		byID[r.ID] = append(byID[r.ID], r)
@@ -61,6 +72,7 @@ func findCumulativeSalaryOfAnEmployee(records []EmployeeMonth) []CumulativeSalar
 
 	for id, emps := range byID {
 		// Sort by month ascending.
+  // Custom sort dengan comparator
 		sort.Slice(emps, func(i, j int) bool {
 			return emps[i].Month < emps[j].Month
 		})
@@ -73,7 +85,7 @@ func findCumulativeSalaryOfAnEmployee(records []EmployeeMonth) []CumulativeSalar
 		lastMonth := emps[len(emps)-1].Month
 
 		// Build a month->salary map for O(1) lookups.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		salaryByMonth := make(map[int]int)
 		for _, e := range emps {
 			salaryByMonth[e.Month] = e.Salary
@@ -99,6 +111,7 @@ func findCumulativeSalaryOfAnEmployee(records []EmployeeMonth) []CumulativeSalar
 	}
 
 	// Sort output by ID asc, then month desc (as per problem spec).
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].ID != result[j].ID {
 			return result[i].ID < result[j].ID

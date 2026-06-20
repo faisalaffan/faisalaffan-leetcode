@@ -1,21 +1,32 @@
 # 2035 — Partition Array Into Two Arrays To Minimize Sum Difference
 
-## Deskripsi
-
-**Soal:** [2035. Partition Array Into Two Arrays To Minimize Sum Difference](https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumDifference(nums []int) int
+```
+
+> **💡 Hint:** Meet-in-the-Middle
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumDifference(nums []int) int`
-
-> **Ide Kunci:** Meet-in-the-Middle
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,9 +50,9 @@ func minimumDifference(nums []int) int {
 	}
 
 	// Generate all subset sums for each half, grouped by subset size
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	leftSums := make([][]int, n+1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rightSums := make([][]int, n+1)
 
 	// Generate combinations for left half
@@ -72,6 +83,7 @@ func minimumDifference(nums []int) int {
 
 	// Sort each group in right half for binary search
 	for i := 0; i <= n; i++ {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(rightSums[i])
 	}
 

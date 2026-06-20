@@ -1,17 +1,30 @@
 # 0691 — Stickers To Spell Word
 
-## Deskripsi
-
-**Soal:** [0691. Stickers To Spell Word](https://leetcode.com/problems/stickers-to-spell-word/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minStickers(stickers []string, target string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func main() {
 
 func minStickers(stickers []string, target string) int {
 	t := len(target)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	targetCount := make([]int, 26)
 	for _, ch := range target {
 		targetCount[ch-'a']++
@@ -51,7 +64,7 @@ func minStickers(stickers []string, target string) int {
 
 	var freqList [][]int
 	for _, s := range stickers {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		freq := make([]int, 26)
 		for _, ch := range s {
 			freq[ch-'a']++
@@ -68,7 +81,7 @@ func minStickers(stickers []string, target string) int {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[int]int)
 	fullMask := (1 << t) - 1
 
@@ -96,7 +109,7 @@ func minStickers(stickers []string, target string) int {
 				continue
 			}
 			newMask := mask
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			remain := make([]int, 26)
 			copy(remain, freq)
 			for i := first; i < t; i++ {

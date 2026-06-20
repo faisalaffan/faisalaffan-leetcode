@@ -1,17 +1,30 @@
 # 3265 — Count Almost Equal Pairs I
 
-## Deskripsi
-
-**Soal:** [3265. Count Almost Equal Pairs I](https://leetcode.com/problems/count-almost-equal-pairs-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countPairs(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n^2 * d) Space: O(d) where d = number of digits  
 **Kompleksitas Ruang:** O(d) where d = number of digits
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,7 @@ func main() {
 
 func countPairs(nums []int) int {
 	ans := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		for j := i + 1; j < len(nums); j++ {
 			if isAlmostEqual(nums[i], nums[j]) {
@@ -45,7 +58,7 @@ func countPairs(nums []int) int {
 func isAlmostEqual(a, b int) bool {
 	sa, sb := fmt.Sprintf("%07d", a), fmt.Sprintf("%07d", b)
 	diff := 0
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ca, cb := make([]int, 10), make([]int, 10)
 	for k := 0; k < 7; k++ {
 		if sa[k] != sb[k] {

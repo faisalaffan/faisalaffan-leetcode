@@ -1,17 +1,30 @@
 # 0464 — Can I Win
 
-## Deskripsi
-
-**Soal:** [0464. Can I Win](https://leetcode.com/problems/can-i-win/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CanIWin(maxChoosableInteger int, desiredTotal int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** O(2^n) where n = maxChoosableInteger (max 20)  
 **Kompleksitas Ruang:** O(2^n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +52,7 @@ func CanIWin(maxChoosableInteger int, desiredTotal int) bool {
 		return false
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[int]bool)
 	var dfs func(used int, currentTotal int) bool
 	dfs = func(used int, currentTotal int) bool {

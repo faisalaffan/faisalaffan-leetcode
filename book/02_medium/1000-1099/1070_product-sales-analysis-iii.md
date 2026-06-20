@@ -1,19 +1,32 @@
 # 1070 — Product Sales Analysis Iii
 
-## Deskripsi
-
-**Soal:** [1070. Product Sales Analysis Iii](https://leetcode.com/problems/product-sales-analysis-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func productSalesAnalysisIII(sales [][]int) [][]int
+```
+
+> **💡 Hint:** Find first year of each product, get its sale data.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Find first year of each product, get its sale data.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +49,9 @@ func main() {
 
 func productSalesAnalysisIII(sales [][]int) [][]int {
 	// sales[i] = [sale_id, product_id, year, quantity, price]
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	firstYear := make(map[int]int) // product_id -> min year
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	saleByProd := make(map[int][]int)
 
 	for _, s := range sales {
@@ -49,9 +62,9 @@ func productSalesAnalysisIII(sales [][]int) [][]int {
 		saleByProd[pid] = s
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[int]bool)
 	for _, s := range sales {
 		pid, year := s[1], s[2]

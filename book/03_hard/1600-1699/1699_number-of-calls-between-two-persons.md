@@ -1,17 +1,30 @@
 # 1699 — Number Of Calls Between Two Persons
 
-## Deskripsi
-
-**Soal:** [1699. Number Of Calls Between Two Persons](https://leetcode.com/problems/number-of-calls-between-two-persons/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfCalls(calls []Call) []CallPair
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -64,7 +77,7 @@ func main() {
 }
 
 func numberOfCalls(calls []Call) []CallPair {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pairMap := make(map[[2]int]*CallPair)
 
 	for _, c := range calls {
@@ -86,7 +99,6 @@ func numberOfCalls(calls []Call) []CallPair {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]CallPair, 0, len(pairMap))
 	for _, pair := range pairMap {
 		result = append(result, *pair)

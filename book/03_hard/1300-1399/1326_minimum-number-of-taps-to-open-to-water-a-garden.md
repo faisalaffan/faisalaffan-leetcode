@@ -1,17 +1,30 @@
 # 1326 — Minimum Number Of Taps To Open To Water A Garden
 
-## Deskripsi
-
-**Soal:** [1326. Minimum Number Of Taps To Open To Water A Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minTaps(n int, ranges []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,7 @@ func main() {
 
 func minTaps(n int, ranges []int) int {
 	// farthest[p] = rightmost reachable point starting from position p.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	farthest := make([]int, n+1)
 	for i, r := range ranges {
 		left := i - r

@@ -1,21 +1,32 @@
 # 3932 — Count K Th Roots In A Range
 
-## Deskripsi
-
-**Soal:** [3932. Count K Th Roots In A Range](https://leetcode.com/problems/count-k-th-roots-in-a-range/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func powWithLimit(base int, k int, limit int) int
+```
+
+> **💡 Hint:** Find smallest x s.t. x^k >= l, largest x s.t. x^k <= r.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search
 
 **Kompleksitas Waktu:** O(log r)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func powWithLimit(base int, k int, limit int) int`
-
-> **Ide Kunci:** Find smallest x s.t. x^k >= l, largest x s.t. x^k <= r.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +63,7 @@ func CountKThRootsInARange(l int, r int, k int) int {
 
 	left := 1
 	right := hiX
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := left + (right-left)/2
 		if powWithLimit(mid, k, r) >= l {
@@ -69,7 +80,7 @@ func CountKThRootsInARange(l int, r int, k int) int {
 
 	// Find last x s.t. x^k <= r
 	left, right = first, hiX
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := (left + right + 1) / 2
 		if powWithLimit(mid, k, r) <= r {

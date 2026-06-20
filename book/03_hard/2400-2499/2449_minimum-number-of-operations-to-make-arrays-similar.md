@@ -1,17 +1,30 @@
 # 2449 — Minimum Number Of Operations To Make Arrays Similar
 
-## Deskripsi
-
-**Soal:** [2449. Minimum Number Of Operations To Make Arrays Similar](https://leetcode.com/problems/minimum-number-of-operations-to-make-arrays-similar/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func makeSimilar(nums []int, target []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,19 +59,23 @@ func makeSimilar(nums []int, target []int) int64 {
 	numsEven := collectEven(nums)
 	tgtEven := collectEven(target)
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(numsOdd)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(tgtOdd)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(numsEven)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(tgtEven)
 
 	var posDiff int64
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(numsOdd); i++ {
 		if tgtOdd[i] > numsOdd[i] {
 			posDiff += int64(tgtOdd[i]-numsOdd[i]) / 2
 		}
 	}
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(numsEven); i++ {
 		if tgtEven[i] > numsEven[i] {
 			posDiff += int64(tgtEven[i]-numsEven[i]) / 2

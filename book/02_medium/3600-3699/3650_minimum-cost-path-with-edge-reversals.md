@@ -1,19 +1,30 @@
 # 3650 — Minimum Cost Path With Edge Reversals
 
-## Deskripsi
-
-**Soal:** [3650. Minimum Cost Path With Edge Reversals](https://leetcode.com/problems/minimum-cost-path-with-edge-reversals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumCostPathWithEdgeReversals(n int, edges [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O((n+m) log n)  
 **Kompleksitas Ruang:** O(n+m)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumCostPathWithEdgeReversals(n int, edges [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +59,7 @@ func (h *minHeap) Pop() interface{} {
 }
 
 func minimumCostPathWithEdgeReversals(n int, edges [][]int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]edge, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -56,18 +67,20 @@ func minimumCostPathWithEdgeReversals(n int, edges [][]int) int {
 		adj[v] = append(adj[v], edge{u, 2 * w})
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = math.MaxInt32
 	}
 	dist[0] = 0
 
 	pq := &minHeap{}
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, struct{ node, dist int }{0, 0})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(struct{ node, dist int })
 		u, d := cur.node, cur.dist
 		if d > dist[u] {
@@ -80,6 +93,7 @@ func minimumCostPathWithEdgeReversals(n int, edges [][]int) int {
 			nd := d + e.weight
 			if nd < dist[e.to] {
 				dist[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, struct{ node, dist int }{e.to, nd})
 			}
 		}

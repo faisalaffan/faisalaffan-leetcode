@@ -1,19 +1,30 @@
 # 2795 — Parallel Execution Of Promises For Individual Results Retrieval
 
-## Deskripsi
-
-**Soal:** [2795. Parallel Execution Of Promises For Individual Results Retrieval](https://leetcode.com/problems/parallel-execution-of-promises-for-individual-results-retrieval/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ParallelExecutionOfPromisesForIndividualResultsRetrieval(functions []func() int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func ParallelExecutionOfPromisesForIndividualResultsRetrieval(functions []func() int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ type PromiseResult struct {
 
 func ParallelExecutionOfPromisesForIndividualResultsRetrieval(functions []func() int) []int {
 	n := len(functions)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	results := make([]int, n)
 	var wg sync.WaitGroup
 

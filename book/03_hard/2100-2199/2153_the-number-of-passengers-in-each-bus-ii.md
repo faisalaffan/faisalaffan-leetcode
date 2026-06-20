@@ -1,17 +1,30 @@
 # 2153 — The Number Of Passengers In Each Bus Ii
 
-## Deskripsi
-
-**Soal:** [2153. The Number Of Passengers In Each Bus Ii](https://leetcode.com/problems/the-number-of-passengers-in-each-bus-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calculateBusPassengers(buses []bus, passengers []passenger) map[int]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,12 +67,14 @@ func main() {
 
 func calculateBusPassengers(buses []bus, passengers []passenger) map[int]int {
 	// Sort buses by arrival time
+  // Custom sort dengan comparator
 	sort.Slice(buses, func(i, j int) bool { return buses[i].time < buses[j].time })
 
 	// Sort passengers by arrival time
+  // Custom sort dengan comparator
 	sort.Slice(passengers, func(i, j int) bool { return passengers[i].time < passengers[j].time })
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	result := make(map[int]int)
 	passIdx := 0
 	n := len(passengers)

@@ -1,19 +1,32 @@
 # 2127 — Maximum Employees To Be Invited To A Meeting
 
-## Deskripsi
-
-**Soal:** [2127. Maximum Employees To Be Invited To A Meeting](https://leetcode.com/problems/maximum-employees-to-be-invited-to-a-meeting/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumInvitations(favorite []int) int
+```
+
+> **💡 Hint:** Cycle detection in functional graph.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Topological Sort (pengurutan topologi)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Topological Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Cycle detection in functional graph.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,16 +64,16 @@ func main() {
 
 func maximumInvitations(favorite []int) int {
 	n := len(favorite)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	inDegree := make([]int, n)
 	for _, f := range favorite {
 		inDegree[f]++
 	}
 
 	// chainLen[i] = longest chain of non-cycle nodes ending at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	chainLen := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	q := make([]int, 0)
 	for i := 0; i < n; i++ {
 		if inDegree[i] == 0 {
@@ -82,7 +95,6 @@ func maximumInvitations(favorite []int) int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	totalChains := 0
 	maxCycle := 0

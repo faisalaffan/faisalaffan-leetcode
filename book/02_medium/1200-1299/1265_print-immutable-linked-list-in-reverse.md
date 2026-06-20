@@ -1,19 +1,30 @@
 # 1265 — Print Immutable Linked List In Reverse
 
-## Deskripsi
-
-**Soal:** [1265. Print Immutable Linked List In Reverse](https://leetcode.com/problems/print-immutable-linked-list-in-reverse/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func printLinkedListInReverse(head *ImmutableListNode) 
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n) for recursive stack
 
-**Algoritma:** Stack (tumpukan LIFO), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func printLinkedListInReverse(head *ImmutableListNode) `
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

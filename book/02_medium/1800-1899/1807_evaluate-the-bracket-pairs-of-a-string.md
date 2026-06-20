@@ -1,19 +1,30 @@
 # 1807 — Evaluate The Bracket Pairs Of A String
 
-## Deskripsi
-
-**Soal:** [1807. Evaluate The Bracket Pairs Of A String](https://leetcode.com/problems/evaluate-the-bracket-pairs-of-a-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func evaluate(s string, knowledge [][]string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(k) where k = number of knowledge pairs  
 **Kompleksitas Ruang:** O(k) where k = number of knowledge pairs
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func evaluate(s string, knowledge [][]string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ import (
 )
 
 func evaluate(s string, knowledge [][]string) string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dict := make(map[string]string)
 	for _, kv := range knowledge {
 		dict[kv[0]] = kv[1]

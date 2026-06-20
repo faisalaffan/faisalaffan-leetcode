@@ -1,21 +1,32 @@
 # 3181 — Maximum Total Reward Using Operations Ii
 
-## Deskripsi
-
-**Soal:** [3181. Maximum Total Reward Using Operations Ii](https://leetcode.com/problems/maximum-total-reward-using-operations-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxTotalReward(rewardValues []int) int
+```
+
+> **💡 Hint:** sort unique rewards, then DP with a bitset (big.Int). For each
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxTotalReward(rewardValues []int) int`
-
-> **Ide Kunci:** sort unique rewards, then DP with a bitset (big.Int). For each
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,6 +53,7 @@ import (
 
 func maxTotalReward(rewardValues []int) int {
 	// Remove duplicates and sort.
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(rewardValues)
 	uniq := []int{rewardValues[0]}
 	for i := 1; i < len(rewardValues); i++ {

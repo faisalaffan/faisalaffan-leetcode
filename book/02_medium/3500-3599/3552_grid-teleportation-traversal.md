@@ -1,17 +1,30 @@
 # 3552 — Grid Teleportation Traversal
 
-## Deskripsi
-
-**Soal:** [3552. Grid Teleportation Traversal](https://leetcode.com/problems/grid-teleportation-traversal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func GridTeleportationTraversal(grid [][]int, start, end []int, teleports [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func main() {
 func GridTeleportationTraversal(grid [][]int, start, end []int, teleports [][]int) int {
 	m, n := len(grid), len(grid[0])
 	// Build teleport map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	tpMap := make(map[[2]int][2]int)
 	for _, tp := range teleports {
 		tpMap[[2]int{tp[0], tp[1]}] = [2]int{tp[2], tp[3]}
@@ -51,9 +64,9 @@ func GridTeleportationTraversal(grid [][]int, start, end []int, teleports [][]in
 
 	// BFS
 	dirs := [][2]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range visited {
 		visited[i] = make([]bool, n)
 	}

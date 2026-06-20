@@ -1,19 +1,30 @@
 # 0955 — Delete Columns To Make Sorted Ii
 
-## Deskripsi
-
-**Soal:** [0955. Delete Columns To Make Sorted Ii](https://leetcode.com/problems/delete-columns-to-make-sorted-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDeletionSize(strs []string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * m)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func minDeletionSize(strs []string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,7 +39,6 @@ import "fmt"
 func minDeletionSize(strs []string) int {
 	m := len(strs)
 	n := len(strs[0])
-  // Membuat slice untuk menyimpan hasil
 	cut := make([]bool, m)
 	ans := 0
 

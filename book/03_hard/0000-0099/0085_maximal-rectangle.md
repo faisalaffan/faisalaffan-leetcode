@@ -1,17 +1,30 @@
 # 0085 — Maximal Rectangle
 
-## Deskripsi
-
-**Soal:** [0085. Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximalRectangle(matrix [][]byte) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func maximalRectangle(matrix [][]byte) int {
 		return 0
 	}
 	rows, cols := len(matrix), len(matrix[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	heights := make([]int, cols)
 	maxArea := 0
 
@@ -67,7 +80,7 @@ func maximalRectangle(matrix [][]byte) int {
 
 func largestRectangleArea(heights []int) int {
 	n := len(heights)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0, n)
 	maxArea := 0
 

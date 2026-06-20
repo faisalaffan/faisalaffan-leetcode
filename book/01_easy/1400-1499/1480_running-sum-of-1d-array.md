@@ -1,19 +1,34 @@
 # 1480 — Running Sum Of 1D Array
 
-## Deskripsi
-
-**Soal:** [1480. Running Sum Of 1D Array](https://leetcode.com/problems/running-sum-of-1d-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func runningSum(nums []int) []int
+
+import "fmt"
+
+func main()
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(1) excluding output  
 **Kompleksitas Ruang:** O(1) excluding output
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func runningSum(nums []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +48,7 @@ func main() {
 
 // Time: O(n), Space: O(1) excluding output
 func RunningSumOfOneDArray(nums []int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	res := make([]int, len(nums))
 	sum := 0
 	for i, v := range nums {

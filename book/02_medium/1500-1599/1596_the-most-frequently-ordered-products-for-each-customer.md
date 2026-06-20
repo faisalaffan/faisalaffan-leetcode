@@ -1,17 +1,30 @@
 # 1596 — The Most Frequently Ordered Products For Each Customer
 
-## Deskripsi
-
-**Soal:** [1596. The Most Frequently Ordered Products For Each Customer](https://leetcode.com/problems/the-most-frequently-ordered-products-for-each-customer/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MostFrequentProducts(orders []struct{ customerID, productID int }, products, customers map[int]string) []freqProduct
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +62,7 @@ type freqProduct struct {
 }
 
 func MostFrequentProducts(orders []struct{ customerID, productID int }, products, customers map[int]string) []freqProduct {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	customerCounts := make(map[int]map[int]int)
 
 	for _, o := range orders {
@@ -59,7 +72,6 @@ func MostFrequentProducts(orders []struct{ customerID, productID int }, products
 		customerCounts[o.customerID][o.productID]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]freqProduct, 0)
 	for cid, prodCounts := range customerCounts {
 		maxCount := 0

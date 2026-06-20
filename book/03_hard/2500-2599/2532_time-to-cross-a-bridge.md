@@ -1,17 +1,30 @@
 # 2532 — Time To Cross A Bridge
 
-## Deskripsi
-
-**Soal:** [2532. Time To Cross A Bridge](https://leetcode.com/problems/time-to-cross-a-bridge/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findCrossingTime(n int, k int, time [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, BFS, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -91,13 +104,13 @@ func (h *TimeHeap) Pop() interface{} {
 }
 
 func findCrossingTime(n int, k int, time [][]int) int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Precompute efficiency
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	efficiency := make([]int, k)
 	for i := 0; i < k; i++ {
 		efficiency[i] = time[i][0] + time[i][2]
@@ -115,6 +128,7 @@ func findCrossingTime(n int, k int, time [][]int) int {
 
 	// Initially, workers need to pick up a box before crossing
 	for i := 0; i < k; i++ {
+  // Masukkan elemen ke priority queue
 		heap.Push(leftWork, TimeEvent{readyTime: time[i][1], idx: i}) // pickLeft
 	}
 
@@ -125,31 +139,39 @@ func findCrossingTime(n int, k int, time [][]int) int {
 	for remainingBoxes > 0 || rightWork.Len() > 0 || rightWait.Len() > 0 {
 		// Flush workers whose work is done into wait queues
 		for leftWork.Len() > 0 && (*leftWork)[0].readyTime <= currentTime {
+  // Ambil elemen terkecil/terbesar dari heap
 			ev := heap.Pop(leftWork).(TimeEvent)
 			w := Worker{idx: ev.idx, efficiency: efficiency[ev.idx]}
+  // Masukkan elemen ke priority queue
 			heap.Push(leftWait, w)
 		}
 		for rightWork.Len() > 0 && (*rightWork)[0].readyTime <= currentTime {
+  // Ambil elemen terkecil/terbesar dari heap
 			ev := heap.Pop(rightWork).(TimeEvent)
 			w := Worker{idx: ev.idx, efficiency: efficiency[ev.idx]}
+  // Masukkan elemen ke priority queue
 			heap.Push(rightWait, w)
 		}
 
 		if rightWait.Len() > 0 {
 			// Worker on right crosses back to left
+  // Ambil elemen terkecil/terbesar dari heap
 			w := heap.Pop(rightWait).(Worker)
 			currentTime += time[w.idx][2] // rightToLeft
 			// Worker is now on left, starts picking up
+  // Masukkan elemen ke priority queue
 			heap.Push(leftWork, TimeEvent{
 				readyTime: currentTime + time[w.idx][1], // + pickLeft
 				idx:       w.idx,
 			})
 		} else if leftWait.Len() > 0 && remainingBoxes > 0 {
 			// Worker on left crosses to right (with a box, only if boxes remain)
+  // Ambil elemen terkecil/terbesar dari heap
 			w := heap.Pop(leftWait).(Worker)
 			currentTime += time[w.idx][0] // leftToRight
 			remainingBoxes--
 			// Worker is now on right, starts putting down
+  // Masukkan elemen ke priority queue
 			heap.Push(rightWork, TimeEvent{
 				readyTime: currentTime + time[w.idx][3], // + pickRight
 				idx:       w.idx,

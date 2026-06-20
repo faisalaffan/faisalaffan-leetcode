@@ -1,19 +1,30 @@
 # 3733 — Minimum Time To Complete All Deliveries
 
-## Deskripsi
-
-**Soal:** [3733. Minimum Time To Complete All Deliveries](https://leetcode.com/problems/minimum-time-to-complete-all-deliveries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTimeToCompleteAllDeliveries(d []int, r []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** O(log(maxTime))  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumTimeToCompleteAllDeliveries(d []int, r []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

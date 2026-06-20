@@ -1,17 +1,30 @@
 # 1554 — Strings Differ By One Character
 
-## Deskripsi
-
-**Soal:** [1554. Strings Differ By One Character](https://leetcode.com/problems/strings-differ-by-one-character/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func DifferByOne(dict []string) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N*M^2) where N = len(dict), M = string length  
 **Kompleksitas Ruang:** O(N*M)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +54,7 @@ func DifferByOne(dict []string) bool {
 	m := len(dict[0])
 
 	for skipIdx := 0; skipIdx < m; skipIdx++ {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		seen := make(map[string]bool)
 		for i := 0; i < n; i++ {
 			// Create string without char at skipIdx

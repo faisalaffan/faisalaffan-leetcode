@@ -1,21 +1,32 @@
 # 3905 — Multi Source Flood Fill
 
-## Deskripsi
-
-**Soal:** [3905. Multi Source Flood Fill](https://leetcode.com/problems/multi-source-flood-fill/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MultiSourceFloodFill(n int, m int, sources [][]int) [][]int
+```
+
+> **💡 Hint:** Multi-source BFS. Track time and color for each cell.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(N*M)  
 **Kompleksitas Ruang:** O(N*M)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MultiSourceFloodFill(n int, m int, sources [][]int) [][]int`
-
-> **Ide Kunci:** Multi-source BFS. Track time and color for each cell.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,9 +41,9 @@ package main
 import "fmt"
 
 func MultiSourceFloodFill(n int, m int, sources [][]int) [][]int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	grid := make([][]int, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	time := make([][]int, n)
 	for i := 0; i < n; i++ {
 		grid[i] = make([]int, m)
@@ -43,7 +54,6 @@ func MultiSourceFloodFill(n int, m int, sources [][]int) [][]int {
 	}
 
 	type Cell struct{ r, c, t, color int }
-  // Membuat slice untuk menyimpan hasil
 	queue := make([]Cell, 0)
 	for _, src := range sources {
 		r, c, color := src[0], src[1], src[2]

@@ -1,19 +1,32 @@
 # 1008 — Construct Binary Search Tree From Preorder Traversal
 
-## Deskripsi
-
-**Soal:** [1008. Construct Binary Search Tree From Preorder Traversal](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func bstFromPreorder(preorder []int) *TreeNode
+```
+
+> **💡 Hint:** Use upper bound recursion. First element is root. Recursively build
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, BFS, Bitmask
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(h) where h is tree height
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Use upper bound recursion. First element is root. Recursively build
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

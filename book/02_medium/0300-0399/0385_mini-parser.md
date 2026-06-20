@@ -1,19 +1,30 @@
 # 0385 — Mini Parser
 
-## Deskripsi
-
-**Soal:** [0385. Mini Parser](https://leetcode.com/problems/mini-parser/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewInt(val int) *NestedInteger
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewInt(val int) *NestedInteger`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -104,7 +115,6 @@ func (n *NestedInteger) String() string {
 	if n.isInt {
 		return strconv.Itoa(n.integer)
 	}
-  // Membuat slice untuk menyimpan hasil
 	parts := make([]string, len(n.list))
 	for i, child := range n.list {
 		parts[i] = child.String()

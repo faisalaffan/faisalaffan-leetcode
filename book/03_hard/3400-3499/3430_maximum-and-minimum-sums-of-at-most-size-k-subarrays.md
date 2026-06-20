@@ -1,19 +1,30 @@
 # 3430 — Maximum And Minimum Sums Of At Most Size K Subarrays
 
-## Deskripsi
-
-**Soal:** [3430. Maximum And Minimum Sums Of At Most Size K Subarrays](https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countContributions(leftDist, rightDist, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func min(a, b int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -65,9 +76,9 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	// --- Monotonic stacks ---
 
 	// Previous smaller (strict)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ps := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		for len(stack) > 0 && nums[stack[len(stack)-1]] > nums[i] {
@@ -82,7 +93,7 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	}
 
 	// Next smaller (strict: nums[ns[i]] < nums[i])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ns := make([]int, n)
 	stack = stack[:0]
 	for i := n - 1; i >= 0; i-- {
@@ -98,7 +109,7 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	}
 
 	// Previous greater (strict)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pg := make([]int, n)
 	stack = stack[:0]
 	for i := 0; i < n; i++ {
@@ -114,7 +125,7 @@ func minMaxSumOfSubarraysAtMostK(nums []int, k int) (int64, int64) {
 	}
 
 	// Next greater (strict: nums[ng[i]] > nums[i])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ng := make([]int, n)
 	stack = stack[:0]
 	for i := n - 1; i >= 0; i-- {

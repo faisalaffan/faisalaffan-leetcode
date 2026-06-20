@@ -1,19 +1,32 @@
 # 0768 — Max Chunks To Make Sorted Ii
 
-## Deskripsi
-
-**Soal:** [0768. Max Chunks To Make Sorted Ii](https://leetcode.com/problems/max-chunks-to-make-sorted-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxChunksToSorted(arr []int) int
+```
+
+> **💡 Hint:** Prefix Max / Suffix Min
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Prefix Max / Suffix Min
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,13 +57,13 @@ func main() {
 
 func maxChunksToSorted(arr []int) int {
 	n := len(arr)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// prefixMax[i] = max(arr[0..i])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixMax := make([]int, n)
 	prefixMax[0] = arr[0]
 	for i := 1; i < n; i++ {
@@ -62,7 +75,7 @@ func maxChunksToSorted(arr []int) int {
 	}
 
 	// suffixMin[i] = min(arr[i..n-1])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suffixMin := make([]int, n)
 	suffixMin[n-1] = arr[n-1]
 	for i := n - 2; i >= 0; i-- {

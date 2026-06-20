@@ -1,17 +1,30 @@
 # 0498 — Diagonal Traverse
 
-## Deskripsi
-
-**Soal:** [0498. Diagonal Traverse](https://leetcode.com/problems/diagonal-traverse/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func DiagonalTraverse(mat [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(m * n)  
 **Kompleksitas Ruang:** O(1) (excluding output)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +47,7 @@ func DiagonalTraverse(mat [][]int) []int {
 		return []int{}
 	}
 	m, n := len(mat), len(mat[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, m*n)
 	row, col := 0, 0
 	dir := 1 // 1 = up-right, -1 = down-left

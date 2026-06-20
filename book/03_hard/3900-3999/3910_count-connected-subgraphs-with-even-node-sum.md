@@ -1,19 +1,32 @@
 # 3910 — Count Connected Subgraphs With Even Node Sum
 
-## Deskripsi
-
-**Soal:** [3910. Count Connected Subgraphs With Even Node Sum](https://leetcode.com/problems/count-connected-subgraphs-with-even-node-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func evenSumSubgraphs(nums []int, edges [][]int) int
+```
+
+> **💡 Hint:** Tree DP. For each node, compute count of connected
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman), Tree DP (DP pada pohon)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Tree DP. For each node, compute count of connected
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,12 +57,12 @@ const MOD = 1000000007
 
 func evenSumSubgraphs(nums []int, edges [][]int) int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]

@@ -1,21 +1,32 @@
 # 1591 — Strange Printer Ii
 
-## Deskripsi
-
-**Soal:** [1591. Strange Printer Ii](https://leetcode.com/problems/strange-printer-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isPrintable(targetGrid [][]int) bool
+```
+
+> **💡 Hint:** // 1. For each color (1..60), find its bounding box (min/max row and col).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Topological Sort (pengurutan topologi)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func isPrintable(targetGrid [][]int) bool`
-
-> **Ide Kunci:** // 1. For each color (1..60), find its bounding box (min/max row and col).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,9 +63,9 @@ func isPrintable(targetGrid [][]int) bool {
 		minR, maxR int
 		minC, maxC int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	boxes := make(map[int]*bbox)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	hasColor := make(map[int]bool)
 
 	for r := 0; r < m; r++ {
@@ -83,7 +94,7 @@ func isPrintable(targetGrid [][]int) bool {
 
 	// Build adjacency: if color a's bounding box contains a cell of color b (b != a),
 	// then a must be painted before b (edge a -> b).
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	graph := make(map[int]map[int]bool)
 	for color, b := range boxes {
 		if graph[color] == nil {
@@ -104,7 +115,7 @@ func isPrintable(targetGrid [][]int) bool {
 
 	// Detect cycle via DFS (topological sort / Kahn's algorithm)
 	// Use three-color DFS: 0=unvisited, 1=visiting, 2=visited
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	state := make(map[int]int)
 	var colors []int
 	for c := range hasColor {

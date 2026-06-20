@@ -1,17 +1,30 @@
 # 3354 — Make Array Elements Equal To Zero
 
-## Deskripsi
-
-**Soal:** [3354. Make Array Elements Equal To Zero](https://leetcode.com/problems/make-array-elements-equal-to-zero/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MakeArrayElementsEqualToZero(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n^2). Space: O(1).  
 **Kompleksitas Ruang:** O(1).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +48,7 @@ func MakeArrayElementsEqualToZero(nums []int) int {
 	count := 0
 
 	for start := 0; start < n; start++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		arr := make([]int, n)
 		copy(arr, nums)
 

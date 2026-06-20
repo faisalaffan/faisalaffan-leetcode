@@ -1,19 +1,30 @@
 # 0384 — Shuffle An Array
 
-## Deskripsi
-
-**Soal:** [0384. Shuffle An Array](https://leetcode.com/problems/shuffle-an-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(nums []int) Solution
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n) per shuffle  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func Constructor(nums []int) Solution`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,21 +44,21 @@ type Solution struct {
 }
 
 func Constructor(nums []int) Solution {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	orig := make([]int, len(nums))
 	copy(orig, nums)
 	return Solution{original: orig}
 }
 
 func (s *Solution) Reset() []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(s.original))
 	copy(result, s.original)
 	return result
 }
 
 func (s *Solution) Shuffle() []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(s.original))
 	copy(result, s.original)
 	// Fisher-Yates

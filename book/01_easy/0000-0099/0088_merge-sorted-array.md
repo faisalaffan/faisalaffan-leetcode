@@ -1,19 +1,30 @@
 # 0088 — Merge Sorted Array
 
-## Deskripsi
-
-**Soal:** [0088. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Merge(nums1 []int, m int, nums2 []int, n int) 
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Merge Sort
 
 **Kompleksitas Waktu:** O(m+n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Merge Sort (pengurutan gabung)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Merge(nums1 []int, m int, nums2 []int, n int) `
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

@@ -1,17 +1,30 @@
 # 2456 — Most Popular Video Creator
 
-## Deskripsi
-
-**Soal:** [2456. Most Popular Video Creator](https://leetcode.com/problems/most-popular-video-creator/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func mostPopularCreator(creators []string, ids []string, views []int) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +52,7 @@ type Creator struct {
 }
 
 func mostPopularCreator(creators []string, ids []string, views []int) [][]string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	creatorsMap := make(map[string]*Creator)
 	maxTotal := 0
 
@@ -59,7 +72,7 @@ func mostPopularCreator(creators []string, ids []string, views []int) [][]string
 		}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	ans := make([][]string, 0)
 	for name, c := range creatorsMap {
 		if c.total == maxTotal {

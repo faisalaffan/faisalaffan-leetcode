@@ -1,17 +1,30 @@
 # 1631 — Path With Minimum Effort
 
-## Deskripsi
-
-**Soal:** [1631. Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumEffortPath(heights [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** O(R*C log(R*C)), Space: O(R*C)  
 **Kompleksitas Ruang:** O(R*C)
 
-**Algoritma:** Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -70,7 +83,7 @@ func MinimumEffortPath(heights [][]int) int {
 		return 0
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	effort := make([][]int, rows)
 	for i := 0; i < rows; i++ {
 		effort[i] = make([]int, cols)
@@ -81,11 +94,13 @@ func MinimumEffortPath(heights [][]int) int {
 	effort[0][0] = 0
 
 	pq := &EffortPQ{}
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &Point{x: 0, y: 0, effort: 0})
 
 	dirs := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		p := heap.Pop(pq).(*Point)
 		if p.effort > effort[p.x][p.y] {
 			continue
@@ -109,6 +124,7 @@ func MinimumEffortPath(heights [][]int) int {
 			}
 			if newEffort < effort[nx][ny] {
 				effort[nx][ny] = newEffort
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &Point{x: nx, y: ny, effort: newEffort})
 			}
 		}

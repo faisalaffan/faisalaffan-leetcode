@@ -1,21 +1,32 @@
 # 3161 — Block Placement Queries
 
-## Deskripsi
-
-**Soal:** [3161. Block Placement Queries](https://leetcode.com/problems/block-placement-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func blockPlacementQueries(queries [][]int) []bool
+```
+
+> **💡 Hint:** maintain a sorted set of obstacle positions and a max-heap of gaps.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func blockPlacementQueries(queries [][]int) []bool`
-
-> **Ide Kunci:** maintain a sorted set of obstacle positions and a max-heap of gaps.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,12 +65,13 @@ func (h *maxIntHeap) Pop() any {
 func blockPlacementQueries(queries [][]int) []bool {
 	obstacles := []int{} // sorted positions
 	gapHeap := &maxIntHeap{}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	gapCount := make(map[int]int)
 
 	// Insert initial gap from 0 to a large coordinate (1e9).
 	const maxCoord = 1_000_000_000
 	initialGap := maxCoord
+  // Masukkan elemen ke priority queue
 	heap.Push(gapHeap, initialGap)
 	gapCount[initialGap] = 1
 
@@ -68,6 +80,7 @@ func blockPlacementQueries(queries [][]int) []bool {
 			return
 		}
 		gapCount[sz]++
+  // Masukkan elemen ke priority queue
 		heap.Push(gapHeap, sz)
 	}
 
@@ -84,12 +97,12 @@ func blockPlacementQueries(queries [][]int) []bool {
 			if cnt := gapCount[top]; cnt > 0 {
 				return top
 			}
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(gapHeap)
 		}
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, 0)
 	for _, q := range queries {
 		if q[0] == 1 {

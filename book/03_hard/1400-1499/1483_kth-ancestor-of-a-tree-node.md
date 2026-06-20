@@ -1,19 +1,32 @@
 # 1483 — Kth Ancestor Of A Tree Node
 
-## Deskripsi
-
-**Soal:** [1483. Kth Ancestor Of A Tree Node](https://leetcode.com/problems/kth-ancestor-of-a-tree-node/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(n int, parent []int) TreeAncestor
+```
+
+> **💡 Hint:** Binary Lifting (doubling)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Lifting, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Lifting (lompatan biner untuk LCA)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Lifting** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary Lifting (doubling)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func Constructor(n int, parent []int) TreeAncestor {
 	for (1 << LOG) <= n {
 		LOG++
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	up := make([][]int, n)
 	for i := 0; i < n; i++ {
 		up[i] = make([]int, LOG)

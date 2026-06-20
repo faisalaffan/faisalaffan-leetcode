@@ -1,19 +1,30 @@
 # 2289 — Steps To Make Array Non Decreasing
 
-## Deskripsi
-
-**Soal:** [2289. Steps To Make Array Non Decreasing](https://leetcode.com/problems/steps-to-make-array-non-decreasing/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func totalSteps(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func totalSteps(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,11 +38,11 @@ import "fmt"
 
 func totalSteps(nums []int) int {
 	stack := []int{} // indices
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	steps := make([]int, len(nums))
 	maxSteps := 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		curSteps := 0
 		for len(stack) > 0 && nums[stack[len(stack)-1]] <= nums[i] {

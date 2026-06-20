@@ -1,19 +1,30 @@
 # 1643 — Kth Smallest Instructions
 
-## Deskripsi
-
-**Soal:** [1643. Kth Smallest Instructions](https://leetcode.com/problems/kth-smallest-instructions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func nCr(n, r int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func nCr(n, r int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +54,6 @@ func kthSmallestPath(destination []int, k int) string {
 	v, h := destination[0], destination[1] // vertical (V) and horizontal (H) steps
 	n := v + h                              // total steps
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, n)
 
 	for i := 0; i < n; i++ {

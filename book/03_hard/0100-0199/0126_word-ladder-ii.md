@@ -1,19 +1,30 @@
 # 0126 — Word Ladder Ii
 
-## Deskripsi
-
-**Soal:** [0126. Word Ladder Ii](https://leetcode.com/problems/word-ladder-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findLadders(beginWord string, endWord string, wordList []string) [][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar), Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findLadders(beginWord string, endWord string, wordList []string) [][]string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import (
 )
 
 func findLadders(beginWord string, endWord string, wordList []string) [][]string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	wordSet := make(map[string]bool)
 	for _, w := range wordList {
 		wordSet[w] = true
@@ -66,7 +77,6 @@ func findLadders(beginWord string, endWord string, wordList []string) [][]string
 	var dfs func(string)
 	dfs = func(word string) {
 		if word == endWord {
-  // Membuat slice untuk menyimpan hasil
 			tmp := make([]string, len(path))
 			copy(tmp, path)
 			result = append(result, tmp)
@@ -88,7 +98,7 @@ func findLadders(beginWord string, endWord string, wordList []string) [][]string
 func getNeighbors(word string, wordSet map[string]bool) []string {
 	neighbors := []string{}
 	bytes := []byte(word)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(bytes); i++ {
 		original := bytes[i]
 		for c := 'a'; c <= 'z'; c++ {

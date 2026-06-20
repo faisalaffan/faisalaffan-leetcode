@@ -1,17 +1,30 @@
 # 1096 — Brace Expansion Ii
 
-## Deskripsi
-
-**Soal:** [1096. Brace Expansion Ii](https://leetcode.com/problems/brace-expansion-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func braceExpansionII(expression string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -86,7 +99,7 @@ func isLetter(ch byte) bool {
 }
 
 func union(a, b []string) []string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	set := make(map[string]bool)
 	for _, s := range a {
 		set[s] = true
@@ -94,7 +107,6 @@ func union(a, b []string) []string {
 	for _, s := range b {
 		set[s] = true
 	}
-  // Membuat slice untuk menyimpan hasil
 	res := make([]string, 0, len(set))
 	for s := range set {
 		res = append(res, s)
@@ -106,14 +118,13 @@ func product(a, b []string) []string {
 	if len(a) == 0 || len(b) == 0 {
 		return nil
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	set := make(map[string]bool)
 	for _, s1 := range a {
 		for _, s2 := range b {
 			set[s1+s2] = true
 		}
 	}
-  // Membuat slice untuk menyimpan hasil
 	res := make([]string, 0, len(set))
 	for s := range set {
 		res = append(res, s)

@@ -1,19 +1,32 @@
 # 0296 — Best Meeting Point
 
-## Deskripsi
-
-**Soal:** [0296. Best Meeting Point](https://leetcode.com/problems/best-meeting-point/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minTotalDistance(grid [][]int) int
+```
+
+> **💡 Hint:** Median of coordinates (Manhattan distance).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Median of coordinates (Manhattan distance).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -90,7 +103,9 @@ func minTotalDistance(grid [][]int) int {
 	}
 
 	// Sort both lists.
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(rows)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(cols)
 
 	// Find medians.

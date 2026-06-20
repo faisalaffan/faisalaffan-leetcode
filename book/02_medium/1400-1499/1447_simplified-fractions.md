@@ -1,17 +1,30 @@
 # 1447 — Simplified Fractions
 
-## Deskripsi
-
-**Soal:** [1447. Simplified Fractions](https://leetcode.com/problems/simplified-fractions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func simplifiedFractions(n int) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** O(n^2 * log(min(i,j))) for generating all fractions  
 **Kompleksitas Ruang:** O(n^2) for result
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,6 @@ func gcd(a, b int) int {
 // Time: O(n^2 * log(min(i,j))) for generating all fractions
 // Space: O(n^2) for result
 func simplifiedFractions(n int) []string {
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 
 	for denominator := 2; denominator <= n; denominator++ {

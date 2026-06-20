@@ -1,19 +1,32 @@
 # 3791 — Number Of Balanced Integers In A Range
 
-## Deskripsi
-
-**Soal:** [3791. Number Of Balanced Integers In A Range](https://leetcode.com/problems/number-of-balanced-integers-in-a-range/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countBalanced(low int64, high int64) int64
+```
+
+> **💡 Hint:** Digit DP tracking positions and digit sum differences.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Digit DP tracking positions and digit sum differences.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,9 +68,9 @@ func countUpTo(n int64) int64 {
 	// dp[pos][diff][tight][started]
 	// diff = sum_even - sum_odd (can be negative, offset by 9*m)
 	offset := 9 * m
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	memo := make([][][][]int64, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = make([][][]int64, 2*offset+1)
 		for j := range memo[i] {
@@ -124,7 +137,7 @@ func countUpTo(n int64) int64 {
 }
 
 func split(n int64) []int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return []int{0}
 	}

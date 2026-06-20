@@ -1,19 +1,30 @@
 # 1938 — Maximum Genetic Difference Query
 
-## Deskripsi
-
-**Soal:** [1938. Maximum Genetic Difference Query](https://leetcode.com/problems/maximum-genetic-difference-query/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newTrie() *Trie
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Trie
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newTrie() *Trie`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -88,7 +99,7 @@ func (t *Trie) maxXor(x int) int {
 func maxGeneticDifference(parents []int, queries [][]int) []int {
 	n := len(parents)
 	// Build adjacency and find root
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	children := make([][]int, n)
 	var root int
 	for i, p := range parents {
@@ -100,14 +111,14 @@ func maxGeneticDifference(parents []int, queries [][]int) []int {
 	}
 
 	// Group queries by node
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	qByNode := make([][][2]int, n)
 	for i, q := range queries {
 		node, val := q[0], q[1]
 		qByNode[node] = append(qByNode[node], [2]int{val, i})
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	trie := newTrie()
 

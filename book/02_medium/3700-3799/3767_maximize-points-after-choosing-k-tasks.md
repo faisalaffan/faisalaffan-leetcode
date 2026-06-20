@@ -1,19 +1,30 @@
 # 3767 — Maximize Points After Choosing K Tasks
 
-## Deskripsi
-
-**Soal:** [3767. Maximize Points After Choosing K Tasks](https://leetcode.com/problems/maximize-points-after-choosing-k-tasks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximizePointsAfterChoosingKTasks(technique1 []int, technique2 []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximizePointsAfterChoosingKTasks(technique1 []int, technique2 []int, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,6 @@ func maximizePointsAfterChoosingKTasks(technique1 []int, technique2 []int, k int
 		diff   int
 		t1, t2 int
 	}
-  // Membuat slice untuk menyimpan hasil
 	tasks := make([]task, n)
 	for i := 0; i < n; i++ {
 		tasks[i] = task{
@@ -44,6 +54,7 @@ func maximizePointsAfterChoosingKTasks(technique1 []int, technique2 []int, k int
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(tasks, func(i, j int) bool {
 		return tasks[i].diff > tasks[j].diff
 	})

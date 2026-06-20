@@ -1,17 +1,30 @@
 # 3627 — Maximum Median Sum Of Subsequences Of Size 3
 
-## Deskripsi
-
-**Soal:** [3627. Maximum Median Sum Of Subsequences Of Size 3](https://leetcode.com/problems/maximum-median-sum-of-subsequences-of-size-3/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumMedianSumOfSubsequencesOfSizeThree(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,6 +55,7 @@ func MaximumMedianSumOfSubsequencesOfSizeThree(nums []int) int {
 		for j := i + 1; j < n; j++ {
 			for k := j + 1; k < n; k++ {
 				sub := []int{nums[i], nums[j], nums[k]}
+  // Urutkan secara ascending — O(n log n)
 				sort.Ints(sub)
 				sum := sub[0] + sub[1] + sub[2]
 				if sum > maxSum {

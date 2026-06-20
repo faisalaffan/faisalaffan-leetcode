@@ -1,19 +1,30 @@
 # 0248 — Strobogrammatic Number Iii
 
-## Deskripsi
-
-**Soal:** [0248. Strobogrammatic Number Iii](https://leetcode.com/problems/strobogrammatic-number-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func strobogrammaticInRange(low string, high string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func strobogrammaticInRange(low string, high string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -62,7 +73,6 @@ func strobogrammaticInRange(low string, high string) int {
 			}
 		}
 
-  // Membuat slice untuk menyimpan hasil
 		cur := make([]byte, length)
 		dfs(cur, 0, length-1)
 	}
@@ -99,7 +109,7 @@ func generate(n int) []string {
 }
 
 func helper(n, m int) []string {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return []string{""}
 	}
@@ -108,7 +118,6 @@ func helper(n, m int) []string {
 	}
 
 	inner := helper(n-2, m)
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 	for _, s := range inner {
 		if n != m {
@@ -123,7 +132,7 @@ func helper(n, m int) []string {
 }
 
 func countStrobogrammatic(n int) int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}

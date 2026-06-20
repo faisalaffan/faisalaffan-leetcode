@@ -1,19 +1,30 @@
 # 2604 — Minimum Time To Eat All Grains
 
-## Deskripsi
-
-**Soal:** [2604. Minimum Time To Eat All Grains](https://leetcode.com/problems/minimum-time-to-eat-all-grains/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTime(hens []int, grains []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumTime(hens []int, grains []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +51,9 @@ import (
 //
 // Complexity: O((n+m) log maxPos) time, O(1) space
 func minimumTime(hens []int, grains []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(hens)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(grains)
 
 	canEat := func(T int) bool {

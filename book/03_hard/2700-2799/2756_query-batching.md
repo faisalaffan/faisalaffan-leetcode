@@ -1,21 +1,32 @@
 # 2756 — Query Batching
 
-## Deskripsi
-
-**Soal:** [2756. Query Batching](https://leetcode.com/problems/query-batching/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func queryBatching(queries []int, batchSize int, batchTime int) []int
+```
+
+> **💡 Hint:** Process queries in batches of up to batchSize.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func queryBatching(queries []int, batchSize int, batchTime int) []int`
-
-> **Ide Kunci:** Process queries in batches of up to batchSize.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,16 +52,16 @@ type query struct {
 func queryBatching(queries []int, batchSize int, batchTime int) []int {
 	n := len(queries)
 	// Sort by arrival time, tracking original index
-  // Membuat slice untuk menyimpan hasil
 	sorted := make([]query, n)
 	for i, t := range queries {
 		sorted[i] = query{t, i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(sorted, func(i, j int) bool {
 		return sorted[i].arrival < sorted[j].arrival
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 	time := 0
 	ptr := 0

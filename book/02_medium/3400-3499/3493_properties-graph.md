@@ -1,17 +1,30 @@
 # 3493 — Properties Graph
 
-## Deskripsi
-
-**Soal:** [3493. Properties Graph](https://leetcode.com/problems/properties-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func PropertiesGraph(properties [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,16 +52,16 @@ func main() {
 
 func PropertiesGraph(properties [][]int, k int) int {
 	n := len(properties)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Build adjacency: nodes share >= k common properties
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for i := 0; i < n; i++ {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		setI := make(map[int]bool)
 		for _, v := range properties[i] {
 			setI[v] = true
@@ -68,7 +81,6 @@ func PropertiesGraph(properties [][]int, k int) int {
 	}
 
 	// DFS to count connected components
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	components := 0
 	var dfs func(u int)

@@ -1,17 +1,30 @@
 # 0568 — Maximum Vacation Days
 
-## Deskripsi
-
-**Soal:** [0568. Maximum Vacation Days](https://leetcode.com/problems/maximum-vacation-days/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxVacationDays(flights [][]int, days [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func maxVacationDays(flights [][]int, days [][]int) int {
 	k := len(days[0])   // weeks
 
 	// prev[j] = max vacation days ending at city j for current week
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prev := make([]int, n)
 	for j := 0; j < n; j++ {
 		// Week 0: can we reach city j?
@@ -55,7 +68,7 @@ func maxVacationDays(flights [][]int, days [][]int) int {
 	}
 
 	for w := 1; w < k; w++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		cur := make([]int, n)
 		for j := 0; j < n; j++ {
 			cur[j] = -1

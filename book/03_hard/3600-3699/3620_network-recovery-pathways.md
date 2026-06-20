@@ -1,19 +1,32 @@
 # 3620 — Network Recovery Pathways
 
-## Deskripsi
-
-**Soal:** [3620. Network Recovery Pathways](https://leetcode.com/problems/network-recovery-pathways/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMaxPathScore(edges [][]int, online []bool, k int64) int
+```
+
+> **💡 Hint:** Binary search on min edge cost + Dijkstra/DP to check feasibility.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Dynamic Programming, Topological Sort, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Dynamic Programming (DP), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on min edge cost + Dijkstra/DP to check feasibility.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,15 +65,16 @@ func findMaxPathScore(edges [][]int, online []bool, k int64) int {
 
 	// Build adjacency
 	type edge struct{ to, cost int }
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]edge, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	costs := make([]int, 0)
 	for _, e := range edges {
 		u, v, c := e[0], e[1], e[2]
 		adj[u] = append(adj[u], edge{v, c})
 		costs = append(costs, c)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(costs)
 
 	if !online[0] || !online[n-1] {
@@ -70,9 +84,9 @@ func findMaxPathScore(edges [][]int, online []bool, k int64) int {
 	// Check if path with minEdge >= x and total cost <= k exists
 	check := func(x int) bool {
 		// DP: dist[node] = min total cost from node 0 to node
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dist := make([]int64, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range dist {
 			dist[i] = math.MaxInt64
 		}

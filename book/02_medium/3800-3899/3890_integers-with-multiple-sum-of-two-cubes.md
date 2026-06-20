@@ -1,21 +1,32 @@
 # 3890 — Integers With Multiple Sum Of Two Cubes
 
-## Deskripsi
-
-**Soal:** [3890. Integers With Multiple Sum Of Two Cubes](https://leetcode.com/problems/integers-with-multiple-sum-of-two-cubes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func IntegersWithMultipleSumOfTwoCubes(n int) []int
+```
+
+> **💡 Hint:** Enumerate a,b up to 1000 (since 1000^3 = 1e9). Count frequency
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(C^2) precompute + O(N log N) sort  
 **Kompleksitas Ruang:** O(C^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func IntegersWithMultipleSumOfTwoCubes(n int) []int`
-
-> **Ide Kunci:** Enumerate a,b up to 1000 (since 1000^3 = 1e9). Count frequency
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ import (
 )
 
 func IntegersWithMultipleSumOfTwoCubes(n int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cubeCount := make(map[int]int)
 	limit := 1000
 	for a := 1; a <= limit; a++ {
@@ -57,6 +68,7 @@ func IntegersWithMultipleSumOfTwoCubes(n int) []int {
 			ans = append(ans, sum)
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(ans)
 	return ans
 }

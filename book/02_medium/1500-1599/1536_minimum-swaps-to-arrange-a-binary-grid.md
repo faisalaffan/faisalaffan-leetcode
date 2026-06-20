@@ -1,17 +1,30 @@
 # 1536 — Minimum Swaps To Arrange A Binary Grid
 
-## Deskripsi
-
-**Soal:** [1536. Minimum Swaps To Arrange A Binary Grid](https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinSwaps(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N^2), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func MinSwaps(grid [][]int) int {
 	n := len(grid)
 
 	// trailingZeros[i] = number of trailing zeros in row i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	trailingZeros := make([]int, n)
 	for i := 0; i < n; i++ {
 		count := 0

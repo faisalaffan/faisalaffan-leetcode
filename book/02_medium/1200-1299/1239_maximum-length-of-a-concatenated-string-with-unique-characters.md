@@ -1,19 +1,30 @@
 # 1239 — Maximum Length Of A Concatenated String With Unique Characters
 
-## Deskripsi
-
-**Soal:** [1239. Maximum Length Of A Concatenated String With Unique Characters](https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxLength(arr []string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking, Bitmask
 
 **Kompleksitas Waktu:** O(2^n) worst case  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Backtracking (pelacakan mundur), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxLength(arr []string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ import (
 // Space: O(n)
 
 func maxLength(arr []string) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	masks := make([]int, 0)
 
 	for _, s := range arr {

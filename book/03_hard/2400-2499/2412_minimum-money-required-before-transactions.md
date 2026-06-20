@@ -1,21 +1,32 @@
 # 2412 — Minimum Money Required Before Transactions
 
-## Deskripsi
-
-**Soal:** [2412. Minimum Money Required Before Transactions](https://leetcode.com/problems/minimum-money-required-before-transactions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumMoney(transactions [][]int) int64
+```
+
+> **💡 Hint:** Split transactions into two groups:
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumMoney(transactions [][]int) int64`
-
-> **Ide Kunci:** Split transactions into two groups:
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,9 +59,9 @@ import (
 
 func minimumMoney(transactions [][]int) int64 {
 	// Separate loss and gain transactions
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	loss := make([][]int, 0)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	gain := make([][]int, 0)
 
 	for _, t := range transactions {
@@ -63,11 +74,13 @@ func minimumMoney(transactions [][]int) int64 {
 	}
 
 	// Sort loss transactions by cashback descending (recover more money sooner)
+  // Custom sort dengan comparator
 	sort.Slice(loss, func(i, j int) bool {
 		return loss[i][1] > loss[j][1]
 	})
 
 	// Sort gain transactions by cost ascending (spend less money first)
+  // Custom sort dengan comparator
 	sort.Slice(gain, func(i, j int) bool {
 		return gain[i][0] < gain[j][0]
 	})

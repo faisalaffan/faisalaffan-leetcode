@@ -1,19 +1,30 @@
 # 1229 — Meeting Scheduler
 
-## Deskripsi
-
-**Soal:** [1229. Meeting Scheduler](https://leetcode.com/problems/meeting-scheduler/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minAvailableDuration(slots1 [][]int, slots2 [][]int, duration int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n + m log m)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Two Pointer (penunjuk kiri & kanan), Two Pointer (penunjuk kiri & kanan)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func minAvailableDuration(slots1 [][]int, slots2 [][]int, duration int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,9 @@ import (
 // Space: O(1)
 
 func minAvailableDuration(slots1 [][]int, slots2 [][]int, duration int) []int {
+  // Custom sort dengan comparator
 	sort.Slice(slots1, func(i, j int) bool { return slots1[i][0] < slots1[j][0] })
+  // Custom sort dengan comparator
 	sort.Slice(slots2, func(i, j int) bool { return slots2[i][0] < slots2[j][0] })
 
 	i, j := 0, 0

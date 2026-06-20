@@ -1,17 +1,30 @@
 # 1501 — Countries You Can Safely Invest In
 
-## Deskripsi
-
-**Soal:** [1501. Countries You Can Safely Invest In](https://leetcode.com/problems/countries-you-can-safely-invest-in/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindSafeCountries(personCountry map[int]string, countryName map[string]string, calls [][3]int) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Trie
 
 **Kompleksitas Waktu:** O(N), Space: O(K) where N = calls, K = countries  
 **Kompleksitas Ruang:** O(K) where N = calls, K = countries
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,9 +53,9 @@ func main() {
 
 func FindSafeCountries(personCountry map[int]string, countryName map[string]string, calls [][3]int) []string {
 	// Time: O(N), Space: O(K) where N = calls, K = countries
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	countryDur := make(map[string]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	countryCount := make(map[string]int)
 	globalDur := 0
 	globalCount := 0
@@ -68,7 +81,6 @@ func FindSafeCountries(personCountry map[int]string, countryName map[string]stri
 	}
 	globalAvg := float64(globalDur) / float64(globalCount)
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 	for code, dur := range countryDur {
 		avg := float64(dur) / float64(countryCount[code])

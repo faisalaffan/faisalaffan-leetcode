@@ -1,17 +1,30 @@
 # 1584 — Min Cost To Connect All Points
 
-## Deskripsi
-
-**Soal:** [1584. Min Cost To Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinCostConnectPoints(points [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(N^2 log N), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -75,16 +88,17 @@ func MinCostConnectPoints(points [][]int) int {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	pq := &PQ{}
 	heap.Init(pq)
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &PQItem{dist: 0, node: 0})
 
 	totalCost := 0
 	edgesUsed := 0
 
 	for pq.Len() > 0 && edgesUsed < n {
+  // Ambil elemen terkecil/terbesar dari heap
 		item := heap.Pop(pq).(*PQItem)
 		if visited[item.node] {
 			continue
@@ -96,6 +110,7 @@ func MinCostConnectPoints(points [][]int) int {
 		for i := 0; i < n; i++ {
 			if !visited[i] {
 				dist := abs(points[item.node][0]-points[i][0]) + abs(points[item.node][1]-points[i][1])
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &PQItem{dist: dist, node: i})
 			}
 		}

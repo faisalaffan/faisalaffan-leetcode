@@ -1,19 +1,30 @@
 # 2901 — Longest Unequal Adjacent Groups Subsequence Ii
 
-## Deskripsi
-
-**Soal:** [2901. Longest Unequal Adjacent Groups Subsequence Ii](https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LongestUnequalAdjacentGroupsSubsequenceIi(words []string, groups []int) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func LongestUnequalAdjacentGroupsSubsequenceIi(words []string, groups []int) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,11 +38,11 @@ import "fmt"
 
 func LongestUnequalAdjacentGroupsSubsequenceIi(words []string, groups []int) []string {
 	n := len(words)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prev := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range prev {
 		prev[i] = -1
 	}
@@ -41,7 +52,7 @@ func LongestUnequalAdjacentGroupsSubsequenceIi(words []string, groups []int) []s
 			return -1
 		}
 		diff := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(a); i++ {
 			if a[i] != b[i] {
 				diff++
@@ -69,7 +80,6 @@ func LongestUnequalAdjacentGroupsSubsequenceIi(words []string, groups []int) []s
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, bestLen)
 	for i := bestLen - 1; i >= 0; i-- {
 		result[i] = words[bestIdx]

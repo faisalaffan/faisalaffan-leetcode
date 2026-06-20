@@ -1,19 +1,30 @@
 # 0077 — Combinations
 
-## Deskripsi
-
-**Soal:** [0077. Combinations](https://leetcode.com/problems/combinations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func combine(n int, k int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(C(n,k) * k)  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func combine(n int, k int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ func combine(n int, k int) [][]int {
 	var backtrack func(start int, path []int)
 	backtrack = func(start int, path []int) {
 		if len(path) == k {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			comb := make([]int, k)
 			copy(comb, path)
 			result = append(result, comb)

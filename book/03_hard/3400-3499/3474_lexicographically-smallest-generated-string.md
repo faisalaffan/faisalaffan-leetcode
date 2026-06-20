@@ -1,19 +1,32 @@
 # 3474 — Lexicographically Smallest Generated String
 
-## Deskripsi
-
-**Soal:** [3474. Lexicographically Smallest Generated String](https://leetcode.com/problems/lexicographically-smallest-generated-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func generateString(s string, t string) string
+```
+
+> **💡 Hint:** For each position in s, determine the best character
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each position in s, determine the best character
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 func generateString(s string, t string) string {
 	m, n := len(s), len(t)
 	// pref[i] = longest prefix of t that is subsequence of s[:i]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, m+1)
 	ti := 0
 	for i := 0; i < m; i++ {
@@ -55,7 +68,7 @@ func generateString(s string, t string) string {
 	}
 
 	// suff[i] = longest suffix of t that is subsequence of s[i:]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suff := make([]int, m+1)
 	ti = n - 1
 	for i := m - 1; i >= 0; i-- {

@@ -1,21 +1,32 @@
 # 2999 — Count The Number Of Powerful Integers
 
-## Deskripsi
-
-**Soal:** [2999. Count The Number Of Powerful Integers](https://leetcode.com/problems/count-the-number-of-powerful-integers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfPowerfulInt(start, finish int64, limit int, s string) int64
+```
+
+> **💡 Hint:** Digit DP
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfPowerfulInt(start, finish int64, limit int, s string) int64`
-
-> **Ide Kunci:** Digit DP
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -70,7 +81,7 @@ func numberOfPowerfulInt(start, finish int64, limit int, s string) int64 {
 			pos   int
 			tight bool
 		}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		memo := make(map[state]int64)
 
 		var dfs func(pos int, tight bool) int64

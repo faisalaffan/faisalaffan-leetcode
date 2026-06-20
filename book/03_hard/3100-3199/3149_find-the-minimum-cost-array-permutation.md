@@ -1,19 +1,30 @@
 # 3149 — Find The Minimum Cost Array Permutation
 
-## Deskripsi
-
-**Soal:** [3149. Find The Minimum Cost Array Permutation](https://leetcode.com/problems/find-the-minimum-cost-array-permutation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMinCostArrayPermutation(nums []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findMinCostArrayPermutation(nums []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ func findMinCostArrayPermutation(nums []int) []int {
 	totalMasks := 1 << n
 
 	// dp[mask][last] = min cost to form subset `mask` ending with `last`
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, totalMasks)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	parent := make([][]int, totalMasks) // to reconstruct path
 
 	for mask := 0; mask < totalMasks; mask++ {
@@ -80,7 +91,7 @@ func findMinCostArrayPermutation(nums []int) []int {
 
 	// Find min cost and last element (preferring lexicographically smaller full permutation)
 	minCost := math.MaxInt32
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bestCandidates := make([]int, 0)
 
 	for last := 0; last < n; last++ {
@@ -93,12 +104,12 @@ func findMinCostArrayPermutation(nums []int) []int {
 	}
 
 	// Reconstruct and pick lexicographically smallest
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bestPerm := make([]int, n)
 	first := true
 
 	for _, last := range bestCandidates {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		perm := make([]int, n)
 		pos := n - 1
 		mask := fullMask
@@ -129,7 +140,7 @@ func abs(x int) int {
 }
 
 func lexSmaller(a, b []int) bool {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(a); i++ {
 		if a[i] < b[i] {
 			return true

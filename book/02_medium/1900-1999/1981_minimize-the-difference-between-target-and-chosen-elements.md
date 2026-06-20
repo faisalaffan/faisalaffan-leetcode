@@ -1,17 +1,30 @@
 # 1981 — Minimize The Difference Between Target And Chosen Elements
 
-## Deskripsi
-
-**Soal:** [1981. Minimize The Difference Between Target And Chosen Elements](https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimizeTheDifference(mat [][]int, target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m * n * maxSum), Space: O(maxSum) where maxSum = 70*70 = 4900  
 **Kompleksitas Ruang:** O(maxSum) where maxSum = 70*70 = 4900
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,12 +44,10 @@ func main() {
 // Time: O(m * n * maxSum), Space: O(maxSum) where maxSum = 70*70 = 4900
 func MinimizeTheDifference(mat [][]int, target int) int {
 	m, n := len(mat), len(mat[0])
-  // Membuat slice untuk menyimpan hasil
 	possible := make([]bool, 4901)
 	possible[0] = true
 
 	for i := 0; i < m; i++ {
-  // Membuat slice untuk menyimpan hasil
 		next := make([]bool, 4901)
 		for s := 0; s < len(possible); s++ {
 			if possible[s] {

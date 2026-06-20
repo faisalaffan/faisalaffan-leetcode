@@ -1,19 +1,30 @@
 # 0711 — Number Of Distinct Islands Ii
 
-## Deskripsi
-
-**Soal:** [0711. Number Of Distinct Islands Ii](https://leetcode.com/problems/number-of-distinct-islands-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numDistinctIslandsII(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, DFS
 
 **Kompleksitas Waktu:** O(rows*cols * log(rows*cols)) for island detection and normalization  
 **Kompleksitas Ruang:** O(rows*cols)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numDistinctIslandsII(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +55,9 @@ func numDistinctIslandsII(grid [][]int) int {
 		return 0
 	}
 	rows, cols := len(grid), len(grid[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, rows)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range visited {
 		visited[i] = make([]bool, cols)
 	}
@@ -87,7 +98,6 @@ func numDistinctIslandsII(grid [][]int) int {
 
 		for _, t := range transforms {
 			// Apply transformation.
-  // Membuat slice untuk menyimpan hasil
 			transformed := make([]pair, len(shape))
 			for i, p := range shape {
 				newR := t[0]*p.r + t[1]*p.c
@@ -96,6 +106,7 @@ func numDistinctIslandsII(grid [][]int) int {
 			}
 
 			// Sort transformed points.
+  // Custom sort dengan comparator
 			sort.Slice(transformed, func(i, j int) bool {
 				if transformed[i].r != transformed[j].r {
 					return transformed[i].r < transformed[j].r
@@ -105,7 +116,7 @@ func numDistinctIslandsII(grid [][]int) int {
 
 			// Translate to origin (subtract min r, min c).
 			minR, minC := transformed[0].r, transformed[0].c
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 			for i := range transformed {
 				transformed[i].r -= minR
 				transformed[i].c -= minC
@@ -138,7 +149,7 @@ func numDistinctIslandsII(grid [][]int) int {
 		dfs(r, c+1, shape)
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	islandSet := make(map[string]bool)
 
 	for r := 0; r < rows; r++ {

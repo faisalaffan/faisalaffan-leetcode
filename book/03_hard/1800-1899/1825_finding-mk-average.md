@@ -1,19 +1,32 @@
 # 1825 — Finding Mk Average
 
-## Deskripsi
-
-**Soal:** [1825. Finding Mk Average](https://leetcode.com/problems/finding-mk-average/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewFenwick(n int) *Fenwick
+```
+
+> **💡 Hint:** Fenwick Tree (Binary Indexed Tree) + Circular Buffer.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, BFS, Prefix Sum, Bitmask, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Queue (antrian FIFO), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Fenwick Tree (Binary Indexed Tree) + Circular Buffer.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

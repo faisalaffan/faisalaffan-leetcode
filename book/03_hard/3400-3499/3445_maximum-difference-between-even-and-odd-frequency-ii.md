@@ -1,19 +1,32 @@
 # 3445 — Maximum Difference Between Even And Odd Frequency Ii
 
-## Deskripsi
-
-**Soal:** [3445. Maximum Difference Between Even And Odd Frequency Ii](https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxDifference(s string, k int) int
+```
+
+> **💡 Hint:** Enumerate all pairs (a,b). Use sliding window with prefix state
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Enumerate all pairs (a,b). Use sliding window with prefix state
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

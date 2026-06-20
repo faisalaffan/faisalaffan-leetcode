@@ -1,19 +1,30 @@
 # 3123 — Find Edges In Shortest Paths
 
-## Deskripsi
-
-**Soal:** [3123. Find Edges In Shortest Paths](https://leetcode.com/problems/find-edges-in-shortest-paths/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func dijkstra(n int, adj [][][]int, start int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO), Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func dijkstra(n int, adj [][][]int, start int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +57,7 @@ func (pq *PriorityQueue) Pop() interface{}    { old := *pq; n := len(old); it :=
 
 func dijkstra(n int, adj [][][]int, start int) []int {
 	const INF = 1 << 60
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
 	for i := 0; i < n; i++ {
 		dist[i] = INF
@@ -54,8 +65,10 @@ func dijkstra(n int, adj [][][]int, start int) []int {
 	dist[start] = 0
 	pq := &PriorityQueue{}
 	heap.Init(pq)
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &Item{node: start, dist: 0})
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		item := heap.Pop(pq).(*Item)
 		u, d := item.node, item.dist
 		if d > dist[u] {
@@ -65,6 +78,7 @@ func dijkstra(n int, adj [][][]int, start int) []int {
 			v, w := edge[0], edge[1]
 			if nd := d + w; nd < dist[v] {
 				dist[v] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &Item{node: v, dist: nd})
 			}
 		}
@@ -73,7 +87,7 @@ func dijkstra(n int, adj [][][]int, start int) []int {
 }
 
 func findEdgesInShortestPaths(n int, edges [][]int) []bool {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -85,7 +99,6 @@ func findEdgesInShortestPaths(n int, edges [][]int) []bool {
 	distFromEnd := dijkstra(n, adj, n-1)
 	shortest := distFromStart[n-1]
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, len(edges))
 	for i, e := range edges {
 		u, v, w := e[0], e[1], e[2]

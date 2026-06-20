@@ -1,17 +1,30 @@
 # 0797 — All Paths From Source To Target
 
-## Deskripsi
-
-**Soal:** [0797. All Paths From Source To Target](https://leetcode.com/problems/all-paths-from-source-to-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func allPathsSourceTarget(graph [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(2^n * n)  
 **Kompleksitas Ruang:** O(2^n * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,16 +43,16 @@ func main() {
 }
 
 func allPathsSourceTarget(graph [][]int) [][]int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	path := make([]int, 0)
 	path = append(path, 0)
 
 	var dfs func(node int)
 	dfs = func(node int) {
 		if node == len(graph)-1 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			pathCopy := make([]int, len(path))
 			copy(pathCopy, path)
 			result = append(result, pathCopy)

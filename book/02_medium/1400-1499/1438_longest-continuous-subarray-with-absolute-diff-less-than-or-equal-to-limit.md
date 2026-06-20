@@ -1,17 +1,30 @@
 # 1438 — Longest Continuous Subarray With Absolute Diff Less Than Or Equal To Limit
 
-## Deskripsi
-
-**Soal:** [1438. Longest Continuous Subarray With Absolute Diff Less Than Or Equal To Limit](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestSubarray(nums []int, limit int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O(n) where n = len(nums)  
 **Kompleksitas Ruang:** O(n) for deques
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,9 +53,9 @@ func main() {
 // Space: O(n) for deques
 func longestSubarray(nums []int, limit int) int {
 	// Monotonic deques for tracking min and max in current window
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	minDeque := make([]int, 0) // increasing
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	maxDeque := make([]int, 0) // decreasing
 
 	left := 0

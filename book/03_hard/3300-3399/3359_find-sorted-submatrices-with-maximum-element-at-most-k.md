@@ -1,17 +1,30 @@
 # 3359 — Find Sorted Submatrices With Maximum Element At Most K
 
-## Deskripsi
-
-**Soal:** [3359. Find Sorted Submatrices With Maximum Element At Most K](https://leetcode.com/problems/find-sorted-submatrices-with-maximum-element-at-most-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindSortedSubmatricesWithMaximumElementAtMostK(grid [][]int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +45,7 @@ func main() {
 
 func FindSortedSubmatricesWithMaximumElementAtMostK(grid [][]int, k int) int {
 	m, n := len(grid), len(grid[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rows := make([][]int, m)
 	for i := 0; i < m; i++ {
 		rows[i] = make([]int, n)
@@ -50,7 +63,6 @@ func FindSortedSubmatricesWithMaximumElementAtMostK(grid [][]int, k int) int {
 	result := 0
 	for j := 0; j < n; j++ {
 		type pair struct{ val, cnt int }
-  // Membuat slice untuk menyimpan hasil
 		stack := make([]pair, 0, m)
 		total := 0
 		for i := 0; i < m; i++ {

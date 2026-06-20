@@ -1,19 +1,32 @@
 # 3245 — Alternating Groups Iii
 
-## Deskripsi
-
-**Soal:** [3245. Alternating Groups Iii](https://leetcode.com/problems/alternating-groups-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func alternatingGroupsIII(colors []int, queries [][]int) []int64
+```
+
+> **💡 Hint:** Maintain maximal alternating intervals in a circular array using
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Fenwick Tree (BIT), Merge Sort
 
 **Kompleksitas Waktu:** O((n+q) log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Maintain maximal alternating intervals in a circular array using
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -68,14 +81,14 @@ func main() {
 
 func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 	n := len(colors)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return nil
 	}
 
 	// BIT for range updates and point queries (difference array of interval counts)
 	bitSize := n + 2
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bitVal := make([]int64, bitSize+1)
 
 	addVal := func(idx int, val int64) {
@@ -113,7 +126,7 @@ func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 	}
 
 	// intervals sorted by l
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	intervals := make([]interval, 0)
 	addInterval := func(l, r int) {
 		if l > r {
@@ -128,7 +141,7 @@ func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 		for pos < len(intervals) && intervals[pos].l < l {
 			pos++
 		}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		newIntervals := make([]interval, len(intervals)+1)
 		copy(newIntervals, intervals[:pos])
 		newIntervals[pos] = interval{l, r}
@@ -180,7 +193,7 @@ func alternatingGroupsIII(colors []int, queries [][]int) []int64 {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, 0)
 
 	for _, q := range queries {

@@ -1,17 +1,30 @@
 # 2434 — Using A Robot To Print The Lexicographically Smallest String
 
-## Deskripsi
-
-**Soal:** [2434. Using A Robot To Print The Lexicographically Smallest String](https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func robotWithString(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n * 26)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +45,6 @@ func main() {
 
 func robotWithString(s string) string {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
 	suffixMin := make([]byte, n+1)
 	suffixMin[n] = 'z' + 1
 	for i := n - 1; i >= 0; i-- {
@@ -43,9 +55,7 @@ func robotWithString(s string) string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	stack := make([]byte, 0, n)
-  // Membuat slice untuk menyimpan hasil
 	res := make([]byte, 0, n)
 	for i := 0; i < n; i++ {
 		stack = append(stack, s[i])

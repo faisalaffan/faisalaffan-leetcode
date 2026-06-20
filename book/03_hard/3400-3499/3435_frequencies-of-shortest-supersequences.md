@@ -1,19 +1,30 @@
 # 3435 — Frequencies Of Shortest Supersequences
 
-## Deskripsi
-
-**Soal:** [3435. Frequencies Of Shortest Supersequences](https://leetcode.com/problems/frequencies-of-shortest-supersequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FrequenciesOfShortestSupersequences(words []string) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Topological Sort (pengurutan topologi)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Topological Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func FrequenciesOfShortestSupersequences(words []string) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,11 +43,10 @@ import "fmt"
 
 func FrequenciesOfShortestSupersequences(words []string) [][]int {
 	// Build adjacency from words
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, 26)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indeg := make([]int, 26)
-  // Membuat slice untuk menyimpan hasil
 	present := make([]bool, 26)
 
 	for _, w := range words {
@@ -58,7 +68,7 @@ func FrequenciesOfShortestSupersequences(words []string) [][]int {
 	L := len(letters)
 
 	// Map letter to index in letters slice
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pos := make([]int, 26)
 	for i, c := range letters {
 		pos[c] = i
@@ -71,7 +81,7 @@ func FrequenciesOfShortestSupersequences(words []string) [][]int {
 		// mask bit = 1 → letter appears once (frequency 1)
 		// mask bit = 0 → letter appears twice (frequency 2)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		tmpIndeg := make([]int, 26)
 		copy(tmpIndeg, indeg)
 
@@ -91,7 +101,7 @@ func FrequenciesOfShortestSupersequences(words []string) [][]int {
 		}
 
 		// Kahn's topological sort
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		q := make([]int, 0, L)
 		visited := 0
 		for _, u := range letters {
@@ -135,7 +145,7 @@ func FrequenciesOfShortestSupersequences(words []string) [][]int {
 			result = nil
 		}
 		if totalLen == shortestLen {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			freq := make([]int, 26)
 			for _, u := range letters {
 				if mask>>pos[u]&1 == 1 {

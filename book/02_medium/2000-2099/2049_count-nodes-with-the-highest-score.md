@@ -1,19 +1,30 @@
 # 2049 — Count Nodes With The Highest Score
 
-## Deskripsi
-
-**Soal:** [2049. Count Nodes With The Highest Score](https://leetcode.com/problems/count-nodes-with-the-highest-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countHighestScoreNodes(parents []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countHighestScoreNodes(parents []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,14 +38,14 @@ import "fmt"
 
 func countHighestScoreNodes(parents []int) int {
 	n := len(parents)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	children := make([][]int, n)
 	for i := 1; i < n; i++ {
 		p := parents[i]
 		children[p] = append(children[p], i)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	subtreeSize := make([]int, n)
 	var dfs func(u int) int
 	dfs = func(u int) int {

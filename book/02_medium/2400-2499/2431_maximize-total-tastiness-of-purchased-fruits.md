@@ -1,17 +1,30 @@
 # 2431 — Maximize Total Tastiness Of Purchased Fruits
 
-## Deskripsi
-
-**Soal:** [2431. Maximize Total Tastiness Of Purchased Fruits](https://leetcode.com/problems/maximize-total-tastiness-of-purchased-fruits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxTastiness(fruits []Fruit, budget int, couponCount int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * budget * coupon)  
 **Kompleksitas Ruang:** O(budget * coupon)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,7 @@ func main() {
 }
 
 func maxTastiness(fruits []Fruit, budget int, couponCount int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, budget+1)
 	for b := range dp {
 		dp[b] = make([]int, couponCount+1)
@@ -49,7 +62,7 @@ func maxTastiness(fruits []Fruit, budget int, couponCount int) int {
 	ans := 0
 
 	for _, f := range fruits {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		newDp := make([][]int, budget+1)
 		for b := range newDp {
 			newDp[b] = make([]int, couponCount+1)

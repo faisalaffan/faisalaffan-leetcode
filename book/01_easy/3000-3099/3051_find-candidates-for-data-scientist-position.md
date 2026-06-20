@@ -1,17 +1,30 @@
 # 3051 — Find Candidates For Data Scientist Position
 
-## Deskripsi
-
-**Soal:** [3051. Find Candidates For Data Scientist Position](https://leetcode.com/problems/find-candidates-for-data-scientist-position/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindCandidatesForDataScientistPosition(candidates [][]string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,7 @@ func main() {
 // Time: O(n log n) | Space: O(n)
 // LeetCode submission name: findCandidates
 func FindCandidatesForDataScientistPosition(candidates [][]string) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	skills := make(map[int]map[string]bool)
 
 	for _, row := range candidates {
@@ -65,13 +78,14 @@ func FindCandidatesForDataScientistPosition(candidates [][]string) []int {
 			result = append(result, id)
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }
 
 func parseInt(s string) int {
 	n := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		n = n*10 + int(s[i]-'0')
 	}

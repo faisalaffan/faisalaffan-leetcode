@@ -1,19 +1,30 @@
 # 1960 — Maximum Product Of The Length Of Two Palindromic Substrings
 
-## Deskripsi
-
-**Soal:** [1960. Maximum Product Of The Length Of Two Palindromic Substrings](https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-substrings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxProduct(s string) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maxProduct(s string) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ import "fmt"
 func maxProduct(s string) int64 {
 	n := len(s)
 	// Odd palindrome radii (center is a character)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	odd := make([]int, n)
 	center, right := 0, 0
 	for i := 0; i < n; i++ {
@@ -46,7 +57,7 @@ func maxProduct(s string) int64 {
 
 	// Even palindrome radii (centered between s[i-1] and s[i])
 	// even[i] = radius for even palindrome centered between i-1 and i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	even := make([]int, n+1)
 	l, r := 0, 0
 	for i := 0; i <= n; i++ {
@@ -62,7 +73,7 @@ func maxProduct(s string) int64 {
 	}
 
 	// L[i] = longest palindrome ending at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	L := make([]int, n)
 	for i := 0; i < n; i++ {
 		L[i] = 1
@@ -96,7 +107,7 @@ func maxProduct(s string) int64 {
 	}
 
 	// R[i] = longest palindrome starting at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	R := make([]int, n)
 	for i := 0; i < n; i++ {
 		R[i] = 1
@@ -130,7 +141,7 @@ func maxProduct(s string) int64 {
 	}
 
 	// Suffix max of R so we can check any split, not just adjacent positions
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suffixMaxR := make([]int, n)
 	suffixMaxR[n-1] = R[n-1]
 	for i := n - 2; i >= 0; i-- {

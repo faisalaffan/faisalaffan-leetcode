@@ -1,19 +1,30 @@
 # 2426 — Number Of Pairs Satisfying Inequality
 
-## Deskripsi
-
-**Soal:** [2426. Number Of Pairs Satisfying Inequality](https://leetcode.com/problems/number-of-pairs-satisfying-inequality/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newBIT(size int) *BIT
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newBIT(size int) *BIT`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,18 +70,19 @@ func numberOfPairs(input [][]int, diff int) int64 {
 	nums1, nums2 := input[0], input[1]
 	n := len(nums1)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	arr := make([]int, n)
 	for i := 0; i < n; i++ {
 		arr[i] = nums1[i] - nums2[i]
 	}
 
 	// Coordinate compression
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	allVals := make([]int, 0, n*2)
 	for _, v := range arr {
 		allVals = append(allVals, v, v+diff)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(allVals)
 	uniq := 1
 	for i := 1; i < len(allVals); i++ {

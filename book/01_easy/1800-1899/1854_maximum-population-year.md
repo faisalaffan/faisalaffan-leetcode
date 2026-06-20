@@ -1,19 +1,30 @@
 # 1854 — Maximum Population Year
 
-## Deskripsi
-
-**Soal:** [1854. Maximum Population Year](https://leetcode.com/problems/maximum-population-year/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumPopulation(logs [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + range), Space: O(range)  
 **Kompleksitas Ruang:** O(range)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MaximumPopulation(logs [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ import "fmt"
 
 // Time: O(n + range), Space: O(range)
 func MaximumPopulation(logs [][]int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	delta := make([]int, 101) // 1950 to 2050
 	for _, log := range logs {
 		delta[log[0]-1950]++

@@ -1,17 +1,30 @@
 # 3348 — Smallest Divisible Digit Product Ii
 
-## Deskripsi
-
-**Soal:** [3348. Smallest Divisible Digit Product Ii](https://leetcode.com/problems/smallest-divisible-digit-product-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func gcd64(a, b int64) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +52,7 @@ func gcd64(a, b int64) int64 {
 func SmallestDivisibleDigitProductIi(num string, t int64) string {
 	if t == 1 {
 		b := []byte(num)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range b {
 			if b[i] == '0' {
 				b[i] = '1'
@@ -59,7 +72,7 @@ func SmallestDivisibleDigitProductIi(num string, t int64) string {
 	}
 
 	n := len(num)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftT := make([]int64, n+1)
 	leftT[0] = t
 	firstZero := n - 1
@@ -116,7 +129,6 @@ func SmallestDivisibleDigitProductIi(num string, t int64) string {
 	if padLen < 0 {
 		padLen = 0
 	}
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, padLen+len(factors))
 	for i := 0; i < padLen; i++ {
 		result = append(result, '1')

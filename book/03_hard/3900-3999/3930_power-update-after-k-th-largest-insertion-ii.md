@@ -1,19 +1,32 @@
 # 3930 — Power Update After K Th Largest Insertion Ii
 
-## Deskripsi
-
-**Soal:** [3930. Power Update After K Th Largest Insertion Ii](https://leetcode.com/problems/power-update-after-k-th-largest-insertion-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func powerUpdate(nums []int, p int, queries [][]int) []int
+```
+
+> **💡 Hint:** Maintain current total XOR of elements that are
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Maintain current total XOR of elements that are
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,6 @@ func main() {
 func powerUpdate(nums []int, p int, queries [][]int) []int {
 	n := len(nums)
 	totalXor := 0
-  // Membuat slice untuk menyimpan hasil
 	included := make([]bool, n)
 	for i, v := range nums {
 		if v%p == 0 {
@@ -54,7 +66,7 @@ func powerUpdate(nums []int, p int, queries [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for idx, q := range queries {
 		i, val := q[0], q[1]

@@ -1,17 +1,30 @@
 # 2363 — Merge Similar Items
 
-## Deskripsi
-
-**Soal:** [2363. Merge Similar Items](https://leetcode.com/problems/merge-similar-items/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MergeSimilarItems(items1 [][]int, items2 [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,11 +53,12 @@ func MergeSimilarItems(items1 [][]int, items2 [][]int) [][]int {
 		valueMap[item[0]] += item[1]
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0, len(valueMap))
 	for v, w := range valueMap {
 		result = append(result, []int{v, w})
 	}
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool { return result[i][0] < result[j][0] })
 	return result
 }

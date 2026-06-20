@@ -1,17 +1,30 @@
 # 2530 — Maximal Score After Applying K Operations
 
-## Deskripsi
-
-**Soal:** [2530. Maximal Score After Applying K Operations](https://leetcode.com/problems/maximal-score-after-applying-k-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxKelements(nums []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O((n + k) log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,12 +59,15 @@ func maxKelements(nums []int, k int) int64 {
 	h := &MaxHeap{}
 	heap.Init(h)
 	for _, v := range nums {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, v)
 	}
 	var score int64
 	for i := 0; i < k; i++ {
+  // Ambil elemen terkecil/terbesar dari heap
 		v := heap.Pop(h).(int)
 		score += int64(v)
+  // Masukkan elemen ke priority queue
 		heap.Push(h, (v+2)/3) // ceil(v/3)
 	}
 	return score

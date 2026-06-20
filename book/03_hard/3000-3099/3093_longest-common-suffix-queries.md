@@ -1,21 +1,32 @@
 # 3093 — Longest Common Suffix Queries
 
-## Deskripsi
-
-**Soal:** [3093. Longest Common Suffix Queries](https://leetcode.com/problems/longest-common-suffix-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func stringIndices(wordsContainer []string, wordsQuery []string) []int
+```
+
+> **💡 Hint:** Trie over reversed words
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie, Prefix Sum
 
 **Kompleksitas Waktu:** O((N + Q) * M)  
 **Kompleksitas Ruang:** O(N * M)
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func stringIndices(wordsContainer []string, wordsQuery []string) []int`
-
-> **Ide Kunci:** Trie over reversed words
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -66,7 +77,7 @@ func stringIndices(wordsContainer []string, wordsQuery []string) []int {
 	}
 
 	// Query each word
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(wordsQuery))
 	for qi, q := range wordsQuery {
 		node := root

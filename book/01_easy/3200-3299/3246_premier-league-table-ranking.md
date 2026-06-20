@@ -1,17 +1,30 @@
 # 3246 — Premier League Table Ranking
 
-## Deskripsi
-
-**Soal:** [3246. Premier League Table Ranking](https://leetcode.com/problems/premier-league-table-ranking/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func PremierLeagueTableRanking(stats []TeamStat) []TeamRank
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n). Space: O(n).  
 **Kompleksitas Ruang:** O(n).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -62,11 +75,11 @@ func PremierLeagueTableRanking(stats []TeamStat) []TeamRank {
 		name   string
 		points int
 	}
-  // Membuat slice untuk menyimpan hasil
 	teams := make([]team, len(stats))
 	for i, s := range stats {
 		teams[i] = team{s.TeamID, s.TeamName, s.Wins*3 + s.Draws}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(teams, func(i, j int) bool {
 		if teams[i].points != teams[j].points {
 			return teams[i].points > teams[j].points
@@ -74,7 +87,6 @@ func PremierLeagueTableRanking(stats []TeamStat) []TeamRank {
 		return teams[i].name < teams[j].name
 	})
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]TeamRank, len(teams))
 	for i, t := range teams {
 		rank := i + 1

@@ -1,17 +1,30 @@
 # 3262 — Find Overlapping Shifts
 
-## Deskripsi
-
-**Soal:** [3262. Find Overlapping Shifts](https://leetcode.com/problems/find-overlapping-shifts/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countOverlappingShifts(shifts []Shift) [][2]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,7 +66,7 @@ type Shift struct {
 
 func countOverlappingShifts(shifts []Shift) [][2]int {
 	// Group shifts by employee
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	empShifts := make(map[int][]Shift)
 	for _, s := range shifts {
 		empShifts[s.EmployeeID] = append(empShifts[s.EmployeeID], s)
@@ -67,6 +80,7 @@ func countOverlappingShifts(shifts []Shift) [][2]int {
 
 	for empID, s := range empShifts {
 		// Sort shifts by start time
+  // Custom sort dengan comparator
 		sort.Slice(s, func(i, j int) bool {
 			return s[i].StartTime < s[j].StartTime
 		})
@@ -89,11 +103,12 @@ func countOverlappingShifts(shifts []Shift) [][2]int {
 	}
 
 	// Sort by employee ID
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].employeeID < results[j].employeeID
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	out := make([][2]int, len(results))
 	for i, r := range results {
 		out[i] = [2]int{r.employeeID, r.count}

@@ -1,21 +1,32 @@
 # 1987 — Number Of Unique Good Subsequences
 
-## Deskripsi
-
-**Soal:** [1987. Number Of Unique Good Subsequences](https://leetcode.com/problems/number-of-unique-good-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfUniqueGoodSubsequences(binary string) int
+```
+
+> **💡 Hint:** DP tracking distinct good subsequences.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfUniqueGoodSubsequences(binary string) int`
-
-> **Ide Kunci:** DP tracking distinct good subsequences.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

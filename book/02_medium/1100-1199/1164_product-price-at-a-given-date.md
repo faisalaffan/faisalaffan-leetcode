@@ -1,19 +1,30 @@
 # 1164 — Product Price At A Given Date
 
-## Deskripsi
-
-**Soal:** [1164. Product Price At A Given Date](https://leetcode.com/problems/product-price-at-a-given-date/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func productPriceAtDate(products [][]int) []productPrice
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func productPriceAtDate(products [][]int) []productPrice`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +55,7 @@ func productPriceAtDate(products [][]int) []productPrice {
 	// Find price of each product on 2019-08-16
 
 	// Group by product
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	changes := make(map[int][][2]int) // productID -> [(date, price)]
 	for _, p := range products {
 		id, price, date := p[0], p[1], p[2]
@@ -53,13 +64,13 @@ func productPriceAtDate(products [][]int) []productPrice {
 
 	// Sort each product's changes by date
 	for id := range changes {
+  // Custom sort dengan comparator
 		sort.Slice(changes[id], func(i, j int) bool {
 			return changes[id][i][0] < changes[id][j][0]
 		})
 	}
 
 	targetDate := 20190816
-  // Membuat slice untuk menyimpan hasil
 	result := make([]productPrice, 0, len(changes))
 
 	for id, vals := range changes {
@@ -74,6 +85,7 @@ func productPriceAtDate(products [][]int) []productPrice {
 		result = append(result, productPrice{id, price})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].productID < result[j].productID
 	})

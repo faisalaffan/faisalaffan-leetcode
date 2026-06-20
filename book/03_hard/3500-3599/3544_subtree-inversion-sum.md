@@ -1,19 +1,30 @@
 # 3544 — Subtree Inversion Sum
 
-## Deskripsi
-
-**Soal:** [3544. Subtree Inversion Sum](https://leetcode.com/problems/subtree-inversion-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func subtreeInversionSum(n int, edges [][]int, nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func subtreeInversionSum(n int, edges [][]int, nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ import (
 )
 
 func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -47,7 +58,7 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 
 	var dfs func(u, p int) ([]int, int64)
 	dfs = func(u, p int) ([]int, int64) {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		vals := make([]int, 0)
 		var invTotal int64
 
@@ -77,7 +88,7 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 				// After swapping, vals = larger (was childVals), childVals = smaller (was vals)
 				// The cross count was correct (computed before swap).
 			}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			merged := make([]int, 0, len(vals)+len(childVals))
 			p1, p2 := 0, 0
 			for p1 < len(vals) && p2 < len(childVals) {
@@ -115,7 +126,7 @@ func subtreeInversionSum(n int, edges [][]int, nums []int) int64 {
 
 // Brute-force verification
 func subtreeInversionSumBrute(n int, edges [][]int, nums []int) int64 {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -137,9 +148,9 @@ func subtreeInversionSumBrute(n int, edges [][]int, nums []int) int64 {
 	dfsOrder(0, -1)
 
 	// tin/tout to identify subtree ranges
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tin := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tout := make([]int, n)
 	var dfsRange func(u, p int, idx *int)
 	dfsRange = func(u, p int, idx *int) {
@@ -165,7 +176,7 @@ func subtreeInversionSumBrute(n int, edges [][]int, nums []int) int64 {
 			}
 		}
 		subInv := int64(0)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(subtreeNodes); i++ {
 			for j := i + 1; j < len(subtreeNodes); j++ {
 				if nums[subtreeNodes[i]] > nums[subtreeNodes[j]] {

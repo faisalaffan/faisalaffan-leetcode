@@ -1,17 +1,30 @@
 # 1996 — The Number Of Weak Characters In The Game
 
-## Deskripsi
-
-**Soal:** [1996. The Number Of Weak Characters In The Game](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func TheNumberOfWeakCharactersInTheGame(properties [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n), Space: O(1) (ignoring sort space)  
 **Kompleksitas Ruang:** O(1) (ignoring sort space)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,6 +46,7 @@ func main() {
 
 // Time: O(n log n), Space: O(1) (ignoring sort space)
 func TheNumberOfWeakCharactersInTheGame(properties [][]int) int {
+  // Custom sort dengan comparator
 	sort.Slice(properties, func(i, j int) bool {
 		if properties[i][0] == properties[j][0] {
 			return properties[i][1] < properties[j][1]

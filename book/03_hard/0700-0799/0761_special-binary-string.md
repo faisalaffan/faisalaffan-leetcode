@@ -1,19 +1,32 @@
 # 0761 — Special Binary String
 
-## Deskripsi
-
-**Soal:** [0761. Special Binary String](https://leetcode.com/problems/special-binary-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func makeLargestSpecial(s string) string
+```
+
+> **💡 Hint:** Recursive
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Recursive
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ func main() {
 
 func makeLargestSpecial(s string) string {
 	n := len(s)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return ""
 	}
@@ -75,6 +88,7 @@ func makeLargestSpecial(s string) string {
 	}
 
 	// Sort in descending order (lexicographically largest first)
+  // Custom sort dengan comparator
 	sort.Slice(subs, func(i, j int) bool {
 		return subs[i] > subs[j]
 	})

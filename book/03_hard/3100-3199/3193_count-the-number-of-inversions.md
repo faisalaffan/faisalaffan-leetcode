@@ -1,21 +1,32 @@
 # 3193 — Count The Number Of Inversions
 
-## Deskripsi
-
-**Soal:** [3193. Count The Number Of Inversions](https://leetcode.com/problems/count-the-number-of-inversions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfPermutations(n int, requirements [][]int) int
+```
+
+> **💡 Hint:** DP with prefix sums.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfPermutations(n int, requirements [][]int) int`
-
-> **Ide Kunci:** DP with prefix sums.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,9 +53,9 @@ const MOD = 1000000007
 func numberOfPermutations(n int, requirements [][]int) int {
 	// required[i] = required inversion count for prefix ending at i, or -1 if
 	// unspecified.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	required := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range required {
 		required[i] = -1
 	}
@@ -58,20 +69,20 @@ func numberOfPermutations(n int, requirements [][]int) int {
 	}
 
 	// dp[j] = number of ways to have exactly j inversions for current prefix.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, maxInv+1)
 	dp[0] = 1
 
 	for i := 1; i < n; i++ {
 		// prefix sums of dp for sliding window of size i+1 (0 to i).
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		pref := make([]int, maxInv+2)
 		pref[0] = dp[0]
 		for j := 1; j <= maxInv; j++ {
 			pref[j] = (pref[j-1] + dp[j]) % MOD
 		}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, maxInv+1)
 		maxJ := maxInv
 		if required[i] != -1 {

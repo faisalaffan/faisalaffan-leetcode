@@ -1,17 +1,30 @@
 # 0770 — Basic Calculator Iv
 
-## Deskripsi
-
-**Soal:** [0770. Basic Calculator Iv](https://leetcode.com/problems/basic-calculator-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func basicCalculatorIV(expression string, evalvars []string, evalints []int) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence), Merge Sort (pengurutan gabung)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,7 +66,7 @@ func main() {
 
 func basicCalculatorIV(expression string, evalvars []string, evalints []int) []string {
 	// Build substitution map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	subst := make(map[string]int)
 	for i, v := range evalvars {
 		subst[v] = evalints[i]
@@ -210,7 +223,6 @@ func combineSig(a, b string) string {
 }
 
 func mergeVars(a, b []string) []string {
-  // Membuat slice untuk menyimpan hasil
 	res := make([]string, 0, len(a)+len(b))
 	i, j := 0, 0
 	for i < len(a) && j < len(b) {
@@ -251,6 +263,7 @@ func formatPoly(p Poly) []string {
 	}
 
 	// Sort by degree desc, then lexicographically
+  // Custom sort dengan comparator
 	sort.Slice(terms, func(i, j int) bool {
 		degI := 0
 		if terms[i].sig != "" {
@@ -266,7 +279,6 @@ func formatPoly(p Poly) []string {
 		return terms[i].sig < terms[j].sig
 	})
 
-  // Membuat slice untuk menyimpan hasil
 	res := make([]string, len(terms))
 	for i, t := range terms {
 		if t.sig == "" {

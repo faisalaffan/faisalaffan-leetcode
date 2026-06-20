@@ -1,19 +1,32 @@
 # 3553 — Minimum Weighted Subgraph With The Required Paths Ii
 
-## Deskripsi
-
-**Soal:** [3553. Minimum Weighted Subgraph With The Required Paths Ii](https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func dijkstra(adj [][]Edge, start int) []int64
+```
+
+> **💡 Hint:** Dijkstra from src1, src2, and reverse Dijkstra from dest.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Dijkstra from src1, src2, and reverse Dijkstra from dest.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,16 +73,18 @@ func (pq *PriorityQueue) Pop() interface{} { old := *pq; n := len(old); x := old
 
 func dijkstra(adj [][]Edge, start int) []int64 {
 	n := len(adj)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int64, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = math.MaxInt64
 	}
 	dist[start] = 0
 	pq := &PriorityQueue{}
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, Item{start, 0})
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		item := heap.Pop(pq).(Item)
 		u := item.node
 		if item.dist > dist[u] {
@@ -78,6 +93,7 @@ func dijkstra(adj [][]Edge, start int) []int64 {
 		for _, e := range adj[u] {
 			if nd := item.dist + int64(e.weight); nd < dist[e.to] {
 				dist[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, Item{e.to, nd})
 			}
 		}
@@ -86,9 +102,9 @@ func dijkstra(adj [][]Edge, start int) []int64 {
 }
 
 func minimumWeightedSubgraph(n int, edges [][]int, src1 int, src2 int, dest int) int64 {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]Edge, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	radj := make([][]Edge, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]

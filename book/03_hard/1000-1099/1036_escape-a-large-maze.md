@@ -1,19 +1,32 @@
 # 1036 — Escape A Large Maze
 
-## Deskripsi
-
-**Soal:** [1036. Escape A Large Maze](https://leetcode.com/problems/escape-a-large-maze/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isEscapePossible(blocked [][]int, source []int, target []int) bool
+```
+
+> **💡 Hint:** BFS limited by blocked cells.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** BFS limited by blocked cells.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,14 +55,14 @@ func main() {
 
 func isEscapePossible(blocked [][]int, source []int, target []int) bool {
 	n := len(blocked)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return true
 	}
 	// Maximum cells we need to explore before determining escape
 	limit := n * (n + 1) / 2
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	blockedSet := make(map[[2]int]bool)
 	for _, b := range blocked {
 		blockedSet[[2]int{b[0], b[1]}] = true
@@ -57,7 +70,7 @@ func isEscapePossible(blocked [][]int, source []int, target []int) bool {
 
 	dirs := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
 	bfs := func(start, target []int) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		visited := make(map[[2]int]bool)
 		queue := [][2]int{{start[0], start[1]}}
 		visited[[2]int{start[0], start[1]}] = true

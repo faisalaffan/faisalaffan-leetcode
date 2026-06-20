@@ -1,19 +1,30 @@
 # 0090 — Subsets Ii
 
-## Deskripsi
-
-**Soal:** [0090. Subsets Ii](https://leetcode.com/problems/subsets-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func subsetsWithDup(nums []int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * 2^n)  
 **Kompleksitas Ruang:** O(n * 2^n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func subsetsWithDup(nums []int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,11 +39,12 @@ import (
 )
 
 func subsetsWithDup(nums []int) [][]int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	result := [][]int{{}}
 	start := 0
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(nums); i++ {
 		n := len(result)
 		begin := 0
@@ -41,7 +53,7 @@ func subsetsWithDup(nums []int) [][]int {
 		}
 		start = n
 		for j := begin; j < n; j++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			newSubset := make([]int, len(result[j])+1)
 			copy(newSubset, result[j])
 			newSubset[len(result[j])] = nums[i]

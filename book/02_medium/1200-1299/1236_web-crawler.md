@@ -1,19 +1,30 @@
 # 1236 — Web Crawler
 
-## Deskripsi
-
-**Soal:** [1236. Web Crawler](https://leetcode.com/problems/web-crawler/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func crawl(startUrl string, parser HtmlParser) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(V + E) where V = #urls, E = #links  
 **Kompleksitas Ruang:** O(V)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func crawl(startUrl string, parser HtmlParser) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +60,7 @@ func crawl(startUrl string, parser HtmlParser) []string {
 	getHost := func(url string) string {
 		// Skip protocol
 		host := ""
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(url)-7; i++ {
 			if url[i:i+7] == "http://" {
 				url = url[7:]
@@ -66,7 +77,7 @@ func crawl(startUrl string, parser HtmlParser) []string {
 	}
 
 	hostname := getHost(startUrl)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[string]bool)
 	queue := []string{startUrl}
 	visited[startUrl] = true
@@ -83,7 +94,6 @@ func crawl(startUrl string, parser HtmlParser) []string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0, len(visited))
 	for url := range visited {
 		result = append(result, url)

@@ -1,17 +1,30 @@
 # 1314 — Matrix Block Sum
 
-## Deskripsi
-
-**Soal:** [1314. Matrix Block Sum](https://leetcode.com/problems/matrix-block-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func matrixBlockSum(mat [][]int, k int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(m*n) where m,n are matrix dimensions  
 **Kompleksitas Ruang:** O(m*n) for prefix sum matrix
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,9 +55,9 @@ func matrixBlockSum(mat [][]int, k int) [][]int {
 	m, n := len(mat), len(mat[0])
 
 	// Build 2D prefix sum (1-indexed)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	prefix := make([][]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range prefix {
 		prefix[i] = make([]int, n+1)
 	}
@@ -55,9 +68,9 @@ func matrixBlockSum(mat [][]int, k int) [][]int {
 	}
 
 	// Calculate block sums
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range result {
 		result[i] = make([]int, n)
 		for j := range result[i] {

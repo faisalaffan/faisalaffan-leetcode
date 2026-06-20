@@ -1,19 +1,32 @@
 # 3347 — Maximum Frequency Of An Element After Performing Operations Ii
 
-## Deskripsi
-
-**Soal:** [3347. Maximum Frequency Of An Element After Performing Operations Ii](https://leetcode.com/problems/maximum-frequency-of-an-element-after-performing-operations-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxFrequency(nums []int, k int, numOperations int) int
+```
+
+> **💡 Hint:** For each unique value, consider it as the final value.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Sliding Window, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each unique value, consider it as the final value.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,22 +58,24 @@ func main() {
 }
 
 func maxFrequency(nums []int, k int, numOperations int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	n := len(nums)
 
 	// Count frequency of each value
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	for _, v := range nums {
 		freq[v]++
 	}
 
 	// Collect unique values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	unique := make([]int, 0, len(freq))
 	for v := range freq {
 		unique = append(unique, v)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(unique)
 
 	// Sliding window: count elements in range [val - k, val + k]

@@ -1,19 +1,32 @@
 # 1467 — Probability Of A Two Boxes Having The Same Number Of Distinct Balls
 
-## Deskripsi
-
-**Soal:** [1467. Probability Of A Two Boxes Having The Same Number Of Distinct Balls](https://leetcode.com/problems/probability-of-a-two-boxes-having-the-same-number-of-distinct-balls/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getProbability(balls []int) float64
+```
+
+> **💡 Hint:** DP with combinatorics. Use DFS to distribute balls of each
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with combinatorics. Use DFS to distribute balls of each
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,9 +63,9 @@ func getProbability(balls []int) float64 {
 	}
 	n >>= 1
 	m := max(mx, n<<1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	c := make([][]int, m+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range c {
 		c[i] = make([]int, m+1)
 	}
@@ -63,9 +76,9 @@ func getProbability(balls []int) float64 {
 		}
 	}
 	k := len(balls)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	f := make([][][]int, k)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range f {
 		f[i] = make([][]int, n+1)
 		for j := range f[i] {

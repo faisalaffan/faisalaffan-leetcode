@@ -1,19 +1,30 @@
 # 2304 — Minimum Path Cost In A Grid
 
-## Deskripsi
-
-**Soal:** [2304. Minimum Path Cost In A Grid](https://leetcode.com/problems/minimum-path-cost-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minPathCost(grid [][]int, moveCost [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(m * n^2)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minPathCost(grid [][]int, moveCost [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,12 +38,12 @@ import "fmt"
 
 func minPathCost(grid [][]int, moveCost [][]int) int {
 	m, n := len(grid), len(grid[0])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n)
 	copy(dp, grid[0])
 
 	for r := 1; r < m; r++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		next := make([]int, n)
 		for j := 0; j < n; j++ {
 			next[j] = 1 << 30

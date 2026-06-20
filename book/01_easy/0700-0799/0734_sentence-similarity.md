@@ -1,17 +1,30 @@
 # 0734 — Sentence Similarity
 
-## Deskripsi
-
-**Soal:** [0734. Sentence Similarity](https://leetcode.com/problems/sentence-similarity/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func areSentencesSimilar(sentence1 []string, sentence2 []string, similarPairs [][]string) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + p) where n = len(sentence), p = len(pairs). Space: O(p).  
 **Kompleksitas Ruang:** O(p).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,7 @@ func areSentencesSimilar(sentence1 []string, sentence2 []string, similarPairs []
 		return false
 	}
 	// Build bidirectional map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pairMap := make(map[string]map[string]bool)
 	for _, p := range similarPairs {
 		a, b := p[0], p[1]
@@ -59,7 +72,7 @@ func areSentencesSimilar(sentence1 []string, sentence2 []string, similarPairs []
 		pairMap[b][a] = true
 	}
 
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range sentence1 {
 		w1, w2 := sentence1[i], sentence2[i]
 		if w1 == w2 {

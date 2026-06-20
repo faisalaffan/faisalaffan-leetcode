@@ -1,19 +1,30 @@
 # 0373 — Find K Pairs With Smallest Sums
 
-## Deskripsi
-
-**Soal:** [0373. Find K Pairs With Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(k log min(k, n))  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,15 +68,18 @@ func kSmallestPairs(nums1 []int, nums2 []int, k int) [][]int {
 
 	// Push first element of nums1 paired with each element of nums2
 	for j := 0; j < len(nums2) && j < k; j++ {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, pair{0, j, nums1[0] + nums2[j]})
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0, k)
 	for h.Len() > 0 && len(result) < k {
+  // Ambil elemen terkecil/terbesar dari heap
 		p := heap.Pop(h).(pair)
 		result = append(result, []int{nums1[p.i], nums2[p.j]})
 		if p.i+1 < len(nums1) {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, pair{p.i + 1, p.j, nums1[p.i+1] + nums2[p.j]})
 		}
 	}

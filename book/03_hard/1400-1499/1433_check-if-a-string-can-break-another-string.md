@@ -1,19 +1,30 @@
 # 1433 — Check If A String Can Break Another String
 
-## Deskripsi
-
-**Soal:** [1433. Check If A String Can Break Another String](https://leetcode.com/problems/check-if-a-string-can-break-another-string/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func checkIfCanBreak(s1 string, s2 string) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func checkIfCanBreak(s1 string, s2 string) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,12 +50,14 @@ func checkIfCanBreak(s1 string, s2 string) bool {
 	// Sort both strings
 	b1 := []byte(s1)
 	b2 := []byte(s2)
+  // Custom sort dengan comparator
 	sort.Slice(b1, func(i, j int) bool { return b1[i] < b1[j] })
+  // Custom sort dengan comparator
 	sort.Slice(b2, func(i, j int) bool { return b2[i] < b2[j] })
 
 	// Check if s1 can break s2
 	s1BreaksS2 := true
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(b1); i++ {
 		if b1[i] < b2[i] {
 			s1BreaksS2 = false
@@ -57,7 +70,7 @@ func checkIfCanBreak(s1 string, s2 string) bool {
 
 	// Check if s2 can break s1
 	s2BreaksS1 := true
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(b1); i++ {
 		if b2[i] < b1[i] {
 			s2BreaksS1 = false

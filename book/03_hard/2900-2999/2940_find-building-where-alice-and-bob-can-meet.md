@@ -1,19 +1,30 @@
 # 2940 — Find Building Where Alice And Bob Can Meet
 
-## Deskripsi
-
-**Soal:** [2940. Find Building Where Alice And Bob Can Meet](https://leetcode.com/problems/find-building-where-alice-and-bob-can-meet/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newSegTree(heights []int) *segTree
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Segment Tree
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newSegTree(heights []int) *segTree`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,7 @@ type segTree struct {
 
 func newSegTree(heights []int) *segTree {
 	n := len(heights)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tr := make([]int, 4*n)
 	var build func(idx, l, r int)
 	build = func(idx, l, r int) {
@@ -87,7 +98,7 @@ func (st *segTree) rangeMax(l, r int) int {
 func leftmostBuilding(heights []int, queries [][]int) []int {
 	n := len(heights)
 	st := newSegTree(heights)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 
 	for qi, q := range queries {

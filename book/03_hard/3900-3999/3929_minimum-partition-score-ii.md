@@ -1,19 +1,32 @@
 # 3929 — Minimum Partition Score Ii
 
-## Deskripsi
-
-**Soal:** [3929. Minimum Partition Score Ii](https://leetcode.com/problems/minimum-partition-score-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumPartitionScore(nums []int, k int) int64
+```
+
+> **💡 Hint:** DP with sorted array. After sorting, each partition
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with sorted array. After sorting, each partition
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,12 +62,13 @@ func minimumPartitionScore(nums []int, k int) int64 {
 	if k <= 0 || k > n {
 		return 0
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 
 	// dp[i][j] = min score for first i elements into j partitions
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, k+1)
 		for j := range dp[i] {

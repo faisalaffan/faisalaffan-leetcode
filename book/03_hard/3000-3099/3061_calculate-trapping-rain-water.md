@@ -1,21 +1,32 @@
 # 3061 — Calculate Trapping Rain Water
 
-## Deskripsi
-
-**Soal:** [3061. Calculate Trapping Rain Water](https://leetcode.com/problems/calculate-trapping-rain-water/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calculateTrappingRainWater(heights []Height) int
+```
+
+> **💡 Hint:** Classic two-pass prefix/suffix max algorithm.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func calculateTrappingRainWater(heights []Height) int`
-
-> **Ide Kunci:** Classic two-pass prefix/suffix max algorithm.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,18 +47,18 @@ type Height struct {
 
 func calculateTrappingRainWater(heights []Height) int {
 	n := len(heights)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	h := make([]int, n)
 	for i, ht := range heights {
 		h[i] = ht.Height
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftMax := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rightMax := make([]int, n)
 	leftMax[0] = h[0]
 	for i := 1; i < n; i++ {

@@ -1,19 +1,32 @@
 # 3287 — Find The Maximum Sequence Value Of Array
 
-## Deskripsi
-
-**Soal:** [3287. Find The Maximum Sequence Value Of Array](https://leetcode.com/problems/find-the-maximum-sequence-value-of-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxSequenceValue(nums []int, k int) int
+```
+
+> **💡 Hint:** //  1. For each split point, consider elements before the split (left part)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** //  1. For each split point, consider elements before the split (left part)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,9 +72,9 @@ func maxSequenceValue(nums []int, k int) int {
 
 	// leftDP[i][j] = bitmask of OR values achievable using j elements
 	// from prefix nums[0..i-1].
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	leftDP := make([][]uint64, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range leftDP {
 		leftDP[i] = make([]uint64, leftSize+1)
 	}
@@ -89,9 +102,9 @@ func maxSequenceValue(nums []int, k int) int {
 
 	// rightDP[i][j] = bitmask of OR values achievable using j elements
 	// from suffix nums[i..n-1].
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rightDP := make([][]uint64, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range rightDP {
 		rightDP[i] = make([]uint64, rightSize+1)
 	}

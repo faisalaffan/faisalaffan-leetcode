@@ -1,19 +1,30 @@
 # 2034 — Stock Price Fluctuation
 
-## Deskripsi
-
-**Soal:** [2034. Stock Price Fluctuation](https://leetcode.com/problems/stock-price-fluctuation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() StockPrice
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(log n) per operation  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor() StockPrice`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -81,7 +92,9 @@ func (sp *StockPrice) Update(timestamp int, price int) {
 		sp.latestTs = timestamp
 		sp.latestP = price
 	}
+  // Masukkan elemen ke priority queue
 	heap.Push(sp.minHeap, PriceEntry{price, timestamp})
+  // Masukkan elemen ke priority queue
 	heap.Push(sp.maxHeap, PriceEntry{price, timestamp})
 }
 
@@ -95,6 +108,7 @@ func (sp *StockPrice) Maximum() int {
 		if sp.prices[top.ts] == top.price {
 			return top.price
 		}
+  // Ambil elemen terkecil/terbesar dari heap
 		heap.Pop(sp.maxHeap)
 	}
 	return 0
@@ -106,6 +120,7 @@ func (sp *StockPrice) Minimum() int {
 		if sp.prices[top.ts] == top.price {
 			return top.price
 		}
+  // Ambil elemen terkecil/terbesar dari heap
 		heap.Pop(sp.minHeap)
 	}
 	return 0

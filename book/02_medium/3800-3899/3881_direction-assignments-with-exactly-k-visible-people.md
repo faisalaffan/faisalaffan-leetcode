@@ -1,21 +1,32 @@
 # 3881 — Direction Assignments With Exactly K Visible People
 
-## Deskripsi
-
-**Soal:** [3881. Direction Assignments With Exactly K Visible People](https://leetcode.com/problems/direction-assignments-with-exactly-k-visible-people/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func DirectionAssignmentsWithExactlyKVisiblePeople(n int, pos int, k int) int
+```
+
+> **💡 Hint:** Combinatorics. For each possible a (visible from left),
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func modPow(a int64, b int, mod int64) int64`
-
-> **Ide Kunci:** Combinatorics. For each possible a (visible from left),
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,14 +58,14 @@ func DirectionAssignmentsWithExactlyKVisiblePeople(n int, pos int, k int) int {
 	left := pos
 	right := n - pos - 1
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	fact := make([]int64, n+1)
 	fact[0] = 1
 	for i := 1; i <= n; i++ {
 		fact[i] = fact[i-1] * int64(i) % MOD
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	invFact := make([]int64, n+1)
 	invFact[n] = modPow(fact[n], int(MOD-2), MOD)
 	for i := n - 1; i >= 0; i-- {

@@ -1,19 +1,30 @@
 # 1383 — Maximum Performance Of A Team
 
-## Deskripsi
-
-**Soal:** [1383. Maximum Performance Of A Team](https://leetcode.com/problems/maximum-performance-of-a-team/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPerformance(n int, speed []int, efficiency []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxPerformance(n int, speed []int, efficiency []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,14 +61,15 @@ func (h *MinHeap) Pop() any {
 
 func maxPerformance(n int, speed []int, efficiency []int, k int) int {
 	// Combine speed and efficiency
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	engineers := make([][2]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range engineers {
 		engineers[i] = [2]int{efficiency[i], speed[i]}
 	}
 
 	// Sort by efficiency descending
+  // Custom sort dengan comparator
 	sort.Slice(engineers, func(i, j int) bool {
 		return engineers[i][0] > engineers[j][0]
 	})
@@ -69,10 +81,12 @@ func maxPerformance(n int, speed []int, efficiency []int, k int) int {
 	for _, eng := range engineers {
 		eff, sp := eng[0], eng[1]
 
+  // Masukkan elemen ke priority queue
 		heap.Push(h, sp)
 		speedSum += sp
 
 		if h.Len() > k {
+  // Ambil elemen terkecil/terbesar dari heap
 			slow := heap.Pop(h).(int)
 			speedSum -= slow
 		}

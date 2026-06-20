@@ -1,19 +1,30 @@
 # 0703 — Kth Largest Element In A Stream
 
-## Deskripsi
-
-**Soal:** [0703. Kth Largest Element In A Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(k int, nums []int) KthLargest
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(log k). Space: O(k).  
 **Kompleksitas Ruang:** O(k).
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor(k int, nums []int) KthLargest`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -61,8 +72,10 @@ func Constructor(k int, nums []int) KthLargest {
 // Add adds a new value and returns the kth largest.
 // Time: O(log k). Space: O(k).
 func (kl *KthLargest) Add(val int) int {
+  // Masukkan elemen ke priority queue
 	heap.Push(kl.heap, val)
 	if kl.heap.Len() > kl.k {
+  // Ambil elemen terkecil/terbesar dari heap
 		heap.Pop(kl.heap)
 	}
 	return (*kl.heap)[0]

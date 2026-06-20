@@ -1,19 +1,32 @@
 # 1830 — Minimum Number Of Operations To Make String Sorted
 
-## Deskripsi
-
-**Soal:** [1830. Minimum Number Of Operations To Make String Sorted](https://leetcode.com/problems/minimum-number-of-operations-to-make-string-sorted/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func makeStringSorted(s string) int
+```
+
+> **💡 Hint:** Combinatorics with Modular Arithmetic.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Combinatorics with Modular Arithmetic.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -74,9 +87,9 @@ func makeStringSorted(s string) int {
 	}
 
 	// Precompute factorials and inverse factorials
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	fact := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	invFact := make([]int, n+1)
 	fact[0] = 1
 	for i := 1; i <= n; i++ {
@@ -88,7 +101,7 @@ func makeStringSorted(s string) int {
 	}
 
 	// Count character frequencies (lowercase English letters)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, 26)
 	for i := 0; i < n; i++ {
 		cnt[s[i]-'a']++

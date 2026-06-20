@@ -1,19 +1,32 @@
 # 3500 — Minimum Cost To Divide Array Into Subarrays
 
-## Deskripsi
-
-**Soal:** [3500. Minimum Cost To Divide Array Into Subarrays](https://leetcode.com/problems/minimum-cost-to-divide-array-into-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumCost(nums []int, cost []int, k int) int64
+```
+
+> **💡 Hint:** DP with convex hull trick (CHT) for optimization, or use
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Greedy (pemilihan optimal lokal), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with convex hull trick (CHT) for optimization, or use
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,9 +59,9 @@ func minimumCost(nums []int, cost []int, k int) int64 {
 	n := len(nums)
 
 	// Prefix sums
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefNums := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefCost := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		prefNums[i+1] = prefNums[i] + nums[i]
@@ -56,7 +69,7 @@ func minimumCost(nums []int, cost []int, k int) int64 {
 	}
 
 	// DP[i] = min cost for prefix up to i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int64, n+1)
 	for i := 1; i <= n; i++ {
 		dp[i] = 1 << 62 // large number

@@ -1,17 +1,30 @@
 # 0528 — Random Pick With Weight
 
-## Deskripsi
-
-**Soal:** [0528. Random Pick With Weight](https://leetcode.com/problems/random-pick-with-weight/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(w []int) Solution
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n) for init, O(log n) per pick  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +54,7 @@ type Solution struct {
 }
 
 func Constructor(w []int) Solution {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixSum := make([]int, len(w))
 	sum := 0
 	for i, weight := range w {

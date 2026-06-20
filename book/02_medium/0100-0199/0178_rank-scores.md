@@ -1,19 +1,30 @@
 # 0178 — Rank Scores
 
-## Deskripsi
-
-**Soal:** [0178. Rank Scores](https://leetcode.com/problems/rank-scores/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func rankScores(scores []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func rankScores(scores []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,17 +49,17 @@ func rankScores(scores []int) []int {
 		idx   int
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	pairs := make([]pair, len(scores))
 	for i, s := range scores {
 		pairs[i] = pair{s, i}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(pairs, func(i, j int) bool {
 		return pairs[i].score > pairs[j].score
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ranks := make([]int, len(scores))
 	rank := 1
 	for i, p := range pairs {

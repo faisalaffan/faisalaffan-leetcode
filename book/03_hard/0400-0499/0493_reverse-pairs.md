@@ -1,19 +1,32 @@
 # 0493 — Reverse Pairs
 
-## Deskripsi
-
-**Soal:** [0493. Reverse Pairs](https://leetcode.com/problems/reverse-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func reversePairs(nums []int) int
+```
+
+> **💡 Hint:** Merge sort counting. During merge, count pairs (i, j) where
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Merge Sort (pengurutan gabung)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Merge sort counting. During merge, count pairs (i, j) where
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,11 +65,11 @@ func main() {
 }
 
 func reversePairs(nums []int) int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return 0
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	temp := make([]int, len(nums))
 	count := mergeSort(nums, temp, 0, len(nums)-1)
 	return count

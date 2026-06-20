@@ -1,19 +1,30 @@
 # 2615 — Sum Of Distances
 
-## Deskripsi
-
-**Soal:** [2615. Sum Of Distances](https://leetcode.com/problems/sum-of-distances/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func distance(nums []int) []int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Prefix Sum
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func distance(nums []int) []int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,17 +39,17 @@ import "fmt"
 func distance(nums []int) []int64 {
 	n := len(nums)
 	// Group indices by value
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[int][]int)
 	for i, v := range nums {
 		groups[v] = append(groups[v], i)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, n)
 	for _, indices := range groups {
 		m := len(indices)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		prefix := make([]int64, m+1)
 		for i, idx := range indices {
 			prefix[i+1] = prefix[i] + int64(idx)

@@ -1,17 +1,30 @@
 # 2617 — Minimum Number Of Visited Cells In A Grid
 
-## Deskripsi
-
-**Soal:** [2617. Minimum Number Of Visited Cells In A Grid](https://leetcode.com/problems/minimum-number-of-visited-cells-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newDSU(n int) *dsu
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,9 +54,9 @@ type dsu struct {
 }
 
 func newDSU(n int) *dsu {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range p {
 		p[i] = i
 	}
@@ -65,7 +78,7 @@ func (d *dsu) mark(x int) {
 func minimumVisitedCells(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
 	// dist stores steps from (0,0), -1 = unvisited
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, m)
 	for i := 0; i < m; i++ {
 		dist[i] = make([]int, n)
@@ -75,9 +88,7 @@ func minimumVisitedCells(grid [][]int) int {
 	}
 
 	// DSU per row for skipping columns, per column for skipping rows
-  // Membuat slice untuk menyimpan hasil
 	rowDSU := make([]*dsu, m)
-  // Membuat slice untuk menyimpan hasil
 	colDSU := make([]*dsu, n)
 	for i := 0; i < m; i++ {
 		rowDSU[i] = newDSU(n)

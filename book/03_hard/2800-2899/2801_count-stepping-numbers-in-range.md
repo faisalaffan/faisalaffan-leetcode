@@ -1,19 +1,30 @@
 # 2801 — Count Stepping Numbers In Range
 
-## Deskripsi
-
-**Soal:** [2801. Count Stepping Numbers In Range](https://leetcode.com/problems/count-stepping-numbers-in-range/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func steppingNumbers(low, high string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func steppingNumbers(low, high string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,15 +70,15 @@ func decrement(s string) string {
 // Count stepping numbers in [0, s] inclusive
 func countLE(s string) int {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digits := make([]int, n)
 	for i, c := range s {
 		digits[i] = int(c - '0')
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][][][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([][][]int, 10)
 		for j := range dp[i] {

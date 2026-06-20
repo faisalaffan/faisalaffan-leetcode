@@ -1,21 +1,32 @@
 # 1970 — Last Day Where You Can Still Cross
 
-## Deskripsi
-
-**Soal:** [1970. Last Day Where You Can Still Cross](https://leetcode.com/problems/last-day-where-you-can-still-cross/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewDSU(n int) *DSU
+```
+
+> **💡 Hint:** Binary search + Union-Find (DSU)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewDSU(n int) *DSU`
-
-> **Ide Kunci:** Binary search + Union-Find (DSU)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -74,7 +85,7 @@ func latestDayToCross(row, col int, cells [][]int) int {
 
 	canCross := func(day int) bool {
 		dsu := NewDSU(n + 2)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		land := make([][]bool, row)
 		for i := 0; i < row; i++ {
 			land[i] = make([]bool, col)

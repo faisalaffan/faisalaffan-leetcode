@@ -1,17 +1,30 @@
 # 0550 — Game Play Analysis Iv
 
-## Deskripsi
-
-**Soal:** [0550. Game Play Analysis Iv](https://leetcode.com/problems/game-play-analysis-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func GamePlayAnalysisIv(activities [][]int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,6 +57,7 @@ func GamePlayAnalysisIv(activities [][]int) float64 {
 	if len(activities) == 0 {
 		return 0.0
 	}
+  // Custom sort dengan comparator
 	sort.Slice(activities, func(i, j int) bool {
 		if activities[i][0] != activities[j][0] {
 			return activities[i][0] < activities[j][0]
@@ -52,7 +66,7 @@ func GamePlayAnalysisIv(activities [][]int) float64 {
 	})
 
 	// Find first login for each player
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	firstLogin := make(map[int]int)
 	for _, act := range activities {
 		pid, date := act[0], act[1]
@@ -63,7 +77,7 @@ func GamePlayAnalysisIv(activities [][]int) float64 {
 
 	// Count players who logged in the day after their first login
 	nextDayPlayers := 0
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	playerSet := make(map[int]bool)
 	for _, act := range activities {
 		pid, date := act[0], act[1]

@@ -1,17 +1,30 @@
 # 2613 — Beautiful Pairs
 
-## Deskripsi
-
-**Soal:** [2613. Beautiful Pairs](https://leetcode.com/problems/beautiful-pairs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func beautifulPairs(nums1, nums2 [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Merge Sort
 
 **Kompleksitas Waktu:** O(n log^2 n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Merge Sort** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,6 @@ func main() {
 
 func beautifulPairs(nums1, nums2 [][]int) []int {
 	m, n := len(nums1), len(nums2)
-  // Membuat slice untuk menyimpan hasil
 	pts := make([]pt, m+n)
 	for i := 0; i < m; i++ {
 		pts[i] = pt{nums1[i][0], nums1[i][1], i, true}
@@ -55,6 +67,7 @@ func beautifulPairs(nums1, nums2 [][]int) []int {
 	for j := 0; j < n; j++ {
 		pts[m+j] = pt{nums2[j][0], nums2[j][1], j, false}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(pts, func(i, j int) bool {
 		if pts[i].x != pts[j].x {
 			return pts[i].x < pts[j].x
@@ -100,11 +113,12 @@ func beautifulPairs(nums1, nums2 [][]int) []int {
 				strip = append(strip, pts[i])
 			}
 		}
+  // Custom sort dengan comparator
 		sort.Slice(strip, func(i, j int) bool {
 			return strip[i].y < strip[j].y
 		})
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(strip); i++ {
 			for j := i + 1; j < len(strip) && strip[j].y-strip[i].y < bestDist; j++ {
 				if strip[i].fromA != strip[j].fromA {

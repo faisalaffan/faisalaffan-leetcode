@@ -1,19 +1,32 @@
 # 1857 — Largest Color Value In A Directed Graph
 
-## Deskripsi
-
-**Soal:** [1857. Largest Color Value In A Directed Graph](https://leetcode.com/problems/largest-color-value-in-a-directed-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestPathValue(colors string, edges [][]int) int
+```
+
+> **💡 Hint:** Topological Sort + DP per Color.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Dynamic Programming, Topological Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Topological Sort (pengurutan topologi), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Topological Sort + DP per Color.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,9 +76,9 @@ func largestPathValue(colors string, edges [][]int) int {
 	n := len(colors)
 
 	// Build adjacency list and in-degree array
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	inDeg := make([]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -74,11 +87,11 @@ func largestPathValue(colors string, edges [][]int) int {
 	}
 
 	// dp[i][c] = max count of color c on any path ending at node i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([][26]int, n)
 
 	// Kahn's topological sort
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([]int, 0, n)
 	for i := 0; i < n; i++ {
 		if inDeg[i] == 0 {

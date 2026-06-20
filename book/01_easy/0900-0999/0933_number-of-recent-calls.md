@@ -1,19 +1,30 @@
 # 0933 — Number Of Recent Calls
 
-## Deskripsi
-
-**Soal:** [0933. Number Of Recent Calls](https://leetcode.com/problems/number-of-recent-calls/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() RecentCounter
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, BFS
 
 **Kompleksitas Waktu:** O(1) amortized. Space: O(n).  
 **Kompleksitas Ruang:** O(n).
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor() RecentCounter`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

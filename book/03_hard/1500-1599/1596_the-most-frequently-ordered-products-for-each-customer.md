@@ -1,19 +1,30 @@
 # 1596 — The Most Frequently Ordered Products For Each Customer
 
-## Deskripsi
-
-**Soal:** [1596. The Most Frequently Ordered Products For Each Customer](https://leetcode.com/problems/the-most-frequently-ordered-products-for-each-customer/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func mostFrequentProducts(orders []Order, products []Product) []resultRow1596
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func mostFrequentProducts(orders []Order, products []Product) []resultRow1596`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,10 +68,10 @@ func mostFrequentProducts(orders []Order, products []Product) []resultRow1596 {
 		customerID int
 		productID  int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counts := make(map[cpKey]int)
 	// Also track max per customer
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	maxPerCustomer := make(map[int]int)
 
 	for _, o := range orders {
@@ -72,7 +83,7 @@ func mostFrequentProducts(orders []Order, products []Product) []resultRow1596 {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	productName := make(map[int]string)
 	for _, p := range products {
 		productName[p.ProductID] = p.ProductName
@@ -91,6 +102,7 @@ func mostFrequentProducts(orders []Order, products []Product) []resultRow1596 {
 	}
 
 	// Sort results by customer ID ascending, product name ascending
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].CustomerID != results[j].CustomerID {
 			return results[i].CustomerID < results[j].CustomerID

@@ -1,21 +1,32 @@
 # 1761 — Minimum Degree Of A Connected Trio In A Graph
 
-## Deskripsi
-
-**Soal:** [1761. Minimum Degree Of A Connected Trio In A Graph](https://leetcode.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minTrioDegree(n int, edges [][]int) int
+```
+
+> **💡 Hint:** Adjacency matrix + degree array.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func minTrioDegree(n int, edges [][]int) int`
-
-> **Ide Kunci:** Adjacency matrix + degree array.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,11 +47,11 @@ import (
 )
 
 func minTrioDegree(n int, edges [][]int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	deg := make([]int, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]bool, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range adj {
 		adj[i] = make([]bool, n)
 	}

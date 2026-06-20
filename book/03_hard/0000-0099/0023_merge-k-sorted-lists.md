@@ -1,19 +1,30 @@
 # 0023 — Merge K Sorted Lists
 
-## Deskripsi
-
-**Soal:** [0023. Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func mergeKLists(lists []*ListNode) *ListNode
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func mergeKLists(lists []*ListNode) *ListNode`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,6 +69,7 @@ func mergeKLists(lists []*ListNode) *ListNode {
 	// push the head of each non-empty list into the heap
 	for _, list := range lists {
 		if list != nil {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, list)
 		}
 	}
@@ -66,10 +78,12 @@ func mergeKLists(lists []*ListNode) *ListNode {
 	curr := dummy
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		node := heap.Pop(h).(*ListNode)
 		curr.Next = node
 		curr = curr.Next
 		if node.Next != nil {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, node.Next)
 		}
 	}

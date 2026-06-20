@@ -1,19 +1,30 @@
 # 2228 — Users With Two Purchases Within Seven Days
 
-## Deskripsi
-
-**Soal:** [2228. Users With Two Purchases Within Seven Days](https://leetcode.com/problems/users-with-two-purchases-within-seven-days/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findUsers(purchases [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findUsers(purchases [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ import (
 
 func findUsers(purchases [][]int) []int {
 	// Group purchases by user
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userPurchases := make(map[int][]int)
 	for _, p := range purchases {
 		userID, date := p[0], p[1]
@@ -42,6 +53,7 @@ func findUsers(purchases [][]int) []int {
 		if len(dates) < 2 {
 			continue
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(dates)
 		for i := 1; i < len(dates); i++ {
 			if dates[i]-dates[i-1] <= 7 {
@@ -50,6 +62,7 @@ func findUsers(purchases [][]int) []int {
 			}
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

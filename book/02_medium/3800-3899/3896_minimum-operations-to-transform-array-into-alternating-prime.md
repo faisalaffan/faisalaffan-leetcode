@@ -1,21 +1,32 @@
 # 3896 — Minimum Operations To Transform Array Into Alternating Prime
 
-## Deskripsi
-
-**Soal:** [3896. Minimum Operations To Transform Array Into Alternating Prime](https://leetcode.com/problems/minimum-operations-to-transform-array-into-alternating-prime/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumOperationsToTransformArrayIntoAlternatingPrime(nums []int) int64
+```
+
+> **💡 Hint:** Sieve primes. Even indices need next prime >= val (binary search).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(N log log M + N)  
 **Kompleksitas Ruang:** O(M) where M = 200000
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumOperationsToTransformArrayIntoAlternatingPrime(nums []int) int64`
-
-> **Ide Kunci:** Sieve primes. Even indices need next prime >= val (binary search).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,6 @@ import "fmt"
 const MAX_VAL = 200000
 
 func MinimumOperationsToTransformArrayIntoAlternatingPrime(nums []int) int64 {
-  // Membuat slice untuk menyimpan hasil
 	isPrime := make([]bool, MAX_VAL+1)
 	for i := 2; i <= MAX_VAL; i++ {
 		isPrime[i] = true
@@ -46,7 +56,7 @@ func MinimumOperationsToTransformArrayIntoAlternatingPrime(nums []int) int64 {
 	}
 
 	// nextPrime[v] = smallest prime >= v
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nextPrime := make([]int, MAX_VAL+1)
 	np := -1
 	for i := MAX_VAL; i >= 2; i-- {

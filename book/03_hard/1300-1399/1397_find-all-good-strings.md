@@ -1,19 +1,30 @@
 # 1397 — Find All Good Strings
 
-## Deskripsi
-
-**Soal:** [1397. Find All Good Strings](https://leetcode.com/problems/find-all-good-strings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfGoodStrings(n int, s1 string, s2 string, evil string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), KMP (Knuth-Morris-Pratt, pencocokan string)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfGoodStrings(n int, s1 string, s2 string, evil string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ const mod = 1_000_000_007
 func numberOfGoodStrings(n int, s1 string, s2 string, evil string) int {
 	// Build KMP LPS array for evil string
 	m := len(evil)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lps := make([]int, m)
 	for i := 1; i < m; i++ {
 		j := lps[i-1]
@@ -46,7 +57,7 @@ func numberOfGoodStrings(n int, s1 string, s2 string, evil string) int {
 	}
 
 	// nextState[k][c] = next KMP state after adding character c in state k
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nextState := make([][26]int, m)
 	for k := 0; k < m; k++ {
 		for c := 0; c < 26; c++ {
@@ -69,9 +80,9 @@ func numberOfGoodStrings(n int, s1 string, s2 string, evil string) int {
 
 	// dp[pos][state][tightLow][tightHigh]
 	// Count strings from position pos to end
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][][2][2]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([][2][2]int, m+1)
 	}

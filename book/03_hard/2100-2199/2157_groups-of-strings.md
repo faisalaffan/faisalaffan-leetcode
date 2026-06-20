@@ -1,17 +1,30 @@
 # 2157 — Groups Of Strings
 
-## Deskripsi
-
-**Soal:** [2157. Groups Of Strings](https://leetcode.com/problems/groups-of-strings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func groupStrings(words []string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU), Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +47,9 @@ func main() {
 
 func groupStrings(words []string) []int {
 	n := len(words)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	masks := make([]uint32, n)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	idxOf := make(map[uint32]int)
 
 	for i, w := range words {
@@ -49,9 +62,9 @@ func groupStrings(words []string) []int {
 	}
 
 	// Union-Find
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sz := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -87,7 +100,7 @@ func groupStrings(words []string) []int {
 	}
 
 	// For each unique mask, try transforms
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[uint32]bool)
 	for i, m := range masks {
 		if seen[m] {
@@ -132,7 +145,7 @@ func groupStrings(words []string) []int {
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groupSizes := make(map[int]int)
 	maxSize := 0
 	for i := 0; i < n; i++ {

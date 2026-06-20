@@ -1,19 +1,30 @@
 # 1155 — Number Of Dice Rolls With Target Sum
 
-## Deskripsi
-
-**Soal:** [1155. Number Of Dice Rolls With Target Sum](https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numRollsToTarget(n int, k int, target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n * target * k)  
 **Kompleksitas Ruang:** O(target) with 1D DP optimization
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numRollsToTarget(n int, k int, target int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,12 +46,12 @@ import (
 func numRollsToTarget(n int, k int, target int) int {
 	const mod = 1_000_000_007
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, target+1)
 	dp[0] = 1
 
 	for dice := 0; dice < n; dice++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		next := make([]int, target+1)
 		for sum := 0; sum <= target; sum++ {
 			if dp[sum] == 0 {

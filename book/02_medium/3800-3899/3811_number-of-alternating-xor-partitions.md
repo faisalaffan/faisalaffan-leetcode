@@ -1,21 +1,32 @@
 # 3811 — Number Of Alternating Xor Partitions
 
-## Deskripsi
-
-**Soal:** [3811. Number Of Alternating Xor Partitions](https://leetcode.com/problems/number-of-alternating-xor-partitions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NumberOfAlternatingXorPartitions(nums []int, target1 int, target2 int) int
+```
+
+> **💡 Hint:** DP with prefix XOR and two hash maps to track alternating pattern.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NumberOfAlternatingXorPartitions(nums []int, target1 int, target2 int) int`
-
-> **Ide Kunci:** DP with prefix XOR and two hash maps to track alternating pattern.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +42,9 @@ import "fmt"
 const MOD = 1000000007
 
 func NumberOfAlternatingXorPartitions(nums []int, target1 int, target2 int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cnt1 := make(map[int]int) // ends with target1
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cnt2 := make(map[int]int) // ends with target2
 
 	cnt2[0] = 1

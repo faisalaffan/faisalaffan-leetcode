@@ -1,17 +1,30 @@
 # 1462 — Course Schedule Iv
 
-## Deskripsi
-
-**Soal:** [1462. Course Schedule Iv](https://leetcode.com/problems/course-schedule-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int) []bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Floyd-Warshall
 
 **Kompleksitas Waktu:** O(n^3) for Floyd-Warshall  
 **Kompleksitas Ruang:** O(n^2) for reachability matrix
 
-**Algoritma:** Floyd-Warshall (lintasan semua pasangan), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Floyd-Warshall** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,16 +53,16 @@ func main() {
 // Space: O(n^2) for reachability matrix
 func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int) []bool {
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, numCourses)
 	for _, p := range prerequisites {
 		adj[p[0]] = append(adj[p[0]], p[1])
 	}
 
 	// Floyd-Warshall for reachability
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	reachable := make([][]bool, numCourses)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range reachable {
 		reachable[i] = make([]bool, numCourses)
 	}
@@ -68,7 +81,6 @@ func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int)
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]bool, len(queries))
 	for i, q := range queries {
 		result[i] = reachable[q[0]][q[1]]

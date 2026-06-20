@@ -1,21 +1,32 @@
 # 3834 — Merge Adjacent Equal Elements
 
-## Deskripsi
-
-**Soal:** [3834. Merge Adjacent Equal Elements](https://leetcode.com/problems/merge-adjacent-equal-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MergeAdjacentEqualElements(nums []int) []int64
+```
+
+> **💡 Hint:** Use a stack to repeatedly merge leftmost adjacent equal pairs.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MergeAdjacentEqualElements(nums []int) []int64`
-
-> **Ide Kunci:** Use a stack to repeatedly merge leftmost adjacent equal pairs.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ package main
 import "fmt"
 
 func MergeAdjacentEqualElements(nums []int) []int64 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int64, 0)
 
 	for _, v := range nums {

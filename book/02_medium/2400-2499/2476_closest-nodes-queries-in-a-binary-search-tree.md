@@ -1,17 +1,30 @@
 # 2476 — Closest Nodes Queries In A Binary Search Tree
 
-## Deskripsi
-
-**Soal:** [2476. Closest Nodes Queries In A Binary Search Tree](https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func closestNodes(root *TreeNode, queries []int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(n + q log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func main() {
 }
 
 func closestNodes(root *TreeNode, queries []int) [][]int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	vals := make([]int, 0)
 	var inorder func(node *TreeNode)
 	inorder = func(node *TreeNode) {
@@ -64,7 +77,7 @@ func closestNodes(root *TreeNode, queries []int) [][]int {
 	}
 	inorder(root)
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	ans := make([][]int, len(queries))
 	for i, q := range queries {
 		// Find smallest >= q

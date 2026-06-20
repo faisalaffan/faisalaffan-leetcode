@@ -1,19 +1,30 @@
 # 2075 — Decode The Slanted Ciphertext
 
-## Deskripsi
-
-**Soal:** [2075. Decode The Slanted Ciphertext](https://leetcode.com/problems/decode-the-slanted-ciphertext/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func decodeCiphertext(encodedText string, rows int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(r*c)  
 **Kompleksitas Ruang:** O(r*c)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func decodeCiphertext(encodedText string, rows int) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ import (
 func decodeCiphertext(encodedText string, rows int) string {
 	n := len(encodedText)
 	cols := n / rows
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	grid := make([][]byte, rows)
 	for i := 0; i < rows; i++ {
 		grid[i] = []byte(encodedText[i*cols : (i+1)*cols])

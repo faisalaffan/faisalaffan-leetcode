@@ -1,19 +1,32 @@
 # 3614 — Process String With Special Operations Ii
 
-## Deskripsi
-
-**Soal:** [3614. Process String With Special Operations Ii](https://leetcode.com/problems/process-string-with-special-operations-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func processStr(s string, k int64) byte
+```
+
+> **💡 Hint:** Work backwards from position k to determine the source character.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Work backwards from position k to determine the source character.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -61,7 +74,7 @@ func processStr(s string, k int64) byte {
 	// Compute character length for each position in the processed string
 	// Walk backwards from position k to find which segment it belongs to
 	var totalLen int64
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	segLens := make([]int64, n)
 	for i := int64(0); i < n; i++ {
 		c := s[i]

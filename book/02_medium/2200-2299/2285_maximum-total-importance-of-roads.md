@@ -1,19 +1,30 @@
 # 2285 — Maximum Total Importance Of Roads
 
-## Deskripsi
-
-**Soal:** [2285. Maximum Total Importance Of Roads](https://leetcode.com/problems/maximum-total-importance-of-roads/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumImportance(n int, roads [][]int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + m)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func maximumImportance(n int, roads [][]int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,12 +40,13 @@ import (
 )
 
 func maximumImportance(n int, roads [][]int) int64 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	degree := make([]int, n)
 	for _, r := range roads {
 		degree[r[0]]++
 		degree[r[1]]++
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(degree)
 
 	var total int64 = 0

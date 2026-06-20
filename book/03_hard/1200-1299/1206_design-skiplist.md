@@ -1,19 +1,30 @@
 # 1206 — Design Skiplist
 
-## Deskripsi
-
-**Soal:** [1206. Design Skiplist](https://leetcode.com/problems/design-skiplist/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() Skiplist
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func Constructor() Skiplist`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -65,7 +76,6 @@ func (sl *Skiplist) Search(target int) bool {
 }
 
 func (sl *Skiplist) Add(num int) {
-  // Membuat slice untuk menyimpan hasil
 	update := make([]*Node, maxLevel)
 	cur := sl.head
 	for i := maxLevel - 1; i >= 0; i-- {
@@ -84,7 +94,6 @@ func (sl *Skiplist) Add(num int) {
 }
 
 func (sl *Skiplist) Erase(num int) bool {
-  // Membuat slice untuk menyimpan hasil
 	update := make([]*Node, maxLevel)
 	cur := sl.head
 	for i := maxLevel - 1; i >= 0; i-- {

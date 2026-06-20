@@ -1,19 +1,32 @@
 # 3288 — Length Of The Longest Increasing Path
 
-## Deskripsi
-
-**Soal:** [3288. Length Of The Longest Increasing Path](https://leetcode.com/problems/length-of-the-longest-increasing-path/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestIncreasingPath(coordinates [][]int) int
+```
+
+> **💡 Hint:** //  1. Sort points by (x, y) ascending.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** //  1. Sort points by (x, y) ascending.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,12 +68,13 @@ func main() {
 
 func longestIncreasingPath(coordinates [][]int) int {
 	n := len(coordinates)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Sort by x ascending, then y ascending.
+  // Custom sort dengan comparator
 	sort.Slice(coordinates, func(i, j int) bool {
 		if coordinates[i][0] != coordinates[j][0] {
 			return coordinates[i][0] < coordinates[j][0]
@@ -71,7 +85,7 @@ func longestIncreasingPath(coordinates [][]int) int {
 	// Patience sorting (LIS) on y.
 	// Process points grouped by x. Within each group, process y in descending
 	// order to avoid taking two points from the same x.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tails := make([]int, 0, n)
 
 	i := 0
@@ -85,7 +99,6 @@ func longestIncreasingPath(coordinates [][]int) int {
 		// Process this group's y values in descending order,
 		// so that same-x y values don't chain into each other.
 		// For each y, find its position in the LIS tails.
-  // Membuat slice untuk menyimpan hasil
 		updates := make([]struct {
 			pos int
 			val int
@@ -119,6 +132,7 @@ func longestIncreasingPath(coordinates [][]int) int {
 
 func lowerBound(arr []int, target int) int {
 	l, r := 0, len(arr)
+  // Two-pointer: gerakkan kiri atau kanan
 	for l < r {
 		mid := (l + r) / 2
 		if arr[mid] < target {

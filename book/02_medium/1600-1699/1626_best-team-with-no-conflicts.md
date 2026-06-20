@@ -1,17 +1,30 @@
 # 1626 — Best Team With No Conflicts
 
-## Deskripsi
-
-**Soal:** [1626. Best Team With No Conflicts](https://leetcode.com/problems/best-team-with-no-conflicts/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func BestTeamScore(scores []int, ages []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(N^2), Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Dynamic Programming (DP), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,13 +47,14 @@ func main() {
 func BestTeamScore(scores []int, ages []int) int {
 	// Time: O(N^2), Space: O(N)
 	n := len(scores)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	players := make([][2]int, n)
 	for i := 0; i < n; i++ {
 		players[i] = [2]int{ages[i], scores[i]}
 	}
 
 	// Sort by age, then by score
+  // Custom sort dengan comparator
 	sort.Slice(players, func(i, j int) bool {
 		if players[i][0] != players[j][0] {
 			return players[i][0] < players[j][0]
@@ -49,7 +63,7 @@ func BestTeamScore(scores []int, ages []int) int {
 	})
 
 	// LIS-like DP
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n)
 	maxScore := 0
 

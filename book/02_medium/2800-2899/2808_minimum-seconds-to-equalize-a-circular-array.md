@@ -1,19 +1,30 @@
 # 2808 — Minimum Seconds To Equalize A Circular Array
 
-## Deskripsi
-
-**Soal:** [2808. Minimum Seconds To Equalize A Circular Array](https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumSecondsToEqualizeACircularArray(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumSecondsToEqualizeACircularArray(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func MinimumSecondsToEqualizeACircularArray(nums []int) int {
 	n := len(nums)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[int][]int)
 	for i, v := range nums {
 		pos[v] = append(pos[v], i)
@@ -39,7 +50,7 @@ func MinimumSecondsToEqualizeACircularArray(nums []int) int {
 			continue
 		}
 		maxGap := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(positions); i++ {
 			curr := positions[i]
 			var prev int

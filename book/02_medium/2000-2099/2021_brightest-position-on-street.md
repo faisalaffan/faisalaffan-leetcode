@@ -1,19 +1,30 @@
 # 2021 — Brightest Position On Street
 
-## Deskripsi
-
-**Soal:** [2021. Brightest Position On Street](https://leetcode.com/problems/brightest-position-on-street/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func brightestPosition(lights [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func brightestPosition(lights [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ import (
 )
 
 func brightestPosition(lights [][]int) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	events := make([][2]int, 0, len(lights)*2)
 
 	for _, l := range lights {
@@ -38,6 +49,7 @@ func brightestPosition(lights [][]int) int {
 		events = append(events, [2]int{pos + rng + 1, -1})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(events, func(i, j int) bool {
 		if events[i][0] != events[j][0] {
 			return events[i][0] < events[j][0]

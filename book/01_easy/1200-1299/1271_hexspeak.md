@@ -1,17 +1,30 @@
 # 1271 — Hexspeak
 
-## Deskripsi
-
-**Soal:** [1271. Hexspeak](https://leetcode.com/problems/hexspeak/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func toHexspeak(num string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(log n)  
 **Kompleksitas Ruang:** O(log n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,9 +53,8 @@ func toHexspeak(num string) string {
 		'0': 'O',
 		'1': 'I',
 	}
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]byte, len(hex))
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range hex {
 		if r, ok := replacer[hex[i]]; ok {
 			ans[i] = r

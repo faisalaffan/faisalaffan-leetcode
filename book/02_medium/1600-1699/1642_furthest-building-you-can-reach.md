@@ -1,17 +1,30 @@
 # 1642 — Furthest Building You Can Reach
 
-## Deskripsi
-
-**Soal:** [1642. Furthest Building You Can Reach](https://leetcode.com/problems/furthest-building-you-can-reach/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FurthestBuilding(heights []int, bricks int, ladders int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(N log K), Space: O(K) where K = ladders  
 **Kompleksitas Ruang:** O(K) where K = ladders
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,17 +65,19 @@ func FurthestBuilding(heights []int, bricks int, ladders int) int {
 	h := &IntHeap{}
 	heap.Init(h)
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(heights)-1; i++ {
 		diff := heights[i+1] - heights[i]
 		if diff <= 0 {
 			continue
 		}
 
+  // Masukkan elemen ke priority queue
 		heap.Push(h, diff)
 
 		// If we have more climbs than ladders, use bricks for the smallest climb
 		if h.Len() > ladders {
+  // Ambil elemen terkecil/terbesar dari heap
 			bricks -= heap.Pop(h).(int)
 			if bricks < 0 {
 				return i

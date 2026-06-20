@@ -1,17 +1,30 @@
 # 3610 — Minimum Number Of Primes To Sum To Target
 
-## Deskripsi
-
-**Soal:** [3610. Minimum Number Of Primes To Sum To Target](https://leetcode.com/problems/minimum-number-of-primes-to-sum-to-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumNumberOfPrimesToSumToTarget(target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,6 @@ func MinimumNumberOfPrimesToSumToTarget(target int) int {
 		return -1
 	}
 	// Sieve to find all primes up to target
-  // Membuat slice untuk menyimpan hasil
 	isPrime := make([]bool, target+1)
 	for i := 2; i <= target; i++ {
 		isPrime[i] = true
@@ -51,9 +63,9 @@ func MinimumNumberOfPrimesToSumToTarget(target int) int {
 	}
 
 	// DP: min primes to sum to x
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, target+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = target + 1
 	}

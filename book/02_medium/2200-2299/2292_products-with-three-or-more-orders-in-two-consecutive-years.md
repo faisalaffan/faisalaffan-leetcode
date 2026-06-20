@@ -1,19 +1,30 @@
 # 2292 — Products With Three Or More Orders In Two Consecutive Years
 
-## Deskripsi
-
-**Soal:** [2292. Products With Three Or More Orders In Two Consecutive Years](https://leetcode.com/problems/products-with-three-or-more-orders-in-two-consecutive-years/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findProducts(orders [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findProducts(orders [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ type Order struct {
 
 func findProducts(orders [][]int) []int {
 	// Group orders by product and year
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	productYears := make(map[int]map[int]int)
 	for _, o := range orders {
 		productID, year := o[0], o[1]
@@ -51,6 +62,7 @@ func findProducts(orders [][]int) []int {
 		for y := range years {
 			yearList = append(yearList, y)
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(yearList)
 
 		for i := 1; i < len(yearList); i++ {
@@ -62,6 +74,7 @@ func findProducts(orders [][]int) []int {
 			}
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

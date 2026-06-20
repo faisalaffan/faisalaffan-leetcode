@@ -1,17 +1,30 @@
 # 1466 — Reorder Routes To Make All Paths Lead To The City Zero
 
-## Deskripsi
-
-**Soal:** [1466. Reorder Routes To Make All Paths Lead To The City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minReorder(n int, connections [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n) where n = number of nodes  
 **Kompleksitas Ruang:** O(n) for adjacency list
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,14 +53,13 @@ func minReorder(n int, connections [][]int) int {
 	// For each edge, store [neighbor, direction]
 	// direction=1 means original direction is away from 0, needs reorder
 	// direction=0 means original direction is towards 0, ok
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, conn := range connections {
 		adj[conn[0]] = append(adj[conn[0]], [2]int{conn[1], 1}) // outgoing
 		adj[conn[1]] = append(adj[conn[1]], [2]int{conn[0], 0}) // incoming
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	changes := 0
 

@@ -1,17 +1,30 @@
 # 0989 — Add To Array Form Of Integer
 
-## Deskripsi
-
-**Soal:** [0989. Add To Array Form Of Integer](https://leetcode.com/problems/add-to-array-form-of-integer/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func addToArrayForm(num []int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(max(n, log k)). Space: O(max(n, log k)).  
 **Kompleksitas Ruang:** O(max(n, log k)).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +45,7 @@ func main() {
 // Time: O(max(n, log k)). Space: O(max(n, log k)).
 func addToArrayForm(num []int, k int) []int {
 	i := len(num) - 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0)
 	carry := 0
 	for i >= 0 || k > 0 || carry > 0 {
@@ -50,6 +63,7 @@ func addToArrayForm(num []int, k int) []int {
 	}
 	// Reverse
 	l, r := 0, len(result)-1
+  // Two-pointer: gerakkan kiri atau kanan
 	for l < r {
 		result[l], result[r] = result[r], result[l]
 		l++

@@ -1,17 +1,30 @@
 # 1424 — Diagonal Traverse Ii
 
-## Deskripsi
-
-**Soal:** [1424. Diagonal Traverse Ii](https://leetcode.com/problems/diagonal-traverse-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findDiagonalOrder(nums [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m*n) where m = number of rows, n = avg columns  
 **Kompleksitas Ruang:** O(m*n) for result
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +60,7 @@ func main() {
 func findDiagonalOrder(nums [][]int) []int {
 	// Group elements by (i+j) diagonal index
 	// For each diagonal, elements appear in reverse row order
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	diagonals := make([][]int, 0)
 
 	for i, row := range nums {
@@ -61,7 +74,7 @@ func findDiagonalOrder(nums [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0)
 	for _, d := range diagonals {
 		// Reverse the diagonal (since we prepended, it's in reverse)

@@ -1,21 +1,32 @@
 # 3937 — Minimum Operations To Make Array Modulo Alternating I
 
-## Deskripsi
-
-**Soal:** [3937. Minimum Operations To Make Array Modulo Alternating I](https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumOperationsToMakeArrayModuloAlternatingI(nums []int, k int) int
+```
+
+> **💡 Hint:** Enumerate all (x,y) pairs with x != y, 0 <= x,y < k.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N * K^2)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MinimumOperationsToMakeArrayModuloAlternatingI(nums []int, k int) int`
-
-> **Ide Kunci:** Enumerate all (x,y) pairs with x != y, 0 <= x,y < k.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ func MinimumOperationsToMakeArrayModuloAlternatingI(nums []int, k int) int {
 	n := len(nums)
 
 	// Precompute remainders
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rem := make([]int, n)
 	for i := 0; i < n; i++ {
 		rem[i] = nums[i] % k

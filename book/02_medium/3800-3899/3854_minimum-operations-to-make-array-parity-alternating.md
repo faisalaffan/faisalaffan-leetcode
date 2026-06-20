@@ -1,21 +1,32 @@
 # 3854 — Minimum Operations To Make Array Parity Alternating
 
-## Deskripsi
-
-**Soal:** [3854. Minimum Operations To Make Array Parity Alternating](https://leetcode.com/problems/minimum-operations-to-make-array-parity-alternating/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumOperationsToMakeArrayParityAlternating(nums []int) []int
+```
+
+> **💡 Hint:** Compute min operations for two patterns (even-start, odd-start).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumOperationsToMakeArrayParityAlternating(nums []int) []int`
-
-> **Ide Kunci:** Compute min operations for two patterns (even-start, odd-start).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -67,12 +78,13 @@ func MinimumOperationsToMakeArrayParityAlternating(nums []int) []int {
 	}
 
 	// Sliding window to find min range
+  // Custom sort dengan comparator
 	sort.Slice(candidates, func(i, j int) bool {
 		return candidates[i][0] < candidates[j][0]
 	})
 
 	minRange := math.MaxInt32
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, n)
 	empty := n
 	left := 0

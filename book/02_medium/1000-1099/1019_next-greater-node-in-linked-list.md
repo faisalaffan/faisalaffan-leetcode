@@ -1,19 +1,32 @@
 # 1019 — Next Greater Node In Linked List
 
-## Deskripsi
-
-**Soal:** [1019. Next Greater Node In Linked List](https://leetcode.com/problems/next-greater-node-in-linked-list/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func nextLargerNodes(head *ListNode) []int
+```
+
+> **💡 Hint:** Convert linked list to array, then use monotonic stack
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Stack (tumpukan LIFO), Monotonic Stack (tumpukan monoton), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Convert linked list to array, then use monotonic stack
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,15 +58,15 @@ func main() {
 
 func nextLargerNodes(head *ListNode) []int {
 	// Convert to array
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	vals := make([]int, 0)
 	for cur := head; cur != nil; cur = cur.Next {
 		vals = append(vals, cur.Val)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(vals))
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0) // indices
 
 	for i, v := range vals {

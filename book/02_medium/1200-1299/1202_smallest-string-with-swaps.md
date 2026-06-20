@@ -1,19 +1,30 @@
 # 1202 — Smallest String With Swaps
 
-## Deskripsi
-
-**Soal:** [1202. Smallest String With Swaps](https://leetcode.com/problems/smallest-string-with-swaps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newUF(n int) *uf
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func newUF(n int) *uf`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,9 +50,9 @@ type uf struct {
 }
 
 func newUF(n int) *uf {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -78,23 +89,23 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 	}
 
 	// Group indices by root
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[int][]int)
 	for i := 0; i < n; i++ {
 		root := u.find(i)
 		groups[root] = append(groups[root], i)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, n)
 	for _, indices := range groups {
-  // Membuat slice untuk menyimpan hasil
 		chars := make([]byte, len(indices))
 		for i, idx := range indices {
 			chars[i] = s[idx]
 		}
+  // Custom sort dengan comparator
 		sort.Slice(chars, func(i, j int) bool { return chars[i] < chars[j] })
 
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(indices)
 		for i, idx := range indices {
 			result[idx] = chars[i]

@@ -1,17 +1,30 @@
 # 2691 — Immutability Helper
 
-## Deskripsi
-
-**Soal:** [2691. Immutability Helper](https://leetcode.com/problems/immutability-helper/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func immutableUpdate(obj any, spec map[string]any) any
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -67,7 +80,6 @@ func immutableUpdate(obj any, spec map[string]any) any {
 			if existing, ok := result[key].([]any); ok {
 				toPush, ok2 := pushVal.([]any)
 				if ok2 {
-  // Membuat slice untuk menyimpan hasil
 					newSlice := make([]any, len(existing)+len(toPush))
 					copy(newSlice, existing)
 					copy(newSlice[len(existing):], toPush)
@@ -100,14 +112,13 @@ func immutableUpdate(obj any, spec map[string]any) any {
 func deepCopy(v any) any {
 	switch val := v.(type) {
 	case map[string]any:
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		result := make(map[string]any, len(val))
 		for k, vv := range val {
 			result[k] = deepCopy(vv)
 		}
 		return result
 	case []any:
-  // Membuat slice untuk menyimpan hasil
 		result := make([]any, len(val))
 		for i, vv := range val {
 			result[i] = deepCopy(vv)

@@ -1,19 +1,30 @@
 # 1786 — Number Of Restricted Paths From First To Last Node
 
-## Deskripsi
-
-**Soal:** [1786. Number Of Restricted Paths From First To Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countRestrictedPaths(n int, edges [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, BFS, Dynamic Programming, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** O(E log V), Space: O(V + E)  
 **Kompleksitas Ruang:** O(V + E)
 
-**Algoritma:** Dynamic Programming (DP), Queue (antrian FIFO), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countRestrictedPaths(n int, edges [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,7 +64,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 }
 
 func countRestrictedPaths(n int, edges [][]int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]Edge, n+1)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -62,7 +73,7 @@ func countRestrictedPaths(n int, edges [][]int) int {
 	}
 
 	// Dijkstra from node n to all nodes
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n+1)
 	for i := 1; i <= n; i++ {
 		dist[i] = 1 << 60
@@ -70,9 +81,11 @@ func countRestrictedPaths(n int, edges [][]int) int {
 	dist[n] = 0
 
 	pq := &PriorityQueue{}
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, Item{n, 0})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		item := heap.Pop(pq).(Item)
 		u := item.node
 		if item.dist > dist[u] {
@@ -81,13 +94,14 @@ func countRestrictedPaths(n int, edges [][]int) int {
 		for _, e := range graph[u] {
 			if nd := dist[u] + e.weight; nd < dist[e.to] {
 				dist[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, Item{e.to, nd})
 			}
 		}
 	}
 
 	// DP: count restricted paths
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	memo := make([]int, n+1)
 	for i := 1; i <= n; i++ {
 		memo[i] = -1

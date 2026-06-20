@@ -1,19 +1,30 @@
 # 2662 — Minimum Cost Of A Path With Special Roads
 
-## Deskripsi
-
-**Soal:** [2662. Minimum Cost Of A Path With Special Roads](https://leetcode.com/problems/minimum-cost-of-a-path-with-special-roads/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumCost(start []int, target []int, specialRoads [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dijkstra
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dijkstra** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumCost(start []int, target []int, specialRoads [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,9 +39,8 @@ import "fmt"
 func minimumCost(start []int, target []int, specialRoads [][]int) int {
 	// Use Dijkstra: dist[i] = min cost to reach special road i's end
 	n := len(specialRoads)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 
 	abs := func(x int) int {

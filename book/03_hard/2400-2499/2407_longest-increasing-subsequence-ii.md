@@ -1,21 +1,32 @@
 # 2407 — Longest Increasing Subsequence Ii
 
-## Deskripsi
-
-**Soal:** [2407. Longest Increasing Subsequence Ii](https://leetcode.com/problems/longest-increasing-subsequence-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewSegTree(size int) *SegTree
+```
+
+> **💡 Hint:** Segment tree over values (1..max(nums)).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Segment Tree
 
 **Kompleksitas Waktu:** O(N log M) where M = max(nums).  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), LIS (Longest Increasing Subsequence), Segment Tree (pohon segmen)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewSegTree(size int) *SegTree`
-
-> **Ide Kunci:** Segment tree over values (1..max(nums)).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -78,7 +89,7 @@ func (st *SegTree) query(ql int, qr int, node int, left int, right int) int {
 }
 
 func lengthOfLIS(nums []int, k int) int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if len(nums) == 0 {
 		return 0
 	}

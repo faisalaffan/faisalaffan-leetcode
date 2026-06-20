@@ -1,19 +1,30 @@
 # 1300 — Sum Of Mutated Array Closest To Target
 
-## Deskripsi
-
-**Soal:** [1300. Sum Of Mutated Array Closest To Target](https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findBestValue(arr []int, target int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n log n + n log max(arr))  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findBestValue(arr []int, target int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,10 +45,11 @@ import (
 // Space: O(1)
 
 func findBestValue(arr []int, target int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(arr)
 	n := len(arr)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n+1)
 	for i := 1; i <= n; i++ {
 		prefix[i] = prefix[i-1] + arr[i-1]

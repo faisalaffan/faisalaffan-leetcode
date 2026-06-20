@@ -1,19 +1,30 @@
 # 0444 — Sequence Reconstruction
 
-## Deskripsi
-
-**Soal:** [0444. Sequence Reconstruction](https://leetcode.com/problems/sequence-reconstruction/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sequenceReconstruction(org []int, seqs [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n + m)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func sequenceReconstruction(org []int, seqs [][]int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -28,11 +39,10 @@ import "fmt"
 func sequenceReconstruction(org []int, seqs [][]int) bool {
 	n := len(org)
 	// Build indegree map and edges
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	indegree := make([]int, n+1)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n+1)
-  // Membuat slice untuk menyimpan hasil
 	exists := make([]bool, n+1)
 
 	for _, seq := range seqs {
@@ -42,7 +52,7 @@ func sequenceReconstruction(org []int, seqs [][]int) bool {
 			}
 			exists[num] = true
 		}
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(seq)-1; i++ {
 			u, v := seq[i], seq[i+1]
 			graph[u] = append(graph[u], v)

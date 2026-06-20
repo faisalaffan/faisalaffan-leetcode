@@ -1,19 +1,30 @@
 # 2545 — Sort The Students By Their Kth Score
 
-## Deskripsi
-
-**Soal:** [2545. Sort The Students By Their Kth Score](https://leetcode.com/problems/sort-the-students-by-their-kth-score/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sortTheStudents(score [][]int, k int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m log m)  
 **Kompleksitas Ruang:** O(1) (excluding output)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func sortTheStudents(score [][]int, k int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,6 +40,7 @@ import (
 )
 
 func sortTheStudents(score [][]int, k int) [][]int {
+  // Custom sort dengan comparator
 	sort.Slice(score, func(i, j int) bool {
 		return score[i][k] > score[j][k]
 	})

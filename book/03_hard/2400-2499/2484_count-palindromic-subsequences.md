@@ -1,17 +1,30 @@
 # 2484 — Count Palindromic Subsequences
 
-## Deskripsi
-
-**Soal:** [2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countPalindromicSubsequences(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,14 +62,14 @@ func countPalindromicSubsequences(s string) int {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nums := make([]int, n)
 	for i := 0; i < n; i++ {
 		nums[i] = int(s[i] - '0')
 	}
 
 	// prefix counts: prefixCnt[i][d] = count of digit d in s[0:i]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefixCnt := make([][10]int, n+1)
 	for i := 0; i < n; i++ {
 		for d := 0; d < 10; d++ {
@@ -66,7 +79,7 @@ func countPalindromicSubsequences(s string) int {
 	}
 
 	// suffix counts: suffixCnt[i][d] = count of digit d in s[i:n]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	suffixCnt := make([][10]int, n+1)
 	for i := n - 1; i >= 0; i-- {
 		for d := 0; d < 10; d++ {

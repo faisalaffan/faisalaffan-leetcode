@@ -1,21 +1,32 @@
 # 2732 — Find A Good Subset Of The Matrix
 
-## Deskripsi
-
-**Soal:** [2732. Find A Good Subset Of The Matrix](https://leetcode.com/problems/find-a-good-subset-of-the-matrix/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findAGoodSubsetOfTheMatrix(grid [][]int) []int
+```
+
+> **💡 Hint:** We never need more than 2 rows.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findAGoodSubsetOfTheMatrix(grid [][]int) []int`
-
-> **Ide Kunci:** We never need more than 2 rows.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +49,7 @@ func findAGoodSubsetOfTheMatrix(grid [][]int) []int {
 	}
 	n := len(grid[0])
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	masks := make([]int, m)
 	allZero := -1
 	for i := 0; i < m; i++ {

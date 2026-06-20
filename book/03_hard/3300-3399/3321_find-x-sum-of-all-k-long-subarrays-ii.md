@@ -1,19 +1,32 @@
 # 3321 — Find X Sum Of All K Long Subarrays Ii
 
-## Deskripsi
-
-**Soal:** [3321. Find X Sum Of All K Long Subarrays Ii](https://leetcode.com/problems/find-x-sum-of-all-k-long-subarrays-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findXSum(nums []int, k int, x int) []int64
+```
+
+> **💡 Hint:** Sliding window with two ordered sets (balanced BST)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sliding window with two ordered sets (balanced BST)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,9 +64,9 @@ type pair struct {
 
 func findXSum(nums []int, k int, x int) []int64 {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, n-k+1)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 
 	for i := 0; i < n; i++ {
@@ -70,6 +83,7 @@ func findXSum(nums []int, k int, x int) []int64 {
 			for val, cnt := range freq {
 				list = append(list, pair{val, cnt})
 			}
+  // Custom sort dengan comparator
 			sort.Slice(list, func(i, j int) bool {
 				if list[i].cnt != list[j].cnt {
 					return list[i].cnt > list[j].cnt

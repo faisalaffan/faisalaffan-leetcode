@@ -1,21 +1,32 @@
 # 2435 — Paths In Matrix Whose Sum Is Divisible By K
 
-## Deskripsi
-
-**Soal:** [2435. Paths In Matrix Whose Sum Is Divisible By K](https://leetcode.com/problems/paths-in-matrix-whose-sum-is-divisible-by-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfPaths(grid [][]int, k int) int
+```
+
+> **💡 Hint:** 3D DP.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfPaths(grid [][]int, k int) int`
-
-> **Ide Kunci:** 3D DP.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,9 +52,9 @@ func numberOfPaths(grid [][]int, k int) int {
 	n := len(grid[0])
 
 	// dp[i][j][r] = ways to reach (i,j) with sum % k == r
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([][]int, n)
 		for j := range dp[i] {

@@ -1,19 +1,32 @@
 # 1072 — Flip Columns For Maximum Number Of Equal Rows
 
-## Deskripsi
-
-**Soal:** [1072. Flip Columns For Maximum Number Of Equal Rows](https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxEqualRowsAfterFlips(matrix [][]int) int
+```
+
+> **💡 Hint:** Normalize each row to a pattern (starting with 0).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Normalize each row to a pattern (starting with 0).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,11 +48,10 @@ func main() {
 }
 
 func maxEqualRowsAfterFlips(matrix [][]int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	patternCount := make(map[string]int)
 
 	for _, row := range matrix {
-  // Membuat slice untuk menyimpan hasil
 		pattern := make([]byte, len(row))
 		for j := 0; j < len(row); j++ {
 			if row[0] == 0 {

@@ -1,17 +1,30 @@
 # 0611 — Valid Triangle Number
 
-## Deskripsi
-
-**Soal:** [0611. Valid Triangle Number](https://leetcode.com/problems/valid-triangle-number/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func TriangleNumber(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(log n) for sorting
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,13 +46,14 @@ func main() {
 }
 
 func TriangleNumber(nums []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 	count := 0
 	n := len(nums)
 
 	for i := n - 1; i >= 2; i-- {
 		left, right := 0, i-1
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 		for left < right {
 			if nums[left]+nums[right] > nums[i] {
 				count += right - left

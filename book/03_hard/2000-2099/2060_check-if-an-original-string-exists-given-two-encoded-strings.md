@@ -1,21 +1,32 @@
 # 2060 — Check If An Original String Exists Given Two Encoded Strings
 
-## Deskripsi
-
-**Soal:** [2060. Check If An Original String Exists Given Two Encoded Strings](https://leetcode.com/problems/check-if-an-original-string-exists-given-two-encoded-strings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func possiblyEquals(s1 string, s2 string) bool
+```
+
+> **💡 Hint:** DP with memoization on (i, j, diff)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func possiblyEquals(s1 string, s2 string) bool`
-
-> **Ide Kunci:** DP with memoization on (i, j, diff)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ func possiblyEquals(s1 string, s2 string) bool {
 	// If diff > 0, s1 has extra length (s2 needs to catch up)
 	// If diff < 0, s2 has extra length
 	// Offset diff by 2000 to make it non-negative
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[[3]int]bool)
 	var dfs func(i, j, diff int) bool
 	dfs = func(i, j, diff int) bool {

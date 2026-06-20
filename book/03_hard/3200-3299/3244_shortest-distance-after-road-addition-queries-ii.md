@@ -1,17 +1,30 @@
 # 3244 — Shortest Distance After Road Addition Queries Ii
 
-## Deskripsi
-
-**Soal:** [3244. Shortest Distance After Road Addition Queries Ii](https://leetcode.com/problems/shortest-distance-after-road-addition-queries-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestDistanceAfterQueries(n int, queries [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +55,7 @@ func main() {
 
 func shortestDistanceAfterQueries(n int, queries [][]int) []int {
 	// next[i] = the next active node reachable from i (i+1 initially)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	next := make([]int, n)
 	for i := 0; i < n-1; i++ {
 		next[i] = i + 1
@@ -50,7 +63,7 @@ func shortestDistanceAfterQueries(n int, queries [][]int) []int {
 	next[n-1] = n - 1 // sentinel
 
 	dist := n - 1 // initial path length (0->1->2->...->n-1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 
 	for qi, q := range queries {

@@ -1,17 +1,30 @@
 # 3066 — Minimum Operations To Exceed Threshold Value Ii
 
-## Deskripsi
-
-**Soal:** [3066. Minimum Operations To Exceed Threshold Value Ii](https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations3066(nums []int, k int) (ans int)
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,14 +63,18 @@ func minOperations3066(nums []int, k int) (ans int) {
 	heap.Init(h)
 	for _, x := range nums {
 		if x < k {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, x)
 		}
 	}
 	for h.Len() >= 2 {
+  // Ambil elemen terkecil/terbesar dari heap
 		x := heap.Pop(h).(int)
+  // Ambil elemen terkecil/terbesar dari heap
 		y := heap.Pop(h).(int)
 		val := x*2 + y
 		if val < k {
+  // Masukkan elemen ke priority queue
 			heap.Push(h, val)
 		}
 		ans++

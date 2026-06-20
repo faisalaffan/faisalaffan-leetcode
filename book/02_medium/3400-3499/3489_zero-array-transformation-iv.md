@@ -1,17 +1,30 @@
 # 3489 — Zero Array Transformation Iv
 
-## Deskripsi
-
-**Soal:** [3489. Zero Array Transformation Iv](https://leetcode.com/problems/zero-array-transformation-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ZeroArrayTransformationIv(nums []int, queries [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,7 +73,7 @@ func ZeroArrayTransformationIv(nums []int, queries [][]int) int {
 func canTransform(nums []int, queries [][]int, k int) bool {
 	n := len(nums)
 	// diff array to apply range updates
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	diff := make([]int, n+1)
 	for i := 0; i < k && i < len(queries); i++ {
 		l, r, val := queries[i][0], queries[i][1], queries[i][2]

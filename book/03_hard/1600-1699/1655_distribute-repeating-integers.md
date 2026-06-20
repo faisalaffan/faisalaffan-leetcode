@@ -1,21 +1,32 @@
 # 1655 — Distribute Repeating Integers
 
-## Deskripsi
-
-**Soal:** [1655. Distribute Repeating Integers](https://leetcode.com/problems/distribute-repeating-integers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canDistribute(nums []int, quantity []int) bool
+```
+
+> **💡 Hint:** // 1. Count frequencies of each distinct number in nums.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canDistribute(nums []int, quantity []int) bool`
-
-> **Ide Kunci:** // 1. Count frequencies of each distinct number in nums.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,24 +56,26 @@ import (
 
 func canDistribute(nums []int, quantity []int) bool {
 	// Count frequencies
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freqMap := make(map[int]int)
 	for _, v := range nums {
 		freqMap[v]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freqs := make([]int, 0, len(freqMap))
 	for _, f := range freqMap {
 		freqs = append(freqs, f)
 	}
 
 	// Sort frequencies descending for better pruning
+  // Custom sort dengan comparator
 	sort.Slice(freqs, func(i, j int) bool {
 		return freqs[i] > freqs[j]
 	})
 
 	// Sort quantity descending
+  // Custom sort dengan comparator
 	sort.Slice(quantity, func(i, j int) bool {
 		return quantity[i] > quantity[j]
 	})
@@ -71,7 +84,7 @@ func canDistribute(nums []int, quantity []int) bool {
 	size := 1 << n
 
 	// Precompute subset sums of quantity
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	subsetSum := make([]int, size)
 	for mask := 1; mask < size; mask++ {
 		lsb := mask & -mask
@@ -80,7 +93,6 @@ func canDistribute(nums []int, quantity []int) bool {
 	}
 
 	// dp[mask] = true if we can satisfy customer subset 'mask' with processed frequencies
-  // Membuat slice untuk menyimpan hasil
 	dp := make([]bool, size)
 	dp[0] = true
 

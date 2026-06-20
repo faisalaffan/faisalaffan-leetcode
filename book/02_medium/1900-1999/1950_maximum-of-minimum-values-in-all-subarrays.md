@@ -1,17 +1,30 @@
 # 1950 — Maximum Of Minimum Values In All Subarrays
 
-## Deskripsi
-
-**Soal:** [1950. Maximum Of Minimum Values In All Subarrays](https://leetcode.com/problems/maximum-of-minimum-values-in-all-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaxOfMinValues(nums []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Stack
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,24 +43,24 @@ func main() {
 // Time: O(n), Space: O(n)
 func MaxOfMinValues(nums []int) []int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n+1) // result[k] for k-length subarrays
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range result {
 		result[i] = 0
 	}
 
 	// Find previous smaller and next smaller elements
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	left := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	right := make([]int, n)
 	for i := 0; i < n; i++ {
 		left[i] = -1
 		right[i] = n
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	stack := make([]int, 0)
 	for i := 0; i < n; i++ {
 		for len(stack) > 0 && nums[stack[len(stack)-1]] >= nums[i] {

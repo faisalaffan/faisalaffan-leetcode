@@ -1,19 +1,32 @@
 # 2350 — Shortest Impossible Sequence Of Rolls
 
-## Deskripsi
-
-**Soal:** [2350. Shortest Impossible Sequence Of Rolls](https://leetcode.com/problems/shortest-impossible-sequence-of-rolls/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestSequence(rolls []int, k int) int
+```
+
+> **💡 Hint:** Greedy. We want the shortest sequence of rolls (each 1..k) that
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Greedy. We want the shortest sequence of rolls (each 1..k) that
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,7 +61,6 @@ func main() {
 }
 
 func shortestSequence(rolls []int, k int) int {
-  // Membuat slice untuk menyimpan hasil
 	seen := make([]bool, k+1)
 	rounds := 0
 	count := 0

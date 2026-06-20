@@ -1,17 +1,30 @@
 # 1183 — Maximum Number Of Ones
 
-## Deskripsi
-
-**Soal:** [1183. Maximum Number Of Ones](https://leetcode.com/problems/maximum-number-of-ones/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -64,7 +77,7 @@ func main() {
 func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int {
 	// For each position (i, j) in a sideLength x sideLength block, compute how
 	// many times it is covered (i.e., appears in the full matrix).
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	counts := make([]int, 0, sideLength*sideLength)
 
 	for i := 0; i < sideLength; i++ {
@@ -80,6 +93,7 @@ func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int
 	}
 
 	// Sort descending so we pick the positions with highest coverage first
+  // Custom sort dengan comparator
 	sort.Slice(counts, func(i, j int) bool {
 		return counts[i] > counts[j]
 	})

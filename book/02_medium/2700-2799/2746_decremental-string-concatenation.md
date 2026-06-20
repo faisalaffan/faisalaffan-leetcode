@@ -1,19 +1,30 @@
 # 2746 — Decremental String Concatenation
 
-## Deskripsi
-
-**Soal:** [2746. Decremental String Concatenation](https://leetcode.com/problems/decremental-string-concatenation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func DecrementalStringConcatenation(words []string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func DecrementalStringConcatenation(words []string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,9 +41,9 @@ func DecrementalStringConcatenation(words []string) int {
 	// dp[first][last] = min length
 	// Use 26 letters
 	const INF = 1 << 30
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, 26)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, 26)
 		for j := range dp[i] {
@@ -46,9 +57,9 @@ func DecrementalStringConcatenation(words []string) int {
 	for i := 1; i < n; i++ {
 		w := words[i]
 		cf, cl := int(w[0]-'a'), int(w[len(w)-1]-'a')
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		ndp := make([][]int, 26)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range ndp {
 			ndp[i] = make([]int, 26)
 			for j := range ndp[i] {

@@ -1,19 +1,30 @@
 # 0287 — Find The Duplicate Number
 
-## Deskripsi
-
-**Soal:** [0287. Find The Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findDuplicate(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Floyd-Warshall
 
 **Kompleksitas Waktu:** O(n), Space: O(1) using Floyd's Cycle Detection  
 **Kompleksitas Ruang:** O(1) using Floyd's Cycle Detection
 
-**Algoritma:** Floyd-Warshall (lintasan semua pasangan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Floyd-Warshall** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findDuplicate(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

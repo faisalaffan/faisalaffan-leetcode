@@ -1,17 +1,30 @@
 # 1868 — Product Of Two Run Length Encoded Arrays
 
-## Deskripsi
-
-**Soal:** [1868. Product Of Two Run Length Encoded Arrays](https://leetcode.com/problems/product-of-two-run-length-encoded-arrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindRLEArray(encoded1 [][]int, encoded2 [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n1 + n2), Space: O(n1 + n2) for result  
 **Kompleksitas Ruang:** O(n1 + n2) for result
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +42,7 @@ func main() {
 
 // Time: O(n1 + n2), Space: O(n1 + n2) for result
 func FindRLEArray(encoded1 [][]int, encoded2 [][]int) [][]int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0)
 	i, j := 0, 0
 

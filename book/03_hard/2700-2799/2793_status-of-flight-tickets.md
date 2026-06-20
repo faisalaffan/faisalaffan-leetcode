@@ -1,19 +1,30 @@
 # 2793 — Status Of Flight Tickets
 
-## Deskripsi
-
-**Soal:** [2793. Status Of Flight Tickets](https://leetcode.com/problems/status-of-flight-tickets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func statusOfFlightTickets(flights [][]int, passengers [][]int) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func statusOfFlightTickets(flights [][]int, passengers [][]int) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,21 +44,21 @@ import (
 )
 
 func statusOfFlightTickets(flights [][]int, passengers [][]int) []string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	capMap := make(map[int]int)
 	for _, f := range flights {
 		capMap[f[0]] = f[1]
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byFlight := make(map[int][]int)
 	for i, p := range passengers {
 		byFlight[p[1]] = append(byFlight[p[1]], i)
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	res := make([]string, len(passengers))
 	for fid, indices := range byFlight {
+  // Custom sort dengan comparator
 		sort.Slice(indices, func(i, j int) bool {
 			return passengers[indices[i]][2] < passengers[indices[j]][2]
 		})

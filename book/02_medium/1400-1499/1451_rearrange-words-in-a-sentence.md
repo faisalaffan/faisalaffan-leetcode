@@ -1,17 +1,30 @@
 # 1451 — Rearrange Words In A Sentence
 
-## Deskripsi
-
-**Soal:** [1451. Rearrange Words In A Sentence](https://leetcode.com/problems/rearrange-words-in-a-sentence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func arrangeWords(text string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n) where n = number of words  
 **Kompleksitas Ruang:** O(n) for storing words
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,12 +68,12 @@ func arrangeWords(text string) string {
 	runes[0] = unicode.ToLower(runes[0])
 	words[0] = string(runes)
 
-  // Membuat slice untuk menyimpan hasil
 	infos := make([]wordInfo, len(words))
 	for i, w := range words {
 		infos[i] = wordInfo{w, i, len(w)}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(infos, func(i, j int) bool {
 		if infos[i].length != infos[j].length {
 			return infos[i].length < infos[j].length
@@ -68,7 +81,6 @@ func arrangeWords(text string) string {
 		return infos[i].index < infos[j].index
 	})
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, len(infos))
 	for i, info := range infos {
 		result[i] = info.word

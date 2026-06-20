@@ -1,19 +1,32 @@
 # 2459 — Sort Array By Moving Items To Empty Space
 
-## Deskripsi
-
-**Soal:** [2459. Sort Array By Moving Items To Empty Space](https://leetcode.com/problems/sort-array-by-moving-items-to-empty-space/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sortArray(nums []int) int
+```
+
+> **💡 Hint:** Cycle decomposition. For each cycle, if it contains 0,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Cycle decomposition. For each cycle, if it contains 0,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,6 @@ func main() {
 
 func sortArray(nums []int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	ans := 0
 	zeroPos := 0

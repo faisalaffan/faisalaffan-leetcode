@@ -1,19 +1,32 @@
 # 1066 — Campus Bikes Ii
 
-## Deskripsi
-
-**Soal:** [1066. Campus Bikes Ii](https://leetcode.com/problems/campus-bikes-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func assignBikesII(workers [][]int, bikes [][]int) int
+```
+
+> **💡 Hint:** DP with bitmask (minimum assignment cost)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** O(W * 2^B) where W = workers, B = bikes  
 **Kompleksitas Ruang:** O(2^B)
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP with bitmask (minimum assignment cost)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,9 +48,9 @@ func main() {
 
 func assignBikesII(workers [][]int, bikes [][]int) int {
 	w, b := len(workers), len(bikes)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, 1<<b)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = -1
 	}

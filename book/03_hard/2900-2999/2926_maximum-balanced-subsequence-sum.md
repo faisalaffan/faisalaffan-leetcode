@@ -1,19 +1,30 @@
 # 2926 — Maximum Balanced Subsequence Sum
 
-## Deskripsi
-
-**Soal:** [2926. Maximum Balanced Subsequence Sum](https://leetcode.com/problems/maximum-balanced-subsequence-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxBalancedSubsequenceSum(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxBalancedSubsequenceSum(nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,16 +49,17 @@ import (
 
 func maxBalancedSubsequenceSum(nums []int) int64 {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	keys := make([]int, n)
 	for i, v := range nums {
 		keys[i] = v - i
 	}
 
 	// Coordinate compression
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, keys)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
 	m := 1
 	for i := 1; i < n; i++ {
@@ -59,9 +71,9 @@ func maxBalancedSubsequenceSum(nums []int) int64 {
 	sorted = sorted[:m]
 
 	// BIT for prefix maximum
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bit := make([]int64, m+2)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range bit {
 		bit[i] = math.MinInt64
 	}

@@ -1,19 +1,32 @@
 # 3625 — Count Number Of Trapezoids Ii
 
-## Deskripsi
-
-**Soal:** [3625. Count Number Of Trapezoids Ii](https://leetcode.com/problems/count-number-of-trapezoids-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countTrapezoids(points [][]int) int
+```
+
+> **💡 Hint:** Group pairs by slope, count parallel combinations, subtract
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Group pairs by slope, count parallel combinations, subtract
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -64,7 +77,7 @@ func countTrapezoids(points [][]int) int {
 	type pairInfo struct {
 		midX, midY int // midpoint for parallelogram detection
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	slopePairs := make(map[pair][]pairInfo)
 	parallelCount := 0
 
@@ -91,7 +104,7 @@ func countTrapezoids(points [][]int) int {
 	// For each slope pair (i,j) and (p,q) with same midpoint, they form a parallelogram
 	parallelogramCount := 0
 	for _, pairs := range slopePairs {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		midCount := make(map[pair]int)
 		for _, p := range pairs {
 			mp := pair{p.midX, p.midY}

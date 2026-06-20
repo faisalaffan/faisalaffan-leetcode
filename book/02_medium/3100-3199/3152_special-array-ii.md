@@ -1,19 +1,30 @@
 # 3152 — Special Array Ii
 
-## Deskripsi
-
-**Soal:** [3152. Special Array Ii](https://leetcode.com/problems/special-array-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isArraySpecial(nums []int, queries [][]int) []bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + q)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func isArraySpecial(nums []int, queries [][]int) []bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func isArraySpecial(nums []int, queries [][]int) []bool {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int, n)
 	for i := 1; i < n; i++ {
 		prefix[i] = prefix[i-1]
@@ -36,7 +47,6 @@ func isArraySpecial(nums []int, queries [][]int) []bool {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, len(queries))
 	for i, q := range queries {
 		from, to := q[0], q[1]

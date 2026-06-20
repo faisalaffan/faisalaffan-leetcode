@@ -1,17 +1,33 @@
 # 1459 — Rectangles Area
 
-## Deskripsi
-
-**Soal:** [1459. Rectangles Area](https://leetcode.com/problems/rectangles-area/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func rectanglesArea(points []struct {
+	id   int
+	x, y int
+}) []rectResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n^2) for finding all vertical pairs  
 **Kompleksitas Ruang:** O(n^2) for map
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,9 +72,9 @@ func rectanglesArea(points []struct {
 	type yPair struct{ y1, y2 int }
 
 	// Group points by x
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pointsByX := make(map[int][]int) // x -> [ids]
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	coords := make(map[int]struct{ x, y int })
 
 	for _, p := range points {
@@ -66,11 +82,11 @@ func rectanglesArea(points []struct {
 		coords[p.id] = struct{ x, y int }{p.x, p.y}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	verticals := make(map[yPair][]int)
 
 	for _, ids := range pointsByX {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(ids); i++ {
 			for j := i + 1; j < len(ids); j++ {
 				yi := coords[ids[i]].y
@@ -91,7 +107,7 @@ func rectanglesArea(points []struct {
 	var results []rectResult
 	for yp, xs := range verticals {
 		// Sort xs
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(xs); i++ {
 			for j := i + 1; j < len(xs); j++ {
 				if xs[j] < xs[i] {
@@ -99,7 +115,7 @@ func rectanglesArea(points []struct {
 				}
 			}
 		}
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(xs); i++ {
 			for j := i + 1; j < len(xs); j++ {
 				x1, x2 := xs[i], xs[j]

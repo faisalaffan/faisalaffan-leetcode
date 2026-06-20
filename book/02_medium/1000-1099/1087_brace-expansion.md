@@ -1,19 +1,32 @@
 # 1087 — Brace Expansion
 
-## Deskripsi
-
-**Soal:** [1087. Brace Expansion](https://leetcode.com/problems/brace-expansion/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func expand(s string) []string
+```
+
+> **💡 Hint:** Backtracking - parse braces and generate all expansions
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(n * k) where k is number of expansions  
 **Kompleksitas Ruang:** O(n * k)
 
-**Algoritma:** Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Backtracking - parse braces and generate all expansions
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +50,6 @@ func main() {
 }
 
 func expand(s string) []string {
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 	backtrack(s, 0, "", &result)
 	sort.Strings(result)
@@ -57,13 +69,13 @@ func backtrack(s string, idx int, cur string, result *[]string) {
 			end++
 		}
 		// Parse options
-  // Membuat slice untuk menyimpan hasil
 		options := make([]byte, 0)
 		for k := idx + 1; k < end; k++ {
 			if s[k] != ',' {
 				options = append(options, s[k])
 			}
 		}
+  // Custom sort dengan comparator
 		sort.Slice(options, func(i, j int) bool {
 			return options[i] < options[j]
 		})

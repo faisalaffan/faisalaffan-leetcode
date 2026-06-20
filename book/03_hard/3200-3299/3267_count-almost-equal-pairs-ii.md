@@ -1,17 +1,30 @@
 # 3267 — Count Almost Equal Pairs Ii
 
-## Deskripsi
-
-**Soal:** [3267. Count Almost Equal Pairs Ii](https://leetcode.com/problems/count-almost-equal-pairs-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countAlmostEqualPairsII(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,11 +60,12 @@ func main() {
 func countAlmostEqualPairsII(nums []int) int64 {
 	// Group numbers by their sorted digit multiset.
 	// Only numbers with the same multiset can be almost equal.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[string][]string)
 	for _, num := range nums {
 		s := strconv.Itoa(num)
 		b := []byte(s)
+  // Custom sort dengan comparator
 		sort.Slice(b, func(i, j int) bool { return b[i] < b[j] })
 		key := string(b)
 		groups[key] = append(groups[key], s)
@@ -61,7 +75,7 @@ func countAlmostEqualPairsII(nums []int) int64 {
 
 	for _, group := range groups {
 		// Count frequency of each distinct string in this group.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		freq := make(map[string]int)
 		for _, s := range group {
 			freq[s]++
@@ -79,7 +93,7 @@ func countAlmostEqualPairsII(nums []int) int64 {
 		for s, f := range freq {
 			b := []byte(s)
 			n := len(b)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 			seen := make(map[string]bool)
 			for p := 0; p < n; p++ {
 				for q := p + 1; q < n; q++ {

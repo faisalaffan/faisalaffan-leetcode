@@ -1,19 +1,32 @@
 # 1040 — Moving Stones Until Consecutive Ii
 
-## Deskripsi
-
-**Soal:** [1040. Moving Stones Until Consecutive Ii](https://leetcode.com/problems/moving-stones-until-consecutive-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numMovesStonesII(stones []int) []int
+```
+
+> **💡 Hint:** Sort stones. Max moves: spread left or right. Min moves: sliding window.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Sort stones. Max moves: spread left or right. Min moves: sliding window.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,6 +50,7 @@ func main() {
 }
 
 func numMovesStonesII(stones []int) []int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(stones)
 	n := len(stones)
 

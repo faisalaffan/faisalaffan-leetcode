@@ -1,17 +1,30 @@
 # 1949 — Strong Friendship
 
-## Deskripsi
-
-**Soal:** [1949. Strong Friendship](https://leetcode.com/problems/strong-friendship/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func StrongFriendship(friendships [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n^2), Space: O(n^2)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +43,7 @@ func main() {
 
 // Time: O(n^2), Space: O(n^2)
 func StrongFriendship(friendships [][]int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	friendSet := make(map[int]map[int]bool)
 	for _, f := range friendships {
 		a, b := f[0], f[1]
@@ -46,13 +59,13 @@ func StrongFriendship(friendships [][]int) int {
 
 	count := 0
 	// For each pair of users, check if they have at least 3 common friends
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	users := make([]int, 0, len(friendSet))
 	for u := range friendSet {
 		users = append(users, u)
 	}
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(users); i++ {
 		for j := i + 1; j < len(users); j++ {
 			a, b := users[i], users[j]

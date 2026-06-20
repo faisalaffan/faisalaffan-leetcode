@@ -1,21 +1,32 @@
 # 3049 — Earliest Second To Mark Indices Ii
 
-## Deskripsi
-
-**Soal:** [3049. Earliest Second To Mark Indices Ii](https://leetcode.com/problems/earliest-second-to-mark-indices-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func earliestSecondToMarkIndices(nums []int, changeIndices []int) int
+```
+
+> **💡 Hint:** Binary search + greedy with min-heap
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Greedy (pemilihan optimal lokal), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func earliestSecondToMarkIndices(nums []int, changeIndices []int) int`
-
-> **Ide Kunci:** Binary search + greedy with min-heap
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -61,9 +72,9 @@ func earliestSecondToMarkIndices(nums []int, changeIndices []int) int {
 	total += int64(n)
 
 	check := func(last int) bool {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		first := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range first {
 			first[i] = -1
 		}
@@ -83,10 +94,12 @@ func earliestSecondToMarkIndices(nums []int, changeIndices []int) int {
 				ops++
 				continue
 			}
+  // Masukkan elemen ke priority queue
 			heap.Push(pq, nums[idx])
 			need -= int64(nums[idx]) - 1
 			if pq.Len() > ops {
 				need += int64((*pq)[0]) - 1
+  // Ambil elemen terkecil/terbesar dari heap
 				heap.Pop(pq)
 				ops++
 			}

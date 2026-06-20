@@ -1,21 +1,32 @@
 # 2846 — Minimum Edge Weight Equilibrium Queries In A Tree
 
-## Deskripsi
-
-**Soal:** [2846. Minimum Edge Weight Equilibrium Queries In A Tree](https://leetcode.com/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minEdgeWeightEquilibriumQueries(n int, edges [][]int, queries [][]int) []int
+```
+
+> **💡 Hint:** root at 0, binary lifting for LCA, prefix frequency arrays for
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Prefix Sum, Binary Lifting, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), LIS (Longest Increasing Subsequence), Binary Lifting (lompatan biner untuk LCA)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minEdgeWeightEquilibriumQueries(n int, edges [][]int, queries [][]int) []int`
-
-> **Ide Kunci:** root at 0, binary lifting for LCA, prefix frequency arrays for
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ import "fmt"
 
 func minEdgeWeightEquilibriumQueries(n int, edges [][]int, queries [][]int) []int {
 	// Build adjacency list: neighbor, weight (0-indexed)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]-1 // weight 1-indexed in input
@@ -48,14 +59,14 @@ func minEdgeWeightEquilibriumQueries(n int, edges [][]int, queries [][]int) []in
 	for (1 << LOG) <= n {
 		LOG++
 	}
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	up := make([][]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	depth := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([][26]int, n) // prefix freq from root to node
 
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range up {
 		up[i] = make([]int, LOG)
 	}
@@ -105,7 +116,7 @@ func minEdgeWeightEquilibriumQueries(n int, edges [][]int, queries [][]int) []in
 		return up[u][0]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 	for qi, q := range queries {
 		u, v := q[0], q[1]

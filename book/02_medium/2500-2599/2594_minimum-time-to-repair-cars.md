@@ -1,19 +1,30 @@
 # 2594 — Minimum Time To Repair Cars
 
-## Deskripsi
-
-**Soal:** [2594. Minimum Time To Repair Cars](https://leetcode.com/problems/minimum-time-to-repair-cars/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func repairCars(ranks []int, cars int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(n log minTime)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func repairCars(ranks []int, cars int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ func repairCars(ranks []int, cars int) int64 {
 
 	left := int64(1)
 	right := int64(ranks[0]) * int64(cars) * int64(cars)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ranks {
 		candidate := int64(ranks[i]) * int64(cars) * int64(cars)
 		if candidate < right {
@@ -50,7 +61,7 @@ func repairCars(ranks []int, cars int) int64 {
 		}
 	}
 
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := left + (right-left)/2
 		if canRepair(mid) {

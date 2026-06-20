@@ -1,19 +1,30 @@
 # 0423 — Reconstruct Original Digits From English
 
-## Deskripsi
-
-**Soal:** [0423. Reconstruct Original Digits From English](https://leetcode.com/problems/reconstruct-original-digits-from-english/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func originalDigits(s string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func originalDigits(s string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ func originalDigits(s string) string {
 	}
 
 	// Unique identifying letters: z(0), w(2), u(4), x(6), g(8)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	digits := make([]int, 10)
 	digits[0] = count['z'-'a']
 	digits[2] = count['w'-'a']

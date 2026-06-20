@@ -1,21 +1,32 @@
 # 3868 — Minimum Cost To Equalize Arrays Using Swaps
 
-## Deskripsi
-
-**Soal:** [3868. Minimum Cost To Equalize Arrays Using Swaps](https://leetcode.com/problems/minimum-cost-to-equalize-arrays-using-swaps/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumCostToEqualizeArraysUsingSwaps(nums1 []int, nums2 []int) int
+```
+
+> **💡 Hint:** Count frequencies in both arrays. If any value's total count is odd,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumCostToEqualizeArraysUsingSwaps(nums1 []int, nums2 []int) int`
-
-> **Ide Kunci:** Count frequencies in both arrays. If any value's total count is odd,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ package main
 import "fmt"
 
 func MinimumCostToEqualizeArraysUsingSwaps(nums1 []int, nums2 []int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cnt := make(map[int]int)
 	for _, v := range nums1 {
 		cnt[v]++

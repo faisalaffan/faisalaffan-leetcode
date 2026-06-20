@@ -1,19 +1,32 @@
 # 3605 — Minimum Stability Factor Of Array
 
-## Deskripsi
-
-**Soal:** [3605. Minimum Stability Factor Of Array](https://leetcode.com/problems/minimum-stability-factor-of-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minStable(nums []int, maxC int) int
+```
+
+> **💡 Hint:** Binary search on stability factor + sliding window with GCD tracking.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window, Binary Search, GCD / Matematika, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Binary Search (pencarian biner), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on stability factor + sliding window with GCD tracking.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,21 +57,21 @@ func main() {
 
 func minStable(nums []int, maxC int) int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Precompute GCD for range queries using sparse table
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	log := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		log[i] = log[i/2] + 1
 	}
 	K := log[n] + 1
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	st := make([][]int, K)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range st {
 		st[i] = make([]int, n)
 	}

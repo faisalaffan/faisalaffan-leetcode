@@ -1,19 +1,32 @@
 # 1129 — Shortest Path With Alternating Colors
 
-## Deskripsi
-
-**Soal:** [1129. Shortest Path With Alternating Colors](https://leetcode.com/problems/shortest-path-with-alternating-colors/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int
+```
+
+> **💡 Hint:** BFS with 2 states per node (reached by red edge / blue edge)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n + e)  
 **Kompleksitas Ruang:** O(n + e)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** BFS with 2 states per node (reached by red edge / blue edge)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,9 +47,9 @@ func main() {
 }
 
 func shortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	redGraph := make([][]int, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	blueGraph := make([][]int, n)
 
 	for _, e := range redEdges {
@@ -48,13 +61,13 @@ func shortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int 
 
 	// dist[node][0] = distance reaching node via red edge
 	// dist[node][1] = distance reaching node via blue edge
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([][2]int, n)
 	for i := 1; i < n; i++ {
 		dist[i] = [2]int{-1, -1}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([][2]int, 0)
 	queue = append(queue, [2]int{0, 0}) // reached 0 via red (start counts as either)
 	queue = append(queue, [2]int{0, 1}) // reached 0 via blue
@@ -82,7 +95,7 @@ func shortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int 
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 	for i := 0; i < n; i++ {
 		result[i] = minDist(dist[i])

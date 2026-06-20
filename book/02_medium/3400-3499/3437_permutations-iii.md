@@ -1,19 +1,30 @@
 # 3437 — Permutations Iii
 
-## Deskripsi
-
-**Soal:** [3437. Permutations Iii](https://leetcode.com/problems/permutations-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func permute(n int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n!) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func permute(n int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,15 +38,14 @@ import "fmt"
 
 func permute(n int) [][]int {
 	var ans [][]int
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cur := make([]int, 0, n)
 
 	var dfs func()
 	dfs = func() {
 		if len(cur) == n {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			tmp := make([]int, n)
 			copy(tmp, cur)
 			ans = append(ans, tmp)

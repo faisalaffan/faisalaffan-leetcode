@@ -1,17 +1,30 @@
 # 1943 — Describe The Painting
 
-## Deskripsi
-
-**Soal:** [1943. Describe The Painting](https://leetcode.com/problems/describe-the-painting/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SplitPainting(segments [][]int) [][]int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,9 +46,9 @@ func main() {
 
 // Time: O(n log n), Space: O(n)
 func SplitPainting(segments [][]int) [][]int64 {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	diff := make(map[int]int64)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	endpoints := make(map[int]bool)
 
 	for _, seg := range segments {
@@ -47,17 +60,18 @@ func SplitPainting(segments [][]int) [][]int64 {
 	}
 
 	// Sort unique endpoints
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	points := make([]int, 0, len(endpoints))
 	for p := range endpoints {
 		points = append(points, p)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(points)
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int64, 0)
 	var sum int64 = 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(points)-1; i++ {
 		sum += diff[points[i]]
 		if sum != 0 {

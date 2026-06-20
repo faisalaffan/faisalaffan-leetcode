@@ -1,19 +1,32 @@
 # 3636 — Threshold Majority Queries
 
-## Deskripsi
-
-**Soal:** [3636. Threshold Majority Queries](https://leetcode.com/problems/threshold-majority-queries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func thresholdMajorityQueries(nums []int, queries [][]int) []int
+```
+
+> **💡 Hint:** For each value, store sorted list of positions. For
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each value, store sorted list of positions. For
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,13 +56,13 @@ func main() {
 }
 
 func thresholdMajorityQueries(nums []int, queries [][]int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[int][]int)
 	for i, v := range nums {
 		pos[v] = append(pos[v], i)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r, threshold := q[0], q[1], q[2]

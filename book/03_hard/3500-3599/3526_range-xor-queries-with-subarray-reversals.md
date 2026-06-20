@@ -1,19 +1,32 @@
 # 3526 — Range Xor Queries With Subarray Reversals
 
-## Deskripsi
-
-**Soal:** [3526. Range Xor Queries With Subarray Reversals](https://leetcode.com/problems/range-xor-queries-with-subarray-reversals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func rangeXorQueries(arr []int, queries [][]int, reversals [][]int) []int
+```
+
+> **💡 Hint:** Use a Fenwick tree for XOR with a Treap for reversals,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Use a Fenwick tree for XOR with a Treap for reversals,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -41,7 +54,7 @@ func main() {
 
 func rangeXorQueries(arr []int, queries [][]int, reversals [][]int) []int {
 	// Copy the array since we need to handle reversals
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	a := make([]int, len(arr))
 	copy(a, arr)
 
@@ -54,14 +67,14 @@ func rangeXorQueries(arr []int, queries [][]int, reversals [][]int) []int {
 	}
 
 	// Prefix XOR
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, len(a)+1)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(a); i++ {
 		pref[i+1] = pref[i] ^ a[i]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]

@@ -1,19 +1,30 @@
 # 1212 — Team Scores In Football Tournament
 
-## Deskripsi
-
-**Soal:** [1212. Team Scores In Football Tournament](https://leetcode.com/problems/team-scores-in-football-tournament/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calculateTeamScores(teams []string, results []matchResult) []teamScore
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func calculateTeamScores(teams []string, results []matchResult) []teamScore`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +57,7 @@ type teamScore struct {
 }
 
 func calculateTeamScores(teams []string, results []matchResult) []teamScore {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	points := make(map[string]int)
 
 	for _, r := range results {
@@ -60,12 +71,12 @@ func calculateTeamScores(teams []string, results []matchResult) []teamScore {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	scores := make([]teamScore, 0, len(teams))
 	for _, t := range teams {
 		scores = append(scores, teamScore{t, points[t]})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(scores, func(i, j int) bool {
 		if scores[i].points != scores[j].points {
 			return scores[i].points > scores[j].points

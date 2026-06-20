@@ -1,19 +1,30 @@
 # 0727 — Minimum Window Subsequence
 
-## Deskripsi
-
-**Soal:** [0727. Minimum Window Subsequence](https://leetcode.com/problems/minimum-window-subsequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minWindow(S string, T string) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Sliding Window, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Sliding Window** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minWindow(S string, T string) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +58,7 @@ func minWindow(S string, T string) string {
 	// Precompute next occurrence of each character from each position
 	// nextPos[i][char] = smallest index >= i such that S[index] == char
 	const totalChars = 26
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nextPos := make([][totalChars]int, m+1)
 	for c := 0; c < totalChars; c++ {
 		nextPos[m][c] = math.MaxInt32

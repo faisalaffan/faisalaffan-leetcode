@@ -1,19 +1,30 @@
 # 2324 — Product Sales Analysis Iv
 
-## Deskripsi
-
-**Soal:** [2324. Product Sales Analysis Iv](https://leetcode.com/problems/product-sales-analysis-iv/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func productSalesAnalysis(sales [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func productSalesAnalysis(sales [][]int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ type Sale struct {
 
 func productSalesAnalysis(sales [][]int) [][]int {
 	// sales[i] = [sale_id, product_id, user_id, quantity]
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userProductQty := make(map[[2]int]int) // [user_id, product_id] -> total qty
 
 	for _, s := range sales {
@@ -43,7 +54,7 @@ func productSalesAnalysis(sales [][]int) [][]int {
 	}
 
 	// For each user, find product with max qty
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userMax := make(map[int]struct{ qty int; product int })
 	for key, qty := range userProductQty {
 		userID, productID := key[0], key[1]

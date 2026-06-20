@@ -1,19 +1,32 @@
 # 1059 — All Paths From Source Lead To Destination
 
-## Deskripsi
-
-**Soal:** [1059. All Paths From Source Lead To Destination](https://leetcode.com/problems/all-paths-from-source-lead-to-destination/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func leadsToDestination(n int, edges [][]int, source int, destination int) bool
+```
+
+> **💡 Hint:** DFS with cycle detection. Every path from source must end at destination.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(V + E)  
 **Kompleksitas Ruang:** O(V + E)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DFS with cycle detection. Every path from source must end at destination.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,13 +47,13 @@ func main() {
 }
 
 func leadsToDestination(n int, edges [][]int, source int, destination int) bool {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n)
 	for _, e := range edges {
 		graph[e[0]] = append(graph[e[0]], e[1])
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	state := make([]int, n) // 0=unvisited, 1=visiting, 2=processed
 
 	var dfs func(node int) bool

@@ -1,19 +1,30 @@
 # 1354 — Construct Target Array With Multiple Sums
 
-## Deskripsi
-
-**Soal:** [1354. Construct Target Array With Multiple Sums](https://leetcode.com/problems/construct-target-array-with-multiple-sums/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isPossible(target []int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func isPossible(target []int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,10 +65,12 @@ func isPossible(target []int) bool {
 	sum := 0
 	for _, v := range target {
 		sum += v
+  // Masukkan elemen ke priority queue
 		heap.Push(h, v)
 	}
 
 	for {
+  // Ambil elemen terkecil/terbesar dari heap
 		maxVal := heap.Pop(h).(int)
 		if maxVal == 1 {
 			return true
@@ -71,6 +84,7 @@ func isPossible(target []int) bool {
 			prev = rest
 		}
 		sum = rest + prev
+  // Masukkan elemen ke priority queue
 		heap.Push(h, prev)
 	}
 }

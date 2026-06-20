@@ -1,17 +1,30 @@
 # 3343 — Count Number Of Balanced Permutations
 
-## Deskripsi
-
-**Soal:** [3343. Count Number Of Balanced Permutations](https://leetcode.com/problems/count-number-of-balanced-permutations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countBalancedPermutations(num string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -52,7 +65,7 @@ const MOD = 1000000007
 
 func countBalancedPermutations(num string) int {
 	n := len(num)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, 10)
 	totalSum := 0
 	for _, ch := range num {
@@ -68,9 +81,9 @@ func countBalancedPermutations(num string) int {
 	oddPos := (n + 1) / 2 // ceil(n/2)
 
 	// Precompute factorials and inverse factorials
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	fact := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	invFact := make([]int, n+1)
 	fact[0] = 1
 	for i := 1; i <= n; i++ {
@@ -89,9 +102,9 @@ func countBalancedPermutations(num string) int {
 	}
 
 	// DP[k][s] = ways to choose k elements for odd positions summing to s
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, oddPos+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, target+1)
 	}

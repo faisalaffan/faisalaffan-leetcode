@@ -1,17 +1,30 @@
 # 2471 — Minimum Number Of Operations To Sort A Binary Tree By Level
 
-## Deskripsi
-
-**Soal:** [2471. Minimum Number Of Operations To Sort A Binary Tree By Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumOperations(root *TreeNode) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,7 +72,7 @@ func minimumOperations(root *TreeNode) int {
 	ans := 0
 	for len(q) > 0 {
 		n := len(q)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		vals := make([]int, n)
 		for i := 0; i < n; i++ {
 			vals[i] = q[i].Val
@@ -68,7 +81,6 @@ func minimumOperations(root *TreeNode) int {
 		// Count min swaps to sort vals
 		ans += minSwaps(vals)
 
-  // Membuat slice untuk menyimpan hasil
 		next := make([]*TreeNode, 0)
 		for _, node := range q {
 			if node.Left != nil {
@@ -85,18 +97,18 @@ func minimumOperations(root *TreeNode) int {
 
 func minSwaps(arr []int) int {
 	n := len(arr)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, arr)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[int]int)
 	for i, v := range arr {
 		pos[v] = i
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 	swaps := 0
 	for i := 0; i < n; i++ {

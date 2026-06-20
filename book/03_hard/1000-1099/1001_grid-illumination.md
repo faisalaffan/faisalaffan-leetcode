@@ -1,19 +1,32 @@
 # 1001 — Grid Illumination
 
-## Deskripsi
-
-**Soal:** [1001. Grid Illumination](https://leetcode.com/problems/grid-illumination/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func gridIllumination(n int, lamps [][]int, queries [][]int) []int
+```
+
+> **💡 Hint:** Hash maps for row, col, diagonal, anti-diagonal coverage + lamp set.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** HashMap (tabel pencarian O(1))
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Hash maps for row, col, diagonal, anti-diagonal coverage + lamp set.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,15 +48,15 @@ func main() {
 }
 
 func gridIllumination(n int, lamps [][]int, queries [][]int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rows := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cols := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	diag := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	anti := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	lampSet := make(map[[2]int]bool)
 
 	for _, l := range lamps {
@@ -59,7 +72,7 @@ func gridIllumination(n int, lamps [][]int, queries [][]int) []int {
 		anti[r+c]++
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for qi, q := range queries {
 		r, c := q[0], q[1]

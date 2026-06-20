@@ -1,19 +1,30 @@
 # 1724 — Checking Existence Of Edge Length Limited Paths Ii
 
-## Deskripsi
-
-**Soal:** [1724. Checking Existence Of Edge Length Limited Paths Ii](https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,9 +44,10 @@ type DistanceLimitedPathsExist struct {
 }
 
 func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	sortedEdges := make([][]int, len(edgeList))
 	copy(sortedEdges, edgeList)
+  // Custom sort dengan comparator
 	sort.Slice(sortedEdges, func(i, j int) bool {
 		return sortedEdges[i][2] < sortedEdges[j][2]
 	})
@@ -43,7 +55,7 @@ func Constructor(n int, edgeList [][]int) DistanceLimitedPathsExist {
 }
 
 func (this *DistanceLimitedPathsExist) Query(p int, q int, limit int) bool {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, this.n)
 	for i := 0; i < this.n; i++ {
 		parent[i] = i

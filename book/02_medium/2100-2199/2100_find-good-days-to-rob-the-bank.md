@@ -1,19 +1,30 @@
 # 2100 — Find Good Days To Rob The Bank
 
-## Deskripsi
-
-**Soal:** [2100. Find Good Days To Rob The Bank](https://leetcode.com/problems/find-good-days-to-rob-the-bank/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func goodDaysToRobBank(security []int, time int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func goodDaysToRobBank(security []int, time int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ func goodDaysToRobBank(security []int, time int) []int {
 	}
 
 	// left[i] = number of consecutive non-increasing days ending at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	left := make([]int, n)
 	for i := 1; i < n; i++ {
 		if security[i] <= security[i-1] {
@@ -41,7 +52,7 @@ func goodDaysToRobBank(security []int, time int) []int {
 	}
 
 	// right[i] = number of consecutive non-decreasing days starting at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	right := make([]int, n)
 	for i := n - 2; i >= 0; i-- {
 		if security[i] <= security[i+1] {

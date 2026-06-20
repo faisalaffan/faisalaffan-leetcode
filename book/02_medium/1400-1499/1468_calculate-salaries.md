@@ -1,17 +1,38 @@
 # 1468 — Calculate Salaries
 
-## Deskripsi
-
-**Soal:** [1468. Calculate Salaries](https://leetcode.com/problems/calculate-salaries/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calculateSalaries(salaries []struct {
+	companyID    int
+	employeeID   int
+	employeeName string
+	salary       int
+}, companies []struct {
+	companyID int
+	name      string
+}) []taxResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n) for sorting  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -73,7 +94,7 @@ func calculateSalaries(salaries []struct {
 	name      string
 }) []taxResult {
 	// Group salaries by company
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	companySalaries := make(map[int][]struct {
 		employeeID int
 		name       string
@@ -87,7 +108,7 @@ func calculateSalaries(salaries []struct {
 		}{s.employeeID, s.employeeName, s.salary})
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	companyNames := make(map[int]string)
 	for _, c := range companies {
 		companyNames[c.companyID] = c.name
@@ -96,6 +117,7 @@ func calculateSalaries(salaries []struct {
 	var results []taxResult
 	for companyID, emps := range companySalaries {
 		// Sort by salary descending
+  // Custom sort dengan comparator
 		sort.Slice(emps, func(i, j int) bool {
 			return emps[i].salary > emps[j].salary
 		})

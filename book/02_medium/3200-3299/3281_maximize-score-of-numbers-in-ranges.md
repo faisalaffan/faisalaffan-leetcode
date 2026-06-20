@@ -1,17 +1,30 @@
 # 3281 — Maximize Score Of Numbers In Ranges
 
-## Deskripsi
-
-**Soal:** [3281. Maximize Score Of Numbers In Ranges](https://leetcode.com/problems/maximize-score-of-numbers-in-ranges/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPossibleScore(start []int, d int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n + n log D) Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,6 +46,7 @@ func main() {
 }
 
 func maxPossibleScore(start []int, d int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(start)
 	n := len(start)
 

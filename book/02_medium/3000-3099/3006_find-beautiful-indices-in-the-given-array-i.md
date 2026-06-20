@@ -1,17 +1,30 @@
 # 3006 — Find Beautiful Indices In The Given Array I
 
-## Deskripsi
-
-**Soal:** [3006. Find Beautiful Indices In The Given Array I](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func beautifulIndices(s string, a string, b string, k int) (ans []int)
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n+m)  
 **Kompleksitas Ruang:** O(n+m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func kmpSearch(text, pattern string) (pos []int) {
 		return
 	}
 	n, m := len(text), len(pattern)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pi := make([]int, m)
 	for i := 1; i < m; i++ {
 		j := pi[i-1]

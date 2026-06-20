@@ -1,19 +1,30 @@
 # 0207 — Course Schedule
 
-## Deskripsi
-
-**Soal:** [0207. Course Schedule](https://leetcode.com/problems/course-schedule/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func canFinish(numCourses int, prerequisites [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(V+E), Space: O(V+E)  
 **Kompleksitas Ruang:** O(V+E)
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func canFinish(numCourses int, prerequisites [][]int) bool`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,9 +37,9 @@ package main
 import "fmt"
 
 func canFinish(numCourses int, prerequisites [][]int) bool {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, numCourses)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	inDegree := make([]int, numCourses)
 
 	for _, pre := range prerequisites {

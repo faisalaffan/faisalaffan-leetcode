@@ -1,19 +1,30 @@
 # 1697 — Checking Existence Of Edge Length Limited Paths
 
-## Deskripsi
-
-**Soal:** [1697. Checking Existence Of Edge Length Limited Paths](https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewDSU(n int) *DSU
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewDSU(n int) *DSU`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rank := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -70,22 +81,23 @@ func (d *DSU) Union(x, y int) {
 
 func distanceLimitedPathsExist(n int, edgeList [][]int, queries [][]int) []bool {
 	// Sort edges by weight
+  // Custom sort dengan comparator
 	sort.Slice(edgeList, func(i, j int) bool {
 		return edgeList[i][2] < edgeList[j][2]
 	})
 
 	// Sort queries by limit, keeping original indices
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	q := make([][4]int, len(queries)) // [limit, u, v, originalIdx]
 	for i, query := range queries {
 		q[i] = [4]int{query[2], query[0], query[1], i}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(q, func(i, j int) bool {
 		return q[i][0] < q[j][0]
 	})
 
 	dsu := NewDSU(n)
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]bool, len(queries))
 	edgeIdx := 0
 

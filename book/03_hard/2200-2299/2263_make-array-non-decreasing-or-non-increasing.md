@@ -1,19 +1,30 @@
 # 2263 — Make Array Non Decreasing Or Non Increasing
 
-## Deskripsi
-
-**Soal:** [2263. Make Array Non Decreasing Or Non Increasing](https://leetcode.com/problems/make-array-non-decreasing-or-non-increasing/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperationsToMakeNonDecOrNonInc(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, BFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Queue (antrian FIFO), Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minOperationsToMakeNonDecOrNonInc(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,12 +56,12 @@ func minOperationsToMakeNonDecOrNonInc(nums []int) int {
 	// We compute both and take min.
 
 	// Coordinate compression: collect unique sorted values
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	unique := make(map[int]bool)
 	for _, v := range nums {
 		unique[v] = true
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sortedVals := make([]int, 0, len(unique))
 	for v := range unique {
 		sortedVals = append(sortedVals, v)
@@ -61,7 +72,7 @@ func minOperationsToMakeNonDecOrNonInc(nums []int) int {
 	// DP for non-decreasing
 	// dp[j] = min cost to make first i elements non-decreasing with
 	// the i-th element <= sortedVals[j]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, m)
 	for j := 0; j < m; j++ {
 		dp[j] = absInt(nums[0] - sortedVals[j])
@@ -74,7 +85,7 @@ func minOperationsToMakeNonDecOrNonInc(nums []int) int {
 	}
 
 	for i := 1; i < n; i++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		newDp := make([]int, m)
 		for j := 0; j < m; j++ {
 			cost := absInt(nums[i] - sortedVals[j])
@@ -103,7 +114,7 @@ func minOperationsToMakeNonDecOrNonInc(nums []int) int {
 	}
 
 	for i := 1; i < n; i++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		newDp := make([]int, m)
 		for j := 0; j < m; j++ {
 			cost := absInt(nums[i] - sortedVals[j])
@@ -181,7 +192,7 @@ func minCostNonInc(nums []int) int64 {
 
 func reverseInts(nums []int) []int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rev := make([]int, n)
 	for i, v := range nums {
 		rev[n-1-i] = v

@@ -1,19 +1,32 @@
 # 1494 — Parallel Courses Ii
 
-## Deskripsi
-
-**Soal:** [1494. Parallel Courses Ii](https://leetcode.com/problems/parallel-courses-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minNumberOfSemesters(n int, dependencies [][]int, k int) int
+```
+
+> **💡 Hint:** DP over Bitmask
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Union-Find (DSU), Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP over Bitmask
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +62,7 @@ func main() {
 
 func minNumberOfSemesters(n int, dependencies [][]int, k int) int {
 	// pre[c] = bitmask of direct prerequisites for course c (1-indexed)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pre := make([]int, n)
 	for _, dep := range dependencies {
 		// dep[0] -> dep[1], meaning dep[1] has prerequisite dep[0]
@@ -59,7 +72,7 @@ func minNumberOfSemesters(n int, dependencies [][]int, k int) int {
 
 	total := 1 << n
 	INF := n + 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, total)
 	for i := 1; i < total; i++ {
 		dp[i] = INF
@@ -67,7 +80,7 @@ func minNumberOfSemesters(n int, dependencies [][]int, k int) int {
 	dp[0] = 0
 
 	// Precompute required prerequisites for each mask (union of all pre[c] for c in mask)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	require := make([]int, total)
 	for mask := 1; mask < total; mask++ {
 		// find lowest set bit

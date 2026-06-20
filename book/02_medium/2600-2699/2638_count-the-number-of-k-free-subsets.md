@@ -1,19 +1,30 @@
 # 2638 — Count The Number Of K Free Subsets
 
-## Deskripsi
-
-**Soal:** [2638. Count The Number Of K Free Subsets](https://leetcode.com/problems/count-the-number-of-k-free-subsets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countKFreeSubsets(nums []int, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countKFreeSubsets(nums []int, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,15 +40,16 @@ import (
 )
 
 func countKFreeSubsets(nums []int, k int) int64 {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	for _, v := range nums {
 		freq[v]++
 	}
 
 	// Group by remainder modulo k
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	groups := make(map[int][]int)
 	for v := range freq {
 		groups[v%k] = append(groups[v%k], v)
@@ -45,6 +57,7 @@ func countKFreeSubsets(nums []int, k int) int64 {
 
 	ans := int64(1) // empty subset
 	for _, vals := range groups {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(vals)
 		// DP within group: O(n) with constraint that consecutive vals with diff k can't both be taken
 		dp0, dp1 := int64(1), int64(0)

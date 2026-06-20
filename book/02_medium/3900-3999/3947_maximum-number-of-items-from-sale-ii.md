@@ -1,21 +1,32 @@
 # 3947 — Maximum Number Of Items From Sale Ii
 
-## Deskripsi
-
-**Soal:** [3947. Maximum Number Of Items From Sale Ii](https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumNumberOfItemsFromSaleIi(items [][]int, budget int) int
+```
+
+> **💡 Hint:** Each purchased copy of item i gives at most 1 free copy of a
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log N)  
 **Kompleksitas Ruang:** O(N) where N = len(items)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MaximumNumberOfItemsFromSaleIi(items [][]int, budget int) int`
-
-> **Ide Kunci:** Each purchased copy of item i gives at most 1 free copy of a
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,7 @@ func MaximumNumberOfItemsFromSaleIi(items [][]int, budget int) int {
 	m := len(items)
 
 	// Compute out_degree per item (how many j where i|j, j != i)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	outDeg := make([]int, m)
 	for i := 0; i < m; i++ {
 		for j := 0; j < m; j++ {
@@ -61,6 +72,7 @@ func MaximumNumberOfItemsFromSaleIi(items [][]int, budget int) int {
 	}
 
 	// Sort bonuses by price
+  // Custom sort dengan comparator
 	sort.Slice(bonuses, func(i, j int) bool {
 		return bonuses[i].price < bonuses[j].price
 	})

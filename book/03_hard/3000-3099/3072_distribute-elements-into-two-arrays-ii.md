@@ -1,21 +1,32 @@
 # 3072 — Distribute Elements Into Two Arrays Ii
 
-## Deskripsi
-
-**Soal:** [3072. Distribute Elements Into Two Arrays Ii](https://leetcode.com/problems/distribute-elements-into-two-arrays-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewBIT(size int) *BIT
+```
+
+> **💡 Hint:** Fenwick Tree (Binary Indexed Tree) for O(log n) counting
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewBIT(size int) *BIT`
-
-> **Ide Kunci:** Fenwick Tree (Binary Indexed Tree) for O(log n) counting
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -75,11 +86,12 @@ func ResultArray(nums []int) []int {
 	n := len(nums)
 
 	// Coordinate compression
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sorted := make([]int, n)
 	copy(sorted, nums)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sorted)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	coord := make(map[int]int)
 	for i, v := range sorted {
 		if _, ok := coord[v]; !ok {

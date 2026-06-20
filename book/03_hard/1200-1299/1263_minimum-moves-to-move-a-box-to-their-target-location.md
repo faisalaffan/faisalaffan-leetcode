@@ -1,17 +1,30 @@
 # 1263 — Minimum Moves To Move A Box To Their Target Location
 
-## Deskripsi
-
-**Soal:** [1263. Minimum Moves To Move A Box To Their Target Location](https://leetcode.com/problems/minimum-moves-to-move-a-box-to-their-target-location/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minPushBox(grid [][]byte) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), BFS (Breadth-First Search / pencarian lebar), Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -92,7 +105,7 @@ func minPushBox(grid [][]byte) int {
 
 	// dist[boxR][boxC] = minimum pushes to get box here
 	const INF = 1 << 30
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, rows)
 	for r := 0; r < rows; r++ {
 		dist[r] = make([]int, cols)
@@ -107,9 +120,8 @@ func minPushBox(grid [][]byte) int {
 		br, bc, pr, pc int
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	queue := make([]State, 0, rows*cols*4)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[State]bool)
 
 	start := State{boxR, boxC, playerR, playerC}
@@ -175,13 +187,13 @@ func canReach(grid [][]byte, sr, sc, tr, tc, boxR, boxC int) bool {
 
 	rows := len(grid)
 	cols := len(grid[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, rows)
 	for r := 0; r < rows; r++ {
 		visited[r] = make([]bool, cols)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	queue := make([][2]int, 0, rows*cols)
 	queue = append(queue, [2]int{sr, sc})
 	visited[sr][sc] = true

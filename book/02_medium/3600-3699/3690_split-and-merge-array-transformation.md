@@ -1,19 +1,30 @@
 # 3690 — Split And Merge Array Transformation
 
-## Deskripsi
-
-**Soal:** [3690. Split And Merge Array Transformation](https://leetcode.com/problems/split-and-merge-array-transformation/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n! * n^4)  
 **Kompleksitas Ruang:** O(n! * n)
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int {
 	n := len(nums1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	target := make([]int, n)
 	copy(target, nums2)
 
@@ -37,11 +48,10 @@ func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int {
 	}
 
 	queue := []state{{arr: append([]int(nil), nums1...), steps: 0}}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	visited := make(map[string]bool)
 
 	key := func(arr []int) string {
-  // Membuat slice untuk menyimpan hasil
 		b := make([]byte, len(arr)*4)
 		for i, v := range arr {
 			b[i*4] = byte(v >> 24)
@@ -65,18 +75,18 @@ func splitAndMergeArrayTransformation(nums1 []int, nums2 []int) int {
 		// Try all subarrays [L, R]
 		for L := 0; L < n; L++ {
 			for R := L; R < n; R++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 				sub := make([]int, R-L+1)
 				copy(sub, cur.arr[L:R+1])
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 				remain := make([]int, 0, n-(R-L+1))
 				remain = append(remain, cur.arr[:L]...)
 				remain = append(remain, cur.arr[R+1:]...)
 
 				// Insert sub at all positions in remain
 				for pos := 0; pos <= len(remain); pos++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 					next := make([]int, 0, n)
 					next = append(next, remain[:pos]...)
 					next = append(next, sub...)

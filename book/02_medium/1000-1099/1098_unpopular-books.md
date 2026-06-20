@@ -1,19 +1,36 @@
 # 1098 — Unpopular Books
 
-## Deskripsi
-
-**Soal:** [1098. Unpopular Books](https://leetcode.com/problems/unpopular-books/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func unpopularBooks(books []string, orders []struct {
+	name     string
+	quantity int
+	daysAgo  int
+}) []string
+```
+
+> **💡 Hint:** Filter books ordered less than 10 times in the last year
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + m) where n = books, m = orders  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Filter books ordered less than 10 times in the last year
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +66,7 @@ func unpopularBooks(books []string, orders []struct {
 	quantity int
 	daysAgo  int
 }) []string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	orderCount := make(map[string]int)
 	for _, o := range orders {
 		if o.daysAgo <= 365 {
@@ -57,7 +74,6 @@ func unpopularBooks(books []string, orders []struct {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, 0)
 	for _, b := range books {
 		count, exists := orderCount[b]

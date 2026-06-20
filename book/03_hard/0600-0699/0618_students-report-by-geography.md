@@ -1,19 +1,30 @@
 # 0618 — Students Report By Geography
 
-## Deskripsi
-
-**Soal:** [0618. Students Report By Geography](https://leetcode.com/problems/students-report-by-geography/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func studentsReportByGeography(students []Student) map[string][]string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N log N) for sorting within each continent, Space: O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func studentsReportByGeography(students []Student) map[string][]string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ type Student struct {
 // Time: O(N log N) for sorting within each continent, Space: O(N)
 func studentsReportByGeography(students []Student) map[string][]string {
 	// Group by continent, sort names within each group.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byContinent := make(map[string][]string)
 	for _, s := range students {
 		byContinent[s.Continent] = append(byContinent[s.Continent], s.Name)
@@ -54,7 +65,7 @@ func studentsReportByGeography(students []Student) map[string][]string {
 	}
 
 	// Build output columns.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	result := make(map[string][]string)
 
 	// Get sorted continent names for deterministic iteration.
@@ -74,7 +85,6 @@ func studentsReportByGeography(students []Student) map[string][]string {
 
 	for _, continent := range continents {
 		names := byContinent[continent]
-  // Membuat slice untuk menyimpan hasil
 		col := make([]string, maxRows)
 		for i := 0; i < maxRows; i++ {
 			if i < len(names) {

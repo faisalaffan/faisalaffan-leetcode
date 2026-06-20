@@ -1,19 +1,30 @@
 # 2945 — Find Maximum Non Decreasing Array Length
 
-## Deskripsi
-
-**Soal:** [2945. Find Maximum Non Decreasing Array Length](https://leetcode.com/problems/find-maximum-non-decreasing-array-length/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findMaximumLength(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findMaximumLength(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,17 +53,17 @@ import (
 
 func findMaximumLength(nums []int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int64, n+1)
 	for i, v := range nums {
 		pref[i+1] = pref[i] + int64(v)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	f := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	g := make([]int64, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	deq := make([]int, 0, n+1)
 	deq = append(deq, 0)
 

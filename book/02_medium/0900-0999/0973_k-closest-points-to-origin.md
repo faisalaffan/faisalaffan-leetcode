@@ -1,19 +1,32 @@
 # 0973 — K Closest Points To Origin
 
-## Deskripsi
-
-**Soal:** [0973. K Closest Points To Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kClosest(points [][]int, k int) [][]int
+```
+
+> **💡 Hint:** QuickSelect (partition-based selection)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** O(n) average, O(n^2) worst-case  
 **Kompleksitas Ruang:** O(1) excluding output
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** QuickSelect (partition-based selection)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func kClosest(points [][]int, k int) [][]int {
 
 	// QuickSelect
 	left, right := 0, len(points)-1
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		pivot := partition(points, left, right)
 		if pivot == k {

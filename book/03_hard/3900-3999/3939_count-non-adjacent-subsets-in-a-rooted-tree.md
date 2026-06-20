@@ -1,19 +1,32 @@
 # 3939 — Count Non Adjacent Subsets In A Rooted Tree
 
-## Deskripsi
-
-**Soal:** [3939. Count Non Adjacent Subsets In A Rooted Tree](https://leetcode.com/problems/count-non-adjacent-subsets-in-a-rooted-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countNonAdjacentSubsets(parent []int, nums []int, k int) int
+```
+
+> **💡 Hint:** Tree DP. dp[u][j][0/1] = count of subsets of size j
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Tree DP (DP pada pohon)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Tree DP. dp[u][j][0/1] = count of subsets of size j
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,12 +57,12 @@ const TREE_MOD = 1000000007
 
 func countNonAdjacentSubsets(parent []int, nums []int, k int) int {
 	n := len(parent)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	children := make([][]int, n)
 	root := -1
 	for i, p := range parent {
@@ -62,17 +75,17 @@ func countNonAdjacentSubsets(parent []int, nums []int, k int) int {
 
 	var dfs func(u int) ([]int, []int)
 	dfs = func(u int) ([]int, []int) {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dp0 := make([]int, k+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dp1 := make([]int, k+1)
 		dp0[0] = 1
 
 		for _, v := range children[u] {
 			cdp0, cdp1 := dfs(v)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			ndp0 := make([]int, k+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			ndp1 := make([]int, k+1)
 
 			for j := 0; j <= k; j++ {

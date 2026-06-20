@@ -1,19 +1,30 @@
 # 3424 — Minimum Cost To Make Arrays Identical
 
-## Deskripsi
-
-**Soal:** [3424. Minimum Cost To Make Arrays Identical](https://leetcode.com/problems/minimum-cost-to-make-arrays-identical/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minCost(arr []int, brr []int, k int64) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func minCost(arr []int, brr []int, k int64) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ import (
 
 func minCost(arr []int, brr []int, k int64) int64 {
 	var cost1 int64
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(arr); i++ {
 		diff := arr[i] - brr[i]
 		if diff < 0 {
@@ -39,17 +50,19 @@ func minCost(arr []int, brr []int, k int64) int64 {
 		cost1 += int64(diff)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sortedArr := make([]int, len(arr))
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sortedBrr := make([]int, len(brr))
 	copy(sortedArr, arr)
 	copy(sortedBrr, brr)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sortedArr)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(sortedBrr)
 
 	var cost2 int64
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(sortedArr); i++ {
 		diff := sortedArr[i] - sortedBrr[i]
 		if diff < 0 {

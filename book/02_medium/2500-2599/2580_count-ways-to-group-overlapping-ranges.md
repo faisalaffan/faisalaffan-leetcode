@@ -1,19 +1,30 @@
 # 2580 — Count Ways To Group Overlapping Ranges
 
-## Deskripsi
-
-**Soal:** [2580. Count Ways To Group Overlapping Ranges](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countWays(ranges [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func countWays(ranges [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,6 +42,7 @@ import (
 func countWays(ranges [][]int) int {
 	const mod = 1_000_000_007
 
+  // Custom sort dengan comparator
 	sort.Slice(ranges, func(i, j int) bool {
 		return ranges[i][0] < ranges[j][0]
 	})

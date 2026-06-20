@@ -1,19 +1,34 @@
 # 1469 — Find All The Lonely Nodes
 
-## Deskripsi
-
-**Soal:** [1469. Find All The Lonely Nodes](https://leetcode.com/problems/find-all-the-lonely-nodes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getLonelyNodes(root *TreeNode) []int
+
+import "fmt"
+
+type TreeNode struct
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n), Space: O(h) recursive + O(n) output  
 **Kompleksitas Ruang:** O(h) recursive + O(n) output
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func getLonelyNodes(root *TreeNode) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +65,7 @@ func main() {
 
 // Time: O(n), Space: O(h) recursive + O(n) output
 func FindAllTheLonelyNodes(root *TreeNode) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	res := make([]int, 0)
 	collectLonely(root, &res)
 	return res

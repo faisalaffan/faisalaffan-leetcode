@@ -1,19 +1,30 @@
 # 2602 — Minimum Operations To Make All Array Elements Equal
 
-## Deskripsi
-
-**Soal:** [2602. Minimum Operations To Make All Array Elements Equal](https://leetcode.com/problems/minimum-operations-to-make-all-array-elements-equal/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(nums []int, queries []int) []int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O((n+q) log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minOperations(nums []int, queries []int) []int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,15 +41,16 @@ import (
 
 func minOperations(nums []int, queries []int) []int64 {
 	n := len(nums)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefix := make([]int64, n+1)
 	for i, v := range nums {
 		prefix[i+1] = prefix[i] + int64(v)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, len(queries))
 	for i, q := range queries {
 		idx := sort.SearchInts(nums, q)

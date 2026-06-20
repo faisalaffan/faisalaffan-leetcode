@@ -1,19 +1,30 @@
 # 3055 — Top Percentile Fraud
 
-## Deskripsi
-
-**Soal:** [3055. Top Percentile Fraud](https://leetcode.com/problems/top-percentile-fraud/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func topPercentileFraud(claims []FraudClaim) []TopClaim
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func topPercentileFraud(claims []FraudClaim) []TopClaim`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +54,7 @@ type TopClaim struct {
 
 func topPercentileFraud(claims []FraudClaim) []TopClaim {
 	// Group by state
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	stateClaims := make(map[string][]FraudClaim)
 	for _, c := range claims {
 		stateClaims[c.State] = append(stateClaims[c.State], c)
@@ -53,6 +64,7 @@ func topPercentileFraud(claims []FraudClaim) []TopClaim {
 
 	for state, cs := range stateClaims {
 		// Sort by fraud_score DESC, then policy_id ASC
+  // Custom sort dengan comparator
 		sort.Slice(cs, func(i, j int) bool {
 			if cs[i].FraudScore != cs[j].FraudScore {
 				return cs[i].FraudScore > cs[j].FraudScore // DESC
@@ -81,6 +93,7 @@ func topPercentileFraud(claims []FraudClaim) []TopClaim {
 		}
 
 		// Among ties, pick lowest policy_id
+  // Custom sort dengan comparator
 		sort.Slice(bestClaims, func(i, j int) bool {
 			return bestClaims[i].PolicyID < bestClaims[j].PolicyID
 		})
@@ -93,6 +106,7 @@ func topPercentileFraud(claims []FraudClaim) []TopClaim {
 	}
 
 	// Order by state ASC, fraud_score DESC, policy_id ASC
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].State != results[j].State {
 			return results[i].State < results[j].State

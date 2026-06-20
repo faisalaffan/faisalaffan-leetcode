@@ -1,19 +1,30 @@
 # 0262 — Trips And Users
 
-## Deskripsi
-
-**Soal:** [0262. Trips And Users](https://leetcode.com/problems/trips-and-users/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func roundTo2(f float64) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(T + U + D log D) where T=#trips, U=#users, D=#distinct dates  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func roundTo2(f float64) float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,7 +74,7 @@ func roundTo2(f float64) float64 {
 // Time: O(T + U + D log D) where T=#trips, U=#users, D=#distinct dates
 func tripsAndUsers(trips []Trip, users []User) []DailyRate {
 	// Build banned user set.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	banned := make(map[int]bool)
 	for _, u := range users {
 		if u.Banned == "Yes" {
@@ -76,7 +87,7 @@ func tripsAndUsers(trips []Trip, users []User) []DailyRate {
 		total       int
 		cancelled   int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byDay := make(map[string]*dateStats)
 
 	for _, t := range trips {

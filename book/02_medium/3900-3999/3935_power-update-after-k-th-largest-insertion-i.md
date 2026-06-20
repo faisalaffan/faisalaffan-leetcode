@@ -1,21 +1,32 @@
 # 3935 — Power Update After K Th Largest Insertion I
 
-## Deskripsi
-
-**Soal:** [3935. Power Update After K Th Largest Insertion I](https://leetcode.com/problems/power-update-after-k-th-largest-insertion-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewBIT(size int) *BIT
+```
+
+> **💡 Hint:** Maintain sorted multiset via Fenwick tree. For each query,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Binary Search, Prefix Sum, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** O(N log M + Q log M)  
 **Kompleksitas Ruang:** O(M) where M = max value
 
-**Algoritma:** Binary Search (pencarian biner), Prefix Sum (jumlah kumulatif), Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewBIT(size int) *BIT`
-
-> **Ide Kunci:** Maintain sorted multiset via Fenwick tree. For each query,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -84,12 +95,13 @@ func (b *BIT) KthLargest(k int) int {
 
 func PowerUpdateAfterKThLargestInsertionI(nums []int, p int, queries [][]int) []int {
 	// Coordinate compress all values
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	allVals := make([]int, 0, len(nums)+len(queries))
 	allVals = append(allVals, nums...)
 	for _, q := range queries {
 		allVals = append(allVals, q[0])
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(allVals)
 	uniq := []int{allVals[0]}
 	for i := 1; i < len(allVals); i++ {
@@ -98,7 +110,7 @@ func PowerUpdateAfterKThLargestInsertionI(nums []int, p int, queries [][]int) []
 		}
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rank := make(map[int]int)
 	for i, v := range uniq {
 		rank[v] = i
@@ -111,7 +123,7 @@ func PowerUpdateAfterKThLargestInsertionI(nums []int, p int, queries [][]int) []
 	}
 
 	cur := int64(p)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 
 	for idx, q := range queries {

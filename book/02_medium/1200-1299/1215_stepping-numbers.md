@@ -1,19 +1,30 @@
 # 1215 — Stepping Numbers
 
-## Deskripsi
-
-**Soal:** [1215. Stepping Numbers](https://leetcode.com/problems/stepping-numbers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countSteppingNumbers(low int, high int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(2^n) where n = number of digits in high  
 **Kompleksitas Ruang:** O(2^n)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countSteppingNumbers(low int, high int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ import (
 // Space: O(2^n)
 
 func countSteppingNumbers(low int, high int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0)
 
 	var dfs func(num int)
@@ -58,6 +69,7 @@ func countSteppingNumbers(low int, high int) []int {
 		dfs(i)
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

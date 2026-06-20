@@ -1,17 +1,30 @@
 # 2203 — Minimum Weighted Subgraph With The Required Paths
 
-## Deskripsi
-
-**Soal:** [2203. Minimum Weighted Subgraph With The Required Paths](https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func dijkstra(n int, graph [][]Edge, src int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -77,9 +90,9 @@ func (h *MinHeap) Pop() interface{} {
 }
 
 func dijkstra(n int, graph [][]Edge, src int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = math.MaxInt64
 	}
@@ -88,6 +101,7 @@ func dijkstra(n int, graph [][]Edge, src int) []int {
 	heap.Init(h)
 
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(h).(Item)
 		if cur.dist > dist[cur.node] {
 			continue
@@ -96,6 +110,7 @@ func dijkstra(n int, graph [][]Edge, src int) []int {
 			nd := cur.dist + e.w
 			if nd < dist[e.to] {
 				dist[e.to] = nd
+  // Masukkan elemen ke priority queue
 				heap.Push(h, Item{e.to, nd})
 			}
 		}
@@ -104,9 +119,9 @@ func dijkstra(n int, graph [][]Edge, src int) []int {
 }
 
 func minimumWeight(n int, edges [][]int, src1 int, src2 int, dest int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]Edge, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	rgraph := make([][]Edge, n)
 
 	for _, e := range edges {

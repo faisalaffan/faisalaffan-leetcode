@@ -1,21 +1,32 @@
 # 3891 — Minimum Increase To Maximize Special Indices
 
-## Deskripsi
-
-**Soal:** [3891. Minimum Increase To Maximize Special Indices](https://leetcode.com/problems/minimum-increase-to-maximize-special-indices/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumIncreaseToMaximizeSpecialIndices(nums []int) int
+```
+
+> **💡 Hint:** DP with memoization. Max special indices = ceil((n-2)/2) = (n-1)/2.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumIncreaseToMaximizeSpecialIndices(nums []int) int`
-
-> **Ide Kunci:** DP with memoization. Max special indices = ceil((n-2)/2) = (n-1)/2.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,7 @@ func MinimumIncreaseToMaximizeSpecialIndices(nums []int) int {
 	}
 
 	// cost to make each position a peak
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cost := make([]int, n)
 	for i := 1; i < n-1; i++ {
 		need := max(nums[i-1], nums[i+1]) + 1
@@ -49,9 +60,9 @@ func MinimumIncreaseToMaximizeSpecialIndices(nums []int) int {
 	}
 
 	maxPeaks := (n - 1) / 2
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	memo := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = make([]int, maxPeaks+1)
 		for j := range memo[i] {

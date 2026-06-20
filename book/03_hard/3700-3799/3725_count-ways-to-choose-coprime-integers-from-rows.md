@@ -1,19 +1,32 @@
 # 3725 — Count Ways To Choose Coprime Integers From Rows
 
-## Deskripsi
-
-**Soal:** [3725. Count Ways To Choose Coprime Integers From Rows](https://leetcode.com/problems/count-ways-to-choose-coprime-integers-from-rows/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countWays(mat [][]int) int
+```
+
+> **💡 Hint:** DP over GCD values. For each row, compute new GCDs.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming, GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP over GCD values. For each row, compute new GCDs.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,14 +60,14 @@ func countWays(mat [][]int) int {
 		return 0
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	dp := make(map[int]int)
 	for _, v := range mat[0] {
 		dp[v] = (dp[v] + 1) % mod
 	}
 
 	for r := 1; r < m; r++ {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		ndp := make(map[int]int)
 		for g, cnt := range dp {
 			for _, v := range mat[r] {

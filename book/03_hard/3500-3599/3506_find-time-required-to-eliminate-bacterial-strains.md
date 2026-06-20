@@ -1,19 +1,32 @@
 # 3506 — Find Time Required To Eliminate Bacterial Strains
 
-## Deskripsi
-
-**Soal:** [3506. Find Time Required To Eliminate Bacterial Strains](https://leetcode.com/problems/find-time-required-to-eliminate-bacterial-strains/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findTimeRequired(initial []int, growth []int, killRate int) int
+```
+
+> **💡 Hint:** Binary search on time. For each time T, check if all strains
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Binary search on time. For each time T, check if all strains
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,14 +60,14 @@ func main() {
 
 func findTimeRequired(initial []int, growth []int, killRate int) int {
 	n := len(initial)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	left, right := 0, math.MaxInt32
 
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := (left + right) / 2
 		if canEliminate(initial, growth, killRate, mid) {

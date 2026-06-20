@@ -1,21 +1,32 @@
 # 1369 — Get The Second Most Recent Activity
 
-## Deskripsi
-
-**Soal:** [1369. Get The Second Most Recent Activity](https://leetcode.com/problems/get-the-second-most-recent-activity/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func secondMostRecentActivity(activities []activity) []activity
+```
+
+> **💡 Hint:** Simulate SQL query in Go.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func secondMostRecentActivity(activities []activity) []activity`
-
-> **Ide Kunci:** Simulate SQL query in Go.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +54,7 @@ type activity struct {
 }
 
 func secondMostRecentActivity(activities []activity) []activity {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	byUser := make(map[string][]activity)
 	for _, a := range activities {
 		byUser[a.username] = append(byUser[a.username], a)
@@ -51,6 +62,7 @@ func secondMostRecentActivity(activities []activity) []activity {
 
 	var result []activity
 	for _, acts := range byUser {
+  // Custom sort dengan comparator
 		sort.Slice(acts, func(i, j int) bool {
 			return acts[i].startDate > acts[j].startDate
 		})
@@ -62,6 +74,7 @@ func secondMostRecentActivity(activities []activity) []activity {
 	}
 
 	// Sort by username for deterministic output
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].username < result[j].username
 	})

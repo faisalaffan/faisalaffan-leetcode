@@ -1,17 +1,30 @@
 # 3593 — Minimum Increments To Equalize Leaf Paths
 
-## Deskripsi
-
-**Soal:** [3593. Minimum Increments To Equalize Leaf Paths](https://leetcode.com/problems/minimum-increments-to-equalize-leaf-paths/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumIncrementsToEqualizeLeafPaths(tree []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -43,7 +56,7 @@ func MinimumIncrementsToEqualizeLeafPaths(tree []int) int {
 	// Find max path sum from root to leaf
 	// For each leaf, compute path sum and find max
 	maxSum := 0
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pathSums := make([]int, n)
 	for i := n - 1; i >= 0; i-- {
 		left := 2*i + 1

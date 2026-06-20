@@ -1,19 +1,30 @@
 # 2552 — Count Increasing Quadruplets
 
-## Deskripsi
-
-**Soal:** [2552. Count Increasing Quadruplets](https://leetcode.com/problems/count-increasing-quadruplets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countQuadruplets(nums []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countQuadruplets(nums []int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,9 +48,9 @@ func countQuadruplets(nums []int) int64 {
 	n := len(nums)
 
 	// prefixLess[i][v] = count of elements before position i that are < v
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	prefixLess := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range prefixLess {
 		prefixLess[i] = make([]int, n+2)
 	}
@@ -51,9 +62,9 @@ func countQuadruplets(nums []int) int64 {
 	}
 
 	// suffixGreater[i][v] = count of elements after position i that are > v
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	suffixGreater := make([][]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range suffixGreater {
 		suffixGreater[i] = make([]int, n+2)
 	}

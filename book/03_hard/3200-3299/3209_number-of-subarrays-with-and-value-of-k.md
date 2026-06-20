@@ -1,21 +1,32 @@
 # 3209 — Number Of Subarrays With And Value Of K
 
-## Deskripsi
-
-**Soal:** [3209. Number Of Subarrays With And Value Of K](https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfSubarraysWithAndValueOfK(nums []int, k int) int64
+```
+
+> **💡 Hint:** maintain map of (AND value -> count) for subarrays ending at the
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfSubarraysWithAndValueOfK(nums []int, k int) int64`
-
-> **Ide Kunci:** maintain map of (AND value -> count) for subarrays ending at the
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,11 +46,11 @@ import "fmt"
 
 func numberOfSubarraysWithAndValueOfK(nums []int, k int) int64 {
 	var ans int64 = 0
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	cur := make(map[int]int)
 
 	for _, x := range nums {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		nxt := make(map[int]int)
 		nxt[x] = 1
 		for val, cnt := range cur {

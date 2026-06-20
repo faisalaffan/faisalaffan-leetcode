@@ -1,19 +1,30 @@
 # 1691 — Maximum Height By Stacking Cuboids
 
-## Deskripsi
-
-**Soal:** [1691. Maximum Height By Stacking Cuboids](https://leetcode.com/problems/maximum-height-by-stacking-cuboids/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxHeight(cuboids [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Stack (tumpukan LIFO), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxHeight(cuboids [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,9 +43,11 @@ import (
 func maxHeight(cuboids [][]int) int {
 	// For each cuboid, sort dimensions so the largest is height
 	for _, c := range cuboids {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(c)
 	}
 	// Sort cuboids by dimensions (width, depth, height)
+  // Custom sort dengan comparator
 	sort.Slice(cuboids, func(i, j int) bool {
 		if cuboids[i][0] != cuboids[j][0] {
 			return cuboids[i][0] < cuboids[j][0]
@@ -46,7 +59,7 @@ func maxHeight(cuboids [][]int) int {
 	})
 
 	n := len(cuboids)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n)
 	ans := 0
 	for i := 0; i < n; i++ {

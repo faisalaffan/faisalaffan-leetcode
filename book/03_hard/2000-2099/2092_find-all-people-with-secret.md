@@ -1,19 +1,32 @@
 # 2092 — Find All People With Secret
 
-## Deskripsi
-
-**Soal:** [2092. Find All People With Secret](https://leetcode.com/problems/find-all-people-with-secret/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findAllPeople(n int, meetings [][]int, firstPerson int) []int
+```
+
+> **💡 Hint:** Time-sorted Union-Find.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Time-sorted Union-Find.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,14 +69,15 @@ func main() {
 
 func findAllPeople(n int, meetings [][]int, firstPerson int) []int {
 	// Sort meetings by time
+  // Custom sort dengan comparator
 	sort.Slice(meetings, func(i, j int) bool {
 		return meetings[i][2] < meetings[j][2]
 	})
 
 	// Union-Find structure
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 	}
@@ -100,7 +114,7 @@ func findAllPeople(n int, meetings [][]int, firstPerson int) []int {
 		}
 
 		// Collect unique people in this time group
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		people := make(map[int]bool)
 		for k := i; k < j; k++ {
 			people[meetings[k][0]] = true

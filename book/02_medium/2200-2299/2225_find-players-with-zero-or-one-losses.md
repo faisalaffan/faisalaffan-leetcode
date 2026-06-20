@@ -1,19 +1,30 @@
 # 2225 — Find Players With Zero Or One Losses
 
-## Deskripsi
-
-**Soal:** [2225. Find Players With Zero Or One Losses](https://leetcode.com/problems/find-players-with-zero-or-one-losses/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findWinners(matches [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findWinners(matches [][]int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,9 +40,9 @@ import (
 )
 
 func findWinners(matches [][]int) [][]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	losses := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	players := make(map[int]bool)
 
 	for _, m := range matches {
@@ -52,7 +63,9 @@ func findWinners(matches [][]int) [][]int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(winners)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(oneLoss)
 
 	return [][]int{winners, oneLoss}

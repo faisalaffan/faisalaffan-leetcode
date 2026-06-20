@@ -1,19 +1,32 @@
 # 2612 — Minimum Reverse Operations
 
-## Deskripsi
-
-**Soal:** [2612. Minimum Reverse Operations](https://leetcode.com/problems/minimum-reverse-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minReverseOperations(n int, p int, banned []int, k int) []int
+```
+
+> **💡 Hint:** BFS + DSU skip list.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** BFS + DSU skip list.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,14 +53,14 @@ func main() {
 }
 
 func minReverseOperations(n int, p int, banned []int, k int) []int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		ans[i] = -1
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	bannedSet := make(map[int]bool)
 	for _, b := range banned {
 		bannedSet[b] = true
@@ -55,9 +68,9 @@ func minReverseOperations(n int, p int, banned []int, k int) []int {
 
 	// DSU parent: next unvisited position with same parity
 	// n+2 sentinel to avoid bounds checking
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n+2)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range parent {
 		parent[i] = i
 	}

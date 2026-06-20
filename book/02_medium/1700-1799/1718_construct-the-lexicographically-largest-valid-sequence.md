@@ -1,19 +1,30 @@
 # 1718 — Construct The Lexicographically Largest Valid Sequence
 
-## Deskripsi
-
-**Soal:** [1718. Construct The Lexicographically Largest Valid Sequence](https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func constructDistancedSequence(n int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(n!), Space: O(n) for backtracking  
 **Kompleksitas Ruang:** O(n) for backtracking
 
-**Algoritma:** Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func constructDistancedSequence(n int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,9 +38,8 @@ import "fmt"
 
 func constructDistancedSequence(n int) []int {
 	length := 2*n - 1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, length)
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, n+1)
 
 	var backtrack func(pos int) bool

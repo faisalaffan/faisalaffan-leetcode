@@ -1,19 +1,30 @@
 # 0254 — Factor Combinations
 
-## Deskripsi
-
-**Soal:** [0254. Factor Combinations](https://leetcode.com/problems/factor-combinations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getFactors(n int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Backtracking
 
 **Kompleksitas Waktu:** O(n log n), Space: O(log n)  
 **Kompleksitas Ruang:** O(log n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Backtracking** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getFactors(n int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,7 +41,7 @@ func getFactors(n int) [][]int {
 	var backtrack func(start, remaining int, path []int)
 	backtrack = func(start, remaining int, path []int) {
 		if len(path) > 0 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 			combo := make([]int, len(path)+1)
 			copy(combo, path)
 			combo[len(combo)-1] = remaining

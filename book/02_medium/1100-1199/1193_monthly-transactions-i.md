@@ -1,19 +1,30 @@
 # 1193 — Monthly Transactions I
 
-## Deskripsi
-
-**Soal:** [1193. Monthly Transactions I](https://leetcode.com/problems/monthly-transactions-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func monthlyTransactionsI(transactions []trans) []monthlyStat
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func monthlyTransactionsI(transactions []trans) []monthlyStat`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,7 +65,7 @@ func monthlyTransactionsI(transactions []trans) []monthlyStat {
 		month   string
 		country string
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	stats := make(map[key]monthlyStat)
 
 	for _, t := range transactions {
@@ -72,12 +83,12 @@ func monthlyTransactionsI(transactions []trans) []monthlyStat {
 		stats[k] = s
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]monthlyStat, 0, len(stats))
 	for _, s := range stats {
 		result = append(result, s)
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].month != result[j].month {
 			return result[i].month < result[j].month

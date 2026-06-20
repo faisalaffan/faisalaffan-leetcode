@@ -1,17 +1,30 @@
 # 3555 — Smallest Subarray To Sort In Every Sliding Window
 
-## Deskripsi
-
-**Soal:** [3555. Smallest Subarray To Sort In Every Sliding Window](https://leetcode.com/problems/smallest-subarray-to-sort-in-every-sliding-window/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SmallestSubarrayToSortInEverySlidingWindow(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,12 +57,13 @@ func SmallestSubarrayToSortInEverySlidingWindow(nums []int, k int) int {
 	// that when sorted makes the entire window sorted
 	minLen := n
 	for i := 0; i <= n-k; i++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		window := make([]int, k)
 		copy(window, nums[i:i+k])
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		sorted := make([]int, k)
 		copy(sorted, window)
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(sorted)
 
 		left, right := 0, k-1

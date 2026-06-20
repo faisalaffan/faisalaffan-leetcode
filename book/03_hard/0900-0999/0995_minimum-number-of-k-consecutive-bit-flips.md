@@ -1,19 +1,32 @@
 # 0995 — Minimum Number Of K Consecutive Bit Flips
 
-## Deskripsi
-
-**Soal:** [0995. Minimum Number Of K Consecutive Bit Flips](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minKBitFlips(nums []int, k int) int
+```
+
+> **💡 Hint:** Greedy + queue (or flip-tracking with a boolean array).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Greedy (pemilihan optimal lokal), Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Greedy + queue (or flip-tracking with a boolean array).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +51,6 @@ func main() {
 
 func minKBitFlips(nums []int, k int) int {
 	n := len(nums)
-  // Membuat slice untuk menyimpan hasil
 	flipped := make([]bool, n)
 	curFlips := 0
 	ans := 0

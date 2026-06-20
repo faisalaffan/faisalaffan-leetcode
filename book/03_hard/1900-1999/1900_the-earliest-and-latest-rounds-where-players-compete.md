@@ -1,19 +1,30 @@
 # 1900 — The Earliest And Latest Rounds Where Players Compete
 
-## Deskripsi
-
-**Soal:** [1900. The Earliest And Latest Rounds Where Players Compete](https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan aturan permainan dan harus menentukan siapa yang menang atau berapa skor maksimal. Tugasmu adalah menganalisis permainan dan membuat keputusan optimal di setiap langkah.
+
+Soal game theory menguji kemampuanmu berpikir beberapa langkah ke depan (minimax). Seringkali diselesaikan dengan DP (Dynamic Programming) untuk menyimpan hasil subproblem.
+
+**Konsep kunci:** minimax, optimal play, game state, DP memoization, win/lose positions.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func dfs(a, b, n int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func dfs(a, b, n int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +60,7 @@ func dfs(a, b, n int) []int {
 	pairB := min(b, n-1-b)
 
 	// Other pair indices (0..pairs-1), excluding pairA and pairB
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	otherPairs := make([]int, 0)
 	for i := 0; i < pairs; i++ {
 		if i != pairA && i != pairB {
@@ -62,9 +73,9 @@ func dfs(a, b, n int) []int {
 	m := len(otherPairs)
 
 	for mask := 0; mask < (1 << m); mask++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		winners := make([]int, half)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range winners {
 			winners[i] = -1
 		}

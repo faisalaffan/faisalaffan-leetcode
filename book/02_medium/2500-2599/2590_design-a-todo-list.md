@@ -1,19 +1,30 @@
 # 2590 — Design A Todo List
 
-## Deskripsi
-
-**Soal:** [2590. Design A Todo List](https://leetcode.com/problems/design-a-todo-list/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() TodoList
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n) per getUserTasks  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func Constructor() TodoList`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -71,13 +82,13 @@ func (this *TodoList) GetAllTasks(userId int) []string {
 			userTasks = append(userTasks, t)
 		}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(userTasks, func(i, j int) bool {
 		if userTasks[i].DueDate != userTasks[j].DueDate {
 			return userTasks[i].DueDate < userTasks[j].DueDate
 		}
 		return userTasks[i].ID < userTasks[j].ID
 	})
-  // Membuat slice untuk menyimpan hasil
 	res := make([]string, len(userTasks))
 	for i, t := range userTasks {
 		res[i] = t.Desc
@@ -97,13 +108,13 @@ func (this *TodoList) GetTasksForTag(userId int, tag string) []string {
 			}
 		}
 	}
+  // Custom sort dengan comparator
 	sort.Slice(userTasks, func(i, j int) bool {
 		if userTasks[i].DueDate != userTasks[j].DueDate {
 			return userTasks[i].DueDate < userTasks[j].DueDate
 		}
 		return userTasks[i].ID < userTasks[j].ID
 	})
-  // Membuat slice untuk menyimpan hasil
 	res := make([]string, len(userTasks))
 	for i, t := range userTasks {
 		res[i] = t.Desc

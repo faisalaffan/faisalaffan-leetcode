@@ -1,19 +1,30 @@
 # 0399 — Evaluate Division
 
-## Deskripsi
-
-**Soal:** [0399. Evaluate Division](https://leetcode.com/problems/evaluate-division/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func calcEquation(equations [][]string, values []float64, queries [][]string) []float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n + q*n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func calcEquation(equations [][]string, values []float64, queries [][]string) []float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,7 +38,7 @@ import "fmt"
 
 func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
 	// Build graph
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	graph := make(map[string]map[string]float64)
 	for i, eq := range equations {
 		a, b := eq[0], eq[1]
@@ -64,10 +75,9 @@ func calcEquation(equations [][]string, values []float64, queries [][]string) []
 		return -1.0
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]float64, len(queries))
 	for i, q := range queries {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		visited := make(map[string]bool)
 		result[i] = dfs(q[0], q[1], visited)
 	}

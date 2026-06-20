@@ -1,19 +1,30 @@
 # 1182 — Shortest Distance To Target Color
 
-## Deskripsi
-
-**Soal:** [1182. Shortest Distance To Target Color](https://leetcode.com/problems/shortest-distance-to-target-color/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func shortestDistanceColor(colors []int, queries [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie
 
 **Kompleksitas Waktu:** O(n + m) where m = len(queries)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func shortestDistanceColor(colors []int, queries [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ func shortestDistanceColor(colors []int, queries [][]int) []int {
 	n := len(colors)
 
 	// left[i][c] = nearest distance to color c from left side up to i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	left := make([][3]int, n)
 	for i := 0; i < n; i++ {
 		for c := 0; c < 3; c++ {
@@ -58,7 +69,7 @@ func shortestDistanceColor(colors []int, queries [][]int) []int {
 	}
 
 	// Simpler approach: for each color, store sorted positions
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	positions := make([][]int, 4) // 1-indexed colors
 	for i, c := range colors {
 		positions[c] = append(positions[c], i)
@@ -92,7 +103,7 @@ func shortestDistanceColor(colors []int, queries [][]int) []int {
 		return pos[lo]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 	for i, q := range queries {
 		idx, color := q[0], q[1]

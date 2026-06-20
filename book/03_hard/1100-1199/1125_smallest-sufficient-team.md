@@ -1,17 +1,30 @@
 # 1125 — Smallest Sufficient Team
 
-## Deskripsi
-
-**Soal:** [1125. Smallest Sufficient Team](https://leetcode.com/problems/smallest-sufficient-team/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func smallestSufficientTeam(reqSkills []string, people [][]string) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit), LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func main() {
 }
 
 func smallestSufficientTeam(reqSkills []string, people [][]string) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	skillIdx := make(map[string]int)
 	for i, s := range reqSkills {
 		skillIdx[s] = i
@@ -43,7 +56,7 @@ func smallestSufficientTeam(reqSkills []string, people [][]string) []int {
 	fullMask := (1 << m) - 1
 
 	// Convert people skills to bitmasks
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	personMask := make([]int, len(people))
 	for i, skills := range people {
 		mask := 0
@@ -56,7 +69,7 @@ func smallestSufficientTeam(reqSkills []string, people [][]string) []int {
 	}
 
 	// dp[mask] = list of person indices covering this mask
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, 1<<m)
 	dp[0] = []int{} // empty team covers no skills
 
@@ -70,7 +83,7 @@ func smallestSufficientTeam(reqSkills []string, people [][]string) []int {
 			}
 			newMask := mask | pMask
 			if dp[newMask] == nil || len(dp[mask])+1 < len(dp[newMask]) {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 				newTeam := make([]int, len(dp[mask]))
 				copy(newTeam, dp[mask])
 				dp[newMask] = append(newTeam, i)

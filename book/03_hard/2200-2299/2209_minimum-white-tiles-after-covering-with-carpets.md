@@ -1,17 +1,30 @@
 # 2209 — Minimum White Tiles After Covering With Carpets
 
-## Deskripsi
-
-**Soal:** [2209. Minimum White Tiles After Covering With Carpets](https://leetcode.com/problems/minimum-white-tiles-after-covering-with-carpets/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumWhiteTiles(floor string, numCarpets int, carpetLen int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,13 +67,13 @@ func min(a, b int) int {
 
 func minimumWhiteTiles(floor string, numCarpets int, carpetLen int) int {
 	n := len(floor)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Row for 0 carpets: prefix count of white tiles.
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
 	for i := 1; i <= n; i++ {
 		dp[i] = dp[i-1]
@@ -70,7 +83,7 @@ func minimumWhiteTiles(floor string, numCarpets int, carpetLen int) int {
 	}
 
 	for j := 1; j <= numCarpets; j++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([]int, n+1)
 		// ndp[0] = 0 by default (0 positions, j carpets -> 0 white tiles)
 		for i := 1; i <= n; i++ {

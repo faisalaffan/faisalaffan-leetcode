@@ -1,19 +1,30 @@
 # 1723 — Find Minimum Time To Finish All Jobs
 
-## Deskripsi
-
-**Soal:** [1723. Find Minimum Time To Finish All Jobs](https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTimeRequired(jobs []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumTimeRequired(jobs []int, k int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +45,7 @@ func minimumTimeRequired(jobs []int, k int) int {
 	n := len(jobs)
 
 	// Precompute sum of each subset
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sum := make([]int, 1<<n)
 	for mask := 1; mask < 1<<n; mask++ {
 		lsb := mask & -mask
@@ -48,7 +59,7 @@ func minimumTimeRequired(jobs []int, k int) int {
 	}
 
 	// dp[mask] after w workers = min possible max time for jobs in mask
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, 1<<n)
 	for mask := range dp {
 		dp[mask] = sum[mask] // 1 worker = sum of all jobs in mask
@@ -56,7 +67,7 @@ func minimumTimeRequired(jobs []int, k int) int {
 
 	// For 2nd through kth worker
 	for w := 2; w <= k; w++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		next := make([]int, 1<<n)
 		for mask := range next {
 			next[mask] = dp[mask] // start with previous value (one fewer worker)

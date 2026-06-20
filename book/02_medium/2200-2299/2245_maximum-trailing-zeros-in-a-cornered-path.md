@@ -1,19 +1,30 @@
 # 2245 — Maximum Trailing Zeros In A Cornered Path
 
-## Deskripsi
-
-**Soal:** [2245. Maximum Trailing Zeros In A Cornered Path](https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxTrailingZeros(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(m * n)  
 **Kompleksitas Ruang:** O(m * n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxTrailingZeros(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ func maxTrailingZeros(grid [][]int) int {
 	type pair struct{ two, five int }
 
 	// Right prefix
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	right := make([][]pair, m)
 	for i := 0; i < m; i++ {
 		right[i] = make([]pair, n+1)
@@ -43,7 +54,7 @@ func maxTrailingZeros(grid [][]int) int {
 	}
 
 	// Down prefix
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	down := make([][]pair, m+1)
 	for i := 0; i <= m; i++ {
 		down[i] = make([]pair, n)

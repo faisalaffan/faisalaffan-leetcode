@@ -1,19 +1,32 @@
 # 0305 — Number Of Islands Ii
 
-## Deskripsi
-
-**Soal:** [0305. Number Of Islands Ii](https://leetcode.com/problems/number-of-islands-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewUnionFind(n int) *UnionFind
+```
+
+> **💡 Hint:** Union-Find (Disjoint Set Union) with path compression and union by size.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Union-Find (Disjoint Set Union) with path compression and union by size.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -61,9 +74,9 @@ type UnionFind struct {
 
 // NewUnionFind creates a new UnionFind for n elements.
 func NewUnionFind(n int) *UnionFind {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	parent := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	size := make([]int, n)
 	for i := 0; i < n; i++ {
 		parent[i] = i
@@ -105,14 +118,14 @@ func numIslands2(m int, n int, positions [][]int) []int {
 		return []int{}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	grid := make([][]bool, m)
 	for i := 0; i < m; i++ {
 		grid[i] = make([]bool, n)
 	}
 
 	uf := NewUnionFind(m * n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0, len(positions))
 	islands := 0
 

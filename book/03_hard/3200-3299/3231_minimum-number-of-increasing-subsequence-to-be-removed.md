@@ -1,17 +1,30 @@
 # 3231 — Minimum Number Of Increasing Subsequence To Be Removed
 
-## Deskripsi
-
-**Soal:** [3231. Minimum Number Of Increasing Subsequence To Be Removed](https://leetcode.com/problems/minimum-number-of-increasing-subsequence-to-be-removed/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +55,7 @@ func main() {
 
 func minOperations(nums []int) int {
 	// tails[k] = largest possible last element of a non-increasing subsequence of length k+1
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tails := make([]int, 0)
 
 	for _, x := range nums {

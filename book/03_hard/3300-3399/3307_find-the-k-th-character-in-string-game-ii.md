@@ -1,17 +1,30 @@
 # 3307 — Find The K Th Character In String Game Ii
 
-## Deskripsi
-
-**Soal:** [3307. Find The K Th Character In String Game Ii](https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kthCharacter(k int, operations []int) byte
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ func kthCharacter(k int, operations []int) byte {
 	m := len(operations)
 
 	// Precompute lengths: len[i] = length after operation i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lengths := make([]int, m+1)
 	lengths[0] = 1 // initial string "a"
 	for i := 1; i <= m; i++ {

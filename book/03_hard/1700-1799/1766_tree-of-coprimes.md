@@ -1,21 +1,32 @@
 # 1766 — Tree Of Coprimes
 
-## Deskripsi
-
-**Soal:** [1766. Tree Of Coprimes](https://leetcode.com/problems/tree-of-coprimes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getCoprimes(nums []int, edges [][]int) []int
+```
+
+> **💡 Hint:** DFS with depth tracking per value (nums[i] ≤ 50).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Stack, GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func gcd(a, b int) int`
-
-> **Ide Kunci:** DFS with depth tracking per value (nums[i] ≤ 50).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +56,7 @@ func gcd(a, b int) int {
 func getCoprimes(nums []int, edges [][]int) []int {
 	n := len(nums)
 	// Build adjacency
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -54,7 +65,7 @@ func getCoprimes(nums []int, edges [][]int) []int {
 	}
 
 	// Precompute coprime pairs for values 1..50
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	coprime := make([][]int, 51)
 	for v := 1; v <= 50; v++ {
 		for u := 1; u <= 50; u++ {
@@ -66,17 +77,16 @@ func getCoprimes(nums []int, edges [][]int) []int {
 
 	// For each value (1..50), maintain a stack of (node, depth)
 	// Use arrays of [][2]int (idx 0=node, idx 1=depth)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	valStack := make([][][2]int, 51)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		ans[i] = -1
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n)
 
 	var dfs func(u, depth int)

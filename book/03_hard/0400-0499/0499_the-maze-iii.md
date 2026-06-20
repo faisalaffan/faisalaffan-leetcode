@@ -1,19 +1,32 @@
 # 0499 — The Maze Iii
 
-## Deskripsi
-
-**Soal:** [0499. The Maze Iii](https://leetcode.com/problems/the-maze-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findShortestWay(maze [][]int, ball []int, hole []int) string
+```
+
+> **💡 Hint:** Dijkstra with lexicographic path. The ball rolls until it hits a wall.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO), Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Dijkstra with lexicographic path. The ball rolls until it hits a wall.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -143,9 +156,9 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 	holeR, holeC := hole[0], hole[1]
 
 	// dist[r][c] = minimum distance to reach (r,c)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -154,9 +167,9 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 	}
 
 	// path[r][c] = lexicographically smallest path to reach (r,c)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	path := make([][]string, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range path {
 		path[i] = make([]string, n)
 	}
@@ -166,9 +179,11 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 
 	dist[startR][startC] = 0
 	path[startR][startC] = ""
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, &State{r: startR, c: startC, dist: 0, path: ""})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(*State)
 
 		// Skip if we already found a better path to this cell
@@ -218,6 +233,7 @@ func findShortestWay(maze [][]int, ball []int, hole []int) string {
 			if newDist < dist[nr][nc] || (newDist == dist[nr][nc] && newPath < path[nr][nc]) {
 				dist[nr][nc] = newDist
 				path[nr][nc] = newPath
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, &State{r: nr, c: nc, dist: newDist, path: newPath})
 			}
 		}

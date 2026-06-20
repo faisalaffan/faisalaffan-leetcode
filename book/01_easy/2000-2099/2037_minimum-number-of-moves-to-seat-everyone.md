@@ -1,17 +1,30 @@
 # 2037 — Minimum Number Of Moves To Seat Everyone
 
-## Deskripsi
-
-**Soal:** [2037. Minimum Number Of Moves To Seat Everyone](https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumNumberOfMovesToSeatEveryone(seats []int, students []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n), Space: O(1)  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,10 +45,12 @@ func main() {
 
 // Time: O(n log n), Space: O(1)
 func MinimumNumberOfMovesToSeatEveryone(seats []int, students []int) int {
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(seats)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(students)
 	moves := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(seats); i++ {
 		diff := seats[i] - students[i]
 		if diff < 0 {

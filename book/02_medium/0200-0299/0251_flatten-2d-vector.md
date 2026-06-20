@@ -1,19 +1,30 @@
 # 0251 — Flatten 2D Vector
 
-## Deskripsi
-
-**Soal:** [0251. Flatten 2D Vector](https://leetcode.com/problems/flatten-2d-vector/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor(vec [][]int) Vector2D
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(1) amortized per next/hasNext, Space: O(1) excluding input  
 **Kompleksitas Ruang:** O(1) excluding input
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func Constructor(vec [][]int) Vector2D`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

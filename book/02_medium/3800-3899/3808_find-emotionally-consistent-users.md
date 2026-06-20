@@ -1,17 +1,30 @@
 # 3808 — Find Emotionally Consistent Users
 
-## Deskripsi
-
-**Soal:** [3808. Find Emotionally Consistent Users](https://leetcode.com/problems/find-emotionally-consistent-users/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FindEmotionallyConsistentUsers(reactions []Reaction) []ConsistentUser
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(N + U log U) where N = reactions, U = unique users  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,9 +67,9 @@ func main() {
 // Space: O(N)
 func FindEmotionallyConsistentUsers(reactions []Reaction) []ConsistentUser {
 	// userID -> reaction -> count
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userReactionCounts := make(map[int]map[string]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userTotal := make(map[int]int)
 
 	for _, r := range reactions {
@@ -93,6 +106,7 @@ func FindEmotionallyConsistentUsers(reactions []Reaction) []ConsistentUser {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i].ReactionRatio != result[j].ReactionRatio {
 			return result[i].ReactionRatio > result[j].ReactionRatio

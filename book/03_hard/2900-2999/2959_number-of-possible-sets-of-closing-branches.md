@@ -1,19 +1,30 @@
 # 2959 — Number Of Possible Sets Of Closing Branches
 
-## Deskripsi
-
-**Soal:** [2959. Number Of Possible Sets Of Closing Branches](https://leetcode.com/problems/number-of-possible-sets-of-closing-branches/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfSets(n int, maxDistance int, roads [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Floyd-Warshall
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Floyd-Warshall (lintasan semua pasangan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Floyd-Warshall** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfSets(n int, maxDistance int, roads [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,9 +47,9 @@ func numberOfSets(n int, maxDistance int, roads [][]int) int {
 	const inf = 1 << 29
 
 	// Build adjacency matrix
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	g := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range g {
 		g[i] = make([]int, n)
 		for j := range g[i] {
@@ -59,9 +70,9 @@ func numberOfSets(n int, maxDistance int, roads [][]int) int {
 	// Try all subsets of open branches
 	for mask := 0; mask < (1 << n); mask++ {
 		// Copy distances for this subset
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		dist := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 		for i := range dist {
 			dist[i] = make([]int, n)
 			copy(dist[i], g[i])

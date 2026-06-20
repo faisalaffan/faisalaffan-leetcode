@@ -1,19 +1,30 @@
 # 1792 — Maximum Average Pass Ratio
 
-## Deskripsi
-
-**Soal:** [1792. Maximum Average Pass Ratio](https://leetcode.com/problems/maximum-average-pass-ratio/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxAverageRatio(classes [][]int, extraStudents int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O((n+k) log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxAverageRatio(classes [][]int, extraStudents int) float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,19 +66,23 @@ func maxAverageRatio(classes [][]int, extraStudents int) float64 {
 	for _, c := range classes {
 		pass, total := c[0], c[1]
 		gain := float64(pass+1)/float64(total+1) - float64(pass)/float64(total)
+  // Masukkan elemen ke priority queue
 		heap.Push(h, Class{pass, total, gain})
 	}
 
 	for i := 0; i < extraStudents; i++ {
+  // Ambil elemen terkecil/terbesar dari heap
 		c := heap.Pop(h).(Class)
 		c.pass++
 		c.total++
 		c.gain = float64(c.pass+1)/float64(c.total+1) - float64(c.pass)/float64(c.total)
+  // Masukkan elemen ke priority queue
 		heap.Push(h, c)
 	}
 
 	sum := 0.0
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		c := heap.Pop(h).(Class)
 		sum += float64(c.pass) / float64(c.total)
 	}

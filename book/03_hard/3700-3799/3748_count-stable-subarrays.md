@@ -1,19 +1,32 @@
 # 3748 — Count Stable Subarrays
 
-## Deskripsi
-
-**Soal:** [3748. Count Stable Subarrays](https://leetcode.com/problems/count-stable-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countStableSubarrays(nums []int, queries [][]int) []int64
+```
+
+> **💡 Hint:** Precompute longest non-decreasing run ending at each position.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Precompute longest non-decreasing run ending at each position.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -46,7 +59,7 @@ func countStableSubarrays(nums []int, queries [][]int) []int64 {
 	n := len(nums)
 
 	// lenEnd[i] = length of longest non-decreasing subarray ending at i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	lenEnd := make([]int, n)
 	for i := 0; i < n; i++ {
 		if i == 0 || nums[i] < nums[i-1] {
@@ -57,7 +70,7 @@ func countStableSubarrays(nums []int, queries [][]int) []int64 {
 	}
 
 	// pref[i] = total non-decreasing subarrays in nums[0..i] (inclusive)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int64, n)
 	for i := 0; i < n; i++ {
 		pref[i] = int64(lenEnd[i])
@@ -66,7 +79,7 @@ func countStableSubarrays(nums []int, queries [][]int) []int64 {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, len(queries))
 	for qi, q := range queries {
 		l, r := q[0], q[1]

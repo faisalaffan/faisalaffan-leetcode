@@ -1,19 +1,30 @@
 # 2101 — Detonate The Maximum Bombs
 
-## Deskripsi
-
-**Soal:** [2101. Detonate The Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumDetonation(bombs [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumDetonation(bombs [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -27,13 +38,13 @@ import "fmt"
 
 func maximumDetonation(bombs [][]int) int {
 	n := len(bombs)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// Build adjacency (directed from i to j if i can detonate j)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n)
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
@@ -51,7 +62,6 @@ func maximumDetonation(bombs [][]int) int {
 
 	maxDetonated := 0
 	for i := 0; i < n; i++ {
-  // Membuat slice untuk menyimpan hasil
 		visited := make([]bool, n)
 		queue := []int{i}
 		visited[i] = true

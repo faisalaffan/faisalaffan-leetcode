@@ -1,19 +1,30 @@
 # 2077 — Paths In Maze That Lead To Same Room
 
-## Deskripsi
-
-**Soal:** [2077. Paths In Maze That Lead To Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfPaths(corridors [][]int, n int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n * deg^2)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func numberOfPaths(corridors [][]int, n int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ package main
 import "fmt"
 
 func numberOfPaths(corridors [][]int, n int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n+1)
 	for _, c := range corridors {
 		u, v := c[0], c[1]
@@ -36,7 +47,7 @@ func numberOfPaths(corridors [][]int, n int) int {
 
 	// For each pair of neighbors of a node, check if they are also connected
 	// Use adjacency set for O(1) lookup
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	adjSet := make([]map[int]bool, n+1)
 	for i := 1; i <= n; i++ {
 		adjSet[i] = make(map[int]bool)

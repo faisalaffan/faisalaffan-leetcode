@@ -1,19 +1,30 @@
 # 0315 — Count Of Smaller Numbers After Self
 
-## Deskripsi
-
-**Soal:** [0315. Count Of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countSmaller(nums []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Binary Search, Merge Sort
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func countSmaller(nums []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,7 +37,7 @@ import "fmt"
 
 func countSmaller(nums []int) []int {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return []int{}
 	}
@@ -36,13 +47,12 @@ func countSmaller(nums []int) []int {
 		val int
 		idx int
 	}
-  // Membuat slice untuk menyimpan hasil
 	arr := make([]pair, n)
 	for i, v := range nums {
 		arr[i] = pair{val: v, idx: i}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 
 	var mergeSort func([]pair) []pair
@@ -55,7 +65,6 @@ func countSmaller(nums []int) []int {
 		right := mergeSort(a[mid:])
 
 		// Merge while counting
-  // Membuat slice untuk menyimpan hasil
 		merged := make([]pair, 0, len(a))
 		i, j := 0, 0
 		for i < len(left) && j < len(right) {

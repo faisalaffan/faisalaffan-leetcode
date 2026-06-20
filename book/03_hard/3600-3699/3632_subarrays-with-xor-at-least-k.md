@@ -1,19 +1,32 @@
 # 3632 — Subarrays With Xor At Least K
 
-## Deskripsi
-
-**Soal:** [3632. Subarrays With Xor At Least K](https://leetcode.com/problems/subarrays-with-xor-at-least-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func subarraysWithXorAtLeastK(nums []int, k int) int64
+```
+
+> **💡 Hint:** Compute prefix XOR, use a binary trie to query how many prefixes
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Trie, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Trie (pohon awalan)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Trie** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Compute prefix XOR, use a binary trie to query how many prefixes
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

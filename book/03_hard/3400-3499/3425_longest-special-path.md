@@ -1,17 +1,30 @@
 # 3425 — Longest Special Path
 
-## Deskripsi
-
-**Soal:** [3425. Longest Special Path](https://leetcode.com/problems/longest-special-path/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestSpecialPath(edges [][]int, nums []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window, DFS, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** HashMap (tabel pencarian O(1)), Sliding Window (jendela geser), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,7 +71,7 @@ func longestSpecialPath(edges [][]int, nums []int) []int {
 		return []int{0, 1}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], 1
@@ -69,9 +82,9 @@ func longestSpecialPath(edges [][]int, nums []int) []int {
 		adj[v] = append(adj[v], [2]int{u, w})
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	lastOccur := make(map[int]int) // value -> last depth seen
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pathSum := make([]int, n)      // prefix sum of edge weights from root
 	maxLen := 0
 	minNodes := 1

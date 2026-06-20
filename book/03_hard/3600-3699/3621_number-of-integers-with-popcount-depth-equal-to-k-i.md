@@ -1,19 +1,32 @@
 # 3621 — Number Of Integers With Popcount Depth Equal To K I
 
-## Deskripsi
-
-**Soal:** [3621. Number Of Integers With Popcount Depth Equal To K I](https://leetcode.com/problems/number-of-integers-with-popcount-depth-equal-to-k-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numberOfIntegers(n int64, k int) int64
+```
+
+> **💡 Hint:** Precompute popcount-depth for all values up to 1000
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Precompute popcount-depth for all values up to 1000
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,7 +57,7 @@ func main() {
 
 func numberOfIntegers(n int64, k int) int64 {
 	// Precompute depth for all possible popcount values (1..60)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	depth := make([]int, 61)
 	for i := 2; i <= 60; i++ {
 		depth[i] = depth[popcount(i)] + 1
@@ -54,9 +67,9 @@ func numberOfIntegers(n int64, k int) int64 {
 	s := fmt.Sprintf("%b", n)
 	m := len(s)
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	memo := make([][][]int64, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = make([][]int64, 2)
 		for j := range memo[i] {

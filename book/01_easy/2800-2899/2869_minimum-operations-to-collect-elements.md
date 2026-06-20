@@ -1,17 +1,30 @@
 # 2869 — Minimum Operations To Collect Elements
 
-## Deskripsi
-
-**Soal:** [2869. Minimum Operations To Collect Elements](https://leetcode.com/problems/minimum-operations-to-collect-elements/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumOperationsToCollectElements(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +42,6 @@ func main() {
 }
 
 func MinimumOperationsToCollectElements(nums []int, k int) int {
-  // Membuat slice untuk menyimpan hasil
 	seen := make([]bool, k+1)
 	collected := 0
 	for i := len(nums) - 1; i >= 0; i-- {

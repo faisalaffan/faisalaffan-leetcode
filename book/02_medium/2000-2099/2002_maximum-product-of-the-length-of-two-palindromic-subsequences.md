@@ -1,17 +1,30 @@
 # 2002 — Maximum Product Of The Length Of Two Palindromic Subsequences
 
-## Deskripsi
-
-**Soal:** [2002. Maximum Product Of The Length Of Two Palindromic Subsequences](https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumProductOfTheLengthOfTwoPalindromicSubsequences(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Bitmask
 
 **Kompleksitas Waktu:** O(3^n), Space: O(2^n)  
 **Kompleksitas Ruang:** O(2^n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +47,6 @@ func main() {
 // Time: O(3^n), Space: O(2^n)
 func MaximumProductOfTheLengthOfTwoPalindromicSubsequences(s string) int {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
 	p := make([]bool, 1<<n)
 
 	for mask := 1; mask < 1<<n; mask++ {

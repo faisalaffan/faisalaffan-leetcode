@@ -1,19 +1,32 @@
 # 3749 — Evaluate Valid Expressions
 
-## Deskripsi
-
-**Soal:** [3749. Evaluate Valid Expressions](https://leetcode.com/problems/evaluate-valid-expressions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func evaluateExpression(expression string) int64
+```
+
+> **💡 Hint:** Two-stack algorithm (Shunting-yard / recursive descent).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Two-stack algorithm (Shunting-yard / recursive descent).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -54,9 +67,8 @@ func evaluateExpression(expression string) int64 {
 
 func calc(s string) int {
 	n := len(s)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nums := make([]int, 0)
-  // Membuat slice untuk menyimpan hasil
 	ops := make([]byte, 0)
 	prec := func(op byte) int {
 		if op == '+' || op == '-' {

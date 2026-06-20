@@ -1,19 +1,32 @@
 # 3459 — Length Of Longest V Shaped Diagonal Segment
 
-## Deskripsi
-
-**Soal:** [3459. Length Of Longest V Shaped Diagonal Segment](https://leetcode.com/problems/length-of-longest-v-shaped-diagonal-segment/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lenOfVDiagonal(grid [][]int) int
+```
+
+> **💡 Hint:** DP from each cell in all diagonal directions. Track length of
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP from each cell in all diagonal directions. Track length of
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,11 +62,11 @@ func lenOfVDiagonal(grid [][]int) int {
 	// dpDec[i][j][dir] = longest decreasing diagonal starting at (i,j) in direction dir
 	// dpInc[i][j][dir] = longest increasing diagonal starting at (i,j) in direction dir
 	// dir: 0=down-right, 1=down-left, 2=up-right, 3=up-left
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dpDec := make([][][]int, m)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dpInc := make([][][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dpDec {
 		dpDec[i] = make([][]int, n)
 		dpInc[i] = make([][]int, n)

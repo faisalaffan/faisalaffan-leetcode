@@ -1,19 +1,30 @@
 # 1737 — Change Minimum Characters To Satisfy One Of Three Conditions
 
-## Deskripsi
-
-**Soal:** [1737. Change Minimum Characters To Satisfy One Of Three Conditions](https://leetcode.com/problems/change-minimum-characters-to-satisfy-one-of-three-conditions/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minCharacters(a string, b string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum
 
 **Kompleksitas Waktu:** O(n + m), Space: O(26)  
 **Kompleksitas Ruang:** O(26)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minCharacters(a string, b string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -26,9 +37,9 @@ package main
 import "fmt"
 
 func minCharacters(a string, b string) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	countA := make([]int, 26)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	countB := make([]int, 26)
 
 	for _, ch := range a {

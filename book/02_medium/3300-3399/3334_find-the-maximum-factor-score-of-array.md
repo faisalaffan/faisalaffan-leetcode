@@ -1,17 +1,30 @@
 # 3334 — Find The Maximum Factor Score Of Array
 
-## Deskripsi
-
-**Soal:** [3334. Find The Maximum Factor Score Of Array](https://leetcode.com/problems/find-the-maximum-factor-score-of-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func lcm(a, b int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** O(n) Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,14 +55,14 @@ func lcm(a, b int) int {
 
 func maxFactorScore(nums []int) int64 {
 	n := len(nums)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	preGCD := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	preLCM := make([]int, n)
 	preGCD[0] = nums[0]
 	preLCM[0] = nums[0]
@@ -58,9 +71,9 @@ func maxFactorScore(nums []int) int64 {
 		preLCM[i] = lcm(preLCM[i-1], nums[i])
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sufGCD := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	sufLCM := make([]int, n+1)
 	sufLCM[n] = 1
 	for i := n - 1; i >= 0; i-- {

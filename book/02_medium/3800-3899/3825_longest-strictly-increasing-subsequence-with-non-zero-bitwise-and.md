@@ -1,21 +1,32 @@
 # 3825 — Longest Strictly Increasing Subsequence With Non Zero Bitwise And
 
-## Deskripsi
-
-**Soal:** [3825. Longest Strictly Increasing Subsequence With Non Zero Bitwise And](https://leetcode.com/problems/longest-strictly-increasing-subsequence-with-non-zero-bitwise-and/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LongestStrictlyIncreasingSubsequenceWithNonZeroBitwiseAnd(nums []int) int
+```
+
+> **💡 Hint:** For each bit position, filter nums that have that bit set,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(log M * N log N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func LongestStrictlyIncreasingSubsequenceWithNonZeroBitwiseAnd(nums []int) int`
-
-> **Ide Kunci:** For each bit position, filter nums that have that bit set,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

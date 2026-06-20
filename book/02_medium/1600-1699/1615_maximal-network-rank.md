@@ -1,17 +1,30 @@
 # 1615 — Maximal Network Rank
 
-## Deskripsi
-
-**Soal:** [1615. Maximal Network Rank](https://leetcode.com/problems/maximal-network-rank/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximalNetworkRank(n int, roads [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N^2), Space: O(N^2)  
 **Kompleksitas Ruang:** O(N^2)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,9 +43,9 @@ func main() {
 
 func MaximalNetworkRank(n int, roads [][]int) int {
 	// Time: O(N^2), Space: O(N^2)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	degree := make([]int, n)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	connected := make([][]bool, n)
 	for i := 0; i < n; i++ {
 		connected[i] = make([]bool, n)

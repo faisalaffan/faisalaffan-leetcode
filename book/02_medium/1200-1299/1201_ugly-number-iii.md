@@ -1,19 +1,30 @@
 # 1201 — Ugly Number Iii
 
-## Deskripsi
-
-**Soal:** [1201. Ugly Number Iii](https://leetcode.com/problems/ugly-number-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func nthUglyNumber(n int, a int, b int, c int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, GCD / Matematika
 
 **Kompleksitas Waktu:** O(log(maxVal)) ~ O(log(2*10^9))  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func nthUglyNumber(n int, a int, b int, c int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

@@ -1,19 +1,32 @@
 # 3944 — Minimum Operations To Make Array Modulo Alternating Ii
 
-## Deskripsi
-
-**Soal:** [3944. Minimum Operations To Make Array Modulo Alternating Ii](https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumOperations(nums []int, k int) int
+```
+
+> **💡 Hint:** For each adjacent pair, if they have same mod, we must
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** For each adjacent pair, if they have same mod, we must
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

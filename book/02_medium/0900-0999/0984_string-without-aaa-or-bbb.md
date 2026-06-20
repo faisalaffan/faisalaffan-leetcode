@@ -1,19 +1,32 @@
 # 0984 — String Without Aaa Or Bbb
 
-## Deskripsi
-
-**Soal:** [0984. String Without Aaa Or Bbb](https://leetcode.com/problems/string-without-aaa-or-bbb/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func strWithout3a3b(a int, b int) string
+```
+
+> **💡 Hint:** Greedy - always append the character with more remaining count,
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(a + b)  
 **Kompleksitas Ruang:** O(a + b) for output
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Greedy - always append the character with more remaining count,
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +49,6 @@ func main() {
 }
 
 func strWithout3a3b(a int, b int) string {
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0, a+b)
 
 	for a > 0 || b > 0 {

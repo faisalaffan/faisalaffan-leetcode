@@ -1,17 +1,30 @@
 # 3478 — Choose K Elements With Maximum Sum
 
-## Deskripsi
-
-**Soal:** [3478. Choose K Elements With Maximum Sum](https://leetcode.com/problems/choose-k-elements-with-maximum-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func ChooseKElementsWithMaximumSum(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -60,13 +73,16 @@ func ChooseKElementsWithMaximumSum(nums []int, k int) int {
 	h := &MinHeap{}
 	heap.Init(h)
 	for _, v := range nums {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, v)
 		if h.Len() > k {
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(h)
 		}
 	}
 	sum := 0
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		sum += heap.Pop(h).(int)
 	}
 	return sum

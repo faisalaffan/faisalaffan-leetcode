@@ -1,17 +1,30 @@
 # 2578 — Split With Minimum Sum
 
-## Deskripsi
-
-**Soal:** [2578. Split With Minimum Sum](https://leetcode.com/problems/split-with-minimum-sum/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SplitWithMinimumSum(num int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,10 +50,11 @@ func SplitWithMinimumSum(num int) int {
 		digits = append(digits, num%10)
 		num /= 10
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(digits)
 
 	num1, num2 := 0, 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(digits); i++ {
 		if i%2 == 0 {
 			num1 = num1*10 + digits[i]

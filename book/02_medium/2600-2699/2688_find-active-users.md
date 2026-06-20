@@ -1,19 +1,30 @@
 # 2688 — Find Active Users
 
-## Deskripsi
-
-**Soal:** [2688. Find Active Users](https://leetcode.com/problems/find-active-users/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findActiveUsers(purchases []UserPurchase) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findActiveUsers(purchases []UserPurchase) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,17 +56,17 @@ type UserPurchase struct {
 // n = number of purchase records.
 func findActiveUsers(purchases []UserPurchase) []int {
 	// Group purchases by user_id.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userDates := make(map[int][]string)
 	for _, p := range purchases {
 		userDates[p.UserID] = append(userDates[p.UserID], p.CreatedAt)
 	}
 
 	// Count distinct dates per user.
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userUniqueDates := make(map[int][]string)
 	for uid, dates := range userDates {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		seen := make(map[string]bool)
 		for _, d := range dates {
 			if !seen[d] {
@@ -86,6 +97,7 @@ func findActiveUsers(purchases []UserPurchase) []int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(active)
 	return active
 }

@@ -1,21 +1,32 @@
 # 3882 — Minimum Xor Path In A Grid
 
-## Deskripsi
-
-**Soal:** [3882. Minimum Xor Path In A Grid](https://leetcode.com/problems/minimum-xor-path-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumXorPathInAGrid(grid [][]int) int
+```
+
+> **💡 Hint:** DP tracking reachable XOR values at each cell. Only right/down moves.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** O(M * N * 2^B)  
 **Kompleksitas Ruang:** O(N * 2^B) where B = 11 (grid values < 1024)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumXorPathInAGrid(grid [][]int) int`
-
-> **Ide Kunci:** DP tracking reachable XOR values at each cell. Only right/down moves.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,7 @@ func MinimumXorPathInAGrid(grid [][]int) int {
 		return -1
 	}
 	n := len(grid[0])
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return -1
 	}
@@ -45,7 +56,7 @@ func MinimumXorPathInAGrid(grid [][]int) int {
 	maxXor := 2048 // 2^11 since grid[i][j] <= 1023
 
 	// Use bitset (boolean array) for each cell
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]bool, n)
 	for j := 0; j < n; j++ {
 		dp[j] = make([]bool, maxXor)
@@ -58,7 +69,6 @@ func MinimumXorPathInAGrid(grid [][]int) int {
 			if i == 0 && j == 0 {
 				continue
 			}
-  // Membuat slice untuk menyimpan hasil
 			cur := make([]bool, maxXor)
 			if i > 0 {
 				for x := 0; x < maxXor; x++ {

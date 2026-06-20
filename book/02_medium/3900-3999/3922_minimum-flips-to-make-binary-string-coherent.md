@@ -1,21 +1,32 @@
 # 3922 — Minimum Flips To Make Binary String Coherent
 
-## Deskripsi
-
-**Soal:** [3922. Minimum Flips To Make Binary String Coherent](https://leetcode.com/problems/minimum-flips-to-make-binary-string-coherent/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumFlipsToMakeBinaryStringCoherent(s string) int
+```
+
+> **💡 Hint:** Valid strings avoid "011" and "110" subsequences. Valid patterns:
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MinimumFlipsToMakeBinaryStringCoherent(s string) int`
-
-> **Ide Kunci:** Valid strings avoid "011" and "110" subsequences. Valid patterns:
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ import "fmt"
 func MinimumFlipsToMakeBinaryStringCoherent(s string) int {
 	n := len(s)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n+1)
 	for i := 0; i < n; i++ {
 		pref[i+1] = pref[i]

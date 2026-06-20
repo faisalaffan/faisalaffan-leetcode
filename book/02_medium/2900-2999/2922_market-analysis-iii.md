@@ -1,19 +1,30 @@
 # 2922 — Market Analysis Iii
 
-## Deskripsi
-
-**Soal:** [2922. Market Analysis Iii](https://leetcode.com/problems/market-analysis-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func marketAnalysisIII(users []User, items []Item, orders []Order) []SellerResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func marketAnalysisIII(users []User, items []Item, orders []Order) []SellerResult`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,21 +64,21 @@ type SellerResult struct {
 
 func marketAnalysisIII(users []User, items []Item, orders []Order) []SellerResult {
 	// Build item_id -> item_brand map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	itemBrand := make(map[int]string)
 	for _, item := range items {
 		itemBrand[item.ItemID] = item.ItemBrand
 	}
 
 	// Build seller_id -> favorite_brand map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	sellerBrand := make(map[int]string)
 	for _, u := range users {
 		sellerBrand[u.SellerID] = u.FavoriteBrand
 	}
 
 	// For each seller, count distinct items where item_brand != favorite_brand
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	sellerCounts := make(map[int]map[int]bool) // seller_id -> set of item_ids
 	for _, o := range orders {
 		brand, ok := itemBrand[o.ItemID]
@@ -103,6 +114,7 @@ func marketAnalysisIII(users []User, items []Item, orders []Order) []SellerResul
 	}
 
 	// Order by seller_id ASC
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].SellerID < results[j].SellerID
 	})

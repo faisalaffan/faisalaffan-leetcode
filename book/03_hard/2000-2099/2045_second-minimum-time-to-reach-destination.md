@@ -1,21 +1,32 @@
 # 2045 — Second Minimum Time To Reach Destination
 
-## Deskripsi
-
-**Soal:** [2045. Second Minimum Time To Reach Destination](https://leetcode.com/problems/second-minimum-time-to-reach-destination/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func secondMinimum(n int, edges [][]int, time int, change int) int
+```
+
+> **💡 Hint:** Modified Dijkstra / BFS with two distances
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar), Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Heap / Priority Queue** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func secondMinimum(n int, edges [][]int, time int, change int) int`
-
-> **Ide Kunci:** Modified Dijkstra / BFS with two distances
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ import (
 
 func secondMinimum(n int, edges [][]int, time int, change int) int {
 	// Build adjacency list
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][]int, n+1)
 	for _, e := range edges {
 		u, v := e[0], e[1]
@@ -42,11 +53,11 @@ func secondMinimum(n int, edges [][]int, time int, change int) int {
 	}
 
 	// dist1[i] = shortest time to reach i, dist2[i] = second shortest
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist1 := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dist2 := make([]int, n+1)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist1 {
 		dist1[i] = math.MaxInt32
 		dist2[i] = math.MaxInt32
@@ -57,9 +68,11 @@ func secondMinimum(n int, edges [][]int, time int, change int) int {
 	// Min-heap: (time, node)
 	pq := &minHeap{}
 	heap.Init(pq)
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, [2]int{0, 1})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).([2]int)
 		t := cur[0]
 		u := cur[1]
@@ -83,9 +96,11 @@ func secondMinimum(n int, edges [][]int, time int, change int) int {
 			if nextTime < dist1[v] {
 				dist2[v] = dist1[v]
 				dist1[v] = nextTime
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, [2]int{nextTime, v})
 			} else if nextTime > dist1[v] && nextTime < dist2[v] {
 				dist2[v] = nextTime
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, [2]int{nextTime, v})
 			}
 		}

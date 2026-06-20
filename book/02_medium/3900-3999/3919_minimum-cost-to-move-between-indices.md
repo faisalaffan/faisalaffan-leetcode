@@ -1,21 +1,32 @@
 # 3919 — Minimum Cost To Move Between Indices
 
-## Deskripsi
-
-**Soal:** [3919. Minimum Cost To Move Between Indices](https://leetcode.com/problems/minimum-cost-to-move-between-indices/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64
+```
+
+> **💡 Hint:** Build directed cost graph. From x to closest(x) costs 1, else
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** O(N + Q)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Heap (priority queue), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64`
-
-> **Ide Kunci:** Build directed cost graph. From x to closest(x) costs 1, else
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,16 +44,16 @@ import "fmt"
 func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64 {
 	n := len(nums)
 	if n <= 1 {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ans := make([]int64, len(queries))
 		return ans
 	}
 
 	// costLR[i] = min cost from i to i+1
 	// costRL[i] = min cost from i+1 to i
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	costLR := make([]int64, n-1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	costRL := make([]int64, n-1)
 
 	for i := 0; i < n; i++ {
@@ -68,20 +79,20 @@ func MinimumCostToMoveBetweenIndices(nums []int, queries [][]int) []int64 {
 	}
 
 	// prefLR[k] = cost from 0 to k (going right)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefLR := make([]int64, n)
 	for i := 0; i < n-1; i++ {
 		prefLR[i+1] = prefLR[i] + costLR[i]
 	}
 
 	// prefRL[k] = cost from k to 0 (going left)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prefRL := make([]int64, n)
 	for i := 0; i < n-1; i++ {
 		prefRL[i+1] = prefRL[i] + costRL[i]
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int64, len(queries))
 	for i, q := range queries {
 		l, r := q[0], q[1]

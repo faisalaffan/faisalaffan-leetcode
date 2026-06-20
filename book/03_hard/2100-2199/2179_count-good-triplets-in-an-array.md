@@ -1,17 +1,30 @@
 # 2179 — Count Good Triplets In An Array
 
-## Deskripsi
-
-**Soal:** [2179. Count Good Triplets In An Array](https://leetcode.com/problems/count-good-triplets-in-an-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countGoodTriplets(nums1 []int, nums2 []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,20 +47,20 @@ func main() {
 
 func countGoodTriplets(nums1 []int, nums2 []int) int64 {
 	n := len(nums1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pos1 := make([]int, n)
 	for i, v := range nums1 {
 		pos1[v] = i
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	arr := make([]int, n)
 	for i, v := range nums2 {
 		arr[i] = pos1[v]
 	}
 
 	// leftLess[i] = count of j < i with arr[j] < arr[i]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	leftLess := make([]int, n)
 	bit := newFenwick(n)
 	for i, v := range arr {
@@ -56,7 +69,7 @@ func countGoodTriplets(nums1 []int, nums2 []int) int64 {
 	}
 
 	// rightGreater[i] = count of j > i with arr[j] > arr[i]
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	rightGreater := make([]int, n)
 	bit = newFenwick(n)
 	for i := n - 1; i >= 0; i-- {

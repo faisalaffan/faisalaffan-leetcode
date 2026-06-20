@@ -1,17 +1,30 @@
 # 2492 — Minimum Score Of A Path Between Two Cities
 
-## Deskripsi
-
-**Soal:** [2492. Minimum Score Of A Path Between Two Cities](https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minScore(n int, roads [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(n + m)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +46,7 @@ func main() {
 }
 
 func minScore(n int, roads [][]int) int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][][2]int, n+1)
 	for _, r := range roads {
 		a, b, d := r[0], r[1], r[2]
@@ -41,7 +54,6 @@ func minScore(n int, roads [][]int) int {
 		graph[b] = append(graph[b], [2]int{a, d})
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	visited := make([]bool, n+1)
 	ans := math.MaxInt32
 

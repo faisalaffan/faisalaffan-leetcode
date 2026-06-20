@@ -1,17 +1,30 @@
 # 1387 — Sort Integers By The Power Value
 
-## Deskripsi
-
-**Soal:** [1387. Sort Integers By The Power Value](https://leetcode.com/problems/sort-integers-by-the-power-value/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getKth(lo int, hi int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Dynamic Programming
 
 **Kompleksitas Waktu:** O(n log n) for sorting  
 **Kompleksitas Ruang:** O(n) for memoization and sorted array
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +53,7 @@ func main() {
 // Time: O(n log n) for sorting
 // Space: O(n) for memoization and sorted array
 func getKth(lo int, hi int, k int) int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[int]int)
 	memo[1] = 0
 
@@ -60,12 +73,12 @@ func getKth(lo int, hi int, k int) int {
 	type pair struct {
 		val, power int
 	}
-  // Membuat slice untuk menyimpan hasil
 	pairs := make([]pair, 0, hi-lo+1)
 	for i := lo; i <= hi; i++ {
 		pairs = append(pairs, pair{i, power(i)})
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(pairs, func(i, j int) bool {
 		if pairs[i].power != pairs[j].power {
 			return pairs[i].power < pairs[j].power

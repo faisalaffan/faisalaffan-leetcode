@@ -1,21 +1,32 @@
 # 3900 — Longest Balanced Substring After One Swap
 
-## Deskripsi
-
-**Soal:** [3900. Longest Balanced Substring After One Swap](https://leetcode.com/problems/longest-balanced-substring-after-one-swap/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func LongestBalancedSubstringAfterOneSwap(s string) int
+```
+
+> **💡 Hint:** Prefix sum (0->-1, 1->+1). Track first occurrence of each prefix sum.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Prefix Sum
 
 **Kompleksitas Waktu:** O(N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func LongestBalancedSubstringAfterOneSwap(s string) int`
-
-> **Ide Kunci:** Prefix sum (0->-1, 1->+1). Track first occurrence of each prefix sum.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,9 +43,9 @@ import "fmt"
 func LongestBalancedSubstringAfterOneSwap(s string) int {
 	n := len(s)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pref := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	onesPref := make([]int, n+1) // prefix count of '1's
 	for i := 0; i < n; i++ {
 		onesPref[i+1] = onesPref[i]
@@ -49,7 +60,7 @@ func LongestBalancedSubstringAfterOneSwap(s string) int {
 	totalOnes := onesPref[n]
 	totalZeros := n - totalOnes
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	firstPos := make(map[int]int)
 	firstPos[0] = 0
 

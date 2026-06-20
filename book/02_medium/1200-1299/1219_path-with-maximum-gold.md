@@ -1,19 +1,30 @@
 # 1219 — Path With Maximum Gold
 
-## Deskripsi
-
-**Soal:** [1219. Path With Maximum Gold](https://leetcode.com/problems/path-with-maximum-gold/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getMaximumGold(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Backtracking
 
 **Kompleksitas Waktu:** O(m*n * 4^(k)) where k = max cells with gold  
 **Kompleksitas Ruang:** O(k) for recursion
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman), Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getMaximumGold(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

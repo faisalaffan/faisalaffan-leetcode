@@ -1,19 +1,30 @@
 # 1244 — Design A Leaderboard
 
-## Deskripsi
-
-**Soal:** [1244. Design A Leaderboard](https://leetcode.com/problems/design-a-leaderboard/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diminta untuk mendesain (merancang) sebuah struktur data kustom dengan operasi tertentu (insert, delete, search, update). Tugasmu adalah memilih representasi data yang tepat agar setiap operasi berjalan efisien — biasanya O(1) atau O(log n).
+
+Ini adalah soal yang paling sering muncul di interview sistem desain. Kamu perlu memilih kombinasi struktur data yang tepat (HashMap + Heap + LinkedList) untuk mencapai kompleksitas yang diminta.
+
+**Konsep kunci:** HashMap (O(1) lookup), Heap (priority), Doubly Linked List (O(1) remove), TreeMap (ordered keys).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func Constructor() Leaderboard
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** addScore O(1), top O(K log n), reset O(1)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func Constructor() Leaderboard`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,13 +60,16 @@ func (lb *Leaderboard) Top(K int) int {
 	h := &minHeap{}
 	heap.Init(h)
 	for _, s := range lb.scores {
+  // Masukkan elemen ke priority queue
 		heap.Push(h, s)
 		if h.Len() > K {
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(h)
 		}
 	}
 	sum := 0
 	for h.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		sum += heap.Pop(h).(int)
 	}
 	return sum

@@ -1,19 +1,32 @@
 # 1568 — Minimum Number Of Days To Disconnect Island
 
-## Deskripsi
-
-**Soal:** [1568. Minimum Number Of Days To Disconnect Island](https://leetcode.com/problems/minimum-number-of-days-to-disconnect-island/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDays(grid [][]int) int
+```
+
+> **💡 Hint:** // 1. Count islands. If not exactly 1, return 0 (already disconnected).
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** // 1. Count islands. If not exactly 1, return 0 (already disconnected).
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -87,9 +100,9 @@ func minDays(grid [][]int) int {
 
 func countIslands(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	visited := make([][]bool, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range visited {
 		visited[i] = make([]bool, n)
 	}

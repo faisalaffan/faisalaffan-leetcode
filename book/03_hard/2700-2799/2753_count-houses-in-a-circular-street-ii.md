@@ -1,21 +1,32 @@
 # 2753 — Count Houses In A Circular Street Ii
 
-## Deskripsi
-
-**Soal:** [2753. Count Houses In A Circular Street Ii](https://leetcode.com/problems/count-houses-in-a-circular-street-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func newStreet(doors []bool) *Street
+```
+
+> **💡 Hint:** Use the Street interface operations.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func newStreet(doors []bool) *Street`
-
-> **Ide Kunci:** Use the Street interface operations.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

@@ -1,19 +1,32 @@
 # 1038 — Binary Search Tree To Greater Sum Tree
 
-## Deskripsi
-
-**Soal:** [1038. Binary Search Tree To Greater Sum Tree](https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func bstToGst(root *TreeNode) *TreeNode
+```
+
+> **💡 Hint:** Reverse inorder (right -> root -> left) accumulating sum
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, DFS, BFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(h) where h is tree height
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Reverse inorder (right -> root -> left) accumulating sum
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

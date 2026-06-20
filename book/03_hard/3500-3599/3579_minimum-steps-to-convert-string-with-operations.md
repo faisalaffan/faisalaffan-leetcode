@@ -1,19 +1,32 @@
 # 3579 — Minimum Steps To Convert String With Operations
 
-## Deskripsi
-
-**Soal:** [3579. Minimum Steps To Convert String With Operations](https://leetcode.com/problems/minimum-steps-to-convert-string-with-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minOperations(word1 string, word2 string) int
+```
+
+> **💡 Hint:** DP over intervals. For substring i..j, compute min operations
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP over intervals. For substring i..j, compute min operations
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,15 +61,15 @@ func main() {
 
 func minOperations(word1 string, word2 string) int {
 	n := len(word1)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
 
 	// dp[i][j] = min ops to convert word1[i..j] to word2[i..j]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n)
 	}

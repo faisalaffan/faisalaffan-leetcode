@@ -1,19 +1,32 @@
 # 3739 — Count Subarrays With Majority Element Ii
 
-## Deskripsi
-
-**Soal:** [3739. Count Subarrays With Majority Element Ii](https://leetcode.com/problems/count-subarrays-with-majority-element-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countMajoritySubarrays(nums []int, target int) int64
+```
+
+> **💡 Hint:** Transform condition to f[i] = 2*cnt[i] - i where cnt[i]
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Prefix Sum, Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Prefix Sum** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Transform condition to f[i] = 2*cnt[i] - i where cnt[i]
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func countMajoritySubarrays(nums []int, target int) int64 {
 
 	offset := n
 	size := 2*n + 3
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bit := make([]int, size+1)
 
 	add := func(idx, val int) {

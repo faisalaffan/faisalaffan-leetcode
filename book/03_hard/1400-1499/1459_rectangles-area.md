@@ -1,19 +1,30 @@
 # 1459 — Rectangles Area
 
-## Deskripsi
-
-**Soal:** [1459. Rectangles Area](https://leetcode.com/problems/rectangles-area/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findRectangles(points []Point) []Rectangle
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findRectangles(points []Point) []Rectangle`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,18 +56,18 @@ type Rectangle struct {
 // findRectangles finds all axis-aligned rectangles from given points.
 func findRectangles(points []Point) []Rectangle {
 	// Build a set of points for O(1) lookup
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pointSet := make(map[Point]bool)
 	for _, p := range points {
 		pointSet[p] = true
 	}
 
 	var rects []Rectangle
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[string]bool)
 
 	// For each pair of points, check if they can be opposite corners
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(points); i++ {
 		for j := i + 1; j < len(points); j++ {
 			p1, p2 := points[i], points[j]
@@ -92,6 +103,7 @@ func findRectangles(points []Point) []Rectangle {
 	}
 
 	// Sort by area descending, then by p1.x, p1.y, p2.x, p2.y
+  // Custom sort dengan comparator
 	sort.Slice(rects, func(i, j int) bool {
 		if rects[i].Area != rects[j].Area {
 			return rects[i].Area > rects[j].Area

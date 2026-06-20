@@ -1,19 +1,32 @@
 # 2474 — Customers With Strictly Increasing Purchases
 
-## Deskripsi
-
-**Soal:** [2474. Customers With Strictly Increasing Purchases](https://leetcode.com/problems/customers-with-strictly-increasing-purchases/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func strictlyIncreasingPurchases(orders []Order) []int
+```
+
+> **💡 Hint:** Simulate the SQL query logic in Go.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Trie
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Simulate the SQL query logic in Go.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,7 +76,7 @@ func strictlyIncreasingPurchases(orders []Order) []int {
 		year   int
 		amount int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	customerYears := make(map[int][]yearAmount)
 
 	for _, o := range orders {
@@ -78,7 +91,7 @@ func strictlyIncreasingPurchases(orders []Order) []int {
 			continue
 		}
 		// Find min per year
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 		minByYear := make(map[int]int)
 		for _, e := range entries {
 			if v, ok := minByYear[e.year]; !ok || e.amount < v {
@@ -86,13 +99,13 @@ func strictlyIncreasingPurchases(orders []Order) []int {
 			}
 		}
 		// Sort years
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		years := make([]int, 0, len(minByYear))
 		for y := range minByYear {
 			years = append(years, y)
 		}
 		// Simple bubble sort for small sets
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(years); i++ {
 			for j := i + 1; j < len(years); j++ {
 				if years[i] > years[j] {
@@ -118,7 +131,7 @@ func strictlyIncreasingPurchases(orders []Order) []int {
 	}
 
 	// Sort result
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(result); i++ {
 		for j := i + 1; j < len(result); j++ {
 			if result[i] > result[j] {

@@ -1,19 +1,30 @@
 # 3058 — Friends With No Mutual Friends
 
-## Deskripsi
-
-**Soal:** [3058. Friends With No Mutual Friends](https://leetcode.com/problems/friends-with-no-mutual-friends/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func friendsWithNoMutualFriends(friendships []Friendship) []NoMutualPair
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n * d^2) where d is avg degree  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func friendsWithNoMutualFriends(friendships []Friendship) []NoMutualPair`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,7 +51,7 @@ type NoMutualPair struct {
 
 func friendsWithNoMutualFriends(friendships []Friendship) []NoMutualPair {
 	// Build adjacency set: user -> set of friends
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	adj := make(map[int]map[int]bool)
 	for _, f := range friendships {
 		if adj[f.UserID1] == nil {
@@ -54,7 +65,7 @@ func friendsWithNoMutualFriends(friendships []Friendship) []NoMutualPair {
 	}
 
 	var results []NoMutualPair
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	seen := make(map[[2]int]bool)
 
 	for _, f := range friendships {
@@ -86,6 +97,7 @@ func friendsWithNoMutualFriends(friendships []Friendship) []NoMutualPair {
 	}
 
 	// Order by user_id1 ASC, user_id2 ASC
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].UserID1 != results[j].UserID1 {
 			return results[i].UserID1 < results[j].UserID1

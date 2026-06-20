@@ -1,19 +1,39 @@
 # 1651 — Hopper Company Queries Iii
 
-## Deskripsi
-
-**Soal:** [1651. Hopper Company Queries Iii](https://leetcode.com/problems/hopper-company-queries-iii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func hopperQueriesIII(rides []struct {
+	rideID  int
+	reqDate string
+}, accepted []struct {
+	rideID int
+	dist   int
+	dur    int
+}) []struct
+```
+
+> **💡 Hint:** Aggregate ride stats by month, then compute rolling
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Aggregate ride stats by month, then compute rolling
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -81,9 +101,9 @@ func hopperQueriesIII(rides []struct {
 	avgRideDuration       float64
 } {
 	// Map ride ID -> month (only 2020)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rideMonth := make(map[int]int)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rideData := make(map[int]struct{ dist, dur int })
 	for _, r := range rides {
 		t, _ := time.Parse("2006-1-2", r.reqDate)
@@ -96,11 +116,11 @@ func hopperQueriesIII(rides []struct {
 	}
 
 	// Monthly totals
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	monthDist := make([]int, 13)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	monthDur := make([]int, 13)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	monthCount := make([]int, 13)
 
 	for rideID, m := range rideMonth {
@@ -111,7 +131,6 @@ func hopperQueriesIII(rides []struct {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]struct {
 		month                 int
 		avgRideDistance       float64

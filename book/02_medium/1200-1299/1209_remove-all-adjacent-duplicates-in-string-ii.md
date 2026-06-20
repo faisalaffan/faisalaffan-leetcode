@@ -1,19 +1,30 @@
 # 1209 — Remove All Adjacent Duplicates In String Ii
 
-## Deskripsi
-
-**Soal:** [1209. Remove All Adjacent Duplicates In String Ii](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func removeDuplicates(s string, k int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Stack (tumpukan LIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Stack** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func removeDuplicates(s string, k int) string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,10 +47,9 @@ func removeDuplicates(s string, k int) string {
 		char  byte
 		count int
 	}
-  // Membuat slice untuk menyimpan hasil
 	stack := make([]pair, 0)
 
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(s); i++ {
 		if len(stack) > 0 && stack[len(stack)-1].char == s[i] {
 			stack[len(stack)-1].count++
@@ -51,7 +61,6 @@ func removeDuplicates(s string, k int) string {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	result := make([]byte, 0)
 	for _, p := range stack {
 		for j := 0; j < p.count; j++ {

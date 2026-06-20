@@ -1,19 +1,32 @@
 # 1042 — Flower Planting With No Adjacent
 
-## Deskripsi
-
-**Soal:** [1042. Flower Planting With No Adjacent](https://leetcode.com/problems/flower-planting-with-no-adjacent/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func gardenNoAdj(n int, paths [][]int) []int
+```
+
+> **💡 Hint:** Greedy coloring with a graph. Each garden gets a flower type
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + e) where e = len(paths)  
 **Kompleksitas Ruang:** O(n + e)
 
-**Algoritma:** Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Greedy coloring with a graph. Each garden gets a flower type
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +48,7 @@ func main() {
 }
 
 func gardenNoAdj(n int, paths [][]int) []int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n)
 	for i := 0; i < n; i++ {
 		graph[i] = make([]int, 0)
@@ -47,10 +60,9 @@ func gardenNoAdj(n int, paths [][]int) []int {
 		graph[v] = append(graph[v], u)
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 	for i := 0; i < n; i++ {
-  // Membuat slice untuk menyimpan hasil
 		used := make([]bool, 5)
 		for _, neighbor := range graph[i] {
 			if result[neighbor] != 0 {

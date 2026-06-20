@@ -1,19 +1,32 @@
 # 1531 — String Compression Ii
 
-## Deskripsi
-
-**Soal:** [1531. String Compression Ii](https://leetcode.com/problems/string-compression-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getLengthOfOptimalCompression(s string, k int) int
+```
+
+> **💡 Hint:** DP (Top-Down with memoization)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP (Top-Down with memoization)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,9 +70,9 @@ func main() {
 func getLengthOfOptimalCompression(s string, k int) int {
 	n := len(s)
 	// memo[i][k]
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	memo := make([][]int, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = make([]int, k+1)
 		for j := range memo[i] {

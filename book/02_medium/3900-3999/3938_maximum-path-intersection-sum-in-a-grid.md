@@ -1,21 +1,32 @@
 # 3938 — Maximum Path Intersection Sum In A Grid
 
-## Deskripsi
-
-**Soal:** [3938. Maximum Path Intersection Sum In A Grid](https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPathIntersectionSum(grid [][]int) int
+```
+
+> **💡 Hint:** Column-by-column DP with 2D prefix max optimization.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Dynamic Programming, Prefix Sum
 
 **Kompleksitas Waktu:** O(C * R^2)  
 **Kompleksitas Ruang:** O(R^2) where R = min(m,n), C = max(m,n)
 
-**Algoritma:** Dynamic Programming (DP), Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxPathIntersectionSum(grid [][]int) int`
-
-> **Ide Kunci:** Column-by-column DP with 2D prefix max optimization.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ func maxPathIntersectionSum(grid [][]int) int {
 
 	// Transpose if m > n to make DP dimension the smaller one
 	if m > n {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		t := make([][]int, n)
 		for i := 0; i < n; i++ {
 			t[i] = make([]int, m)
@@ -58,7 +69,7 @@ func maxPathIntersectionSum(grid [][]int) int {
 	// P2 starts at (m-1,0), ends at (0,n-1), moves right/up.
 
 	// Column prefix sums
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	pref := make([][]int, n)
 	for c := 0; c < n; c++ {
 		pref[c] = make([]int, m+1)
@@ -68,7 +79,7 @@ func maxPathIntersectionSum(grid [][]int) int {
 	}
 
 	// dp[r1][r2] after column 0
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, m)
 	for i := 0; i < m; i++ {
 		dp[i] = make([]int, m)
@@ -88,7 +99,7 @@ func maxPathIntersectionSum(grid [][]int) int {
 
 	// Process columns 1..n-1
 	for c := 1; c < n; c++ {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		newdp := make([][]int, m)
 		for i := 0; i < m; i++ {
 			newdp[i] = make([]int, m)
@@ -98,7 +109,7 @@ func maxPathIntersectionSum(grid [][]int) int {
 		}
 
 		// 2D prefix max of dp (upper-left quadrant: p1 <= i, p2 >= j)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 		pmax := make([][]int, m)
 		for i := 0; i < m; i++ {
 			pmax[i] = make([]int, m+1)

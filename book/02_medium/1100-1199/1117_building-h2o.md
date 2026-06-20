@@ -1,21 +1,32 @@
 # 1117 — Building H2O
 
-## Deskripsi
-
-**Soal:** [1117. Building H2O](https://leetcode.com/problems/building-h2o/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewH2O() *H2O
+```
+
+> **💡 Hint:** Use mutex and condition variable to synchronize H and O threads.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n) where n = number of water molecules  
 **Kompleksitas Ruang:** O(1)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func NewH2O() *H2O`
-
-> **Ide Kunci:** Use mutex and condition variable to synchronize H and O threads.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -82,7 +93,6 @@ func (h2o *H2O) Oxygen(releaseOxygen func()) {
 func main() {
 	var wg sync.WaitGroup
 	h2o := NewH2O()
-  // Membuat slice untuk menyimpan hasil
 	output := make([]byte, 0, 12)
 
 	// Form 2 water molecules: need 4 H and 2 O

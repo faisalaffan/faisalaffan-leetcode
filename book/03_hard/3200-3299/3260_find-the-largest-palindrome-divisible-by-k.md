@@ -1,17 +1,30 @@
 # 3260 — Find The Largest Palindrome Divisible By K
 
-## Deskripsi
-
-**Soal:** [3260. Find The Largest Palindrome Divisible By K](https://leetcode.com/problems/find-the-largest-palindrome-divisible-by-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah string (teks). Tugasmu adalah memanipulasi, mencari pola, atau menghitung sesuatu dari string tersebut.
+
+Ibarat kamu sedang mengedit dokumen teks — kamu perlu mencari kata tertentu, menghitung huruf, atau mengubah format teks. String di Go adalah slice of byte yang immutable (tidak bisa diubah langsung, harus dikonversi ke `[]byte` dulu).
+
+**Konsep kunci:** karakter, substring, prefix/suffix, konversi `string` ↔ `[]byte`.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func largestPalindrome(n int, k int) string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Greedy (pemilihan optimal lokal)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -45,7 +58,7 @@ func main() {
 
 func largestPalindrome(n int, k int) string {
 	// Precompute pow10[i] = 10^i mod k
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	pow10 := make([]int, n)
 	pow10[0] = 1 % k
 	for i := 1; i < n; i++ {
@@ -56,9 +69,9 @@ func largestPalindrome(n int, k int) string {
 
 	// dp[pos][mod] = true if we can fill positions [pos, half) to reach 0 mod k
 	// with the current accumulated remainder = mod
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	memo := make([][]int, half)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		memo[i] = make([]int, k)
 		for j := range memo[i] {
@@ -67,9 +80,8 @@ func largestPalindrome(n int, k int) string {
 	}
 
 	// ans stores the digits of the result
-  // Membuat slice untuk menyimpan hasil
 	ans := make([]byte, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range ans {
 		ans[i] = '0'
 	}

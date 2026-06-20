@@ -1,19 +1,30 @@
 # 2191 — Sort The Jumbled Numbers
 
-## Deskripsi
-
-**Soal:** [2191. Sort The Jumbled Numbers](https://leetcode.com/problems/sort-the-jumbled-numbers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan data yang perlu diurutkan dengan aturan tertentu. Tugasmu adalah mengurutkan data tersebut dan mungkin melakukan operasi tambahan setelah terurut.
+
+Mengurutkan data adalah operasi fundamental di computer science. Go menyediakan `sort.Ints()` untuk integer, `sort.Strings()` untuk string, dan `sort.Slice()` untuk custom sorting dengan closure.
+
+**Konsep kunci:** comparator, ascending/descending, stable sort, custom sort key.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func sortJumbled(mapping []int, nums []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n + n * d)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func sortJumbled(mapping []int, nums []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,6 @@ func sortJumbled(mapping []int, nums []int) []int {
 		idx    int
 	}
 
-  // Membuat slice untuk menyimpan hasil
 	pairs := make([]pair, len(nums))
 	for i, num := range nums {
 		mapped := 0
@@ -62,7 +72,7 @@ func sortJumbled(mapping []int, nums []int) []int {
 		return pairs[i].idx < pairs[j].idx
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(nums))
 	for i, p := range pairs {
 		result[i] = p.val

@@ -1,19 +1,32 @@
 # 3504 — Longest Palindrome After Substring Concatenation Ii
 
-## Deskripsi
-
-**Soal:** [3504. Longest Palindrome After Substring Concatenation Ii](https://leetcode.com/problems/longest-palindrome-after-substring-concatenation-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func longestPalindrome(s string, t string) int
+```
+
+> **💡 Hint:** Precompute longest palindromic substrings in s and t. Then find
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Precompute longest palindromic substrings in s and t. Then find
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func longestPalindrome(s string, t string) int {
 
 	// Precompute longest palindromic substrings in s
 	// palS[i] = longest palindrome starting at or after i in s
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	palS := make([]int, m+1)
 	for i := 0; i < m; i++ {
 		// odd length
@@ -84,7 +97,7 @@ func longestPalindrome(s string, t string) int {
 	}
 
 	// Precompute longest palindromes in t (ending at or before j)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	palT := make([]int, n+1)
 	for j := 0; j < n; j++ {
 		// odd length
@@ -115,9 +128,9 @@ func longestPalindrome(s string, t string) int {
 	// DP for matching wings between s and reversed t
 	// dp[i][j] = length of matching suffix between s[0..i-1] and revT[0..j-1]
 	revT := reverse(t)
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dp := make([][]int, m+2)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dp {
 		dp[i] = make([]int, n+2)
 	}

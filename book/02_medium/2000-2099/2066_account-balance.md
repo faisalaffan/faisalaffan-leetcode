@@ -1,19 +1,30 @@
 # 2066 — Account Balance
 
-## Deskripsi
-
-**Soal:** [2066. Account Balance](https://leetcode.com/problems/account-balance/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func accountBalance(transactions []Transaction) map[int]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func accountBalance(transactions []Transaction) map[int]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,21 +45,22 @@ type Transaction struct {
 }
 
 func accountBalance(transactions []Transaction) map[int]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	balances := make(map[int]int)
 	for _, t := range transactions {
 		balances[t.AccountID] += t.Amount
 	}
 
 	// Get sorted account IDs
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ids := make([]int, 0, len(balances))
 	for id := range balances {
 		ids = append(ids, id)
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(ids)
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	result := make(map[int]int)
 	for _, id := range ids {
 		result[id] = balances[id]

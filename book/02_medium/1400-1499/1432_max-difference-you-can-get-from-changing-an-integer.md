@@ -1,17 +1,30 @@
 # 1432 — Max Difference You Can Get From Changing An Integer
 
-## Deskripsi
-
-**Soal:** [1432. Max Difference You Can Get From Changing An Integer](https://leetcode.com/problems/max-difference-you-can-get-from-changing-an-integer/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxDiff(num int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n) where n = number of digits  
 **Kompleksitas Ruang:** O(n) for string conversion
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,11 +60,10 @@ func maxDiff(num int) int {
 	digits := []byte(s)
 
 	// Find max: replace first non-'9' with '9'
-  // Membuat slice untuk menyimpan hasil
 	maxDigits := make([]byte, len(digits))
 	copy(maxDigits, digits)
 	targetMax := byte(0)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(maxDigits); i++ {
 		if maxDigits[i] != '9' {
 			targetMax = maxDigits[i]
@@ -59,7 +71,7 @@ func maxDiff(num int) int {
 		}
 	}
 	if targetMax != 0 {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(maxDigits); i++ {
 			if maxDigits[i] == targetMax {
 				maxDigits[i] = '9'
@@ -69,7 +81,6 @@ func maxDiff(num int) int {
 	maxVal, _ := strconv.Atoi(string(maxDigits))
 
 	// Find min: replace first non-'0'/'1' appropriately
-  // Membuat slice untuk menyimpan hasil
 	minDigits := make([]byte, len(digits))
 	copy(minDigits, digits)
 
@@ -92,7 +103,7 @@ func maxDiff(num int) int {
 	}
 
 	if targetMin != 0 {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(minDigits); i++ {
 			if minDigits[i] == targetMin {
 				minDigits[i] = replacementMin

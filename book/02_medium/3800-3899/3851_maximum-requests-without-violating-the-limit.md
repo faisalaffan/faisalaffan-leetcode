@@ -1,21 +1,32 @@
 # 3851 — Maximum Requests Without Violating The Limit
 
-## Deskripsi
-
-**Soal:** [3851. Maximum Requests Without Violating The Limit](https://leetcode.com/problems/maximum-requests-without-violating-the-limit/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumRequestsWithoutViolatingTheLimit(requests [][]int, k int, window int) int
+```
+
+> **💡 Hint:** For each user, group requests by time. Use sliding window to
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Sliding Window, Dynamic Programming
 
 **Kompleksitas Waktu:** O(N log N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Sliding Window (jendela geser), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MaximumRequestsWithoutViolatingTheLimit(requests [][]int, k int, window int) int`
-
-> **Ide Kunci:** For each user, group requests by time. Use sliding window to
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,7 +46,7 @@ import (
 
 func MaximumRequestsWithoutViolatingTheLimit(requests [][]int, k int, window int) int {
 	// Group requests by user
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userRequests := make(map[int][]int)
 	for _, r := range requests {
 		user, time := r[0], r[1]
@@ -45,11 +56,12 @@ func MaximumRequestsWithoutViolatingTheLimit(requests [][]int, k int, window int
 	total := 0
 
 	for _, times := range userRequests {
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(times)
 		// Use DP to find max requests we can keep
 		// For each request, we can either keep it or drop it
 		n := len(times)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		dp := make([]int, n+1)
 		for i := 0; i < n; i++ {
 			// Drop this request

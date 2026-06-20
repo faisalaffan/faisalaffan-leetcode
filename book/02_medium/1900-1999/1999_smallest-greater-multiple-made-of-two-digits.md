@@ -1,17 +1,30 @@
 # 1999 — Smallest Greater Multiple Made Of Two Digits
 
-## Deskripsi
-
-**Soal:** [1999. Smallest Greater Multiple Made Of Two Digits](https://leetcode.com/problems/smallest-greater-multiple-made-of-two-digits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SmallestGreaterMultipleMadeOfTwoDigits(k int, digit1 int, digit2 int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(2^k * log n) where k is number of digits, Space: O(2^k)  
 **Kompleksitas Ruang:** O(2^k)
 
-**Algoritma:** BFS (Breadth-First Search / pencarian lebar)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +51,7 @@ func SmallestGreaterMultipleMadeOfTwoDigits(k int, digit1 int, digit2 int) int {
 		digit1, digit2 = digit2, digit1
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nums := make([]int, 0)
 
 	// BFS to generate all numbers using only digit1 and digit2
@@ -71,6 +84,7 @@ func SmallestGreaterMultipleMadeOfTwoDigits(k int, digit1 int, digit2 int) int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(nums)
 
 	for _, num := range nums {

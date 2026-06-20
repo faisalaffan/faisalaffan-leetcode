@@ -1,19 +1,32 @@
 # 2307 — Check For Contradictions In Equations
 
-## Deskripsi
-
-**Soal:** [2307. Check For Contradictions In Equations](https://leetcode.com/problems/check-for-contradictions-in-equations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewWeightedUF() *WeightedUF
+```
+
+> **💡 Hint:** Weighted Union-Find. Each equation a / b = val means a = val * b.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Weighted Union-Find. Each equation a / b = val means a = val * b.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main

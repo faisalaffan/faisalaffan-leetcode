@@ -1,19 +1,30 @@
 # 2253 — Dynamic Unpivoting Of A Table
 
-## Deskripsi
-
-**Soal:** [2253. Dynamic Unpivoting Of A Table](https://leetcode.com/problems/dynamic-unpivoting-of-a-table/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewUnpivotTable() *UnpivotTable
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewUnpivotTable() *UnpivotTable`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,7 +68,6 @@ func (ut *UnpivotTable) Unpivot() [][3]interface{} {
 
 	for productID, stores := range ut.Data {
 		// sort stores for deterministic output
-  // Membuat slice untuk menyimpan hasil
 		storeNames := make([]string, 0, len(stores))
 		for s := range stores {
 			storeNames = append(storeNames, s)

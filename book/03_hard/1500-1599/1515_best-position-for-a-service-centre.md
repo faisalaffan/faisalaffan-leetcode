@@ -1,19 +1,30 @@
 # 1515 — Best Position For A Service Centre
 
-## Deskripsi
-
-**Soal:** [1515. Best Position For A Service Centre](https://leetcode.com/problems/best-position-for-a-service-centre/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getMinDistSum(positions [][]int) float64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func getMinDistSum(positions [][]int) float64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,7 +44,7 @@ import (
 
 func getMinDistSum(positions [][]int) float64 {
 	n := len(positions)
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return 0
 	}
@@ -42,7 +53,6 @@ func getMinDistSum(positions [][]int) float64 {
 	}
 
 	// Convert to float64 for precision
-  // Membuat slice untuk menyimpan hasil
 	pts := make([][2]float64, n)
 	for i, p := range positions {
 		pts[i] = [2]float64{float64(p[0]), float64(p[1])}

@@ -1,19 +1,30 @@
 # 1532 — The Most Recent Three Orders
 
-## Deskripsi
-
-**Soal:** [1532. The Most Recent Three Orders](https://leetcode.com/problems/the-most-recent-three-orders/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func mostRecentThreeOrders(customers []Customer, orders []Order) []resultRow1532
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func mostRecentThreeOrders(customers []Customer, orders []Order) []resultRow1532`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -53,14 +64,14 @@ type resultRow1532 struct {
 // ordered by customer name ascending, then order date descending, then order ID descending.
 func mostRecentThreeOrders(customers []Customer, orders []Order) []resultRow1532 {
 	// Group orders by customer ID
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	ordersByCustomer := make(map[int][]Order)
 	for _, o := range orders {
 		ordersByCustomer[o.CustomerID] = append(ordersByCustomer[o.CustomerID], o)
 	}
 
 	// For each customer, sort orders by date descending, then order ID descending
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	customerMap := make(map[int]string)
 	for _, c := range customers {
 		customerMap[c.CustomerID] = c.Name
@@ -69,6 +80,7 @@ func mostRecentThreeOrders(customers []Customer, orders []Order) []resultRow1532
 	var results []resultRow1532
 
 	for cid, ords := range ordersByCustomer {
+  // Custom sort dengan comparator
 		sort.Slice(ords, func(i, j int) bool {
 			if ords[i].OrderDate != ords[j].OrderDate {
 				return ords[i].OrderDate > ords[j].OrderDate
@@ -92,6 +104,7 @@ func mostRecentThreeOrders(customers []Customer, orders []Order) []resultRow1532
 	}
 
 	// Sort results by customer name ascending, order date descending, order ID descending
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		if results[i].CustomerName != results[j].CustomerName {
 			return results[i].CustomerName < results[j].CustomerName

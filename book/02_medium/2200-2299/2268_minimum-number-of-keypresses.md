@@ -1,19 +1,30 @@
 # 2268 — Minimum Number Of Keypresses
 
-## Deskripsi
-
-**Soal:** [2268. Minimum Number Of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumKeypresses(s string) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n + 26 log 26)  
 **Kompleksitas Ruang:** O(26)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func minimumKeypresses(s string) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,12 +40,13 @@ import (
 )
 
 func minimumKeypresses(s string) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	count := make([]int, 26)
 	for _, ch := range s {
 		count[ch-'a']++
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(count, func(i, j int) bool {
 		return count[i] > count[j]
 	})

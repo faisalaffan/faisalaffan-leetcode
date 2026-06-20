@@ -1,19 +1,32 @@
 # 1012 — Numbers With Repeated Digits
 
-## Deskripsi
-
-**Soal:** [1012. Numbers With Repeated Digits](https://leetcode.com/problems/numbers-with-repeated-digits/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numDupDigitsAtMostN(n int) int
+```
+
+> **💡 Hint:** Digit DP.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Digit DP.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +57,9 @@ func numDupDigitsAtMostN(n int) int {
 	// Count numbers with all-unique digits from 0 to n (inclusive)
 	// Use digit DP: tight + mask of used digits
 	var countUnique func(pos int, tight bool, started bool, mask int) int
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	memo := make([][1 << 10][2][2]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range memo {
 		for j := range memo[i] {
 			memo[i][j] = [2][2]int{{-1, -1}, {-1, -1}}

@@ -1,19 +1,32 @@
 # 3699 — Number Of Zigzag Arrays I
 
-## Deskripsi
-
-**Soal:** [3699. Number Of Zigzag Arrays I](https://leetcode.com/problems/number-of-zigzag-arrays-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func zigZagArraysI(n int, l int, r int) int
+```
+
+> **💡 Hint:** DP over possible values with three-state tracking.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Dynamic Programming** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** DP over possible values with three-state tracking.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -57,7 +70,7 @@ func zigZagArraysI(n int, l int, r int) int {
 	// Actually since no adjacent equal, we only track up/down
 
 	// For position i, we track counts for each possible value
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([][2]int, m)
 	for v := 0; v < m; v++ {
 		dp[v][0] = 1 // increasing (single element)
@@ -65,7 +78,7 @@ func zigZagArraysI(n int, l int, r int) int {
 	}
 
 	for pos := 2; pos <= n; pos++ {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		ndp := make([][2]int, m)
 		for cur := 0; cur < m; cur++ {
 			// For arrays where cur is at an odd position (1-indexed from end):

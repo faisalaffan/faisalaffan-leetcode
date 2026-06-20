@@ -1,19 +1,30 @@
 # 2577 — Minimum Time To Visit A Cell In A Grid
 
-## Deskripsi
-
-**Soal:** [2577. Minimum Time To Visit A Cell In A Grid](https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan matriks 2D (grid) — array dua dimensi dengan baris dan kolom. Tugasmu adalah menjelajahi, memanipulasi, atau menghitung properti matriks tersebut.
+
+Bayangkan spreadsheet Excel: ada baris (row) dan kolom (column). Setiap sel punya nilai. Kamu perlu mengolah data di dalam grid tersebut. Matriks di Go adalah `[][]int` (slice of slice).
+
+**Konsep kunci:** baris (row), kolom (col), boundary check, arah gerak (atas/bawah/kiri/kanan), prefix sum 2D.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumTime(grid [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS, Heap / Priority Queue, Stack, Dijkstra
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Queue (antrian FIFO), Heap (priority queue), Dijkstra (lintasan terpendek)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func minimumTime(grid [][]int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -69,9 +80,9 @@ func minimumTime(grid [][]int) int {
 		return -1
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	dist := make([][]int, m)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range dist {
 		dist[i] = make([]int, n)
 		for j := range dist[i] {
@@ -81,9 +92,11 @@ func minimumTime(grid [][]int) int {
 	dist[0][0] = 0
 
 	pq := &MinHeap{}
+  // Masukkan elemen ke priority queue
 	heap.Push(pq, Item{0, 0, 0})
 
 	for pq.Len() > 0 {
+  // Ambil elemen terkecil/terbesar dari heap
 		cur := heap.Pop(pq).(Item)
 		if cur.time > dist[cur.row][cur.col] {
 			continue
@@ -110,6 +123,7 @@ func minimumTime(grid [][]int) int {
 
 			if nt < dist[nr][nc] {
 				dist[nr][nc] = nt
+  // Masukkan elemen ke priority queue
 				heap.Push(pq, Item{nr, nc, nt})
 			}
 		}

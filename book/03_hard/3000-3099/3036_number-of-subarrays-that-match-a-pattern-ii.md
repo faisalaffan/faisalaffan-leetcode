@@ -1,21 +1,32 @@
 # 3036 — Number Of Subarrays That Match A Pattern Ii
 
-## Deskripsi
-
-**Soal:** [3036. Number Of Subarrays That Match A Pattern Ii](https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countMatchingSubarrays(nums, pattern []int) int
+```
+
+> **💡 Hint:** Z-algorithm (linear time)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func countMatchingSubarrays(nums, pattern []int) int`
-
-> **Ide Kunci:** Z-algorithm (linear time)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ func countMatchingSubarrays(nums, pattern []int) int {
 	m := len(pattern)
 
 	// Build combined array: pattern | sentinel | diff array
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	arr := make([]int, 0, m+1+len(nums)-1)
 	arr = append(arr, pattern...)
 	arr = append(arr, 2) // sentinel (any value not in {-1,0,1})
@@ -53,7 +64,7 @@ func countMatchingSubarrays(nums, pattern []int) int {
 	n := len(arr)
 
 	// Z-algorithm
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	z := make([]int, n)
 	l, r := 0, 0
 	for i := 1; i < n; i++ {

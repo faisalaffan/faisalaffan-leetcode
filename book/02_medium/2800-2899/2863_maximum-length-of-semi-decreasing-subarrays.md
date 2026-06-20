@@ -1,19 +1,30 @@
 # 2863 — Maximum Length Of Semi Decreasing Subarrays
 
-## Deskripsi
-
-**Soal:** [2863. Maximum Length Of Semi Decreasing Subarrays](https://leetcode.com/problems/maximum-length-of-semi-decreasing-subarrays/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumLengthOfSemiDecreasingSubarrays(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MaximumLengthOfSemiDecreasingSubarrays(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,7 +43,7 @@ func MaximumLengthOfSemiDecreasingSubarrays(nums []int) int {
 	}
 
 	// Store indices where nums[i] > nums[i+1] (start of decreasing)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	starts := make([]int, 0)
 	for i := 0; i < n-1; i++ {
 		if nums[i] > nums[i+1] {
@@ -45,7 +56,7 @@ func MaximumLengthOfSemiDecreasingSubarrays(nums []int) int {
 	}
 
 	best := 1
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(starts); i++ {
 		end := starts[i] + 1
 		// If not the last start, limit by next start

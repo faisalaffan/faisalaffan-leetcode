@@ -1,17 +1,30 @@
 # 3242 — Design Neighbor Sum Service
 
-## Deskripsi
-
-**Soal:** [3242. Design Neighbor Sum Service](https://leetcode.com/problems/design-neighbor-sum-service/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewNeighborSum(grid [][]int) NeighborSum
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n^2). Space: O(n^2).  
 **Kompleksitas Ruang:** O(n^2).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -44,9 +57,9 @@ type NeighborSum struct {
 // NewNeighborSum initializes a NeighborSum with the given grid.
 // Time: O(n^2). Space: O(n^2).
 func NewNeighborSum(grid [][]int) NeighborSum {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	pos := make(map[int][2]int)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 	for i := 0; i < len(grid); i++ {
 		for j := 0; j < len(grid[i]); j++ {
 			pos[grid[i][j]] = [2]int{i, j}

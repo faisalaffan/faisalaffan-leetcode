@@ -1,17 +1,30 @@
 # 1122 — Relative Sort Array
 
-## Deskripsi
-
-**Soal:** [1122. Relative Sort Array](https://leetcode.com/problems/relative-sort-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func relativeSortArray(arr1, arr2 []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,11 +48,12 @@ func main() {
 
 // LeetCode submission: relativeSortArray
 func relativeSortArray(arr1, arr2 []int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rank := make(map[int]int, len(arr2))
 	for i, v := range arr2 {
 		rank[v] = i
 	}
+  // Custom sort dengan comparator
 	sort.Slice(arr1, func(i, j int) bool {
 		ri, okI := rank[arr1[i]]
 		rj, okJ := rank[arr1[j]]

@@ -1,19 +1,30 @@
 # 2993 — Friday Purchases I
 
-## Deskripsi
-
-**Soal:** [2993. Friday Purchases I](https://leetcode.com/problems/friday-purchases-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findFridayPurchasesI(purchases []Purchase) []WeeklyResult
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(d) where d = distinct weeks
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func findFridayPurchasesI(purchases []Purchase) []WeeklyResult`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -49,7 +60,7 @@ type WeeklyResult struct {
 // Time: O(n) | Space: O(d) where d = distinct weeks
 // n = number of purchases.
 func findFridayPurchasesI(purchases []Purchase) []WeeklyResult {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	weeklyAmount := make(map[int]int)
 
 	for _, p := range purchases {
@@ -82,6 +93,7 @@ func findFridayPurchasesI(purchases []Purchase) []WeeklyResult {
 	}
 
 	// Order by week_of_month ASC.
+  // Custom sort dengan comparator
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].WeekOfMonth < results[j].WeekOfMonth
 	})

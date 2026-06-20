@@ -1,19 +1,32 @@
 # 3585 — Find Weighted Median Node In Tree
 
-## Deskripsi
-
-**Soal:** [3585. Find Weighted Median Node In Tree](https://leetcode.com/problems/find-weighted-median-node-in-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findWeightedMedianNode(n int, edges [][]int, queries [][]int) []int
+```
+
+> **💡 Hint:** Two DFS passes. First computes subtree sums. Second
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-> **Ide Kunci:** Two DFS passes. First computes subtree sums. Second
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -40,12 +53,12 @@ func main() {
 }
 
 func findWeightedMedianNode(n int, edges [][]int, queries [][]int) []int {
-  // Edge case: input kosong
+  // Edge case: input kosong — langsung return
 	if n == 0 {
 		return []int{}
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	adj := make([][][2]int, n)
 	for _, e := range edges {
 		u, v, w := e[0], e[1], e[2]
@@ -54,7 +67,7 @@ func findWeightedMedianNode(n int, edges [][]int, queries [][]int) []int {
 	}
 
 	// First DFS for subtree sums from root 0
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	subSum := make([]int64, n)
 	total := int64(0)
 
@@ -75,7 +88,7 @@ func findWeightedMedianNode(n int, edges [][]int, queries [][]int) []int {
 	dfs1(0, -1)
 
 	// Second DFS: find median node
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(queries))
 	for qi := 0; qi < len(queries); qi++ {
 		// For this query, use current graph state

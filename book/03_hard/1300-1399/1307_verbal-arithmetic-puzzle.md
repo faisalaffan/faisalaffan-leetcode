@@ -1,21 +1,32 @@
 # 1307 — Verbal Arithmetic Puzzle
 
-## Deskripsi
-
-**Soal:** [1307. Verbal Arithmetic Puzzle](https://leetcode.com/problems/verbal-arithmetic-puzzle/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func isSolvable(words []string, result string) bool
+```
+
+> **💡 Hint:** Backtracking with digit assignment.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Backtracking
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func isSolvable(words []string, result string) bool`
-
-> **Ide Kunci:** Backtracking with digit assignment.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,10 +44,10 @@ package main
 import "fmt"
 
 func isSolvable(words []string, result string) bool {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	letterSet := make(map[byte]bool)
 	addLetters := func(s string) {
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(s); i++ {
 			letterSet[s[i]] = true
 		}
@@ -46,7 +57,6 @@ func isSolvable(words []string, result string) bool {
 	}
 	addLetters(result)
 
-  // Membuat slice untuk menyimpan hasil
 	letters := make([]byte, 0, len(letterSet))
 	for c := range letterSet {
 		letters = append(letters, c)
@@ -55,7 +65,7 @@ func isSolvable(words []string, result string) bool {
 		return false
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	nonZero := make(map[byte]bool)
 	for _, w := range words {
 		if len(w) > 1 {
@@ -66,9 +76,8 @@ func isSolvable(words []string, result string) bool {
 		nonZero[result[0]] = true
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	mapping := make(map[byte]int)
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, 10)
 
 	var dfs func(int) bool
@@ -77,14 +86,14 @@ func isSolvable(words []string, result string) bool {
 			sum := 0
 			for _, w := range words {
 				val := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 				for i := 0; i < len(w); i++ {
 					val = val*10 + mapping[w[i]]
 				}
 				sum += val
 			}
 			res := 0
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 			for i := 0; i < len(result); i++ {
 				res = res*10 + mapping[result[i]]
 			}

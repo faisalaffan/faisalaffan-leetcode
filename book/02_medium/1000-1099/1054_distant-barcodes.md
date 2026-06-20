@@ -1,19 +1,32 @@
 # 1054 — Distant Barcodes
 
-## Deskripsi
-
-**Soal:** [1054. Distant Barcodes](https://leetcode.com/problems/distant-barcodes/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func rearrangeBarcodes(barcodes []int) []int
+```
+
+> **💡 Hint:** Count frequencies, place most frequent in even indices, then odd
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Count frequencies, place most frequent in even indices, then odd
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -38,7 +51,7 @@ func main() {
 
 func rearrangeBarcodes(barcodes []int) []int {
 	n := len(barcodes)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	for _, b := range barcodes {
 		freq[b]++
@@ -48,16 +61,16 @@ func rearrangeBarcodes(barcodes []int) []int {
 		val   int
 		count int
 	}
-  // Membuat slice untuk menyimpan hasil
 	pairs := make([]pair, 0, len(freq))
 	for val, count := range freq {
 		pairs = append(pairs, pair{val, count})
 	}
+  // Custom sort dengan comparator
 	sort.Slice(pairs, func(i, j int) bool {
 		return pairs[i].count > pairs[j].count
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, n)
 	idx := 0
 

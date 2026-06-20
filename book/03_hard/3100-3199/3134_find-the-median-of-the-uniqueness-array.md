@@ -1,19 +1,30 @@
 # 3134 — Find The Median Of The Uniqueness Array
 
-## Deskripsi
-
-**Soal:** [3134. Find The Median Of The Uniqueness Array](https://leetcode.com/problems/find-the-median-of-the-uniqueness-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func medianOfUniquenessArray(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Sliding Window, Binary Search
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Sliding Window (jendela geser), Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func medianOfUniquenessArray(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -36,7 +47,7 @@ func medianOfUniquenessArray(nums []int) int {
 	medianPos := (total + 1) / 2
 
 	left, right := 1, n
-  // Loop two-pointer: kiri vs kanan
+  // Two-pointer: gerakkan kiri atau kanan
 	for left < right {
 		mid := (left + right) / 2
 		if int(countLE(nums, mid)) >= medianPos {
@@ -50,7 +61,7 @@ func medianOfUniquenessArray(nums []int) int {
 
 func countLE(nums []int, k int) int64 {
 	n := len(nums)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	freq := make(map[int]int)
 	distinct := 0
 	var count int64 = 0

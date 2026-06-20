@@ -1,21 +1,32 @@
 # 3187 — Peaks In Array
 
-## Deskripsi
-
-**Soal:** [3187. Peaks In Array](https://leetcode.com/problems/peaks-in-array/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewBIT(n int) *BIT
+```
+
+> **💡 Hint:** Binary Indexed Tree (Fenwick) tracking whether each index is a
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Fenwick Tree (BIT)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), Fenwick Tree (Binary Indexed Tree)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Fenwick Tree (BIT)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewBIT(n int) *BIT`
-
-> **Ide Kunci:** Binary Indexed Tree (Fenwick) tracking whether each index is a
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -92,7 +103,7 @@ func countOfPeaks(nums []int, queries [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, 0)
 	for _, q := range queries {
 		if q[0] == 1 {
@@ -106,7 +117,6 @@ func countOfPeaks(nums []int, queries [][]int) []int {
 			idx, val := q[1], q[2]
 			// Check affected positions: idx-1, idx, idx+1.
 			affected := []int{idx - 1, idx, idx + 1}
-  // Membuat slice untuk menyimpan hasil
 			oldStatus := make([]bool, 3)
 			for p, pos := range affected {
 				oldStatus[p] = isPeak(nums, pos)

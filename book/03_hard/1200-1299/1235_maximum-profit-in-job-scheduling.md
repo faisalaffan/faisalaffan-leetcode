@@ -1,19 +1,30 @@
 # 1235 — Maximum Profit In Job Scheduling
 
-## Deskripsi
-
-**Soal:** [1235. Maximum Profit In Job Scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func jobScheduling(startTime []int, endTime []int, profit []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Dynamic Programming
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Binary Search (pencarian biner), Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func jobScheduling(startTime []int, endTime []int, profit []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,21 +44,21 @@ type Job struct {
 
 func jobScheduling(startTime []int, endTime []int, profit []int) int {
 	n := len(startTime)
-  // Membuat slice untuk menyimpan hasil
 	jobs := make([]Job, n)
 	for i := 0; i < n; i++ {
 		jobs[i] = Job{startTime[i], endTime[i], profit[i]}
 	}
 
 	// Sort by end time
+  // Custom sort dengan comparator
 	sort.Slice(jobs, func(i, j int) bool {
 		return jobs[i].end < jobs[j].end
 	})
 
 	// dp[i] = max profit considering first i jobs (i = number of jobs processed)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	dp := make([]int, n+1)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	endTimes := make([]int, n)
 	for i := 0; i < n; i++ {
 		endTimes[i] = jobs[i].end

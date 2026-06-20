@@ -1,21 +1,32 @@
 # 3893 — Maximum Team Size With Overlapping Intervals
 
-## Deskripsi
-
-**Soal:** [3893. Maximum Team Size With Overlapping Intervals](https://leetcode.com/problems/maximum-team-size-with-overlapping-intervals/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximumTeamSizeWithOverlappingIntervals(startTime []int, endTime []int) int
+```
+
+> **💡 Hint:** For each employee, count overlapping intervals using binary search
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search
 
 **Kompleksitas Waktu:** O(N log N)  
 **Kompleksitas Ruang:** O(N)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MaximumTeamSizeWithOverlappingIntervals(startTime []int, endTime []int) int`
-
-> **Ide Kunci:** For each employee, count overlapping intervals using binary search
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,13 +45,15 @@ import (
 
 func MaximumTeamSizeWithOverlappingIntervals(startTime []int, endTime []int) int {
 	n := len(startTime)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	st := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	et := make([]int, n)
 	copy(st, startTime)
 	copy(et, endTime)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(st)
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(et)
 
 	ans := 0

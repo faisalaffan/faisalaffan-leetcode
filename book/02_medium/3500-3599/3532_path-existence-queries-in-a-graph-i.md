@@ -1,19 +1,30 @@
 # 3532 — Path Existence Queries In A Graph I
 
-## Deskripsi
-
-**Soal:** [3532. Path Existence Queries In A Graph I](https://leetcode.com/problems/path-existence-queries-in-a-graph-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func NewDSU(n int) *DSU
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Union-Find (DSU)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Union-Find (DSU)** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func NewDSU(n int) *DSU`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,9 +42,9 @@ type DSU struct {
 }
 
 func NewDSU(n int) *DSU {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	p := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	r := make([]int, n)
 	for i := 0; i < n; i++ {
 		p[i] = i
@@ -86,7 +97,6 @@ func PathExistenceQueriesInAGraphI(n int, edges [][]int, queries [][]int) []bool
 	for _, e := range edges {
 		dsu.Union(e[0], e[1])
 	}
-  // Membuat slice untuk menyimpan hasil
 	result := make([]bool, len(queries))
 	for i, q := range queries {
 		result[i] = dsu.Find(q[0]) == dsu.Find(q[1])

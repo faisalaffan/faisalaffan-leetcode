@@ -1,17 +1,30 @@
 # 1921 — Eliminate Maximum Number Of Monsters
 
-## Deskripsi
-
-**Soal:** [1921. Eliminate Maximum Number Of Monsters](https://leetcode.com/problems/eliminate-maximum-number-of-monsters/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func EliminateMaximum(dist []int, speed []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,11 +47,12 @@ func main() {
 // Time: O(n log n), Space: O(n)
 func EliminateMaximum(dist []int, speed []int) int {
 	n := len(dist)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	time := make([]int, n)
 	for i := 0; i < n; i++ {
 		time[i] = (dist[i] + speed[i] - 1) / speed[i] // ceil division
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(time)
 
 	for i := 0; i < n; i++ {

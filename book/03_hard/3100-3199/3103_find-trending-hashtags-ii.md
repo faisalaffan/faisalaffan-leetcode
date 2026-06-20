@@ -1,19 +1,30 @@
 # 3103 — Find Trending Hashtags Ii
 
-## Deskripsi
-
-**Soal:** [3103. Find Trending Hashtags Ii](https://leetcode.com/problems/find-trending-hashtags-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func findTrendingHashtags(tweets [][]string) []string
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func findTrendingHashtags(tweets [][]string) []string`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,7 +50,7 @@ type HashtagCount struct {
 }
 
 func findTrendingHashtags(tweets [][]string) []string {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counts := make(map[string]int)
 
 	for _, tweet := range tweets {
@@ -63,6 +74,7 @@ func findTrendingHashtags(tweets [][]string) []string {
 	for h, c := range counts {
 		hcs = append(hcs, HashtagCount{h, c})
 	}
+  // Custom sort dengan comparator
 	sort.Slice(hcs, func(i, j int) bool {
 		if hcs[i].count != hcs[j].count {
 			return hcs[i].count > hcs[j].count
@@ -75,7 +87,6 @@ func findTrendingHashtags(tweets [][]string) []string {
 	if len(hcs) < topN {
 		topN = len(hcs)
 	}
-  // Membuat slice untuk menyimpan hasil
 	result := make([]string, topN)
 	for i := 0; i < topN; i++ {
 		result[i] = hcs[i].hashtag

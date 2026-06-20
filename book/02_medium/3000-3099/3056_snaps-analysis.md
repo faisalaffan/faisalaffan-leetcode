@@ -1,19 +1,30 @@
 # 3056 — Snaps Analysis
 
-## Deskripsi
-
-**Soal:** [3056. Snaps Analysis](https://leetcode.com/problems/snaps-analysis/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func snapsAnalysis(activities []Activity, ages []Age) []AgeBucketAnalysis
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Dynamic Programming (DP)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func snapsAnalysis(activities []Activity, ages []Age) []AgeBucketAnalysis`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -47,7 +58,7 @@ type AgeBucketAnalysis struct {
 
 func snapsAnalysis(activities []Activity, ages []Age) []AgeBucketAnalysis {
 	// Build user -> age_bucket map
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	userAge := make(map[int]string)
 	for _, a := range ages {
 		userAge[a.UserID] = a.AgeBucket
@@ -58,7 +69,7 @@ func snapsAnalysis(activities []Activity, ages []Age) []AgeBucketAnalysis {
 		totalSend float64
 		totalOpen float64
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	buckets := make(map[string]*bucketSums)
 
 	for _, act := range activities {

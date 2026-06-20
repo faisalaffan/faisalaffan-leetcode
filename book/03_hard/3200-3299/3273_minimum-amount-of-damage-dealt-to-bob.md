@@ -1,17 +1,30 @@
 # 3273 — Minimum Amount Of Damage Dealt To Bob
 
-## Deskripsi
-
-**Soal:** [3273. Minimum Amount Of Damage Dealt To Bob](https://leetcode.com/problems/minimum-amount-of-damage-dealt-to-bob/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minDamage(power int, damage []int, health []int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,9 +68,8 @@ func minDamage(power int, damage []int, health []int) int64 {
 		t int64 // time to kill (ceil(health/power))
 		d int64 // damage per second
 	}
-  // Membuat slice untuk menyimpan hasil
 	enemies := make([]enemy, n)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range enemies {
 		enemies[i].t = int64((health[i] + power - 1) / power)
 		enemies[i].d = int64(damage[i])
@@ -65,6 +77,7 @@ func minDamage(power int, damage []int, health []int) int64 {
 
 	// Sort by t/d ratio ascending.
 	// Equivalent sort comparator: t_i * d_j < t_j * d_i
+  // Custom sort dengan comparator
 	sort.Slice(enemies, func(i, j int) bool {
 		return enemies[i].t*enemies[j].d < enemies[j].t*enemies[i].d
 	})

@@ -1,17 +1,30 @@
 # 3338 — Second Highest Salary Ii
 
-## Deskripsi
-
-**Soal:** [3338. Second Highest Salary Ii](https://leetcode.com/problems/second-highest-salary-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func secondHighestSalary(employees []Employee) []DeptSalary
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(e log e) Space: O(e)  
 **Kompleksitas Ruang:** O(e)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -50,7 +63,7 @@ type DeptSalary struct {
 }
 
 func secondHighestSalary(employees []Employee) []DeptSalary {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	deptSalaries := make(map[string][]int)
 	for _, e := range employees {
 		deptSalaries[e.Dept] = append(deptSalaries[e.Dept], e.Salary)
@@ -58,6 +71,7 @@ func secondHighestSalary(employees []Employee) []DeptSalary {
 
 	var result []DeptSalary
 	for dept, salaries := range deptSalaries {
+  // Custom sort dengan comparator
 		sort.Slice(salaries, func(i, j int) bool {
 			return salaries[i] > salaries[j]
 		})
@@ -87,6 +101,7 @@ func secondHighestSalary(employees []Employee) []DeptSalary {
 		}
 	}
 
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].Dept < result[j].Dept
 	})

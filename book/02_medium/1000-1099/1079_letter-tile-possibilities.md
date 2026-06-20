@@ -1,19 +1,32 @@
 # 1079 — Letter Tile Possibilities
 
-## Deskripsi
-
-**Soal:** [1079. Letter Tile Possibilities](https://leetcode.com/problems/letter-tile-possibilities/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func numTilePossibilities(tiles string) int
+```
+
+> **💡 Hint:** Backtracking with frequency count
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS, Backtracking
 
 **Kompleksitas Waktu:** O(n!) where n = len(tiles) worst case  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Backtracking (pelacakan mundur)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-> **Ide Kunci:** Backtracking with frequency count
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -34,7 +47,7 @@ func main() {
 }
 
 func numTilePossibilities(tiles string) int {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, 26)
 	for _, c := range tiles {
 		freq[c-'A']++

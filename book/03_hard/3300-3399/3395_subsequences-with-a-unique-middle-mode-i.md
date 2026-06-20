@@ -1,17 +1,30 @@
 # 3395 — Subsequences With A Unique Middle Mode I
 
-## Deskripsi
-
-**Soal:** [3395. Subsequences With A Unique Middle Mode I](https://leetcode.com/problems/subsequences-with-a-unique-middle-mode-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func subsequencesWithMiddleMode(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -51,7 +64,7 @@ func subsequencesWithMiddleMode(nums []int) int {
 	}
 
 	// Coordinate compression
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	comp := make(map[int]int)
 	for _, v := range nums {
 		comp[v] = 1
@@ -61,21 +74,21 @@ func subsequencesWithMiddleMode(nums []int) int {
 		comp[k] = m
 		m++
 	}
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	arr := make([]int, n)
 	for i, v := range nums {
 		arr[i] = comp[v]
 	}
 
 	// Total count of each value
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	tot := make([]int, m)
 	for _, v := range arr {
 		tot[v]++
 	}
 
 	// Precompute combinations up to n, choose up to 5
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	C := make([][]int, n+1)
 	for i := 0; i <= n; i++ {
 		C[i] = make([]int, 6)
@@ -92,7 +105,7 @@ func subsequencesWithMiddleMode(nums []int) int {
 	}
 
 	ans := 0
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cnt := make([]int, m) // prefix count as we sweep
 
 	for i := 0; i < n; i++ {

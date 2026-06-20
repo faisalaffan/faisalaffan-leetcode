@@ -1,19 +1,30 @@
 # 3230 — Customer Purchasing Behavior Analysis
 
-## Deskripsi
-
-**Soal:** [3230. Customer Purchasing Behavior Analysis](https://leetcode.com/problems/customer-purchasing-behavior-analysis/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func customerPurchasingBehavior(purchases [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func customerPurchasingBehavior(purchases [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,7 +40,7 @@ import (
 )
 
 func customerPurchasingBehavior(purchases [][]int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	counts := make(map[int]int)
 	for _, p := range purchases {
 		counts[p[0]]++
@@ -39,6 +50,7 @@ func customerPurchasingBehavior(purchases [][]int) []int {
 	for id := range counts {
 		customers = append(customers, id)
 	}
+  // Custom sort dengan comparator
 	sort.Slice(customers, func(i, j int) bool {
 		if counts[customers[i]] != counts[customers[j]] {
 			return counts[customers[i]] > counts[customers[j]]
@@ -46,7 +58,7 @@ func customerPurchasingBehavior(purchases [][]int) []int {
 		return customers[i] < customers[j]
 	})
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	ans := make([]int, len(customers))
 	for i, id := range customers {
 		ans[i] = id

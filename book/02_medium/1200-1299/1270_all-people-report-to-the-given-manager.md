@@ -1,19 +1,30 @@
 # 1270 — All People Report To The Given Manager
 
-## Deskripsi
-
-**Soal:** [1270. All People Report To The Given Manager](https://leetcode.com/problems/all-people-report-to-the-given-manager/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func allPeopleReportTo(employees [][]int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, BFS
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func allPeopleReportTo(employees [][]int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -37,7 +48,7 @@ func allPeopleReportTo(employees [][]int) []int {
 	// employees[i] = [employee_id, manager_id]
 	// Find all employees who report to employee_id=1 (directly or indirectly)
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	adj := make(map[int][]int)
 	for _, e := range employees {
 		empID, mgrID := e[0], e[1]
@@ -46,7 +57,7 @@ func allPeopleReportTo(employees [][]int) []int {
 		}
 	}
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, 0)
 	queue := []int{1}
 
@@ -59,6 +70,7 @@ func allPeopleReportTo(employees [][]int) []int {
 		}
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

@@ -1,19 +1,30 @@
 # 2070 — Most Beautiful Item For Each Query
 
-## Deskripsi
-
-**Soal:** [2070. Most Beautiful Item For Each Query](https://leetcode.com/problems/most-beautiful-item-for-each-query/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumBeauty(items [][]int, queries []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, Monotonic Stack/Queue
 
 **Kompleksitas Waktu:** O((n+q) log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Binary Search (pencarian biner)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumBeauty(items [][]int, queries []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -30,6 +41,7 @@ import (
 
 func maximumBeauty(items [][]int, queries []int) []int {
 	// Sort items by price
+  // Custom sort dengan comparator
 	sort.Slice(items, func(i, j int) bool {
 		return items[i][0] < items[j][0]
 	})
@@ -49,7 +61,7 @@ func maximumBeauty(items [][]int, queries []int) []int {
 	}
 
 	// Handle queries
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(queries))
 	for i, q := range queries {
 		// Binary search for last item with price <= q

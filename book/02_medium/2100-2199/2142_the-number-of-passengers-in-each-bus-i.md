@@ -1,19 +1,30 @@
 # 2142 — The Number Of Passengers In Each Bus I
 
-## Deskripsi
-
-**Soal:** [2142. The Number Of Passengers In Each Bus I](https://leetcode.com/problems/the-number-of-passengers-in-each-bus-i/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func busPassengers(buses [][]int, passengers []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n log n + m log m)  
 **Kompleksitas Ruang:** O(n + m)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func busPassengers(buses [][]int, passengers []int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -35,14 +46,16 @@ type Bus struct {
 
 func busPassengers(buses [][]int, passengers []int) []int {
 	// Sort buses by arrival time
+  // Custom sort dengan comparator
 	sort.Slice(buses, func(i, j int) bool {
 		return buses[i][1] < buses[j][1]
 	})
 
 	// Sort passengers
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(passengers)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	result := make([]int, len(buses))
 	pIdx := 0
 

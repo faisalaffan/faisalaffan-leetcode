@@ -1,17 +1,30 @@
 # 1549 — The Most Recent Orders For Each Product
 
-## Deskripsi
-
-**Soal:** [1549. The Most Recent Orders For Each Product](https://leetcode.com/problems/the-most-recent-orders-for-each-product/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MostRecentOrders(products map[int]string, orders []struct{ orderID, productID int; date string }) []recentOrderInfo
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -59,16 +72,17 @@ type recentOrderInfo struct {
 
 func MostRecentOrders(products map[int]string, orders []struct{ orderID, productID int; date string }) []recentOrderInfo {
 	// Group orders by product
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	productOrders := make(map[int][]struct{ orderID int; date string })
 	for _, o := range orders {
 		productOrders[o.productID] = append(productOrders[o.productID], struct{ orderID int; date string }{o.orderID, o.date})
 	}
 
 	// Find most recent order date per product
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	productRecent := make(map[int]string)
 	for pid, ords := range productOrders {
+  // Custom sort dengan comparator
 		sort.Slice(ords, func(i, j int) bool {
 			return ords[i].date > ords[j].date
 		})
@@ -76,7 +90,6 @@ func MostRecentOrders(products map[int]string, orders []struct{ orderID, product
 	}
 
 	// Collect orders that match the most recent date for their product
-  // Membuat slice untuk menyimpan hasil
 	result := make([]recentOrderInfo, 0)
 	for pid, pname := range products {
 		recentDate, ok := productRecent[pid]

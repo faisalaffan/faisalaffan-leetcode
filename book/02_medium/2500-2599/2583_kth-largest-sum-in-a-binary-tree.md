@@ -1,19 +1,30 @@
 # 2583 — Kth Largest Sum In A Binary Tree
 
-## Deskripsi
-
-**Soal:** [2583. Kth Largest Sum In A Binary Tree](https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func kthLargestLevelSum(root *TreeNode, k int) int64
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, BFS, Heap / Priority Queue, Stack
 
 **Kompleksitas Waktu:** O(n log n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** Heap (priority queue)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func kthLargestLevelSum(root *TreeNode, k int) int64`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -71,8 +82,10 @@ func kthLargestLevelSum(root *TreeNode, k int) int64 {
 				queue = append(queue, node.Right)
 			}
 		}
+  // Masukkan elemen ke priority queue
 		heap.Push(h, sum)
 		if h.Len() > k {
+  // Ambil elemen terkecil/terbesar dari heap
 			heap.Pop(h)
 		}
 	}

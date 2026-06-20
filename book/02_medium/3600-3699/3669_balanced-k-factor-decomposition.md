@@ -1,19 +1,30 @@
 # 3669 — Balanced K Factor Decomposition
 
-## Deskripsi
-
-**Soal:** [3669. Balanced K Factor Decomposition](https://leetcode.com/problems/balanced-k-factor-decomposition/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func balancedKFactorDecomposition(n int, k int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** DFS
 
 **Kompleksitas Waktu:** O(d^k) worst case with pruning  
 **Kompleksitas Ruang:** O(k)
 
-**Algoritma:** DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **DFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func balancedKFactorDecomposition(n int, k int) []int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +42,7 @@ import (
 func balancedKFactorDecomposition(n int, k int) []int {
 	bestDiff := math.MaxInt32
 	var best []int
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	path := make([]int, k)
 
 	var dfs func(rem int, start int, depth int)

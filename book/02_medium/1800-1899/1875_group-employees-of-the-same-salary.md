@@ -1,17 +1,30 @@
 # 1875 — Group Employees Of The Same Salary
 
-## Deskripsi
-
-**Soal:** [1875. Group Employees Of The Same Salary](https://leetcode.com/problems/group-employees-of-the-same-salary/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func GroupEmployees(employees [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n log n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,23 +46,25 @@ func main() {
 
 // Time: O(n log n), Space: O(n)
 func GroupEmployees(employees [][]int) [][]int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	salaryMap := make(map[int][]int)
 	for _, emp := range employees {
 		id, salary := emp[0], emp[1]
 		salaryMap[salary] = append(salaryMap[salary], id)
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, 0)
 	for _, ids := range salaryMap {
 		if len(ids) >= 2 {
+  // Urutkan secara ascending — O(n log n)
 			sort.Ints(ids)
 			result = append(result, ids)
 		}
 	}
 
 	// Sort by first employee ID for deterministic output
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		return result[i][0] < result[j][0]
 	})

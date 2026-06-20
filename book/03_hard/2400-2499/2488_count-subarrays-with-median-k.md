@@ -1,17 +1,30 @@
 # 2488 — Count Subarrays With Median K
 
-## Deskripsi
-
-**Soal:** [2488. Count Subarrays With Median K](https://leetcode.com/problems/count-subarrays-with-median-k/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func countSubarrays(nums []int, k int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, Two Pointer, Prefix Sum
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Prefix Sum (jumlah kumulatif)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -56,7 +69,7 @@ func countSubarrays(nums []int, k int) int {
 
 	// Transform: >k => 1, <k => -1, =k => 0
 	// Compute prefix sums from pos going right
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	rightFreq := make(map[int]int)
 	rightFreq[0] = 1 // empty suffix
 	balance := 0
@@ -70,7 +83,7 @@ func countSubarrays(nums []int, k int) int {
 	}
 
 	// Now go left, tracking left balance
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	leftFreq := make(map[int]int)
 	leftFreq[0] = 1 // empty prefix
 	balance = 0

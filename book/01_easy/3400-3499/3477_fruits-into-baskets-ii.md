@@ -1,17 +1,30 @@
 # 3477 — Fruits Into Baskets Ii
 
-## Deskripsi
-
-**Soal:** [3477. Fruits Into Baskets Ii](https://leetcode.com/problems/fruits-into-baskets-ii/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func FruitsIntoBasketsIi(fruits []int, baskets []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n * m). Space: O(1).  
 **Kompleksitas Ruang:** O(1).
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -31,7 +44,6 @@ func main() {
 // Each fruit i can go into basket j if fruits[i] <= baskets[j].
 // Time: O(n * m). Space: O(1).
 func FruitsIntoBasketsIi(fruits []int, baskets []int) int {
-  // Membuat slice untuk menyimpan hasil
 	used := make([]bool, len(baskets))
 	unplaced := 0
 	for _, f := range fruits {

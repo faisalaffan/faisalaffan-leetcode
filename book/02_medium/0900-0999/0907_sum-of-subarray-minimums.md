@@ -1,17 +1,30 @@
 # 0907 — Sum Of Subarray Minimums
 
-## Deskripsi
-
-**Soal:** [0907. Sum Of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func SumOfSubarrayMinimums(arr []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Two Pointer, Stack
 
 **Kompleksitas Waktu:** O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Two Pointer** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,9 +46,9 @@ func SumOfSubarrayMinimums(arr []int) int {
 	const mod = 1_000_000_007
 	n := len(arr)
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	prevSmaller := make([]int, n)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	nextSmaller := make([]int, n)
 
 	for i := 0; i < n; i++ {

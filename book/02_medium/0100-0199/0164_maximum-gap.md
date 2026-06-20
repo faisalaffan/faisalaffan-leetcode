@@ -1,19 +1,30 @@
 # 0164 — Maximum Gap
 
-## Deskripsi
-
-**Soal:** [0164. Maximum Gap](https://leetcode.com/problems/maximum-gap/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maximumGap(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Bitmask
 
 **Kompleksitas Waktu:** O(n), Space: O(n) using bucket sort (Pigeonhole Principle)  
 **Kompleksitas Ruang:** O(n) using bucket sort (Pigeonhole Principle)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **Bitmask** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maximumGap(nums []int) int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -48,11 +59,11 @@ func maximumGap(nums []int) int {
 	bucketSize := max(1, (maxVal-minVal)/(n-1))
 	bucketCount := (maxVal-minVal)/bucketSize + 1
 
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bucketMin := make([]int, bucketCount)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	bucketMax := make([]int, bucketCount)
-  // Iterasi seluruh elemen
+  // Range loop: iterasi dengan indeks + nilai
 	for i := range bucketMin {
 		bucketMin[i] = 1<<31 - 1
 		bucketMax[i] = -1 << 31

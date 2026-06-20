@@ -1,17 +1,30 @@
 # 2032 — Two Out Of Three
 
-## Deskripsi
-
-**Soal:** [2032. Two Out Of Three](https://leetcode.com/problems/two-out-of-three/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func TwoOutOfThree(nums1 []int, nums2 []int, nums3 []int) []int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** O(n), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -33,11 +46,11 @@ func main() {
 
 // Time: O(n), Space: O(n)
 func TwoOutOfThree(nums1 []int, nums2 []int, nums3 []int) []int {
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	set1 := make(map[int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	set2 := make(map[int]bool)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	set3 := make(map[int]bool)
 
 	for _, v := range nums1 {
@@ -50,7 +63,7 @@ func TwoOutOfThree(nums1 []int, nums2 []int, nums3 []int) []int {
 		set3[v] = true
 	}
 
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	count := make(map[int]int)
 	for v := range set1 {
 		count[v]++
@@ -68,6 +81,7 @@ func TwoOutOfThree(nums1 []int, nums2 []int, nums3 []int) []int {
 			result = append(result, v)
 		}
 	}
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(result)
 	return result
 }

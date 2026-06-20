@@ -1,17 +1,30 @@
 # 1665 — Minimum Initial Energy To Finish Tasks
 
-## Deskripsi
-
-**Soal:** [1665. Minimum Initial Energy To Finish Tasks](https://leetcode.com/problems/minimum-initial-energy-to-finish-tasks/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan sebuah array (larik) bilangan. Tugasmu adalah mencari elemen atau pola tertentu dalam array tersebut, lalu mengembalikan hasilnya sesuai permintaan soal.
+
+Bayangkan kamu sedang memeriksa daftar nilai ujian — kamu perlu menemukan nilai tertentu atau menghitung sesuatu dari daftar tersebut. Array adalah struktur data paling dasar: kumpulan elemen yang disimpan berurutan di memori.
+
+**Konsep kunci:** indeks (posisi), value (nilai), panjang array (len).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func minimumEffort(tasks [][]int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -39,6 +52,7 @@ func main() {
 func minimumEffort(tasks [][]int) int {
 	// Sort by (minimum - actual) descending: tasks with the largest energy
 	// deficit (minimum required vs actual consumed) should be done first.
+  // Custom sort dengan comparator
 	sort.Slice(tasks, func(i, j int) bool {
 		return (tasks[i][1] - tasks[i][0]) > (tasks[j][1] - tasks[j][0])
 	})

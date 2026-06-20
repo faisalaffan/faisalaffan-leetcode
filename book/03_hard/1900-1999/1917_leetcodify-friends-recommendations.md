@@ -1,17 +1,30 @@
 # 1917 — Leetcodify Friends Recommendations
 
-## Deskripsi
-
-**Soal:** [1917. Leetcodify Friends Recommendations](https://leetcode.com/problems/leetcodify-friends-recommendations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan tabel database dan diminta untuk menulis query SQL. Karena repo ini menggunakan Go, query SQL disimulasikan dengan struktur data Go (map untuk grouping, slice untuk sorting, struct untuk representasi row).
+
+Soal tipe ini menguji kemampuanmu menganalisis data relasional — seperti yang kamu lakukan dengan SQL di pekerjaan backend sehari-hari.
+
+**Konsep kunci:** GROUP BY, JOIN, aggregate (SUM, COUNT, AVG), window function (RANK, ROW_NUMBER), HAVING.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func leetcodifyFriendsRecommendations(listens [][]int, friendships [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** LIS (Longest Increasing Subsequence)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -78,7 +91,7 @@ func leetcodifyFriendsRecommendations(listens [][]int, friendships [][]int) [][]
 	type key struct {
 		user, song, day int
 	}
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	count := make(map[key]int)
 	for _, l := range listens {
 		k := key{user: l[0], song: l[1], day: l[2]}
@@ -86,7 +99,7 @@ func leetcodifyFriendsRecommendations(listens [][]int, friendships [][]int) [][]
 	}
 
 	// Build existing friendships set
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	existingFriends := make(map[[2]int]bool)
 	for _, f := range friendships {
 		u1, u2 := f[0], f[1]
@@ -97,7 +110,7 @@ func leetcodifyFriendsRecommendations(listens [][]int, friendships [][]int) [][]
 	}
 
 	// For each (song, day) pair, find all users with >= 3 listens
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	songDayUsers := make(map[[2]int]map[int]bool) // (song, day) -> set of users with >= 3 listens
 	for k, c := range count {
 		if c >= 3 {
@@ -110,7 +123,7 @@ func leetcodifyFriendsRecommendations(listens [][]int, friendships [][]int) [][]
 	}
 
 	// Generate recommendations
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	recSet := make(map[[2]int]bool)
 	for _, users := range songDayUsers {
 		// All pairs of users who listened to this (song, day) >= 3 times
@@ -118,8 +131,9 @@ func leetcodifyFriendsRecommendations(listens [][]int, friendships [][]int) [][]
 		for u := range users {
 			userList = append(userList, u)
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(userList)
-  // Loop standar: indeks 0 sampai n-1
+  // Loop linear O(n): iterasi setiap elemen
 		for i := 0; i < len(userList); i++ {
 			for j := i + 1; j < len(userList); j++ {
 				u1, u2 := userList[i], userList[j]
@@ -136,6 +150,7 @@ func leetcodifyFriendsRecommendations(listens [][]int, friendships [][]int) [][]
 	for p := range recSet {
 		result = append(result, []int{p[0], p[1]})
 	}
+  // Custom sort dengan comparator
 	sort.Slice(result, func(i, j int) bool {
 		if result[i][0] != result[j][0] {
 			return result[i][0] < result[j][0]

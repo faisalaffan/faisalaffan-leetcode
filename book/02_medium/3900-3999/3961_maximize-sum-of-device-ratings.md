@@ -1,21 +1,32 @@
 # 3961 — Maximize Sum Of Device Ratings
 
-## Deskripsi
-
-**Soal:** [3961. Maximize Sum Of Device Ratings](https://leetcode.com/problems/maximize-sum-of-device-ratings/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sekumpulan bilangan dan diminta untuk menghitung penjumlahan dengan aturan tertentu. Tugasmu adalah menemukan kombinasi, subset, atau urutan yang memenuhi target penjumlahan.
+
+Seperti menghitung kembalian belanja — kamu perlu kombinasi pecahan uang yang tepat. Soal penjumlahan seringnya diselesaikan dengan HashMap (two-sum pattern) atau Prefix Sum (jumlah kumulatif).
+
+**Konsep kunci:** target sum, complement (pelengkap), prefix sum, cumulative sum.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MaximizeSumOfDeviceRatings(units [][]int) int64
+```
+
+> **💡 Hint:** Sort each device's units. Rating after optimal transfers =
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(M * N log N)  
 **Kompleksitas Ruang:** O(M) where M = devices, N = units per device
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-**Fungsi Solusi:** `func MaximizeSumOfDeviceRatings(units [][]int) int64`
-
-> **Ide Kunci:** Sort each device's units. Rating after optimal transfers =
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -55,9 +66,10 @@ func MaximizeSumOfDeviceRatings(units [][]int) int64 {
 	var sumSecond int64
 
 	for _, dev := range units {
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 		sorted := make([]int, n)
 		copy(sorted, dev)
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(sorted)
 
 		if sorted[0] < globalMin {

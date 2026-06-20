@@ -1,17 +1,30 @@
 # 2133 — Check If Every Row And Column Contains All Numbers
 
-## Deskripsi
-
-**Soal:** [2133. Check If Every Row And Column Contains All Numbers](https://leetcode.com/problems/check-if-every-row-and-column-contains-all-numbers/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Mudah
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func CheckIfEveryRowAndColumnContainsAllNumbers(matrix [][]int) bool
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** — (analisis sendiri ☕)
 
 **Kompleksitas Waktu:** O(n^2), Space: O(n)  
 **Kompleksitas Ruang:** O(n)
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Coba pahami dulu input/output sebelum melihat kode. Gambar di kertas kalau perlu!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -32,9 +45,7 @@ func CheckIfEveryRowAndColumnContainsAllNumbers(matrix [][]int) bool {
 	n := len(matrix)
 
 	for i := 0; i < n; i++ {
-  // Membuat slice untuk menyimpan hasil
 		rowSet := make([]bool, n+1)
-  // Membuat slice untuk menyimpan hasil
 		colSet := make([]bool, n+1)
 		for j := 0; j < n; j++ {
 			if matrix[i][j] < 1 || matrix[i][j] > n || rowSet[matrix[i][j]] {

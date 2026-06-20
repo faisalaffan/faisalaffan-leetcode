@@ -1,17 +1,30 @@
 # 3336 — Find The Number Of Subsequences With Equal Gcd
 
-## Deskripsi
-
-**Soal:** [3336. Find The Number Of Subsequences With Equal Gcd](https://leetcode.com/problems/find-the-number-of-subsequences-with-equal-gcd/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan data terstruktur dan diminta untuk mencari elemen atau pola tertentu. Tugasmu adalah menemukan posisi, jumlah, atau keberadaan elemen dengan efisien.
+
+Seperti mencari kata di kamus — kamu tidak membaca dari halaman 1, tapi langsung ke tengah (binary search), lalu maju/mundur. Teknik pencarian yang efisien sangat penting untuk interview.
+
+**Konsep kunci:** linear search O(n), binary search O(log n), HashMap lookup O(1).
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func subsequencePairCount(nums []int) int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** GCD / Matematika
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** —
+> **Untuk fresh graduate:** Kuasai dulu teknik **GCD / Matematika** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -63,14 +76,14 @@ func subsequencePairCount(nums []int) int {
 	}
 
 	// Count frequency of each value
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	freq := make([]int, maxVal+1)
 	for _, v := range nums {
 		freq[v]++
 	}
 
 	// Precompute combination nCk for n up to n, k up to 5
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	C := make([][]int, n+1)
 	for i := 0; i <= n; i++ {
 		C[i] = make([]int, 6)
@@ -81,7 +94,7 @@ func subsequencePairCount(nums []int) int {
 	}
 
 	// cntMult[g] = number of elements divisible by g
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	cntMult := make([]int, maxVal+1)
 	for g := 1; g <= maxVal; g++ {
 		for m := g; m <= maxVal; m += g {
@@ -92,7 +105,7 @@ func subsequencePairCount(nums []int) int {
 	// f[g] = number of ways to pick 2 non-empty disjoint subsequences
 	// where each element in each subsequence is divisible by g
 	// (i.e., both GCDs are multiples of g)
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	f := make([]int, maxVal+1)
 	for g := 1; g <= maxVal; g++ {
 		c := cntMult[g]
@@ -112,7 +125,7 @@ func subsequencePairCount(nums []int) int {
 
 	// Use MObius-like inclusion-exclusion to get exact GCD = g
 	// gExact[g] = exact pairs with GCD = g
-  // Membuat slice untuk menyimpan hasil
+  // Alokasi slice integer
 	gExact := make([]int, maxVal+1)
 	for g := maxVal; g >= 1; g-- {
 		gExact[g] = f[g]

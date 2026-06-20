@@ -1,21 +1,32 @@
 # 3003 — Maximize The Number Of Partitions After Operations
 
-## Deskripsi
-
-**Soal:** [3003. Maximize The Number Of Partitions After Operations](https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sulit
+
+Kamu diberikan bilangan bulat dan diminta untuk menghitung, memanipulasi, atau menganalisis properti bilangan tersebut.
+
+Soal tipe bilangan menguji pemahamanmu tentang operasi matematika, digit, atau properti bilangan (prima, palindrome, pembagi, dll). Kuncinya adalah menemukan pola matematika sebelum menulis kode.
+
+**Konsep kunci:** modulo (%), pembagian integer, digit extraction, prime check, GCD/LCM.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func maxPartitionsAfterOperations(s string, k int) int
+```
+
+> **💡 Hint:** DP + memoization (DFS with bitmask)
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** HashMap, DFS, Dynamic Programming, Bitmask
 
 **Kompleksitas Waktu:** —  
 **Kompleksitas Ruang:** —
 
-**Algoritma:** Dynamic Programming (DP), DFS (Depth-First Search / pencarian kedalaman), Bitmask (representasi himpunan dengan bit)
+> **Untuk fresh graduate:** Kuasai dulu teknik **HashMap** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func maxPartitionsAfterOperations(s string, k int) int`
-
-> **Ide Kunci:** DP + memoization (DFS with bitmask)
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -42,7 +53,7 @@ import (
 
 func maxPartitionsAfterOperations(s string, k int) int {
 	n := len(s)
-  // Membuat map untuk pencarian O(1): key → value
+  // Membuat map (HashMap) — pencarian O(1)
 	memo := make(map[[3]int]int)
 
 	var dfs func(i, mask int, changed bool) int

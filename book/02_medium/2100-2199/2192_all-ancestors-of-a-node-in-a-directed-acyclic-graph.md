@@ -1,19 +1,30 @@
 # 2192 — All Ancestors Of A Node In A Directed Acyclic Graph
 
-## Deskripsi
-
-**Soal:** [2192. All Ancestors Of A Node In A Directed Acyclic Graph](https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah graf — kumpulan node (simpul) yang terhubung oleh edge (sisi). Tugasmu adalah menjelajahi graf, mencari jalur terpendek, atau menganalisis konektivitas.
+
+Ibarat peta jalan: kota adalah node, jalan adalah edge. Kamu perlu mencari rute terpendek dari kota A ke kota B. Graf direpresentasikan dengan adjacency list (`map[int][]int` atau `[][]int`).
+
+**Konsep kunci:** node, edge, directed/undirected, weighted/unweighted, BFS (level-order), DFS (depth-first), cycle detection.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func getAncestors(n int, edges [][]int) [][]int
+```
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** BFS
 
 **Kompleksitas Waktu:** O(n^2)  
 **Kompleksitas Ruang:** O(n^2)
 
-**Algoritma:** Queue (antrian FIFO)
+> **Untuk fresh graduate:** Kuasai dulu teknik **BFS** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func getAncestors(n int, edges [][]int) [][]int`
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -29,16 +40,15 @@ import (
 )
 
 func getAncestors(n int, edges [][]int) [][]int {
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	graph := make([][]int, n)
 	for _, e := range edges {
 		graph[e[1]] = append(graph[e[1]], e[0])
 	}
 
-  // Membuat slice 2D untuk DP/tabel
+  // Membuat matriks/slice 2D untuk DP
 	result := make([][]int, n)
 	for i := 0; i < n; i++ {
-  // Membuat slice untuk menyimpan hasil
 		visited := make([]bool, n)
 		queue := []int{i}
 		visited[i] = true
@@ -58,6 +68,7 @@ func getAncestors(n int, edges [][]int) [][]int {
 				ancestors = append(ancestors, j)
 			}
 		}
+  // Urutkan secara ascending — O(n log n)
 		sort.Ints(ancestors)
 		result[i] = ancestors
 	}

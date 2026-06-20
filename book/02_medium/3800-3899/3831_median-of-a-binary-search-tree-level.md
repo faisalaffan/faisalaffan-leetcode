@@ -1,21 +1,32 @@
 # 3831 — Median Of A Binary Search Tree Level
 
-## Deskripsi
-
-**Soal:** [3831. Median Of A Binary Search Tree Level](https://leetcode.com/problems/median-of-a-binary-search-tree-level/)
+## 📖 Deskripsi Soal
 
 **Tingkat Kesulitan:** Sedang
+
+Kamu diberikan sebuah pohon (tree) — struktur data hierarkis dengan node (simpul) dan edge (cabang). Tugasmu adalah menjelajahi pohon tersebut (traversal), mencari nilai, atau menghitung properti tertentu.
+
+Bayangkan struktur organisasi perusahaan: ada CEO (root), VP (children), Manager (grandchildren). Setiap node bisa punya 0 atau lebih anak. Pohon di Go direpresentasikan dengan struct yang memiliki pointer ke children (Left, Right untuk binary tree).
+
+**Konsep kunci:** root, leaf, parent, child, depth, traversal (pre-order, in-order, post-order), recursive DFS.
+
+**Fungsi yang perlu kamu implementasikan:**
+```go
+func MedianOfABinarySearchTreeLevel(root *TreeNode, level int) int
+```
+
+> **💡 Hint:** DFS to collect all values at target level, sort, compute upper median.
+
+## 🔍 Petunjuk Penyelesaian
+
+**Teknik yang digunakan:** Binary Search, DFS
 
 **Kompleksitas Waktu:** O(N log W)  
 **Kompleksitas Ruang:** O(W)
 
-**Algoritma:** Binary Search (pencarian biner), DFS (Depth-First Search / pencarian kedalaman)
+> **Untuk fresh graduate:** Kuasai dulu teknik **Binary Search** sebelum lanjut ke solusi. Teknik ini sering muncul di interview!
 
-**Fungsi Solusi:** `func MedianOfABinarySearchTreeLevel(root *TreeNode, level int) int`
-
-> **Ide Kunci:** DFS to collect all values at target level, sort, compute upper median.
-
-## Solusi Go
+## 💻 Solusi Go
 
 ```go
 package main
@@ -58,6 +69,7 @@ func MedianOfABinarySearchTreeLevel(root *TreeNode, level int) int {
 		return -1
 	}
 
+  // Urutkan secara ascending — O(n log n)
 	sort.Ints(values)
 	return values[len(values)/2] // upper median
 }
