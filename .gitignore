@@ -1,5 +1,10 @@
-# Go build artifacts
+# Go build artifacts (di root)
 /[0-9][0-9][0-9][0-9]_*
+
+# Go build artifacts (binary di subdir)
+01_easy/*/[0-9][0-9][0-9][0-9]_*
+02_medium/*/[0-9][0-9][0-9][0-9]_*
+03_hard/*/[0-9][0-9][0-9][0-9]_*
 
 # IDE
 .idea/
