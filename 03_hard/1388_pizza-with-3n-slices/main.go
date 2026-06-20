@@ -55,5 +55,5 @@ func maxSizeSlices(slices []int) int {
 func main() {
 	fmt.Println(maxSizeSlices([]int{1, 2, 3, 4, 5, 6}))       // 10
 	fmt.Println(maxSizeSlices([]int{8, 9, 8, 6, 1, 1}))       // 16
-	fmt.Println(maxSizeSlices([]int{2, 4, 3, 5, 6, 7, 8, 9, 9})) // 20
+	fmt.Println(maxSizeSlices([]int{2, 4, 3, 5, 6, 7, 8, 9, 9})) // 23
 }
