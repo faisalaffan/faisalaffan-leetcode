@@ -1,0 +1,12 @@
+[book]
+authors = ["Muhammad Faisal Affan"]
+language = "id"
+title = "LeetCode Go Solutions — 3963 Problems"
+src = "book"
+
+[build]
+build-dir = "book-html"
+
+[output.html]
+git-repository-url = "https://github.com/faisalaffan/faisalaffan-leetcode"
+edit-url-template = "https://github.com/faisalaffan/faisalaffan-leetcode/edit/main/{path}"

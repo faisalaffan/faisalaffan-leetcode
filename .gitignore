@@ -6,5 +6,11 @@
 .vscode/*
 !.vscode/settings.json
 
+# mdBook build output
+/book-html/
+
+# Go binary
+/main
+
 # OS
 .DS_Store
