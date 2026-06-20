@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��3043
+# Medium (Sedang) — Problem 2831–3043
 
 ## 2831 — Find The Longest Equal Subarray
 

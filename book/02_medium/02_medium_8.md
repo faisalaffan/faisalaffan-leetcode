@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��1462
+# Medium (Sedang) — Problem 1264–1462
 
 ## 1264 — Page Recommendations
 

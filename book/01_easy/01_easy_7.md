@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��2797
+# Easy (Mudah) — Problem 2437–2797
 
 ## 2437 — Number Of Valid Clock Times
 
@@ -1077,7 +1077,7 @@ func MaximumDifferenceByRemappingADigit(num int) int {
 }
 ```
 
-## 2570 — Merge Two 2d Arrays By Summing Values
+## 2570 — Merge Two 2D Arrays By Summing Values
 
 ```go
 package main

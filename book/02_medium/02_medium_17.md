@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��3234
+# Medium (Sedang) — Problem 3044–3234
 
 ## 3044 — Most Frequent Prime
 

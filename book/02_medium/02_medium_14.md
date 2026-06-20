@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��2627
+# Medium (Sedang) — Problem 2434–2627
 
 ## 2434 — Using A Robot To Print The Lexicographically Smallest String
 
@@ -1873,7 +1873,7 @@ func primeFactorSum(n int) int {
 }
 ```
 
-## 2510 — Check If There Is A Path With Equal Number Of 0s And 1s
+## 2510 — Check If There Is A Path With Equal Number Of 0S And 1S
 
 ```go
 package main
@@ -4924,7 +4924,7 @@ func main() {
 }
 ```
 
-## 2610 — Convert An Array Into A 2d Array With Conditions
+## 2610 — Convert An Array Into A 2D Array With Conditions
 
 ```go
 package main

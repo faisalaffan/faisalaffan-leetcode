@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��1221
+# Easy (Mudah) — Problem 0830–1221
 
 ## 0830 — Positions Of Large Groups
 
@@ -443,7 +443,7 @@ func middleNode(head *ListNode) *ListNode {
 }
 ```
 
-## 0883 — Projection Area Of 3d Shapes
+## 0883 — Projection Area Of 3D Shapes
 
 ```go
 package main
@@ -565,7 +565,7 @@ func fairCandySwap(aliceSizes []int, bobSizes []int) []int {
 }
 ```
 
-## 0892 — Surface Area Of 3d Shapes
+## 0892 — Surface Area Of 3D Shapes
 
 ```go
 package main
@@ -1239,7 +1239,7 @@ func isLess(a, b string, order map[byte]int) bool {
 }
 ```
 
-## 0961 — N Repeated Element In Size 2n Array
+## 0961 — N Repeated Element In Size 2N Array
 
 ```go
 package main

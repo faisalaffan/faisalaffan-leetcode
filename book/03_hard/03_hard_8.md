@@ -1,4 +1,4 @@
-# Hard (Sulit) — Problem ��3378
+# Hard (Sulit) — Problem 3045–3378
 
 ## 3045 — Count Prefix And Suffix Pairs Ii
 
@@ -7901,7 +7901,7 @@ func kthCharacter(k int, operations []int) byte {
 }
 ```
 
-## 3311 — Construct 2d Grid Matching Graph Layout
+## 3311 — Construct 2D Grid Matching Graph Layout
 
 ```go
 package main

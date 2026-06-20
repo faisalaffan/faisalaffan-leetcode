@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��2238
+# Medium (Sedang) — Problem 2051–2238
 
 ## 2051 — The Category Of Each Member In The Store
 
@@ -2973,7 +2973,7 @@ func main() {
 }
 ```
 
-## 2134 — Minimum Swaps To Group All 1s Together Ii
+## 2134 — Minimum Swaps To Group All 1S Together Ii
 
 ```go
 package main

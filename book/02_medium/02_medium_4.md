@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��0707
+# Medium (Sedang) — Problem 0523–0707
 
 ## 0523 — Continuous Subarray Sum
 

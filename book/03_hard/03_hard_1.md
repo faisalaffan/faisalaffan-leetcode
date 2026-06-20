@@ -1,4 +1,4 @@
-# Hard (Sulit) — Problem ��0552
+# Hard (Sulit) — Problem 0004–0552
 
 ## 0004 — Median Of Two Sorted Arrays
 

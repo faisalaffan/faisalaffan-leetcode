@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��3649
+# Medium (Sedang) — Problem 3466–3649
 
 ## 3466 — Maximum Coin Collection
 

@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��1664
+# Medium (Sedang) — Problem 1465–1664
 
 ## 1465 — Maximum Area Of A Piece Of Cake After Horizontal And Vertical Cuts
 
@@ -989,7 +989,7 @@ func intSqrt(n int) int {
 }
 ```
 
-## 1493 — Longest Subarray Of 1s After Deleting One Element
+## 1493 — Longest Subarray Of 1S After Deleting One Element
 
 ```go
 package main
@@ -1581,7 +1581,7 @@ func MinDifference(nums []int) int {
 }
 ```
 
-## 1513 — Number Of Substrings With Only 1s
+## 1513 — Number Of Substrings With Only 1S
 
 ```go
 package main
@@ -2973,7 +2973,7 @@ func MinOperations(nums []int) int {
 }
 ```
 
-## 1559 — Detect Cycles In 2d Grid
+## 1559 — Detect Cycles In 2D Grid
 
 ```go
 package main

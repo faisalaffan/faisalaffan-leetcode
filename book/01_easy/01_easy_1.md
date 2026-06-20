@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��0412
+# Easy (Mudah) — Problem 0001–0412
 
 ## 0001 — Two Sum
 

@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��1262
+# Medium (Sedang) — Problem 1079–1262
 
 ## 1079 — Letter Tile Possibilities
 
@@ -1165,7 +1165,7 @@ func main() {
 }
 ```
 
-## 1117 — Building H2o
+## 1117 — Building H2O
 
 ```go
 package main
@@ -2597,7 +2597,7 @@ func main() {
 }
 ```
 
-## 1151 — Minimum Swaps To Group All 1s Together
+## 1151 — Minimum Swaps To Group All 1S Together
 
 ```go
 package main

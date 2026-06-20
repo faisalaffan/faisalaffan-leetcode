@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��0166
+# Medium (Sedang) — Problem 0002–0166
 
 ## 0002 — Add Two Numbers
 
@@ -431,7 +431,7 @@ func main() {
 // Time: O(1) | Space: O(1)
 ```
 
-## 0015 — 3sum
+## 0015 — 3Sum
 
 ```go
 package main
@@ -491,7 +491,7 @@ func main() {
 // Time: O(n^2) | Space: O(1) (excluding output)
 ```
 
-## 0016 — 3sum Closest
+## 0016 — 3Sum Closest
 
 ```go
 package main
@@ -600,7 +600,7 @@ func main() {
 // Time: O(4^n) | Space: O(4^n)
 ```
 
-## 0018 — 4sum
+## 0018 — 4Sum
 
 ```go
 package main
@@ -2348,7 +2348,7 @@ func main() {
 // Time: O(m*n) | Space: O(1)
 ```
 
-## 0074 — Search A 2d Matrix
+## 0074 — Search A 2D Matrix
 
 ```go
 package main

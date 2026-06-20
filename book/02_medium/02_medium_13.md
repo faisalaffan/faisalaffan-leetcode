@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��2433
+# Medium (Sedang) — Problem 2240–2433
 
 ## 2240 — Number Of Ways To Buy Pens And Pencils
 

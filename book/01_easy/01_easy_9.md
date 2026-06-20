@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��3688
+# Easy (Mudah) — Problem 3174–3688
 
 ## 3174 — Clear Digits
 

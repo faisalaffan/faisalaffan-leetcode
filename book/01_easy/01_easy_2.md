@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��0824
+# Easy (Mudah) — Problem 0414–0824
 
 ## 0414 — Third Maximum Number
 

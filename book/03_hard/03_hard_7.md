@@ -1,4 +1,4 @@
-# Hard (Sulit) — Problem ��3041
+# Hard (Sulit) — Problem 2584–3041
 
 ## 2584 — Split The Array To Make Coprime Products
 

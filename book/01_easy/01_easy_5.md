@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��1979
+# Easy (Mudah) — Problem 1603–1979
 
 ## 1603 — Design Parking System
 

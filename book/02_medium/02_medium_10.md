@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��1864
+# Medium (Sedang) — Problem 1666–1864
 
 ## 1666 — Change The Root Of A Binary Tree
 

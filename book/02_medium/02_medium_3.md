@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��0522
+# Medium (Sedang) — Problem 0351–0522
 
 ## 0351 — Android Unlock Patterns
 
@@ -4231,7 +4231,7 @@ func main() {
 }
 ```
 
-## 0454 — 4sum Ii
+## 0454 — 4Sum Ii
 
 ```go
 package main

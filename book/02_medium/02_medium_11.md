@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��2049
+# Medium (Sedang) — Problem 1865–2049
 
 ## 1865 — Finding Pairs With A Certain Sum
 

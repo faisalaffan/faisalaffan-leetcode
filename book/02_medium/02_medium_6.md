@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��1077
+# Medium (Sedang) — Problem 0901–1077
 
 ## 0901 — Online Stock Span
 
@@ -618,7 +618,7 @@ func main() {
 }
 ```
 
-## 0923 — 3sum With Multiplicity
+## 0923 — 3Sum With Multiplicity
 
 ```go
 package main

@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��2432
+# Easy (Mudah) — Problem 1984–2432
 
 ## 1984 — Minimum Difference Between Highest And Lowest Of K Scores
 
@@ -246,7 +246,7 @@ func MaximumDifferenceBetweenIncreasingElements(nums []int) int {
 }
 ```
 
-## 2022 — Convert 1d Array Into 2d Array
+## 2022 — Convert 1D Array Into 2D Array
 
 ```go
 package main

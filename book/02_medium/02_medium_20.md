@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��3828
+# Medium (Sedang) — Problem 3650–3828
 
 ## 3650 — Minimum Cost Path With Edge Reversals
 

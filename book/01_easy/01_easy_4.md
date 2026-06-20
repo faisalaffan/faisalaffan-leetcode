@@ -1,4 +1,4 @@
-# Easy (Mudah) — Problem ��1598
+# Easy (Mudah) — Problem 1228–1598
 
 ## 1228 — Missing Number In Arithmetic Progression
 
@@ -188,7 +188,7 @@ func oddCells(m, n int, indices [][]int) int {
 }
 ```
 
-## 1260 — Shift 2d Grid
+## 1260 — Shift 2D Grid
 
 ```go
 package main
@@ -2123,7 +2123,7 @@ func DestinationCity(paths [][]string) string {
 }
 ```
 
-## 1437 — Check If All 1s Are At Least Length K Places Away
+## 1437 — Check If All 1S Are At Least Length K Places Away
 
 ```go
 package main
@@ -2501,7 +2501,7 @@ func FinalPricesWithASpecialDiscountInAShop(prices []int) []int {
 }
 ```
 
-## 1480 — Running Sum Of 1d Array
+## 1480 — Running Sum Of 1D Array
 
 ```go
 package main

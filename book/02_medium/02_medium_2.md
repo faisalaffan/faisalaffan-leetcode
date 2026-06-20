@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��0348
+# Medium (Sedang) — Problem 0167–0348
 
 ## 0167 — Two Sum Ii Input Array Is Sorted
 
@@ -1794,7 +1794,7 @@ func main() {
 }
 ```
 
-## 0240 — Search A 2d Matrix Ii
+## 0240 — Search A 2D Matrix Ii
 
 ```go
 package main
@@ -2172,7 +2172,7 @@ func main() {
 }
 ```
 
-## 0251 — Flatten 2d Vector
+## 0251 — Flatten 2D Vector
 
 ```go
 package main
@@ -2403,7 +2403,7 @@ func main() {
 }
 ```
 
-## 0259 — 3sum Smaller
+## 0259 — 3Sum Smaller
 
 ```go
 package main
@@ -3638,7 +3638,7 @@ func main() {
 }
 ```
 
-## 0304 — Range Sum Query 2d Immutable
+## 0304 — Range Sum Query 2D Immutable
 
 ```go
 package main
@@ -3834,7 +3834,7 @@ func main() {
 }
 ```
 
-## 0308 — Range Sum Query 2d Mutable
+## 0308 — Range Sum Query 2D Mutable
 
 ```go
 package main

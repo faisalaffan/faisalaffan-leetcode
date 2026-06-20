@@ -1,4 +1,4 @@
-# Hard (Sulit) — Problem ��3700
+# Hard (Sulit) — Problem 3382–3700
 
 ## 3382 — Maximum Area Rectangle With Point Constraints Ii
 

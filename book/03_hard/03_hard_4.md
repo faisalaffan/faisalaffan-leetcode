@@ -1,4 +1,4 @@
-# Hard (Sulit) — Problem ��1783
+# Hard (Sulit) — Problem 1449–1783
 
 ## 1449 — Form Largest Integer With Digits That Add Up To Target
 

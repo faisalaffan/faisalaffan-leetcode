@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��3462
+# Medium (Sedang) — Problem 3237–3462
 
 ## 3237 — Alt And Tab Simulation
 
@@ -4134,7 +4134,7 @@ func beautifulSplits(nums []int) int {
 }
 ```
 
-## 3391 — Design A 3d Binary Matrix With Efficient Layer Tracking
+## 3391 — Design A 3D Binary Matrix With Efficient Layer Tracking
 
 ```go
 package main

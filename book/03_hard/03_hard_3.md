@@ -1,4 +1,4 @@
-# Hard (Sulit) — Problem ��1445
+# Hard (Sulit) — Problem 0972–1445
 
 ## 0972 — Equal Rational Numbers
 
@@ -7162,7 +7162,7 @@ func main() {
 }
 ```
 
-## 1388 — Pizza With 3n Slices
+## 1388 — Pizza With 3N Slices
 
 ```go
 package main

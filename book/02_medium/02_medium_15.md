@@ -1,4 +1,4 @@
-# Medium (Sedang) — Problem ��2830
+# Medium (Sedang) — Problem 2628–2830
 
 ## 2628 — Json Deep Equal
 

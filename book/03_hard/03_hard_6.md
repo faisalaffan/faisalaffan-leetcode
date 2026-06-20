@@ -1,4 +1,4 @@
-# Hard (Sulit) — Problem ��2581
+# Hard (Sulit) — Problem 2203–2581
 
 ## 2203 — Minimum Weighted Subgraph With The Required Paths
 
