@@ -3,6 +3,17 @@ package main
 // LeetCode #3138: Minimum Length of Anagram Concatenation
 // https://leetcode.com/problems/minimum-length-of-anagram-concatenation/
 // Difficulty: Medium
+//
+// LOGIC:
+// 1. Soal: cari panjang minimum substring L sehingga string s bisa dibentuk
+//    dari konkatenasi beberapa anagram dari substring sepanjang L itu
+// 2. Coba semua L dari 1 sampai n, hanya L yang habis membagi n (n % L == 0)
+// 3. Untuk setiap L: ambil frekuensi substring pertama [0:L] sebagai base
+// 4. Cek semua chunk berikutnya [L:2L], [2L:3L], ...
+//    Semua harus punya frekuensi karakter yang SAMA dengan base (anagram)
+// 5. Return L terkecil yang lolos pengecekan
+// 6. Worst case: L = n (setiap karakter unik, tidak bisa dipecah)
+//
 // Time: O(n * sqrt(n)) | Space: O(n)
 
 import "fmt"

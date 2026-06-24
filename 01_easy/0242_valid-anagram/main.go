@@ -3,6 +3,14 @@ package main
 // LeetCode #242: Valid Anagram
 // https://leetcode.com/problems/valid-anagram/
 // Difficulty: Easy
+//
+// LOGIC:
+// 1. Jika panjang s != t, langsung return false
+// 2. Buat array [26]int sebagai counter karakter a-z
+// 3. Iterasi bersamaan: karakter di s → counter++, karakter di t → counter--
+// 4. Jika semua counter == 0, s dan t adalah anagram
+// 5. Intuisi: karakter yang muncul di s harus dinetralkan oleh karakter yang sama di t
+//    Kalau satu string punya kelebihan suatu huruf, counternya tidak akan nol
 
 import "fmt"
 

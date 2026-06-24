@@ -4,6 +4,13 @@ package main
 // https://leetcode.com/problems/find-anagram-mappings/
 // Difficulty: Easy [Paid]
 // Note: This is a premium problem. Implementation based on public description.
+//
+// LOGIC:
+// 1. nums1 dan nums2 adalah anagram satu sama lain (elemen sama, urutan berbeda)
+// 2. Build hashmap: value → index untuk semua elemen di nums2
+// 3. Untuk setiap elemen di nums1, cari index-nya di nums2 via hashmap
+// 4. Return array index mapping P di mana P[i] = posisi nums1[i] di nums2
+// 5. Karena value unik (asumsi soal), hashmap lookup O(1) per elemen
 
 import "fmt"
 

@@ -3,6 +3,15 @@ package main
 // LeetCode #1347: Minimum Number of Steps to Make Two Strings Anagram
 // https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/
 // Difficulty: Medium
+//
+// LOGIC:
+// 1. Soal: berapa langkah minimum mengubah karakter di t agar s dan t jadi anagram?
+//    (satu langkah = satu perubahan karakter di t)
+// 2. Hitung selisih frekuensi: untuk setiap karakter, s[i] → +1, t[i] → -1
+// 3. Nilai positif di freq[c] = kelebihan huruf c di s yang tidak punya pasangan di t
+// 4. Jumlahkan semua nilai positif = total langkah yang dibutuhkan
+// 5. Intuisi: kita hanya perlu mengganti karakter di t yang "kurang" match dengan s
+//    Karena |s| = |t|, jumlah kelebihan = jumlah kekurangan
 
 import "fmt"
 

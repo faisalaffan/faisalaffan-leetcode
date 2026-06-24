@@ -3,6 +3,14 @@ package main
 // LeetCode #49: Group Anagrams
 // https://leetcode.com/problems/group-anagrams/
 // Difficulty: Medium
+//
+// LOGIC:
+// 1. Untuk setiap string, hitung frekuensi karakter (array [26]byte)
+// 2. Array frekuensi ini jadi KEY — semua anagram punya key yang sama
+// 3. Gunakan hashmap: key → []string, append setiap string ke key-nya
+// 4. Di akhir, kumpulkan semua grup dari hashmap ke result
+// 5. Kenapa O(n*k) bukan O(n*k log k)? Tidak pakai sort, hanya counting
+//    "eat" → [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,...] (a=1,e=1,t=1)
 
 import "fmt"
 

@@ -3,6 +3,15 @@ package main
 // LeetCode #2273: Find Resultant Array After Removing Anagrams
 // https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/
 // Difficulty: Easy
+//
+// LOGIC:
+// 1. Simpan kata pertama sebagai anchor
+// 2. Untuk setiap kata berikutnya: sort huruf-hurufnya
+// 3. Bandingkan hasil sort dengan hasil sort kata sebelumnya
+// 4. Kalau sama → anagram bertetangga, skip (hapus)
+// 5. Kalau beda → simpan kata asli, update anchor ke kata ini
+// 6. Kenapa sort? Dua string anagram punya sorted form yang identik
+//
 // Time O(n * m log m) | Space O(n)
 
 import (
